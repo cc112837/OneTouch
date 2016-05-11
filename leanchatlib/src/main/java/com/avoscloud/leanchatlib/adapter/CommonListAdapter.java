@@ -1,9 +1,11 @@
 package com.avoscloud.leanchatlib.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 
 
+import com.avos.avoscloud.LogUtil.log;
 import com.avoscloud.leanchatlib.viewholder.CommonViewHolder;
 import com.avoscloud.leanchatlib.viewholder.CommonViewHolder.ViewHolderCreator;
 import java.util.ArrayList;
@@ -12,11 +14,10 @@ import java.util.List;
 
 /**
  * Created by wli on 15/11/23.
- * 现在还仅仅支持单类型 item，多类型 item 稍后在重构
  */
 public class CommonListAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
 
-  private static HashMap<String, ViewHolderCreator> creatorHashMap = new HashMap<>();
+  private static HashMap<String, ViewHolderCreator> creatorHashMap = new HashMap<String, ViewHolderCreator>();
 
   private Class<?> vhClass;
 
@@ -39,13 +40,9 @@ public class CommonListAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>
     }
   }
 
-  /**
-   * 默认在最后插入
-   * @param datas
-   */
-  public void addDataList(List<T> datas) {
-    dataList.addAll(datas);
-  }
+//  public void addDataList(List<T> datas) {
+//    dataList.addAll(0, datas);
+//  }
 
   @Override
   public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -73,13 +70,13 @@ public class CommonListAdapter<T> extends RecyclerView.Adapter<CommonViewHolder>
     if (null != creator) {
       return creator.createByViewGroupAndType(parent, viewType);
     } else {
-      throw new IllegalArgumentException(vhClass.getName() + " HOLDER_CREATOR should be instantiated");
+      return null;
     }
   }
 
   @Override
   public void onBindViewHolder(CommonViewHolder holder, int position) {
-    if (position >= 0 && position < dataList.size()) {
+    if (position >= 0 && position < dataList.size() ) {
       holder.bindData(dataList.get(position));
     }
   }

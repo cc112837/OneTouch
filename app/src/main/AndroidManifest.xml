@@ -3,6 +3,7 @@
     package="com.wzy.mhealth"
     android:versionCode="1"
     android:versionName="1.0">
+
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
@@ -45,7 +46,9 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <!-- 扫码 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -75,7 +78,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/Theme.AppStartLoad">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -87,7 +92,13 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.NewFriendActivity" />
+        <activity android:name=".activities.MsgActivity" />
+        <activity android:name=".activities.RegActivity" />
+        <activity android:name=".activities.NoContentActivity" />
+        <activity android:name=".activities.SearchActivity"></activity>
     </application>
 
 </manifest>

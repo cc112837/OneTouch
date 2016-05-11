@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:padding="15dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv_title"
+            android:text="显示的标题是什么呢"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_content"
+            android:text="30元一碗！非油炸方便面究竟该卖多少钱 与传统油炸方便面相比，非油炸方便面的脂肪含量明显少于前者，由于油炸方便面脂肪含量占20%，而非油炸方便面仅为1%左右，相同质量的产品，油炸比非油炸高出逾100千卡的热量，相当于一碗米饭的热量"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:lines="3"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+</LinearLayout>
