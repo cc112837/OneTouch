@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/title_green"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+
+    <FrameLayout
+        android:id="@+id/titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/title_green"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/titleView"
+            style="@style/white20Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="家人健康" />
+
+        <ImageView
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:onClick="leftBtnClick"
+            android:padding="10dp"
+            android:src="@mipmap/btn_back" />
+
+        <TextView
+            android:id="@+id/right"
+            style="@style/white16Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:onClick="rightBtnClick"
+            android:text="确认" />
+    </FrameLayout>
+    <LinearLayout
+        android:background="@color/grey_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="姓名：" />
+
+            <EditText
+                android:id="@+id/nameView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="2"
+                android:background="@mipmap/input_bg"
+                android:textColor="@color/black"
+                android:text=""
+                android:textSize="18sp"  >
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="年龄：" />
+
+            <EditText
+                android:id="@+id/ageView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@mipmap/input_bg"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="18sp"   >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="病史：" />
+
+            <EditText
+                android:id="@+id/medicalHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:background="@mipmap/input_bg"
+                android:text="" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="关系：" />
+
+            <EditText
+                android:id="@+id/related"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@mipmap/input_bg"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text=""  >
+            </EditText>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -87,6 +87,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.avos.avoscloud.feedback.ThreadActivity" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -98,7 +99,14 @@
         <activity android:name=".activities.MsgActivity" />
         <activity android:name=".activities.RegActivity" />
         <activity android:name=".activities.NoContentActivity" />
-        <activity android:name=".activities.SearchActivity"></activity>
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.ManageActivity" />
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.ChangePwdActivity" />
+        <activity android:name=".activities.BarCodeActivity" />
+        <activity android:name=".activities.NotiNewsActivity" />
+        <activity android:name=".activities.FamilyHealthActivity" />
+        <activity android:name=".activities.AddFamilyHealthActivity"></activity>
     </application>
 
 </manifest>
