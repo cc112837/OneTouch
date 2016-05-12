@@ -81,7 +81,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 	protected InputBottomBar inputBottomBar;
 
 	protected String localCameraPath = PathUtils.getPicturePathByCurrentTime();
-
 	protected AVIMConversation conversation;
 	protected ImageView image;
 	protected TextView title;
@@ -179,6 +178,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 	}
 
 
+
 	@TargetApi(Build.VERSION_CODES.KITKAT)
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -249,7 +249,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 	}
 
 	public void setConversation(AVIMConversation conversation) {
-		conversation = conversation;
 		refreshLayout.setEnabled(true);
 		inputBottomBar.setTag(conversation.getConversationId());
 		fetchMessages();
@@ -345,7 +344,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 			}
 		}
 	}
-
 	public void onEvent(InputBottomBarRecordEvent recordEvent) {
 		if (null != conversation && null != recordEvent
 				&& !TextUtils.isEmpty(recordEvent.audioPath)
@@ -437,8 +435,8 @@ public class ChatRoomActivity extends AVBaseActivity {
 		refreshLayout = (SwipeRefreshLayout) findViewById(R.id.fragment_chat_srl_pullrefresh);
 		refreshLayout.setEnabled(false);
 		inputBottomBar = (InputBottomBar) findViewById(R.id.fragment_chat_inputbottombar);
-//		image = (ImageView) findViewById(R.id.leftBtn);
-//		title = (TextView) findViewById(R.id.titleViewOfChatRoom);
+		image = (ImageView) findViewById(R.id.leftBtn);
+		title = (TextView) findViewById(R.id.titleViewOfChatRoom);
 
 		layoutManager = new LinearLayoutManager(this);
 		recyclerView.setLayoutManager(layoutManager);
@@ -483,6 +481,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 				finish();
 			}
 		});
+
 
 	}
 

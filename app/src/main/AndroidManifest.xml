@@ -94,6 +94,9 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".LeanChat.activity.ChatRoomActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.NewFriendActivity" />
         <activity android:name=".activities.MsgActivity" />
@@ -106,7 +109,29 @@
         <activity android:name=".activities.BarCodeActivity" />
         <activity android:name=".activities.NotiNewsActivity" />
         <activity android:name=".activities.FamilyHealthActivity" />
-        <activity android:name=".activities.AddFamilyHealthActivity"></activity>
+        <activity android:name=".activities.AddFamilyHealthActivity"/>
+        <receiver android:name="com.wzy.mhealth.LeanChat.service.MHealthUReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.avoscloud.chat.INVITATION_ACTION" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.avos.avoscloud.PushService" />
+
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.wzy.mhealth.LeanChat.service.NotificationBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.avoscloud.chat.intent.mhealthclient_notification" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

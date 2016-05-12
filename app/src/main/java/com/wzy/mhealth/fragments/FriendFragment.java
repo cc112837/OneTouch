@@ -178,7 +178,6 @@ public class FriendFragment extends D3Fragment {
 
     @Override
     public void onResume() {
-        // searchText.clearFocus();
         super.onResume();
         updateNewRequestBadge();
     }
@@ -288,7 +287,6 @@ public class FriendFragment extends D3Fragment {
     }
 
     public void onEvent(ContactRefreshEvent event) {
-        // getMembers(true);
         myGetMenber();
     }
 
@@ -298,7 +296,6 @@ public class FriendFragment extends D3Fragment {
     }
 
     public void onEvent(ContactItemClickEvent event) {
-
         final ChatManager chatManager = ChatManager.getInstance();
         chatManager.fetchConversationWithUserId(event.memberId,
                 new AVIMConversationCreatedCallback() {
@@ -318,9 +315,6 @@ public class FriendFragment extends D3Fragment {
                     }
                 });
 
-        // Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
-        // intent.putExtra(Constants.MEMBER_ID, event.memberId);
-        // startActivity(intent);
     }
 
     public void onEvent(ContactItemLongClickEvent event) {
@@ -341,7 +335,6 @@ public class FriendFragment extends D3Fragment {
     }
 
     protected ProgressDialog showSpinnerDialog() {
-        // activity = modifyDialogContext(activity);
         ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.setCancelable(true);
