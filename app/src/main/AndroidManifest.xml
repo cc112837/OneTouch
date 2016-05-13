@@ -80,7 +80,7 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:theme="@style/Theme.AppStartLoad">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -2,15 +2,18 @@ package com.wzy.mhealth.fragments;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.avos.avoscloud.AVException;
@@ -34,6 +37,7 @@ import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.YuyueListActivity;
 import com.wzy.mhealth.activities.ZixunActivity;
 import com.wzy.mhealth.view.LocalImageHolderView;
+import com.wzy.mhealth.view.MyScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +52,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     private ConversationManager conversationManager = ConversationManager.getInstance();
     private TextView countView;
+    private RelativeLayout title1;
+    private MyScrollView my_scroll;
 
 
     @Override
@@ -60,6 +66,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
     private void loadLocalImage() {
         localImages.add(R.mipmap.carouse1);
         localImages.add(R.mipmap.carouse2);
@@ -69,6 +76,8 @@ public class HomeFragment extends Fragment {
 
     public void initView(View view) {
         loadLocalImage();
+        my_scroll = (MyScrollView) view.findViewById(R.id.my_scroll);
+        title1 = (RelativeLayout) view.findViewById(R.id.title1);
         countView = (TextView) view.findViewById(R.id.countView);
         Button chat_btn = (Button) view.findViewById(R.id.chat_btn);
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
@@ -85,6 +94,22 @@ public class HomeFragment extends Fragment {
         RadioButton rb_yuyue = (RadioButton) view.findViewById(R.id.rb_yuyue);
         RadioButton rb_select = (RadioButton) view.findViewById(R.id.rb_select);
         RadioButton rb_quike = (RadioButton) view.findViewById(R.id.rb_quike);
+        my_scroll.setScrollViewListener(new MyScrollView.ScrollViewListener() {
+            @Override
+            public void onScrollChanged(MyScrollView scrollView, int x, int y, int oldx, int oldy) {
+                if (y <= 0) {
+                    Log.e("TAG", "y--->" + y);
+                    title1.setBackgroundColor(Color.argb((int) 0, 0, 0, 0));//AGB由相关工具获得，或者美工提供
+                } else if (y > 0 && y <= 50) {
+                    float scale = (float) y / 50;
+                    float alpha = (255 * scale);
+                    title1.setBackgroundColor(Color.argb((int) alpha, 2, 185, 157));
+                } else {
+                    title1.setBackgroundColor(Color.argb((int) 255, 2, 185, 157));
+                }
+            }
+
+        });
         convenientBanner = ((ConvenientBanner) view.findViewById(R.id.convenientBanner));
         convenientBanner.setPages(
                 new CBViewHolderCreator<LocalImageHolderView>() {
@@ -380,4 +405,5 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
 }

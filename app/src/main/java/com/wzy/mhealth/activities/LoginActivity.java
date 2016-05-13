@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
@@ -60,7 +59,6 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
     private static final int MSG_AUTH_CANCEL = 2;
     private static final int MSG_AUTH_ERROR= 3;
     private static final int MSG_AUTH_COMPLETE = 4;
-    private PopupWindow mPopWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
