@@ -24,7 +24,6 @@ import com.wzy.mhealth.fragments.ChangeFragmentHelper;
 import com.wzy.mhealth.fragments.FriendFragment;
 import com.wzy.mhealth.fragments.HomeFragment;
 import com.wzy.mhealth.fragments.MyFragment;
-import com.wzy.mhealth.model.HospitalEntity;
 
 import java.util.List;
 
@@ -34,12 +33,10 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton main_home;
     private RadioButton main_friend;
     private RadioButton main_my;
-    final public int CODE = 0x717;
+
     private Fragment fragment;
-    private TextView title, countView;
-    public String name, keshi;
-    public HospitalEntity names;
-    private String flag = "0";
+    private TextView  countView;
+
     private ConversationManager conversationManager = ConversationManager.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

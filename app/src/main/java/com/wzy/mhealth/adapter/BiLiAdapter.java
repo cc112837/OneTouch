@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.NewsMedi;
 
@@ -67,9 +68,9 @@ public class BiLiAdapter extends  BaseAdapter{
         } else {
             viewholder = (ViewHolder) convertView.getTag();
         }
-//        BitmapUtils bitmapUtils=new BitmapUtils(context);
-//        bitmapUtils.display(viewholder.iv_img, "http://tnfs.tngou.net/image"+list.get(position).getImg());
-//                viewholder.tv_title.setText(list.get(position).getTitle());
+        BitmapUtils bitmapUtils=new BitmapUtils(context);
+        bitmapUtils.display(viewholder.iv_img, "http://tnfs.tngou.net/image"+list.get(position).getImg());
+                viewholder.tv_title.setText(list.get(position).getTitle());
         viewholder.tv_content.setText(list.get(position).getDescription());
         return convertView;
     }

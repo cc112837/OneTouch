@@ -1,12 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.wzy.mhealth.activities.MsgActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/title_green"
+    android:orientation="vertical" >
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/title_green"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="35dip"
+            android:src="@mipmap/btn_local"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical" />
+
+        <ImageView
+            android:id="@+id/leftBtn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@mipmap/btn_back" />
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消息列表"
+            android:textSize="@dimen/fontSizeMidMM"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+
+
+        <ImageView
+            android:id="@+id/rightBtn"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dip"
+            android:src="@mipmap/add"
+            android:layout_gravity="center_vertical|right" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayout_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#dad8d9"
+        android:orientation="horizontal" >
+        <include layout="@layout/chat_client_state_view" />
+
+        <ListView
+            android:id="@+id/fragment_conversation_srl_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</LinearLayout>

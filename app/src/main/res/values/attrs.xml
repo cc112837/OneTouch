@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PayRidioButton">
+        <attr name="title1" format="reference|string" />
+        <attr name="logo1" format="reference|color" />
+        <attr name="desc" format="reference|string" />
+        <attr name="checked" format="boolean" />
+        <attr name="radio" format="reference" />
+    </declare-styleable>
+    
+    <declare-styleable name="CircleButton">
+        <attr name="cb_color" format="color" />
+        <attr name="cb_pressedRingWidth" format="dimension" />
+    </declare-styleable>
+
+    <!-- Standard orientation constant. -->
+    <attr name="orientation">
+        <enum name="horizontal" value="0" />
+        <enum name="vertical" value="1" />
+    </attr>
+
+    <declare-styleable name="PayRidioGroup">
+        <attr name="checkedButton" format="integer" />
+        <attr name="orientation" />
+    </declare-styleable>
+    
+    <declare-styleable name="AppTheme">
+        <attr name="activatedBackgroundIndicator" format="reference" />
+        <attr name="listPreferredItemHeightSmall1" format="dimension" />
+        <attr name="textAppearanceListItemSmall1" format="reference" />
+    </declare-styleable>
+    
+    <declare-styleable name="CircleFlowIndicator">
+        <attr name="activeColor" format="color" />
+        <attr name="inactiveColor" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="centered" format="boolean" />
+        <attr name="fadeOut" format="integer" />
+        <attr name="inactiveType">
+            <flag name="stroke" value="0" />
+            <flag name="fill" value="1" />
+        </attr>
+        <attr name="activeType">
+            <flag name="stroke" value="0" />
+            <flag name="fill" value="1" />
+        </attr>
+        <attr name="circleSeparation" format="dimension" />
+        <attr name="activeRadius" format="dimension" />
+    </declare-styleable>
+    
+    <declare-styleable name="ViewFlow">
+        <attr name="sidebuffer" format="integer" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/title_green"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/title_green"
+        android:gravity="center_vertical" >
+        <ImageView
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@mipmap/btn_back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的健康档案"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/fontSizeMidMM" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#fff">
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="基本信息"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/fontSizeMid" />
+
+            <TextView
+                android:id="@+id/basic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="2"
+                android:text="张三   男    23岁"
+                android:textColor="#000000"
+                android:singleLine="true"
+                android:textSize="@dimen/fontSizeMid" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="婚育史"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/fontSizeMid" />
+
+            <TextView
+                android:id="@+id/histroy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:layout_marginLeft="25dp"
+                android:text="   未婚       未生育"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="@dimen/fontSizeMid" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="外伤和手术"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/fontSizeMid" />
+
+            <TextView
+                android:id="@+id/shoushu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:singleLine="true"
+                android:text="无手术或外伤"
+                android:textColor="#000000"
+                android:textSize="@dimen/fontSizeMid" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="家族病史"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/fontSizeMid" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:text=" 无记录"
+                android:layout_marginLeft="3dp"
+                android:textColor="#000000"
+                android:singleLine="true"
+                android:textSize="@dimen/fontSizeMid" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="药物过敏"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/fontSizeMid" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:text=" 无记录"
+                android:layout_marginLeft="3dp"
+                android:textColor="#000000"
+                android:textSize="@dimen/fontSizeMid" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="10dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <LinearLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="个人习惯"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/fontSizeMid" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:text="未填写"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:textColor="#000000"
+                android:textSize="@dimen/fontSizeMid" />
+        </LinearLayout>
+
+        <!--    android:text="  低头族、久坐" -->
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+    </LinearLayout>
+</LinearLayout>

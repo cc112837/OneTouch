@@ -1,0 +1,156 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/title_green"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/title_green"
+        android:gravity="center_vertical" >
+        <ImageView
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@mipmap/btn_back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="挂号"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/fontSizeMidMM" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <RelativeLayout
+            android:id="@+id/yiyuan_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/bmp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:src="@mipmap/guahao_yiyuan_icon" />
+
+            <TextView
+                android:id="@+id/Select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_toRightOf="@id/bmp"
+                android:text="请选择医院"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@mipmap/arrow_right"
+                android:paddingBottom="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <RelativeLayout
+            android:id="@+id/keshi_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/Bmp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:paddingBottom="15dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:src="@mipmap/guahao_keshi_icon" />
+
+            <TextView
+                android:id="@+id/Select1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_toRightOf="@id/Bmp"
+                android:text="请选择科室"
+                android:textSize="14dp" />
+
+            <ImageView
+                android:id="@+id/arrow1"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@mipmap/arrow_right"
+                android:paddingBottom="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_bg"
+            android:padding="1dp" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <Button
+                android:id="@+id/guanhao_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:text="去挂号"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:background="@mipmap/guahaobtn" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

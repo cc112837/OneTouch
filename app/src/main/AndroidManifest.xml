@@ -87,6 +87,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.wzy.mhealth.activities.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name="com.avos.avoscloud.feedback.ThreadActivity" />
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -109,8 +115,9 @@
         <activity android:name=".activities.BarCodeActivity" />
         <activity android:name=".activities.NotiNewsActivity" />
         <activity android:name=".activities.FamilyHealthActivity" />
-        <activity android:name=".activities.AddFamilyHealthActivity"/>
-        <receiver android:name="com.wzy.mhealth.LeanChat.service.MHealthUReceiver">
+        <activity android:name=".activities.AddFamilyHealthActivity" />
+
+        <receiver android:name=".LeanChat.service.MHealthUReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -127,11 +134,31 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.wzy.mhealth.LeanChat.service.NotificationBroadcastReceiver">
+        <receiver android:name=".LeanChat.service.NotificationBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.avoscloud.chat.intent.mhealthclient_notification" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".activities.RouteActivity" />
+        <activity android:name=".activities.GuahaoActivity" />
+        <activity android:name=".activities.ZixunActivity" />
+        <activity android:name=".activities.PoiKeywordSearchActivity" />
+        <activity android:name=".activities.JiBingActivity" />
+        <activity android:name=".activities.YuyueListActivity" />
+        <activity android:name=".activities.GreenPassActivity" />
+        <activity android:name=".activities.BingliActivity" />
+        <activity android:name=".activities.JianyanBaogaoActivity" />
+        <activity android:name=".activities.ScanresultActivity" />
+        <activity android:name=".activities.YiyuanSelectActivity" />
+        <activity android:name=".activities.KeshiselectActivity" />
+        <activity android:name=".activities.GuahaoDoctorListActivity" />
+        <activity android:name=".activities.JiankangActivity" />
+        <activity android:name=".activities.JiBingDetailActicity" />
+        <activity android:name=".activities.DoctorListActivity" />
+        <activity android:name=".activities.DoctorDetailActivity" />
+        <activity android:name=".activities.BuActivity"></activity>
+        <activity android:name=".activities.EvaluationListActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/doctorlistLinear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/title_green"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@color/title_green"
+        android:gravity="center_vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="医生"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/fontSizeMidMM" />
+
+        <ImageView
+            android:id="@+id/leftBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:src="@mipmap/btn_back" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/grey_bg">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5px"
+            android:background="#666666" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@+id/total_location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <!--
+                     <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="left" />
+                -->
+
+                <TextView
+                    android:id="@+id/text_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40.0dip"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="全部位置"
+                    android:textColor="@drawable/mytext_selector"
+                    android:textSize="14.0sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/down" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5px"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:background="#666666" />
+
+            <LinearLayout
+                android:id="@+id/department"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <!--
+                     <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginLeft="5dp"
+                     />
+                -->
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40.0dip"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="内科"
+                    android:textSize="14.0sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/down" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.5px"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:background="#666666" />
+
+            <LinearLayout
+                android:id="@+id/order"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <!--
+                     <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginLeft="10dp"
+                    />
+                -->
+
+                <TextView
+                    android:id="@+id/order_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40.0dip"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:text="默认排序"
+                    android:textSize="14.0sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="5dp"
+                    android:src="@mipmap/down" />
+                <!--
+                     <ImageView
+                    android:id="@+id/iv_price_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="30dp"
+                     />
+                -->
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5px"
+            android:background="#666666" />
+
+        <ListView
+            android:id="@+id/doctorlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6" >
+        </ListView>
+    </LinearLayout>
+</LinearLayout>

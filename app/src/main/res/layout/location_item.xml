@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    
+    android:orientation="horizontal" >
+    <TextView 
+            android:id="@+id/province"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="25sp"
+            android:text="省份"
+           
+            />
+    <TextView 
+            android:id="@+id/present"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textSize="20sp"
+            android:text="当前定位"
+            />
+
+</LinearLayout>
