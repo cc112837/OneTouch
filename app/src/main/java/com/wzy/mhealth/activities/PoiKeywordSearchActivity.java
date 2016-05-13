@@ -172,10 +172,10 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements OnMark
 
                             if (keyWord.endsWith("药房"))
                                 markerOption.icon(BitmapDescriptorFactory
-                                        .fromResource(R.mipmap.yaofang));
+                                        .fromResource(R.mipmap.yaodian));
                             else if (keyWord.endsWith("医院"))
                                 markerOption.icon(BitmapDescriptorFactory
-                                        .fromResource(R.mipmap.hospital));
+                                        .fromResource(R.mipmap.yiyuan));
                             else
                                 markerOption.icon(BitmapDescriptorFactory
                                         .fromResource(R.mipmap.car));
@@ -225,8 +225,8 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements OnMark
     //定义自动定位动画
     private void customPic() {
         ArrayList<BitmapDescriptor> animations = new ArrayList<BitmapDescriptor>();
-        animations.add(BitmapDescriptorFactory.fromResource(R.mipmap.red_heart));
-        animations.add(BitmapDescriptorFactory.fromResource(R.mipmap.red_heart1));
+        animations.add(BitmapDescriptorFactory.fromResource(R.mipmap.heart04));
+        animations.add(BitmapDescriptorFactory.fromResource(R.mipmap.heart03));
         markerOptions.anchor(0.5f, 0.5f);
         markerOptions.position(new LatLng(a, b));
         markerOptions.draggable(true);

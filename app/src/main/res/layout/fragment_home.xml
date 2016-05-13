@@ -128,25 +128,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#8383f2c8" />
+                android:background="@color/grey_bg" />
 
             <LinearLayout
                 android:id="@+id/ll_speci"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="#fff"
+                android:background="@mipmap/kuaisutongdao"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:background="#fff"
-                    android:padding="10dp" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_marginLeft="80dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -173,7 +169,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="#8383f2c8" />
+                android:background="@color/grey_bg"  />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -227,7 +223,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/menzhenjiaofei" />
 
                         <TextView
                             android:id="@+id/textView2"
@@ -258,7 +254,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/mode33" />
 
                         <TextView
                             android:id="@+id/textView3"
@@ -294,7 +290,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/mode2" />
 
                         <TextView
                             android:id="@+id/textView41"
@@ -325,7 +321,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/tijianyuyue" />
 
                         <TextView
                             android:id="@+id/textView51"
@@ -356,7 +352,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/jiuzhenzhuanche" />
 
                         <TextView
                             android:id="@+id/textView61"
@@ -393,7 +389,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/mode4" />
 
                         <TextView
                             android:id="@+id/textView4"
@@ -424,7 +420,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/mode5" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -455,7 +451,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode1" />
+                            android:background="@mipmap/mode6" />
 
                         <TextView
                             android:id="@+id/textView6"

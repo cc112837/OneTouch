@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
         EventBus.getDefault().register(this);
         updateCount();
@@ -61,10 +61,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadLocalImage() {
-        localImages.add(R.mipmap.e);
-        localImages.add(R.mipmap.g);
-        localImages.add(R.mipmap.e);
-        localImages.add(R.mipmap.g);
+        localImages.add(R.mipmap.carouse1);
+        localImages.add(R.mipmap.carouse2);
+        localImages.add(R.mipmap.carouse3);
+        localImages.add(R.mipmap.carouse4);
     }
 
     public void initView(View view) {
@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //门诊缴费
-                Intent intent=new Intent(getActivity(), NoContentActivity.class);
+                Intent intent = new Intent(getActivity(), NoContentActivity.class);
                 startActivity(intent);
             }
         });
@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //体检预约
-                Intent intent=new Intent(getActivity(), NoContentActivity.class);
+                Intent intent = new Intent(getActivity(), NoContentActivity.class);
                 startActivity(intent);
             }
         });
@@ -160,7 +160,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //疾病库页面
-                Intent intent=new Intent(getActivity(),JiBingActivity.class);
+                Intent intent = new Intent(getActivity(), JiBingActivity.class);
                 startActivity(intent);
             }
         });
@@ -188,7 +188,7 @@ public class HomeFragment extends Fragment {
         ll_speci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),GreenPassActivity.class);
+                Intent intent = new Intent(getActivity(), GreenPassActivity.class);
                 startActivity(intent);
             }
         });
@@ -261,7 +261,7 @@ public class HomeFragment extends Fragment {
         if (requestCode == 0) {
             if (resultCode == 200) {
                 String num = data.getStringExtra("result");
-                Intent intent =null;
+                Intent intent = null;
                 if (isValidURI(num)) {
                     intent = new Intent();
                     intent.setAction("android.intent.action.VIEW");

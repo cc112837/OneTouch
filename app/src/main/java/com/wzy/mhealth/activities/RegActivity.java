@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,7 +105,6 @@ public class RegActivity extends Activity implements View.OnClickListener{
                                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                                     //提交验证码成功
                                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                                    Log.e("验证码", "获取成功");
                                 } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
                                     //返回支持发送验证码的国家列表
                                 }
