@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wzy.mhealth"
     android:versionCode="1"
-    android:versionName="1.0">
+    android:versionName="1.0.1">
 
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -88,7 +88,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.wzy.mhealth.activities.CaptureActivity"
+            android:name=".activities.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
@@ -116,7 +116,7 @@
         <activity android:name=".activities.NotiNewsActivity" />
         <activity android:name=".activities.FamilyHealthActivity" />
         <activity android:name=".activities.AddFamilyHealthActivity" />
-
+        <service android:name="com.amap.api.location.APSService" />
         <receiver android:name=".LeanChat.service.MHealthUReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -157,8 +157,9 @@
         <activity android:name=".activities.JiBingDetailActicity" />
         <activity android:name=".activities.DoctorListActivity" />
         <activity android:name=".activities.DoctorDetailActivity" />
-        <activity android:name=".activities.BuActivity"></activity>
-        <activity android:name=".activities.EvaluationListActivity"></activity>
+        <activity android:name=".activities.BuActivity" />
+        <activity android:name=".activities.EvaluationListActivity" />
+        <activity android:name=".activities.GPSNaviActivity"></activity>
     </application>
 
 </manifest>
