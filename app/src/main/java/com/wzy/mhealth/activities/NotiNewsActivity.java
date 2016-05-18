@@ -2,7 +2,9 @@ package com.wzy.mhealth.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ToggleButton;
 
 import com.wzy.mhealth.MyApplication;
@@ -18,6 +20,13 @@ public class NotiNewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_noti_news);
+        ImageView leftBtn=(ImageView) findViewById(R.id.leftBtn);
+        leftBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         switch1 = (ToggleButton) findViewById(R.id.switch1);
         switch2 = (ToggleButton) findViewById(R.id.switch2);
         if (MyApplication.sharedPreferences.getBoolean("isSound", true))

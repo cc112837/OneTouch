@@ -78,9 +78,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.LoginActivity"
-            >
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -102,6 +100,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".LeanChat.activity.ChatRoomActivity"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.NewFriendActivity" />
@@ -116,6 +115,7 @@
         <activity android:name=".activities.NotiNewsActivity" />
         <activity android:name=".activities.FamilyHealthActivity" />
         <activity android:name=".activities.AddFamilyHealthActivity" />
+
         <service android:name="com.amap.api.location.APSService" />
         <receiver android:name=".LeanChat.service.MHealthUReceiver">
             <intent-filter>
