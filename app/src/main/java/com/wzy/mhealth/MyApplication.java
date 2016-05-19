@@ -56,31 +56,14 @@ public class MyApplication extends Application implements
         ImgConfig.initImageLoader();
         Utils.fixAsyncTaskBug();
 
-        // String publicId = "g7gz9oazvrubrauf5xjmzp3dl12edorywm0hy8fvlt6mjb1y";
-        // String publicKey =
-        // "01p70e67aet6dvkcaag9ajn5mff39s1d5jmpyakzhd851fhx";
-        //
-        // String testAppId =
-        // "xcalhck83o10dntwh8ft3z5kvv0xc25p6t3jqbe5zlkkdsib";
-        // String testAppKey =
-        // "m9fzwse7od89gvcnk1dmdq4huprjvghjtiug1u2zu073zn99";
-
-        // String appId = "x3o016bxnkpyee7e9pa5pre6efx2dadyerdlcez0wbzhw25g";
-        // String appKey = "057x24cfdzhffnl3dzk14jh9xo2rq6w1hy1fdzt5tv46ym78";
-
-//		String appId = "PoJ2459xzj6c6mtnlfbbCNDY-gzGzoHsz";
-//		String appKey = "5C3gdVjG7fO57mU5tTdXWhVA";
         String appId = "cirdf9pJrnd6XpNW1Xn3OVf5-gzGzoHsz";
         String appKey = "eFwqv2nwhEDg9qdqzPUr3fga";
 
-//		String appId = "a5j8swDxrYAHc2HMoSua5kkG-gzGzoHsz";
-//		String appKey = "pRvNRlaoLsb51lsRPHSJsafx";
 
 
         AVUser.alwaysUseSubUserClass(LeanchatUser.class);
         AVOSCloud.initialize(this, appId, appKey);
-        // AVOSCloud.initialize(this, publicId,publicKey);
-        // AVOSCloud.initialize(this, testAppId, testAppKey);
+
 
         AVObject.registerSubclass(AddRequest.class);
         AVObject.registerSubclass(UpdateInfo.class);

@@ -50,7 +50,7 @@ import cn.sharesdk.tencent.qq.QQ;
  * @author cc112837@163.com
  *
  */
-public class LoginActivity extends BaseActivity implements TextWatcher ,PlatformActionListener,OnClickListener{
+public class LoginActivity extends BaseActivity implements TextWatcher ,PlatformActionListener{
     private Button loginBtn, regButton,forgetButton;
     private EditText nameText, pwdText;
     private String name, pwd;
@@ -136,7 +136,13 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                 weibo.showUser(null);
                 weibo.authorize();
             }});
-        regButton.setOnClickListener(this);
+        regButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // 已登录过,自动登录
         name = MyApplication.sharedPreferences.getString(Constants.LOGIN_ACCOUNT,
@@ -147,28 +153,6 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         thread.start();
     }
 
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.loginBtn:
-                name = nameText.getText().toString();
-                pwd = pwdText.getText().toString();
-                if (TextUtils.isEmpty(name)) {
-                    Tool.initToast(LoginActivity.this, getString(R.string.register_name));
-                } else if (TextUtils.isEmpty(pwd)) {
-                    Tool.initToast(LoginActivity.this,
-                            getString(R.string.register_password));
-                } else {
-                    loginAccount(name, pwd);
-                }
-                break;
-            case R.id.regButton:
-                Intent intent = new Intent(LoginActivity.this, RegActivity.class);
-                startActivity(intent);
-
-            default:
-                break;
-        }
-    }
 
     private void loginAccount(final String userName, final String password) {
         final ProgressDialog dialog = showSpinnerDialog();

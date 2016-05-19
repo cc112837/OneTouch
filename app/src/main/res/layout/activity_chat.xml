@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/leftBtn"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:background="@mipmap/arrow_left_white" />
@@ -41,31 +41,31 @@
             android:visibility="gone" />
     </FrameLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
-
-        <com.avoscloud.leanchatlib.activity.InputBottomBar
-            android:id="@+id/fragment_chat_inputbottombar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
-
-        </com.avoscloud.leanchatlib.activity.InputBottomBar>
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/fragment_chat_srl_pullrefresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/fragment_chat_inputbottombar">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/fragment_chat_rv_chat"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
         </android.support.v4.widget.SwipeRefreshLayout>
-    </RelativeLayout>
+
+        <com.avoscloud.leanchatlib.activity.InputBottomBar
+            android:id="@+id/fragment_chat_inputbottombar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.avoscloud.leanchatlib.activity.InputBottomBar>
+    </LinearLayout>
 
 </LinearLayout>

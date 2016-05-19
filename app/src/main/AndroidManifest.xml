@@ -100,7 +100,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".LeanChat.activity.ChatRoomActivity"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.NewFriendActivity" />

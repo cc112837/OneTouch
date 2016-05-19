@@ -46,6 +46,7 @@ import com.avoscloud.leanchatlib.event.InputBottomBarEvent;
 import com.avoscloud.leanchatlib.event.InputBottomBarRecordEvent;
 import com.avoscloud.leanchatlib.event.InputBottomBarTextEvent;
 import com.avoscloud.leanchatlib.event.LocationItemClickEvent;
+import com.avoscloud.leanchatlib.event.RecyclerClickEvent;
 import com.avoscloud.leanchatlib.model.ConversationType;
 import com.avoscloud.leanchatlib.utils.Constants;
 import com.avoscloud.leanchatlib.utils.LogUtils;
@@ -61,17 +62,16 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by lzw on 15/4/24.
+ * Created by cc112837@163.com on 16/5/18.
  */
 public class ChatRoomActivity extends AVBaseActivity {
 	public static final int LOCATION_REQUEST = 100;
 	public static final int QUIT_GROUP_REQUEST = 200;
-
 	private static final int TAKE_CAMERA_REQUEST = 2;
 	private static final int GALLERY_REQUEST = 0;
 	private static final int GALLERY_KITKAT_REQUEST = 3;
 
-	// protected AVIMConversation conversation;
+
 	protected MessageAgent messageAgent;
 
 	protected MultipleItemAdapter itemAdapter;
@@ -81,6 +81,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 	protected InputBottomBar inputBottomBar;
 
 	protected String localCameraPath = PathUtils.getPicturePathByCurrentTime();
+
 	protected AVIMConversation conversation;
 	protected ImageView image;
 	protected TextView title;
@@ -93,6 +94,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 		initByIntent(getIntent());
 	}
 
+
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
@@ -104,6 +106,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 		if (null != extras) {
 			if (extras.containsKey(Constants.MEMBER_ID)) {
 				getConversation(extras.getString(Constants.MEMBER_ID));
+
 			} else if (extras.containsKey(Constants.CONVERSATION_ID)) {
 				String conversationId = extras.getString(Constants.CONVERSATION_ID);
 				updateConversation(AVIMClient.getInstance(
@@ -151,7 +154,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 
 					@Override
 					public void done(AVIMConversation arg0, AVIMException e) {
-						// TODO Auto-generated method stub
 						if (e == null) {
 							ChatManager.getInstance().getRoomsTable()
 									.insertRoom(arg0.getConversationId());
@@ -176,7 +178,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 		inflater.inflate(R.menu.chat_ativity_menu, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
-
 
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
@@ -216,6 +217,10 @@ public class ChatRoomActivity extends AVBaseActivity {
 					break;
 			}
 		}
+	}
+
+	public void onEvent(RecyclerClickEvent event) {
+		scrollToBottom();
 	}
 
 	public void onEvent(LocationItemClickEvent event) {
@@ -268,7 +273,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 
 			@Override
 			public void done(List<AVIMMessage> list, AVIMException e) {
-				// TODO Auto-generated method stub
 				if (e == null) {
 					itemAdapter.setMessageList(list);
 					recyclerView.setAdapter(itemAdapter);
@@ -283,6 +287,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 	 * 输入事件处理，接收后构造成 AVIMTextMessage 然后发送 因为不排除某些特殊情况会受到其他页面过来的无效消息，所以此处加了 tag 判断
 	 */
 	public void onEvent(InputBottomBarTextEvent textEvent) {
+
 		if (null != conversation && null != textEvent) {
 			if (!TextUtils.isEmpty(textEvent.sendContent)
 					&& conversation.getConversationId().equals(textEvent.tag)) {
@@ -322,7 +327,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 
 					@Override
 					public void done(AVIMException arg0) {
-						// TODO Auto-generated method stub
 						itemAdapter.notifyDataSetChanged();
 					}
 				});
@@ -344,6 +348,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 			}
 		}
 	}
+
 	public void onEvent(InputBottomBarRecordEvent recordEvent) {
 		if (null != conversation && null != recordEvent
 				&& !TextUtils.isEmpty(recordEvent.audioPath)
@@ -388,7 +393,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	}
 
-	// TODO messageAgent
 	private void sendText(String content) {
 		AVIMTextMessage message = new AVIMTextMessage();
 		message.setText(content);
@@ -422,7 +426,6 @@ public class ChatRoomActivity extends AVBaseActivity {
 
 			@Override
 			public void done(AVIMException arg0) {
-				// TODO Auto-generated method stub
 				ChatManager.getInstance().getRoomsTable()
 						.insertRoom(conversation.getConversationId());
 				itemAdapter.notifyDataSetChanged();
@@ -437,14 +440,11 @@ public class ChatRoomActivity extends AVBaseActivity {
 		inputBottomBar = (InputBottomBar) findViewById(R.id.fragment_chat_inputbottombar);
 		image = (ImageView) findViewById(R.id.leftBtn);
 		title = (TextView) findViewById(R.id.titleViewOfChatRoom);
-
 		layoutManager = new LinearLayoutManager(this);
 		recyclerView.setLayoutManager(layoutManager);
-
 		itemAdapter = new MultipleItemAdapter();
 		itemAdapter.resetRecycledViewPoolSize(recyclerView);
 		recyclerView.setAdapter(itemAdapter);
-
 		refreshLayout
 				.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 					@Override
@@ -458,13 +458,11 @@ public class ChatRoomActivity extends AVBaseActivity {
 
 										@Override
 										public void done(List<AVIMMessage> list, AVIMException e) {
-											// TODO Auto-generated method stub
 											refreshLayout.setRefreshing(false);
 											if (e == null) {
 												if (null != list && list.size() > 0) {
 													itemAdapter.addMessageList(list);
 													itemAdapter.notifyDataSetChanged();
-
 													layoutManager.scrollToPositionWithOffset(
 															list.size() - 1, 0);
 												}
