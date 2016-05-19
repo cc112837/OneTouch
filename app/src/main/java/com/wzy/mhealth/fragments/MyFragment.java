@@ -40,6 +40,7 @@ import com.wzy.mhealth.activities.LoginActivity;
 import com.wzy.mhealth.activities.ManageActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.utils.CacheUtils;
+import com.wzy.mhealth.utils.MyAndroidUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,9 +57,9 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class MyFragment extends D3Fragment {
 
-    RelativeLayout logout, account,manager, erweima, noti_news, secret, normal, about, familyHealth;
+    RelativeLayout logout, account, manager, erweima, noti_news, secret, normal, about, familyHealth;
     TextView username;
-    LinearLayout about1,fankui;
+    LinearLayout about1, fankui;
     ImageView headImage;
     String iconUrl;
     String dateTime;
@@ -71,8 +72,8 @@ public class MyFragment extends D3Fragment {
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
-        about1=(LinearLayout) view.findViewById(R.id.about1);
-        fankui=(LinearLayout) view.findViewById(R.id.fankui);
+        about1 = (LinearLayout) view.findViewById(R.id.about1);
+        fankui = (LinearLayout) view.findViewById(R.id.fankui);
         logout = (RelativeLayout) view.findViewById(R.id.logout);
         account = (RelativeLayout) view.findViewById(R.id.account);
         erweima = (RelativeLayout) view.findViewById(R.id.erweima);
@@ -85,22 +86,25 @@ public class MyFragment extends D3Fragment {
         headImage = (ImageView) view.findViewById(R.id.headView);
         LeanchatUser curUser = AVUser.getCurrentUser(LeanchatUser.class);
         String avatarUrl = curUser.getAvatarUrl();
-        if(avatarUrl==null){
+        if (avatarUrl == null) {
             try {
-                JSONObject object = new JSONObject( curUser.toString());
+                JSONObject object = new JSONObject(curUser.toString());
                 JSONObject serverData = object.getJSONObject("serverData");
                 JSONObject avatar = serverData.getJSONObject("avatar");
                 avatarUrl = avatar.getString("url");
             } catch (JSONException e) {
                 e.printStackTrace();
-            }}
+            }
+        }
 
+        MyAndroidUtil.editXmlByString(
+                Constants.icon, avatarUrl);
         ImageLoader.getInstance().displayImage(avatarUrl, headImage,
                 com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOption);
         manager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),ManageActivity.class);
+                Intent intent = new Intent(getActivity(), ManageActivity.class);
                 startActivity(intent);
             }
         });
@@ -118,7 +122,7 @@ public class MyFragment extends D3Fragment {
              */
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),AboutActivity.class);
+                Intent intent = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intent);
             }
         });
@@ -317,6 +321,7 @@ public class MyFragment extends D3Fragment {
         }
         return path;
     }
+
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
@@ -328,7 +333,7 @@ public class MyFragment extends D3Fragment {
         intent.putExtra("scale", true);
         intent.putExtra("scaleUpIfNeeded", true);
         intent.putExtra("return-data", true);
-        startActivityForResult(intent,3);
+        startActivityForResult(intent, 3);
 
     }
 
@@ -337,6 +342,7 @@ public class MyFragment extends D3Fragment {
         super.onDestroy();
         ShareSDK.stopSDK(getContext());
     }
+
     private void showShare() {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权

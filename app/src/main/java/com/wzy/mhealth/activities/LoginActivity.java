@@ -30,6 +30,7 @@ import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
@@ -54,7 +55,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
     private Button loginBtn, regButton,forgetButton;
     private EditText nameText, pwdText;
     private String name, pwd;
-    private ImageView iv_qqlogin,iv_weibologin;
+    private ImageView iv_qqlogin,iv_weibologin,headicon;
     private LinearLayout loginLinear, qidongLinear;
     private static final int MSG_AUTH_CANCEL = 2;
     private static final int MSG_AUTH_ERROR= 3;
@@ -85,6 +86,9 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         loginBtn = (Button) findViewById(R.id.loginBtn);
         regButton = (Button) findViewById(R.id.regButton);
         forgetButton = (Button) findViewById(R.id.forgetButton);
+        headicon=(ImageView) findViewById(R.id.headicon);
+        ImageLoader.getInstance().displayImage(MyApplication.sharedPreferences.getString(Constants.icon,null), headicon,
+                com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOption);
         forgetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
