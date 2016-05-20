@@ -78,13 +78,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".activities.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -101,6 +95,7 @@
         <activity
             android:name=".LeanChat.activity.ChatRoomActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.NewFriendActivity" />
         <activity android:name=".activities.MsgActivity" />
@@ -139,6 +134,14 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".activities.GuideActivity" />
+        <activity android:name=".activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activities.RouteActivity" />
         <activity android:name=".activities.GuahaoActivity" />
         <activity android:name=".activities.ZixunActivity" />

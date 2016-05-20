@@ -33,7 +33,20 @@ public class PhotoUtils {
                     //.displayer(new RoundedBitmapDisplayer(20))
                     //.displayer(new FadeInBitmapDisplayer(100))// 淡入
             .build();
-
+    public static DisplayImageOptions avatarlogin = new DisplayImageOptions.Builder()
+            .showImageOnLoading(R.drawable.default_icon)
+            .showImageForEmptyUri(R.drawable.default_icon)
+            .showImageOnFail(R.drawable.default_icon)
+            .cacheInMemory(true)
+            .cacheOnDisc(true)
+            .displayer(new RoundedBitmapDisplayer(180))
+            .considerExifParams(true)
+            .imageScaleType(ImageScaleType.EXACTLY)
+            .bitmapConfig(Bitmap.Config.RGB_565)
+            .resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
+                    //.displayer(new RoundedBitmapDisplayer(20))
+                    //.displayer(new FadeInBitmapDisplayer(100))// 淡入
+            .build();
     /**
      * 创建人：吴聪聪
      * 设置圆角图片

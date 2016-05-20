@@ -30,6 +30,7 @@ import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
+import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.MyApplication;
@@ -88,7 +89,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         forgetButton = (Button) findViewById(R.id.forgetButton);
         headicon=(ImageView) findViewById(R.id.headicon);
         ImageLoader.getInstance().displayImage(MyApplication.sharedPreferences.getString(Constants.icon,null), headicon,
-                com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOption);
+                PhotoUtils.avatarlogin);
         forgetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
