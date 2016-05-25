@@ -20,7 +20,6 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.DoctorListAdapter;
 import com.wzy.mhealth.adapter.LocationAdapter;
 import com.wzy.mhealth.adapter.ProvinceAdapter;
-import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.DoctorEntity;
 
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ public class DoctorListActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
 
                 locationtTextView.setTextColor(0xf000cf00);
                 showPopupWindow(doctorlistLayout.getWidth(),
@@ -72,7 +70,6 @@ public class DoctorListActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
 
             }
         });
@@ -92,7 +89,6 @@ public class DoctorListActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
                 Intent intent = new Intent();
                 intent.setClass(DoctorListActivity.this, DoctorDetailActivity.class);
                 Bundle bundle = new Bundle();
@@ -108,7 +104,6 @@ public class DoctorListActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 finish();
             }
         });
@@ -117,9 +112,30 @@ public class DoctorListActivity extends Activity {
 
 
     private void init() {
-
-        doctorlist.addAll(XmppConnection.getInstance().getDoctorListBykeshi(keshi));
-
+// TODO: 2016/5/25 (修改成无网络)
+        //doctorlist.addAll(XmppConnection.getInstance().getDoctorListBykeshi(keshi));
+        doctorlist.add(new DoctorEntity("邓珊","liao","内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","15","15","15"));
+        doctorlist.add(new DoctorEntity("李芳","long", "内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("刘卫华", "zhang","内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("左丽珊", "zuolishan","内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("赵荣","admin", "内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("谷雨", "admin","内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("刘晓梅","admin", "内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("程芳","admin", "内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("黄春玉","admin", "内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("宋静","admin", "内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
+        doctorlist.add(new DoctorEntity("丁鑫", "admin","内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺"));
         locationList.add("北京市");
         locationList.add("北京市");
         locationList.add("北京市");

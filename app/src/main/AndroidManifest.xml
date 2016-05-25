@@ -78,7 +78,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -111,6 +110,7 @@
         <activity android:name=".activities.AddFamilyHealthActivity" />
 
         <service android:name="com.amap.api.location.APSService" />
+
         <receiver android:name=".LeanChat.service.MHealthUReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -161,7 +161,8 @@
         <activity android:name=".activities.DoctorDetailActivity" />
         <activity android:name=".activities.BuActivity" />
         <activity android:name=".activities.EvaluationListActivity" />
-        <activity android:name=".activities.GPSNaviActivity"></activity>
+        <activity android:name=".activities.GPSNaviActivity" />
+        <activity android:name=".activities.YuyueActivity"></activity>
     </application>
 
 </manifest>

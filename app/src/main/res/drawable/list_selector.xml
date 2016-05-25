@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <!--  <item android:drawable="@drawable/guahao_detail"/>
+
+    没有焦点时的背景图片
+    <item android:drawable="@drawable/guahao_detail" android:state_window_focused="false"/>
+
+    非触摸模式下获得焦点并单击时的背景图片
+    <item android:drawable="@drawable/guahao_detail" android:state_focused="true" android:state_pressed="true"/>
+
+    触摸模式下单击时的背景图片
+    <item android:drawable="@drawable/guahao_detail" android:state_focused="false" android:state_pressed="true"/>
+
+    选中时的图片背景
+    <item android:drawable="@drawable/guahao_detail" android:state_selected="true"/>
+
+    获得焦点时的图片背景
+    <item android:drawable="@drawable/guahao_detail" android:state_focused="true"/> -->
+    <item android:drawable="@color/grey_bg" android:state_selected="true"/>
+    <!-- 获得焦点时的颜色 -->
+    <item android:drawable="@color/grey_bg" android:state_focused="true"/>
+    <!-- 点击时的颜色 -->
+    <item android:drawable="@color/grey_bg" android:state_pressed="true"/>
+<!--     默认颜色 -->
+    <item android:drawable="@color/grey_bg"/>
+
+</selector>
