@@ -148,7 +148,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), PoiKeywordSearchActivity.class);
-                intent.putExtra("keyword", "急救");
+                intent.putExtra("keyword", "急救中心|急诊");
                 getActivity().startActivity(intent);
             }
         });

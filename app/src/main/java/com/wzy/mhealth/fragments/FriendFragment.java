@@ -308,6 +308,7 @@ public class FriendFragment extends D3Fragment {
                         } else {
                             Intent intent = new Intent(getActivity(),
                                     ChatRoomActivity.class);
+
                             intent.putExtra(Constants.CONVERSATION_ID,
                                     conversation.getConversationId());
                             startActivity(intent);

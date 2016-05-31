@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
 
 public class BarCodeActivity extends Activity {
@@ -16,7 +16,7 @@ public class BarCodeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_code);
         qrImgImageView = (ImageView) this.findViewById(R.id.iv_qr_image);
-        String contentString = Constants.USER_NAME;
+        String contentString = LeanchatUser.getCurrentUser().getObjectId();
         CreateQRImageTest createQRImageTest = new CreateQRImageTest(qrImgImageView);
         createQRImageTest.createQRImage(contentString);
 

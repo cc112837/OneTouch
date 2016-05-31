@@ -162,7 +162,8 @@
         <activity android:name=".activities.BuActivity" />
         <activity android:name=".activities.EvaluationListActivity" />
         <activity android:name=".activities.GPSNaviActivity" />
-        <activity android:name=".activities.YuyueActivity"></activity>
+        <activity android:name=".activities.YuyueActivity" />
+        <activity android:name=".activities.FriendDetailActivity"></activity>
     </application>
 
 </manifest>

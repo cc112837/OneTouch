@@ -69,7 +69,7 @@ public class XmppConnection {
 				try {
 					HttpClient client = new DefaultHttpClient();
 					HttpPost request = new HttpPost(
-							"http://123.57.191.21:8080/mhealth/servlet/DoctorServlet");
+							"http://192.168.1.106:8080/mhealth/servlet/DoctorServlet");
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					info.add(new BasicNameValuePair("firstdepId", keshi));
 					HttpParams params = client.getParams();
@@ -131,7 +131,7 @@ public class XmppConnection {
 				try {
 					HttpClient client = new DefaultHttpClient();
 					HttpPost request = new HttpPost(
-							"http://123.57.191.21:8080/mhealth/servlet/DoctorServlet");
+							"http://192.168.1.106:8080/mhealth/servlet/DoctorServlet");
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					if(keshi.equals("")||keshi == null){
 					}
@@ -191,7 +191,7 @@ public class XmppConnection {
 //							"http://123.57.191.21:8080/mhealth/servlet/RegisterServlet");
 					//// TODO: 2016/2/17  
 							HttpPost request = new HttpPost(
-					"http://123.57.191.21:8080/mhealth/servlet/DoctorArrangeServlet");
+					"http://192.168.1.106:8080/mhealth/servlet/DoctorArrangeServlet");
 
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					info.add(new BasicNameValuePair("doctorId", doctorId));
@@ -241,7 +241,7 @@ public class XmppConnection {
 				try {
 					HttpClient client = new DefaultHttpClient();
 					HttpPost request = new HttpPost(
-							"http://123.57.191.21:8080/mhealth/servlet/HospitalServlet");
+							"http://192.168.1.106:8080/mhealth/servlet/HospitalServlet");
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					info.add(new BasicNameValuePair("hospital", "hospital"));
 					HttpParams params = client.getParams();
@@ -291,7 +291,7 @@ public class XmppConnection {
 				try {
 					HttpClient client = new DefaultHttpClient();
 					HttpPost request = new HttpPost(
-							"http://123.57.191.21:8080/mhealth/servlet/UserServlet");
+							"http://192.168.1.106:8080/mhealth/servlet/UserServlet");
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					info.add(new BasicNameValuePair("userId", Constants.USER_NAME+"_u"));
 					HttpParams params = client.getParams();
@@ -339,7 +339,7 @@ public class XmppConnection {
 				try {
 					HttpClient client = new DefaultHttpClient();
 					HttpPost request = new HttpPost(
-							"http://123.57.191.21:8080/mhealth/servlet/MedicalRecordServlet");
+							"http://192.168.1.106:8080/mhealth/servlet/MedicalRecordServlet");
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					info.add(new BasicNameValuePair("userId", Constants.USER_NAME+"_u"));
 					HttpParams params = client.getParams();
@@ -382,7 +382,7 @@ public class XmppConnection {
 				try {
 					HttpClient client = new DefaultHttpClient();
 					HttpPost request = new HttpPost(
-							"http://123.57.191.21:8080/mhealth/servlet/UserEvaluateServlet");
+							"http://192.168.1.106:8080/mhealth/servlet/UserEvaluateServlet");
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					info.add(new BasicNameValuePair("doctorId", doctorId));
 					info.add(new BasicNameValuePair("number", number));
@@ -427,7 +427,7 @@ public class XmppConnection {
 				try {
 					HttpClient client = new DefaultHttpClient();
 					HttpPost request = new HttpPost(
-							"http://123.57.191.21:8080/mhealth/servlet/ElectronicMedicalRecordServlet");
+							"http://192.168.1.106:8080/mhealth/servlet/ElectronicMedicalRecordServlet");
 					List<NameValuePair> info = new ArrayList<NameValuePair>();
 					info.add(new BasicNameValuePair("userId", Constants.USER_NAME+"_u"));
 					HttpParams params = client.getParams();

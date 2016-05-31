@@ -114,7 +114,7 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements OnMark
         if (keyWord.equals("药房")) {
             titleView.setText("附近药房");
             NAME = "药店";
-        } else if (keyWord.equals("急救")) {
+        } else if (keyWord.equals("急救中心|急诊")) {
             titleView.setText("急诊通道");
             NAME = "急诊";
         } else {
@@ -131,9 +131,9 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements OnMark
         //String [] poi={"急救","急诊医院"};
         //for (int i = 0; i < poi.length; i++) {
 
-        query = new PoiSearch.Query(keyWord, "", "");// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+        query = new PoiSearch.Query(keyWord, "医疗保健服务", "");// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
 
-        query.setPageSize(40);// 设置每页最多返回多少条poiitem
+        query.setPageSize(30);// 设置每页最多返回多少条poiitem
         query.setPageNum(0);// 设置查第一页
         poiSearch = new PoiSearch(this, query);
         poiSearch.setOnPoiSearchListener(this);
