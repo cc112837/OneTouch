@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFriendship;
 import com.avos.avoscloud.AVFriendshipQuery;
+import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.callback.AVFriendshipCallback;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
@@ -37,13 +39,14 @@ import java.util.List;
 
 public class FriendDetailActivity extends AVBaseActivity implements View.OnClickListener {
     TextView usernameView;
-    ImageView avatarView, avatarArrowView,leftBtn;
+    ImageView avatarView, avatarArrowView, leftBtn;
     LinearLayout allLayout;
     Button chatBtn, addFriendBtn;
     RelativeLayout avatarLayout;
-    String userId,username,url;
-    boolean isFriend=true;
+    String userId, username, url;
+    boolean isFriend = false;
     LeanchatUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,11 +59,11 @@ public class FriendDetailActivity extends AVBaseActivity implements View.OnClick
     private void initData() {
         Intent intent = getIntent();
         String use = intent.getStringExtra("use");
-        JSONObject s ;
+        JSONObject s;
         try {
             s = new JSONObject(use);
             JSONObject serverData = s.getJSONObject("serverData");
-            userId=s.getString("objectId");
+            userId = s.getString("objectId");
             username = serverData.getString("username");
             JSONObject avatar = serverData.getJSONObject("avatar");
             url = avatar.getString("url");
@@ -78,7 +81,7 @@ public class FriendDetailActivity extends AVBaseActivity implements View.OnClick
         avatarLayout = (RelativeLayout) findViewById(R.id.head_layout);
         chatBtn = (Button) findViewById(R.id.chatBtn);
         addFriendBtn = (Button) findViewById(R.id.addFriendBtn);
-        leftBtn=(ImageView) findViewById(R.id.leftBtn);
+        leftBtn = (ImageView) findViewById(R.id.leftBtn);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,37 +104,44 @@ public class FriendDetailActivity extends AVBaseActivity implements View.OnClick
             AVFriendshipQuery query = AVUser
                     .friendshipQuery(AVUser.getCurrentUser()
                             .getObjectId(), LeanchatUser.class);
-            query.include("followee");
+            query.include("follower");
             query.getInBackground(new AVFriendshipCallback() {
 
-                @Override
-                public void done(AVFriendship friendship, AVException e) {
-                    if (e == null) {
-                        List<LeanchatUser> followees = friendship
-                                .getFollowees(); // 获取关注列表
-                        final List<LeanchatUser> users = new ArrayList<LeanchatUser>();
-                        List<String> Ids = new ArrayList<String>();
-                        for (LeanchatUser u : followees)
-                            if (followees.contains(u)) {
-                                isFriend = false;
-                                user=u;
-                                Ids.add(u.getObjectId());
-                                users.add(u);
-                            }
-                        CacheService.setFriendIds(Ids);
+                                      @Override
+                                      public void done(AVFriendship friendship, AVException e) {
+                                          if (e == null) {
+                                              List<LeanchatUser> followees = friendship
+                                                      .getFollowers(); // 获取关注列表
+                                              List<String> Ids = new ArrayList<String>();
+                                              for (LeanchatUser u : followees) {
+                                                  if (u.getUsername().equals(username)) {
+                                                      user = u;
+                                                      isFriend = true;
+                                                      break;
+                                                  } else {
+                                                      isFriend = false;
+                                                  }
+                                              }
+                                              CacheService.setFriendIds(Ids);
+                                          }
+                                          if (isFriend)
+                                          {
+                                              chatBtn.setVisibility(View.VISIBLE);
+                                              chatBtn.setOnClickListener(FriendDetailActivity.this);
+                                          } else
 
-                    }
-                }
-            });
+                                          {
+                                              chatBtn.setVisibility(View.GONE);
+                                              addFriendBtn.setVisibility(View.VISIBLE);
+                                              addFriendBtn.setOnClickListener(FriendDetailActivity.this);
+                                          }
+                                      }
 
-            if (isFriend) {
-                chatBtn.setVisibility(View.VISIBLE);
-                chatBtn.setOnClickListener(this);
-            } else {
-                chatBtn.setVisibility(View.GONE);
-                addFriendBtn.setVisibility(View.VISIBLE);
-                addFriendBtn.setOnClickListener(this);
-            }
+                                  }
+
+
+            );
+
         }
         updateView();
     }
@@ -169,7 +179,20 @@ public class FriendDetailActivity extends AVBaseActivity implements View.OnClick
 
                 break;
             case R.id.addFriendBtn:// 添加好友
-                AddRequestManager.getInstance().createAddRequestInBackground(this, user);
+                AVQuery<LeanchatUser> q = AVUser.getQuery(LeanchatUser.class);
+                q.whereEqualTo(Constants.OBJECT_ID, userId);
+                q.findInBackground(new FindCallback<LeanchatUser>() {
+                    @Override
+                    public void done(List<LeanchatUser> list, AVException e) {
+                        if (null == e) {
+                            LeanchatUser finduser = list.get(0);
+                            AddRequestManager.getInstance().createAddRequestInBackground(FriendDetailActivity.this, finduser);
+
+                        }
+
+                    }
+                });
+
                 break;
         }
     }
