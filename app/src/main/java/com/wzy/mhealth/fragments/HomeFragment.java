@@ -24,7 +24,6 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.BingliActivity;
 import com.wzy.mhealth.activities.CaptureActivity;
-import com.wzy.mhealth.activities.GreenPassActivity;
 import com.wzy.mhealth.activities.GuahaoActivity;
 import com.wzy.mhealth.activities.JiBingActivity;
 import com.wzy.mhealth.activities.JianyanBaogaoActivity;
@@ -211,8 +210,8 @@ public class HomeFragment extends Fragment {
         ll_speci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), GreenPassActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), GreenPassActivity.class);
+//                startActivity(intent);
             }
         });
         dianzibingli_btn.setOnClickListener(new View.OnClickListener() {

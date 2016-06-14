@@ -155,9 +155,7 @@ public class CaptureActivity extends Activity implements Callback {
                 for (int i = 0; i < list.size(); i++) {
                     try {
                         JSONObject s = new JSONObject(String.valueOf(list.get(i)));
-                        JSONObject serverData = s.getJSONObject("serverData");
                         String objectId=s.getString("objectId");
-                        String username = serverData.getString("username");
                         if (result.equals(objectId)) {
                             Intent intent = new Intent(CaptureActivity.this, FriendDetailActivity.class);
                             intent.putExtra("use",String.valueOf(list.get(i)));
@@ -173,6 +171,7 @@ public class CaptureActivity extends Activity implements Callback {
 
             }
         });
+
 
         Intent intent = new Intent();
         intent.putExtra("result", result);
