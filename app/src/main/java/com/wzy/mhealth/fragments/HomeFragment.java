@@ -24,6 +24,7 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.BingliActivity;
 import com.wzy.mhealth.activities.CaptureActivity;
+import com.wzy.mhealth.activities.GreenPassActivity;
 import com.wzy.mhealth.activities.GuahaoActivity;
 import com.wzy.mhealth.activities.JiBingActivity;
 import com.wzy.mhealth.activities.JianyanBaogaoActivity;
@@ -33,6 +34,7 @@ import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.RouteActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.YuyueListActivity;
+import com.wzy.mhealth.activities.ZhiXingActivity;
 import com.wzy.mhealth.activities.ZixunActivity;
 import com.wzy.mhealth.view.LocalImageHolderView;
 import com.wzy.mhealth.view.MyScrollView;
@@ -123,6 +125,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                //就诊专车
                 Intent intent = new Intent(getActivity(), RouteActivity.class);
                 startActivity(intent);
             }
@@ -130,6 +133,7 @@ public class HomeFragment extends Fragment {
         rb_yuyue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //预约界面
                 Intent intent = new Intent(getActivity(), GuahaoActivity.class);
                 startActivity(intent);
 
@@ -138,6 +142,7 @@ public class HomeFragment extends Fragment {
         rb_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //咨询页面
                 Intent intent = new Intent(getActivity(), ZixunActivity.class);
                 startActivity(intent);
             }
@@ -145,10 +150,10 @@ public class HomeFragment extends Fragment {
         rb_quike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), PoiKeywordSearchActivity.class);
-                intent.putExtra("keyword", "急救中心|急诊");
-                getActivity().startActivity(intent);
+                //智行体检
+                Intent intent = new Intent(getActivity(), ZhiXingActivity.class);
+                startActivity(intent);
+
             }
         });
         menzhen.setOnClickListener(new View.OnClickListener() {
@@ -162,9 +167,11 @@ public class HomeFragment extends Fragment {
         tijian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //体检预约
-                Intent intent = new Intent(getActivity(), NoContentActivity.class);
-                startActivity(intent);
+                //急诊通道
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), PoiKeywordSearchActivity.class);
+                intent.putExtra("keyword", "急救中心|急诊");
+                getActivity().startActivity(intent);
             }
         });
         chat_btn.setOnClickListener(new View.OnClickListener() {
@@ -210,8 +217,9 @@ public class HomeFragment extends Fragment {
         ll_speci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), GreenPassActivity.class);
-//                startActivity(intent);
+                //绿色通道
+                Intent intent = new Intent(getActivity(), GreenPassActivity.class);
+                startActivity(intent);
             }
         });
         dianzibingli_btn.setOnClickListener(new View.OnClickListener() {

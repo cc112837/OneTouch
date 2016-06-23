@@ -28,7 +28,7 @@
                 android:layout_height="100dp"
                 android:background="#fff"
                 android:orientation="horizontal"
-                android:paddingBottom="10dp">
+                android:padding="10dp">
 
                 <RadioButton
                     android:id="@+id/rb_yuyue"
@@ -36,37 +36,33 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:drawableTop="@mipmap/cc"
+                    android:drawableTop="@mipmap/yuyue"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
                     android:text="预约挂号"
-                    android:textColor="@color/black" />
-
-                <RadioButton
-                    android:id="@+id/rb_select"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:drawableTop="@mipmap/bb"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="医生咨询"
-                    android:textColor="@color/black" />
-
+                    android:textColor="@color/black"
+                    android:checked="false" />
                 <RadioButton
                     android:id="@+id/rb_quike"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:drawableTop="@mipmap/aa"
+                    android:drawableTop="@mipmap/zhixingexamination"
                     android:gravity="center"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:text="急诊通道"
+                    android:text="智行体检"
                     android:textColor="@color/black" />
+                <RadioButton
+                    android:id="@+id/rb_select"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableTop="@mipmap/zixun"
+                    android:gravity="center"
+                    android:text="医生咨询"
+                    android:textColor="@color/black" />
+
+
             </LinearLayout>
 
             <TextView
@@ -265,7 +261,7 @@
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/tijianyuyue" />
+                            android:background="@mipmap/jizhen" />
 
                         <TextView
                             android:id="@+id/textView51"
@@ -274,7 +270,7 @@
                             android:layout_below="@+id/mode51"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="体检预约"
+                            android:text="急诊通道"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
