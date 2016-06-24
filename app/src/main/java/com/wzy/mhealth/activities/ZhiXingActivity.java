@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,17 +112,22 @@ public class ZhiXingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //团体套餐
+                Intent intent=new Intent(ZhiXingActivity.this,TijianYueActivity.class);
+                startActivity(intent);
             }
         });
         rb_yuyue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //我的预约
+                Intent intent=new Intent(ZhiXingActivity.this,TijianYuyueActivity.class);
+                startActivity(intent);
             }
         });
         rb_taocan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //套餐介绍
             }
         });
@@ -129,6 +135,8 @@ public class ZhiXingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //体检报告
+                Intent intent=new Intent(ZhiXingActivity.this,TijianRecordActivity.class);
+                startActivity(intent);
             }
         });
         leftBtn.setOnClickListener(new View.OnClickListener() {

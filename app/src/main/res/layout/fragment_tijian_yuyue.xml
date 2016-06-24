@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wzy.mhealth.fragments.TijianYuyueFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tv_timeid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="25dp"
+        android:singleLine="true"
+        android:gravity="center"
+        android:text="您已成功预约2016年6月20号体检"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="您的二维码"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_erweima"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:id="@+id/tv_yuyuecount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        android:text="当前预约量：200人"
+        android:textColor="@color/dark_grey"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="*请您务必按照预约的时间前往体检"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
+</LinearLayout>
