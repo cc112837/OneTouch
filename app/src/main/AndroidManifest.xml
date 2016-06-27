@@ -167,7 +167,8 @@
         <activity android:name=".activities.ZhiXingActivity" />
         <activity android:name=".activities.TijianYuyueActivity" />
         <activity android:name=".activities.TijianRecordActivity" />
-        <activity android:name=".activities.TijianYueActivity"></activity>
+        <activity android:name=".activities.TijianYueActivity" />
+        <activity android:name=".activities.DoctorGradeActivity"></activity>
     </application>
 
 </manifest>
