@@ -120,7 +120,7 @@ public class ZhiXingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //我的预约
-                Intent intent=new Intent(ZhiXingActivity.this,TijianYuyueActivity.class);
+                Intent intent=new Intent(ZhiXingActivity.this,MyYuyueActivity.class);
                 startActivity(intent);
             }
         });

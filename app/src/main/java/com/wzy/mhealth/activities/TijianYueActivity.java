@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +36,8 @@ public class TijianYueActivity extends Activity {
                 String name = nameid.getText().toString();
                 String cardid = idcard.getText().toString();
                 Toast.makeText(TijianYueActivity.this,name+""+cardid,Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(TijianYueActivity.this,TestSelfActivity.class);
+                startActivity(intent);
             }
         });
         leftBtn.setOnClickListener(new View.OnClickListener() {

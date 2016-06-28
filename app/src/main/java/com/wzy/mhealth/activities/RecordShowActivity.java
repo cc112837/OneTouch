@@ -10,41 +10,40 @@ import android.widget.ImageView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TijianAdapter;
-import com.wzy.mhealth.fragments.TijianYuyueFragment;
-import com.wzy.mhealth.fragments.XianChaFragment;
+import com.wzy.mhealth.fragments.ConclusionFragment;
+import com.wzy.mhealth.fragments.TotalFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TijianYuyueActivity extends FragmentActivity {
+public class RecordShowActivity extends FragmentActivity {
     private ImageView leftBtn;
-    private Button rb_chati,rb_yuyue;
+    private Button rb_conclusion,rb_total;
     private List<Fragment> fragments;
     private ViewPager viewPager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tijian_yuyue);
+        setContentView(R.layout.activity_record_show);
         init();
     }
 
     private void init() {
         leftBtn=(ImageView) findViewById(R.id.leftBtn);
         viewPager=(ViewPager) findViewById(R.id.vp_yuyue);
-        rb_chati=(Button) findViewById(R.id.rb_chati);
-        rb_yuyue=(Button) findViewById(R.id.rb_yuyue);
-        rb_chati.setOnClickListener(new View.OnClickListener() {
+        rb_conclusion=(Button) findViewById(R.id.rb_conclusion);
+        rb_total=(Button) findViewById(R.id.rb_total);
+        rb_conclusion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rbTextColorSet(rb_chati, rb_yuyue);
+                rbTextColorSet(rb_conclusion, rb_total);
                 viewPager.setCurrentItem(1);
             }
         });
-        rb_yuyue.setOnClickListener(new View.OnClickListener() {
+        rb_total.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rbTextColorSet(rb_yuyue, rb_chati);
+                rbTextColorSet(rb_total, rb_conclusion);
                 viewPager.setCurrentItem(0);
             }
         });
@@ -58,10 +57,10 @@ public class TijianYuyueActivity extends FragmentActivity {
     }
     private void addViewpager() {
         fragments = new ArrayList<>();
-        TijianYuyueFragment yuyueFragment = new TijianYuyueFragment();
-        fragments.add(yuyueFragment);
-        XianChaFragment xianchaFragment = new XianChaFragment();
-        fragments.add(xianchaFragment);
+        TotalFragment totalFragment = new TotalFragment();
+        fragments.add(totalFragment);
+        ConclusionFragment concluFragment = new ConclusionFragment();
+        fragments.add(concluFragment);
         TijianAdapter adapter = new TijianAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
         /*添加监听器*/
@@ -69,9 +68,9 @@ public class TijianYuyueActivity extends FragmentActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 0) {
-                    rbTextColorSet(rb_yuyue, rb_chati);
+                    rbTextColorSet(rb_total, rb_conclusion);
                 } else {
-                    rbTextColorSet(rb_chati, rb_yuyue);
+                    rbTextColorSet(rb_conclusion, rb_total);
                 }
             }
 
@@ -92,3 +91,4 @@ public class TijianYuyueActivity extends FragmentActivity {
         b2.setTextColor(getResources().getColor(R.color.dark_grey));
     }
 }
+

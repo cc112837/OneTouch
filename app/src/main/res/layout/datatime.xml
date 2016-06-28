@@ -12,6 +12,7 @@
         android:textSize="18sp"
         android:gravity="center_vertical"
         android:layout_weight="1"
+        android:text="体检的时间"
         android:textColor="@color/dark_grey"
         android:layout_height="match_parent" />
     <ImageView

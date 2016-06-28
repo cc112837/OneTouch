@@ -42,9 +42,9 @@ public class XianChaFragment extends Fragment implements
     }
 
     private void init(View view) {
-        initData();
         expandableListView = (PinnedHeaderExpandableListView) view.findViewById(R.id.expandablelist);
         stickyLayout = (StickyLayout) view.findViewById(R.id.sticky_layout);
+        initData();
         adapter = new MyexpandableListAdapter(getActivity(), groupList, childList);
         expandableListView.setAdapter(adapter);
         expandableListView.setOnChildClickListener(this);

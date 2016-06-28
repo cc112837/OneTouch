@@ -165,10 +165,13 @@
         <activity android:name=".activities.YuyueActivity" />
         <activity android:name=".activities.FriendDetailActivity" />
         <activity android:name=".activities.ZhiXingActivity" />
-        <activity android:name=".activities.TijianYuyueActivity" />
+        <activity android:name=".activities.MyYuyueActivity" />
         <activity android:name=".activities.TijianRecordActivity" />
         <activity android:name=".activities.TijianYueActivity" />
-        <activity android:name=".activities.DoctorGradeActivity"></activity>
+        <activity android:name=".activities.DoctorGradeActivity" />
+        <activity android:name=".activities.TestSelfActivity"
+            android:theme="@style/DialogTheme" />
+        <activity android:name=".activities.RecordShowActivity"></activity>
     </application>
 
 </manifest>
