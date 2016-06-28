@@ -57,10 +57,10 @@ public class RecordShowActivity extends FragmentActivity {
     }
     private void addViewpager() {
         fragments = new ArrayList<>();
-        TotalFragment totalFragment = new TotalFragment();
-        fragments.add(totalFragment);
         ConclusionFragment concluFragment = new ConclusionFragment();
         fragments.add(concluFragment);
+        TotalFragment totalFragment = new TotalFragment();
+        fragments.add(totalFragment);
         TijianAdapter adapter = new TijianAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(adapter);
         /*添加监听器*/

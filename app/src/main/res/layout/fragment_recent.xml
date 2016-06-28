@@ -125,6 +125,7 @@
     <EditText
         android:id="@+id/et_content"
         android:layout_width="match_parent"
+        android:background="@mipmap/input_bg"
         android:layout_height="wrap_content"
         android:hint="点击输入近期病史，如无近期病史请输入“无”"
         android:lines="3"/>

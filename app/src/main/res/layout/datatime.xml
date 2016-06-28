@@ -5,19 +5,20 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="horizontal">
-
+    <ImageView
+        android:id="@+id/iv_updown"
+        android:src="@mipmap/icon_more"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="0dp"
+        android:layout_marginLeft="5dp"
         android:textSize="18sp"
         android:gravity="center_vertical"
         android:layout_weight="1"
         android:text="体检的时间"
         android:textColor="@color/dark_grey"
         android:layout_height="match_parent" />
-    <ImageView
-        android:id="@+id/iv_updown"
-        android:src="@mipmap/icon_more"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
+
 </LinearLayout>
