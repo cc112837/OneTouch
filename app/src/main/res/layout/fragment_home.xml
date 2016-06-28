@@ -47,7 +47,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:drawableTop="@mipmap/zhixingexamination"
+                    android:drawableTop="@mipmap/doexam"
                     android:gravity="center"
                     android:text="智行体检"
                     android:textColor="@color/black" />
