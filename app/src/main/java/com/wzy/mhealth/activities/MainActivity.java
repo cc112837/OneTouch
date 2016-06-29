@@ -25,6 +25,7 @@ import com.wzy.mhealth.fragments.ChangeFragmentHelper;
 import com.wzy.mhealth.fragments.FriendFragment;
 import com.wzy.mhealth.fragments.HomeFragment;
 import com.wzy.mhealth.fragments.MyFragment;
+import com.wzy.mhealth.fragments.NewsFragment;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton main_home;
     private RadioButton main_friend;
     private RadioButton main_my;
-
+    private RadioButton main_news;
     private Fragment fragment;
     private TextView  countView;
 
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         main_home=(RadioButton) findViewById(R.id.main_home);
         main_friend=(RadioButton) findViewById(R.id.main_friend);
         main_my=(RadioButton) findViewById(R.id.main_my);
+        main_news=(RadioButton) findViewById(R.id.main_news);
         main_tabBar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -85,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.main_home:
                         fragment = new HomeFragment();
                         break;
-
+                    case R.id.main_news:
+                        fragment=new NewsFragment();
+                        break;
                     case R.id.main_friend:
                         fragment = new FriendFragment();
                         break;

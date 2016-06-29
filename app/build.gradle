@@ -48,4 +48,5 @@ dependencies {
     compile files('libs/AMap_Navi_v1.7.0.1_20160203.jar')
     compile files('libs/AMap_Services_V2.7.0_20151125.jar')
     compile files('libs/Msc.jar')
+    compile 'com.android.support:design:23.1.1'
 }
