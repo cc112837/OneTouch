@@ -139,9 +139,6 @@ public class MyexpandableListAdapter extends BaseExpandableListAdapter {
         TextView tv_sex=(TextView)childView.findViewById(R.id.tv_sex);
         SubListView listView = (SubListView) childView.findViewById(R.id.lv_showclassfy);
         listView.setAdapter(new TestItemAdapter(context, contentList.get(groupPosition), inflater));
-        tv_name.setText(contentList.get(groupPosition).get(childPosition).getName());
-        tv_sex.setText(contentList.get(groupPosition).get(childPosition).getSex());
-
     }
 
     @Override

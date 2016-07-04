@@ -1,5 +1,6 @@
 package com.wzy.mhealth.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,11 +22,63 @@ public class TestSelfActivity extends FragmentActivity {
     private Button rb_recent,rb_item;
     private List<Fragment> fragments;
     private ViewPager viewPager;
+    String eId,session,name,sex,taocan;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getTaocan() {
+        return taocan;
+    }
+
+    public void setTaocan(String taocan) {
+        this.taocan = taocan;
+    }
+
+    public String geteId() {
+        return eId;
+    }
+
+    public void seteId(String eId) {
+        this.eId = eId;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_self);
+        Intent intent=getIntent();
+        String session=intent.getStringExtra("session");
+        String id=intent.getStringExtra("id");
+        String name=intent.getStringExtra("name");
+        String sex=intent.getStringExtra("sex");
+        String taocan=intent.getStringExtra("taocan");
+        setName(name);
+        setSex(sex);
+        setTaocan(taocan);
+        setSession(session);
+        seteId(id);
         init();
     }
 

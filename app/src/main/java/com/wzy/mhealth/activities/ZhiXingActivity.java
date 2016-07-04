@@ -112,7 +112,9 @@ public class ZhiXingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //团体套餐
+
                 Intent intent=new Intent(ZhiXingActivity.this,TijianYueActivity.class);
+                intent.putExtra("flag",1);
                 startActivity(intent);
             }
         });
@@ -120,7 +122,9 @@ public class ZhiXingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //我的预约
+
                 Intent intent=new Intent(ZhiXingActivity.this,MyYuyueActivity.class);
+                intent.putExtra("flag",2);
                 startActivity(intent);
             }
         });

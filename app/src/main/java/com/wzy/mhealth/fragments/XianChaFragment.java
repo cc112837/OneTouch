@@ -2,17 +2,24 @@ package com.wzy.mhealth.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.adapter.MyexpandableListAdapter;
 import com.wzy.mhealth.model.ChaTiContent;
 import com.wzy.mhealth.model.ChaTiTime;
+import com.wzy.mhealth.model.ItemInfo;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.PinnedHeaderExpandableListView;
 import com.wzy.mhealth.view.StickyLayout;
 
@@ -28,9 +35,11 @@ public class XianChaFragment extends Fragment implements
         PinnedHeaderExpandableListView.OnHeaderUpdateListener, StickyLayout.OnGiveUpTouchEventListener {
     private PinnedHeaderExpandableListView expandableListView;
     private StickyLayout stickyLayout;
+    ArrayList<ChaTiContent> childTemp;
     private ArrayList<ChaTiTime> groupList;
     private ArrayList<List<ChaTiContent>> childList;
     private MyexpandableListAdapter adapter;
+    String sessid, recordid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,53 +87,46 @@ public class XianChaFragment extends Fragment implements
 
     }
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 6:
+                    ItemInfo info = (ItemInfo) msg.obj;
+                    Log.e("info",info.getRows()+"");
+                    ChaTiContent content = new ChaTiContent();
+                    for(int i=0;i<info.getRows().size();i++){
+                        content.setItemname(info.getRows().get(i).getXMMC());
+                        childTemp.add(content);
+                    }
+
+                    childList.add(childTemp);
+            }
+        }
+    };
+
     void initData() {
         groupList = new ArrayList<>();
         ChaTiTime group;
-        for (int i = 0; i < 4; i++) {
-            group = new ChaTiTime();
-            group.setData("体检的时间是第" + i + "次");
-            groupList.add(group);
-        }
+        group = new ChaTiTime();
+        group.setData("体检的具体项目");
+        groupList.add(group);
 
         childList = new ArrayList<>();
         for (int i = 0; i < groupList.size(); i++) {
-            ArrayList<ChaTiContent> childTemp;
             if (i == 0) {
                 childTemp = new ArrayList<>();
-                for (int j = 0; j < 6; j++) {
-                    ChaTiContent people = new ChaTiContent();
-                    people.setState(false);
-                    people.setItemname("检查项目" + j);
-                    people.setWaitcount("剩余22人");
-                    people.setName("姓名：哈哈");
-                    people.setSex("性别：男");
-                    childTemp.add(people);
-                }
-            } else if (i == 1) {
-                childTemp = new ArrayList<>();
-                for (int j = 0; j < 8; j++) {
-                    ChaTiContent people = new ChaTiContent();
-                    people.setState(true);
-                    people.setName("姓名：嘻嘻");
-                    people.setSex("性别：女");
-                    people.setItemname("检查项目" + j);
-                    people.setWaitcount("评价");
-                    childTemp.add(people);
-                }
-            } else {
-                childTemp = new ArrayList<>();
-                for (int j = 0; j < 13; j++) {
-                    ChaTiContent people = new ChaTiContent();
-                    people.setState(true);
-                    people.setName("姓名：猜的");
-                    people.setSex("性别：男");
-                    people.setItemname("检查项目" + j);
-                    people.setWaitcount("剩余12人");
-                    childTemp.add(people);
+                sessid = ((MyYuyueActivity) getActivity()).getSession();
+                recordid = ((MyYuyueActivity) getActivity()).getId();
+                if ("null".equals(recordid)) {
+                    Toast.makeText(getActivity(), "请先进行体检预约", 2000).show();
+                } else {
+                    String itemurl = "http://113.201.59.226:8081/Healwis/base/itemAction!app_jcxm.action?sessid=" + sessid + "&id=" + recordid;
+                    Log.e("item",itemurl);
+                    MyHttpUtils.handData(handler, 6, itemurl, null);
+
                 }
             }
-            childList.add(childTemp);
         }
 
     }

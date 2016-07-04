@@ -117,6 +117,11 @@ public class RegActivity extends Activity implements View.OnClickListener{
                 }
                 break;
             case R.id.register_btn:
+                if(pass.length()<6){
+                    Toast.makeText(this, "请输入6位或者6位以上密码", Toast.LENGTH_SHORT).show();
+                }
+                MyAndroidUtil.editXmlByString("phone",userPhone);
+                MyAndroidUtil.editXmlByString("pass",pass);
                 RequestParams params = new RequestParams();
                 params.addBodyParameter("appkey", "10fb5eade1138");
                 params.addBodyParameter("phone", userPhone);

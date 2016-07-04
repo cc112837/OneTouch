@@ -1,5 +1,6 @@
 package com.wzy.mhealth.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,11 +22,33 @@ public class MyYuyueActivity extends FragmentActivity {
     private Button rb_chati,rb_yuyue;
     private List<Fragment> fragments;
     private ViewPager viewPager;
+    String session,id;
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tijian_yuyue);
+        Intent intent=getIntent();
+        session= intent.getStringExtra("session");
+        setSession(session);
+        id=intent.getStringExtra("id");
+        setId(id);
         init();
     }
 

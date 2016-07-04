@@ -48,7 +48,7 @@
             android:background="@color/white"
             android:textColor="@color/title_green"
             android:gravity="center"
-            android:text="体检项目" />
+            android:text="体检须知" />
 
         <View
             android:layout_width="1px"
@@ -64,7 +64,7 @@
             android:textColor="@color/dark_grey"
             android:background="@color/white"
             android:gravity="center"
-            android:text="近期病史" />
+            android:text="信息确认" />
 
     </LinearLayout>
 

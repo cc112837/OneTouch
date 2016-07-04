@@ -1,13 +1,52 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.wzy.mhealth.fragments.TestItemFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_gray"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="体检流程"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="1、前台登记\n2、换鞋\n3、餐前检查：\n  ①采血\n  ②腹部超声检查\n  ③C14呼吸检查\n4、营养早餐\n5、餐后检查：\n  ①内科\n  ②外科\n  ③心电图\n  ④妇科\n  ⑤一般项目\n  ⑥眼科\n  ⑦口腔科\n  ⑧耳鼻喉科\n  ⑨骨密度检查\n  ⑩肺功能检查\n  ⑪动脉硬化检查\n  ⑫经颅多普勒\n  ⑬超声检查\n  ⑭DR放射检查\n6、体检完毕后，请换鞋。\n    将更衣柜钥匙交回前台。"
+                android:textColor="@color/dark_grey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_gray"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="注意事项"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="1、体检接待时间：周一至周六08:00-10：30。周日及国家法定节假日不上班。\n2、体检前3日勿食油腻食物，勿饮酒。体检当日禁食、禁水。\n3、糖尿病、高血压等慢性病患者，请将平时服用的药物携带备用。\n4、有眼压检查项目的人员，请勿佩戴隐形眼镜。\n5、孕妇或准备3个月内受孕的女士不宜进行x光检查.\n6、检查当天不宜穿紧身、连体及有金属、橡胶等饰物的衣物。\n7、妇科检查须知：\n  妇科检查仅限有性生活史的女性。\n  女性月经期不宜做便、尿检查，经期结束后3天可补检。\n  妇科检查前3天不宜进行阴道灌洗及放药治疗。\n检后：\n  1、个人体检报告7个工作日后至3个月内领取。\n  2、团体报告按合同要求送取.\n  3、体检后1个月内可以在网上查询电子报告并打印，查询网址：www.healwis.com\n  4、体检结果咨询请拨打029-68550666转8003."
+                android:textColor="@color/dark_grey" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
