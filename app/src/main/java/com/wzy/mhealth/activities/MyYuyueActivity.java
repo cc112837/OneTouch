@@ -22,7 +22,15 @@ public class MyYuyueActivity extends FragmentActivity {
     private Button rb_chati,rb_yuyue;
     private List<Fragment> fragments;
     private ViewPager viewPager;
-    String session,id;
+    String session,id,ex;
+
+    public String getEx() {
+        return ex;
+    }
+
+    public void setEx(String ex) {
+        this.ex = ex;
+    }
 
     public String getSession() {
         return session;
@@ -49,6 +57,8 @@ public class MyYuyueActivity extends FragmentActivity {
         setSession(session);
         id=intent.getStringExtra("id");
         setId(id);
+        ex=intent.getStringExtra("extra");
+        setEx(ex);
         init();
     }
 

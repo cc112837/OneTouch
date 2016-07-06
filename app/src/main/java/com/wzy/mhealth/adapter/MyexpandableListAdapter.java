@@ -11,6 +11,7 @@ package com.wzy.mhealth.adapter;
  */
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.model.ChaTiContent;
 import com.wzy.mhealth.model.ChaTiTime;
 import com.wzy.mhealth.view.SubListView;
+import com.wzy.mhealth.zxingdemo.CreateQrYi;
 
 import java.util.List;
 
@@ -136,7 +139,13 @@ public class MyexpandableListAdapter extends BaseExpandableListAdapter {
     private void bindChildView(int groupPosition, int childPosition,
                                View childView) {
         TextView tv_name = (TextView) childView.findViewById(R.id.tv_name);
-        TextView tv_sex=(TextView)childView.findViewById(R.id.tv_sex);
+        ImageView iv_yiwei=(ImageView) childView.findViewById(R.id.iv_yiwei);
+        CreateQrYi createQrYi= new CreateQrYi(iv_yiwei);
+        DisplayMetrics metric = new DisplayMetrics();
+        ((MyYuyueActivity)context).getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels; // 屏幕宽度（像素）
+        createQrYi.getBarcode(((MyYuyueActivity) context).getEx(), width, 100);
+        tv_name.setText(((MyYuyueActivity)context).getEx());
         SubListView listView = (SubListView) childView.findViewById(R.id.lv_showclassfy);
         listView.setAdapter(new TestItemAdapter(context, contentList.get(groupPosition), inflater));
     }

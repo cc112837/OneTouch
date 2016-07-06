@@ -91,7 +91,7 @@ public class RecentFragment extends Fragment {
                     if (month > Calendar.getInstance().get(Calendar.MONTH)) {
                         flag = judgeData();
                     } else if (month == Calendar.getInstance().get(Calendar.MONTH)) {
-                        if (day > Calendar.getInstance().get(Calendar.DAY_OF_MONTH) || day == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+                        if (day > Calendar.getInstance().get(Calendar.DAY_OF_MONTH)|| day == Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
                             flag = judgeData();
 
                         } else {
@@ -164,6 +164,7 @@ public class RecentFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), MyYuyueActivity.class);
                     intent.putExtra("session", session);
                     intent.putExtra("id", id);
+                    intent.putExtra("extra",((TestSelfActivity)getActivity()).getTjid()+"20160713");
                     startActivity(intent);
                     getActivity().finish();
             }

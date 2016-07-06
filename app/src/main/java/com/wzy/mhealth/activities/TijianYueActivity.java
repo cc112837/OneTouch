@@ -95,6 +95,7 @@ public class TijianYueActivity extends Activity {
                     intent.putExtra("name",inf.getRows().get(0).getXM());
                     intent.putExtra("sex",inf.getRows().get(0).getXB());
                     intent.putExtra("taocan", inf.getRows().get(0).getNAME());
+                    intent.putExtra("tiid",inf.getRows().get(0).getTJID());
                     startActivity(intent);
                     TijianYueActivity.this.finish();
                     break;

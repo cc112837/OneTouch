@@ -14,7 +14,7 @@
         android:layout_marginBottom="25dp"
         android:singleLine="true"
         android:gravity="center"
-        android:text="您已成功预约2016年6月20号体检"
+        android:text="您已成功预约该体检"
         android:textColor="@color/dark_grey"
         android:textSize="16sp" />
 
@@ -41,7 +41,7 @@
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:layout_margin="20dp"
-        android:text="当前预约量：200人"
+        android:text="当前预约量：未知"
         android:textColor="@color/dark_grey"
         android:textSize="16sp" />
 

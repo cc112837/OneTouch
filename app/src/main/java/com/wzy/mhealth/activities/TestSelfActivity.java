@@ -22,7 +22,15 @@ public class TestSelfActivity extends FragmentActivity {
     private Button rb_recent,rb_item;
     private List<Fragment> fragments;
     private ViewPager viewPager;
-    String eId,session,name,sex,taocan;
+    String eId,session,name,sex,taocan,tjid;
+
+    public String getTjid() {
+        return tjid;
+    }
+
+    public void setTjid(String tjid) {
+        this.tjid = tjid;
+    }
 
     public String getName() {
         return name;
@@ -74,6 +82,8 @@ public class TestSelfActivity extends FragmentActivity {
         String name=intent.getStringExtra("name");
         String sex=intent.getStringExtra("sex");
         String taocan=intent.getStringExtra("taocan");
+        String tjid=intent.getStringExtra("tiid");
+        setTjid(tjid);
         setName(name);
         setSex(sex);
         setTaocan(taocan);

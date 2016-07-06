@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.MyYuyueActivity;
+import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +34,9 @@ public class TijianYuyueFragment extends Fragment {
         tv_timeid=(TextView) view.findViewById(R.id.tv_timeid);
         tv_yuyuecount=(TextView) view.findViewById(R.id.tv_yuyuecount);
         iv_erweima=(ImageView) view.findViewById(R.id.iv_erweima);
+        String  recordid = ((MyYuyueActivity) getActivity()).getId();
+        CreateQRImageTest createQRImageTest = new CreateQRImageTest(iv_erweima);
+        createQRImageTest.createQRImage(recordid);
         //// TODO: 2016/6/24 (时间 ，人数，以及二维码生成) 
     }
 
