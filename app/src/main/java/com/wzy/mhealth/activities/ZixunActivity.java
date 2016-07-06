@@ -115,7 +115,6 @@ public class ZixunActivity extends Activity {
         gridview.setAdapter(saImageItems);
         // 添加消息处理
         gridview.setOnItemClickListener(new ItemClickListener());
-        gridview.setVerticalSpacing(0);
         // 当AdapterView被单击(触摸屏或者键盘)，则返回的Item单击事件
         gridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
 
@@ -132,7 +131,6 @@ public class ZixunActivity extends Activity {
             // 在本例中arg2=arg3
             HashMap<String, Object> item = (HashMap<String, Object>) arg0
                     .getItemAtPosition(arg2);
-            // 显示所选Item的ItemText
             Intent intent = new Intent();
             //
             Bundle bundle = new Bundle();
