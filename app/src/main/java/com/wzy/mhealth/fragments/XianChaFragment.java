@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -93,9 +92,11 @@ public class XianChaFragment extends Fragment implements
             switch (msg.what) {
                 case 6:
                     ItemInfo info = (ItemInfo) msg.obj;
-                    Log.e("info",info.getRows()+"");
-                    ChaTiContent content = new ChaTiContent();
                     for(int i=0;i<info.getRows().size();i++){
+                        ChaTiContent content = new ChaTiContent();
+                        content.setId(info.getRows().get(i).getID());
+                        content.setItemcode(info.getRows().get(i).getITEMCODE());
+                        content.setStuyid(info.getRows().get(i).getSTUDYID());
                         content.setItemname(info.getRows().get(i).getXMMC());
                         childTemp.add(content);
                     }
@@ -122,7 +123,6 @@ public class XianChaFragment extends Fragment implements
                     Toast.makeText(getActivity(), "请先进行体检预约", 2000).show();
                 } else {
                     String itemurl = "http://113.201.59.226:8081/Healwis/base/itemAction!app_jcxm.action?sessid=" + sessid + "&id=" + recordid;
-                    Log.e("item",itemurl);
                     MyHttpUtils.handData(handler, 6, itemurl, null);
 
                 }

@@ -12,34 +12,34 @@ package com.wzy.mhealth.model;
  */
 public class ChaTiContent {
     // TODO: 2016/6/24
-    Boolean state;
+
     String itemname;
-    String waitcount;
-    String name;
-    String sex;
+   String itemcode;
+    String stuyid;
+    String id;
 
-    public String getName() {
-        return name;
+    public String getItemcode() {
+        return itemcode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemcode(String itemcode) {
+        this.itemcode = itemcode;
     }
 
-    public String getSex() {
-        return sex;
+    public String getStuyid() {
+        return stuyid;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setStuyid(String stuyid) {
+        this.stuyid = stuyid;
     }
 
-    public Boolean getState() {
-        return state;
+    public String getId() {
+        return id;
     }
 
-    public void setState(Boolean state) {
-        this.state = state;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getItemname() {
@@ -50,11 +50,5 @@ public class ChaTiContent {
         this.itemname = itemname;
     }
 
-    public String getWaitcount() {
-        return waitcount;
-    }
 
-    public void setWaitcount(String waitcount) {
-        this.waitcount = waitcount;
-    }
 }

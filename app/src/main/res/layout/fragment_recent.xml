@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,15 +6,16 @@
     tools:context="com.wzy.mhealth.fragments.RecentFragment">
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.93"
+    android:layout_height="match_parent"
     android:orientation="vertical">
    <TextView
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:paddingLeft="10dp"
        android:paddingRight="10dp"
-       android:textColor="@color/black"
+       android:textColor="@color/dark_grey"
+       android:paddingTop="5dp"
+       android:paddingBottom="5dp"
        android:text="基本信息"
        android:textSize="18sp"
        android:background="@color/bg_gray"/>
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:text="姓名：" />
 
         <TextView
@@ -42,7 +43,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="@mipmap/input_bg"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:text="姓名"
             android:textSize="18sp"  >
         </TextView>
@@ -51,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:textSize="18sp"
             android:text="性别：" />
 
@@ -64,7 +65,7 @@
             android:gravity="center"
             android:background="@mipmap/input_bg"
             android:text="男"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:textSize="18sp"   >
         </TextView>
     </LinearLayout>
@@ -72,6 +73,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content" >
 
@@ -80,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:text="套餐：" />
 
         <TextView
@@ -90,7 +92,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:background="@mipmap/input_bg"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:text=""
             android:textSize="18sp"  >
         </TextView>
@@ -101,24 +103,31 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:textColor="@color/black"
+        android:textColor="@color/dark_grey"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:text="近期病史"
         android:textSize="18sp"
         android:background="@color/bg_gray"/>
     <EditText
         android:id="@+id/et_content"
         android:layout_width="match_parent"
-        android:background="@mipmap/input_bg"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/dark_grey"
+        android:lines="8"
+        android:background="@drawable/iforminput_bg"
         android:hint="点击输入近期病史，如无近期病史请输入“无”"
-        android:lines="3"/>
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="预约时间"
-        android:textColor="@color/black"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/dark_grey"
         android:textSize="18sp"
         android:background="@color/bg_gray"/>
     <TextView
@@ -128,7 +137,7 @@
         android:layout_marginTop="5dp"
         android:background="@mipmap/input_bg"
         android:layout_gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/dark_grey"
         android:text="请点击选择时间"
         android:textSize="18sp"
         android:gravity="center"/>
@@ -153,7 +162,6 @@
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginTop="5dp"/>
-</LinearLayout>
     <TextView
         android:id="@+id/tv_submit"
         android:layout_width="wrap_content"
@@ -161,12 +169,12 @@
         android:text="提交"
         android:textColor="@color/white"
         android:gravity="center"
+        android:layout_marginTop="10dp"
         android:background="@mipmap/select_bg"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_gravity="center"
         android:layout_marginBottom="50dp"/>
-
-
-
 </LinearLayout>
+
+</ScrollView>

@@ -47,6 +47,7 @@ import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * @author cc112837@163.com
@@ -56,7 +57,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
     private Button loginBtn, regButton,forgetButton;
     private EditText nameText, pwdText;
     private String name, pwd;
-    private ImageView iv_qqlogin,iv_weibologin,headicon;
+    private ImageView iv_qqlogin,iv_weibologin,headicon,iv_wechatlogin;
     private LinearLayout loginLinear, qidongLinear;
     private static final int MSG_AUTH_CANCEL = 2;
     private static final int MSG_AUTH_ERROR= 3;
@@ -82,6 +83,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         qidongLinear = (LinearLayout) findViewById(R.id.qidongLinear);
         iv_qqlogin=(ImageView) findViewById(R.id.iv_qqlogin);
         iv_weibologin=(ImageView) findViewById(R.id.iv_weibologin);
+        iv_wechatlogin=(ImageView) findViewById(R.id.iv_wechatlogin);
         nameText = (EditText) findViewById(R.id.nameText);
         pwdText = (EditText) findViewById(R.id.pwdText);
         loginBtn = (Button) findViewById(R.id.loginBtn);
@@ -93,7 +95,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         forgetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this, NoContentActivity.class);
+                Intent intent = new Intent(LoginActivity.this, NoContentActivity.class);
                 startActivity(intent);
             }
         });
@@ -112,6 +114,20 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                 } else {
                     loginAccount(name, pwd);
                 }
+            }
+        });
+        iv_wechatlogin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("执行了","wehcat");
+                Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
+                if (wechat.isValid ()) {
+                    wechat.removeAccount();
+                }
+                wechat.SSOSetting(false);  //设置false表示使用SSO授权方式
+                wechat.setPlatformActionListener(LoginActivity.this); // 设置分享事件回调
+                wechat.showUser(null);
+                wechat.authorize();
             }
         });
         iv_qqlogin.setOnClickListener(new OnClickListener() {
@@ -271,6 +287,42 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                     HashMap<String, Object> res = (HashMap<String, Object>) objs[1];
                     final PlatformDb plat =(PlatformDb)objs[2];
                     if(QQ.NAME.equals(platform)){
+                        final String  nickname=res.get("nickname").toString();
+                        final String icon=res.get("figureurl_qq_2").toString();
+                        AVUser.AVThirdPartyUserAuth auth =
+                                new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
+                                        .getExpiresTime()),AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIBO, plat
+                                        .getUserId());
+                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>(){
+                            @Override
+                            public void done(AVUser user, AVException e) {
+                                if (e == null) {
+                                    //恭喜你，已经和我们的 AVUser 绑定成功
+
+                                    MyAndroidUtil.editXmlByString(
+                                            Constants.LOGIN_ACCOUNT, nickname);
+                                    user.setUsername(nickname);
+                                    user.put("property", "user");
+                                    AVFile avFile = new AVFile(nickname,icon,null);
+                                    user.put("avatar", avFile);
+                                    user.signUpInBackground(new SignUpCallback() {
+                                        @Override
+                                        public void done(AVException e) {
+
+                                        }
+                                    });
+                                    name=nickname;
+                                    finishLogin();
+                                } else {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+
+                    }
+                    if(Wechat.NAME.equals(platform)){
+                        Log.e("wechat",res+"");
                         final String  nickname=res.get("nickname").toString();
                         final String icon=res.get("figureurl_qq_2").toString();
                         AVUser.AVThirdPartyUserAuth auth =

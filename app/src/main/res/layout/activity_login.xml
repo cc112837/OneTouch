@@ -123,14 +123,21 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/weibo1" />
+                android:src="@drawable/ssdk_oks_classic_sinaweibo" />
 
             <ImageView
                 android:id="@+id/iv_qqlogin"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/qq1" />
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ssdk_oks_classic_qq" />
+            <ImageView
+                android:id="@+id/iv_wechatlogin"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ssdk_oks_classic_wechat" />
         </LinearLayout>
 
         <LinearLayout

@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="医生评价"
+            android:text="项目评价"
             android:textColor="#ffffff"
             android:textSize="@dimen/fontSizeMidMM" />
     </RelativeLayout>
@@ -38,40 +38,6 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_head"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@mipmap/default_icon" />
-
-            <TextView
-                android:id="@+id/tv_nameid"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="姓名\n\n内科"
-                android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_pro"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="副主任医师\n\n"
-                android:textColor="@color/dark_grey"
-                android:textSize="18sp" />
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

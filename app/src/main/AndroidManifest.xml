@@ -170,6 +170,7 @@
         <activity android:name=".activities.TijianYueActivity" />
         <activity android:name=".activities.DoctorGradeActivity" />
         <activity android:name=".activities.TestSelfActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/DialogTheme" />
         <activity android:name=".activities.RecordShowActivity"></activity>
     </application>

@@ -125,7 +125,6 @@ public class RecentFragment extends Fragment {
                 session = ((TestSelfActivity) getActivity()).getSession();
                 id = ((TestSelfActivity) getActivity()).geteId();
                 String url = "http://113.201.59.226:8081/Healwis/base/recordAction!app_appointment.action?sessid=" + session + "&id=" + id + "&appointmentDate=" + time + "&rdesc=" + content;
-                Log.e("cichu", url);
                 MyHttpUtils.handData(handler, 2, url, null);
 
             }
@@ -164,8 +163,9 @@ public class RecentFragment extends Fragment {
                         Toast.makeText(getActivity(), "已预约过", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getActivity(), MyYuyueActivity.class);
                     intent.putExtra("session", session);
-                    intent.putExtra("id", session);
+                    intent.putExtra("id", id);
                     startActivity(intent);
+                    getActivity().finish();
             }
         }
     };

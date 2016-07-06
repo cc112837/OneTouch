@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.DoctorGradeActivity;
+import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.model.ChaTiContent;
 
 import java.util.List;
@@ -46,42 +47,30 @@ public class TestItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         ChildHolder childHolder;
         if (convertView == null) {
             childHolder = new ChildHolder();
             convertView = mInflater.inflate(R.layout.type_item, null);
-            childHolder.tv_state = (TextView) convertView.findViewById(R.id.tv_state);
             childHolder.tv_classname = (TextView) convertView.findViewById(R.id.tv_classname);
             childHolder.tv_waitcount = (Button) convertView.findViewById(R.id.tv_waitcount);
             convertView.setTag(childHolder);
         } else {
             childHolder = (ChildHolder) convertView.getTag();
         }
-        if (contentList.get(position).getState()) {
-            childHolder.tv_classname.setText(contentList.get(position).getItemname());
-            childHolder.tv_state.setBackgroundResource(R.mipmap.green);
-            childHolder.tv_state.setText("已查");
-            childHolder.tv_waitcount.setFocusable(true);
-            childHolder.tv_waitcount.setText("评价");
-            childHolder.tv_waitcount.setBackgroundResource(R.mipmap.blue);
-            childHolder.tv_waitcount.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(con,DoctorGradeActivity.class);
-                    con.startActivity(intent);
-                }
-            });
-        } else {
-            childHolder.tv_classname.setText(contentList.get(position).getItemname());
-            childHolder.tv_state.setBackgroundResource(R.mipmap.orange);
-            childHolder.tv_state.setText("未查");
-            childHolder.tv_waitcount.setFocusable(false);
-            childHolder.tv_waitcount.setText(contentList.get(position).getWaitcount());
-            childHolder.tv_waitcount.setTextColor(R.color.dark_grey);
-            childHolder.tv_waitcount.setBackgroundResource(R.color.white);
-        }
+        childHolder.tv_classname.setText(contentList.get(position).getItemname());
+        childHolder.tv_waitcount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(con, DoctorGradeActivity.class);
+                intent.putExtra("codeid",contentList.get(position).getItemcode());
+                intent.putExtra("stuid",contentList.get(position).getStuyid());
+                intent.putExtra("session",((MyYuyueActivity)con).getSession());
+                intent.putExtra("eid",((MyYuyueActivity)con).getId());
+                con.startActivity(intent);
+            }
+        });
         return convertView;
     }
 

@@ -81,6 +81,7 @@ public class TijianYueActivity extends Activity {
                             intent.putExtra("session",info.getMsg());
                             intent.putExtra("id","0");
                             startActivity(intent);
+                            TijianYueActivity.this.finish();
                         }
                     } else {
                         Toast.makeText(TijianYueActivity.this, "校验失败!", Toast.LENGTH_LONG).show();
@@ -95,6 +96,7 @@ public class TijianYueActivity extends Activity {
                     intent.putExtra("sex",inf.getRows().get(0).getXB());
                     intent.putExtra("taocan", inf.getRows().get(0).getNAME());
                     startActivity(intent);
+                    TijianYueActivity.this.finish();
                     break;
             }
         }
