@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
@@ -55,6 +57,7 @@ public class XianChaFragment extends Fragment implements
         initData();
         adapter = new MyexpandableListAdapter(getActivity(), groupList, childList);
         expandableListView.setAdapter(adapter);
+        expandableListView.setOnHeaderUpdateListener(this);
         expandableListView.setOnChildClickListener(this);
         expandableListView.setOnGroupClickListener(this);
         stickyLayout.setOnGiveUpTouchEventListener(this);
@@ -78,14 +81,19 @@ public class XianChaFragment extends Fragment implements
 
     @Override
     public View getPinnedHeader() {
-        return null;
+        View headerView = getActivity().getLayoutInflater().inflate(R.layout.datatime, null);
+        headerView.setLayoutParams(new AbsListView.LayoutParams(
+                AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
+
+        return headerView;
     }
 
     @Override
     public void updatePinnedHeader(View headerView, int firstVisibleGroupPos) {
-
+        ChaTiTime firstVisibleGroup = (ChaTiTime) adapter.getGroup(firstVisibleGroupPos);
+        TextView textView = (TextView) headerView.findViewById(R.id.tv_time);
+        textView.setText(firstVisibleGroup.getData());
     }
-
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -110,7 +118,7 @@ public class XianChaFragment extends Fragment implements
         groupList = new ArrayList<>();
         ChaTiTime group;
         group = new ChaTiTime();
-        group.setData("体检的具体项目");
+        group.setData("体检的时间2016-07-20");
         groupList.add(group);
 
         childList = new ArrayList<>();

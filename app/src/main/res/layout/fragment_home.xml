@@ -20,7 +20,7 @@
             <com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/convenientBanner"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="200dp"
                 app:canLoop="true" />
 
             <LinearLayout
@@ -28,7 +28,7 @@
                 android:layout_height="100dp"
                 android:background="#fff"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                >
 
                 <RadioButton
                     android:id="@+id/rb_yuyue"
@@ -36,6 +36,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
+                    android:padding="10dp"
                     android:drawableTop="@mipmap/yuyue"
                     android:gravity="center"
                     android:text="预约挂号"
@@ -47,6 +48,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
+                    android:padding="10dp"
                     android:drawableTop="@mipmap/doexam"
                     android:gravity="center"
                     android:text="智行体检"
@@ -57,6 +59,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
+                    android:padding="10dp"
                     android:drawableTop="@mipmap/zixun"
                     android:gravity="center"
                     android:text="医生咨询"
@@ -65,15 +68,11 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/grey_bg" />
 
             <LinearLayout
                 android:id="@+id/ll_speci"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="90dp"
                 android:background="@mipmap/kuaisutongdao"
                 android:orientation="horizontal">
 
@@ -89,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:paddingTop="30dp"
+                        android:paddingTop="20dp"
                         android:text="儿科妇科绿色通道"
                         android:textColor="#000"
                         android:textSize="18sp" />
@@ -98,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:paddingTop="20dp"
+                        android:paddingTop="10dp"
                         android:text="免费不用等待"
                         android:textColor="#f4a003"
                         android:textSize="18sp" />
@@ -106,10 +105,6 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/grey_bg"  />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,11 +140,6 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
-                        <RelativeLayout
-                            android:layout_width="1dp"
-                            android:layout_height="90dp"
-                            android:layout_alignParentRight="true"
-                            android:background="@color/grey_bg"></RelativeLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -176,11 +166,6 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
-                        <RelativeLayout
-                            android:layout_width="1dp"
-                            android:layout_height="90dp"
-                            android:layout_alignParentRight="true"
-                            android:background="@color/grey_bg"></RelativeLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -209,11 +194,6 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="top"
-                    android:background="@color/grey_bg"></RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,11 +223,6 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
-                        <RelativeLayout
-                            android:layout_width="1dp"
-                            android:layout_height="90dp"
-                            android:layout_alignParentRight="true"
-                            android:background="@color/grey_bg"></RelativeLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -274,11 +249,7 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
-                        <RelativeLayout
-                            android:layout_width="1dp"
-                            android:layout_height="90dp"
-                            android:layout_alignParentRight="true"
-                            android:background="@color/grey_bg"></RelativeLayout>
+
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -307,11 +278,6 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="top"
-                    android:background="@color/grey_bg"></RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -342,11 +308,6 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
-                        <RelativeLayout
-                            android:layout_width="1dp"
-                            android:layout_height="90dp"
-                            android:layout_alignParentRight="true"
-                            android:background="@color/grey_bg"></RelativeLayout>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -373,11 +334,6 @@
                             android:textColor="@color/black"
                             android:textSize="16sp" />
 
-                        <RelativeLayout
-                            android:layout_width="1dp"
-                            android:layout_height="90dp"
-                            android:layout_alignParentRight="true"
-                            android:background="@color/grey_bg"></RelativeLayout>
                     </RelativeLayout>
 
                     <RelativeLayout

@@ -33,14 +33,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#bbedb6">
+            android:background="#7acfc3">
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabid"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 tab:tabGravity="center"
-                tab:tabIndicatorColor="#f57ad0"
+                android:padding="3dp"
+                tab:tabIndicatorColor="@color/white"
                 tab:tabSelectedTextColor="#ffffff">
             </android.support.design.widget.TabLayout>
 

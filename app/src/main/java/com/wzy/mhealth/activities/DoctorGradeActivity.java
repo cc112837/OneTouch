@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -34,6 +33,7 @@ public class DoctorGradeActivity extends Activity {
         itemcode=intent.getStringExtra("codeid");
         sessid=intent.getStringExtra("session");
         rid=intent.getStringExtra("eid");
+        grade=5;
 //        String seleurl="http://113.201.59.226:8081/Healwis/base/evaluationAction!app_getOne.action?sessid="+sessid+"&rid="+rid+"&itemcode="+itemcode;
         init();
     }
@@ -64,7 +64,6 @@ private Handler handler=new Handler(){
             public void onClick(View v) {
 
                 String url="http://113.201.59.226:8081/Healwis/base/evaluationAction!app_evalOne.action?sessid="+sessid+"&rid="+rid+"&itemcode="+itemcode+"&studyid="+studyid+"&etype=s&marks="+grade+"&rdesc="+content;
-                Log.e("最后url",url);
                 MyHttpUtils.handData(handler,2,url,null);
             }
         });

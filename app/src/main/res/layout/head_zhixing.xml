@@ -22,7 +22,7 @@
             android:background="#b1595959"
             android:gravity="center"
             android:padding="3dp"
-            android:text="展示的内容"
+            android:text="注意：体检前请先进行体检预约"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
@@ -87,7 +87,7 @@
             android:gravity="center"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="体检预约"
+            android:text="团体套餐"
             android:textColor="@color/dark_grey" />
 
 

@@ -43,10 +43,10 @@
             android:id="@+id/nameid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="15dp"
             android:background="@mipmap/input_bg"
             android:hint="请填写姓名"
             android:padding="3dp"
@@ -63,6 +63,7 @@
             android:padding="3dp"
             android:textColor="@color/black"
             android:textSize="18sp"></EditText>
+
         <EditText
             android:id="@+id/et_tel"
             android:layout_width="match_parent"
@@ -73,6 +74,7 @@
             android:padding="3dp"
             android:textColor="@color/black"
             android:textSize="18sp"></EditText>
+
         <EditText
             android:id="@+id/et_pass"
             android:layout_width="match_parent"
@@ -81,8 +83,10 @@
             android:background="@mipmap/input_bg"
             android:hint="请设置密码"
             android:padding="3dp"
+            android:password="true"
             android:textColor="@color/black"
             android:textSize="18sp"></EditText>
+
         <TextView
             android:id="@+id/submit"
             android:layout_width="match_parent"

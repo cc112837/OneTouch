@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:orientation="horizontal">
@@ -17,7 +18,6 @@
         android:textSize="18sp"
         android:gravity="center_vertical"
         android:layout_weight="1"
-        android:text="体检的时间"
         android:textColor="@color/dark_grey"
         android:layout_height="match_parent" />
 

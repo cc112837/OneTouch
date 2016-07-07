@@ -69,7 +69,6 @@ public class ManageActivity extends Activity implements View.OnClickListener{
                 String aid=et_aid.getText().toString();
                 String home=et_home.getText().toString();
                 String habit=et_habit.getText().toString();
-                if(sex.equals(null)) sex="男";
                 Toast.makeText(ManageActivity.this,"看看效果",Toast.LENGTH_LONG).show();
 
                 break;

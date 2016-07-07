@@ -32,19 +32,19 @@ public class NewsFragment extends Fragment {
     private void init(View v) {
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tabid);
         TabLayout.Tab tab1 = tabLayout.newTab();
-        tab1.setText("健康1");
+        tab1.setText("养生");
         tabLayout.addTab(tab1);
 
         TabLayout.Tab tab2 = tabLayout.newTab();
-        tab2.setText("健康2");
+        tab2.setText("美容");
         tabLayout.addTab(tab2);
 
         TabLayout.Tab tab3 = tabLayout.newTab();
-        tab3.setText("健康3");
+        tab3.setText("健康");
         tabLayout.addTab(tab3);
 
         TabLayout.Tab tab4 = tabLayout.newTab();
-        tab4.setText("健康4");
+        tab4.setText("心理");
         tabLayout.addTab(tab4);
 
         vp_news = (ViewPager) v.findViewById(R.id.vp_news);

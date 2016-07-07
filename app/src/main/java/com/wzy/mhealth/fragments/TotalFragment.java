@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.RecordListAdapter;
@@ -50,6 +52,7 @@ public class TotalFragment extends Fragment implements
         initData();
         adapter = new RecordListAdapter(getActivity(), groupList, childList);
         expandableListView.setAdapter(adapter);
+        expandableListView.setOnHeaderUpdateListener(this);
         expandableListView.setOnChildClickListener(this);
         expandableListView.setOnGroupClickListener(this);
         stickyLayout.setOnGiveUpTouchEventListener(this);
@@ -116,11 +119,17 @@ public class TotalFragment extends Fragment implements
 
     @Override
     public View getPinnedHeader() {
-        return null;
+        View headerView = getActivity().getLayoutInflater().inflate(R.layout.datatime, null);
+        headerView.setLayoutParams(new AbsListView.LayoutParams(
+                AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
+
+        return headerView;
     }
 
     @Override
     public void updatePinnedHeader(View headerView, int firstVisibleGroupPos) {
-
+        ChaTiTime firstVisibleGroup = (ChaTiTime) adapter.getGroup(firstVisibleGroupPos);
+        TextView textView = (TextView) headerView.findViewById(R.id.tv_time);
+        textView.setText(firstVisibleGroup.getData());
     }
 }

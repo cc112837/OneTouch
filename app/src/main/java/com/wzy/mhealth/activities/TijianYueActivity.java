@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,7 +24,7 @@ public class TijianYueActivity extends Activity {
     private ImageView leftBtn;
     private TextView submit;
     private EditText nameid, idcard, et_pass, et_tel;//姓名，身份证号
-    String cardid, pass, name,tel , tag;
+    String cardid, pass, name, tel, tag;
     int flag;
 
     @Override
@@ -34,14 +33,14 @@ public class TijianYueActivity extends Activity {
         setContentView(R.layout.activity_tijian_yue);
         String phone = MyApplication.sharedPreferences.getString("phone",
                 null);
-        String pass=MyApplication.sharedPreferences.getString("pass",
+        String pass = MyApplication.sharedPreferences.getString("pass",
                 null);
         et_pass = (EditText) findViewById(R.id.et_pass);
         et_tel = (EditText) findViewById(R.id.et_tel);
         et_tel.setText(phone);
         et_pass.setText(pass);
-        Intent intent=getIntent();
-        flag=intent.getIntExtra("flag",0);
+        Intent intent = getIntent();
+        flag = intent.getIntExtra("flag", 1);
         init();
     }
 
@@ -53,7 +52,7 @@ public class TijianYueActivity extends Activity {
                 case 1:
                     Info obj = (Info) msg.obj;
                     if (!obj.isSuccess() && obj.getMsg().equals("非法用户！")) {
-                        Toast.makeText(TijianYueActivity.this, "您没有在公司有预约项目", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TijianYueActivity.this, "您公司没有预约项目", Toast.LENGTH_LONG).show();
                     } else if ((!obj.isSuccess()) && obj.getMsg().equals("用户注册失败！")) {
                         Toast.makeText(TijianYueActivity.this, "请检查您的输入数据，确定是否有误!", Toast.LENGTH_LONG).show();
                     } else {
@@ -69,35 +68,34 @@ public class TijianYueActivity extends Activity {
                     Info info = (Info) msg.obj;
                     if (info.isSuccess()) {
                         Toast.makeText(TijianYueActivity.this, "校验成功!", Toast.LENGTH_LONG).show();
-                        if(flag==1){
-                            String renurl="http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid="+info.getMsg() ;
-                            Log.e("renurl",renurl+"***"+info.getMsg());
-                            tag=info.getMsg();
-                            MyHttpUtils.handData(handler, 33, renurl, null);
-
-                        }
-                        if(flag==2){
-                            Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
-                            intent.putExtra("session",info.getMsg());
-                            intent.putExtra("id","0");
-                            startActivity(intent);
-                            TijianYueActivity.this.finish();
-                        }
+                        String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid=" + info.getMsg();
+                        tag = info.getMsg();
+                        MyHttpUtils.handData(handler, 33, renurl, null);
                     } else {
                         Toast.makeText(TijianYueActivity.this, "校验失败!", Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 33:
-                    TaocanInfo inf=(TaocanInfo)msg.obj;
-                    Intent intent = new Intent(TijianYueActivity.this, TestSelfActivity.class);
-                    intent.putExtra("session",tag);
-                    intent.putExtra("id", inf.getRows().get(0).getEID());
-                    intent.putExtra("name",inf.getRows().get(0).getXM());
-                    intent.putExtra("sex",inf.getRows().get(0).getXB());
-                    intent.putExtra("taocan", inf.getRows().get(0).getNAME());
-                    intent.putExtra("tiid",inf.getRows().get(0).getTJID());
-                    startActivity(intent);
-                    TijianYueActivity.this.finish();
+                    TaocanInfo inf = (TaocanInfo) msg.obj;
+                    if (flag == 1) {
+                        Intent intent = new Intent(TijianYueActivity.this, TestSelfActivity.class);
+                        intent.putExtra("session", tag);
+                        intent.putExtra("id", inf.getRows().get(0).getEID());
+                        intent.putExtra("name", inf.getRows().get(0).getXM());
+                        intent.putExtra("sex", inf.getRows().get(0).getXB());
+                        intent.putExtra("taocan", inf.getRows().get(0).getNAME());
+                        intent.putExtra("tiid", inf.getRows().get(0).getTJID());
+                        startActivity(intent);
+                        TijianYueActivity.this.finish();
+                    }
+                    if (flag == 2) {
+                        Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
+                        intent.putExtra("session", tag);
+                        intent.putExtra("id", inf.getRows().get(0).getEID());
+                        intent.putExtra("extra",inf.getRows().get(0).getTJID()+"20160713");
+                        startActivity(intent);
+                        TijianYueActivity.this.finish();
+                    }
                     break;
             }
         }
@@ -130,14 +128,14 @@ public class TijianYueActivity extends Activity {
                 cardid = idcard.getText().toString();
                 pass = et_pass.getText().toString();
                 tel = et_tel.getText().toString();
-                if(cardid.length()!=18){
-                    Toast.makeText(TijianYueActivity.this,"请输入18位身份证号码",Toast.LENGTH_LONG).show();
+                if (cardid.length() != 18) {
+                    Toast.makeText(TijianYueActivity.this, "请输入18位身份证号码", Toast.LENGTH_LONG).show();
                 }
-                if(pass.length()<6){
-                    Toast.makeText(TijianYueActivity.this,"请输入6位以上密码",Toast.LENGTH_LONG).show();
+                if (pass.length() < 6) {
+                    Toast.makeText(TijianYueActivity.this, "请输入6位以上密码", Toast.LENGTH_LONG).show();
                 }
-                if(tel.length()!=11){
-                    Toast.makeText(TijianYueActivity.this,"请输入11位手机号码",Toast.LENGTH_LONG).show();
+                if (tel.length() != 11) {
+                    Toast.makeText(TijianYueActivity.this, "请输入11位手机号码", Toast.LENGTH_LONG).show();
                 }
                 SharedPreferences et = getSharedPreferences("et", MODE_PRIVATE);
                 SharedPreferences.Editor edit = et.edit();
@@ -158,7 +156,7 @@ public class TijianYueActivity extends Activity {
                     user.setCardId(cardid);
                     user.setPass(pass);
                     user.setTel(tel);
-                    MyHttpUtils.handData(handler, 1, regurl,user);
+                    MyHttpUtils.handData(handler, 1, regurl, user);
                 }
 
 

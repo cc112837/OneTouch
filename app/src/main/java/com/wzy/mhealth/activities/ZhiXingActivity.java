@@ -105,7 +105,8 @@ public class ZhiXingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //私人订制套餐
-
+                Intent intent=new Intent(ZhiXingActivity.this,NoContentActivity.class);
+                startActivity(intent);
             }
         });
         rb_group.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +124,7 @@ public class ZhiXingActivity extends Activity {
             public void onClick(View v) {
                 //我的预约
 
-                Intent intent=new Intent(ZhiXingActivity.this,MyYuyueActivity.class);
+                Intent intent=new Intent(ZhiXingActivity.this,TijianYueActivity.class);
                 intent.putExtra("flag",2);
                 startActivity(intent);
             }
@@ -131,7 +132,8 @@ public class ZhiXingActivity extends Activity {
         rb_taocan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(ZhiXingActivity.this,NoContentActivity.class);
+                startActivity(intent);
                 //套餐介绍
             }
         });
