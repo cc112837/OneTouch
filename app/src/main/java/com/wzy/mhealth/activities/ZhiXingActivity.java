@@ -36,10 +36,10 @@ public class ZhiXingActivity extends Activity {
     }
 
     private void loadLocalImage() {
-        localImages.add(R.mipmap.carouse1);
-        localImages.add(R.mipmap.carouse2);
-        localImages.add(R.mipmap.carouse3);
-        localImages.add(R.mipmap.carouse4);
+        localImages.add(R.mipmap.carouse11);
+        localImages.add(R.mipmap.carouse22);
+        localImages.add(R.mipmap.carouse33);
+        localImages.add(R.mipmap.carouse44);
     }
 
 

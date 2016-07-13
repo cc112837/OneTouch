@@ -30,14 +30,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.LeanChat.util.PathUtils;
 import com.wzy.mhealth.LeanChat.util.PhotoUtils;
-import com.wzy.mhealth.activities.NotiNewsActivity;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.AboutActivity;
 import com.wzy.mhealth.activities.BarCodeActivity;
 import com.wzy.mhealth.activities.ChangePwdActivity;
-import com.wzy.mhealth.activities.FamilyHealthActivity;
 import com.wzy.mhealth.activities.LoginActivity;
 import com.wzy.mhealth.activities.ManageActivity;
+import com.wzy.mhealth.activities.NotiNewsActivity;
+import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.utils.CacheUtils;
 import com.wzy.mhealth.utils.MyAndroidUtil;
@@ -190,7 +190,8 @@ public class MyFragment extends D3Fragment {
         familyHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FamilyHealthActivity.class);
+                // TODO: 2016/7/8 我的计步 家人健康FamilyHealthActivity
+                Intent intent = new Intent(getActivity(), StepCountActivity.class);
                 startActivity(intent);
             }
         });

@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/title_green"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="com.MHealth.activities.NoContentActivity">
 
     <LinearLayout
@@ -27,260 +27,233 @@
         <TextView
             android:id="@+id/titleView"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
             android:text="健康管家"
+            android:layout_marginRight="50dp"
             android:textColor="#ffffff"
             android:textSize="@dimen/fontSizeMidMM" />
-        <ImageView
-            android:id="@+id/dui"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:padding="10dp"
-            android:src="@mipmap/dui" />
 
 
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="10dp"
             android:background="@color/bg_gray"
-            android:padding="5dp"
-            android:textColor="#000"
-            android:text="基本信息"
-            android:textSize="14sp" />
+           />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:background="@color/white"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal" >
+            android:layout_margin="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="#000"
-                android:text="生  日"
-                android:textSize="16sp" />
+                android:layout_margin="5dp"
+                android:text="姓名："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/nameView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@mipmap/input_bg"
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="性别："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/rg_sex"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@mipmap/input_bg"
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="职业："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/proView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@mipmap/input_bg"
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="年龄："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/tv_birthid"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_weight="1"
                 android:background="@mipmap/input_bg"
-                android:hint="请输入相关信息"
-                android:textSize="16sp" />
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:background="#FFFFFF"
-            android:orientation="horizontal" >
+            android:layout_margin="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="#000"
-                android:text="性  别"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/rg_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkedButton="@+id/rb_male"
-                android:orientation="horizontal" >
-
-                <RadioButton
-                    android:id="@+id/rb_male"
-                    android:checked="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:text="男" />
-
-                <RadioButton
-                    android:id="@+id/rb_female"
-                    android:layout_width="wrap_content"
-                    android:textColor="#000"
-                    android:layout_height="wrap_content"
-                    android:text="女" />
-            </RadioGroup>
-        </LinearLayout>
-
-
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/bg_gray"
-            android:padding="5dp"
-            android:textColor="#000"
-            android:text="个人信息"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textColor="#000"
-                android:text="婚育史"
-                android:textSize="16sp" />
+                android:layout_margin="5dp"
+                android:text="婚姻："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_hunyu"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_weight="1"
                 android:background="@mipmap/input_bg"
-                android:textColor="#000"
-                android:hint="请输入相关信息"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:background="#FFFFFF"
-            android:orientation="horizontal" >
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="过敏史"
-                android:textSize="16sp" />
+                android:layout_margin="5dp"
+                android:text="病史陈述者："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/et_guominid"
-                android:textColor="#000"
-                android:layout_width="match_parent"
+                android:id="@+id/cheView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_weight="1.9"
                 android:background="@mipmap/input_bg"
-                android:hint="请输入相关信息"
-                android:textSize="16sp" />
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="10dp"
             android:background="@color/bg_gray"
-            android:padding="5dp"
-            android:textColor="#000"
-            android:text="病历信息"
-            android:textSize="14sp" />
+             />
+
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:background="#FFFFFF"
-            android:orientation="horizontal" >
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:textColor="#000"
-                android:paddingRight="10dp"
-                android:text="外伤手术"
-                android:textSize="16sp" />
-            <EditText
-                android:id="@+id/et_aid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@mipmap/input_bg"
-                android:hint="请输入相关信息"
-                android:textSize="16sp" />
-        </LinearLayout>
-        <LinearLayout
+                android:layout_margin="5dp"
+                android:text="现病史："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:background="#FFFFFF"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:textColor="#000"
-                android:paddingRight="10dp"
-                android:text="家族病史"
-                android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/et_home"
+                android:id="@+id/medicalHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@mipmap/input_bg"
-                android:hint="请输入相关信息"
-                android:textSize="16sp" />
+                android:layout_margin="5dp"
+                android:background="@drawable/lineback_selector"
+                android:lines="6"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:background="#FFFFFF"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:textColor="#000"
-                android:paddingRight="10dp"
-                android:text="个人习惯"
-                android:textSize="16sp" />
+                android:layout_margin="5dp"
+                android:text="个人习惯："
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
             <EditText
                 android:id="@+id/et_habit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:background="@mipmap/input_bg"
-                android:hint="请输入相关信息"
-                android:textSize="16sp" />
+                android:layout_margin="5dp"
+                android:background="@drawable/lineback_selector"
+                android:lines="2"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@mipmap/select_bg"
+            android:gravity="center"
+            android:text="提交" />
     </LinearLayout>
 </LinearLayout>

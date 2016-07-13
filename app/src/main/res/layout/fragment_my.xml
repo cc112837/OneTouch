@@ -146,7 +146,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
-                        android:src="@mipmap/vedio_green2" />
+                        android:src="@mipmap/vedio_stepcount" />
 
                     <TextView
                         android:id="@+id/TextView061"
@@ -154,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/tu61"
-                        android:text="家人健康"
+                        android:text="个人运动"
                         android:textColor="#000000"
                         android:textSize="18sp" />
 

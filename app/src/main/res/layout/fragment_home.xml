@@ -40,7 +40,7 @@
                     android:drawableTop="@mipmap/yuyue"
                     android:gravity="center"
                     android:text="预约挂号"
-                    android:textColor="@color/black"
+                    android:textColor="@color/dark_grey"
                     android:checked="false" />
                 <RadioButton
                     android:id="@+id/rb_quike"
@@ -52,7 +52,7 @@
                     android:drawableTop="@mipmap/doexam"
                     android:gravity="center"
                     android:text="智行体检"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/dark_grey" />
                 <RadioButton
                     android:id="@+id/rb_select"
                     android:layout_width="0dp"
@@ -63,12 +63,15 @@
                     android:drawableTop="@mipmap/zixun"
                     android:gravity="center"
                     android:text="医生咨询"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/dark_grey" />
 
 
             </LinearLayout>
 
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="10dp"
+    android:background="@color/bg_gray"/>
             <LinearLayout
                 android:id="@+id/ll_speci"
                 android:layout_width="match_parent"
@@ -90,7 +93,7 @@
                         android:layout_gravity="center"
                         android:paddingTop="20dp"
                         android:text="儿科妇科绿色通道"
-                        android:textColor="#000"
+                        android:textColor="@color/dark_grey"
                         android:textSize="18sp" />
 
                     <TextView
@@ -102,9 +105,11 @@
                         android:textColor="#f4a003"
                         android:textSize="18sp" />
                 </LinearLayout>
-
             </LinearLayout>
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/bg_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,6 +123,7 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
@@ -137,13 +143,14 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="我的预约"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
@@ -163,13 +170,14 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="门诊缴费"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
@@ -189,7 +197,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="检验报告"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -201,6 +209,7 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
@@ -220,13 +229,14 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="电子病历"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
@@ -246,7 +256,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="急诊通道"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
 
@@ -254,6 +264,7 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
@@ -273,7 +284,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="就诊专车"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -286,6 +297,7 @@
                     <RelativeLayout
                         android:id="@+id/rl_airid"
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
@@ -305,13 +317,14 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="疾病库"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
@@ -331,13 +344,14 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="附近医院"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
+                        android:paddingBottom="5dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
@@ -357,7 +371,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="附近药店"
-                            android:textColor="@color/black"
+                            android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
                     </RelativeLayout>
                 </LinearLayout>
