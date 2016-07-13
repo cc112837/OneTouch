@@ -1,1 +1,1 @@
-include ':app', ':leanchatlib', ':sharesdk', ':onekeyshare'
+include ':app', ':leanchatlib', ':sharesdk', ':onekeyshare', ':Steplibrary'

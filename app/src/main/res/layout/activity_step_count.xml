@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/title_green"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.wzy.mhealth.activities.StepCountActivity">
+
     <LinearLayout
         android:id="@+id/titlebar"
         android:layout_width="fill_parent"
@@ -26,14 +30,129 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginRight="50dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="个人运动"
-            android:layout_marginRight="50dp"
             android:textColor="#ffffff"
             android:textSize="@dimen/fontSizeMidMM" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="15dp">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp">
+
+            <com.timqi.sectorprogressview.ColorfulRingProgressView
+                android:id="@+id/crpv"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                app:bgColor="#e1e1e1"
+                app:fgColorEnd="#02b99d"
+                app:fgColorStart="#2fbca7"
+                app:startAngle="0"
+                app:strokeWidth="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="今日步数"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/activity_main_step_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="2340"
+                    android:textColor="#101010"
+                    android:textSize="40sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@mipmap/backing"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@mipmap/week" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right|center_vertical"
+                    android:text="步数1302"
+                    android:textColor="#ccecec"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#a5e7d5" />
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/linechart"
+                android:layout_width="match_parent"
+                android:layout_height="160dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#dcdbdb" />
+
+        <TextView
+            android:id="@+id/tv_alldata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingTop="5dp"
+            android:paddingLeft="15dp"
+            android:text="所有数据"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>
