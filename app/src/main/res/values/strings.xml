@@ -95,7 +95,13 @@
     <string name="preference_title_tts_pitch">语调</string>
     <string name="preference_default_tts_pitch">50</string>
     <string name="sending_request">正在发送请求</string>
-
+    <string-array name="aiditem">
+    <item>头部</item>
+    <item>胸，腹部</item>
+    <item>婴幼儿</item>
+    <item>四肢</item>
+    <item>生殖</item>
+    </string-array>
     <string-array name="deparment">
         <item>内科</item>
         <item>外科</item>

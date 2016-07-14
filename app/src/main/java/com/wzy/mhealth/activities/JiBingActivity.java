@@ -3,46 +3,23 @@ package com.wzy.mhealth.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import com.google.gson.Gson;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
-import com.wzy.mhealth.R;
-import com.wzy.mhealth.adapter.BiLiAdapter;
-import com.wzy.mhealth.model.NewsMedi;
 
-import java.util.List;
-import java.util.Random;
+import com.google.gson.Gson;
+import com.wzy.mhealth.R;
+import com.wzy.mhealth.model.NewsAids;
+import com.wzy.mhealth.utils.ReadUtil;
 
 public class JiBingActivity extends Activity {
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what){
-                case 5:
-                    NewsMedi obj =(NewsMedi) msg.obj;
-                    list = obj.getTngou();
-                    adapter.setList(list);
-                    adapter.notifyDataSetChanged();
-                    break;
-            }
-        }
-    };
-    private SwipeRefreshLayout sp_refresh;
-    private ListView lv_display;
-    private BiLiAdapter adapter;
-    private List<NewsMedi.TngouEntity> list;
+    private ListView lv_display, office;
     private ImageView leftBtn;
+    private int pos;
+    String[] dess = {"头部", "四肢", "胸，腹部", "生殖", "婴幼儿"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +27,61 @@ public class JiBingActivity extends Activity {
         setContentView(R.layout.activity_ji_bing);
         initView();
     }
+
     //初始化界面控件
     private void initView() {
-        leftBtn=(ImageView) findViewById(R.id.leftBtn);
-        sp_refresh=(SwipeRefreshLayout) findViewById(R.id.sp_refresh);
-        lv_display=(ListView) findViewById(R.id.lv_display);
-        adapter=new BiLiAdapter(list,JiBingActivity.this);
-        lv_display.setAdapter(adapter);
-        requeList();
+        leftBtn = (ImageView) findViewById(R.id.leftBtn);
+        office = (ListView) findViewById(R.id.office);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(JiBingActivity.this,
+                R.layout.list_item_text, dess);
+        office.setAdapter(adapter);
+        lv_display = (ListView) findViewById(R.id.lv_display);
+        final NewsAids newsAids = new Gson().fromJson(ReadUtil.readFromRaw(getApplicationContext()), NewsAids.class);
+        String arr[] = new String[newsAids.getHead().size()];
+        for (int i = 0; i < newsAids.getHead().size(); i++) {
+            arr[i] = newsAids.getHead().get(i).getTitle();
+        }
+        ArrayAdapter adapter1 = new ArrayAdapter<>(JiBingActivity.this,
+                R.layout.list_item_text_black, arr);
+        lv_display.setAdapter(adapter1);
+        office.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ArrayAdapter adapter = null;
+                String[] s = null;
+
+                if (position == 0) {
+                    s = new String[newsAids.getHead().size()];
+                    for (int i = 0; i < newsAids.getHead().size(); i++) {
+                        s[i] = newsAids.getHead().get(i).getTitle();
+                    }
+                } else if (position == 1) {
+                    s = new String[newsAids.getHand().size()];
+                    for (int i = 0; i < newsAids.getHand().size(); i++) {
+                        s[i] = newsAids.getHand().get(i).getTitle();
+                    }
+                } else if (position == 2) {
+                    s = new String[newsAids.getBrest().size()];
+                    for (int i = 0; i < newsAids.getBrest().size(); i++) {
+                        s[i] = newsAids.getBrest().get(i).getTitle();
+                    }
+                } else if (position == 3) {
+                    s = new String[newsAids.getSpecial().size()];
+                    for (int i = 0; i < newsAids.getSpecial().size(); i++) {
+                        s[i] = newsAids.getSpecial().get(i).getTitle();
+                    }
+                } else {
+                    s = new String[newsAids.getBaby().size()];
+                    for (int i = 0; i < newsAids.getBaby().size(); i++) {
+                        s[i] = newsAids.getBaby().get(i).getTitle();
+                    }
+                }
+                adapter = new ArrayAdapter<>(
+                        JiBingActivity.this, R.layout.list_item_text_black, s);
+                lv_display.setAdapter(adapter);
+                pos = position;
+            }
+        });
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,40 +91,32 @@ public class JiBingActivity extends Activity {
         lv_display.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(JiBingActivity.this, JiBingDetailActicity.class);
-                intent.putExtra("id",list.get(position).getId()+"");
+
+                Intent intent = new Intent(JiBingActivity.this, JiBingDetailActicity.class);
+                String content = null;
+                String title=null;
+                if (pos == 0) {
+                    content = newsAids.getHead().get(position).getDetail();
+                    title=newsAids.getHead().get(position).getTitle();
+                } else if (pos == 1) {
+                    content = newsAids.getHand().get(position).getDetail();
+                    title=newsAids.getHand().get(position).getTitle();
+                } else if (pos == 2) {
+                    content = newsAids.getBrest().get(position).getDetail();
+                    title=newsAids.getBrest().get(position).getTitle();
+                } else if (pos == 3) {
+                    content = newsAids.getSpecial().get(position).getDetail();
+                    title=newsAids.getSpecial().get(position).getTitle();
+                } else {
+                    content = newsAids.getBaby().get(position).getDetail();
+                    title=newsAids.getBaby().get(position).getTitle();
+                }
+                intent.putExtra("content", content);
+                intent.putExtra("title",title);
                 startActivity(intent);
             }
         });
-        sp_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                sp_refresh.setRefreshing(false);
-                adapter.clear();
-                requeList();
-
-            }
-        });
     }
 
-    private void requeList() {
-        Random random = new Random();
-        int i = random.nextInt(8);
-        new HttpUtils().send(HttpRequest.HttpMethod.GET, "http://www.tngou.net/api/info/list?id=" + i, new RequestCallBack<String>() {
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                String result = responseInfo.result;
-                NewsMedi newsMedi = new Gson().fromJson(result, NewsMedi.class);
-                Message msg = new Message();
-                msg.what = 5;
-                msg.obj = newsMedi;
-                handler.sendMessage(msg);
-            }
 
-            @Override
-            public void onFailure(HttpException error, String msg) {
-                Log.i("下载失败", msg);
-            }
-        });
-    }
 }

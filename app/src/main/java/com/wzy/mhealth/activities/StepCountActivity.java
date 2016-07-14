@@ -45,9 +45,10 @@ public class StepCountActivity extends Activity {
     SharedPreferences sp;
     SharedPreferences.Editor editor;
     String time;
-    private ArrayList<HashMap<String,String>> list;
+    private ArrayList<HashMap<String, String>> list;
     int step;
     private int total_step = 0;   //走的总步数
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class StepCountActivity extends Activity {
         step = sp.getInt("step", 0);
         crpv = (ColorfulRingProgressView) findViewById(R.id.crpv);
         stepTv = (TextView) findViewById(R.id.activity_main_step_tv);
-        stepTv.setText(step+ "");// 显示当前步数
+        stepTv.setText(step + "");// 显示当前步数
         crpv.setPercent((step) / 10);
         linechart = (GraphView) findViewById(R.id.linechart);
         tv_alldata.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +79,7 @@ public class StepCountActivity extends Activity {
     }
 
     private void init() {
-        leftBtn_back=(ImageView) findViewById(R.id.leftBtn_back);
+        leftBtn_back = (ImageView) findViewById(R.id.leftBtn_back);
         leftBtn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +87,7 @@ public class StepCountActivity extends Activity {
             }
         });
     }
+
     private void initDB() {
         helper = new MySqliteOpenHelper(this, FinalValue.DB_NAME, null,
                 FinalValue.DB_VERSION);
@@ -96,15 +98,15 @@ public class StepCountActivity extends Activity {
     private void aboutChart() {
         int d = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 0),
-                new DataPoint(1,5432),
-                new DataPoint(2, 3232),
-                new DataPoint(3, 8686),
-                new DataPoint(4, 1211),
-                new DataPoint(5, 2000),
-                new DataPoint(6, 6434),
-                new DataPoint(7, 4231),
-                new DataPoint(8, 0)
+                new DataPoint(0, 10000),
+                new DataPoint(1, 0),
+                new DataPoint(2, 0),
+                new DataPoint(3, 0),
+                new DataPoint(4, 0),
+                new DataPoint(5, 0),
+                new DataPoint(6, 0),
+                new DataPoint(7, 0),
+                new DataPoint(8, 10000)
         });
         linechart.addSeries(series);
         linechart.getLegendRenderer().setTextColor(Color.WHITE);
@@ -118,7 +120,6 @@ public class StepCountActivity extends Activity {
 
 
     }
-
 
 
     private void initThreadToPedometer() {
@@ -167,9 +168,9 @@ public class StepCountActivity extends Activity {
             // TODO Auto-generated method stub
             super.handleMessage(msg);        // 此处可以更新UI
             countStep();          //调用步数方法
-            stepTv.setText(total_step +step+ "");// 显示当前步数
-            crpv.setPercent((total_step+step) / 10);
-            editor.putInt("step", total_step+step);
+            stepTv.setText(total_step + step + "");// 显示当前步数
+            crpv.setPercent((total_step + step) / 10);
+            editor.putInt("step", total_step + step);
             editor.commit();
         }
     };
@@ -194,14 +195,14 @@ public class StepCountActivity extends Activity {
             values.put("time", hour + ":" + mm + ":" + ss);
             database.insert(FinalValue.TB_STEP, null, values);
             editor.putString("time", d + "");
-            StepDetector.CURRENT_STEP=0;
-            step=0;
+            StepDetector.CURRENT_STEP = 0;
+            step = 0;
             editor.commit();
         }
     }
 
     private int getTime() {
-        long l = System.currentTimeMillis()-24*60*60*1000; //前一天天的毫秒数
+        long l = System.currentTimeMillis() - 24 * 60 * 60 * 1000; //前一天天的毫秒数
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         int d = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         values = new ContentValues();
@@ -212,7 +213,7 @@ public class StepCountActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        editor.putInt("step", total_step+step);
+        editor.putInt("step", total_step + step);
         editor.commit();
         super.onDestroy();
     }
