@@ -63,6 +63,7 @@ public class TaoCanAdapter extends BaseAdapter{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        viewHolder.beforeprice.setText(list.get(position)+"");
         return convertView;
     }
     static class ViewHolder {

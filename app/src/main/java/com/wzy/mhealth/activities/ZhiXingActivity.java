@@ -24,7 +24,7 @@ public class ZhiXingActivity extends Activity {
     private ConvenientBanner convenientBanner;
     private TextView tv_display;
     private ListView lv_showid;
-    private LinearLayout ll_private;
+    private LinearLayout ll_private,ll_intro;
     private RadioButton rb_group, rb_taocan, rb_yuyue, rb_record;
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
 
@@ -76,8 +76,8 @@ public class ZhiXingActivity extends Activity {
         list.add(444+"");
         list.add(555+"");
         list.add(666+"");
-        list.add(444+"");
-        list.add(333+"");
+        list.add(444 + "");
+        list.add(333 + "");
 
         TaoCanAdapter adapter=new TaoCanAdapter(this,list);
         lv_showid.setAdapter(adapter);
@@ -95,6 +95,7 @@ public class ZhiXingActivity extends Activity {
                         //设置指示器的方向
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
+        ll_intro=(LinearLayout)findViewById(R.id.ll_intro);
         ll_private=(LinearLayout) headview.findViewById(R.id.ll_private);
         tv_display = (TextView) headview.findViewById(R.id.tv_display);
         rb_group = (RadioButton) headview.findViewById(R.id.rb_group);
@@ -106,6 +107,13 @@ public class ZhiXingActivity extends Activity {
             public void onClick(View v) {
                 //私人订制套餐
                 Intent intent=new Intent(ZhiXingActivity.this,NoContentActivity.class);
+                startActivity(intent);
+            }
+        });
+        ll_intro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ZhiXingActivity.this,ZhixingIntroduceActivity.class);
                 startActivity(intent);
             }
         });

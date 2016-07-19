@@ -10,7 +10,7 @@
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/dark_grey"
         android:gravity="center"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:id="@+id/tv_afterprice"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/dark_grey"
         android:gravity="center"
         android:layout_height="wrap_content"
@@ -28,9 +28,14 @@
         android:id="@+id/tv_beforeprice"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/dark_grey"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:text="200" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
+        android:src="@mipmap/icon_more"
+        android:layout_height="match_parent" />
 </LinearLayout>
