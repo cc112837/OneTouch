@@ -24,7 +24,7 @@ import java.util.List;
  * 修改时间：2016/6/28 15:24
  * 修改备注：
  */
-public class RecordListAdapter  extends BaseExpandableListAdapter {
+public class RecordListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private LayoutInflater inflater;
     private List<ChaTiTime> timeList;
@@ -53,7 +53,7 @@ public class RecordListAdapter  extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-
+        ;
         return timeList.get(groupPosition);
     }
 
@@ -116,6 +116,7 @@ public class RecordListAdapter  extends BaseExpandableListAdapter {
                     .findViewById(R.id.tv_name);
             childHolder.tv_content = (TextView) convertView
                     .findViewById(R.id.tv_content);
+            childHolder.tv_usual = (TextView) convertView.findViewById(R.id.tv_usual);
 
             convertView.setTag(childHolder);
         } else {
@@ -126,7 +127,13 @@ public class RecordListAdapter  extends BaseExpandableListAdapter {
                 childPosition)).getName());
         childHolder.tv_content.setText(String.valueOf(((TestItem) getChild(
                 groupPosition, childPosition)).getContent()));
-
+        if (groupPosition==0) {
+            childHolder.tv_usual.setVisibility(View.VISIBLE);
+            childHolder.tv_usual.setText(String.valueOf(((TestItem) getChild(
+                    groupPosition, childPosition)).getUsusl()));
+        } else {
+            childHolder.tv_usual.setVisibility(View.GONE);
+        }
         return convertView;
     }
 
@@ -140,5 +147,6 @@ public class RecordListAdapter  extends BaseExpandableListAdapter {
 class ChildHolder {
     TextView tv_name;
     TextView tv_content;
+    TextView tv_usual;
 }
 

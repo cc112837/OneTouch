@@ -1,14 +1,17 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avoscloud.leanchatlib.utils.PhotoUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.model.NewsYang;
 
 import java.util.List;
 
@@ -22,12 +25,12 @@ import java.util.List;
  * 修改时间：2016/6/23 14:35
  * 修改备注：
  */
-public class TaoCanAdapter extends BaseAdapter{
+public class NewsItemAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private Context context;
-    private List<String> list;
+    private List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list;
 
-    public TaoCanAdapter(Context context,List<String> list) {
+    public NewsItemAdapter(Context context, List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list=list;
         this.context=context;
@@ -54,21 +57,20 @@ public class TaoCanAdapter extends BaseAdapter{
         ViewHolder viewHolder = null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.taocan_item, null);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.afterprice = (TextView) convertView.findViewById(R.id.tv_afterprice);
-            viewHolder.beforeprice = (TextView) convertView.findViewById(R.id.tv_beforeprice);
-            viewHolder.afterprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
+            convertView = mInflater.inflate(R.layout.news_item, null);
+            viewHolder.iv_img = (ImageView) convertView.findViewById(R.id.iv_img);
+            viewHolder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        ImageLoader.getInstance().displayImage(list.get(position).getThumb(), viewHolder.iv_img, PhotoUtils.avatarImage);
+        viewHolder.tv_title.setText(list.get(position).getTitle());
         return convertView;
     }
-    static class ViewHolder {
-        public TextView name;
-        public  TextView afterprice;
-        public TextView beforeprice;
+   class ViewHolder {
+        public ImageView iv_img;
+        public  TextView tv_title;
 
     }
 

@@ -13,6 +13,15 @@ package com.wzy.mhealth.model;
 public class TestItem {
     String name;
     String content;
+    String ususl;
+
+    public String getUsusl() {
+        return ususl;
+    }
+
+    public void setUsusl(String ususl) {
+        this.ususl = ususl;
+    }
 
     public String getName() {
         return name;

@@ -27,8 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="#fff"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/rb_yuyue"
@@ -36,42 +35,45 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:padding="10dp"
+                    android:checked="false"
                     android:drawableTop="@mipmap/yuyue"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="预约挂号"
-                    android:textColor="@color/dark_grey"
-                    android:checked="false" />
+                    android:textColor="@color/dark_grey" />
+
                 <RadioButton
                     android:id="@+id/rb_quike"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:padding="10dp"
                     android:drawableTop="@mipmap/doexam"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="智行体检"
                     android:textColor="@color/dark_grey" />
+
                 <RadioButton
                     android:id="@+id/rb_select"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:padding="10dp"
                     android:drawableTop="@mipmap/zixun"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="医生咨询"
                     android:textColor="@color/dark_grey" />
 
 
             </LinearLayout>
 
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="10dp"
-    android:background="@color/bg_gray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/bg_gray" />
+
             <LinearLayout
                 android:id="@+id/ll_speci"
                 android:layout_width="match_parent"
@@ -83,8 +85,8 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_marginLeft="80dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
@@ -106,10 +108,11 @@
                         android:textSize="18sp" />
                 </LinearLayout>
             </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/bg_gray"/>
+                android:background="@color/bg_gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,9 +126,9 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
                             android:id="@+id/mode1"
@@ -150,26 +153,26 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
-                            android:id="@+id/mode2"
+                            android:id="@+id/mode5"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/menzhenjiaofei" />
+                            android:background="@mipmap/mode5" />
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/textView5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/mode2"
+                            android:layout_below="@+id/mode5"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="门诊缴费"
+                            android:text="附近医院"
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
@@ -177,29 +180,30 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
-                            android:id="@+id/mode3"
+                            android:id="@+id/mode6"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode33" />
+                            android:background="@mipmap/mode6" />
 
                         <TextView
-                            android:id="@+id/textView3"
+                            android:id="@+id/textView6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/mode3"
+                            android:layout_below="@+id/mode6"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="检验报告"
+                            android:text="附近药店"
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
                     </RelativeLayout>
+
                 </LinearLayout>
 
 
@@ -208,27 +212,28 @@
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
+                        android:id="@+id/rl_airid"
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
-                            android:id="@+id/mode41"
+                            android:id="@+id/mode4"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode2" />
+                            android:background="@mipmap/mode4" />
 
                         <TextView
-                            android:id="@+id/textView41"
+                            android:id="@+id/textView4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/mode41"
+                            android:layout_below="@+id/mode4"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="电子病历"
+                            android:text="急救知识"
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
@@ -236,9 +241,9 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
                             android:id="@+id/mode51"
@@ -264,9 +269,9 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
                             android:id="@+id/mode61"
@@ -295,28 +300,55 @@
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
-                        android:id="@+id/rl_airid"
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
-                            android:id="@+id/mode4"
+                            android:id="@+id/mode41"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode4" />
+                            android:background="@mipmap/mode2" />
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/textView41"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/mode4"
+                            android:layout_below="@+id/mode41"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="急救知识"
+                            android:text="电子病历"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="16sp" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
+
+                        <Button
+                            android:id="@+id/mode2"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:background="@mipmap/menzhenjiaofei" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/mode2"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:text="门诊缴费"
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
 
@@ -324,68 +356,43 @@
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:paddingBottom="5dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1">
-
-                        <Button
-                            android:id="@+id/mode5"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode5" />
-
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/mode5"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
-                            android:text="附近医院"
-                            android:textColor="@color/dark_grey"
-                            android:textSize="16sp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:paddingBottom="5dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:paddingBottom="5dp">
 
                         <Button
-                            android:id="@+id/mode6"
+                            android:id="@+id/mode3"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:background="@mipmap/mode6" />
+                            android:background="@mipmap/mode33" />
 
                         <TextView
-                            android:id="@+id/textView6"
+                            android:id="@+id/textView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/mode6"
+                            android:layout_below="@+id/mode3"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="附近药店"
+                            android:text="检验报告"
                             android:textColor="@color/dark_grey"
                             android:textSize="16sp" />
                     </RelativeLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
     </com.wzy.mhealth.view.MyScrollView>
+
     <RelativeLayout
         android:id="@+id/title1"
         android:layout_width="fill_parent"
-        android:paddingTop="25dp"
         android:layout_height="75dp"
         android:background="@color/transparent"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:paddingTop="25dp">
 
         <Button
             android:id="@+id/sacn_btn"

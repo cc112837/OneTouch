@@ -2,6 +2,8 @@ package com.wzy.mhealth.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -9,12 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.RecordShowActivity;
 import com.wzy.mhealth.adapter.RecordListAdapter;
 import com.wzy.mhealth.model.ChaTiTime;
+import com.wzy.mhealth.model.HuaRecord;
+import com.wzy.mhealth.model.NoRecord;
 import com.wzy.mhealth.model.TestItem;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.PinnedHeaderExpandableListView;
 import com.wzy.mhealth.view.StickyLayout;
 
@@ -33,7 +38,42 @@ public class TotalFragment extends Fragment implements
     private ArrayList<ChaTiTime> groupList;
     private ArrayList<List<TestItem>> childList;
     private RecordListAdapter adapter;
-
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            List childTemp;
+            switch (msg.what) {
+                case 14:
+                    HuaRecord huaRecord = (HuaRecord) msg.obj;
+                    //正常值  huaRecord.getRows().get(0).getDEFVALUE();
+                    //分区名称huaRecord.getRows().get(i).getXMMC()
+                    childTemp = new ArrayList<>();
+                    for (int i = 0; i < huaRecord.getRows().size(); i++) {
+                        TestItem people = new TestItem();
+                        people.setUsusl(huaRecord.getRows().get(i).getDEFVALUE());
+                        people.setName(huaRecord.getRows().get(i).getCNAME() + "(" + huaRecord.getRows().get(0).getUNIT() + ")");
+                        people.setContent(huaRecord.getRows().get(i).getHYRESULT());
+                        childTemp.add(people);
+                    }
+                    childList.add(childTemp);
+                    break;
+                case 15:
+                    NoRecord noRecord = (NoRecord) msg.obj;
+                    //分区名称noRecord.getRows().get(i).getKSMC()
+                    childTemp = new ArrayList<>();
+                    for (int j = 0; j < noRecord.getRows().size(); j++) {
+                        TestItem peopl = new TestItem();
+                        peopl.setName(noRecord.getRows().get(j).getCNAME());
+                        peopl.setContent(noRecord.getRows().get(j).getMVALUE());
+                        childTemp.add(peopl);
+                    }
+                    childList.add(childTemp);
+                    adapter = new RecordListAdapter(getActivity(), groupList, childList);
+                    expandableListView.setAdapter(adapter);
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -41,7 +81,7 @@ public class TotalFragment extends Fragment implements
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v=inflater.inflate(R.layout.fragment_total, container, false);
+        View v = inflater.inflate(R.layout.fragment_total, container, false);
         init(v);
         return v;
     }
@@ -50,55 +90,26 @@ public class TotalFragment extends Fragment implements
         expandableListView = (PinnedHeaderExpandableListView) view.findViewById(R.id.expandablelist);
         stickyLayout = (StickyLayout) view.findViewById(R.id.sticky_layout);
         initData();
-        adapter = new RecordListAdapter(getActivity(), groupList, childList);
-        expandableListView.setAdapter(adapter);
-        expandableListView.setOnHeaderUpdateListener(this);
+//        expandableListView.setOnHeaderUpdateListener(this);
         expandableListView.setOnChildClickListener(this);
         expandableListView.setOnGroupClickListener(this);
         stickyLayout.setOnGiveUpTouchEventListener(this);
     }
 
     private void initData() {
+        String huaurl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_assay.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
+        String nourl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_result.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
+        ChaTiTime group,group1;
         groupList = new ArrayList<>();
-        ChaTiTime group;
-        for (int i = 0; i < 4; i++) {
-            group = new ChaTiTime();
-            group.setData("报告详情" + i + "条");
-            groupList.add(group);
-        }
-
+        group = new ChaTiTime();
+        group.setData("化验区");
+        groupList.add(group);
+        group1 = new ChaTiTime();
+        group1.setData("非化验区");
+        groupList.add(group1);
         childList = new ArrayList<>();
-        for (int i = 0; i < groupList.size(); i++) {
-            ArrayList<TestItem> childTemp;
-            if (i == 0) {
-                childTemp = new ArrayList<>();
-                for (int j = 0; j < 6; j++) {
-                    TestItem people = new TestItem();
-                    people.setContent("检查的项目" + j);
-                    people.setName("正常");
-                    childTemp.add(people);
-                }
-            } else if (i == 1) {
-                childTemp = new ArrayList<>();
-                for (int j = 0; j < 8; j++) {
-                    TestItem people = new TestItem();
-                    people.setContent("检查的项目" + j);
-                    people.setName("异常");
-                    childTemp.add(people);
-                }
-            } else {
-                childTemp = new ArrayList<>();
-                for (int j = 0; j < 13; j++) {
-                    TestItem people = new TestItem();
-                    people.setContent("检查的项目" + j);
-                    people.setName("笨蛋");
-                    childTemp.add(people);
-                }
-            }
-            childList.add(childTemp);
-        }
-
-
+        MyHttpUtils.handData(handler, 14, huaurl, null);
+        MyHttpUtils.handData(handler, 15, nourl, null);
     }
 
 
@@ -128,8 +139,8 @@ public class TotalFragment extends Fragment implements
 
     @Override
     public void updatePinnedHeader(View headerView, int firstVisibleGroupPos) {
-        ChaTiTime firstVisibleGroup = (ChaTiTime) adapter.getGroup(firstVisibleGroupPos);
-        TextView textView = (TextView) headerView.findViewById(R.id.tv_time);
-        textView.setText(firstVisibleGroup.getData());
+//        ChaTiTime firstVisibleGroup = (ChaTiTime) adapter.getGroup(firstVisibleGroupPos);
+//        TextView textView = (TextView) headerView.findViewById(R.id.tv_time);
+//        textView.setText(firstVisibleGroup.getData());
     }
 }

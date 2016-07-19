@@ -52,7 +52,7 @@ public class TijianYueActivity extends Activity {
                 case 1:
                     Info obj = (Info) msg.obj;
                     if (!obj.isSuccess() && obj.getMsg().equals("非法用户！")) {
-                        Toast.makeText(TijianYueActivity.this, "您公司没有预约项目", Toast.LENGTH_LONG).show();
+                        Toast.makeText(TijianYueActivity.this, "请确保您公司为您预约了项目或者确保和公司统计信息一致", Toast.LENGTH_LONG).show();
                     } else if ((!obj.isSuccess()) && obj.getMsg().equals("用户注册失败！")) {
                         Toast.makeText(TijianYueActivity.this, "请检查您的输入数据，确定是否有误!", Toast.LENGTH_LONG).show();
                     } else {

@@ -20,6 +20,19 @@ import java.io.IOException;
  * Created by lzw on 15/4/24.
  */
 public class PhotoUtils {
+    public static DisplayImageOptions avatarImage = new DisplayImageOptions.Builder()
+            .showImageOnLoading(R.drawable.ic_defaluat)
+            .showImageForEmptyUri(R.drawable.ic_defaluat)
+            .showImageOnFail(R.drawable.ic_defaluat)
+            .cacheInMemory(true)
+            .cacheOnDisc(true)
+            .considerExifParams(true)
+            .imageScaleType(ImageScaleType.EXACTLY)
+            .bitmapConfig(Bitmap.Config.RGB_565)
+            .resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
+                    //.displayer(new RoundedBitmapDisplayer(20))
+                    //.displayer(new FadeInBitmapDisplayer(100))// 淡入
+            .build();
     public static DisplayImageOptions avatarImageOptions = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.drawable.chat_default_user_avatar)
             .showImageForEmptyUri(R.drawable.chat_default_user_avatar)

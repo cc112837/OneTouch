@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HealthListFragment3 extends Fragment implements XListView.IXListViewListener {
+public class HealthListFragment5 extends Fragment implements XListView.IXListViewListener {
     private XListView lv_show;
     private NewsItemAdapter adapter;
     int page;
@@ -72,7 +72,7 @@ public class HealthListFragment3 extends Fragment implements XListView.IXListVie
             }
         });
         page=1;
-        String url = "http://api.m.vodjk.com/v1/content?channelid=31&amp;height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page="+page+"&pagesize=20&sign=54ef2b685ec61ed597ac1430f7c331a6&amp;time=1468474136&token=3&type=android&width=375";
+        String url = "http://api.m.vodjk.com/v1/content?channelid=33&height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page="+page+"&pagesize=20&sign=d2397d89e14070110eba3d4c3c46b40f&time=1408764433&token=3&type=android&width=375";
         MyHttpUtils.handData(handler, 21, url, null);
     }
 
@@ -80,14 +80,14 @@ public class HealthListFragment3 extends Fragment implements XListView.IXListVie
     @Override
     public void onRefresh() {
         page=1;
-        String url = "http://api.m.vodjk.com/v1/content?channelid=31&amp;height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page="+page+"&pagesize=20&sign=54ef2b685ec61ed597ac1430f7c331a6&amp;time=1468474136&token=3&type=android&width=375";
+        String url = "http://api.m.vodjk.com/v1/content?channelid=33&height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page="+page+"&pagesize=20&sign=d2397d89e14070110eba3d4c3c46b40f&time=1408764433&token=3&type=android&width=375";
         MyHttpUtils.handData(handler, 21, url, null);
     }
 
     @Override
     public void onLoadMore() {
         page++;
-        String url = "http://api.m.vodjk.com/v1/content?channelid=31&amp;height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page=" + page + "&pagesize=20&sign=54ef2b685ec61ed597ac1430f7c331a6&amp;time=1468474136&token=3&type=android&width=375";
+        String url = "http://api.m.vodjk.com/v1/content?channelid=33&height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page=" + page + "&pagesize=20&sign=d2397d89e14070110eba3d4c3c46b40f&time=1408764433&token=3&type=android&width=375";
         MyHttpUtils.handData(handler, 21, url, null);
     }
 }

@@ -12,30 +12,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_yi"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:background="@color/red"
-                android:text="异" />
+                android:background="#4bd763"
+                android:paddingLeft="10dp"
+                android:padding="5dp"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:text="项目结论" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="诊断"
-                android:textColor="@color/dark_grey" />
 
             <TextView
                 android:id="@+id/tv_unusual"
-                android:layout_width="0dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:padding="10dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:text="脂肪肝·胆脾胰未见明显异常"
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -43,11 +38,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:padding="5dp"
             android:background="#f7b83d"
             android:paddingLeft="10dp"
-            android:text="体检结论"
+            android:text="终检结论"
             android:textColor="@color/white"
             android:textSize="18sp" />
         <TextView
@@ -69,11 +63,18 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="你应该注意的事项："
+            android:textColor="@color/black"
+            />
+        <TextView
             android:id="@+id/tv_advise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="你应该注意的事项：\n\n\n\n\n\n\n"
+            android:text=""
             android:textColor="@color/black"
             />
     </LinearLayout>

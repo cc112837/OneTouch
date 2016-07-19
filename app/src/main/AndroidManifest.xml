@@ -108,9 +108,12 @@
         <activity android:name=".activities.NotiNewsActivity" />
         <activity android:name=".activities.FamilyHealthActivity" />
         <activity android:name=".activities.AddFamilyHealthActivity" />
+
         <service android:name=".service.PedometerService" />
         <service android:name=".service.StepCounterService" />
-        <activity android:name=".activities.AllDataActivity"/>
+
+        <activity android:name=".activities.AllDataActivity" />
+
         <service android:name="com.amap.api.location.APSService" />
 
         <receiver android:name=".LeanChat.service.MHealthUReceiver">
@@ -176,7 +179,10 @@
             android:theme="@style/DialogTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".activities.RecordShowActivity" />
-        <activity android:name=".activities.StepCountActivity"></activity>
+        <activity android:name=".activities.StepCountActivity" />
+        <activity android:name=".activities.RecordListActivity" />
+        <activity android:name=".activities.ZhixingIntroduceActivity" />
+        <activity android:name=".activities.NewsDetailActivity"></activity>
     </application>
 
 </manifest>

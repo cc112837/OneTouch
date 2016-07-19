@@ -1,5 +1,6 @@
 package com.wzy.mhealth.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,10 +22,33 @@ public class RecordShowActivity extends FragmentActivity {
     private Button rb_conclusion,rb_total;
     private List<Fragment> fragments;
     private ViewPager viewPager;
+    String studid,session;
+
+    public String getStudid() {
+        return studid;
+    }
+
+    public void setStudid(String studid) {
+        this.studid = studid;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_show);
+        Intent intent=getIntent();
+        String studid=intent.getStringExtra("stuid");
+        String session=intent.getStringExtra("session");
+        setSession(session);
+        setStudid(studid);
         init();
     }
 

@@ -6,8 +6,14 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.wzy.mhealth.model.Conclusion;
+import com.wzy.mhealth.model.HuaRecord;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.model.ItemInfo;
+import com.wzy.mhealth.model.NewDetail;
+import com.wzy.mhealth.model.NewsYang;
+import com.wzy.mhealth.model.NoRecord;
+import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
 
@@ -44,8 +50,25 @@ public class MyHttpUtils extends HttpUtils{
       }
       if(what==6){
           sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new ItemInfo(), handler, what));
+      }
+      if(what==7){
+          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
+      }
+      if(what==8){
+          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Conclusion(), handler, what));
+      }
+      if(what==14){
+          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new HuaRecord(), handler, what));
+      }
+      if(what==15){
+          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NoRecord(), handler, what));
+      }
+      if(what==21){
+          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewsYang(), handler, what));
+      }
+      if(what==22){
+          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewDetail(), handler, what));
 
       }
-
   }
 }

@@ -47,7 +47,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="30dp"
             android:background="@mipmap/input_bg"
-            android:hint="请填写体检ID"
+            android:hint="体检ID(身份证号)"
             android:padding="3dp"
             android:textColor="@color/black"
             android:textSize="18sp"></EditText>
@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:background="@mipmap/input_bg"
-            android:hint="请填写姓名"
+            android:hint="请填写体检密码"
+            android:password="true"
             android:padding="3dp"
             android:textColor="@color/black"
             android:textSize="18sp"></EditText>

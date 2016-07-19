@@ -308,8 +308,8 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                     }
 
                     if(SinaWeibo.NAME.equals(platform)){
-                        final String  nickname=res.get("nickname").toString();
-                        final String icon=res.get("figureurl_qq_2").toString();
+                        final String  nickname=res.get("name").toString();
+                        final String icon=res.get("avatar_hd").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()),AVUser.AVThirdPartyUserAuth.SNS_SINA_WEIBO , plat

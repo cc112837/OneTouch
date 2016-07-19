@@ -61,7 +61,7 @@
         SortId="1"
         AppKey="3332178896"
         AppSecret="e580d921992ad5ea652c2a45a164e31c"
-        RedirectUrl="https://leancloud.cn/1.1/sns/callback/6uvdjk39nwdjqm60"
+        RedirectUrl="http://wanpaiapp.com/oauth/callback/sina"
         ShareByAppClient="true"
         Enable="true" />
 

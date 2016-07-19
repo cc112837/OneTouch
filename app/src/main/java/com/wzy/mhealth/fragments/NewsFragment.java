@@ -32,33 +32,44 @@ public class NewsFragment extends Fragment {
     private void init(View v) {
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tabid);
         TabLayout.Tab tab1 = tabLayout.newTab();
-        tab1.setText("养生");
+        tab1.setText("热点");
         tabLayout.addTab(tab1);
 
         TabLayout.Tab tab2 = tabLayout.newTab();
-        tab2.setText("美容");
+        tab2.setText("养生");
         tabLayout.addTab(tab2);
 
         TabLayout.Tab tab3 = tabLayout.newTab();
-        tab3.setText("健康");
+        tab3.setText("情感");
         tabLayout.addTab(tab3);
 
         TabLayout.Tab tab4 = tabLayout.newTab();
-        tab4.setText("心理");
+        tab4.setText("美容");
         tabLayout.addTab(tab4);
+
+        TabLayout.Tab tab5 = tabLayout.newTab();
+        tab5.setText("男性");
+        tabLayout.addTab(tab5);
+
+        TabLayout.Tab tab6 = tabLayout.newTab();
+        tab6.setText("女性");
+        tabLayout.addTab(tab6);
 
         vp_news = (ViewPager) v.findViewById(R.id.vp_news);
         List<Fragment> fragmentList = new ArrayList<>();
-
         HealthListFragment1 health1 = new HealthListFragment1();
         HealthListFragment2 health2 = new HealthListFragment2();
         HealthListFragment3 health3 = new HealthListFragment3();
         HealthListFragment4 health4 = new HealthListFragment4();
+        HealthListFragment5 health5 = new HealthListFragment5();
+        HealthListFragment6 health6 = new HealthListFragment6();
 
         fragmentList.add(health1);
         fragmentList.add(health2);
         fragmentList.add(health3);
         fragmentList.add(health4);
+        fragmentList.add(health5);
+        fragmentList.add(health6);
 
         NewsAdapter adapter = new NewsAdapter(getChildFragmentManager(), fragmentList);
         vp_news.setAdapter(adapter);
