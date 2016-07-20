@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class NewsFragment extends Fragment {
     private ViewPager vp_news;
+    String channelid;
 
 
     @Override
@@ -57,12 +58,12 @@ public class NewsFragment extends Fragment {
 
         vp_news = (ViewPager) v.findViewById(R.id.vp_news);
         List<Fragment> fragmentList = new ArrayList<>();
-        HealthListFragment1 health1 = new HealthListFragment1();
-        HealthListFragment2 health2 = new HealthListFragment2();
-        HealthListFragment3 health3 = new HealthListFragment3();
-        HealthListFragment4 health4 = new HealthListFragment4();
-        HealthListFragment5 health5 = new HealthListFragment5();
-        HealthListFragment6 health6 = new HealthListFragment6();
+        HealthListFragment health1 = new HealthListFragment(13+"");
+        HealthListFragment health2 = new HealthListFragment(19+"");
+        HealthListFragment health3 = new HealthListFragment(31+"");
+        HealthListFragment health4 = new HealthListFragment(35+"");
+        HealthListFragment health5 = new HealthListFragment(33+"");
+        HealthListFragment health6 = new HealthListFragment(25+"");
 
         fragmentList.add(health1);
         fragmentList.add(health2);

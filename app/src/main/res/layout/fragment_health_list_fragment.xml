@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context="com.wzy.mhealth.fragments.HealthListFragment3">
+    tools:context=".fragments.HealthListFragment">
     <com.wzy.mhealth.LeanChat.view.XListView
         android:id="@+id/lv_show"
         android:layout_width="match_parent"

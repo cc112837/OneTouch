@@ -113,6 +113,21 @@
                 android:layout_marginRight="10dp"
                 android:text="      我们的使命：聆听生命，创意健康。\n      我们的价值观：格物、致知、诚意、正心，一切为了客户的健康价值而努力创造。\n      西安智行深度(精密)体检中心是“治未病”先进理念的领先者和倡导者，决心改变“因病就医”的传统观念，为人们发现早期、潜在的隐患和病灶，远离疾病和痛苦，提高生命和生活质量。"
                 android:textColor="@color/black" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="17sp"
+                android:text="医院地址"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:lineSpacingMultiplier="1.2"
+                android:layout_marginRight="10dp"
+                android:text="      西安市莲湖区丰登南路23号建大洋房(丰庆公园西门向北200米路东)"
+                android:textColor="@color/black" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
