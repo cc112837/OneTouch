@@ -15,9 +15,9 @@ import android.widget.ExpandableListView;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.RecordShowActivity;
 import com.wzy.mhealth.adapter.RecordListAdapter;
-import com.wzy.mhealth.model.ChaTiTime;
-import com.wzy.mhealth.model.HuaRecord;
-import com.wzy.mhealth.model.NoRecord;
+import com.wzy.mhealth.model.HuaYanRecord;
+import com.wzy.mhealth.model.NoHuaRecord;
+import com.wzy.mhealth.model.SubjectTest;
 import com.wzy.mhealth.model.TestItem;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.PinnedHeaderExpandableListView;
@@ -35,40 +35,47 @@ public class TotalFragment extends Fragment implements
         PinnedHeaderExpandableListView.OnHeaderUpdateListener, StickyLayout.OnGiveUpTouchEventListener {
     private PinnedHeaderExpandableListView expandableListView;
     private StickyLayout stickyLayout;
-    private ArrayList<ChaTiTime> groupList;
-    private ArrayList<List<TestItem>> childList;
+    private ArrayList<TestItem> collist;
     private RecordListAdapter adapter;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            List childTemp;
             switch (msg.what) {
                 case 14:
-                    HuaRecord huaRecord = (HuaRecord) msg.obj;
-                    //正常值  huaRecord.getRows().get(0).getDEFVALUE();
-                    //分区名称huaRecord.getRows().get(i).getXMMC()
-                    childTemp = new ArrayList<>();
-                    for (int i = 0; i < huaRecord.getRows().size(); i++) {
-                        TestItem people = new TestItem();
-                        people.setUsusl(huaRecord.getRows().get(i).getDEFVALUE());
-                        people.setName(huaRecord.getRows().get(i).getCNAME() + "(" + huaRecord.getRows().get(0).getUNIT() + ")");
-                        people.setContent(huaRecord.getRows().get(i).getHYRESULT());
-                        childTemp.add(people);
+                    NoHuaRecord noHuaRecord = (NoHuaRecord) msg.obj;
+                    collist=new ArrayList<>();
+                    for (int i = 0; i < noHuaRecord.getObj().size(); i++) {
+                       String  s= noHuaRecord.getObj().get(i).getKSMC();
+                        List<SubjectTest> list=new ArrayList<>();
+                        for (int j=0;j<noHuaRecord.getObj().get(i).getRESULT().size();j++){
+                            String name=noHuaRecord.getObj().get(i).getRESULT().get(j).getCOMPONENTNAME();
+                            String value=noHuaRecord.getObj().get(i).getRESULT().get(j).getCVALUE();
+                            SubjectTest subjectTest=new SubjectTest(name,value);
+                            list.add(subjectTest);
+                        }
+                        TestItem testItem=new TestItem(s,list);
+                        collist.add(testItem);
                     }
-                    childList.add(childTemp);
+                    String huaurl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_assayX.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
+                    MyHttpUtils.handData(handler, 15, huaurl, null);
                     break;
                 case 15:
-                    NoRecord noRecord = (NoRecord) msg.obj;
-                    //分区名称noRecord.getRows().get(i).getKSMC()
-                    childTemp = new ArrayList<>();
-                    for (int j = 0; j < noRecord.getRows().size(); j++) {
-                        TestItem peopl = new TestItem();
-                        peopl.setName(noRecord.getRows().get(j).getCNAME());
-                        peopl.setContent(noRecord.getRows().get(j).getMVALUE());
-                        childTemp.add(peopl);
+                    HuaYanRecord huaYanRecord = (HuaYanRecord) msg.obj;
+                    for (int i = 0; i < huaYanRecord.getObj().size(); i++) {
+                        String s= huaYanRecord.getObj().get(i).getITEMNAME();
+                        List<SubjectTest> list=new ArrayList<>();
+                        for (int j=0;j<huaYanRecord.getObj().get(i).getRESULT().size();j++){
+                            String name=huaYanRecord.getObj().get(i).getRESULT().get(j).getCOMPONENTNAME();
+                            String value=huaYanRecord.getObj().get(i).getRESULT().get(j).getHYRESULT();
+                            String deau=huaYanRecord.getObj().get(i).getRESULT().get(j).getDEFVALUE();
+                            String usual=huaYanRecord.getObj().get(i).getRESULT().get(j).getUNIT();
+                            SubjectTest subjectTest=new SubjectTest(name,value,usual,deau);
+                            list.add(subjectTest);
+                        }
+                        TestItem testItem=new TestItem(s,list);
+                        collist.add(testItem);
                     }
-                    childList.add(childTemp);
-                    adapter = new RecordListAdapter(getActivity(), groupList, childList);
+                    adapter = new RecordListAdapter(getActivity(), collist);
                     expandableListView.setAdapter(adapter);
                     break;
             }
@@ -97,19 +104,8 @@ public class TotalFragment extends Fragment implements
     }
 
     private void initData() {
-        String huaurl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_assay.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
-        String nourl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_result.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
-        ChaTiTime group,group1;
-        groupList = new ArrayList<>();
-        group = new ChaTiTime();
-        group.setData("化验区");
-        groupList.add(group);
-        group1 = new ChaTiTime();
-        group1.setData("非化验区");
-        groupList.add(group1);
-        childList = new ArrayList<>();
-        MyHttpUtils.handData(handler, 14, huaurl, null);
-        MyHttpUtils.handData(handler, 15, nourl, null);
+        String nourl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_resultX.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
+        MyHttpUtils.handData(handler, 14, nourl, null);
     }
 
 

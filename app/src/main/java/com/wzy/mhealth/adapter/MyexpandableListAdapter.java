@@ -102,8 +102,8 @@ public class MyexpandableListAdapter extends BaseExpandableListAdapter {
             convertView.setTag(groupHolder);
         } else {
             groupHolder = (GroupHolder) convertView.getTag();
-            groupHolder.tv_time.setText(timeList.get(groupPosition).getData());
         }
+        groupHolder.tv_time.setText(timeList.get(groupPosition).getData());
 
 
         if (isExpanded)// ture is Expanded or false is not isExpanded

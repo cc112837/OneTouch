@@ -2,8 +2,6 @@ package com.wzy.mhealth.model;
 
 import java.io.Serializable;
 
-import android.media.Image;
-
 public class DoctorEntity implements Serializable {
 
 	private String doctorName;// 医生名字
@@ -23,9 +21,10 @@ public class DoctorEntity implements Serializable {
 	private String level;//医术水平评分
 
 	public DoctorEntity(String name, String doctorid, String department,
-			String zhicheng, String hospital, String brief) {
+			String zhicheng, String hospital, String brief,String level) {
 		// TODO Auto-generated constructor stub
 		this.doctorName = name;
+		this.level=level;
 		this.doctorUsername = doctorid;
 		this.firstdepName = department;
 		this.doctorTitle = zhicheng;
@@ -39,9 +38,10 @@ public class DoctorEntity implements Serializable {
 
 	public DoctorEntity(String name, String doctorid, String department,
 			String zhicheng, String hospital, String brief,String price_picture,
-			String price_phone,String price_private ) {
+			String price_phone,String price_private,String level ) {
 		// TODO Auto-generated constructor stub
 		this.doctorName = name;
+		this.level=level;
 		this.doctorUsername = doctorid;
 		this.firstdepName = department;
 		this.doctorTitle = zhicheng;

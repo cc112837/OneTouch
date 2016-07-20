@@ -1,41 +1,40 @@
 package com.wzy.mhealth.model;
 
+import java.util.List;
+
 /**
  * 项目名称：mhealth
  * 类描述：
  * 创建人：吴聪聪
  * 邮箱：cc112837@163.com
- * 创建时间：2016/6/28 15:05
+ * 创建时间：2016/7/20 13:54
  * 修改人：Administrator
- * 修改时间：2016/6/28 15:05
+ * 修改时间：2016/7/20 13:54
  * 修改备注：
  */
 public class TestItem {
-    String name;
-    String content;
-    String ususl;
+    private  String header;
 
-    public String getUsusl() {
-        return ususl;
+    public String getHeader() {
+        return header;
     }
 
-    public void setUsusl(String ususl) {
-        this.ususl = ususl;
+    public void setHeader(String header) {
+        this.header = header;
     }
 
-    public String getName() {
-        return name;
+    private List<SubjectTest> listHash;
+
+    public TestItem(String header, List<SubjectTest>listHash) {
+        this.header = header;
+        this.listHash = listHash;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public List<SubjectTest> getListHash() {
+        return listHash;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setListHash( List<SubjectTest> listHash) {
+        this.listHash = listHash;
     }
 }

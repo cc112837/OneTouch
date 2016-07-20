@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.model.ChaTiTime;
 import com.wzy.mhealth.model.TestItem;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * 项目名称：mhealth
@@ -27,40 +26,38 @@ import java.util.List;
 public class RecordListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<ChaTiTime> timeList;
-    private List<List<TestItem>> contentList;
+    private ArrayList<TestItem> collist;
 
 
-    public RecordListAdapter(Context context, List<ChaTiTime> timeList, List<List<TestItem>> contentList) {
+    public RecordListAdapter(Context context,ArrayList<TestItem> collist) {
         this.context = context;
-        this.timeList = timeList;
-        this.contentList = contentList;
+        this.collist=collist;
         inflater = LayoutInflater.from(context);
     }
 
     // 返回父列表个数
     @Override
     public int getGroupCount() {
-        return timeList.size();
+        return collist.size();
     }
 
 
     // 返回子列表个数
     @Override
     public int getChildrenCount(int groupPosition) {
-        return contentList.get(groupPosition).size();
+        return collist.get(groupPosition).getListHash().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
         ;
-        return timeList.get(groupPosition);
+        return collist.get(groupPosition);
     }
 
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return contentList.get(groupPosition).get(childPosition);
+        return collist.get(groupPosition).getListHash();
     }
 
     @Override
@@ -92,9 +89,8 @@ public class RecordListAdapter extends BaseExpandableListAdapter {
             convertView.setTag(groupHolder);
         } else {
             groupHolder = (GroupHolder) convertView.getTag();
-            groupHolder.tv_time.setText(timeList.get(groupPosition).getData());
         }
-
+        groupHolder.tv_time.setText(collist.get(groupPosition).getHeader());
 
         if (isExpanded)// ture is Expanded or false is not isExpanded
         {
@@ -116,6 +112,8 @@ public class RecordListAdapter extends BaseExpandableListAdapter {
                     .findViewById(R.id.tv_name);
             childHolder.tv_content = (TextView) convertView
                     .findViewById(R.id.tv_content);
+            childHolder.tv_cp = (TextView) convertView
+                    .findViewById(R.id.tv_cp);
             childHolder.tv_usual = (TextView) convertView.findViewById(R.id.tv_usual);
 
             convertView.setTag(childHolder);
@@ -123,17 +121,21 @@ public class RecordListAdapter extends BaseExpandableListAdapter {
             childHolder = (ChildHolder) convertView.getTag();
         }
 
-        childHolder.tv_name.setText(((TestItem) getChild(groupPosition,
-                childPosition)).getName());
-        childHolder.tv_content.setText(String.valueOf(((TestItem) getChild(
-                groupPosition, childPosition)).getContent()));
-        if (groupPosition==0) {
-            childHolder.tv_usual.setVisibility(View.VISIBLE);
-            childHolder.tv_usual.setText(String.valueOf(((TestItem) getChild(
-                    groupPosition, childPosition)).getUsusl()));
-        } else {
+        childHolder.tv_name.setText(collist.get(groupPosition).getListHash().get(childPosition).getName()+"");
+        childHolder.tv_content.setText(collist.get(groupPosition).getListHash().get(childPosition).getCvalue()+"");
+
+        if((collist.get(groupPosition).getListHash().get(childPosition).getDefau()==null)&&(collist.get(groupPosition).getListHash().get(childPosition).getUsual()==null)){
+            childHolder.tv_cp.setVisibility(View.GONE);
             childHolder.tv_usual.setVisibility(View.GONE);
         }
+            else{
+            childHolder.tv_cp.setVisibility(View.VISIBLE);
+            childHolder.tv_usual.setVisibility(View.VISIBLE);
+            childHolder.tv_cp.setText(collist.get(groupPosition).getListHash().get(childPosition).getDefau() + "");
+            childHolder.tv_usual.setText("正常值："+collist.get(groupPosition).getListHash().get(childPosition).getUsual()+"");
+        }
+
+
         return convertView;
     }
 
@@ -148,5 +150,6 @@ class ChildHolder {
     TextView tv_name;
     TextView tv_content;
     TextView tv_usual;
+    TextView tv_cp;
 }
 

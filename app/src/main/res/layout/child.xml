@@ -2,27 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="0dp"
-        android:text="条目"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_marginLeft="10dp"
-        android:layout_width="0dp"
-        android:layout_weight="0.9"
-        android:text="检查结果"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tv_usual"
-        android:layout_width="0dp"
-        android:layout_weight="0.9"
-        android:layout_marginLeft="5dp"
-        android:text="正常值"
-        android:layout_height="wrap_content" />
+    android:layout_marginLeft="15dp"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:textSize="17sp"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.8"
+            android:text="条目" />
+
+        <TextView
+            android:textSize="17sp"
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="检查结果" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_cp"
+            android:layout_width="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.8"
+            android:text="单位" />
+
+        <TextView
+            android:id="@+id/tv_usual"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="检查结果" />
+    </LinearLayout>
 </LinearLayout>
