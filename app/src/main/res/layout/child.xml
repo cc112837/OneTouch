@@ -18,7 +18,7 @@
             android:layout_marginLeft="15dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:text="条目" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_marginLeft="15dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:text="单位" />
 
         <TextView

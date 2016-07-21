@@ -94,22 +94,26 @@ public class XianChaFragment extends Fragment implements
         TextView textView = (TextView) headerView.findViewById(R.id.tv_time);
         textView.setText(firstVisibleGroup.getData());
     }
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 6:
                     ItemInfo info = (ItemInfo) msg.obj;
-                    for(int i=0;i<info.getRows().size();i++){
-                        ChaTiContent content = new ChaTiContent();
-                        content.setId(info.getRows().get(i).getID());
-                        content.setItemcode(info.getRows().get(i).getITEMCODE());
-                        content.setStuyid(info.getRows().get(i).getSTUDYID());
-                        content.setItemname(info.getRows().get(i).getXMMC());
-                        childTemp.add(content);
+                    if (info.getTotal() == -1 || info.getTotal() == 0) {
+                        Toast.makeText(getActivity(), "没有体检数据", Toast.LENGTH_SHORT).show();
+                    } else {
+                        for (int i = 0; i < info.getRows().size(); i++) {
+                            ChaTiContent content = new ChaTiContent();
+                            content.setId(info.getRows().get(i).getID());
+                            content.setItemcode(info.getRows().get(i).getITEMCODE());
+                            content.setStuyid(info.getRows().get(i).getSTUDYID());
+                            content.setItemname(info.getRows().get(i).getXMMC());
+                            childTemp.add(content);
+                        }
+                        childList.add(childTemp);
                     }
-
-                    childList.add(childTemp);
             }
         }
     };

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,7 +157,6 @@ public class RecentFragment extends Fragment {
             switch (msg.what) {
                 case 2:
                     Info info = (Info) msg.obj;
-                    Log.e("msg", info.getMsg());
                     if (!info.isSuccess())
                         Toast.makeText(getActivity(), "已预约过", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getActivity(), MyYuyueActivity.class);

@@ -63,13 +63,6 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="你应该注意的事项："
-            android:textColor="@color/black"
-            />
-        <TextView
             android:id="@+id/tv_advise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

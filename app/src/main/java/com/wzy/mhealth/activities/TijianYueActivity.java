@@ -77,24 +77,28 @@ public class TijianYueActivity extends Activity {
                     break;
                 case 33:
                     TaocanInfo inf = (TaocanInfo) msg.obj;
-                    if (flag == 1) {
-                        Intent intent = new Intent(TijianYueActivity.this, TestSelfActivity.class);
-                        intent.putExtra("session", tag);
-                        intent.putExtra("id", inf.getRows().get(0).getEID());
-                        intent.putExtra("name", inf.getRows().get(0).getXM());
-                        intent.putExtra("sex", inf.getRows().get(0).getXB());
-                        intent.putExtra("taocan", inf.getRows().get(0).getNAME());
-                        intent.putExtra("tiid", inf.getRows().get(0).getTJID());
-                        startActivity(intent);
-                        TijianYueActivity.this.finish();
-                    }
-                    if (flag == 2) {
-                        Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
-                        intent.putExtra("session", tag);
-                        intent.putExtra("id", inf.getRows().get(0).getEID());
-                        intent.putExtra("extra",inf.getRows().get(0).getTJID()+"20160713");
-                        startActivity(intent);
-                        TijianYueActivity.this.finish();
+                    if (inf.getTotal() == -1 || inf.getTotal() == 0) {
+                        Toast.makeText(TijianYueActivity.this, "没有数据!", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (flag == 1) {
+                            Intent intent = new Intent(TijianYueActivity.this, TestSelfActivity.class);
+                            intent.putExtra("session", tag);
+                            intent.putExtra("id", inf.getRows().get(0).getEID());
+                            intent.putExtra("name", inf.getRows().get(0).getXM());
+                            intent.putExtra("sex", inf.getRows().get(0).getXB());
+                            intent.putExtra("taocan", inf.getRows().get(0).getNAME());
+                            intent.putExtra("tiid", inf.getRows().get(0).getTJID());
+                            startActivity(intent);
+                            TijianYueActivity.this.finish();
+                        }
+                        if (flag == 2) {
+                            Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
+                            intent.putExtra("session", tag);
+                            intent.putExtra("id", inf.getRows().get(0).getEID());
+                            intent.putExtra("extra", inf.getRows().get(0).getTJID() + "20160713");
+                            startActivity(intent);
+                            TijianYueActivity.this.finish();
+                        }
                     }
                     break;
             }
