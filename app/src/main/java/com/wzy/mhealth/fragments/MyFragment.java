@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
@@ -59,7 +60,7 @@ public class MyFragment extends D3Fragment {
 
     RelativeLayout logout, account, manager, erweima, noti_news, secret, normal, about, familyHealth;
     TextView username;
-    LinearLayout about1, fankui;
+    LinearLayout about1,cache, fankui;
     ImageView headImage;
     String iconUrl;
     String dateTime;
@@ -72,6 +73,7 @@ public class MyFragment extends D3Fragment {
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
+        cache=(LinearLayout) view.findViewById(R.id.cache);
         about1 = (LinearLayout) view.findViewById(R.id.about1);
         fankui = (LinearLayout) view.findViewById(R.id.fankui);
         logout = (RelativeLayout) view.findViewById(R.id.logout);
@@ -132,6 +134,12 @@ public class MyFragment extends D3Fragment {
                 //// TODO: 2016/4/26  用户反馈界面
                 FeedbackAgent agent = new FeedbackAgent(getActivity());
                 agent.startDefaultThreadActivity();
+            }
+        });
+        cache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"清除缓存",Toast.LENGTH_LONG).show();
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
