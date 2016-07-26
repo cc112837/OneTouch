@@ -182,7 +182,8 @@
         <activity android:name=".activities.StepCountActivity" />
         <activity android:name=".activities.RecordListActivity" />
         <activity android:name=".activities.ZhixingIntroduceActivity" />
-        <activity android:name=".activities.NewsDetailActivity"></activity>
+        <activity android:name=".activities.NewsDetailActivity" />
+        <activity android:name=".activities.ServicePri"></activity>
     </application>
 
 </manifest>
