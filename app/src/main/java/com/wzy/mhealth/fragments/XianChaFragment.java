@@ -2,8 +2,6 @@ package com.wzy.mhealth.fragments;
 
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,15 +10,12 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.adapter.MyexpandableListAdapter;
 import com.wzy.mhealth.model.ChaTiContent;
 import com.wzy.mhealth.model.ChaTiTime;
-import com.wzy.mhealth.model.ItemInfo;
-import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.PinnedHeaderExpandableListView;
 import com.wzy.mhealth.view.StickyLayout;
 
@@ -36,11 +31,9 @@ public class XianChaFragment extends Fragment implements
         PinnedHeaderExpandableListView.OnHeaderUpdateListener, StickyLayout.OnGiveUpTouchEventListener {
     private PinnedHeaderExpandableListView expandableListView;
     private StickyLayout stickyLayout;
-    ArrayList<ChaTiContent> childTemp;
     private ArrayList<ChaTiTime> groupList;
     private ArrayList<List<ChaTiContent>> childList;
     private MyexpandableListAdapter adapter;
-    String sessid, recordid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,7 +77,6 @@ public class XianChaFragment extends Fragment implements
         View headerView = getActivity().getLayoutInflater().inflate(R.layout.datatime, null);
         headerView.setLayoutParams(new AbsListView.LayoutParams(
                 AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
-
         return headerView;
     }
 
@@ -95,51 +87,18 @@ public class XianChaFragment extends Fragment implements
         textView.setText(firstVisibleGroup.getData());
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 6:
-                    ItemInfo info = (ItemInfo) msg.obj;
-                    if (info.getTotal() == -1 || info.getTotal() == 0) {
-                        Toast.makeText(getActivity(), "没有体检数据", Toast.LENGTH_SHORT).show();
-                    } else {
-                        for (int i = 0; i < info.getRows().size(); i++) {
-                            ChaTiContent content = new ChaTiContent();
-                            content.setId(info.getRows().get(i).getID());
-                            content.setItemcode(info.getRows().get(i).getITEMCODE());
-                            content.setStuyid(info.getRows().get(i).getSTUDYID());
-                            content.setItemname(info.getRows().get(i).getXMMC());
-                            childTemp.add(content);
-                        }
-                        childList.add(childTemp);
-                    }
-            }
-        }
-    };
+
 
     void initData() {
         groupList = new ArrayList<>();
         ChaTiTime group;
         group = new ChaTiTime();
-        group.setData("体检的时间2016-07-20");
+        group.setData("预约的项目");
         groupList.add(group);
 
         childList = new ArrayList<>();
         for (int i = 0; i < groupList.size(); i++) {
-            if (i == 0) {
-                childTemp = new ArrayList<>();
-                sessid = ((MyYuyueActivity) getActivity()).getSession();
-                recordid = ((MyYuyueActivity) getActivity()).getId();
-                if ("null".equals(recordid)) {
-                    Toast.makeText(getActivity(), "请先进行体检预约", 2000).show();
-                } else {
-                    String itemurl = "http://113.201.59.226:8081/Healwis/base/itemAction!app_jcxm.action?sessid=" + sessid + "&id=" + recordid;
-                    MyHttpUtils.handData(handler, 6, itemurl, null);
-
-                }
-            }
+            childList=((MyYuyueActivity)getActivity()).getChildList();
         }
-
     }
 }

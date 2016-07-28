@@ -2,17 +2,23 @@ package com.wzy.mhealth.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TijianAdapter;
 import com.wzy.mhealth.fragments.TijianYuyueFragment;
 import com.wzy.mhealth.fragments.XianChaFragment;
+import com.wzy.mhealth.model.ChaTiContent;
+import com.wzy.mhealth.model.ItemInfo;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,22 +28,16 @@ public class MyYuyueActivity extends FragmentActivity {
     private Button rb_chati,rb_yuyue;
     private List<Fragment> fragments;
     private ViewPager viewPager;
+    ArrayList<ChaTiContent> childTemp;
+    private ArrayList<List<ChaTiContent>> childList;
     String session,id,ex;
 
-    public String getEx() {
-        return ex;
+    public ArrayList<List<ChaTiContent>> getChildList() {
+        return childList;
     }
 
-    public void setEx(String ex) {
-        this.ex = ex;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
+    public void setChildList(ArrayList<List<ChaTiContent>> childList) {
+        this.childList = childList;
     }
 
     public String getId() {
@@ -48,22 +48,75 @@ public class MyYuyueActivity extends FragmentActivity {
         this.id = id;
     }
 
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public String getEx() {
+        return ex;
+    }
+
+    public void setEx(String ex) {
+        this.ex = ex;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tijian_yuyue);
+        leftBtn=(ImageView) findViewById(R.id.leftBtn);
+        leftBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Intent intent=getIntent();
         session= intent.getStringExtra("session");
-        setSession(session);
         id=intent.getStringExtra("id");
-        setId(id);
         ex=intent.getStringExtra("extra");
         setEx(ex);
-        init();
+        childTemp = new ArrayList<>();
+        childList = new ArrayList<>();
+        if ("null".equals(id)) {
+            Toast.makeText(MyYuyueActivity.this, "请先进行体检预约", 2000).show();
+        } else {
+            String itemurl = "http://113.201.59.226:8081/Healwis/base/itemAction!app_jcxm.action?sessid=" + session + "&id=" + id;
+            MyHttpUtils.handData(handler, 6, itemurl, null);
+        }
     }
-
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 6:
+                    ItemInfo info = (ItemInfo) msg.obj;
+                    if (info.getTotal() == -1 || info.getTotal() == 0) {
+                        Toast.makeText(MyYuyueActivity.this, "没有体检套餐数据", Toast.LENGTH_SHORT).show();
+                    } else {
+                        init();
+                        for (int i = 0; i < info.getRows().size(); i++) {
+                            ChaTiContent content = new ChaTiContent();
+                            content.setId(info.getRows().get(i).getID());
+                            content.setItemcode(info.getRows().get(i).getITEMCODE());
+                            content.setStuyid(info.getRows().get(i).getSTUDYID());
+                            content.setItemname(info.getRows().get(i).getXMMC());
+                            childTemp.add(content);
+                        }
+                        childList.add(childTemp);
+                        setChildList(childList);
+                    }
+            }
+        }
+    };
     private void init() {
-        leftBtn=(ImageView) findViewById(R.id.leftBtn);
+
+
         viewPager=(ViewPager) findViewById(R.id.vp_yuyue);
         rb_chati=(Button) findViewById(R.id.rb_chati);
         rb_yuyue=(Button) findViewById(R.id.rb_yuyue);
@@ -82,12 +135,7 @@ public class MyYuyueActivity extends FragmentActivity {
             }
         });
         addViewpager();
-        leftBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
     }
     private void addViewpager() {
         fragments = new ArrayList<>();

@@ -24,7 +24,7 @@ public class ServicePri extends Activity {
         webSettings.setBuiltInZoomControls(true);//support zoom
         webSettings.setUseWideViewPort(true);// 这个很关键
         webSettings.setLoadWithOverviewMode(true);
-        wv_show.loadUrl("http://www.xa-hengli.com/page/QT/99.php");//// TODO: 2016/7/25 (服务协议)
+        wv_show.loadUrl("http://www.yidianjiuhao.com/yinsi/index.html");//// TODO: 2016/7/25 (服务协议)
         leftBtn=(ImageView) findViewById(R.id.leftBtn);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
