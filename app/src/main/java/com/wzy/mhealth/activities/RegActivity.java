@@ -61,7 +61,7 @@ public class RegActivity extends Activity implements View.OnClickListener{
     }
 
     private void initSms() {
-        SMSSDK.initSDK(this, "10fb5eade1138", "d52a83a2049860c418ea494ea9b4f18b");
+        SMSSDK.initSDK(this, "159b5bdf78770", "fb8e5913caefd25208c85911cc52bd82");
 
     }
 
@@ -123,7 +123,7 @@ public class RegActivity extends Activity implements View.OnClickListener{
                 MyAndroidUtil.editXmlByString("phone",userPhone);
                 MyAndroidUtil.editXmlByString("pass",pass);
                 RequestParams params = new RequestParams();
-                params.addBodyParameter("appkey", "10fb5eade1138");
+                params.addBodyParameter("appkey", "159b5bdf78770");
                 params.addBodyParameter("phone", userPhone);
                 params.addBodyParameter("zone", "86");
                 params.addBodyParameter("code", Phonecode);
@@ -164,7 +164,6 @@ public class RegActivity extends Activity implements View.OnClickListener{
 
                             @Override
                             public void onFailure(HttpException error, String msg) {
-
                             }
                         });
                 break;
