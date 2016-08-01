@@ -144,6 +144,7 @@ public class RegActivity extends Activity implements View.OnClickListener{
                                                             + e.getMessage());
                                                 } else {
                                                     Utils.toast(R.string.registerSucceed);
+                                                    LeanchatUser.getCurrentUser().setMobilePhoneNumber(userPhone);
                                                     MyAndroidUtil.editXmlByString(
                                                             Constants.LOGIN_ACCOUNT, userPhone);
                                                     Intent intent = new Intent(RegActivity.this, LoginActivity.class);
