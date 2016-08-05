@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 public class JiankangActivity extends Activity {
@@ -51,5 +52,14 @@ public class JiankangActivity extends Activity {
             shoushu.setText("");
 
 
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

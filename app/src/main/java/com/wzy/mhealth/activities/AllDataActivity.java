@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.db.MySqliteOpenHelper;
 import com.wzy.mhealth.inter.FinalValue;
@@ -31,7 +32,7 @@ public class AllDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_data);
-        leftBtn_back=(ImageView) findViewById(R.id.leftBtn_back);
+        leftBtn_back = (ImageView) findViewById(R.id.leftBtn_back);
         leftBtn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,4 +86,13 @@ public class AllDataActivity extends AppCompatActivity {
         return list;
     }
 
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 }

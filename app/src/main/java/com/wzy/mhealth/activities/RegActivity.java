@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.SignUpCallback;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
@@ -181,6 +182,14 @@ public class RegActivity extends Activity implements View.OnClickListener{
         SMSSDK.unregisterAllEventHandler();
     }
 
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
 
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 }
 

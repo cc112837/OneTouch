@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -22,49 +23,50 @@ public class DoctorGradeActivity extends Activity {
     private TextView tv_submit;
     private EditText tv_contentid;
     int grade;
-    String sessid,rid,itemcode,studyid;
+    String sessid, rid, itemcode, studyid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_grade);
-        Intent intent=getIntent();
-        studyid=intent.getStringExtra("stuid");
-        itemcode=intent.getStringExtra("codeid");
-        sessid=intent.getStringExtra("session");
-        rid=intent.getStringExtra("eid");
-        grade=5;
+        Intent intent = getIntent();
+        studyid = intent.getStringExtra("stuid");
+        itemcode = intent.getStringExtra("codeid");
+        sessid = intent.getStringExtra("session");
+        rid = intent.getStringExtra("eid");
+        grade = 5;
 //        String seleurl="http://113.201.59.226:8081/Healwis/base/evaluationAction!app_getOne.action?sessid="+sessid+"&rid="+rid+"&itemcode="+itemcode;
         init();
     }
-private Handler handler=new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what){
-            case 2:
-               Info info =(Info)msg.obj;
-              if(info.isSuccess()){
-                  Toast.makeText(DoctorGradeActivity.this,"评价成功",Toast.LENGTH_LONG).show();
-                  finish();
-              }
-                else{
-                  Toast.makeText(DoctorGradeActivity.this,"评价失败请稍后重试",Toast.LENGTH_LONG).show();
-              }
-                break;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 2:
+                    Info info = (Info) msg.obj;
+                    if (info.isSuccess()) {
+                        Toast.makeText(DoctorGradeActivity.this, "评价成功", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(DoctorGradeActivity.this, "评价失败请稍后重试", Toast.LENGTH_LONG).show();
+                    }
+                    break;
+            }
         }
-    }
-};
+    };
+
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
-        tv_contentid=(EditText) findViewById(R.id.tv_contentid);
-        final String content=tv_contentid.getText().toString();
-        tv_submit=(TextView) findViewById(R.id.tv_submit);
+        tv_contentid = (EditText) findViewById(R.id.tv_contentid);
+        final String content = tv_contentid.getText().toString();
+        tv_submit = (TextView) findViewById(R.id.tv_submit);
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String url="http://113.201.59.226:8081/Healwis/base/evaluationAction!app_evalOne.action?sessid="+sessid+"&rid="+rid+"&itemcode="+itemcode+"&studyid="+studyid+"&etype=s&marks="+grade+"&rdesc="+content;
-                MyHttpUtils.handData(handler,2,url,null);
+                String url = "http://113.201.59.226:8081/Healwis/base/evaluationAction!app_evalOne.action?sessid=" + sessid + "&rid=" + rid + "&itemcode=" + itemcode + "&studyid=" + studyid + "&etype=s&marks=" + grade + "&rdesc=" + content;
+                MyHttpUtils.handData(handler, 2, url, null);
             }
         });
         iv_1 = (CheckBox) findViewById(R.id.iv_1);
@@ -75,7 +77,7 @@ private Handler handler=new Handler(){
         iv_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grade=1;
+                grade = 1;
                 iv_1.setBackgroundResource(R.mipmap.goldstar1);
                 iv_2.setBackgroundResource(R.mipmap.greystar2);
                 iv_3.setBackgroundResource(R.mipmap.greystar2);
@@ -86,7 +88,7 @@ private Handler handler=new Handler(){
         iv_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grade=2;
+                grade = 2;
                 iv_1.setBackgroundResource(R.mipmap.goldstar1);
                 iv_2.setBackgroundResource(R.mipmap.goldstar1);
                 iv_3.setBackgroundResource(R.mipmap.greystar2);
@@ -97,7 +99,7 @@ private Handler handler=new Handler(){
         iv_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grade=3;
+                grade = 3;
                 iv_1.setBackgroundResource(R.mipmap.goldstar1);
                 iv_2.setBackgroundResource(R.mipmap.goldstar1);
                 iv_3.setBackgroundResource(R.mipmap.goldstar1);
@@ -108,7 +110,7 @@ private Handler handler=new Handler(){
         iv_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grade=4;
+                grade = 4;
                 iv_1.setBackgroundResource(R.mipmap.goldstar1);
                 iv_2.setBackgroundResource(R.mipmap.goldstar1);
                 iv_3.setBackgroundResource(R.mipmap.goldstar1);
@@ -119,7 +121,7 @@ private Handler handler=new Handler(){
         iv_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grade=5;
+                grade = 5;
                 iv_1.setBackgroundResource(R.mipmap.goldstar1);
                 iv_2.setBackgroundResource(R.mipmap.goldstar1);
                 iv_3.setBackgroundResource(R.mipmap.goldstar1);
@@ -135,5 +137,16 @@ private Handler handler=new Handler(){
             }
         });
     }
+
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
+
 
 }

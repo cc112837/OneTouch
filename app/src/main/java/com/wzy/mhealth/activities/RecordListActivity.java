@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -75,5 +76,14 @@ public class RecordListActivity extends Activity {
         lv_showid.setAdapter(adapter);
         String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchAccept.action?sessid=" +tag;
         MyHttpUtils.handData(handler, 7, renurl, null);
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

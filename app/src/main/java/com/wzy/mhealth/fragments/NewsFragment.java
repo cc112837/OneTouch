@@ -1,5 +1,6 @@
 package com.wzy.mhealth.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.NewsAdapter;
 
@@ -21,7 +23,23 @@ public class NewsFragment extends Fragment {
     private ViewPager vp_news;
     String channelid;
 
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("news-list-fragment");
+    }
+
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart("news-list-fragment");
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

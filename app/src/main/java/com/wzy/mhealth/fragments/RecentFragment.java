@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.activities.TestSelfActivity;
@@ -35,7 +37,23 @@ public class RecentFragment extends Fragment {
     private int year, month, day;
     String id, session;
 
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("recent-list-fragment");
+    }
+
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart("recent-list-fragment");
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

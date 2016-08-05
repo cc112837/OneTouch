@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.widget.RadioGroup;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.GuideAdapter;
 import com.wzy.mhealth.fragments.GuideFragment;
@@ -105,5 +106,14 @@ public class GuideActivity extends FragmentActivity {
 
             }
         });
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

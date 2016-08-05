@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
@@ -172,5 +173,14 @@ public class TijianYueActivity extends Activity {
                 finish();
             }
         });
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

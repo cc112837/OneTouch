@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 public class ManageActivity extends Activity implements View.OnClickListener{
@@ -60,5 +61,14 @@ public class ManageActivity extends Activity implements View.OnClickListener{
 
         }
 
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 import java.util.ArrayList;
@@ -141,5 +142,14 @@ public class ZixunActivity extends Activity {
             startActivity(intent);
         }
 
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

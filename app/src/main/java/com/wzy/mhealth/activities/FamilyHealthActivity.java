@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.FamilyHealthAdapter;
@@ -120,5 +121,13 @@ public class FamilyHealthActivity extends Activity {
         return li;
     }
 
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
 
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 }

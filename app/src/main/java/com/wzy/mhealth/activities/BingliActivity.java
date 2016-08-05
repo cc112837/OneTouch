@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TabBingli2Adapter;
 import com.wzy.mhealth.adapter.TabBingliAdapter;
@@ -93,5 +94,13 @@ public class BingliActivity extends Activity {
             }
         }
     }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
 
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 }

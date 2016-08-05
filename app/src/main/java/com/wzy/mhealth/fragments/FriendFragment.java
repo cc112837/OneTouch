@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFriendship;
 import com.avos.avoscloud.AVFriendshipQuery;
@@ -71,6 +73,18 @@ public class FriendFragment extends D3Fragment {
     LinearLayoutManager layoutManager;
 
     private Handler handler = new Handler(Looper.getMainLooper());
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("friend-list-fragment");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -179,6 +193,7 @@ public class FriendFragment extends D3Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        AVAnalytics.onFragmentStart("friend-list-fragment");
         updateNewRequestBadge();
     }
 

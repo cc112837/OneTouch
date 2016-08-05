@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 public class NoContentActivity extends Activity {
@@ -20,5 +21,14 @@ public class NoContentActivity extends Activity {
                 finish();
             }
         });
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

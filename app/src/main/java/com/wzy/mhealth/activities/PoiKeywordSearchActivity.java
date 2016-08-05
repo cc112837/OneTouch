@@ -39,6 +39,7 @@ import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.amap.api.services.poisearch.PoiSearch.OnPoiSearchListener;
 import com.amap.api.services.poisearch.PoiSearch.SearchBound;
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 import java.util.ArrayList;
@@ -378,6 +379,14 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements OnMark
 
 
     }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
 
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 
 }

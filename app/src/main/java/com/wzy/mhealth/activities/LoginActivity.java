@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVOSCloud;
@@ -231,6 +232,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         if (name != null)
             nameText.setText(name);
         super.onResume();
+        AVAnalytics.onResume(this);
     }
 
     @Override
@@ -411,5 +413,11 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         }
 
     }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avoscloud.leanchatlib.event.ImTypeMessageEvent;
 import com.avoscloud.leanchatlib.model.Room;
@@ -54,6 +56,14 @@ public class HomeFragment extends Fragment {
     private TextView countView;
     private RelativeLayout title1;
     private MyScrollView my_scroll;
+
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    public void onStart() {
+        super.onStart();
+    }
 
 
     @Override
@@ -324,7 +334,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
 
         super.onResume();
-
+        AVAnalytics.onFragmentStart("home-list-fragment");
         //开始自动翻页
         updateCount();
         convenientBanner.startTurning(2000);
@@ -338,7 +348,7 @@ public class HomeFragment extends Fragment {
     public void onPause() {
 
         super.onPause();
-
+        AVAnalytics.onFragmentEnd("home-list-fragment");
         //停止翻页
         convenientBanner.stopTurning();
 

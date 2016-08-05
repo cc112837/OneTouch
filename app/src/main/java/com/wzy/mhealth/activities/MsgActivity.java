@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
@@ -105,6 +106,7 @@ public class MsgActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
+        AVAnalytics.onResume(this);
         if (!hidden) {
             updateConversationList();
         }
@@ -208,4 +210,10 @@ public class MsgActivity extends BaseActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+
 }

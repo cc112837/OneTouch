@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
 
 public class BarCodeActivity extends Activity {
     private ImageView qrImgImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,5 +39,15 @@ public class BarCodeActivity extends Activity {
                 finish();
             }
         });
+    }
+
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

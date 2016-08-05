@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.HospitalEntity;
 import com.wzy.mhealth.utils.Tool;
@@ -102,7 +103,7 @@ public class GuahaoActivity extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("返回数据了",data+"***"+requestCode+"&&&&"+resultCode);
+        Log.e("返回数据了", data + "***" + requestCode + "&&&&" + resultCode);
         if (requestCode == CODE && resultCode == CODE) {
             guahaoActivity.names = (HospitalEntity) data.getSerializableExtra("name");
             String flag = data.getStringExtra("flag");
@@ -112,5 +113,14 @@ public class GuahaoActivity extends Activity {
 
             }
         }
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

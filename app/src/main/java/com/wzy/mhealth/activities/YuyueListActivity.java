@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.YuyueAdapter;
 import com.wzy.mhealth.inter.XmppConnection;
@@ -53,5 +54,13 @@ public class YuyueListActivity extends Activity {
         yuyueDoctorList.addAll(XmppConnection.getInstance().getOwnGuahaoInfo());
 
     }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
 
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 }

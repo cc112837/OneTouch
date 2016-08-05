@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
@@ -67,6 +69,19 @@ public class MyFragment extends D3Fragment {
     private AlertDialog avatarDialog;
 
     private ChatManager chatManager = ChatManager.getInstance();
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("my-list-fragment");
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -209,6 +224,7 @@ public class MyFragment extends D3Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        AVAnalytics.onFragmentStart("my-list-fragment");
     }
 
     public void AvatarDialog() {

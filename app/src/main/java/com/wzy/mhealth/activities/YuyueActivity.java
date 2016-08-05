@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.guahaoAdapter;
 import com.wzy.mhealth.constant.Constants;
@@ -177,7 +178,16 @@ public class YuyueActivity extends BaseActivity {
 		  guahaoList.add(new GuaHao("2015-08-15","周六下午",0)); guahaoList.add(new
 		  GuaHao("2015-08-16","周日上午",1)); guahaoList.add(new
 		  GuaHao("2015-08-16","周日下午",0)); guahaoList.add(new
-		  GuaHao("2015-08-17","周一上午",1));
+                GuaHao("2015-08-17", "周一上午", 1));
 
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.adapter.MyexpandableListAdapter;
@@ -34,7 +36,23 @@ public class XianChaFragment extends Fragment implements
     private ArrayList<ChaTiTime> groupList;
     private ArrayList<List<ChaTiContent>> childList;
     private MyexpandableListAdapter adapter;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("xian-list-fragment");
+    }
+
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart("xian-list-fragment");
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

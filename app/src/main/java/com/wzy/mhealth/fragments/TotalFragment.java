@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.RecordShowActivity;
 import com.wzy.mhealth.adapter.RecordListAdapter;
@@ -82,7 +84,23 @@ public class TotalFragment extends Fragment implements
         }
     };
 
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("total-list-fragment");
+    }
+
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart("total-list-fragment");
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

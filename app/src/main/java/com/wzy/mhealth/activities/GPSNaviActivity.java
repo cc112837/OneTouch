@@ -21,6 +21,7 @@ import com.amap.api.navi.model.AMapNaviTrafficFacilityInfo;
 import com.amap.api.navi.model.NaviInfo;
 import com.amap.api.navi.model.NaviLatLng;
 import com.autonavi.tbt.TrafficFacilityInfo;
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.dao.TTSController;
 
@@ -83,6 +84,7 @@ public class GPSNaviActivity extends Activity implements AMapNaviListener, AMapN
     @Override
     protected void onResume() {
         super.onResume();
+        AVAnalytics.onResume(this);
         mAMapNaviView.onResume();
         mStartList.add(startLatlng);
         mEndList.add(endLatlng);
@@ -91,6 +93,7 @@ public class GPSNaviActivity extends Activity implements AMapNaviListener, AMapN
     @Override
     protected void onPause() {
         super.onPause();
+        AVAnalytics.onPause(this);
         mAMapNaviView.onPause();
 
 //        仅仅是停止你当前在说的这句话，一会到新的路口还是会再说的

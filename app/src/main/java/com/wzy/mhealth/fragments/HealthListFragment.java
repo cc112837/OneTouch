@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.LeanChat.view.XListView;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.NewsDetailActivity;
@@ -50,7 +52,23 @@ public class HealthListFragment extends Fragment implements XListView.IXListView
             }
         }
     };
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("health-list-fragment");
+    }
+
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart("health-list-fragment");
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

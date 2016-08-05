@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.feedback.FeedbackAgent;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                     case R.id.main_news:
-                        fragment=new NewsFragment();
+                        fragment = new NewsFragment();
                         break;
                     case R.id.main_friend:
                         fragment = new FriendFragment();
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        AVAnalytics.onResume(this);
         updateCount();
     }
 
@@ -175,5 +177,10 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.commit();
     }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
 
 }

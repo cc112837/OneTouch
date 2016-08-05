@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TijianAdapter;
 import com.wzy.mhealth.fragments.ConclusionFragment;
@@ -113,6 +114,15 @@ public class RecordShowActivity extends FragmentActivity {
     {
         b1.setTextColor(getResources().getColor(R.color.title_green));
         b2.setTextColor(getResources().getColor(R.color.dark_grey));
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }
 

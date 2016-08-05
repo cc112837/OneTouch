@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.wzy.mhealth.R;
@@ -46,6 +47,7 @@ public class ZhiXingActivity extends Activity {
     @Override
 
     public void onResume() {
+        AVAnalytics.onResume(this);
 
         super.onResume();
 
@@ -61,6 +63,7 @@ public class ZhiXingActivity extends Activity {
     public void onPause() {
 
         super.onPause();
+        AVAnalytics.onPause(this);
 
         //停止翻页
         convenientBanner.stopTurning();

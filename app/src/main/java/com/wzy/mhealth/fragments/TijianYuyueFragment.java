@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
@@ -19,7 +21,23 @@ import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
 public class TijianYuyueFragment extends Fragment {
     private TextView tv_timeid,tv_yuyuecount;
     private ImageView iv_erweima;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
 
+    public void onStart() {
+        super.onStart();
+    }
+
+    public void onPause() {
+        super.onPause();
+        AVAnalytics.onFragmentEnd("tijianyue-list-fragment");
+    }
+
+    public void onResume() {
+        super.onResume();
+        AVAnalytics.onFragmentStart("tijianyue-list-fragment");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

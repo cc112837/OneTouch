@@ -45,6 +45,7 @@ import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.RouteSearch.DriveRouteQuery;
 import com.amap.api.services.route.RouteSearch.OnRouteSearchListener;
 import com.amap.api.services.route.WalkRouteResult;
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.utils.AMapUtil;
 import com.wzy.mhealth.utils.ToastUtil;
@@ -142,6 +143,7 @@ public class RouteActivity extends Activity implements OnMarkerClickListener,
     @Override
     protected void onResume() {
         super.onResume();
+        AVAnalytics.onResume(this);
         mapView.onResume();
     }
 
@@ -151,6 +153,7 @@ public class RouteActivity extends Activity implements OnMarkerClickListener,
     @Override
     protected void onPause() {
         super.onPause();
+        AVAnalytics.onPause(this);
         mapView.onPause();
     }
 

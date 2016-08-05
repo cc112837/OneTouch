@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
 
@@ -49,8 +50,8 @@ public class AddFamilyHealthActivity extends Activity {
                 age = ageText.getText().toString();
                 medicalHistory = medicalHistoryText.getText().toString();
                 related = relatedText.getText().toString();
-                if(TextUtils.isEmpty(name));
-                else if(TextUtils.isEmpty(medicalHistory));
+                if (TextUtils.isEmpty(name)) ;
+                else if (TextUtils.isEmpty(medicalHistory)) ;
                 else Queren();
 
             }
@@ -65,7 +66,7 @@ public class AddFamilyHealthActivity extends Activity {
     // public void rightBtnClick(View v) {
     //
     // }
-    private void Queren(){
+    private void Queren() {
         Thread thth = new Thread() {
             @Override
             public void run() {
@@ -86,7 +87,7 @@ public class AddFamilyHealthActivity extends Activity {
                     HttpResponse response = client.execute(request);
                     Log.e("成功了", response.getStatusLine().getStatusCode() + "");
                     if (response.getStatusLine().getStatusCode() == 200) {
-                        Log.e("成功了",""+ EntityUtils.toString(
+                        Log.e("成功了", "" + EntityUtils.toString(
                                 response.getEntity(), HTTP.UTF_8));
                         AddFamilyHealthActivity.this.finish();
                     }
@@ -98,4 +99,13 @@ public class AddFamilyHealthActivity extends Activity {
         thth.start();
     }
 
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 }

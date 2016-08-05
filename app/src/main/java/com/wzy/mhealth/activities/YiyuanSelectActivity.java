@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.HospitalListAdapter;
 import com.wzy.mhealth.model.HospitalEntity;
@@ -79,5 +80,14 @@ public class YiyuanSelectActivity extends Activity {
 				"患者评价 5.9万"));
 		hospitallist.add(new HospitalEntity("上海交通大学医学院附属医院","三级甲等", "预约量 90.6万",
 				"患者评价 3.8万"));
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

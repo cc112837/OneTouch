@@ -7,6 +7,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ToggleButton;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.utils.MyAndroidUtil;
@@ -55,6 +56,15 @@ public class NotiNewsActivity extends AppCompatActivity {
             }
         });
 
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }
 

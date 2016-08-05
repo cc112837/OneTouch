@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFriendship;
 import com.avos.avoscloud.AVFriendshipQuery;
@@ -195,6 +196,15 @@ public class FriendDetailActivity extends AVBaseActivity implements View.OnClick
 
                 break;
         }
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }
 

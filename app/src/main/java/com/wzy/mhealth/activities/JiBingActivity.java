@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.google.gson.Gson;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.NewsAids;
@@ -118,5 +119,13 @@ public class JiBingActivity extends Activity {
         });
     }
 
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
 
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
+    }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.EvaluationListAdapter;
 import com.wzy.mhealth.inter.XmppConnection;
@@ -38,5 +39,14 @@ public class EvaluationListActivity extends Activity {
         evaluationList.addAll(XmppConnection.getInstance().getUserEvaluation(doctorId, "0"));
         adapter = new EvaluationListAdapter(this, evaluationList);
         listView.setAdapter(adapter);
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }

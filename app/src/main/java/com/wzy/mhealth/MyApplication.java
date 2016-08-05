@@ -72,7 +72,7 @@ public class MyApplication extends Application implements
 
         PushManager.getInstance().init(instance);
         AVOSCloud.setDebugLogEnabled(debug);
-        AVAnalytics.enableCrashReport(this, !debug);
+        AVAnalytics.enableCrashReport(this, true);
         initImageLoader(instance);
         if (MyApplication.debug) {
             openStrictMode();

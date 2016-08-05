@@ -7,6 +7,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
+import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 public class ServicePri extends Activity {
@@ -32,5 +33,14 @@ public class ServicePri extends Activity {
                 finish();
             }
         });
+    }
+    protected void onPause() {
+        super.onPause();
+        AVAnalytics.onPause(this);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        AVAnalytics.onResume(this);
     }
 }
