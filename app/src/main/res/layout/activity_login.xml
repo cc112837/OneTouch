@@ -15,7 +15,7 @@
         android:id="@+id/loginLinear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/login_background"
+        android:background="#fff"
         android:orientation="vertical"
         tools:context="com.cpsecpom.LoginActivity">
 
@@ -50,7 +50,7 @@
                     android:src="@mipmap/login_phone" />
 
                 <TextView
-                    android:layout_width="5dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="#ffffff" />
 
@@ -80,7 +80,7 @@
                     android:src="@mipmap/login_password" />
 
                 <TextView
-                    android:layout_width="5dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="#ffffff" />
 
@@ -145,19 +145,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparent_background"
+                android:background="@color/light_grey"
                 android:gravity="center"
                 android:text="注册新账号"
                 android:textColor="@color/dark_grey"
                 android:textSize="18sp" />
-
+            <TextView
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#bababa" />
 
             <Button
                 android:id="@+id/forgetButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparent_background"
+                android:background="@color/light_grey"
                 android:gravity="center"
                 android:text="忘记密码？"
                 android:textColor="@color/dark_grey"

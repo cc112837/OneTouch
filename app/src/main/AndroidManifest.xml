@@ -93,21 +93,50 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".LeanChat.activity.ChatRoomActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.NewFriendActivity" />
-        <activity android:name=".activities.MsgActivity" />
-        <activity android:name=".activities.RegActivity" />
-        <activity android:name=".activities.NoContentActivity" />
-        <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.ManageActivity" />
-        <activity android:name=".activities.AboutActivity" />
-        <activity android:name=".activities.ChangePwdActivity" />
-        <activity android:name=".activities.BarCodeActivity" />
-        <activity android:name=".activities.NotiNewsActivity" />
-        <activity android:name=".activities.FamilyHealthActivity" />
-        <activity android:name=".activities.AddFamilyHealthActivity" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NewFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.RegActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NoContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ChangePwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.BarCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NotiNewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.FamilyHealthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AddFamilyHealthActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".service.PedometerService" />
         <service android:name=".service.StepCounterService" />
@@ -139,51 +168,122 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activities.GuideActivity" />
-        <activity android:name=".activities.SplashActivity">
+        <activity
+            android:name=".activities.GuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RouteActivity" />
-        <activity android:name=".activities.GuahaoActivity" />
-        <activity android:name=".activities.ZixunActivity" />
-        <activity android:name=".activities.PoiKeywordSearchActivity" />
-        <activity android:name=".activities.JiBingActivity" />
-        <activity android:name=".activities.YuyueListActivity" />
-        <activity android:name=".activities.GreenPassActivity" />
-        <activity android:name=".activities.BingliActivity" />
-        <activity android:name=".activities.JianyanBaogaoActivity" />
-        <activity android:name=".activities.ScanresultActivity" />
-        <activity android:name=".activities.YiyuanSelectActivity" />
-        <activity android:name=".activities.KeshiselectActivity" />
-        <activity android:name=".activities.GuahaoDoctorListActivity" />
-        <activity android:name=".activities.JiankangActivity" />
-        <activity android:name=".activities.JiBingDetailActicity" />
-        <activity android:name=".activities.DoctorListActivity" />
-        <activity android:name=".activities.DoctorDetailActivity" />
-        <activity android:name=".activities.BuActivity" />
-        <activity android:name=".activities.EvaluationListActivity" />
-        <activity android:name=".activities.GPSNaviActivity" />
-        <activity android:name=".activities.YuyueActivity" />
-        <activity android:name=".activities.FriendDetailActivity" />
-        <activity android:name=".activities.ZhiXingActivity" />
-        <activity android:name=".activities.MyYuyueActivity" />
-        <activity android:name=".activities.TijianRecordActivity" />
-        <activity android:name=".activities.TijianYueActivity" />
-        <activity android:name=".activities.DoctorGradeActivity" />
+        <activity
+            android:name=".activities.RouteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.GuahaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ZixunActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PoiKeywordSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.JiBingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.YuyueListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.GreenPassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.BingliActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.JianyanBaogaoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ScanresultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.YiyuanSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.KeshiselectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.GuahaoDoctorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.JiankangActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.JiBingDetailActicity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DoctorListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DoctorDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.BuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.EvaluationListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.GPSNaviActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.YuyueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.FriendDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ZhiXingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MyYuyueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TijianRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TijianYueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DoctorGradeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.TestSelfActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/DialogTheme"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".activities.RecordShowActivity" />
-        <activity android:name=".activities.StepCountActivity" />
-        <activity android:name=".activities.RecordListActivity" />
-        <activity android:name=".activities.ZhixingIntroduceActivity" />
-        <activity android:name=".activities.NewsDetailActivity" />
-        <activity android:name=".activities.ServicePri"></activity>
+        <activity
+            android:name=".activities.RecordShowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.StepCountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.RecordListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ZhixingIntroduceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NewsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ServicePri"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
