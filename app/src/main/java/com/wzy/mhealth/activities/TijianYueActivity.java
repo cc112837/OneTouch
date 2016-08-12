@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVAnalytics;
@@ -26,7 +26,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class TijianYueActivity extends Activity {
     private ImageView leftBtn;
-    private TextView submit;
+    private Button submit;
     private EditText nameid, idcard, et_pass, et_tel;//姓名，身份证号
     String cardid, pass, name, tel, tag;
     int flag;
@@ -134,7 +134,7 @@ public class TijianYueActivity extends Activity {
         String card1 = sp.getString("card", null);
         String tel1 = sp.getString("tel", null);
         String pass1 = sp.getString("pass", null);
-        submit = (TextView) findViewById(R.id.submit);
+        submit = (Button) findViewById(R.id.submit);
         nameid = (EditText) findViewById(R.id.nameid);
         idcard = (EditText) findViewById(R.id.idcard);
 

@@ -109,7 +109,7 @@
             android:layout_margin="10dp"
             android:background="@mipmap/input_bg"
             android:lines="6"/>
-        <TextView
+        <Button
             android:id="@+id/tv_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
             android:layout_marginRight="80dp"
             android:layout_marginTop="20dp"
             android:padding="10dp"
-            android:background="@mipmap/select_bg"
+            android:background="@drawable/button_cli"
             android:gravity="center"
             android:text="提交"
             android:textColor="@color/white"

@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
@@ -18,7 +18,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 public class DoctorGradeActivity extends BaActivity {
     private ImageView leftBtn;
     private CheckBox iv_1, iv_2, iv_3, iv_4, iv_5;
-    private TextView tv_submit;
+    private Button tv_submit;
     private EditText tv_contentid;
     int grade;
     String sessid, rid, itemcode, studyid;
@@ -58,7 +58,7 @@ public class DoctorGradeActivity extends BaActivity {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         tv_contentid = (EditText) findViewById(R.id.tv_contentid);
         final String content = tv_contentid.getText().toString();
-        tv_submit = (TextView) findViewById(R.id.tv_submit);
+        tv_submit = (Button) findViewById(R.id.tv_submit);
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

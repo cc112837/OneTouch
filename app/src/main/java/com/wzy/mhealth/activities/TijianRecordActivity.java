@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
@@ -17,7 +17,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class TijianRecordActivity extends BaActivity {
     private ImageView leftBtn;
-    private TextView select;
+    private Button select;
     private String tag;
     private EditText tijianid, name;
 
@@ -59,7 +59,7 @@ public class TijianRecordActivity extends BaActivity {
         String pass = sp.getString("pass", null);
         tijianid.setText(tijian);
         name.setText(pass);
-        select = (TextView) findViewById(R.id.select);
+        select = (Button) findViewById(R.id.select);
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

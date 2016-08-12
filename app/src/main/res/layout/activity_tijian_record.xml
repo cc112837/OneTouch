@@ -64,14 +64,14 @@
             android:textColor="@color/black"
             android:textSize="18sp"></EditText>
 
-        <TextView
+        <Button
             android:id="@+id/select"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="40dp"
-            android:background="@mipmap/select_bg"
+            android:background="@drawable/button_cli"
             android:gravity="center"
             android:text="查询"
             android:textColor="@color/white"
