@@ -1,20 +1,18 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.UpdatePasswordCallback;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.utils.Tool;
 
-public class ChangePwdActivity extends Activity {
+public class ChangePwdActivity extends BaActivity {
     EditText oldPwdView, pwdView, pwdView1;
     Button subBtn;
     @Override
@@ -76,14 +74,5 @@ public class ChangePwdActivity extends Activity {
                 finish();
             }
         });
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

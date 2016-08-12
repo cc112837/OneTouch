@@ -5,7 +5,6 @@ package com.wzy.mhealth.activities;
  * 创建时间：2016/7/18
  */
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,12 +14,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-public class NewsDetailActivity extends Activity {
+public class NewsDetailActivity extends BaActivity {
     private ImageView leftBtn;
     private WebView wv_dis;
     private Handler handler = new Handler() {
@@ -55,13 +53,5 @@ public class NewsDetailActivity extends Activity {
             }
         });
     }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
 
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

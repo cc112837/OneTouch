@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.HospitalEntity;
 
-public class KeshiselectActivity extends Activity {
+public class KeshiselectActivity extends BaActivity {
     public static KeshiselectActivity instance;
     String[][] officess = { { "心血管内科", "消化内科", "呼吸内科", "血液内科", "内分泌内科", "肾病内科" },
             { "普通外科", "神经外科", "小儿外科", "骨科", "泌尿外科", "胸外科", "胆胰外科", "肠胃外科" },
@@ -84,14 +82,5 @@ public class KeshiselectActivity extends Activity {
             }
 
         });
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

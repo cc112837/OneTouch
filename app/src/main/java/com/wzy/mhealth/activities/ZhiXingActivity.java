@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.wzy.mhealth.R;
@@ -20,7 +18,7 @@ import com.wzy.mhealth.view.LocalImageHolderView;
 
 import java.util.ArrayList;
 
-public class ZhiXingActivity extends Activity {
+public class ZhiXingActivity extends BaActivity {
     private ImageView leftBtn;
     private ConvenientBanner convenientBanner;
     private TextView tv_display;
@@ -47,7 +45,6 @@ public class ZhiXingActivity extends Activity {
     @Override
 
     public void onResume() {
-        AVAnalytics.onResume(this);
 
         super.onResume();
 
@@ -63,7 +60,6 @@ public class ZhiXingActivity extends Activity {
     public void onPause() {
 
         super.onPause();
-        AVAnalytics.onPause(this);
 
         //停止翻页
         convenientBanner.stopTurning();

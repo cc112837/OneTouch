@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.PopupWindow;
 import android.widget.PopupWindow.OnDismissListener;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.DoctorListAdapter;
 import com.wzy.mhealth.adapter.LocationAdapter;
@@ -26,7 +24,7 @@ import com.wzy.mhealth.model.DoctorEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorListActivity extends Activity {
+public class DoctorListActivity extends BaActivity {
 
     private List<DoctorEntity> doctorlist;
     private List<String> locationList;
@@ -209,14 +207,5 @@ public class DoctorListActivity extends Activity {
         mPopupWindow.showAsDropDown(location, 5, 1);
         mPopupWindow.update();
         // mPopupWindow.setFocusable(true);
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

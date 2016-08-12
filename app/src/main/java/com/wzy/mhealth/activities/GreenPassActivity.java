@@ -1,16 +1,14 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
-public class GreenPassActivity extends Activity  implements View.OnClickListener{
+public class GreenPassActivity extends BaActivity  implements View.OnClickListener{
     private TextView ll_child;
     private TextView ll_fuke;
     private TextView ll_chanke;
@@ -64,14 +62,5 @@ public class GreenPassActivity extends Activity  implements View.OnClickListener
                 break;
         }
 
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

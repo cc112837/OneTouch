@@ -13,6 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVAnalytics;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.SignUpCallback;
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
@@ -61,6 +64,16 @@ public class TijianYueActivity extends Activity {
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString(name, "cc");
                         editor.commit();
+                        LeanchatUser user= LeanchatUser.getCurrentUser();
+                        user.put("realName",name);
+                        user.put("IDCard",cardid);
+						LeanchatUser.getCurrentUser().setMobilePhoneNumber(tel);
+                        user.signUpInBackground(new SignUpCallback() {
+                            @Override
+                            public void done(AVException e) {
+
+                            }
+                        });
                         String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + cardid + "&passwd=" + pass;
                         MyHttpUtils.handData(handler, 2, loginurl, null);
                     }
@@ -71,6 +84,14 @@ public class TijianYueActivity extends Activity {
                         Toast.makeText(TijianYueActivity.this, "校验成功!", Toast.LENGTH_LONG).show();
                         String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid=" + info.getMsg();
                         tag = info.getMsg();
+
+
+
+
+
+
+
+
                         MyHttpUtils.handData(handler, 33, renurl, null);
                     } else {
                         Toast.makeText(TijianYueActivity.this, "校验失败!", Toast.LENGTH_LONG).show();

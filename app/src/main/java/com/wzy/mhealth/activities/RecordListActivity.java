@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -20,7 +18,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordListActivity extends Activity {
+public class RecordListActivity extends BaActivity {
     private String tag;
     private ImageView leftBtn;
     private ListView lv_showid;
@@ -77,13 +75,5 @@ public class RecordListActivity extends Activity {
         String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchAccept.action?sessid=" +tag;
         MyHttpUtils.handData(handler, 7, renurl, null);
     }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
 
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

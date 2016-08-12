@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
@@ -30,7 +28,7 @@ import com.wzy.mhealth.view.PayRadioPurified;
 import java.util.List;
 
 
-public class BuActivity extends Activity {
+public class BuActivity extends BaActivity {
     // private DoctorEntity doctor;
     private TextView doctorname, price, price1, titleName;
     private DoctorEntity doctor;
@@ -158,13 +156,4 @@ public class BuActivity extends Activity {
         finish();
     }
 
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

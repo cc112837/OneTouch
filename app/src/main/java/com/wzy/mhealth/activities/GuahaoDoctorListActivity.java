@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.GuahaoDoctorListAdapter;
 import com.wzy.mhealth.inter.XmppConnection;
@@ -19,7 +17,7 @@ import com.wzy.mhealth.model.HospitalEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuahaoDoctorListActivity extends Activity {
+public class GuahaoDoctorListActivity extends BaActivity {
     private List<GuahaoDoctorEntity> doctorlist;
 
     private ListView lv;
@@ -102,13 +100,5 @@ public class GuahaoDoctorListActivity extends Activity {
 		doctorlist.add(new GuahaoDoctorEntity("李凌云", "dengshan", "主任医师",
                 "9.4", "接诊量457", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺", 15));
     }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
 
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

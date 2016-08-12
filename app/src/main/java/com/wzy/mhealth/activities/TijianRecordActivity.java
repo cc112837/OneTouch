@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,12 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-public class TijianRecordActivity extends Activity {
+public class TijianRecordActivity extends BaActivity {
     private ImageView leftBtn;
     private TextView select;
     private String tag;
@@ -78,14 +76,6 @@ public class TijianRecordActivity extends Activity {
             }
         });
     }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
 
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 
 }

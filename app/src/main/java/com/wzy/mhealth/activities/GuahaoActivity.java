@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +9,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.HospitalEntity;
 import com.wzy.mhealth.utils.Tool;
 
-public class GuahaoActivity extends Activity {
+public class GuahaoActivity extends BaActivity {
     TextView tex;
     public String name;
     public HospitalEntity names;
@@ -113,14 +111,5 @@ public class GuahaoActivity extends Activity {
 
             }
         }
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

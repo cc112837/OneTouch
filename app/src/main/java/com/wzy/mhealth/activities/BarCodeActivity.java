@@ -1,16 +1,14 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
 
-public class BarCodeActivity extends Activity {
+public class BarCodeActivity extends BaActivity {
     private ImageView qrImgImageView;
 
     @Override
@@ -41,13 +39,4 @@ public class BarCodeActivity extends Activity {
         });
     }
 
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

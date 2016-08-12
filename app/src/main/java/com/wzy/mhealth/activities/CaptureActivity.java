@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -14,7 +13,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
@@ -33,7 +31,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-public class CaptureActivity extends Activity implements Callback {
+public class CaptureActivity extends BaActivity implements Callback {
 
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
@@ -63,7 +61,6 @@ public class CaptureActivity extends Activity implements Callback {
     @Override
     protected void onResume() {
         super.onResume();
-        AVAnalytics.onResume(this);
         SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         if (hasSurface) {
@@ -92,7 +89,6 @@ public class CaptureActivity extends Activity implements Callback {
             handler = null;
         }
         CameraManager.get().closeDriver();
-        AVAnalytics.onPause(this);
     }
 
     @Override

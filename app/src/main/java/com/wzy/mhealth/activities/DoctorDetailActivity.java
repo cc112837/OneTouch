@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.DoctorEntity;
@@ -19,7 +17,7 @@ import com.wzy.mhealth.model.UserEvaluation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorDetailActivity extends Activity {
+public class DoctorDetailActivity extends BaActivity {
 
     private TextView name, departmenTextView, zhichengTextView,
             hospitalTextView, xianqingTextView, tuwenfeiyong, dianhuafeiyong,
@@ -214,14 +212,5 @@ public class DoctorDetailActivity extends Activity {
 
     public void leftBtnClick(View v) {
         finish();
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

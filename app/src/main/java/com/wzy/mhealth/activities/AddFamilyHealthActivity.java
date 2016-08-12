@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
 
@@ -28,7 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddFamilyHealthActivity extends Activity {
+public class AddFamilyHealthActivity extends BaActivity {
     private EditText nameText, ageText, medicalHistoryText, relatedText;
     private String name, age, medicalHistory, related;
     private TextView queRen;
@@ -99,13 +97,4 @@ public class AddFamilyHealthActivity extends Activity {
         thth.start();
     }
 
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

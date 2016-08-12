@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.SignUpCallback;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
@@ -32,7 +30,7 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class RegActivity extends Activity implements View.OnClickListener{
+public class RegActivity extends BaActivity implements View.OnClickListener{
     private EditText et_phone, et_code, register_password;
     private Button Message_btn, register_btn;
     private Button btn_back;
@@ -182,14 +180,6 @@ public class RegActivity extends Activity implements View.OnClickListener{
         SMSSDK.unregisterAllEventHandler();
     }
 
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
 
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }
 

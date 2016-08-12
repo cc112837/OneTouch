@@ -1,16 +1,14 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
-public class ScanresultActivity extends Activity {
+public class ScanresultActivity extends BaActivity {
     Button btn_back;
 
     @Override
@@ -31,14 +29,5 @@ public class ScanresultActivity extends Activity {
         scanresult_tv.setText(num);
     }
 
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 
 }

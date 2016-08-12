@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TabBingli2Adapter;
 import com.wzy.mhealth.adapter.TabBingliAdapter;
@@ -18,7 +16,7 @@ import com.wzy.mhealth.model.Bingli2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BingliActivity extends Activity {
+public class BingliActivity extends BaActivity {
     private String interactName = "张三";
     private String interactSex = "男";
     private String interactYear = "23";
@@ -94,13 +92,6 @@ public class BingliActivity extends Activity {
             }
         }
     }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
 
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
+
 }

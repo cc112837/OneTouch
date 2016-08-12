@@ -1,16 +1,14 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
-public class JiBingDetailActicity extends Activity {
+public class JiBingDetailActicity extends BaActivity {
     private ImageView leftBtn;
     private TextView tv_title,tv_content;
     @Override
@@ -36,13 +34,5 @@ public class JiBingDetailActicity extends Activity {
             }
         });
     }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
 
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

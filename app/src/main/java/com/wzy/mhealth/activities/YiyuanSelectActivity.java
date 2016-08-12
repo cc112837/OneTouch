@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.HospitalListAdapter;
 import com.wzy.mhealth.model.HospitalEntity;
@@ -16,7 +14,7 @@ import com.wzy.mhealth.model.HospitalEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YiyuanSelectActivity extends Activity {
+public class YiyuanSelectActivity extends BaActivity {
     private List<HospitalEntity> hospitallist;
 
     private ListView lv;
@@ -80,14 +78,5 @@ public class YiyuanSelectActivity extends Activity {
 				"患者评价 5.9万"));
 		hospitallist.add(new HospitalEntity("上海交通大学医学院附属医院","三级甲等", "预约量 90.6万",
 				"患者评价 3.8万"));
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

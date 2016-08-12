@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ZixunActivity extends Activity {
+public class ZixunActivity extends BaActivity {
     private ListView list;
     private ImageView leftBtn;
     @Override
@@ -142,14 +140,5 @@ public class ZixunActivity extends Activity {
             startActivity(intent);
         }
 
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

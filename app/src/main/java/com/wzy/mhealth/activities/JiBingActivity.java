@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.google.gson.Gson;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.NewsAids;
 import com.wzy.mhealth.utils.ReadUtil;
 
-public class JiBingActivity extends Activity {
+public class JiBingActivity extends BaActivity {
     private ListView lv_display, office;
     private ImageView leftBtn;
     private int pos;
@@ -119,13 +117,4 @@ public class JiBingActivity extends Activity {
         });
     }
 
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 }

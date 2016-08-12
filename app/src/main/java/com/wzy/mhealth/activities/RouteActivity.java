@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -45,7 +44,6 @@ import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.RouteSearch.DriveRouteQuery;
 import com.amap.api.services.route.RouteSearch.OnRouteSearchListener;
 import com.amap.api.services.route.WalkRouteResult;
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.utils.AMapUtil;
 import com.wzy.mhealth.utils.ToastUtil;
@@ -56,7 +54,7 @@ import java.util.List;
 /**
  * AMapV1地图中简单介绍route搜索
  */
-public class RouteActivity extends Activity implements OnMarkerClickListener,
+public class RouteActivity extends BaActivity implements OnMarkerClickListener,
         OnMapClickListener, OnInfoWindowClickListener, InfoWindowAdapter,
         OnPoiSearchListener, OnRouteSearchListener, OnClickListener,
         LocationSource, AMapLocationListener {
@@ -143,7 +141,6 @@ public class RouteActivity extends Activity implements OnMarkerClickListener,
     @Override
     protected void onResume() {
         super.onResume();
-        AVAnalytics.onResume(this);
         mapView.onResume();
     }
 
@@ -153,7 +150,6 @@ public class RouteActivity extends Activity implements OnMarkerClickListener,
     @Override
     protected void onPause() {
         super.onPause();
-        AVAnalytics.onPause(this);
         mapView.onPause();
     }
 

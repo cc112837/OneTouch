@@ -1,7 +1,6 @@
 package com.wzy.mhealth.activities;
 
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.DataPoint;
@@ -33,7 +31,7 @@ import java.util.HashMap;
 
 import me.pedometer.StepDetector;
 
-public class StepCountActivity extends Activity {
+public class StepCountActivity extends BaActivity {
     private ImageView leftBtn_back;
     private ColorfulRingProgressView crpv;
     private TextView tv_alldata;
@@ -217,14 +215,5 @@ public class StepCountActivity extends Activity {
         editor.putInt("step", total_step + step);
         editor.commit();
         super.onDestroy();
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

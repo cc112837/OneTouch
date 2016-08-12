@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,10 +7,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
-public class ManageActivity extends Activity implements View.OnClickListener{
+public class ManageActivity extends BaActivity implements View.OnClickListener{
     private ImageView leftBtn_back;
     private Button submit;
     private EditText nameView,rg_sex,tv_birth,proView,cheView,et_hunyu,et_habit,medicalHistory;
@@ -61,14 +59,5 @@ public class ManageActivity extends Activity implements View.OnClickListener{
 
         }
 
-    }
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
     }
 }

@@ -2,6 +2,8 @@ package com.wzy.mhealth.activities;
 
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.app.FragmentActivity;
@@ -192,5 +194,13 @@ public class BaseActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         AVAnalytics.onResume(this);
+    }
+    @Override
+    public Resources getResources() {
+        Resources res = super.getResources();
+        Configuration config=new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
     }
 }

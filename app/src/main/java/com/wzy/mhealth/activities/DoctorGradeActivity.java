@@ -1,6 +1,5 @@
 package com.wzy.mhealth.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,12 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-public class DoctorGradeActivity extends Activity {
+public class DoctorGradeActivity extends BaActivity {
     private ImageView leftBtn;
     private CheckBox iv_1, iv_2, iv_3, iv_4, iv_5;
     private TextView tv_submit;
@@ -138,15 +136,6 @@ public class DoctorGradeActivity extends Activity {
         });
     }
 
-    protected void onPause() {
-        super.onPause();
-        AVAnalytics.onPause(this);
-    }
-
-    protected void onResume() {
-        super.onResume();
-        AVAnalytics.onResume(this);
-    }
 
 
 }
