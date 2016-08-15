@@ -70,5 +70,9 @@ public class MyHttpUtils extends HttpUtils{
           sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewDetail(), handler, what));
 
       }
+      if(what==23){
+          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
+
+      }
   }
 }

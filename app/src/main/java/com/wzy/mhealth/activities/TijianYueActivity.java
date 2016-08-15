@@ -19,6 +19,7 @@ import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
+import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -82,19 +83,30 @@ public class TijianYueActivity extends Activity {
                     Info info = (Info) msg.obj;
                     if (info.isSuccess()) {
                         Toast.makeText(TijianYueActivity.this, "校验成功!", Toast.LENGTH_LONG).show();
-                        String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid=" + info.getMsg();
                         tag = info.getMsg();
-
-
-
-
-
-
-
-
-                        MyHttpUtils.handData(handler, 33, renurl, null);
+                        String recurl="http://113.201.59.226:8081/Healwis/base/recordAction!app_matchCheck.action?sessid=" + tag;
+                        MyHttpUtils.handData(handler, 23, recurl, null);
                     } else {
                         Toast.makeText(TijianYueActivity.this, "校验失败!", Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                case 23:
+                    Record rec= (Record) msg.obj;
+                    if (rec.getTotal() == -1 || rec.getTotal() == 0) {
+                        String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid=" + tag;
+                        MyHttpUtils.handData(handler, 33, renurl, null);
+                    } else {
+                        if (flag == 1) {
+                         Toast.makeText(TijianYueActivity.this,"您已经成功预约成功，请进去我的预约查看",Toast.LENGTH_LONG).show();
+                        }
+                        if (flag == 2) {
+                            Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
+                            intent.putExtra("session", tag);
+                            intent.putExtra("id", rec.getRows().get(0).getEID());
+                            intent.putExtra("extra", rec.getRows().get(0).getTJID() + "20160713");
+                            startActivity(intent);
+                            TijianYueActivity.this.finish();
+                        }
                     }
                     break;
                 case 33:
