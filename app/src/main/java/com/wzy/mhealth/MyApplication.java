@@ -39,7 +39,7 @@ public class MyApplication extends Application implements
         UncaughtExceptionHandler {
     private static MyApplication instance;
     public static SharedPreferences sharedPreferences;
-
+    public static SharedPreferences share;
     public static boolean debug = true;
 
     public static MyApplication getInstance() {
@@ -52,6 +52,8 @@ public class MyApplication extends Application implements
         instance = this;
 
         sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES,
+                Context.MODE_PRIVATE);
+        share = getSharedPreferences("comment",
                 Context.MODE_PRIVATE);
         ImgConfig.initImageLoader();
         Utils.fixAsyncTaskBug();

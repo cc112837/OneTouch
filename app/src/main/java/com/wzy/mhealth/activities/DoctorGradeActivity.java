@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -20,7 +22,7 @@ public class DoctorGradeActivity extends BaActivity {
     private CheckBox iv_1, iv_2, iv_3, iv_4, iv_5;
     private Button tv_submit;
     private EditText tv_contentid;
-    int grade;
+    int grade,position;
     String sessid, rid, itemcode, studyid;
 
     @Override
@@ -32,6 +34,7 @@ public class DoctorGradeActivity extends BaActivity {
         itemcode = intent.getStringExtra("codeid");
         sessid = intent.getStringExtra("session");
         rid = intent.getStringExtra("eid");
+        position=intent.getIntExtra("list",100);
         grade = 5;
 //        String seleurl="http://113.201.59.226:8081/Healwis/base/evaluationAction!app_getOne.action?sessid="+sessid+"&rid="+rid+"&itemcode="+itemcode;
         init();
@@ -45,6 +48,9 @@ public class DoctorGradeActivity extends BaActivity {
                     Info info = (Info) msg.obj;
                     if (info.isSuccess()) {
                         Toast.makeText(DoctorGradeActivity.this, "评价成功", Toast.LENGTH_LONG).show();
+                        SharedPreferences.Editor editor = MyApplication.share.edit();
+                        editor.putString(position+"","cc");
+                        editor.commit();
                         finish();
                     } else {
                         Toast.makeText(DoctorGradeActivity.this, "评价失败请稍后重试", Toast.LENGTH_LONG).show();
