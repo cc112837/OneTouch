@@ -15,12 +15,14 @@ import com.wzy.mhealth.activities.DoctorGradeActivity;
 import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.model.ChaTiContent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestItemAdapter extends BaseAdapter {
     private List<ChaTiContent> contentList;
     private Context con;
     private LayoutInflater mInflater;
+    private List<String> list = new ArrayList<>();
 
     public TestItemAdapter(Context context, List<ChaTiContent> contentList, LayoutInflater inflater) {
         // TODO Auto-generated constructor stub
@@ -49,7 +51,7 @@ public class TestItemAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-        ChildHolder childHolder;
+        final ChildHolder childHolder;
         if (convertView == null) {
             childHolder = new ChildHolder();
             convertView = mInflater.inflate(R.layout.type_item, null);
@@ -60,14 +62,21 @@ public class TestItemAdapter extends BaseAdapter {
             childHolder = (ChildHolder) convertView.getTag();
         }
         childHolder.tv_classname.setText(contentList.get(position).getItemname());
+        childHolder.tv_waitcount.setEnabled(!list.contains(position + ""));
+        childHolder.tv_waitcount.setTag(R.id.tv_waitcount, position);
         childHolder.tv_waitcount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(con, DoctorGradeActivity.class);
-                intent.putExtra("codeid",contentList.get(position).getItemcode());
-                intent.putExtra("stuid",contentList.get(position).getStuyid());
-                intent.putExtra("session",((MyYuyueActivity)con).getSession());
-                intent.putExtra("eid",((MyYuyueActivity)con).getId());
+                int position = (int) v.getTag(R.id.tv_waitcount);
+                list.add(position + "");
+                childHolder.tv_waitcount.setText("已评价");
+                childHolder.tv_waitcount.setBackgroundResource(R.mipmap.blue);
+                childHolder.tv_waitcount.setEnabled(false);
+                Intent intent = new Intent(con, DoctorGradeActivity.class);
+                intent.putExtra("codeid", contentList.get(position).getItemcode());
+                intent.putExtra("stuid", contentList.get(position).getStuyid());
+                intent.putExtra("session", ((MyYuyueActivity) con).getSession());
+                intent.putExtra("eid", ((MyYuyueActivity) con).getId());
                 con.startActivity(intent);
             }
         });

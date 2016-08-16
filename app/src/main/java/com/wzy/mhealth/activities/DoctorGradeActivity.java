@@ -62,7 +62,6 @@ public class DoctorGradeActivity extends BaActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String url = "http://113.201.59.226:8081/Healwis/base/evaluationAction!app_evalOne.action?sessid=" + sessid + "&rid=" + rid + "&itemcode=" + itemcode + "&studyid=" + studyid + "&etype=s&marks=" + grade + "&rdesc=" + content;
                 MyHttpUtils.handData(handler, 2, url, null);
             }

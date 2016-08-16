@@ -21,6 +21,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:button="@null"
         android:text="评价"
         android:textColor="@color/white"
         android:background="@mipmap/green"
