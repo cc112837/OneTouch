@@ -84,7 +84,7 @@ public class MyYuyueActivity extends FragmentActivity {
         setEx(ex);
         childTemp = new ArrayList<>();
         childList = new ArrayList<>();
-        if ("null".equals(id)) {
+        if (id=="") {
             Toast.makeText(MyYuyueActivity.this, "请先进行体检预约", 2000).show();
         } else {
             String itemurl = "http://113.201.59.226:8081/Healwis/base/itemAction!app_jcxm.action?sessid=" + session + "&id=" + id;

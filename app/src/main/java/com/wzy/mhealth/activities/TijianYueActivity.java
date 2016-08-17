@@ -65,10 +65,10 @@ public class TijianYueActivity extends Activity {
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString(name, "cc");
                         editor.commit();
-                        LeanchatUser user= LeanchatUser.getCurrentUser();
-                        user.put("realName",name);
-                        user.put("IDCard",cardid);
-						LeanchatUser.getCurrentUser().setMobilePhoneNumber(tel);
+                        LeanchatUser user = LeanchatUser.getCurrentUser();
+                        user.put("realName", name);
+                        user.put("IDCard", cardid);
+                        LeanchatUser.getCurrentUser().setMobilePhoneNumber(tel);
                         user.signUpInBackground(new SignUpCallback() {
                             @Override
                             public void done(AVException e) {
@@ -84,20 +84,20 @@ public class TijianYueActivity extends Activity {
                     if (info.isSuccess()) {
                         Toast.makeText(TijianYueActivity.this, "校验成功!", Toast.LENGTH_LONG).show();
                         tag = info.getMsg();
-                        String recurl="http://113.201.59.226:8081/Healwis/base/recordAction!app_matchCheck.action?sessid=" + tag;
+                        String recurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchCheck.action?sessid=" + tag;
                         MyHttpUtils.handData(handler, 23, recurl, null);
                     } else {
                         Toast.makeText(TijianYueActivity.this, "校验失败!", Toast.LENGTH_LONG).show();
                     }
                     break;
                 case 23:
-                    Record rec= (Record) msg.obj;
+                    Record rec = (Record) msg.obj;
                     if (rec.getTotal() == -1 || rec.getTotal() == 0) {
                         String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid=" + tag;
                         MyHttpUtils.handData(handler, 33, renurl, null);
                     } else {
                         if (flag == 1) {
-                         Toast.makeText(TijianYueActivity.this,"您已经成功预约成功，请进去我的预约查看",Toast.LENGTH_LONG).show();
+                            Toast.makeText(TijianYueActivity.this, "您已经成功预约成功，请进去我的预约查看", Toast.LENGTH_LONG).show();
                         }
                         if (flag == 2) {
                             Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
@@ -114,6 +114,7 @@ public class TijianYueActivity extends Activity {
                     if (inf.getTotal() == -1 || inf.getTotal() == 0) {
                         Toast.makeText(TijianYueActivity.this, "没有数据!", Toast.LENGTH_LONG).show();
                     } else {
+                        int status = inf.getRows().get(0).getSTATUS();
                         if (flag == 1) {
                             Intent intent = new Intent(TijianYueActivity.this, TestSelfActivity.class);
                             intent.putExtra("session", tag);
@@ -126,12 +127,16 @@ public class TijianYueActivity extends Activity {
                             TijianYueActivity.this.finish();
                         }
                         if (flag == 2) {
-                            Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
-                            intent.putExtra("session", tag);
-                            intent.putExtra("id", inf.getRows().get(0).getEID());
-                            intent.putExtra("extra", inf.getRows().get(0).getTJID() + "20160713");
-                            startActivity(intent);
-                            TijianYueActivity.this.finish();
+                            if (0 == status) {
+                                Toast.makeText(TijianYueActivity.this, "请先进行体检预约", Toast.LENGTH_LONG).show();
+                            } else {
+                                Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
+                                intent.putExtra("session", tag);
+                                intent.putExtra("id", inf.getRows().get(0).getEID());
+                                intent.putExtra("extra", inf.getRows().get(0).getTJID() + "20160713");
+                                startActivity(intent);
+                                TijianYueActivity.this.finish();
+                            }
                         }
                     }
                     break;
@@ -207,6 +212,7 @@ public class TijianYueActivity extends Activity {
             }
         });
     }
+
     protected void onPause() {
         super.onPause();
         AVAnalytics.onPause(this);
