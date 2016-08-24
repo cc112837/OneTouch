@@ -330,7 +330,7 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements OnMark
         start = new LatLng(a, b);
         end = new LatLng(endLat, endLog);
         TextView tv_distance = (TextView) view.findViewById(R.id.distance);
-        double  distance=(int)((((int)AMapUtils.calculateLineDistance(start, end))/1000.0)*100+0.5)/100.0;
+        double distance = (int) ((((int) AMapUtils.calculateLineDistance(start, end)) / 1000.0) * 100 + 0.5) / 100.0;
         tv_distance.setText("距离亲" + distance + "公里");
 
         button = (ImageButton) view
@@ -379,6 +379,7 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements OnMark
 
 
     }
+
     protected void onPause() {
         super.onPause();
         AVAnalytics.onPause(this);

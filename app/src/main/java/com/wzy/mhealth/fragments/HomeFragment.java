@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -101,9 +100,9 @@ public class HomeFragment extends Fragment {
         Button fujinyaodian_btn = (Button) view.findViewById(R.id.mode6);
         Button jiuzhenzhuanche_btn = (Button) view.findViewById(R.id.mode61);
         LinearLayout ll_speci = (LinearLayout) view.findViewById(R.id.ll_speci);
-        RadioButton rb_yuyue = (RadioButton) view.findViewById(R.id.rb_yuyue);
-        RadioButton rb_select = (RadioButton) view.findViewById(R.id.rb_select);
-        RadioButton rb_quike = (RadioButton) view.findViewById(R.id.rb_quike);
+        LinearLayout rb_yuyue = (LinearLayout) view.findViewById(R.id.rb_yuyue);
+        LinearLayout rb_select = (LinearLayout) view.findViewById(R.id.rb_select);
+        LinearLayout rb_quike = (LinearLayout) view.findViewById(R.id.rb_quike);
         my_scroll.setScrollViewListener(new MyScrollView.ScrollViewListener() {
             @Override
             public void onScrollChanged(MyScrollView scrollView, int x, int y, int oldx, int oldy) {

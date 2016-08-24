@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TaoCanAdapter;
+import com.wzy.mhealth.model.ZhixingTaocan;
 import com.wzy.mhealth.view.LocalImageHolderView;
 
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class ZhiXingActivity extends BaActivity {
     private LinearLayout ll_private,ll_intro;
     private RadioButton rb_group, rb_taocan, rb_yuyue, rb_record;
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
+    private ArrayList<ZhixingTaocan> list=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +75,28 @@ public class ZhiXingActivity extends BaActivity {
         View headview = LayoutInflater.from(this).inflate(R.layout.head_zhixing, null);
         loadLocalImage();
         lv_showid = (ListView) findViewById(R.id.lv_showid);
-         ArrayList<String> list=new ArrayList<>();
-        list.add(444+"");
-        list.add(555+"");
-        list.add(666+"");
-        list.add(444 + "");
-        list.add(333 + "");
-
+        list.add(new ZhixingTaocan("入职套餐", 228, 114));
+        list.add(new ZhixingTaocan("青年男宾体检套餐",468,234));
+        list.add(new ZhixingTaocan("青年已婚女宾体检套餐",713,357));
+        list.add(new ZhixingTaocan("青年未婚女宾体检套餐", 558, 279));
+        list.add(new ZhixingTaocan("青年男宾深度体检套餐",840,420));
+        list.add(new ZhixingTaocan("青年已婚女宾深度体检套餐",995,498));
+        list.add(new ZhixingTaocan("中年男宾体检套餐",1065,533));
+        list.add(new ZhixingTaocan("中年已婚女宾体检套餐",1220,610));
+        list.add(new ZhixingTaocan("中老年男宾体检套餐",1155,578));
+        list.add(new ZhixingTaocan("中老年女宾体检套餐",1310,655));
+        list.add(new ZhixingTaocan("孕前男宾体检套餐",678,339));
+        list.add(new ZhixingTaocan("孕前女宾体检套餐", 1148, 574));
         TaoCanAdapter adapter=new TaoCanAdapter(this,list);
         lv_showid.setAdapter(adapter);
         lv_showid.addHeaderView(headview);
+        lv_showid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ZhiXingActivity.this, "您点击了" + list.get(position-1).getName(), Toast.LENGTH_LONG).show();
+            }
+        });
+
         convenientBanner = ((ConvenientBanner) headview.findViewById(R.id.convenientBanner));
         convenientBanner.setPages(
                 new CBViewHolderCreator<LocalImageHolderView>() {
@@ -139,7 +155,7 @@ public class ZhiXingActivity extends BaActivity {
         rb_taocan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ZhiXingActivity.this,NoContentActivity.class);
+                Intent intent=new Intent(ZhiXingActivity.this,PersonTaocan.class);
                 startActivity(intent);
                 //套餐介绍
             }

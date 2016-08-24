@@ -46,12 +46,14 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <!-- 扫码 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -283,6 +285,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ServicePri"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.PersonTaocan"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.TaocanDetailAcitivty"
             android:screenOrientation="portrait"></activity>
     </application>
 

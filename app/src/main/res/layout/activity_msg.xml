@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dip"
-            android:src="@mipmap/add"
+            android:src="@mipmap/addr"
             android:layout_gravity="center_vertical|right" />
 
     </FrameLayout>
