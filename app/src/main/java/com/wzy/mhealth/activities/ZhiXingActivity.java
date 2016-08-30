@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
@@ -75,7 +74,7 @@ public class ZhiXingActivity extends BaActivity {
         View headview = LayoutInflater.from(this).inflate(R.layout.head_zhixing, null);
         loadLocalImage();
         lv_showid = (ListView) findViewById(R.id.lv_showid);
-        list.add(new ZhixingTaocan("入职套餐", 228, 114));
+        list.add(new ZhixingTaocan("入职套餐", 228,79));
         list.add(new ZhixingTaocan("青年男宾体检套餐",468,234));
         list.add(new ZhixingTaocan("青年已婚女宾体检套餐",713,357));
         list.add(new ZhixingTaocan("青年未婚女宾体检套餐", 558, 279));
@@ -93,7 +92,11 @@ public class ZhiXingActivity extends BaActivity {
         lv_showid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ZhiXingActivity.this, "您点击了" + list.get(position-1).getName(), Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(ZhiXingActivity.this,TaocanDetailAcitivty.class);
+                intent.putExtra("name",list.get(position - 1).getName());
+                intent.putExtra("price",list.get(position-1).getNewprice()+"");
+                intent.putExtra("old",list.get(position-1).getOldprice()+"");
+                startActivity(intent);
             }
         });
 
@@ -155,7 +158,7 @@ public class ZhiXingActivity extends BaActivity {
         rb_taocan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ZhiXingActivity.this,PersonTaocan.class);
+                Intent intent=new Intent(ZhiXingActivity.this,PersonTaocanActivity.class);
                 startActivity(intent);
                 //套餐介绍
             }

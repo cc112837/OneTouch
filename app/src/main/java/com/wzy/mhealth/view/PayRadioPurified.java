@@ -161,7 +161,7 @@ public class PayRadioPurified extends RelativeLayout implements Checkable {
     		payLogo.setImageDrawable(d);
     	}
     }
-    
+
     public void setChangeImg(int checkedId) {
     	System.out.println(">>" + checkedId);
     	System.out.println(">>" + id);

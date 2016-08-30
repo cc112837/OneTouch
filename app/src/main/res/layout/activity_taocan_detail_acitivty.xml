@@ -33,13 +33,70 @@
             android:src="@mipmap/btn_back" />
     </FrameLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-    </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:scaleType="fitXY"
+                    android:layout_margin="10dp"
+                    android:src="@mipmap/taocan" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="1、体检接待时间：周一至周六08:00-10：30。周日及国家法定节假日不上班。\n2、体检前3日勿食油腻食物，勿饮酒。体检当日禁食、禁水。\n3、糖尿病、高血压等慢性病患者，请将平时服用的药物携带备用。\n4、有眼压检查项目的人员，请勿佩戴隐形眼镜。\n5、孕妇或准备3个月内受孕的女士不宜进行x光检查.\n6、检查当天不宜穿紧身、连体及有金属、橡胶等饰物的衣物。\n7、妇科检查须知：\n  妇科检查仅限有性生活史的女性。\n  女性月经期不宜做便、尿检查，经期结束后3天可补检。\n  妇科检查前3天不宜进行阴道灌洗及放药治疗。\n检后：\n  1、个人体检报告7个工作日后至3个月内领取。\n  2、团体报告按合同要求送取.\n  3、体检后1个月内可以在网上查询电子报告并打印，查询网址：www.healwis.com\n  4、体检结果咨询请拨打029-68550666转8003."
+                    android:textColor="@color/dark_grey" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:background="@color/bg_gray"
+            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_new"
+            android:layout_width="0dp"
+            android:text="88元"
+            android:textSize="16sp"
+            android:textColor="#fc8a10"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/tv_old"
+                android:layout_width="0dp"
+                android:text="178元"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/tv_buy"
+                android:layout_width="0dp"
+                android:layout_weight="1.2"
+                android:text="立即购买"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@color/orange"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
 

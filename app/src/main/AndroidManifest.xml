@@ -46,7 +46,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <!-- 扫码 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".MyApplication"
@@ -286,10 +286,13 @@
         <activity
             android:name=".activities.ServicePri"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.PersonTaocan"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.TaocanDetailAcitivty"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activities.PersonTaocanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TaocanDetailAcitivty"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.TaocanBuyActivity"></activity>
     </application>
 
 </manifest>

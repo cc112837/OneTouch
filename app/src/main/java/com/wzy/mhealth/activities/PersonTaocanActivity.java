@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -24,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PersonTaocan extends Activity implements AMapLocationListener {
+public class PersonTaocanActivity extends Activity implements AMapLocationListener {
     private ImageView leftBtn;
     private ListView lv_show;
     double lat, log;
@@ -41,11 +40,11 @@ public class PersonTaocan extends Activity implements AMapLocationListener {
 
 
     public void loaction() {
-        mlocationClient = new AMapLocationClient(PersonTaocan.this);
+        mlocationClient = new AMapLocationClient(PersonTaocanActivity.this);
 //初始化定位参数
         mLocationOption = new AMapLocationClientOption();
 //设置定位监听
-        mlocationClient.setLocationListener(PersonTaocan.this);
+        mlocationClient.setLocationListener(PersonTaocanActivity.this);
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         mLocationOption.setInterval(2000);
         mlocationClient.setLocationOption(mLocationOption);
@@ -77,7 +76,7 @@ public class PersonTaocan extends Activity implements AMapLocationListener {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_show = (ListView) findViewById(R.id.lv_show);
         View headview = LayoutInflater.from(this).inflate(R.layout.zhidetail_header, null);
-        list.add(new ZhixingTaocan("入职套餐", 228, 114));
+        list.add(new ZhixingTaocan("入职套餐", 228, 79));
         list.add(new ZhixingTaocan("青年男宾体检套餐", 468, 234));
         list.add(new ZhixingTaocan("青年已婚女宾体检套餐", 713, 357));
         list.add(new ZhixingTaocan("青年未婚女宾体检套餐", 558, 279));
@@ -105,7 +104,7 @@ public class PersonTaocan extends Activity implements AMapLocationListener {
             @Override
             public void onClick(View v) {
                 loaction();
-                Intent intent = new Intent(PersonTaocan.this, GPSNaviActivity.class);
+                Intent intent = new Intent(PersonTaocanActivity.this, GPSNaviActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putDouble("lat", lat);
                 bundle.putDouble("log", log);
@@ -122,7 +121,11 @@ public class PersonTaocan extends Activity implements AMapLocationListener {
         lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(PersonTaocan.this, "您点击了" + list.get(position - 1).getName(), Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(PersonTaocanActivity.this,TaocanDetailAcitivty.class);
+                intent.putExtra("name",list.get(position - 1).getName());
+                intent.putExtra("price",list.get(position-1).getNewprice()+"");
+                intent.putExtra("old",list.get(position-1).getOldprice()+"");
+                startActivity(intent);
             }
         });
         leftBtn.setOnClickListener(new View.OnClickListener() {

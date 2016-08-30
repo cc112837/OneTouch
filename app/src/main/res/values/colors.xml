@@ -46,7 +46,7 @@
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="viewfinder_mask">#60000000</color>
-
+    <color name="orange">#fc6d1b</color>
 
     <color name="yuyue">#234de9</color>
     <color name="entry_blue">#72c0f2</color>
