@@ -10,12 +10,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.snappingstepper.SnappingStepper;
+import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
 
 public class TaocanBuyActivity extends Activity {
     private ImageView leftBtn;
+    private SnappingStepper stepperCustom;
     private Button btn_pay;
     private LinearLayout ll_youhui;
     private PayRadioGroup pay_fun;
@@ -48,9 +51,20 @@ public class TaocanBuyActivity extends Activity {
         ll_youhui = (LinearLayout) findViewById(R.id.ll_youhui);
         tv_name=(TextView) findViewById(R.id.tv_name);
         newid = (TextView) findViewById(R.id.newid);
-        tv_name.setText(name+"");
-        newid.setText(price + "元");
+        stepperCustom=(SnappingStepper) findViewById(R.id.stepperCustom);
+        stepperCustom.setOnValueChangeListener(new SnappingStepperValueChangeListener() {
+            @Override
+            public void onValueChange(View view, int value) {
+                switch (view.getId()) {
+                    case R.id.stepperCustom:
+                       tv_price.setText(Integer.parseInt(price)*value + "元");
+                        break;
+                }
+            }
+        });
         tv_price.setText(price + "元");
+        tv_name.setText(name + "");
+        newid.setText(price + "元");
         pay_fun.setOnCheckedChangeListener(new PayRadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(PayRadioGroup group, int checkedId) {

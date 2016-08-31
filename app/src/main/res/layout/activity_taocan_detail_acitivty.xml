@@ -44,20 +44,29 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="体检套餐深度解析"
+                    android:textColor="@color/black" />
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:scaleType="fitXY"
-                    android:layout_margin="10dp"
-                    android:src="@mipmap/taocan" />
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:scaleType="fitXY"
+                android:layout_margin="10dp"
+                android:src="@mipmap/taocan" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="1、体检接待时间：周一至周六08:00-10：30。周日及国家法定节假日不上班。\n2、体检前3日勿食油腻食物，勿饮酒。体检当日禁食、禁水。\n3、糖尿病、高血压等慢性病患者，请将平时服用的药物携带备用。\n4、有眼压检查项目的人员，请勿佩戴隐形眼镜。\n5、孕妇或准备3个月内受孕的女士不宜进行x光检查.\n6、检查当天不宜穿紧身、连体及有金属、橡胶等饰物的衣物。\n7、妇科检查须知：\n  妇科检查仅限有性生活史的女性。\n  女性月经期不宜做便、尿检查，经期结束后3天可补检。\n  妇科检查前3天不宜进行阴道灌洗及放药治疗。\n检后：\n  1、个人体检报告7个工作日后至3个月内领取。\n  2、团体报告按合同要求送取.\n  3、体检后1个月内可以在网上查询电子报告并打印，查询网址：www.healwis.com\n  4、体检结果咨询请拨打029-68550666转8003."
+                    android:text="套餐预订须知\n    预约时间：为保证预约成功，请您最晚要在体检前1天16：00前预约。\n    预约电话：029-68018969（8:00-21:00） 	\n    营业时间：周一至周六（08:00-10:00）\n     体检地点：西安市莲湖区丰登南路23号建大洋房（丰庆公园西门向北200米路东）\n    体检凭证：体检当天凭借客户端预订成功信息前往前台登记享受体检服务。
+\n体检注意事项\n    体检前：\n      1、体检前一天请您清淡饮食,勿饮酒、勿劳累。体检当天请空腹,禁食。\n      2、体检前一天要注意休息，晚上8点后不再进食。避免剧烈运动和情绪激动，保证充足睡眠，以免影响体检结果。\n      3、例假期间不宜做妇科、尿液检查。\n      4、妊娠期、哺乳期和备孕前3个月的女性；30日内服用过抗生素、铋剂、质子泵抑制剂等HP敏感药物；上消化道急性出血及停止7日内，禁做C-14检查；检查前空腹或禁食至少4-6小时。\n    体检中：\n      1、需空腹检查的项目为抽血、腹部B超、数字胃肠，胃镜及其它标注的体检项目。\n      2、做膀胱、子宫、附件B超时请勿排尿，如无尿需饮水至膀胱充盈。做妇科检查前应排空尿。\n      3、未婚女性不做妇科检查；怀孕的女性请预先告知医护人员,不安排做放射及其他有影响的检查。\n      4、做放射线检查前,请您除去身上佩戴的金银、玉器等饰物。\n      5、核磁共振检查，应禁止佩带首饰、手表、传呼、手机等金属物品，磁卡也不应带入检查室，以防消磁。\n    体检后：\n      1、全部项目完毕后请您务必将体检单交到前台。\n      2、请您认真听取医生的建议,及时复查.随诊或进一步检查治疗。\n      3、请您保存好体检结果，以便和下次体检结果作对照，也可作为您就医时的资料。"
                     android:textColor="@color/dark_grey" />
             </LinearLayout>
         </ScrollView>
@@ -65,37 +74,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:gravity="center"
             android:layout_gravity="bottom"
             android:background="@color/bg_gray"
-            android:orientation="horizontal">
-        <TextView
-            android:id="@+id/tv_new"
-            android:layout_width="0dp"
-            android:text="88元"
-            android:textSize="16sp"
-            android:textColor="#fc8a10"
             android:gravity="center"
-            android:layout_weight="1"
-            android:layout_height="match_parent" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_new"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="88元"
+                android:textColor="#fc8a10"
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tv_old"
                 android:layout_width="0dp"
-                android:text="178元"
-                android:gravity="center"
-                android:textSize="16sp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent" />
+                android:gravity="center"
+                android:text="178元"
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tv_buy"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1.2"
-                android:text="立即购买"
-                android:textSize="17sp"
-                android:gravity="center"
-                android:textColor="@color/white"
                 android:background="@color/orange"
-                android:layout_height="match_parent" />
+                android:gravity="center"
+                android:text="立即购买"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>
