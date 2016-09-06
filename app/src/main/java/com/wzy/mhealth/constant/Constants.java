@@ -1,11 +1,11 @@
 package com.wzy.mhealth.constant;
 
 
-import com.wzy.mhealth.model.User;
 import com.wzy.mhealth.utils.Util;
 
 public class Constants {
-
+	public final static String STEP = "step";
+	public final static String STEPDATE="data";
 	public final static boolean IS_DEBUG = true;
 	public final static String SERVER_HOST = "123.57.191.21";
 	public final static String SERVER_URL = "http://"+SERVER_HOST+":9090/plugins/xmppservice/";
@@ -41,8 +41,6 @@ public class Constants {
 	
 	public static String USER_NAME = "";
 	public static String icon="";
-	public static String PWD = "";
-	public static User loginUser;
 
 
 }

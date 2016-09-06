@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_row_selector"
@@ -8,11 +7,11 @@
 
     <ImageView
         android:id="@+id/pay_icon"
-        android:src="@drawable/ic_alipay_plugin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_centerVertical="true"
-        android:layout_marginRight="12dp" />
+        android:layout_marginRight="12dp"
+        android:src="@drawable/ic_alipay_plugin" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -21,19 +20,34 @@
         android:layout_toRightOf="@id/pay_icon"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/pay_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColor="#ff616660"
-            android:textSize="16.0sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pay_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="支付宝"
+                android:textColor="#ff616660"
+                android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/iv_visi"
+                android:layout_width="54dp"
+                android:visibility="gone"
+                android:layout_height="18dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/recommand" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/pay_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:text="支付支付"
             android:textColor="#ffa3a3a3"
             android:textSize="13.0sp" />
     </LinearLayout>

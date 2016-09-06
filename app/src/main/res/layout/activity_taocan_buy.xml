@@ -181,9 +181,10 @@
             android:background="@drawable/bg_border_selector"
             my:desc="支付银行卡支付，支付更安全"
             my:checked="true"
+            my:visi="true"
             my:logo1="@drawable/ic_alipay_plugin"
             my:radio="@drawable/radio"
-            my:title1="支付宝支付" />
+            my:title1="支付宝" />
         <com.wzy.mhealth.view.PayRadioPurified
             android:id="@+id/bank"
             android:layout_width="fill_parent"

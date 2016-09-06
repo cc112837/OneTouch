@@ -6,6 +6,7 @@
         <attr name="logo1" format="reference|color" />
         <attr name="desc" format="reference|string" />
         <attr name="checked" format="boolean" />
+        <attr name="visi" format="boolean" />
         <attr name="radio" format="reference" />
     </declare-styleable>
     

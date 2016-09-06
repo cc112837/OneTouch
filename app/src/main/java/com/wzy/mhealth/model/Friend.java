@@ -7,8 +7,47 @@ public class Friend {
 	public String userHead;
 	public String mood;
 	public boolean isChose;
-	
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUserHead() {
+		return userHead;
+	}
+
+	public void setUserHead(String userHead) {
+		this.userHead = userHead;
+	}
+
+	public String getMood() {
+		return mood;
+	}
+
+	public void setMood(String mood) {
+		this.mood = mood;
+	}
+
+	public boolean isChose() {
+		return isChose;
+	}
+
+	public void setIsChose(boolean isChose) {
+		this.isChose = isChose;
+	}
+
 	public Friend(String username) {
 		super();
 		this.username = username;

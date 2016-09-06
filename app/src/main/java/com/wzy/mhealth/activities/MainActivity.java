@@ -24,7 +24,7 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.fragments.ChangeFragmentHelper;
 import com.wzy.mhealth.fragments.FriendFragment;
-import com.wzy.mhealth.fragments.HomeFragment;
+import com.wzy.mhealth.fragments.HomeNewFragment;
 import com.wzy.mhealth.fragments.MyFragment;
 import com.wzy.mhealth.fragments.NewsFragment;
 
@@ -38,9 +38,19 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton main_my;
     private RadioButton main_news;
     private Fragment fragment;
-    private TextView  countView;
+    private TextView countView;
+    private RadioGroup main_tabBar;
+
+    public RadioGroup getMain_tabBar() {
+        return main_tabBar;
+    }
+
+    public void setMain_tabBar(RadioGroup main_tabBar) {
+        this.main_tabBar = main_tabBar;
+    }
 
     private ConversationManager conversationManager = ConversationManager.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         FeedbackAgent agent = new FeedbackAgent(this);
         agent.sync();
         CacheService.registerUser(AVUser.getCurrentUser(LeanchatUser.class));
-        Fragment fragment = new HomeFragment();
+        Fragment fragment = new HomeNewFragment();
 
         ChangeFragmentHelper helper = new ChangeFragmentHelper();
         helper.setTargetFragment(fragment);
@@ -60,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         updateCount();
     }
+
     private void hideStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
@@ -71,22 +82,23 @@ public class MainActivity extends AppCompatActivity {
         attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
         getWindow().setAttributes(attrs);
     }
+
     private void initView() {
         FrameLayout main_container = ((FrameLayout) findViewById(R.id.main_container));
         countView = (TextView) findViewById(R.id.countView);
-        RadioGroup main_tabBar = ((RadioGroup) findViewById(R.id.main_tabBar));
+        main_tabBar = ((RadioGroup) findViewById(R.id.main_tabBar));
         main_tabBar.check(R.id.main_home);
         fragment = null;
-        main_home=(RadioButton) findViewById(R.id.main_home);
-        main_friend=(RadioButton) findViewById(R.id.main_friend);
-        main_my=(RadioButton) findViewById(R.id.main_my);
-        main_news=(RadioButton) findViewById(R.id.main_news);
+        main_home = (RadioButton) findViewById(R.id.main_home);
+        main_friend = (RadioButton) findViewById(R.id.main_friend);
+        main_my = (RadioButton) findViewById(R.id.main_my);
+        main_news = (RadioButton) findViewById(R.id.main_news);
         main_tabBar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.main_home:
-                        fragment = new HomeFragment();
+                        fragment = new HomeNewFragment();
                         break;
                     case R.id.main_news:
                         fragment = new NewsFragment();
@@ -107,13 +119,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         AVAnalytics.onResume(this);
         updateCount();
@@ -123,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     public void onEvent(ImTypeMessageEvent event) {
         updateCount();
     }
+
     public void updateCount() {
         conversationManager.findAndCacheRooms(new Room.MultiRoomsCallback() {
             @Override
@@ -142,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void changeFragment(ChangeFragmentHelper helper) {
 
         //获取需要跳转的Fragment
@@ -177,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.commit();
     }
+
     protected void onPause() {
         super.onPause();
         AVAnalytics.onPause(this);

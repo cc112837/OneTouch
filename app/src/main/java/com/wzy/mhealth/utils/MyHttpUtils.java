@@ -7,13 +7,16 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.wzy.mhealth.model.Conclusion;
-import com.wzy.mhealth.model.NoHuaRecord;
+import com.wzy.mhealth.model.Friend;
+import com.wzy.mhealth.model.HuaYanRecord;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.model.ItemInfo;
 import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.NewsYang;
-import com.wzy.mhealth.model.HuaYanRecord;
+import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.Record;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.StepResult;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
 
@@ -73,6 +76,18 @@ public class MyHttpUtils extends HttpUtils{
       if(what==23){
           sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
 
+      }
+      if (what==112){
+          Friend user=(Friend)object;
+          params.addBodyParameter("userName",user.getUsername());
+          params.addBodyParameter("stepNum",user.getId());
+          params.addBodyParameter("stepTime",user.getMood());
+          sendData(HttpRequest.HttpMethod.POST,url,params,new MyCallBack(new StepInfo(), handler, what));
+      }
+      if (what==113){
+          StepInfo user=(StepInfo)object;
+          params.addBodyParameter("userName",user.getData());
+          sendData(HttpRequest.HttpMethod.POST,url,params,new MyCallBack(new StepResult(), handler, what));
       }
   }
 }

@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.LeanChat.util.PathUtils;
 import com.wzy.mhealth.LeanChat.util.PhotoUtils;
+import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.AboutActivity;
 import com.wzy.mhealth.activities.BarCodeActivity;
@@ -42,8 +46,12 @@ import com.wzy.mhealth.activities.ManageActivity;
 import com.wzy.mhealth.activities.NotiNewsActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Friend;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.StepResult;
 import com.wzy.mhealth.utils.CacheUtils;
 import com.wzy.mhealth.utils.MyAndroidUtil;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +75,25 @@ public class MyFragment extends D3Fragment {
     String iconUrl;
     String dateTime;
     private AlertDialog avatarDialog;
-
+private Handler handler=new Handler(){
+    @Override
+    public void handleMessage(Message msg) {
+        switch (msg.what){
+            case 112:
+                StepInfo stepInfo=(StepInfo)msg.obj;
+                Log.e("上传结果", stepInfo.getData());
+                String uri = "http://xtt123456789.bj.cdnjsp.com.cn/servlet/StepQueryServlet";
+                StepInfo stepInf=new StepInfo();
+                stepInfo.setData(LeanchatUser.getCurrentUser().getUsername());
+                MyHttpUtils.handData(handler, 113, uri, stepInf);
+                break;
+            case 113:
+                StepResult stepResult=(StepResult)msg.obj;
+                Log.e("查询结果", stepResult.getData().toString());
+                break;
+        }
+    }
+};
     private ChatManager chatManager = ChatManager.getInstance();
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -146,7 +172,6 @@ public class MyFragment extends D3Fragment {
         fankui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/4/26  用户反馈界面
                 FeedbackAgent agent = new FeedbackAgent(getActivity());
                 agent.startDefaultThreadActivity();
             }
@@ -206,7 +231,6 @@ public class MyFragment extends D3Fragment {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/1/28
                 showShare();
             }
         });
@@ -214,6 +238,13 @@ public class MyFragment extends D3Fragment {
             @Override
             public void onClick(View v) {
                 // TODO: 2016/7/8 我的计步 家人健康FamilyHealthActivity
+                String nowstep = MyApplication.sharedPreferences.getString(Constants.STEP,
+                        null);
+                String time = MyApplication.sharedPreferences.getString(Constants.STEPDATE,
+                        null);
+                String url="http://xtt123456789.bj.cdnjsp.com.cn/servlet/StepServlet";
+                Friend friend=new Friend(nowstep, LeanchatUser.getCurrentUser().getUsername(),time);
+                MyHttpUtils.handData(handler, 112, url, friend);
                 Intent intent = new Intent(getActivity(), StepCountActivity.class);
                 startActivity(intent);
             }
