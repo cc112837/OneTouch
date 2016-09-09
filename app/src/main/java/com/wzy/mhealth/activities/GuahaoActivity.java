@@ -101,7 +101,6 @@ public class GuahaoActivity extends BaActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("返回数据了", data + "***" + requestCode + "&&&&" + resultCode);
         if (requestCode == CODE && resultCode == CODE) {
             guahaoActivity.names = (HospitalEntity) data.getSerializableExtra("name");
             String flag = data.getStringExtra("flag");

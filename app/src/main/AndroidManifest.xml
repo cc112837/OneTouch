@@ -155,12 +155,6 @@
         <activity
             android:name=".activities.NotiNewsActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.FamilyHealthActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.AddFamilyHealthActivity"
-            android:screenOrientation="portrait" />
 
         <service android:name=".service.PedometerService" />
         <service android:name=".service.StepCounterService" />
@@ -267,9 +261,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.FriendDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.ZhiXingActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.MyYuyueActivity"

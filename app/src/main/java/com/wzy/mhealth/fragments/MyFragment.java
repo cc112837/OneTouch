@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,7 +78,6 @@ public class MyFragment extends D3Fragment {
             switch (msg.what) {
                 case 31:
                     StepInfo stepInfo1 = (StepInfo) msg.obj;
-                    Log.e("上传结果1", stepInfo1.getData());
                     if(stepInfo1.getStatus().equals("1")||stepInfo1.getStatus().equals("2")){
                         Intent intent = new Intent(getActivity(), StepCountActivity.class);
                     startActivity(intent);

@@ -35,7 +35,6 @@ import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.RouteActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.YuyueListActivity;
-import com.wzy.mhealth.activities.ZhiXingActivity;
 import com.wzy.mhealth.activities.ZixunActivity;
 import com.wzy.mhealth.view.LocalImageHolderView;
 import com.wzy.mhealth.view.MyScrollView;
@@ -156,15 +155,7 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        rb_quike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //智行体检
-                Intent intent = new Intent(getActivity(), ZhiXingActivity.class);
-                startActivity(intent);
 
-            }
-        });
         menzhen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

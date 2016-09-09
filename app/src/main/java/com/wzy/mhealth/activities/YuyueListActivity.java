@@ -24,7 +24,7 @@ public class YuyueListActivity extends BaActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yuyue_list);
 
-        yuyueDoctorList = new ArrayList<YuyueDoctor>();
+        yuyueDoctorList = new ArrayList<>();
         init();
         list = (ListView) findViewById(R.id.yuyueList);
         adapter = new YuyueAdapter(this, yuyueDoctorList);
@@ -50,7 +50,6 @@ public class YuyueListActivity extends BaActivity {
 
     private void init() {
         yuyueDoctorList.addAll(XmppConnection.getInstance().getOwnGuahaoInfo());
-
     }
 
 }

@@ -19,6 +19,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.DoctorListAdapter;
 import com.wzy.mhealth.adapter.LocationAdapter;
 import com.wzy.mhealth.adapter.ProvinceAdapter;
+import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.DoctorEntity;
 
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class DoctorListActivity extends BaActivity {
 
     private void init() {
 // TODO: 2016/5/25 (修改成无网络)
-        //doctorlist.addAll(XmppConnection.getInstance().getDoctorListBykeshi(keshi));
+        doctorlist.addAll(XmppConnection.getInstance().getDoctorListBykeshi(keshi));
         doctorlist.add(new DoctorEntity("邓珊","liao","内科", "主任医师",
                 "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","5","5","15","9.2"));
         doctorlist.add(new DoctorEntity("李芳","long", "内科", "主任医师",

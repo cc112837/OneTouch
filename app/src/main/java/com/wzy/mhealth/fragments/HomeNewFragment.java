@@ -318,8 +318,10 @@ public class HomeNewFragment extends Fragment {
     public void setContent(View v){
         TextView tv_name=(TextView)v.findViewById(R.id.tv_name);
         TextView tv_pre=(TextView)v.findViewById(R.id.tv_pre);
+        TextView tv_hos=(TextView) v.findViewById(R.id.tv_hosi);
         tv_name.setText("邓珊");
-        tv_pre.setText("内科");
+        tv_pre.setText("主任医生");
+        tv_hos.setText("内科");
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

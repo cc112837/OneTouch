@@ -13,7 +13,7 @@
          android:layout_weight="1"
          android:layout_marginTop="10dp"
          android:layout_marginBottom="10dp"
-        android:src="@mipmap/doctor1" />
+        android:src="@mipmap/doctor_man" />
 
     <LinearLayout
         android:layout_width="wrap_content"
