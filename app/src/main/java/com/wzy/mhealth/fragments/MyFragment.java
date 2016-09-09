@@ -36,7 +36,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.LeanChat.util.PathUtils;
 import com.wzy.mhealth.LeanChat.util.PhotoUtils;
-import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.AboutActivity;
 import com.wzy.mhealth.activities.BarCodeActivity;
@@ -46,9 +45,8 @@ import com.wzy.mhealth.activities.ManageActivity;
 import com.wzy.mhealth.activities.NotiNewsActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.Friend;
 import com.wzy.mhealth.model.StepInfo;
-import com.wzy.mhealth.model.StepResult;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.CacheUtils;
 import com.wzy.mhealth.utils.MyAndroidUtil;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -70,31 +68,28 @@ public class MyFragment extends D3Fragment {
 
     RelativeLayout logout, account, manager, erweima, noti_news, secret, normal, about, familyHealth;
     TextView username;
-    LinearLayout about1,cache, fankui;
+    LinearLayout about1, cache, fankui;
     ImageView headImage;
     String iconUrl;
     String dateTime;
     private AlertDialog avatarDialog;
-private Handler handler=new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what){
-            case 112:
-                StepInfo stepInfo=(StepInfo)msg.obj;
-                Log.e("上传结果", stepInfo.getData());
-                String uri = "http://xtt123456789.bj.cdnjsp.com.cn/servlet/StepQueryServlet";
-                StepInfo stepInf=new StepInfo();
-                stepInfo.setData(LeanchatUser.getCurrentUser().getUsername());
-                MyHttpUtils.handData(handler, 113, uri, stepInf);
-                break;
-            case 113:
-                StepResult stepResult=(StepResult)msg.obj;
-                Log.e("查询结果", stepResult.getData().toString());
-                break;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 31:
+                    StepInfo stepInfo1 = (StepInfo) msg.obj;
+                    Log.e("上传结果1", stepInfo1.getData());
+                    if(stepInfo1.getStatus().equals("1")||stepInfo1.getStatus().equals("2")){
+                        Intent intent = new Intent(getActivity(), StepCountActivity.class);
+                    startActivity(intent);
+                    }
+                    break;
+            }
         }
-    }
-};
+    };
     private ChatManager chatManager = ChatManager.getInstance();
+
     public void onAttach(Activity activity) {
         super.onAttach(activity);
     }
@@ -114,7 +109,7 @@ private Handler handler=new Handler(){
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
-        cache=(LinearLayout) view.findViewById(R.id.cache);
+        cache = (LinearLayout) view.findViewById(R.id.cache);
         about1 = (LinearLayout) view.findViewById(R.id.about1);
         fankui = (LinearLayout) view.findViewById(R.id.fankui);
         logout = (RelativeLayout) view.findViewById(R.id.logout);
@@ -179,7 +174,7 @@ private Handler handler=new Handler(){
         cache.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"清除缓存",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "清除缓存", Toast.LENGTH_LONG).show();
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -238,15 +233,11 @@ private Handler handler=new Handler(){
             @Override
             public void onClick(View v) {
                 // TODO: 2016/7/8 我的计步 家人健康FamilyHealthActivity
-                String nowstep = MyApplication.sharedPreferences.getString(Constants.STEP,
-                        null);
-                String time = MyApplication.sharedPreferences.getString(Constants.STEPDATE,
-                        null);
-                String url="http://xtt123456789.bj.cdnjsp.com.cn/servlet/StepServlet";
-                Friend friend=new Friend(nowstep, LeanchatUser.getCurrentUser().getUsername(),time);
-                MyHttpUtils.handData(handler, 112, url, friend);
-                Intent intent = new Intent(getActivity(), StepCountActivity.class);
-                startActivity(intent);
+                TiUser step = new TiUser();
+                step.setName(LeanchatUser.getCurrentUser().getUsername());
+                String ul = "http://117.34.105.29:8209/mhealth/servlet/MhealthUserStepServlet";
+                MyHttpUtils.handData(handler, 31, ul, step);
+
             }
         });
         return view;

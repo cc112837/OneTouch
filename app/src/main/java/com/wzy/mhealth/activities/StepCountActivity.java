@@ -2,24 +2,26 @@ package com.wzy.mhealth.activities;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.LegendRenderer;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Friend;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.StepResult;
 import com.wzy.mhealth.service.StepCounterService;
 import com.wzy.mhealth.utils.MyAndroidUtil;
+import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.view.LineView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,11 +33,11 @@ import me.pedometer.StepDetector;
 public class StepCountActivity extends BaActivity {
     private ImageView leftBtn_back;
     private ColorfulRingProgressView crpv;
-    private TextView stepTv;
-    private GraphView linechart;
+    private TextView stepTv,tv_today;
     private Thread thread;  //定义线程对象
     private ArrayList<HashMap<String, String>> list;
     int step;
+    LineView mLineView;
     String time;
     private int total_step = 0;   //走的总步数
 
@@ -44,26 +46,25 @@ public class StepCountActivity extends BaActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_count);
         init();
+        time = MyApplication.sharedPreferences.getString(Constants.STEPDATE,
+                null);
         String nowstep = MyApplication.sharedPreferences.getString(Constants.STEP,
                 null);
         if (nowstep != null)
             step = Integer.parseInt(nowstep);
-        time = MyApplication.sharedPreferences.getString(Constants.STEPDATE,
-                null);
-        if (!getTime().equals(time)) {
+        if (!getTime().equals(time)||time==null) {
             step = 0;
             StepDetector.CURRENT_STEP = 0;
         }
-        aboutChart();
         stepTv.setText(step + "");// 显示当前步数
         crpv.setPercent((step) / 10);
         initThreadToPedometer();
         startService(new Intent(StepCountActivity.this, StepCounterService.class));
-
-
     }
 
     private void init() {
+        addView();
+        aboutLine();
         leftBtn_back = (ImageView) findViewById(R.id.leftBtn_back);
         leftBtn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,33 +72,28 @@ public class StepCountActivity extends BaActivity {
                 finish();
             }
         });
-        linechart = (GraphView) findViewById(R.id.linechart);
         crpv = (ColorfulRingProgressView) findViewById(R.id.crpv);
         stepTv = (TextView) findViewById(R.id.activity_main_step_tv);
+        tv_today=(TextView)findViewById(R.id.tv_today);
+
     }
 
-
-    private void aboutChart() {
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(1, 0),
-                new DataPoint(2, 0),
-                new DataPoint(3, 0),
-                new DataPoint(4, 0),
-                new DataPoint(5, 0),
-                new DataPoint(6, 0),
-                new DataPoint(7, 0)
-        });
-        linechart.addSeries(series);
-        linechart.getLegendRenderer().setTextColor(Color.WHITE);
-        // style
-        series.setColor(Color.rgb(191, 226, 226));
-        series.setThickness(2);
-        // legend
-        series.setTitle("步数");
-        linechart.getLegendRenderer().setVisible(true);
-        linechart.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.MIDDLE);
-
-
+    private View addView() {
+        // TODO 动态添加布局(java方式)
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout view=(LinearLayout) findViewById(R.id.ll_view);
+        view.setLayoutParams(lp);//设置布局参数
+        view.setOrientation(LinearLayout.HORIZONTAL);// 设置子View的Linearlayout// 为垂直方向布局
+        mLineView=new LineView(StepCountActivity.this);
+        view.addView(mLineView);//将TextView 添加到子View 中
+        return view;
+    }
+    private void aboutLine() {
+        String uri = "http://117.34.105.29:8209/mhealth/servlet/StepQueryServlet";
+        StepInfo stepInf = new StepInfo();
+        stepInf.setData(LeanchatUser.getCurrentUser().getUsername());
+        MyHttpUtils.handData(handler, 113, uri, stepInf);
     }
 
 
@@ -120,6 +116,7 @@ public class StepCountActivity extends BaActivity {
                         }
                         if (StepCounterService.FLAG) {
                             Message msg = new Message();
+                            msg.what=50;
                             if (temp != StepDetector.CURRENT_STEP) {
                                 temp = StepDetector.CURRENT_STEP;
                             }
@@ -135,10 +132,35 @@ public class StepCountActivity extends BaActivity {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);// 此处可以更新UI
-            countStep();          //调用步数方法
-            stepTv.setText(total_step + step + "");// 显示当前步数
-            crpv.setPercent((total_step + step) / 10);
+            switch (msg.what){
+                case 113:
+                    StepResult stepResult = (StepResult) msg.obj;
+                    String[] xvalue,stepvalue;
+                    xvalue=new String[200];
+                    stepvalue=new String[200];
+                    for (int i=0;i<stepResult.getData().size();i++){
+                        xvalue[i]=stepResult.getData().get(i).getWeek();
+                        stepvalue[i]=stepResult.getData().get(i).getStepNum();
+                    }
+                    mLineView.SetInfo(
+                           xvalue,   //X轴刻度
+                            new String[]{"", "2000", "4000", "6000", "8000","10000"},   //Y轴刻度
+                           stepvalue,  //数据
+                            "计步结果"
+                    );
+                    break;
+                case 50:
+                    super.handleMessage(msg);// 此处可以更新UI
+                    countStep();          //调用步数方法
+                    stepTv.setText(total_step + step + "");// 显示当前步数
+                    tv_today.setText("步数"+(total_step + step));
+                    crpv.setPercent((total_step + step) / 10);
+                    break;
+                case 112:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    break;
+            }
+
         }
     };
 
@@ -153,11 +175,22 @@ public class StepCountActivity extends BaActivity {
 
 
     private String getTime() {
-        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
         String nowdata = sf.format(new Date());
         return nowdata;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String nowstep = MyApplication.sharedPreferences.getString(Constants.STEP,
+                null);
+        String time = MyApplication.sharedPreferences.getString(Constants.STEPDATE,
+                null);
+        String url = "http://117.34.105.29:8209/mhealth/servlet/StepServlet";
+        Friend friend = new Friend(nowstep, LeanchatUser.getCurrentUser().getUsername(), time);
+        MyHttpUtils.handData(handler, 112, url, friend);
+    }
 
     @Override
     protected void onDestroy() {

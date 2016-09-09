@@ -1,6 +1,7 @@
 package com.wzy.mhealth.utils;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -75,14 +76,18 @@ public class MyHttpUtils extends HttpUtils{
       }
       if(what==23){
           sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
-
+      }
+      if(what==31){
+          TiUser step=(TiUser)object;
+          params.addBodyParameter("userName",step.getName());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
       }
       if (what==112){
           Friend user=(Friend)object;
           params.addBodyParameter("userName",user.getUsername());
           params.addBodyParameter("stepNum",user.getId());
-          params.addBodyParameter("stepTime",user.getMood());
-          sendData(HttpRequest.HttpMethod.POST,url,params,new MyCallBack(new StepInfo(), handler, what));
+          params.addBodyParameter("stepTime", user.getMood());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
       }
       if (what==113){
           StepInfo user=(StepInfo)object;

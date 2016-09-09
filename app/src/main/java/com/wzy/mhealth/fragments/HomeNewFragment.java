@@ -29,6 +29,7 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
+import com.wzy.mhealth.activities.DoctorDetailActivity;
 import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.JiBingActivity;
 import com.wzy.mhealth.activities.MainActivity;
@@ -41,6 +42,7 @@ import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.TijianRecordActivity;
 import com.wzy.mhealth.activities.TijianYueActivity;
 import com.wzy.mhealth.adapter.NewsItemAdapter;
+import com.wzy.mhealth.model.DoctorEntity;
 import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.LocalImageHolderView;
@@ -64,6 +66,8 @@ public class HomeNewFragment extends Fragment {
     private List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list;
     private NewsItemAdapter adapter;
     private MyScrollView my_scroll;
+    private View ll_doc1,ll_doc2,ll_doc3,ll_doc4;
+    private List<DoctorEntity> doctorlist;
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -139,6 +143,21 @@ public class HomeNewFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        ll_doc1=headview.findViewById(R.id.ll_doc1);
+        ll_doc2=headview.findViewById(R.id.ll_doc2);
+        ll_doc3=headview.findViewById(R.id.ll_doc3);
+        ll_doc4=headview.findViewById(R.id.ll_doc4);
+        setContent(ll_doc1);
+        setContent(ll_doc2);
+        setContent(ll_doc3);
+        setContent(ll_doc4);
+        doctorlist = new ArrayList<>();
+        doctorlist.add(new DoctorEntity("邓珊", "liao", "内科", "主任医师",
+                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺", "5", "5", "15", "9.2"));
+        setClickView(ll_doc4);
+        setClickView(ll_doc3);
+        setClickView(ll_doc2);
+        setClickView(ll_doc1);
         LinearLayout ll_record = (LinearLayout) headview.findViewById(R.id.ll_record);
         ll_record.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,8 +302,25 @@ public class HomeNewFragment extends Fragment {
         });
 
     }
-
-
+   public  void  setClickView(View v){
+       v.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent();
+               intent.setClass(getActivity(), DoctorDetailActivity.class);
+               Bundle bundle = new Bundle();
+               bundle.putSerializable("doctor", doctorlist.get(0));
+               intent.putExtras(bundle);
+               startActivity(intent);
+           }
+       });
+   }
+    public void setContent(View v){
+        TextView tv_name=(TextView)v.findViewById(R.id.tv_name);
+        TextView tv_pre=(TextView)v.findViewById(R.id.tv_pre);
+        tv_name.setText("邓珊");
+        tv_pre.setText("内科");
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 

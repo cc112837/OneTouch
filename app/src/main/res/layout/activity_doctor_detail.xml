@@ -53,7 +53,7 @@
                     android:layout_height="60dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
-                    android:background="@mipmap/doctor1"
+                    android:background="@mipmap/doctor_women"
                     android:scaleType="fitXY" />
 
                 <LinearLayout
@@ -154,6 +154,7 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:layout_marginTop="7dp"
                         android:id="@+id/tuwen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -167,7 +168,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="6dp"
                         android:background="@mipmap/tuwen_green"
                         android:scaleType="fitXY" />
 
@@ -195,6 +196,7 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:layout_marginTop="7dp"
                         android:id="@+id/dianhua"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -208,7 +210,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="6dp"
                         android:scaleType="fitXY"
                         android:src="@mipmap/phone_green" />
 
@@ -237,6 +239,7 @@
 
                     <TextView
                         android:id="@+id/jiahao"
+                        android:layout_marginTop="7dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -249,7 +252,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="6dp"
                         android:background="@mipmap/add_green"
                         android:scaleType="fitXY" />
 
@@ -281,6 +284,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="私人"
+                        android:layout_marginTop="7dp"
                         android:textColor="#666666"
                         android:textSize="13sp" />
 
@@ -289,7 +293,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="6dp"
                         android:background="@mipmap/private_green"
                         android:scaleType="fitXY" />
 
@@ -321,6 +325,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="视频"
+                        android:layout_marginTop="7dp"
                         android:textColor="#666666"
                         android:textSize="13sp" />
 
@@ -328,7 +333,7 @@
                         android:id="@+id/vediotu"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_margin="10dp"
+                        android:layout_margin="6dp"
                         android:layout_gravity="center"
                         android:background="@mipmap/vedio_green"
                         android:scaleType="fitXY" />

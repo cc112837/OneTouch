@@ -46,7 +46,6 @@ dependencies {
     compile files('libs/AMap_Services_V2.7.0_20151125.jar')
     compile files('libs/Msc.jar')
     compile 'com.bigkoo:snappingstepper:1.0.2'
-    compile 'com.android.support:design:23.1.1'
     compile project(':Steplibrary')
     compile files('libs/UPPayAssistEx.jar')
     compile files('libs/UPPayPluginExPro.jar')

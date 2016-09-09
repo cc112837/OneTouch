@@ -39,7 +39,7 @@ public class DoctorDetailActivity extends BaActivity {
         setContentView(R.layout.activity_doctor_detail);
         Intent intent = getIntent();
         doctor = (DoctorEntity) intent.getSerializableExtra("doctor");
-        userEvaluationList = new ArrayList<UserEvaluation>();
+        userEvaluationList = new ArrayList<>();
 
         init();
         guanzhuTextView = (TextView) findViewById(R.id.guanzhu);
