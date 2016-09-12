@@ -21,8 +21,8 @@ public class TaocanDetail {
      */
 
     private int id;
-    private int oldPrice;
-    private int newPrice;
+    private double oldPrice;
+    private double newPrice;
     private String name;
     private String context;
 
@@ -50,11 +50,11 @@ public class TaocanDetail {
         return id;
     }
 
-    public int getOldPrice() {
+    public double getOldPrice() {
         return oldPrice;
     }
 
-    public int getNewPrice() {
+    public double getNewPrice() {
         return newPrice;
     }
 

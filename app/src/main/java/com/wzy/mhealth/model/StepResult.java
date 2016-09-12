@@ -14,10 +14,11 @@ import java.util.List;
  */
 public class StepResult {
 
+
     /**
-     * userName : xiaowang
-     * stepNum : 234
-     * stepTime : 2016.9.7
+     * stepNum : 0
+     * time : 2016-09-06
+     * userName : 18369956786
      */
 
     private List<DataEntity> data;
@@ -31,32 +32,32 @@ public class StepResult {
     }
 
     public static class DataEntity {
-        private String userName;
         private int stepNum;
-        private String stepTime;
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
+        private String time;
+        private String userName;
 
         public void setStepNum(int stepNum) {
             this.stepNum = stepNum;
         }
 
-        public void setStepTime(String stepTime) {
-            this.stepTime = stepTime;
+        public void setTime(String time) {
+            this.time = time;
         }
 
-        public String getUserName() {
-            return userName;
+        public void setUserName(String userName) {
+            this.userName = userName;
         }
 
         public int getStepNum() {
             return stepNum;
         }
 
-        public String getStepTime() {
-            return stepTime;
+        public String getTime() {
+            return time;
+        }
+
+        public String getUserName() {
+            return userName;
         }
     }
 }

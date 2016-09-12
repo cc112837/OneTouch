@@ -23,8 +23,11 @@ import com.bigkoo.snappingstepper.SnappingStepper;
 import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
 import com.unionpay.UPPayAssistEx;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.ali.OrderInfoUtil2_0;
 import com.wzy.mhealth.ali.PayResult;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.AliPayBack;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
 
@@ -46,27 +49,13 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
     private PayRadioGroup pay_fun;
     private PayRadioPurified bank, alipay;
     private TextView tv_price, newid, tv_name;
-    private String name, price, old;
+    private String name, price, old,id;
     private Context mContext = null;
     private Handler mHandler = null;
+    int number=1;
     private ProgressDialog mLoadingDialog = null;
     private static final int SDK_ALIPAY_FLAG = 1;
     private static final int SDK_UNIONPAY_FLAG = 2;
-    public static final String APPID = "2016090301842431";
-    public static final String RSA_PRIVATE = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANCa6QB3QyZrFDYD" +
-            "7NohPtL0qzNoYt1ZrXsURd7npgPqdeWm8L0fb1rzL0MMU82F51c4gK8e2h99aIfF" +
-            "q9z3DcOciJ9vU7M+byDhaRryM+i96nM3ZObQn1fhdT6l1dpayPiiQP8Lwv8771Bc" +
-            "abwISpC5SGW6vcVzr4o+egBBOnjXAgMBAAECgYAg7aMEAM9nvBVXpWz4zbCmChsQ" +
-            "JVUdza8Vs5CH7BcHnTX5B04O/GxOdf6q3cJIue9XlEKz4fHacKhUbj5/xbu1MOks" +
-            "OWJonqLzpFcRIfKKQ3amNQgzcZu+S2WTFpgedgS555FFM7aFwMgOUTGrwmZq4ArD" +
-            "RXtfEq7ffDlTucXEcQJBAPRq7SYKgX1byN2IIMBxTt0Ga2P2p3htHozXICLAKp3W" +
-            "pAfvCv515jssDv/ilPEb0rKrkpQE5076Oe69LBeFz98CQQDafYkLk+2Nan5EAOm8" +
-            "3fDDMoiprHKfm/eThp98P+b34zZhX+p5vv4+qGc3jq08/ZCOOyTCIzBMsxUXXstT" +
-            "dxYJAkBi8U4jEimtN5SuqUao4LWOH+UlSFovE+1EEmn951DZKGSqmYgXzl5vIbzI" +
-            "tU6Z9CttDKt/pCSHAiCllorc0tx9AkEAzcPcBONTnRLlxvV1K0F5NNuqiOC3MkmY" +
-            "Z38pQ8KKqnl5BUtnbzDIEApY6qGb1QyXzts0SwEIw7MD8fZ8ViaYwQJBALm1kTLr" +
-            "13WcJUCZXO1O+B7JrPtvVcmKjfp8LSa31gBWEur61NlNGtKvs57pnUHfuSU1bdnO" +
-            "Y/LgSGTh1DeiAOk=";
     /*****************************************************************
      * mMode参数解释： "00" - 启动银联正式环境 "01" - 连接银联测试环境
      *****************************************************************/
@@ -77,38 +66,26 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
         @Override
         public void onClick(View v) {
             if (flag == "bank") {
-                if (TextUtils.isEmpty(APPID) || TextUtils.isEmpty(RSA_PRIVATE)) {
-                    new AlertDialog.Builder(TaocanBuyActivity.this).setTitle("警告").setMessage("需要配置APPID | RSA_PRIVATE")
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialoginterface, int i) {
-                                    //
-                                    finish();
-                                }
-                            }).show();
-                    return;
-                }
-                Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID);
-                String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-                String sign = OrderInfoUtil2_0.getSign(params, RSA_PRIVATE);
-                final String orderInfo = orderParam + "&" + sign;
+//                if (TextUtils.isEmpty(APPID) || TextUtils.isEmpty(RSA_PRIVATE)) {
+//                    new AlertDialog.Builder(TaocanBuyActivity.this).setTitle("警告").setMessage("需要配置APPID | RSA_PRIVATE")
+//                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialoginterface, int i) {
+//                                    //
+//                                    finish();
+//                                }
+//                            }).show();
+//                    return;
+//                }
+//                Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID);
+//                String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
+//                String sign = OrderInfoUtil2_0.getSign(params, RSA_PRIVATE);
+//                final String orderInfo = orderParam + "&" + sign;
+                String url= Constants.SERVER_URL+"AliPayServlet";
+                TiUser user=new TiUser();
+                user.setName(id);
+                user.setCardId(number+"");
+                MyHttpUtils.handData(mHandler, 40, url, user);
 
-                Runnable payRunnable = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        PayTask alipay = new PayTask(TaocanBuyActivity.this);
-                        Map<String, String> result = alipay.payV2(orderInfo, true);
-                        Log.i("msp", result.toString());
-
-                        Message msg = new Message();
-                        msg.what = SDK_ALIPAY_FLAG;
-                        msg.obj = result;
-                        mHandler.sendMessage(msg);
-                    }
-                };
-
-                Thread payThread = new Thread(payRunnable);
-                payThread.start();
             } else {
                 mLoadingDialog = ProgressDialog.show(mContext, // context
                         "", // title
@@ -136,6 +113,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
         name = intent.getStringExtra("name");
         price = intent.getStringExtra("price");
         old = intent.getStringExtra("old");
+        id=intent.getStringExtra("id");
         init();
     }
 
@@ -160,6 +138,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
             public void onValueChange(View view, int value) {
                 switch (view.getId()) {
                     case R.id.stepperCustom:
+                        number=value;
                         tv_price.setText(Integer.parseInt(price) * value + "元");
                         break;
                 }
@@ -222,6 +201,27 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                      ************************************************/
                     doStartUnionPayPlugin(this, tn, mMode);
                 }
+                break;
+            case 40:
+                AliPayBack stepInfo=(AliPayBack) msg.obj;
+                final String orderInfo=stepInfo.getData();
+                Log.e("qinming",orderInfo);
+                Runnable payRunnable = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        PayTask alipay = new PayTask(TaocanBuyActivity.this);
+                        Map<String, String> result = alipay.payV2(orderInfo, true);
+                        Log.i("msp", result.toString());
+                        Message msg = new Message();
+                        msg.what = SDK_ALIPAY_FLAG;
+                        msg.obj = result;
+                        mHandler.sendMessage(msg);
+                    }
+                };
+
+                Thread payThread = new Thread(payRunnable);
+                payThread.start();
                 break;
             case SDK_ALIPAY_FLAG:
                 PayResult payResult = new PayResult((Map<String, String>) msg.obj);

@@ -233,7 +233,7 @@ public class MyFragment extends D3Fragment {
                 // TODO: 2016/7/8 我的计步 家人健康FamilyHealthActivity
                 TiUser step = new TiUser();
                 step.setName(LeanchatUser.getCurrentUser().getUsername());
-                String ul = "http://117.34.105.29:8209/mhealth/servlet/MhealthUserStepServlet";
+                String ul = Constants.SERVER_URL+"StepNumInitServlet";
                 MyHttpUtils.handData(handler, 31, ul, step);
 
             }

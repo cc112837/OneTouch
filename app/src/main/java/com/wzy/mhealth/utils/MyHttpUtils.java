@@ -6,6 +6,7 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.model.Friend;
 import com.wzy.mhealth.model.HuaYanRecord;
@@ -82,6 +83,13 @@ public class MyHttpUtils extends HttpUtils{
           TiUser step=(TiUser)object;
           params.addBodyParameter("userName",step.getName());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+      }
+      if(what==40){
+          TiUser user=(TiUser)object;
+          params.addBodyParameter("id",user.getName());
+          params.addBodyParameter("number",user.getCardId());
+          sendData(HttpRequest.HttpMethod.POST,url, params,new MyCallBack(new AliPayBack(),handler,what));
+
       }
       if (what==112){
           Friend user=(Friend)object;

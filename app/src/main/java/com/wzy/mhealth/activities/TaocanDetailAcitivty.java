@@ -38,6 +38,7 @@ public class TaocanDetailAcitivty extends Activity {
                             intent.putExtra("name", taocanDetail.getName()+"");
                             intent.putExtra("price", taocanDetail.getNewPrice()+"");
                             intent.putExtra("old", taocanDetail.getOldPrice()+"");
+                            intent.putExtra("id",taocanDetail.getId()+"");
                             startActivity(intent);
                         }
                     });

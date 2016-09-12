@@ -33,19 +33,19 @@ public class ZhixingTaocan {
 
     public static class DataEntity {
         private int id;
-        private int oldPrice;
-        private int newPrice;
+        private double oldPrice;
+        private double newPrice;
         private String name;
 
         public void setId(int id) {
             this.id = id;
         }
 
-        public void setOldPrice(int oldPrice) {
+        public void setOldPrice(double oldPrice) {
             this.oldPrice = oldPrice;
         }
 
-        public void setNewPrice(int newPrice) {
+        public void setNewPrice(double newPrice) {
             this.newPrice = newPrice;
         }
 
@@ -57,11 +57,11 @@ public class ZhixingTaocan {
             return id;
         }
 
-        public int getOldPrice() {
+        public double getOldPrice() {
             return oldPrice;
         }
 
-        public int getNewPrice() {
+        public double getNewPrice() {
             return newPrice;
         }
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,7 +39,20 @@ public class StepCountActivity extends BaActivity {
     int step;
     LineView mLineView;
     String time;
+    String[] xvalue,stepvalue;
     private int total_step = 0;   //走的总步数
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String nowstep = MyApplication.sharedPreferences.getString(Constants.STEP,
+                "0");
+        String time = MyApplication.sharedPreferences.getString(Constants.STEPDATE,
+                null);
+        String url = Constants.SERVER_URL+"StepNumServlet";
+        Friend friend = new Friend(nowstep, LeanchatUser.getCurrentUser().getUsername(), time);
+        MyHttpUtils.handData(handler, 112, url, friend);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +76,8 @@ public class StepCountActivity extends BaActivity {
     }
 
     private void init() {
-        addView();
+        xvalue=new String[200];
+        stepvalue=new String[200];
         aboutLine();
         leftBtn_back = (ImageView) findViewById(R.id.leftBtn_back);
         leftBtn_back.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +89,7 @@ public class StepCountActivity extends BaActivity {
         crpv = (ColorfulRingProgressView) findViewById(R.id.crpv);
         stepTv = (TextView) findViewById(R.id.activity_main_step_tv);
         tv_today=(TextView)findViewById(R.id.tv_today);
-
+        addView();
     }
 
     private View addView() {
@@ -88,6 +101,12 @@ public class StepCountActivity extends BaActivity {
         view.setOrientation(LinearLayout.HORIZONTAL);// 设置子View的Linearlayout// 为垂直方向布局
         mLineView=new LineView(StepCountActivity.this);
         view.addView(mLineView);//将TextView 添加到子View 中
+        mLineView.SetInfo(
+                xvalue,   //X轴刻度
+                new String[]{"", "2000", "4000", "6000", "8000", "10000"},   //Y轴刻度
+                stepvalue,  //数据
+                "计步结果"
+        );
         return view;
     }
     private void aboutLine() {
@@ -136,20 +155,11 @@ public class StepCountActivity extends BaActivity {
             switch (msg.what){
                 case 113:
                     StepResult stepResult = (StepResult) msg.obj;
-                    Log.e("step",stepResult+"");
-                    String[] xvalue,stepvalue;
-                    xvalue=new String[200];
-                    stepvalue=new String[200];
                     for (int i=0;i<7;i++){
-                        xvalue[i]=stepResult.getData().get(i).getStepTime();
+                        xvalue[i]=stepResult.getData().get(i).getTime().substring(5);
                         stepvalue[i]=String.valueOf(stepResult.getData().get(i).getStepNum());
                     }
-                    mLineView.SetInfo(
-                           xvalue,   //X轴刻度
-                            new String[]{"", "2000", "4000", "6000", "8000","10000"},   //Y轴刻度
-                           stepvalue,  //数据
-                            "计步结果"
-                    );
+
                     break;
                 case 50:
                     super.handleMessage(msg);// 此处可以更新UI
