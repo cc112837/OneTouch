@@ -44,8 +44,6 @@ public class TijianYueActivity extends Activity {
         et_tel = (EditText) findViewById(R.id.et_tel);
         et_tel.setText(phone);
         et_pass.setText(pass);
-        Intent intent = getIntent();
-        flag = intent.getIntExtra("flag", 1);
         init();
     }
 
@@ -96,17 +94,12 @@ public class TijianYueActivity extends Activity {
                         String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid=" + tag;
                         MyHttpUtils.handData(handler, 33, renurl, null);
                     } else {
-                        if (flag == 1) {
-                            Toast.makeText(TijianYueActivity.this, "您已经成功预约成功，请进去我的预约查看", Toast.LENGTH_LONG).show();
-                        }
-                        if (flag == 2) {
-                            Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
-                            intent.putExtra("session", tag);
-                            intent.putExtra("id", rec.getRows().get(0).getEID());
-                            intent.putExtra("extra", rec.getRows().get(0).getTJID() + "20160713");
-                            startActivity(intent);
-                            TijianYueActivity.this.finish();
-                        }
+                        Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
+                        intent.putExtra("session", tag);
+                        intent.putExtra("id", rec.getRows().get(0).getEID());
+                        intent.putExtra("extra", rec.getRows().get(0).getTJID() + "20160713");
+                        startActivity(intent);
+                        TijianYueActivity.this.finish();
                     }
                     break;
                 case 33:
@@ -115,7 +108,7 @@ public class TijianYueActivity extends Activity {
                         Toast.makeText(TijianYueActivity.this, "没有数据!", Toast.LENGTH_LONG).show();
                     } else {
                         int status = inf.getRows().get(0).getSTATUS();
-                        if (flag == 1) {
+                        if (0 == status) {
                             Intent intent = new Intent(TijianYueActivity.this, TestSelfActivity.class);
                             intent.putExtra("session", tag);
                             intent.putExtra("id", inf.getRows().get(0).getEID());
@@ -125,19 +118,15 @@ public class TijianYueActivity extends Activity {
                             intent.putExtra("tiid", inf.getRows().get(0).getTJID());
                             startActivity(intent);
                             TijianYueActivity.this.finish();
+                        } else {
+                            Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
+                            intent.putExtra("session", tag);
+                            intent.putExtra("id", inf.getRows().get(0).getEID());
+                            intent.putExtra("extra", inf.getRows().get(0).getTJID() + "20160713");
+                            startActivity(intent);
+                            TijianYueActivity.this.finish();
                         }
-                        if (flag == 2) {
-                            if (0 == status) {
-                                Toast.makeText(TijianYueActivity.this, "请先进行体检预约", Toast.LENGTH_LONG).show();
-                            } else {
-                                Intent intent = new Intent(TijianYueActivity.this, MyYuyueActivity.class);
-                                intent.putExtra("session", tag);
-                                intent.putExtra("id", inf.getRows().get(0).getEID());
-                                intent.putExtra("extra", inf.getRows().get(0).getTJID() + "20160713");
-                                startActivity(intent);
-                                TijianYueActivity.this.finish();
-                            }
-                        }
+
                     }
                     break;
             }
@@ -154,7 +143,6 @@ public class TijianYueActivity extends Activity {
         submit = (Button) findViewById(R.id.submit);
         nameid = (EditText) findViewById(R.id.nameid);
         idcard = (EditText) findViewById(R.id.idcard);
-
         nameid.setText(name1);
         idcard.setText(card1);
         et_pass.setText(pass1);

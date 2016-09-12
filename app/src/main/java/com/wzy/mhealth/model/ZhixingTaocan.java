@@ -1,5 +1,7 @@
 package com.wzy.mhealth.model;
 
+import java.util.List;
+
 /**
  * 项目名称：mhealth
  * 类描述：
@@ -11,37 +13,60 @@ package com.wzy.mhealth.model;
  * 修改备注：
  */
 public class ZhixingTaocan {
-    private String name;
-    private int oldprice;
-    private int newprice;
 
-    public ZhixingTaocan(String name, int oldprice, int newprice) {
-        this.name = name;
-        this.oldprice = oldprice;
-        this.newprice = newprice;
+    /**
+     * id : 1
+     * oldPrice : 228
+     * newPrice : 79
+     * name : 入职套餐
+     */
+
+    private List<DataEntity> data;
+
+    public void setData(List<DataEntity> data) {
+        this.data = data;
     }
 
-    public String getName() {
-        return name;
+    public List<DataEntity> getData() {
+        return data;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public static class DataEntity {
+        private int id;
+        private int oldPrice;
+        private int newPrice;
+        private String name;
 
-    public int getOldprice() {
-        return oldprice;
-    }
+        public void setId(int id) {
+            this.id = id;
+        }
 
-    public void setOldprice(int oldprice) {
-        this.oldprice = oldprice;
-    }
+        public void setOldPrice(int oldPrice) {
+            this.oldPrice = oldPrice;
+        }
 
-    public int getNewprice() {
-        return newprice;
-    }
+        public void setNewPrice(int newPrice) {
+            this.newPrice = newPrice;
+        }
 
-    public void setNewprice(int newprice) {
-        this.newprice = newprice;
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public int getOldPrice() {
+            return oldPrice;
+        }
+
+        public int getNewPrice() {
+            return newPrice;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

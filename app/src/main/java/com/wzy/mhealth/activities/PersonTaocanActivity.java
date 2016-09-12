@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,9 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TaoCanAdapter;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ZhixingTaocan;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,9 +31,10 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
     private ImageView leftBtn;
     private ListView lv_show;
     double lat, log;
+    TaoCanAdapter adapter;
     private AMapLocationClient mlocationClient;
     public AMapLocationClientOption mLocationOption = null;
-    private ArrayList<ZhixingTaocan> list = new ArrayList<>();
+    private ArrayList<ZhixingTaocan.DataEntity> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,24 +76,25 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
             }
         }
     }
-
+private Handler handler=new Handler(){
+    @Override
+    public void handleMessage(Message msg) {
+        switch (msg.what){
+            case 115:
+                ZhixingTaocan zhixing=(ZhixingTaocan)msg.obj;
+                list.addAll(zhixing.getData());
+                adapter.notifyDataSetChanged();
+                break;
+        }
+    }
+};
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_show = (ListView) findViewById(R.id.lv_show);
         View headview = LayoutInflater.from(this).inflate(R.layout.zhidetail_header, null);
-        list.add(new ZhixingTaocan("入职套餐", 228, 79));
-        list.add(new ZhixingTaocan("青年男宾体检套餐", 468, 234));
-        list.add(new ZhixingTaocan("青年已婚女宾体检套餐", 713, 357));
-        list.add(new ZhixingTaocan("青年未婚女宾体检套餐", 558, 279));
-        list.add(new ZhixingTaocan("青年男宾深度体检套餐", 840, 420));
-        list.add(new ZhixingTaocan("青年已婚女宾深度体检套餐", 995, 498));
-        list.add(new ZhixingTaocan("中年男宾体检套餐", 1065, 533));
-        list.add(new ZhixingTaocan("中年已婚女宾体检套餐", 1220, 610));
-        list.add(new ZhixingTaocan("中老年男宾体检套餐", 1155, 578));
-        list.add(new ZhixingTaocan("中老年女宾体检套餐", 1310, 655));
-        list.add(new ZhixingTaocan("孕前男宾体检套餐", 678, 339));
-        list.add(new ZhixingTaocan("孕前女宾体检套餐", 1148, 574));
-        TaoCanAdapter adapter = new TaoCanAdapter(this, list);
+        adapter = new TaoCanAdapter(this, list);
+        String url= Constants.SERVER_URL+"TaoCanServlet";
+        MyHttpUtils.handData(handler,115,url,null);
         ImageView iv_addr = (ImageView) headview.findViewById(R.id.iv_address);
         ImageView iv_tel = (ImageView) headview.findViewById(R.id.iv_tel);
         iv_tel.setOnClickListener(new View.OnClickListener() {
@@ -122,9 +128,7 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(PersonTaocanActivity.this,TaocanDetailAcitivty.class);
-                intent.putExtra("name",list.get(position - 1).getName());
-                intent.putExtra("price",list.get(position-1).getNewprice()+"");
-                intent.putExtra("old",list.get(position-1).getOldprice()+"");
+                intent.putExtra("id",list.get(position - 1).getId()+"");
                 startActivity(intent);
             }
         });

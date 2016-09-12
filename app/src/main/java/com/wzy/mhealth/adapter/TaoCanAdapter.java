@@ -26,9 +26,9 @@ import java.util.List;
 public class TaoCanAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private Context context;
-    private List<ZhixingTaocan> list;
+    private List<ZhixingTaocan.DataEntity> list;
 
-    public TaoCanAdapter(Context context,List<ZhixingTaocan> list) {
+    public TaoCanAdapter(Context context,List<ZhixingTaocan.DataEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list=list;
         this.context=context;
@@ -64,8 +64,8 @@ public class TaoCanAdapter extends BaseAdapter{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.beforeprice.setText("¥"+list.get(position).getNewprice()+"");
-        viewHolder.afterprice.setText("¥"+list.get(position).getOldprice()+"");
+        viewHolder.beforeprice.setText("¥"+list.get(position).getNewPrice()+"");
+        viewHolder.afterprice.setText("¥"+list.get(position).getOldPrice()+"");
         viewHolder.name.setText(list.get(position).getName()+"");
         return convertView;
     }

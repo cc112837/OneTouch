@@ -17,7 +17,7 @@ public class StepResult {
     /**
      * userName : xiaowang
      * stepNum : 234
-     * week : 星期一
+     * stepTime : 2016.9.7
      */
 
     private List<DataEntity> data;
@@ -32,31 +32,31 @@ public class StepResult {
 
     public static class DataEntity {
         private String userName;
-        private String stepNum;
-        private String week;
+        private int stepNum;
+        private String stepTime;
 
         public void setUserName(String userName) {
             this.userName = userName;
         }
 
-        public void setStepNum(String stepNum) {
+        public void setStepNum(int stepNum) {
             this.stepNum = stepNum;
         }
 
-        public void setWeek(String week) {
-            this.week = week;
+        public void setStepTime(String stepTime) {
+            this.stepTime = stepTime;
         }
 
         public String getUserName() {
             return userName;
         }
 
-        public String getStepNum() {
+        public int getStepNum() {
             return stepNum;
         }
 
-        public String getWeek() {
-            return week;
+        public String getStepTime() {
+            return stepTime;
         }
     }
 }

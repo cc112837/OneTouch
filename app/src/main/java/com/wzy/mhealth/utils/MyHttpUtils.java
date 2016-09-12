@@ -1,7 +1,6 @@
 package com.wzy.mhealth.utils;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -18,8 +17,10 @@ import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepResult;
+import com.wzy.mhealth.model.TaocanDetail;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.model.ZhixingTaocan;
 
 
 /**
@@ -92,7 +93,15 @@ public class MyHttpUtils extends HttpUtils{
       if (what==113){
           StepInfo user=(StepInfo)object;
           params.addBodyParameter("userName",user.getData());
-          sendData(HttpRequest.HttpMethod.POST,url,params,new MyCallBack(new StepResult(), handler, what));
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepResult(), handler, what));
+      }
+      if(what==115){
+          sendData(HttpRequest.HttpMethod.POST,url,null,new MyCallBack(new ZhixingTaocan(),handler,what));
+      }
+      if(what==116){
+          TiUser user=(TiUser)object;
+          params.addBodyParameter("id",user.getName());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TaocanDetail(), handler, what));
       }
   }
 }

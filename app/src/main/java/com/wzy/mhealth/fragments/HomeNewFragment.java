@@ -158,6 +158,7 @@ public class HomeNewFragment extends Fragment {
         setClickView(ll_doc3);
         setClickView(ll_doc2);
         setClickView(ll_doc1);
+
         LinearLayout ll_record = (LinearLayout) headview.findViewById(R.id.ll_record);
         ll_record.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,9 +182,7 @@ public class HomeNewFragment extends Fragment {
         ll_yuyue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TijianYueActivity.class);
-                intent.putExtra("flag", 2);
-                startActivity(intent);
+                // TODO: 2016/9/9 flag=2;
             }
         });
         LinearLayout ll_taocan = (LinearLayout) headview.findViewById(R.id.ll_taocan);
@@ -238,8 +237,8 @@ public class HomeNewFragment extends Fragment {
         ll_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: 2016/9/9  flag=1;
                 Intent intent = new Intent(getActivity(), TijianYueActivity.class);
-                intent.putExtra("flag", 1);
                 startActivity(intent);
             }
         });
@@ -247,7 +246,7 @@ public class HomeNewFragment extends Fragment {
         ll_private.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/9/5 (私人订制套餐) 
+
             }
         });
         convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);

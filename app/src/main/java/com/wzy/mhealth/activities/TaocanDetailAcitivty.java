@@ -4,25 +4,59 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.TaocanDetail;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class TaocanDetailAcitivty extends Activity {
-    private ImageView leftBtn;
+    private ImageView leftBtn,iv_detail;
     private TextView tv_old, tv_new, tv_buy,titleView;
-    private String name,price,old;
+    private String id;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 116:
+                    final TaocanDetail taocanDetail=(TaocanDetail)msg.obj;
+                    tv_old.setText(taocanDetail.getOldPrice()+"元");
+                    titleView.setText(taocanDetail.getName()+"");
+                    tv_new.setText(taocanDetail.getNewPrice()+"元");
+
+                    tv_buy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(TaocanDetailAcitivty.this, TaocanBuyActivity.class);
+                            intent.putExtra("name", taocanDetail.getName()+"");
+                            intent.putExtra("price", taocanDetail.getNewPrice()+"");
+                            intent.putExtra("old", taocanDetail.getOldPrice()+"");
+                            startActivity(intent);
+                        }
+                    });
+                    ImageLoader.getInstance().displayImage(taocanDetail.getContext(),iv_detail);
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taocan_detail_acitivty);
         Intent intent = getIntent();
-        name = intent.getStringExtra("name");
-        price = intent.getStringExtra("price");
-        old = intent.getStringExtra("old");
+        id = intent.getStringExtra("id");
+        String url= Constants.SERVER_URL+"TaoCanPayServlet";
+        TiUser user = new TiUser();
+        user.setName(id+"");
+        MyHttpUtils.handData(handler,116,url,user);
         init();
     }
 
@@ -38,19 +72,8 @@ public class TaocanDetailAcitivty extends Activity {
         tv_new = (TextView) findViewById(R.id.tv_new);
         tv_buy = (TextView) findViewById(R.id.tv_buy);
         titleView=(TextView) findViewById(R.id.titleView);
-        tv_old.setText(old+"元");
-        titleView.setText(name+"");
-        tv_new.setText(price+"元");
-        tv_buy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TaocanDetailAcitivty.this, TaocanBuyActivity.class);
-                intent.putExtra("name",name);
-                intent.putExtra("price",price);
-                intent.putExtra("old",old);
-                startActivity(intent);
-            }
-        });
+        iv_detail=(ImageView) findViewById(R.id.iv_detail);
+
         tv_old.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 }

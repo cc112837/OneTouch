@@ -56,11 +56,13 @@
                     android:textColor="@color/black" />
 
                 <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:scaleType="fitXY"
-                android:layout_margin="10dp"
-                android:src="@mipmap/taocan" />
+                    android:id="@+id/iv_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/taocan" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

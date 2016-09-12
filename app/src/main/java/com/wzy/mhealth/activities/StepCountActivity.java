@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -90,7 +91,7 @@ public class StepCountActivity extends BaActivity {
         return view;
     }
     private void aboutLine() {
-        String uri = "http://117.34.105.29:8209/mhealth/servlet/StepQueryServlet";
+        String uri = Constants.SERVER_URL+"StepNumQueryServlet";
         StepInfo stepInf = new StepInfo();
         stepInf.setData(LeanchatUser.getCurrentUser().getUsername());
         MyHttpUtils.handData(handler, 113, uri, stepInf);
@@ -135,12 +136,13 @@ public class StepCountActivity extends BaActivity {
             switch (msg.what){
                 case 113:
                     StepResult stepResult = (StepResult) msg.obj;
+                    Log.e("step",stepResult+"");
                     String[] xvalue,stepvalue;
                     xvalue=new String[200];
                     stepvalue=new String[200];
-                    for (int i=0;i<stepResult.getData().size();i++){
-                        xvalue[i]=stepResult.getData().get(i).getWeek();
-                        stepvalue[i]=stepResult.getData().get(i).getStepNum();
+                    for (int i=0;i<7;i++){
+                        xvalue[i]=stepResult.getData().get(i).getStepTime();
+                        stepvalue[i]=String.valueOf(stepResult.getData().get(i).getStepNum());
                     }
                     mLineView.SetInfo(
                            xvalue,   //X轴刻度
@@ -187,7 +189,7 @@ public class StepCountActivity extends BaActivity {
                 null);
         String time = MyApplication.sharedPreferences.getString(Constants.STEPDATE,
                 null);
-        String url = "http://117.34.105.29:8209/mhealth/servlet/StepServlet";
+        String url = Constants.SERVER_URL+"StepNumServlet";
         Friend friend = new Friend(nowstep, LeanchatUser.getCurrentUser().getUsername(), time);
         MyHttpUtils.handData(handler, 112, url, friend);
     }
