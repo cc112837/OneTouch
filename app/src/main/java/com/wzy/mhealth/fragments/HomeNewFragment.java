@@ -39,6 +39,7 @@ import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PersonTaocanActivity;
 import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
+import com.wzy.mhealth.activities.TijianOrderActivity;
 import com.wzy.mhealth.activities.TijianRecordActivity;
 import com.wzy.mhealth.activities.TijianYueActivity;
 import com.wzy.mhealth.adapter.NewsItemAdapter;
@@ -66,7 +67,7 @@ public class HomeNewFragment extends Fragment {
     private List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list;
     private NewsItemAdapter adapter;
     private MyScrollView my_scroll;
-    private View ll_doc1,ll_doc2,ll_doc3,ll_doc4;
+    private View ll_doc1, ll_doc2, ll_doc3, ll_doc4;
     private List<DoctorEntity> doctorlist;
 
     public void onAttach(Activity activity) {
@@ -143,10 +144,10 @@ public class HomeNewFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        ll_doc1=headview.findViewById(R.id.ll_doc1);
-        ll_doc2=headview.findViewById(R.id.ll_doc2);
-        ll_doc3=headview.findViewById(R.id.ll_doc3);
-        ll_doc4=headview.findViewById(R.id.ll_doc4);
+        ll_doc1 = headview.findViewById(R.id.ll_doc1);
+        ll_doc2 = headview.findViewById(R.id.ll_doc2);
+        ll_doc3 = headview.findViewById(R.id.ll_doc3);
+        ll_doc4 = headview.findViewById(R.id.ll_doc4);
         setContent(ll_doc1);
         setContent(ll_doc2);
         setContent(ll_doc3);
@@ -246,7 +247,8 @@ public class HomeNewFragment extends Fragment {
         ll_private.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), TijianOrderActivity.class);
+                startActivity(intent);
             }
         });
         convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);
@@ -301,27 +303,30 @@ public class HomeNewFragment extends Fragment {
         });
 
     }
-   public  void  setClickView(View v){
-       v.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent();
-               intent.setClass(getActivity(), DoctorDetailActivity.class);
-               Bundle bundle = new Bundle();
-               bundle.putSerializable("doctor", doctorlist.get(0));
-               intent.putExtras(bundle);
-               startActivity(intent);
-           }
-       });
-   }
-    public void setContent(View v){
-        TextView tv_name=(TextView)v.findViewById(R.id.tv_name);
-        TextView tv_pre=(TextView)v.findViewById(R.id.tv_pre);
-        TextView tv_hos=(TextView) v.findViewById(R.id.tv_hosi);
+
+    public void setClickView(View v) {
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), DoctorDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("doctor", doctorlist.get(0));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void setContent(View v) {
+        TextView tv_name = (TextView) v.findViewById(R.id.tv_name);
+        TextView tv_pre = (TextView) v.findViewById(R.id.tv_pre);
+        TextView tv_hos = (TextView) v.findViewById(R.id.tv_hosi);
         tv_name.setText("邓珊");
         tv_pre.setText("主任医生");
         tv_hos.setText("内科");
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
 

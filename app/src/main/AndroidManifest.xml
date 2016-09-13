@@ -58,30 +58,32 @@
         <uses-library
             android:name="org.simalliance.openmobileapi"
             android:required="false" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="6bee2cdc2ac673629c875baf2869a6ef" />
+
         <activity android:name=".ali.H5PayDemoActivity" />
         <activity
             android:name="com.unionpay.uppay.PayActivity"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.unionpay.UPPayWapActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" />
+            android:screenOrientation="behind"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -158,7 +160,6 @@
 
         <service android:name=".service.PedometerService" />
         <service android:name=".service.StepCounterService" />
-
         <service android:name="com.amap.api.location.APSService" />
 
         <receiver android:name=".LeanChat.service.MHealthUReceiver">
@@ -303,7 +304,8 @@
         <activity
             android:name=".activities.TaocanDetailAcitivty"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.TaocanBuyActivity"></activity>
+        <activity android:name=".activities.TaocanBuyActivity" />
+        <activity android:name=".activities.TijianOrderActivity"></activity>
     </application>
 
 </manifest>
