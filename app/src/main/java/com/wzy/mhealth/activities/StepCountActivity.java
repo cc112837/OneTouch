@@ -89,10 +89,9 @@ public class StepCountActivity extends BaActivity {
         crpv = (ColorfulRingProgressView) findViewById(R.id.crpv);
         stepTv = (TextView) findViewById(R.id.activity_main_step_tv);
         tv_today=(TextView)findViewById(R.id.tv_today);
-        addView();
     }
 
-    private View addView() {
+    private void addView() {
         // TODO 动态添加布局(java方式)
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -100,14 +99,13 @@ public class StepCountActivity extends BaActivity {
         view.setLayoutParams(lp);//设置布局参数
         view.setOrientation(LinearLayout.HORIZONTAL);// 设置子View的Linearlayout// 为垂直方向布局
         mLineView=new LineView(StepCountActivity.this);
-        view.addView(mLineView);//将TextView 添加到子View 中
         mLineView.SetInfo(
-                xvalue,   //X轴刻度
+                new String[]{xvalue[0], xvalue[1], xvalue[2], xvalue[3], xvalue[4], xvalue[5], xvalue[6]},
                 new String[]{"", "2000", "4000", "6000", "8000", "10000"},   //Y轴刻度
-                stepvalue,  //数据
+                new String[]{stepvalue[0], stepvalue[1], stepvalue[2], stepvalue[3], stepvalue[4], stepvalue[5], stepvalue[6]},  //数据
                 "计步结果"
         );
-        return view;
+        view.addView(mLineView);
     }
     private void aboutLine() {
         String uri = Constants.SERVER_URL+"StepNumQueryServlet";
@@ -159,13 +157,13 @@ public class StepCountActivity extends BaActivity {
                         xvalue[i]=stepResult.getData().get(i).getTime().substring(5);
                         stepvalue[i]=String.valueOf(stepResult.getData().get(i).getStepNum());
                     }
-
+                    addView();
                     break;
                 case 50:
                     super.handleMessage(msg);// 此处可以更新UI
                     countStep();          //调用步数方法
                     stepTv.setText(total_step + step + "");// 显示当前步数
-                    tv_today.setText("步数"+(total_step + step));
+                    tv_today.setText(""+(total_step + step));
                     crpv.setPercent((total_step + step) / 10);
                     break;
                 case 112:

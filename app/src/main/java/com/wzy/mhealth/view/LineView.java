@@ -55,7 +55,7 @@ public class LineView extends View {
         paint1.setStyle(Paint.Style.STROKE);
         paint1.setAntiAlias(true);//去锯齿
         paint1.setColor(Color.DKGRAY);
-        paint.setTextSize(16);  //设置轴文字大小
+        paint.setTextSize(20);  //设置轴文字大小
         //设置Y轴
         canvas.drawLine(XPoint, YPoint-YLength, XPoint, YPoint, paint);   //轴线
         for(int i=0;i*YScale<YLength ;i++)
@@ -91,8 +91,8 @@ public class LineView extends View {
         }
         canvas.drawLine(XPoint+XLength,YPoint,XPoint+XLength-6,YPoint-3,paint);    //箭头
         canvas.drawLine(XPoint + XLength, YPoint, XPoint + XLength - 6, YPoint + 3, paint);
-        paint.setTextSize(16);
-        canvas.drawText("运动步数", 150, 50, paint);
+        paint.setTextSize(20);
+        canvas.drawText(Title, 150, 50, paint);
     }
     private int YCoord(String y0)  //计算绘制时的Y坐标，无数据时返回-999
     {
