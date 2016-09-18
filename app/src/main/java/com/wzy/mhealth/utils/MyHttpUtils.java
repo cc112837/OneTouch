@@ -106,6 +106,12 @@ public class MyHttpUtils extends HttpUtils{
       if(what==115){
           sendData(HttpRequest.HttpMethod.POST,url,null,new MyCallBack(new ZhixingTaocan(),handler,what));
       }
+      if(what==120){
+          TiUser user=(TiUser)object;
+          params.addBodyParameter("result",user.getName());
+          params.addBodyParameter("userName",user.getCardId());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+      }
       if(what==116){
           TiUser user=(TiUser)object;
           params.addBodyParameter("id",user.getName());

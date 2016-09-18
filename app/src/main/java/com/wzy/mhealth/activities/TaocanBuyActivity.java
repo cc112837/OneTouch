@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.bigkoo.snappingstepper.SnappingStepper;
 import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
 import com.unionpay.UPPayAssistEx;
@@ -26,6 +26,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.ali.PayResult;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.AliPayBack;
+import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.PayRadioGroup;
@@ -66,20 +67,6 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
         @Override
         public void onClick(View v) {
             if (flag == "bank") {
-//                if (TextUtils.isEmpty(APPID) || TextUtils.isEmpty(RSA_PRIVATE)) {
-//                    new AlertDialog.Builder(TaocanBuyActivity.this).setTitle("警告").setMessage("需要配置APPID | RSA_PRIVATE")
-//                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialoginterface, int i) {
-//                                    //
-//                                    finish();
-//                                }
-//                            }).show();
-//                    return;
-//                }
-//                Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID);
-//                String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-//                String sign = OrderInfoUtil2_0.getSign(params, RSA_PRIVATE);
-//                final String orderInfo = orderParam + "&" + sign;
                 String url= Constants.SERVER_URL+"AliPayServlet";
                 TiUser user=new TiUser();
                 user.setName(id);
@@ -202,17 +189,23 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                     doStartUnionPayPlugin(this, tn, mMode);
                 }
                 break;
+            case 120:
+                StepInfo info= (StepInfo)msg.obj;
+                if(info.getStatus().equals("1")){
+                    Intent intent=new Intent(TaocanBuyActivity.this,TijianOrderActivity.class);
+                    startActivity(intent);
+                }
+
+                break;
             case 40:
                 AliPayBack stepInfo=(AliPayBack) msg.obj;
                 final String orderInfo=stepInfo.getData();
-                Log.e("qinming",orderInfo);
                 Runnable payRunnable = new Runnable() {
 
                     @Override
                     public void run() {
                         PayTask alipay = new PayTask(TaocanBuyActivity.this);
                         Map<String, String> result = alipay.payV2(orderInfo, true);
-                        Log.i("msp", result.toString());
                         Message msg = new Message();
                         msg.what = SDK_ALIPAY_FLAG;
                         msg.obj = result;
@@ -225,15 +218,16 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                 break;
             case SDK_ALIPAY_FLAG:
                 PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-                /**
-                 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
-                 */
                 String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-
                 String resultStatus = payResult.getResultStatus();
                 // 判断resultStatus 为9000则代表支付成功
                 if (TextUtils.equals(resultStatus, "9000")) {
                     // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                    String url=Constants.SERVER_URL+"PayServlet";
+                    TiUser user=new TiUser();
+                    user.setName(resultInfo);
+                    user.setCardId(LeanchatUser.getCurrentUser().getUsername());
+                    MyHttpUtils.handData(mHandler,120,url,user);
                     Toast.makeText(TaocanBuyActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 } else {
                     // 该笔订单真实的支付结果，需要依赖服务端的异步通知。

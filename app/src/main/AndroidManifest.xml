@@ -305,7 +305,8 @@
             android:name=".activities.TaocanDetailAcitivty"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.TaocanBuyActivity" />
-        <activity android:name=".activities.TijianOrderActivity"></activity>
+        <activity android:name=".activities.TijianOrderActivity" />
+        <activity android:name=".activities.RankActivity"></activity>
     </application>
 
 </manifest>

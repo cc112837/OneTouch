@@ -33,6 +33,7 @@ import me.pedometer.StepDetector;
 public class StepCountActivity extends BaActivity {
     private ImageView leftBtn_back;
     private ColorfulRingProgressView crpv;
+    private TextView tv_rank;
     private TextView stepTv,tv_today;
     private Thread thread;  //定义线程对象
     private ArrayList<HashMap<String, String>> list;
@@ -79,6 +80,14 @@ public class StepCountActivity extends BaActivity {
         xvalue=new String[200];
         stepvalue=new String[200];
         aboutLine();
+        tv_rank=(TextView) findViewById(R.id.tv_rank);
+        tv_rank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(StepCountActivity.this,RankActivity.class);
+                startActivity(intent);
+            }
+        });
         leftBtn_back = (ImageView) findViewById(R.id.leftBtn_back);
         leftBtn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +111,7 @@ public class StepCountActivity extends BaActivity {
         mLineView.SetInfo(
                 new String[]{xvalue[0], xvalue[1], xvalue[2], xvalue[3], xvalue[4], xvalue[5], xvalue[6]},
                 new String[]{"", "2000", "4000", "6000", "8000", "10000"},   //Y轴刻度
-                new String[]{stepvalue[0], stepvalue[1], stepvalue[2], stepvalue[3], stepvalue[4], stepvalue[5], stepvalue[6]},  //数据
+                new String[]{stepvalue[0], stepvalue[1], stepvalue[2], stepvalue[3], stepvalue[4], stepvalue[5], total_step + step+""},  //数据
                 "计步结果"
         );
         view.addView(mLineView);

@@ -183,7 +183,8 @@ public class HomeNewFragment extends Fragment {
         ll_yuyue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/9/9 flag=2;
+                Intent intent = new Intent(getActivity(), TijianOrderActivity.class);
+                startActivity(intent);
             }
         });
         LinearLayout ll_taocan = (LinearLayout) headview.findViewById(R.id.ll_taocan);
@@ -238,7 +239,7 @@ public class HomeNewFragment extends Fragment {
         ll_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/9/9  flag=1;
+
                 Intent intent = new Intent(getActivity(), TijianYueActivity.class);
                 startActivity(intent);
             }
@@ -247,8 +248,6 @@ public class HomeNewFragment extends Fragment {
         ll_private.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TijianOrderActivity.class);
-                startActivity(intent);
             }
         });
         convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);
