@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.model.ZhixingTaocan;
+import com.wzy.mhealth.model.OrderInfo;
 
 import java.util.List;
 
@@ -24,12 +24,13 @@ import java.util.List;
 public class OrderAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private Context context;
-    private List<ZhixingTaocan.DataEntity> list;
-    public OrderAdapter(Context context,List<ZhixingTaocan.DataEntity> list) {
+    private List<OrderInfo.DataEntity> list;
+    public OrderAdapter(Context context,List<OrderInfo.DataEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list=list;
         this.context=context;
     }
+
     @Override
     public int getCount() {
         return list.size();
@@ -57,13 +58,12 @@ public class OrderAdapter extends BaseAdapter{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.price.setText("¥"+list.get(position).getOldPrice()+"");
-        viewHolder.name.setText(list.get(position).getName()+"");
+        viewHolder.price.setText("¥"+list.get(position).getPayMoney()+"");
+        viewHolder.name.setText(list.get(position).getShopName()+"");
         return convertView;
     }
     static class ViewHolder {
         public TextView name;
         public  TextView price;
-
     }
 }
