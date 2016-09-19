@@ -7,10 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avoscloud.leanchatlib.utils.PhotoUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.model.AllStepRank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +31,9 @@ import java.util.List;
 public class RankAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
-    private List<String> list;
-    public RankAdapter(Context context,List<String> list) {
+    private List<String> flag= new ArrayList<>();
+    private List<AllStepRank.DataEntity> list;
+    public RankAdapter(Context context,List<AllStepRank.DataEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list=list;
         this.context=context;
@@ -58,22 +64,26 @@ public class RankAdapter extends BaseAdapter {
             viewHolder.tv_dastep = (TextView) convertView.findViewById(R.id.tv_dastep);
             viewHolder.tv_count = (TextView) convertView.findViewById(R.id.tv_count);
             viewHolder.cb_prasid = (CheckBox) convertView.findViewById(R.id.cb_prasid);
+            viewHolder.iv_tank = (ImageView) convertView.findViewById(R.id.iv_tank);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_name.setText("");
-        viewHolder.tv_rank.setText("");
-        viewHolder.tv_dastep.setText("");
-        viewHolder.tv_count.setText("");
+        viewHolder.tv_name.setText(""+list.get(position).getUserName());
+        viewHolder.tv_rank.setText(position+1+"");
+        viewHolder.tv_dastep.setText(""+list.get(position).getStepNum());
+        viewHolder.tv_count.setText(""+"0");
+        viewHolder.cb_prasid.setTag(R.id.cb_prasid, position);
+        ImageLoader.getInstance().displayImage("", viewHolder.iv_tank, PhotoUtils.avatarImageOptions);
+        viewHolder.cb_prasid.setChecked(flag.contains(position + ""));
         viewHolder.cb_prasid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int position = (int) buttonView.getTag(R.id.cb_prasid);
                 if (isChecked) {
-
+                    flag.add(position + "");
                 } else {
-
+                    flag.remove(position + "");
                 }
             }
         });
@@ -85,6 +95,7 @@ public class RankAdapter extends BaseAdapter {
         public  TextView tv_dastep;
         public  TextView tv_count;
         public CheckBox cb_prasid;
+        public ImageView iv_tank;
 
 
     }

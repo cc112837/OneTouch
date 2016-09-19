@@ -7,6 +7,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.wzy.mhealth.model.AliPayBack;
+import com.wzy.mhealth.model.AllStepRank;
 import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.model.Friend;
 import com.wzy.mhealth.model.HuaYanRecord;
@@ -18,6 +19,7 @@ import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.StepResult;
 import com.wzy.mhealth.model.TaocanDetail;
 import com.wzy.mhealth.model.TaocanInfo;
@@ -123,10 +125,17 @@ public class MyHttpUtils extends HttpUtils{
           params.addBodyParameter("userName",user.getName());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
       }
-      if(what==122){
+
+      if(what==123){
           TiUser user=(TiUser) object;
           params.addBodyParameter("userName",user.getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
+          params.addBodyParameter("stepTime",user.getPass());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepRank(), handler, what));
+      }
+      if(what==124){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("stepTime",user.getPass());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
       }
   }
 }
