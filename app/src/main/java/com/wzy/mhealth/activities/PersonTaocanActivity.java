@@ -62,8 +62,8 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
             if (amapLocation.getErrorCode() == 0) {
                 //定位成功回调信息，设置相关消息
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
-                lat=amapLocation.getLatitude();//获取纬度
-                log=amapLocation.getLongitude();//获取经度
+                lat = amapLocation.getLatitude();//获取纬度
+                log = amapLocation.getLongitude();//获取经度
                 amapLocation.getAccuracy();//获取精度信息
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date(amapLocation.getTime());
@@ -76,25 +76,27 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
             }
         }
     }
-private Handler handler=new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what){
-            case 115:
-                ZhixingTaocan zhixing=(ZhixingTaocan)msg.obj;
-                list.addAll(zhixing.getData());
-                adapter.notifyDataSetChanged();
-                break;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 115:
+                    ZhixingTaocan zhixing = (ZhixingTaocan) msg.obj;
+                    list.addAll(zhixing.getData());
+                    adapter.notifyDataSetChanged();
+                    break;
+            }
         }
-    }
-};
+    };
+
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_show = (ListView) findViewById(R.id.lv_show);
         View headview = LayoutInflater.from(this).inflate(R.layout.zhidetail_header, null);
         adapter = new TaoCanAdapter(this, list);
-        String url= Constants.SERVER_URL+"TaoCanServlet";
-        MyHttpUtils.handData(handler,115,url,null);
+        String url = Constants.SERVER_URL + "TaoCanServlet";
+        MyHttpUtils.handData(handler, 115, url, null);
         ImageView iv_addr = (ImageView) headview.findViewById(R.id.iv_address);
         ImageView iv_tel = (ImageView) headview.findViewById(R.id.iv_tel);
         iv_tel.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +106,6 @@ private Handler handler=new Handler(){
                 startActivity(intent);
             }
         });
-
-
         iv_addr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,9 +127,14 @@ private Handler handler=new Handler(){
         lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(PersonTaocanActivity.this,TaocanDetailAcitivty.class);
-                intent.putExtra("id",list.get(position - 1).getId()+"");
-                startActivity(intent);
+                if (position == 0) {
+                    Intent intent=new Intent(PersonTaocanActivity.this,ZhixingIntroduceActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(PersonTaocanActivity.this, TaocanDetailAcitivty.class);
+                    intent.putExtra("id", list.get(position - 1).getId() + "");
+                    startActivity(intent);
+                }
             }
         });
         leftBtn.setOnClickListener(new View.OnClickListener() {

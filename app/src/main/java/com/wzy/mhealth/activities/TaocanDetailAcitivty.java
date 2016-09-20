@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.TaocanDetail;
@@ -21,6 +22,7 @@ public class TaocanDetailAcitivty extends Activity {
     private ImageView leftBtn, iv_detail;
     private TextView tv_old, tv_new, tv_buy, titleView;
     private String id;
+    private WebView wv_show;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -41,7 +43,14 @@ public class TaocanDetailAcitivty extends Activity {
                             startActivity(intent);
                         }
                     });
-                    ImageLoader.getInstance().displayImage(taocanDetail.getContext(),iv_detail);
+                    WebSettings webSettings = wv_show.getSettings();
+                    webSettings.setUseWideViewPort(true);
+                    webSettings.setLoadWithOverviewMode(true);
+                    webSettings.setJavaScriptEnabled(true);
+                    webSettings.setBuiltInZoomControls(true);
+                    webSettings.setTextZoom(300);
+                    webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
+                    wv_show.loadData(taocanDetail.getContext(), "text/html; charset=utf-8", "utf-8");
                     break;
             }
         }
@@ -72,8 +81,9 @@ public class TaocanDetailAcitivty extends Activity {
         tv_old = (TextView) findViewById(R.id.tv_old);
         tv_new = (TextView) findViewById(R.id.tv_new);
         tv_buy = (TextView) findViewById(R.id.tv_buy);
+        wv_show = (WebView) findViewById(R.id.wv_show);
         titleView = (TextView) findViewById(R.id.titleView);
-        iv_detail = (ImageView) findViewById(R.id.iv_detail);
+//        iv_detail = (ImageView) findViewById(R.id.iv_detail);
         tv_old.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 }
