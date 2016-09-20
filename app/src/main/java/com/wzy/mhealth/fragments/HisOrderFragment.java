@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
@@ -38,6 +37,7 @@ public class HisOrderFragment extends Fragment {
                 case 122:
                     final OrderInfo orderInfo = (OrderInfo) msg.obj;
                     if (orderInfo.getData().size() == 0) {
+
                     } else {
                         list.addAll(orderInfo.getData());
                         adapter.notifyDataSetChanged();
@@ -45,13 +45,15 @@ public class HisOrderFragment extends Fragment {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent intent = new Intent(getActivity(), OrderStatusActivity.class);
-                                intent.putExtra("id", list.get(position).getId() + "");
+                                intent.putExtra("id", list.get(position).getShopId() + "");
                                 intent.putExtra("name", list.get(position).getShopName() + "");
                                 intent.putExtra("price", list.get(position).getPayMoney() + "");
                                 intent.putExtra("bought", list.get(position).getTradeTime() + "");
                                 intent.putExtra("creat", list.get(position).getCreateTime() + "");
                                 intent.putExtra("num", list.get(position).getShopOrder() + "");
                                 intent.putExtra("status", list.get(position).getStatus() + "");
+                                intent.putExtra("orderid", list.get(position).getOrderId() + "");
+                                intent.putExtra("account", list.get(position).getShopNumber() + "");
                                 startActivity(intent);
                             }
                         });
@@ -65,15 +67,15 @@ public class HisOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_his_order, container, false);
+        String url = Constants.SERVER_URL + "PayHistoryServlet";
+        TiUser user = new TiUser();
+        user.setName(LeanchatUser.getCurrentUser().getUsername());
+        MyHttpUtils.handData(handler, 122, url, user);
         init(v);
         return v;
     }
 
     private void init(View v) {
-        String url = Constants.SERVER_URL + "PayHistoryServlet";
-        TiUser user = new TiUser();
-        user.setName(LeanchatUser.getCurrentUser().getUsername());
-        MyHttpUtils.handData(handler, 122, url, user);
         lv_show = (ListView) v.findViewById(R.id.lv_show);
         adapter = new OrderAdapter(getActivity(), list);
         lv_show.setAdapter(adapter);

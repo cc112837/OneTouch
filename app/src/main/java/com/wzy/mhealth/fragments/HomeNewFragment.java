@@ -103,10 +103,13 @@ public class HomeNewFragment extends Fragment {
             switch (msg.what) {
                 case 21:
                     NewsYang newsYang = (NewsYang) msg.obj;
-                    for (int i = 0; i < 3; i++) {
-                        list.add(newsYang.getData().getFlow().getItems().get(i));
+                    if (newsYang.getData().getFlow().getItems().size() == 0) {
+                    } else {
+                        for (int i = 0; i < 3; i++) {
+                            list.add(newsYang.getData().getFlow().getItems().get(i));
+                        }
+                        adapter.notifyDataSetChanged();
                     }
-                    adapter.notifyDataSetChanged();
                     break;
             }
         }

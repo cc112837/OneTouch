@@ -74,7 +74,7 @@ public class RankAdapter extends BaseAdapter {
         viewHolder.tv_dastep.setText(""+list.get(position).getStepNum());
         viewHolder.tv_count.setText(""+"0");
         viewHolder.cb_prasid.setTag(R.id.cb_prasid, position);
-        ImageLoader.getInstance().displayImage("", viewHolder.iv_tank, PhotoUtils.avatarImageOptions);
+        ImageLoader.getInstance().displayImage("", viewHolder.iv_tank, PhotoUtils.avatarImageOption);
         viewHolder.cb_prasid.setChecked(flag.contains(position + ""));
         viewHolder.cb_prasid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

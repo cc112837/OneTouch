@@ -14,12 +14,18 @@ import java.util.List;
  */
 public class OrderInfo {
 
+
     /**
-     * shopName :
-     * payMoney : 1.0
-     * userName :
-     * tradeTime :
-     * status  :
+     * createTime : 2016-09-19 15:14:50.0
+     * shopNumber : 2016091921001004430266499957
+     * payMoney : 0.01
+     * status : 0
+     * tradeTime : 2016-09-19 15:13:57.0
+     * shopName : ceishi
+     * shopId : 6
+     * OrderId : 10
+     * userName : 18369956786
+     * shopOrder : 091915143358521
      */
 
     private List<DataEntity> data;
@@ -33,77 +39,96 @@ public class OrderInfo {
     }
 
     public static class DataEntity {
-        private String shopName;
-        private double payMoney;
-        private String userName;
-        private String tradeTime;
-        private String status;
-        private String id;
         private String createTime;
+        private String shopNumber;
+        private double payMoney;
+        private int status;
+        private String tradeTime;
+        private String shopName;
+        private int shopId;
+        private int OrderId;
+        private String userName;
         private String shopOrder;
-
-        public String getCreateTime() {
-            return createTime;
-        }
 
         public void setCreateTime(String createTime) {
             this.createTime = createTime;
         }
 
-        public String getShopOrder() {
-            return shopOrder;
-        }
-
-        public void setShopOrder(String shopOrder) {
-            this.shopOrder = shopOrder;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public void setShopName(String shopName) {
-            this.shopName = shopName;
+        public void setShopNumber(String shopNumber) {
+            this.shopNumber = shopNumber;
         }
 
         public void setPayMoney(double payMoney) {
             this.payMoney = payMoney;
         }
 
-        public void setUserName(String userName) {
-            this.userName = userName;
+        public void setStatus(int status) {
+            this.status = status;
         }
 
         public void setTradeTime(String tradeTime) {
             this.tradeTime = tradeTime;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setShopName(String shopName) {
+            this.shopName = shopName;
         }
 
-        public String getShopName() {
-            return shopName;
+        public void setShopId(int shopId) {
+            this.shopId = shopId;
+        }
+
+        public void setOrderId(int OrderId) {
+            this.OrderId = OrderId;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public void setShopOrder(String shopOrder) {
+            this.shopOrder = shopOrder;
+        }
+
+        public String getCreateTime() {
+            return createTime;
+        }
+
+        public String getShopNumber() {
+            return shopNumber;
         }
 
         public double getPayMoney() {
             return payMoney;
         }
 
-        public String getUserName() {
-            return userName;
+        public int getStatus() {
+            return status;
         }
 
         public String getTradeTime() {
             return tradeTime;
         }
 
-        public String getStatus() {
-            return status;
+        public String getShopName() {
+            return shopName;
+        }
+
+        public int getShopId() {
+            return shopId;
+        }
+
+        public int getOrderId() {
+            return OrderId;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public String getShopOrder() {
+            return shopOrder;
         }
     }
+
 }

@@ -18,6 +18,7 @@ import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Record;
+import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.StepResult;
@@ -112,6 +113,7 @@ public class MyHttpUtils extends HttpUtils{
       if(what==120){
           TiUser user=(TiUser)object;
           params.addBodyParameter("result",user.getName());
+          params.addBodyParameter("id",user.getTel());
           params.addBodyParameter("userName",user.getCardId());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
       }
@@ -125,7 +127,11 @@ public class MyHttpUtils extends HttpUtils{
           params.addBodyParameter("userName",user.getName());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
       }
-
+      if(what==122){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("userName",user.getName());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
+      }
       if(what==123){
           TiUser user=(TiUser) object;
           params.addBodyParameter("userName",user.getName());
@@ -136,6 +142,16 @@ public class MyHttpUtils extends HttpUtils{
           TiUser user=(TiUser) object;
           params.addBodyParameter("stepTime",user.getPass());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
+      }
+      if(what==124){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("stepTime",user.getPass());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
+      }
+      if(what==131){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("OrderId",user.getTel());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
       }
   }
 }

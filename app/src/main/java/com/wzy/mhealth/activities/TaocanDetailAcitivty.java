@@ -18,27 +18,26 @@ import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class TaocanDetailAcitivty extends Activity {
-    private ImageView leftBtn,iv_detail;
-    private TextView tv_old, tv_new, tv_buy,titleView;
+    private ImageView leftBtn, iv_detail;
+    private TextView tv_old, tv_new, tv_buy, titleView;
     private String id;
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 116:
-                    final TaocanDetail taocanDetail=(TaocanDetail)msg.obj;
-                    tv_old.setText(taocanDetail.getOldPrice()+"元");
-                    titleView.setText(taocanDetail.getName()+"");
-                    tv_new.setText(taocanDetail.getNewPrice()+"元");
-
+                    final TaocanDetail taocanDetail = (TaocanDetail) msg.obj;
+                    tv_old.setText(taocanDetail.getOldPrice() + "元");
+                    titleView.setText(taocanDetail.getName() + "");
+                    tv_new.setText(taocanDetail.getNewPrice() + "元");
                     tv_buy.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(TaocanDetailAcitivty.this, TaocanBuyActivity.class);
-                            intent.putExtra("name", taocanDetail.getName()+"");
-                            intent.putExtra("price", taocanDetail.getNewPrice()+"");
-                            intent.putExtra("old", taocanDetail.getOldPrice()+"");
-                            intent.putExtra("id",taocanDetail.getId()+"");
+                            intent.putExtra("name", taocanDetail.getName() + "");
+                            intent.putExtra("price", taocanDetail.getNewPrice() + "");
+                            intent.putExtra("old", taocanDetail.getOldPrice() + "");
+                            intent.putExtra("id", taocanDetail.getId() + "");
                             startActivity(intent);
                         }
                     });
@@ -48,16 +47,17 @@ public class TaocanDetailAcitivty extends Activity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taocan_detail_acitivty);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        String url= Constants.SERVER_URL+"TaoCanPayServlet";
+        String url = Constants.SERVER_URL + "TaoCanPayServlet";
         TiUser user = new TiUser();
-        user.setName(id+"");
-        MyHttpUtils.handData(handler,116,url,user);
+        user.setName(id + "");
+        MyHttpUtils.handData(handler, 116, url, user);
         init();
     }
 
@@ -72,9 +72,8 @@ public class TaocanDetailAcitivty extends Activity {
         tv_old = (TextView) findViewById(R.id.tv_old);
         tv_new = (TextView) findViewById(R.id.tv_new);
         tv_buy = (TextView) findViewById(R.id.tv_buy);
-        titleView=(TextView) findViewById(R.id.titleView);
-        iv_detail=(ImageView) findViewById(R.id.iv_detail);
-
+        titleView = (TextView) findViewById(R.id.titleView);
+        iv_detail = (ImageView) findViewById(R.id.iv_detail);
         tv_old.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 }

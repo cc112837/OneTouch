@@ -201,7 +201,6 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                 AliPayBack stepInfo=(AliPayBack) msg.obj;
                 final String orderInfo=stepInfo.getData();
                 Runnable payRunnable = new Runnable() {
-
                     @Override
                     public void run() {
                         PayTask alipay = new PayTask(TaocanBuyActivity.this);
@@ -212,7 +211,6 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                         mHandler.sendMessage(msg);
                     }
                 };
-
                 Thread payThread = new Thread(payRunnable);
                 payThread.start();
                 break;
@@ -226,6 +224,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                     String url=Constants.SERVER_URL+"PayServlet";
                     TiUser user=new TiUser();
                     user.setName(resultInfo);
+                    user.setTel(id+"");
                     user.setCardId(LeanchatUser.getCurrentUser().getUsername());
                     MyHttpUtils.handData(mHandler,120,url,user);
                     Toast.makeText(TaocanBuyActivity.this, "支付成功", Toast.LENGTH_SHORT).show();

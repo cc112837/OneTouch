@@ -38,6 +38,7 @@ public class NowOrderFragment extends Fragment {
                 case 121:
                     final OrderInfo orderInfo = (OrderInfo) msg.obj;
                     if (orderInfo.getData().size() == 0) {
+
                     } else {
                         list.addAll(orderInfo.getData());
                         adapter.notifyDataSetChanged();
@@ -45,13 +46,15 @@ public class NowOrderFragment extends Fragment {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent intent = new Intent(getActivity(), OrderStatusActivity.class);
-                                intent.putExtra("id", list.get(position).getId() + "");
+                                intent.putExtra("id", list.get(position).getShopId() + "");
                                 intent.putExtra("name", list.get(position).getShopName() + "");
                                 intent.putExtra("price", list.get(position).getPayMoney() + "");
                                 intent.putExtra("bought", list.get(position).getTradeTime() + "");
                                 intent.putExtra("status", list.get(position).getStatus() + "");
                                 intent.putExtra("creat", list.get(position).getCreateTime() + "");
                                 intent.putExtra("num", list.get(position).getShopOrder() + "");
+                                intent.putExtra("orderid", list.get(position).getOrderId() + "");
+                                intent.putExtra("account", list.get(position).getShopNumber() + "");
                                 startActivity(intent);
                             }
                         });
