@@ -82,6 +82,8 @@ public class OrderStatusActivity extends Activity {
                             TiUser user = new TiUser();
                             user.setTel(orderid);
                             MyHttpUtils.handData(handler, 131, url, user);
+                            Toast.makeText(OrderStatusActivity.this, "您的请求已被受理，一般会在3~5个工作日处理完成", Toast.LENGTH_LONG
+                            ).show();
                         }
                     });
                     builder.create().show();

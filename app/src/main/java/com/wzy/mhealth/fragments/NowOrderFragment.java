@@ -37,7 +37,7 @@ public class NowOrderFragment extends Fragment {
             switch (msg.what) {
                 case 121:
                     final OrderInfo orderInfo = (OrderInfo) msg.obj;
-                    if (orderInfo.getData().size() == 0) {
+                    if (orderInfo.getData()==null) {
 
                     } else {
                         list.addAll(orderInfo.getData());

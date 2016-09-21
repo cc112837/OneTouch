@@ -48,7 +48,7 @@ public class TaocanDetailAcitivty extends Activity {
                     webSettings.setLoadWithOverviewMode(true);
                     webSettings.setJavaScriptEnabled(true);
                     webSettings.setBuiltInZoomControls(true);
-                    webSettings.setTextZoom(300);
+                    webSettings.setTextZoom(240);
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
                     wv_show.loadData(taocanDetail.getContext(), "text/html; charset=utf-8", "utf-8");
                     break;
