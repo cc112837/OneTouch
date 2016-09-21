@@ -65,9 +65,9 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class MyFragment extends D3Fragment {
 
-    RelativeLayout logout, account, manager, erweima, noti_news, secret, normal, about, familyHealth;
+    RelativeLayout logout, myproud,account, manager, erweima, noti_news, secret, normal, about, familyHealth;
     TextView username;
-    LinearLayout about1, cache, fankui;
+    LinearLayout about1, cache, fankui,ll_extramoney,ll_decrease,ll_grade;
     ImageView headImage;
     String iconUrl;
     String dateTime;
@@ -107,6 +107,28 @@ public class MyFragment extends D3Fragment {
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
+        ll_extramoney=(LinearLayout)view.findViewById(R.id.ll_extramoney);
+        ll_decrease=(LinearLayout) view.findViewById(R.id.ll_decrease);
+        ll_grade=(LinearLayout) view.findViewById(R.id.ll_grade);
+        ll_extramoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2016/9/21 账户余额 
+            }
+        });
+        ll_decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2016/9/21 优惠劵 
+            }
+        });
+        ll_grade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2016/9/21 积分
+            }
+        });
+        myproud=(RelativeLayout) view.findViewById(R.id.myproud);
         cache = (LinearLayout) view.findViewById(R.id.cache);
         about1 = (LinearLayout) view.findViewById(R.id.about1);
         fankui = (LinearLayout) view.findViewById(R.id.fankui);
@@ -121,6 +143,12 @@ public class MyFragment extends D3Fragment {
         username.setText(Constants.USER_NAME);
         headImage = (ImageView) view.findViewById(R.id.headView);
         LeanchatUser curUser = AVUser.getCurrentUser(LeanchatUser.class);
+        myproud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2016/9/21 我的勋章
+            }
+        });
         String avatarUrl = curUser.getAvatarUrl();
         if (avatarUrl == null) {
             try {

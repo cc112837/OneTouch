@@ -126,7 +126,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                 switch (view.getId()) {
                     case R.id.stepperCustom:
                         number=value;
-                        tv_price.setText(Integer.parseInt(price) * value + "元");
+                        tv_price.setText(Double.parseDouble(price) * value + "元");
                         break;
                 }
             }
