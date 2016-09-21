@@ -23,6 +23,7 @@ public class TaocanDetailAcitivty extends Activity {
     private TextView tv_old, tv_new, tv_buy, titleView;
     private String id;
     private WebView wv_show;
+    Intent intent;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -35,12 +36,14 @@ public class TaocanDetailAcitivty extends Activity {
                     tv_buy.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(TaocanDetailAcitivty.this, TaocanBuyActivity.class);
-                            intent.putExtra("name", taocanDetail.getName() + "");
-                            intent.putExtra("price", taocanDetail.getNewPrice() + "");
-                            intent.putExtra("old", taocanDetail.getOldPrice() + "");
-                            intent.putExtra("id", taocanDetail.getId() + "");
-                            startActivity(intent);
+                            Intent intent1 = new Intent(TaocanDetailAcitivty.this, TaocanBuyActivity.class);
+                            intent1.putExtra("name", taocanDetail.getName() + "");
+                            intent1.putExtra("price", taocanDetail.getNewPrice() + "");
+                            intent1.putExtra("old", taocanDetail.getOldPrice() + "");
+                            intent1.putExtra("id", taocanDetail.getId() + "");
+                            setResult(456,intent);
+                            startActivity(intent1);
+                            TaocanDetailAcitivty.this.finish();
                         }
                     });
                     WebSettings webSettings = wv_show.getSettings();
@@ -61,7 +64,7 @@ public class TaocanDetailAcitivty extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taocan_detail_acitivty);
-        Intent intent = getIntent();
+        intent = getIntent();
         id = intent.getStringExtra("id");
         String url = Constants.SERVER_URL + "TaoCanPayServlet";
         TiUser user = new TiUser();

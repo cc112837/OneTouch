@@ -128,12 +128,12 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    Intent intent=new Intent(PersonTaocanActivity.this,ZhixingIntroduceActivity.class);
+                    Intent intent = new Intent(PersonTaocanActivity.this, ZhixingIntroduceActivity.class);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(PersonTaocanActivity.this, TaocanDetailAcitivty.class);
                     intent.putExtra("id", list.get(position - 1).getId() + "");
-                    startActivity(intent);
+                    startActivityForResult(intent, 456);
                 }
             }
         });
@@ -145,4 +145,14 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case 456:
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
 }

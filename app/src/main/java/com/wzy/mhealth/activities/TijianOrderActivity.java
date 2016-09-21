@@ -1,5 +1,6 @@
 package com.wzy.mhealth.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -69,9 +70,9 @@ public class TijianOrderActivity extends FragmentActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position == 0) {
-                    rbTextColorSet(rb_noworder,rb_hisorder);
+                    rbTextColorSet(rb_noworder, rb_hisorder);
                 } else {
-                    rbTextColorSet(rb_hisorder,rb_noworder);
+                    rbTextColorSet(rb_hisorder, rb_noworder);
                 }
             }
 
@@ -90,5 +91,14 @@ public class TijianOrderActivity extends FragmentActivity {
     {
         b1.setTextColor(getResources().getColor(R.color.title_green));
         b2.setTextColor(getResources().getColor(R.color.dark_grey));
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case 345:
+                TijianOrderActivity.this.finish();
+                break;
+            default:
+                break;
+        }
     }
 }

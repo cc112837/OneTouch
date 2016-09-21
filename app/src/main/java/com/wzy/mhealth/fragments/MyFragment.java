@@ -41,7 +41,9 @@ import com.wzy.mhealth.activities.BarCodeActivity;
 import com.wzy.mhealth.activities.ChangePwdActivity;
 import com.wzy.mhealth.activities.LoginActivity;
 import com.wzy.mhealth.activities.ManageActivity;
+import com.wzy.mhealth.activities.MyGradeActivity;
 import com.wzy.mhealth.activities.NotiNewsActivity;
+import com.wzy.mhealth.activities.ProudActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.StepInfo;
@@ -65,9 +67,9 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class MyFragment extends D3Fragment {
 
-    RelativeLayout logout, myproud,account, manager, erweima, noti_news, secret, normal, about, familyHealth;
-    TextView username;
-    LinearLayout about1, cache, fankui,ll_extramoney,ll_decrease,ll_grade;
+    RelativeLayout logout, myproud, account, manager, erweima, noti_news, secret, normal, about, familyHealth;
+    TextView username,tv_gradenum;
+    LinearLayout about1, cache, fankui, ll_extramoney, ll_decrease, ll_grade;
     ImageView headImage;
     String iconUrl;
     String dateTime;
@@ -78,9 +80,9 @@ public class MyFragment extends D3Fragment {
             switch (msg.what) {
                 case 31:
                     StepInfo stepInfo1 = (StepInfo) msg.obj;
-                    if(stepInfo1.getStatus().equals("1")||stepInfo1.getStatus().equals("2")){
+                    if (stepInfo1.getStatus().equals("1") || stepInfo1.getStatus().equals("2")) {
                         Intent intent = new Intent(getActivity(), StepCountActivity.class);
-                    startActivity(intent);
+                        startActivity(intent);
                     }
                     break;
             }
@@ -107,9 +109,10 @@ public class MyFragment extends D3Fragment {
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
-        ll_extramoney=(LinearLayout)view.findViewById(R.id.ll_extramoney);
-        ll_decrease=(LinearLayout) view.findViewById(R.id.ll_decrease);
-        ll_grade=(LinearLayout) view.findViewById(R.id.ll_grade);
+        ll_extramoney = (LinearLayout) view.findViewById(R.id.ll_extramoney);
+        ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
+        ll_grade = (LinearLayout) view.findViewById(R.id.ll_grade);
+        tv_gradenum=(TextView) view.findViewById(R.id.tv_gradenum);
         ll_extramoney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,10 +128,12 @@ public class MyFragment extends D3Fragment {
         ll_grade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/9/21 积分
+                Intent intent = new Intent(getActivity(), MyGradeActivity.class);
+                intent.putExtra("count",tv_gradenum.getText().toString());
+                startActivity(intent);
             }
         });
-        myproud=(RelativeLayout) view.findViewById(R.id.myproud);
+        myproud = (RelativeLayout) view.findViewById(R.id.myproud);
         cache = (LinearLayout) view.findViewById(R.id.cache);
         about1 = (LinearLayout) view.findViewById(R.id.about1);
         fankui = (LinearLayout) view.findViewById(R.id.fankui);
@@ -146,7 +151,8 @@ public class MyFragment extends D3Fragment {
         myproud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/9/21 我的勋章
+                Intent intent = new Intent(getActivity(), ProudActivity.class);
+                startActivity(intent);
             }
         });
         String avatarUrl = curUser.getAvatarUrl();
@@ -261,7 +267,7 @@ public class MyFragment extends D3Fragment {
                 // TODO: 2016/7/8 我的计步 家人健康FamilyHealthActivity
                 TiUser step = new TiUser();
                 step.setName(LeanchatUser.getCurrentUser().getUsername());
-                String ul = Constants.SERVER_URL+"StepNumInitServlet";
+                String ul = Constants.SERVER_URL + "StepNumInitServlet";
                 MyHttpUtils.handData(handler, 31, ul, step);
 
             }

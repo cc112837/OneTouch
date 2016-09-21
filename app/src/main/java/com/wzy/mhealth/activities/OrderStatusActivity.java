@@ -22,12 +22,13 @@ public class OrderStatusActivity extends Activity {
     private TextView tv_orderstatus, tv_name, tv_price, back_money, tv_ordernum, tv_orderbuy, tv_bought;
     private ImageView iv_taointro, iv_taocandetail, leftBtn;
     String id, name, price, bought, status, creat, num, account, orderid;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_status);
-        Intent intent = getIntent();
+        intent = getIntent();
         id = intent.getStringExtra("id");
         name = intent.getStringExtra("name");
         price = intent.getStringExtra("price");
@@ -82,8 +83,6 @@ public class OrderStatusActivity extends Activity {
                             TiUser user = new TiUser();
                             user.setTel(orderid);
                             MyHttpUtils.handData(handler, 131, url, user);
-                            Toast.makeText(OrderStatusActivity.this, "您的请求已被受理，一般会在3~5个工作日处理完成", Toast.LENGTH_LONG
-                            ).show();
                         }
                     });
                     builder.create().show();
@@ -136,8 +135,10 @@ public class OrderStatusActivity extends Activity {
                 case 131:
                     Retuback retuback = (Retuback) msg.obj;
                     if (retuback.getStatus().equals("1")) {
-                        Toast.makeText(OrderStatusActivity.this, "请求已被受理，马上为您处理", Toast.LENGTH_LONG
+                        Toast.makeText(OrderStatusActivity.this, "您的请求已被受理，一般会在3~5个工作日处理完成", Toast.LENGTH_LONG
                         ).show();
+                        setResult(345,intent);
+                        finish();
                     } else {
                         Toast.makeText(OrderStatusActivity.this, retuback.getMessage(), Toast.LENGTH_LONG
                         ).show();

@@ -54,6 +54,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
     private Context mContext = null;
     private Handler mHandler = null;
     int number=1;
+    Intent intent;
     private ProgressDialog mLoadingDialog = null;
     private static final int SDK_ALIPAY_FLAG = 1;
     private static final int SDK_UNIONPAY_FLAG = 2;
@@ -96,7 +97,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
         setContentView(R.layout.activity_taocan_buy);
         mContext = this;
         mHandler = new Handler(this);
-        Intent intent = getIntent();
+        intent = getIntent();
         name = intent.getStringExtra("name");
         price = intent.getStringExtra("price");
         old = intent.getStringExtra("old");
@@ -192,8 +193,9 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
             case 120:
                 StepInfo info= (StepInfo)msg.obj;
                 if(info.getStatus().equals("1")){
-                    Intent intent=new Intent(TaocanBuyActivity.this,TijianOrderActivity.class);
-                    startActivity(intent);
+                    Intent intent1=new Intent(TaocanBuyActivity.this,TijianOrderActivity.class);
+                    startActivity(intent1);
+                    TaocanBuyActivity.this.finish();
                 }
 
                 break;
