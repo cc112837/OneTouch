@@ -310,7 +310,8 @@
         <activity android:name=".activities.OrderStatusActivity" />
         <activity android:name=".activities.ProudActivity" />
         <activity android:name=".activities.LightActivity" />
-        <activity android:name=".activities.MyGradeActivity"></activity>
+        <activity android:name=".activities.MyGradeActivity" />
+        <activity android:name=".activities.SettingActivity"></activity>
     </application>
 
 </manifest>

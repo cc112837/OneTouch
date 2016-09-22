@@ -48,7 +48,7 @@ public class RankActivity extends Activity {
                     break;
                 case 124:
                     AllStepRank allStepRank = (AllStepRank) msg.obj;
-                    list.addAll(allStepRank.getData());
+                    rankAdapter.setList(allStepRank.getData());
                     rankAdapter.notifyDataSetChanged();
                     break;
             }
@@ -90,9 +90,9 @@ public class RankActivity extends Activity {
         SimpleDateFormat sf1 = new SimpleDateFormat("yyyy-MM-dd");
         String nowdat = sf1.format(new Date());
         user1.setPass(nowdat);
-        MyHttpUtils.handData(handler, 124, uri, user1);
         rankAdapter = new RankAdapter(RankActivity.this, list);
         lv_show.setAdapter(rankAdapter);
+        MyHttpUtils.handData(handler, 124, uri, user1);
         View headview = LayoutInflater.from(RankActivity.this).inflate(R.layout.list_rank_header, null);
         lv_show.addHeaderView(headview);
 

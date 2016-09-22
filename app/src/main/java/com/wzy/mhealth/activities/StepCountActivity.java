@@ -86,6 +86,7 @@ public class StepCountActivity extends BaActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(StepCountActivity.this,RankActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         leftBtn_back = (ImageView) findViewById(R.id.leftBtn_back);

@@ -19,31 +19,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
-import com.avos.avoscloud.feedback.FeedbackAgent;
-import com.avos.avoscloud.im.v2.AVIMClient;
-import com.avos.avoscloud.im.v2.AVIMException;
-import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
-import com.avoscloud.leanchatlib.controller.ChatManager;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.LeanChat.util.PathUtils;
 import com.wzy.mhealth.LeanChat.util.PhotoUtils;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.AboutActivity;
 import com.wzy.mhealth.activities.BarCodeActivity;
-import com.wzy.mhealth.activities.ChangePwdActivity;
-import com.wzy.mhealth.activities.LoginActivity;
 import com.wzy.mhealth.activities.ManageActivity;
 import com.wzy.mhealth.activities.MyGradeActivity;
-import com.wzy.mhealth.activities.NotiNewsActivity;
 import com.wzy.mhealth.activities.ProudActivity;
+import com.wzy.mhealth.activities.SettingActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.StepInfo;
@@ -67,9 +58,9 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class MyFragment extends D3Fragment {
 
-    RelativeLayout logout, myproud, account, manager, erweima, noti_news, secret, normal, about, familyHealth;
-    TextView username,tv_gradenum;
-    LinearLayout about1, cache, fankui, ll_extramoney, ll_decrease, ll_grade;
+    RelativeLayout logout, myproud, setting, manager, erweima, secret, normal, about, familyHealth;
+    TextView username, tv_gradenum;
+    LinearLayout about1, ll_decrease, ll_grade;
     ImageView headImage;
     String iconUrl;
     String dateTime;
@@ -88,7 +79,7 @@ public class MyFragment extends D3Fragment {
             }
         }
     };
-    private ChatManager chatManager = ChatManager.getInstance();
+
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -109,16 +100,9 @@ public class MyFragment extends D3Fragment {
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
-        ll_extramoney = (LinearLayout) view.findViewById(R.id.ll_extramoney);
         ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
         ll_grade = (LinearLayout) view.findViewById(R.id.ll_grade);
-        tv_gradenum=(TextView) view.findViewById(R.id.tv_gradenum);
-        ll_extramoney.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2016/9/21 账户余额 
-            }
-        });
+        tv_gradenum = (TextView) view.findViewById(R.id.tv_gradenum);
         ll_decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,25 +113,32 @@ public class MyFragment extends D3Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MyGradeActivity.class);
-                intent.putExtra("count",tv_gradenum.getText().toString());
+                intent.putExtra("count", tv_gradenum.getText().toString());
                 startActivity(intent);
             }
         });
         myproud = (RelativeLayout) view.findViewById(R.id.myproud);
-        cache = (LinearLayout) view.findViewById(R.id.cache);
+
         about1 = (LinearLayout) view.findViewById(R.id.about1);
-        fankui = (LinearLayout) view.findViewById(R.id.fankui);
-        logout = (RelativeLayout) view.findViewById(R.id.logout);
-        account = (RelativeLayout) view.findViewById(R.id.account);
+
+
         erweima = (RelativeLayout) view.findViewById(R.id.erweima);
         manager = (RelativeLayout) view.findViewById(R.id.manager);
-        noti_news = (RelativeLayout) view.findViewById(R.id.noti_news);
+
+        setting = (RelativeLayout) view.findViewById(R.id.setting);
         about = (RelativeLayout) view.findViewById(R.id.about);
         familyHealth = (RelativeLayout) view.findViewById(R.id.familyHealth);
         username = (TextView) view.findViewById(R.id.username);
         username.setText(Constants.USER_NAME);
         headImage = (ImageView) view.findViewById(R.id.headView);
         LeanchatUser curUser = AVUser.getCurrentUser(LeanchatUser.class);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
         myproud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,46 +187,7 @@ public class MyFragment extends D3Fragment {
                 startActivity(intent);
             }
         });
-        fankui.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FeedbackAgent agent = new FeedbackAgent(getActivity());
-                agent.startDefaultThreadActivity();
-            }
-        });
-        cache.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "清除缓存", Toast.LENGTH_LONG).show();
-            }
-        });
-        logout.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-
-                chatManager.closeWithCallback(new AVIMClientCallback() {
-                    @Override
-                    public void done(AVIMClient avimClient, AVIMException e) {
-                    }
-                });
-                PushManager.getInstance().unsubscribeCurrentUserChannel();
-                AVUser.logOut();
-                getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                getActivity().finish();
-//				System.exit(0);
-            }
-        });
-        account.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), ChangePwdActivity.class);
-                getActivity().startActivity(intent);
-
-            }
-        });
         erweima.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -246,15 +198,7 @@ public class MyFragment extends D3Fragment {
 
             }
         });
-        noti_news.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotiNewsActivity.class);
-                startActivity(intent);
-
-            }
-        });
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

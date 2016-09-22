@@ -38,6 +38,9 @@ public class RankAdapter extends BaseAdapter {
         this.list=list;
         this.context=context;
     }
+    public void setList(List<AllStepRank.DataEntity> list){
+        this.list=list;
+    }
     @Override
     public int getCount() {
         return list.size();
