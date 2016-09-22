@@ -65,8 +65,8 @@ public class OrderStatusActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(OrderStatusActivity.this);
-                    builder.setTitle("退款界面");
-                    builder.setMessage("你确定要退款吗");
+                    builder.setTitle("申请退款界面");
+                    builder.setMessage("你确定要申请退款吗");
                     builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -76,8 +76,8 @@ public class OrderStatusActivity extends Activity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
-                            back_money.setText("退款中");
-                            tv_orderstatus.setText("退款中");
+                            back_money.setText("处理中");
+                            tv_orderstatus.setText("处理中");
                             back_money.setEnabled(false);
                             String url = Constants.SERVER_URL + "PayBackServlet";
                             TiUser user = new TiUser();
@@ -103,8 +103,8 @@ public class OrderStatusActivity extends Activity {
         } else if (status.equals("3")) {
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
-            tv_orderstatus.setText("退款中");
-            back_money.setText("退款中");
+            tv_orderstatus.setText("处理中");
+            back_money.setText("处理中");
 
         }
 
