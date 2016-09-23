@@ -144,6 +144,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ManageActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.AboutActivity"
@@ -202,9 +203,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.GuahaoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.ZixunActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.PoiKeywordSearchActivity"

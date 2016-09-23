@@ -35,7 +35,6 @@ import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.RouteActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.YuyueListActivity;
-import com.wzy.mhealth.activities.ZixunActivity;
 import com.wzy.mhealth.view.LocalImageHolderView;
 import com.wzy.mhealth.view.MyScrollView;
 
@@ -145,14 +144,6 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), GuahaoActivity.class);
                 startActivity(intent);
 
-            }
-        });
-        rb_select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //咨询页面
-                Intent intent = new Intent(getActivity(), ZixunActivity.class);
-                startActivity(intent);
             }
         });
 

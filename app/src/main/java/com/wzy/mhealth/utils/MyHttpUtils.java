@@ -2,6 +2,7 @@ package com.wzy.mhealth.utils;
 
 import android.os.Handler;
 
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -19,6 +20,7 @@ import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.Retuback;
+import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.StepResult;
@@ -152,6 +154,22 @@ public class MyHttpUtils extends HttpUtils{
           TiUser user=(TiUser) object;
           params.addBodyParameter("OrderId",user.getTel());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
+      }
+      if(what==150){
+          SelfHealth selfHealth=(SelfHealth)object;
+          params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+          params.addBodyParameter("name",selfHealth.getName());
+          params.addBodyParameter("sex",selfHealth.getSex());
+          params.addBodyParameter("profession",selfHealth.getProfession());
+          params.addBodyParameter("age",selfHealth.getAge());
+          params.addBodyParameter("marrage",selfHealth.getMarrage());
+          params.addBodyParameter("relator",selfHealth.getRelator());
+          params.addBodyParameter("relate",selfHealth.getRelate());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+      }
+      if(what==151){
+          params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
       }
   }
 }
