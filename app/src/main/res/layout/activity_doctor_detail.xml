@@ -159,17 +159,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="图文"
+                        android:text="图文咨询"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/tuwentu"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_margin="6dp"
-                        android:background="@mipmap/tuwen_green"
+                        android:layout_margin="10dp"
+                        android:background="@mipmap/camera_doctor"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -179,7 +179,7 @@
                         android:gravity="center"
                         android:text="15元/次"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <View
@@ -201,18 +201,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="电话"
+                        android:text="电话咨询"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/dianhuatu"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_margin="6dp"
+                        android:layout_margin="10dp"
                         android:scaleType="fitXY"
-                        android:src="@mipmap/phone_green" />
+                        android:src="@mipmap/phone_doctor" />
 
                     <TextView
                         android:id="@+id/dianhuafeiyong"
@@ -221,7 +221,7 @@
                         android:gravity="center"
                         android:text="未开通"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <View
@@ -243,17 +243,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="加号"
+                        android:text="视频咨询"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/jiahaotu"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_margin="6dp"
-                        android:background="@mipmap/add_green"
+                        android:layout_margin="10dp"
+                        android:background="@mipmap/video_doctor"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -263,7 +263,7 @@
                         android:gravity="center"
                         android:text="未开通"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <View
@@ -283,18 +283,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="私人"
+                        android:text="私人医生"
                         android:layout_marginTop="7dp"
                         android:textColor="#666666"
                         android:textSize="13sp" />
 
                     <ImageView
                         android:id="@+id/privatetu"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_margin="6dp"
-                        android:background="@mipmap/private_green"
+                        android:layout_margin="10dp"
+                        android:background="@mipmap/person_doctor_grey"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -304,7 +304,7 @@
                         android:gravity="center"
                         android:text="未开通"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <View
@@ -324,18 +324,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="视频"
+                        android:text="预约挂号"
                         android:layout_marginTop="7dp"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/vediotu"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_margin="6dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="10dp"
                         android:layout_gravity="center"
-                        android:background="@mipmap/vedio_green"
+                        android:background="@mipmap/before_doctor_grey"
                         android:scaleType="fitXY" />
 
                     <TextView
@@ -345,30 +345,9 @@
                         android:gravity="center"
                         android:text="未开通"
                         android:textColor="#666666"
-                        android:textSize="13sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- <View
-                    android:layout_width="1dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="#c0c0c0" />
-                <LinearLayout
-                    android:id="@+id/more"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:id="@+id/gengduo"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/shenglvehao"
-                        android:scaleType="fitXY" />
-                </LinearLayout> -->
 
                 <View
                     android:layout_width="1dp"

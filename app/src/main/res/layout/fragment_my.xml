@@ -64,37 +64,37 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/proud" />
+                            android:src="@mipmap/gift_red" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/proud" />
+                            android:src="@mipmap/gift_grey" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/proud" />
+                            android:src="@mipmap/love_red" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/proud" />
+                            android:src="@mipmap/love_grey" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/proud" />
+                            android:src="@mipmap/speed_proud" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/proud" />
+                            android:src="@mipmap/speed_grey" />
 
                         <ImageView
                             android:layout_width="wrap_content"

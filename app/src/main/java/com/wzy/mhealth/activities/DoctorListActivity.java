@@ -3,6 +3,8 @@ package com.wzy.mhealth.activities;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,15 +21,16 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.DoctorListAdapter;
 import com.wzy.mhealth.adapter.LocationAdapter;
 import com.wzy.mhealth.adapter.ProvinceAdapter;
-import com.wzy.mhealth.inter.XmppConnection;
-import com.wzy.mhealth.model.DoctorEntity;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Doctor;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorListActivity extends BaActivity {
 
-    private List<DoctorEntity> doctorlist;
+    private List<Doctor.DataEntity> doctorlist;
     private List<String> locationList;
     public List<String> cityList, list2;
     private ListView lv, locationListView, cityListView;
@@ -42,16 +45,12 @@ public class DoctorListActivity extends BaActivity {
     private LinearLayout doctorlistLayout;
     private ProvinceAdapter provinceAdapter;
     private TextView locationtTextView;
-    private String keshi;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_list);
-
-        Intent intent = getIntent();
-        keshi = (String) intent.getStringExtra("keshi");
         location = (LinearLayout) findViewById(R.id.total_location);
         locationtTextView = (TextView)location.findViewById(R.id.text_category);
         department = (LinearLayout) findViewById(R.id.department);
@@ -75,28 +74,15 @@ public class DoctorListActivity extends BaActivity {
         });
 
         lv = (ListView) findViewById(R.id.doctorlist);
-        doctorlist = new ArrayList<DoctorEntity>();
-        locationList = new ArrayList<String>();
-        cityList = new ArrayList<String>();
-        list2 = new ArrayList<String>();
-        //initbydatabase();
-        //initlist();
-        init();
+        doctorlist = new ArrayList<>();
+        locationList = new ArrayList<>();
+        cityList = new ArrayList<>();
+        list2 = new ArrayList<>();
+        String url= Constants.SERVER_URL+"MhealthDoctorServlet";
+        MyHttpUtils.handData(handler, 152, url, null);
         adapter = new DoctorListAdapter(this, doctorlist);
         lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent intent = new Intent();
-                intent.setClass(DoctorListActivity.this, DoctorDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("doctor", doctorlist.get(position));
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
         //返回箭头
         ImageView imageback = (ImageView) findViewById(R.id.leftBtn);
 
@@ -109,53 +95,31 @@ public class DoctorListActivity extends BaActivity {
         });
     }
 
+private Handler handler=new Handler(){
+    @Override
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what){
+            case 152:
+                final Doctor doctor=(Doctor)msg.obj;
+                doctorlist.addAll(doctor.getData());
+                adapter.notifyDataSetChanged();
+                lv.setOnItemClickListener(new OnItemClickListener() {
 
-
-    private void init() {
-// TODO: 2016/5/25 (修改成无网络)
-        doctorlist.addAll(XmppConnection.getInstance().getDoctorListBykeshi(keshi));
-        doctorlist.add(new DoctorEntity("邓珊","liao","内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","5","5","15","9.2"));
-        doctorlist.add(new DoctorEntity("李芳","long", "内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","9.8"));
-        doctorlist.add(new DoctorEntity("刘卫华", "zhang","内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","8.8"));
-        doctorlist.add(new DoctorEntity("左丽珊", "zuolishan","内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","9.9"));
-        doctorlist.add(new DoctorEntity("赵荣","admin", "内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","8.8"));
-        doctorlist.add(new DoctorEntity("谷雨", "admin","内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","9.5"));
-        doctorlist.add(new DoctorEntity("刘晓梅","admin", "内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","9.8"));
-        doctorlist.add(new DoctorEntity("程芳","admin", "内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","8.8"));
-        doctorlist.add(new DoctorEntity("黄春玉","admin", "内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","9.1"));
-        doctorlist.add(new DoctorEntity("宋静","admin", "内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","9.2"));
-        doctorlist.add(new DoctorEntity("丁鑫", "admin","内科", "主任医师",
-                "中国人民解放军总医院（301医院）", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺","9.5"));
-        locationList.add("北京市");
-        locationList.add("北京市");
-        locationList.add("北京市");
-        locationList.add("北京市");
-        locationList.add("北京市");
-        locationList.add("北京市");
-        locationList.add("北京市");
-        cityList.add("海淀区");
-        cityList.add("海淀区");
-        cityList.add("海淀区");
-        cityList.add("海淀区");
-        cityList.add("海淀区");
-        cityList.add("海淀区");
-        list2.add("西城区");
-        list2.add("西城区");
-        list2.add("西城区");
-        list2.add("西城区");
-        list2.add("西城区");
-
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        Intent intent = new Intent();
+                        intent.setClass(DoctorListActivity.this, DoctorDetailActivity.class);
+                        intent.putExtra("doctor",doctor.getData().get(position).getId()+"" );
+                        startActivity(intent);
+                    }
+                });
+            break;
+        }
     }
+};
+
 
     private void showPopupWindow(int width, int height) {
         layout_left = (LinearLayout) LayoutInflater.from(

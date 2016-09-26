@@ -40,6 +40,7 @@ public class RankActivity extends Activity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            super.handleMessage(msg);
             switch (msg.what) {
                 case 123:
                     StepRank stepRank = (StepRank) msg.obj;
@@ -47,6 +48,7 @@ public class RankActivity extends Activity {
                     tv_daystep.setText(stepRank.getStepNum() + "");
                     break;
                 case 124:
+
                     AllStepRank allStepRank = (AllStepRank) msg.obj;
                     rankAdapter.setList(allStepRank.getData());
                     rankAdapter.notifyDataSetChanged();

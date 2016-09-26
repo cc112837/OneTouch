@@ -10,6 +10,8 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.AllStepRank;
 import com.wzy.mhealth.model.Conclusion;
+import com.wzy.mhealth.model.Doctor;
+import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.Friend;
 import com.wzy.mhealth.model.HuaYanRecord;
 import com.wzy.mhealth.model.Info;
@@ -170,6 +172,14 @@ public class MyHttpUtils extends HttpUtils{
       if(what==151){
           params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
+      }
+      if (what==152){
+          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Doctor(), handler, what));
+      }
+      if(what==153){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("id",user.getName());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DoctorDetail(), handler, what));
       }
   }
 }
