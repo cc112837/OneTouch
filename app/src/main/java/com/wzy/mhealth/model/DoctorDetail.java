@@ -44,7 +44,15 @@ public class DoctorDetail {
     private String specialization;
     private String hospital;
     private String introduction;
+    private String doctorId;
 
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
     public void setOutpatientCatagory(String outpatientCatagory) {
         this.outpatientCatagory = outpatientCatagory;
     }

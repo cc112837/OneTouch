@@ -120,7 +120,7 @@ private Handler handler=new Handler(){
                         intent.setClass(DoctorDetailActivity.this, BuActivity.class);
                         intent.putExtra("type","1");
                         intent.putExtra("price", doctorDetail.getPricePicture()+"");
-                        intent.putExtra("doctor",doctorDetail.getId()+"");
+                        intent.putExtra("doctor",doctorDetail.getDoctorId()+"");
                         intent.putExtra("name",doctorDetail.getUserName()+"");
                         startActivity(intent);
                     }

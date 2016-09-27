@@ -13,6 +13,7 @@ import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.model.Doctor;
 import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.Friend;
+import com.wzy.mhealth.model.Grade;
 import com.wzy.mhealth.model.HuaYanRecord;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.model.ItemInfo;
@@ -187,6 +188,10 @@ public class MyHttpUtils extends HttpUtils{
           params.addBodyParameter("phone",user.getName());
           params.addBodyParameter("passWord",user.getPass());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Regmodel(), handler, what));
+      }
+      if(what==156){
+          params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Grade(), handler, what));
       }
   }
 }

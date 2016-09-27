@@ -49,6 +49,15 @@ public class Doctor implements Serializable {
         private Object pricePhone;
         private String specialization;
         private String doctorTilte;
+        private String doctorId;
+
+        public String getDoctorId() {
+            return doctorId;
+        }
+
+        public void setDoctorId(String doctorId) {
+            this.doctorId = doctorId;
+        }
 
         public String getDoctorTilte() {
             return doctorTilte;

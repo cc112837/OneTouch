@@ -37,6 +37,7 @@ import com.wzy.mhealth.activities.ProudActivity;
 import com.wzy.mhealth.activities.SettingActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Grade;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.CacheUtils;
@@ -76,6 +77,13 @@ public class MyFragment extends D3Fragment {
                         startActivity(intent);
                     }
                     break;
+                case 156:
+                    Grade grade = (Grade) msg.obj;
+                    if (grade != null) {
+                        tv_gradenum.setText(grade.getIntegration() + "");
+                    }
+
+                    break;
             }
         }
     };
@@ -103,6 +111,8 @@ public class MyFragment extends D3Fragment {
         ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
         ll_grade = (LinearLayout) view.findViewById(R.id.ll_grade);
         tv_gradenum = (TextView) view.findViewById(R.id.tv_gradenum);
+        String ul = Constants.SERVER_URL + "StepIntegrationServlet";
+        MyHttpUtils.handData(handler, 156, ul, null);
         ll_decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
