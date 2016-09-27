@@ -64,8 +64,8 @@ public class DoctorHomeAdapter extends BaseAdapter {
         }
         viewHolder.tv_name.setText(list.get(position).getUserName());
         ImageLoader.getInstance().displayImage("",viewHolder.iv_doctorhead,com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions );
-        viewHolder.tv_pre.setText(list.get(position).getDoctorTilte());
-        viewHolder.tv_hosi.setText(list.get(position).getHospital());
+        viewHolder.tv_pre.setText(list.get(position).getFirstdep());
+        viewHolder.tv_hosi.setText(list.get(position).getDoctorTilte());
         return convertView;
 
     }

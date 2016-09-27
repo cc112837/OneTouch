@@ -20,7 +20,6 @@ import com.avoscloud.leanchatlib.utils.Constants;
 import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
 import com.wzy.mhealth.LeanChat.service.CacheService;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.model.DoctorEntity;
 import com.wzy.mhealth.utils.Tool;
 import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
@@ -31,41 +30,34 @@ import java.util.List;
 public class BuActivity extends BaActivity {
     // private DoctorEntity doctor;
     private TextView doctorname, price, price1, titleName;
-    private DoctorEntity doctor;
     private Button buy;
-    private int type;
-    private String stringOfPrice;
+    private String stringOfPrice,type,doctorid,name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bu);
-        doctor = (DoctorEntity) getIntent().getSerializableExtra("doctor");
-        stringOfPrice = (String) getIntent().getSerializableExtra("price");
-        type = getIntent().getIntExtra("type", 1);// 1表示是图文咨询
+        doctorid=getIntent().getStringExtra("doctor");
+        name=getIntent().getStringExtra("name");
+        stringOfPrice = getIntent().getStringExtra("price");
+        type = getIntent().getStringExtra("type");// 1表示是图文咨询
         init();
         PayRadioGroup group = (PayRadioGroup) findViewById(R.id.genderGroup);
         titleName = (TextView) findViewById(R.id.titleName);
-        if (type == 1)
+        if (type.equals("1"))
             titleName.setText("购买：图文咨询");
         price = (TextView) findViewById(R.id.price);
         price1 = (TextView) findViewById(R.id.price1);
         price.setText(stringOfPrice + "元/次");
-        int pp = Integer.parseInt(stringOfPrice);
-        price1.setText("会员价" + (pp - 1) + "元/次");
+        price1.setText("会员价" + (Integer.parseInt(stringOfPrice) - 1) + "元/次");
         buy = (Button) findViewById(R.id.btn_pay);
         group.setOnCheckedChangeListener(new PayRadioGroup.OnCheckedChangeListener
                 () {
 
             @Override
             public void onCheckedChanged(PayRadioGroup group, int checkedId) {
-                // TODO Auto-generated method stub
                 int radioButtonId = group.getCheckedRadioButtonId();
-                // PayRadioButton rb =
-                // (PayRadioButton)MainActivity.this.findViewById(radioButtonId);
-                // Toast.makeText(MainActivity.this, rb.getText(),
-                // Toast.LENGTH_SHORT).show();
 
                 PayRadioPurified rl = (PayRadioPurified) BuActivity.this
                         .findViewById(radioButtonId);
@@ -80,12 +72,12 @@ public class BuActivity extends BaActivity {
 
             @Override
             public void onClick(View v) {
-                if (doctor.getDoctorObjectId() == null
-                        || doctor.getDoctorObjectId().equals(""))
+                if (doctorid == null
+                        || doctorid.equals(""))
                     Tool.initToast(BuActivity.this, "支付失败");
                 else {
                     final ChatManager chatManager = ChatManager.getInstance();
-                    chatManager.fetchConversationWithUserId(doctor.getDoctorObjectId(),
+                    chatManager.fetchConversationWithUserId(doctorid,
                             new AVIMConversationCreatedCallback() {
                                 @Override
                                 public void done(AVIMConversation conversation, AVIMException e) {
@@ -98,7 +90,7 @@ public class BuActivity extends BaActivity {
                                         intent.putExtra(Constants.CONVERSATION_ID,
                                                 conversation.getConversationId());
                                         Tool.initToast(BuActivity.this,
-                                                "支付成功，请24小时内与" + doctor.getName() + "医生咨询");
+                                                "支付成功，请24小时内与" + name + "医生咨询");
                                         startActivity(intent);
                                     }
                                 }
@@ -112,7 +104,7 @@ public class BuActivity extends BaActivity {
 
     private void init() {
         doctorname = (TextView) findViewById(R.id.doctorname);
-        doctorname.setText(doctor.getName());
+        doctorname.setText(name);
 
     }
 
@@ -127,7 +119,7 @@ public class BuActivity extends BaActivity {
         List<LeanchatUser> users = q.find();
         if (users != null) {
             for (LeanchatUser lcu : users)
-                if (lcu.getUsername().equals(doctor.getDoctorUsername())) {
+                if (lcu.getUsername().equals(name)) {
                     final ChatManager chatManager = ChatManager.getInstance();
                     chatManager.fetchConversationWithUserId(lcu.getObjectId(),
                             new AVIMConversationCreatedCallback() {
@@ -142,7 +134,7 @@ public class BuActivity extends BaActivity {
                                         intent.putExtra(Constants.CONVERSATION_ID,
                                                 conversation.getConversationId());
                                         Tool.initToast(getApplicationContext(), "支付成功，请24小时内与"
-                                                + doctor.getName() + "医生咨询");
+                                                + name + "医生咨询");
                                         startActivity(intent);
                                     }
                                 }

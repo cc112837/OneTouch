@@ -21,6 +21,7 @@ import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Record;
+import com.wzy.mhealth.model.Regmodel;
 import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.StepInfo;
@@ -180,6 +181,12 @@ public class MyHttpUtils extends HttpUtils{
           TiUser user=(TiUser) object;
           params.addBodyParameter("id",user.getName());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DoctorDetail(), handler, what));
+      }
+      if(what==155){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("phone",user.getName());
+          params.addBodyParameter("passWord",user.getPass());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Regmodel(), handler, what));
       }
   }
 }

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +24,10 @@ import com.wzy.mhealth.LeanChat.util.Utils;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Regmodel;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyAndroidUtil;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +39,8 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
     private EditText et_phone, et_code, register_password;
     private Button Message_btn, register_btn;
     private Button btn_back;
+    private String userPhone;
+    private String pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +70,34 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
         SMSSDK.initSDK(this, "159b5bdf78770", "fb8e5913caefd25208c85911cc52bd82");
 
     }
-
+private Handler handler=new Handler(){
+    @Override
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what){
+            case 155:
+                Regmodel regmodel=(Regmodel)msg.obj;
+                if(regmodel.getStatus().equals("1")){
+                Utils.toast(R.string.registerSucceed);
+                LeanchatUser.getCurrentUser().setMobilePhoneNumber(userPhone);
+                MyAndroidUtil.editXmlByString(
+                        Constants.LOGIN_ACCOUNT, userPhone);
+                Intent intent = new Intent(RegActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                }
+                else{
+                    Utils.toast(R.string.register_fail);
+                }
+                break;
+        }
+    }
+};
     @Override
     public void onClick(View v) {
-        final String userPhone = et_phone.getText().toString();
+        userPhone = et_phone.getText().toString();
         final String Phonecode = et_code.getText().toString();
-        final String pass = register_password.getText().toString();
+        pass = register_password.getText().toString();
         switch (v.getId()) {
             case R.id.Message_btn:
                 if (userPhone.length() != 11) {
@@ -119,8 +148,8 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
                 if(pass.length()<6){
                     Toast.makeText(this, "请输入6位或者6位以上密码", Toast.LENGTH_SHORT).show();
                 }
-                MyAndroidUtil.editXmlByString("phone",userPhone);
-                MyAndroidUtil.editXmlByString("pass",pass);
+                MyAndroidUtil.editXmlByString("phone", userPhone);
+                MyAndroidUtil.editXmlByString("pass", pass);
                 RequestParams params = new RequestParams();
                 params.addBodyParameter("appkey", "159b5bdf78770");
                 params.addBodyParameter("phone", userPhone);
@@ -142,13 +171,11 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
                                                             R.string.registerFailed)
                                                             + e.getMessage());
                                                 } else {
-                                                    Utils.toast(R.string.registerSucceed);
-                                                    LeanchatUser.getCurrentUser().setMobilePhoneNumber(userPhone);
-                                                    MyAndroidUtil.editXmlByString(
-                                                            Constants.LOGIN_ACCOUNT, userPhone);
-                                                    Intent intent = new Intent(RegActivity.this, LoginActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    String url=Constants.SERVER_URL+"MhealthUserRegisterServlet";
+                                                    TiUser user=new TiUser();
+                                                    user.setName(userPhone +"");
+                                                    user.setPass(pass + "");
+                                                    MyHttpUtils.handData(handler, 155, url, user);
                                                 }
                                             }
                                         });

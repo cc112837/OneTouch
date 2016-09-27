@@ -62,9 +62,7 @@ public class DoctorDetailActivity extends BaActivity {
                 } else if (userEvaluationList.get(0).getTotalRecord() > 2) {
                     Intent intent = new Intent();
                     intent.setClass(DoctorDetailActivity.this, EvaluationListActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("doctorId",doctor+"");
-                    intent.putExtras(bundle);
+                    intent.putExtra("doctorId",doctor+"");
                     startActivity(intent);
                 }
             }
@@ -120,10 +118,10 @@ private Handler handler=new Handler(){
                     public void onClick(View v) {
                         Intent intent = new Intent();
                         intent.setClass(DoctorDetailActivity.this, BuActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("price", doctorDetail.getPricePicture());
-                        bundle.putInt("type", 1);
-                        intent.putExtras(bundle);
+                        intent.putExtra("type","1");
+                        intent.putExtra("price", doctorDetail.getPricePicture()+"");
+                        intent.putExtra("doctor",doctorDetail.getId()+"");
+                        intent.putExtra("name",doctorDetail.getUserName()+"");
                         startActivity(intent);
                     }
                 });
