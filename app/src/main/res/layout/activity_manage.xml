@@ -29,10 +29,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginRight="50dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="健康管家"
-            android:layout_marginRight="50dp"
             android:textColor="#ffffff"
             android:textSize="@dimen/fontSizeMidMM" />
 
@@ -48,8 +48,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@color/bg_gray"
-           />
+            android:background="@color/bg_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,9 +68,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:singleLine="true"
                 android:background="@mipmap/input_bg"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text=" "
                 android:textColor="@color/black"
                 android:textSize="18sp" />
@@ -91,8 +90,8 @@
                 android:layout_weight="1"
                 android:background="@mipmap/input_bg"
                 android:gravity="center"
-                android:text=" "
                 android:singleLine="true"
+                android:text=" "
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -101,6 +100,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp">
 
@@ -108,18 +108,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="职业："
+                android:text="婚姻："
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/proView"
+                android:id="@+id/et_hunyu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:singleLine="true"
                 android:background="@mipmap/input_bg"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text=" "
                 android:textColor="@color/black"
                 android:textSize="18sp" />
@@ -139,55 +139,8 @@
                 android:layout_weight="1"
                 android:background="@mipmap/input_bg"
                 android:gravity="center"
-                android:text=" "
                 android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="婚姻："
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/et_hunyu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@mipmap/input_bg"
-                android:gravity="center"
                 android:text=" "
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="病史陈述者："
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/cheView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.9"
-                android:background="@mipmap/input_bg"
-                android:gravity="center"
-                android:text=" "
-                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -196,8 +149,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@color/bg_gray"
-             />
+            android:background="@color/bg_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -209,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="现病史："
+                android:text="过敏史："
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 

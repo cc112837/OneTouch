@@ -18,7 +18,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 public class ManageActivity extends BaActivity implements View.OnClickListener {
     private ImageView leftBtn_back;
     private Button submit;
-    private EditText nameView, rg_sex, tv_birth, proView, cheView, et_hunyu, medicalHistory;
+    private EditText nameView, rg_sex, tv_birth, et_hunyu, medicalHistory;
 
     private Handler handler = new Handler() {
         @Override
@@ -37,8 +37,7 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
                     tv_birth.setText("" + selfHealth.getAge());
                     rg_sex.setText("" + selfHealth.getSex());
                     et_hunyu.setText("" + selfHealth.getMarrage());
-                    proView.setText("" + selfHealth.getProfession());
-                    cheView.setText("" + selfHealth.getRelator());
+
                     medicalHistory.setText("" + selfHealth.getRelate());
                     break;
             }
@@ -62,8 +61,7 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
         rg_sex = ((EditText) findViewById(R.id.rg_sex));
         nameView = ((EditText) findViewById(R.id.nameView));
         tv_birth = ((EditText) findViewById(R.id.tv_birthid));
-        proView = ((EditText) findViewById(R.id.proView));
-        cheView = ((EditText) findViewById(R.id.cheView));
+
         leftBtn_back = ((ImageView) findViewById(R.id.leftBtn_back));
         leftBtn_back.setOnClickListener(this);
         submit.setOnClickListener(this);
@@ -76,8 +74,7 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.submit:
-                String guominid = cheView.getText().toString();
-                String aid = proView.getText().toString();
+
                 String name = nameView.getText().toString();
                 String sex = rg_sex.getText().toString();
                 String medical = medicalHistory.getText().toString();
@@ -91,10 +88,10 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
                     selfHealth.setName(name);
                     selfHealth.setAge(birth);
                     selfHealth.setMarrage(hun);
-                    selfHealth.setProfession(aid);
+
                     selfHealth.setSex(sex);
                     selfHealth.setRelate(medical);
-                    selfHealth.setRelator(guominid);
+
                     MyHttpUtils.handData(handler, 150, url, selfHealth);
                 }
                 break;

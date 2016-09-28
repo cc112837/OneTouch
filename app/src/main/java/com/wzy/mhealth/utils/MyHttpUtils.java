@@ -31,6 +31,7 @@ import com.wzy.mhealth.model.StepResult;
 import com.wzy.mhealth.model.TaocanDetail;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.model.ZhixingTaocan;
 
 
@@ -114,7 +115,9 @@ public class MyHttpUtils extends HttpUtils{
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepResult(), handler, what));
       }
       if(what==115){
-          sendData(HttpRequest.HttpMethod.POST,url,null,new MyCallBack(new ZhixingTaocan(),handler,what));
+          TiUser user=(TiUser)object;
+          params.addBodyParameter("id",user.getTel());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ZhixingTaocan(), handler, what));
       }
       if(what==120){
           TiUser user=(TiUser)object;
@@ -192,6 +195,11 @@ public class MyHttpUtils extends HttpUtils{
       if(what==156){
           params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Grade(), handler, what));
+      }
+      if(what==157){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("id",user.getTel());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Tijian(), handler, what));
       }
   }
 }

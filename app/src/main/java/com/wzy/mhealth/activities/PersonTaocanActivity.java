@@ -20,6 +20,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TaoCanAdapter;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.ZhixingTaocan;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -35,11 +36,14 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
     private AMapLocationClient mlocationClient;
     public AMapLocationClientOption mLocationOption = null;
     private ArrayList<ZhixingTaocan.DataEntity> list = new ArrayList<>();
+    private String id="6101001";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_taocan);
+        Intent intent=getIntent();
+        id = intent.getStringExtra("id");
         init();
     }
 
@@ -83,8 +87,10 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
             switch (msg.what) {
                 case 115:
                     ZhixingTaocan zhixing = (ZhixingTaocan) msg.obj;
-                    list.addAll(zhixing.getData());
-                    adapter.notifyDataSetChanged();
+                    if(zhixing!=null){
+                        list.addAll(zhixing.getData());
+                        adapter.notifyDataSetChanged();
+                    }
                     break;
             }
         }
@@ -95,8 +101,10 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
         lv_show = (ListView) findViewById(R.id.lv_show);
         View headview = LayoutInflater.from(this).inflate(R.layout.zhidetail_header, null);
         adapter = new TaoCanAdapter(this, list);
-        String url = Constants.SERVER_URL + "TaoCanServlet";
-        MyHttpUtils.handData(handler, 115, url, null);
+        String url = Constants.SERVER_URL + "TaoCanCenterServlet";
+        TiUser user=new TiUser();
+        user.setTel(""+id);
+        MyHttpUtils.handData(handler, 115, url, user);
         ImageView iv_addr = (ImageView) headview.findViewById(R.id.iv_address);
         ImageView iv_tel = (ImageView) headview.findViewById(R.id.iv_tel);
         iv_tel.setOnClickListener(new View.OnClickListener() {

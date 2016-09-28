@@ -40,6 +40,7 @@ import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PersonTaocanActivity;
 import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
+import com.wzy.mhealth.activities.TaocanListActivity;
 import com.wzy.mhealth.activities.TijianOrderActivity;
 import com.wzy.mhealth.activities.TijianRecordActivity;
 import com.wzy.mhealth.activities.TijianYueActivity;
@@ -208,7 +209,7 @@ public class HomeNewFragment extends Fragment {
         ll_taocan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PersonTaocanActivity.class);
+                Intent intent = new Intent(getActivity(), TaocanListActivity.class);
                 startActivity(intent);
             }
         });

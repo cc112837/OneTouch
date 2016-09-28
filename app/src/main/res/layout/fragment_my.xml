@@ -15,7 +15,7 @@
         <LinearLayout
             android:id="@+id/RelativeLayout_up"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="170dp"
             android:background="@color/title_green"
             android:orientation="vertical">
 
@@ -108,7 +108,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:background="#009c84"
                 android:orientation="horizontal">
 
@@ -125,14 +125,14 @@
                         android:layout_height="wrap_content"
                         android:text="优惠劵"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <TextView
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:text="积分"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/tv_gradenum"
@@ -161,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:text="80"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
