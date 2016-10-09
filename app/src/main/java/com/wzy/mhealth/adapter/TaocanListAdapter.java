@@ -88,7 +88,7 @@ public class TaocanListAdapter extends BaseAdapter {
         viewHolder.tv_sale.setText("已售套餐："+ list.get(position).getNum());
         viewHolder.tv_address.setText(list.get(position).getAdress() + "");
         viewHolder.tv_nametijan.setText(list.get(position).getName() + "");
-        ImageLoader.getInstance().displayImage("", viewHolder.iv_taocan,com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImage);
+        ImageLoader.getInstance().displayImage(list.get(position).getImg(), viewHolder.iv_taocan,com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImage);
         return convertView;
     }
 

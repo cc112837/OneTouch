@@ -9,6 +9,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.AllStepRank;
+import com.wzy.mhealth.model.City;
 import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.model.Doctor;
 import com.wzy.mhealth.model.DoctorDetail;
@@ -21,6 +22,7 @@ import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderInfo;
+import com.wzy.mhealth.model.Provice;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.Regmodel;
 import com.wzy.mhealth.model.Retuback;
@@ -123,7 +125,7 @@ public class MyHttpUtils extends HttpUtils{
           TiUser user=(TiUser)object;
           params.addBodyParameter("result",user.getName());
           params.addBodyParameter("id",user.getTel());
-          params.addBodyParameter("userName",user.getCardId());
+          params.addBodyParameter("userName", user.getCardId());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
       }
       if(what==116){
@@ -200,6 +202,14 @@ public class MyHttpUtils extends HttpUtils{
           TiUser user=(TiUser) object;
           params.addBodyParameter("id",user.getTel());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Tijian(), handler, what));
+      }
+      if(what==160){
+          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Provice(), handler, what));
+      }
+      if (what==162){
+          TiUser user=(TiUser) object;
+          params.addBodyParameter("id",user.getName());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new City(), handler, what));
       }
   }
 }

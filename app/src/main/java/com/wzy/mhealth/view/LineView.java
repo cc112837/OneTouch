@@ -16,17 +16,20 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+import com.wzy.mhealth.utils.MyUtils;
+
 
 /**
  * Created by Dacer on 11/4/13.
  */
 public class LineView extends View {
-    public int XPoint=50;    //原点的X坐标
-    public int YPoint=280;     //原点的Y坐标
-    public int XScale=60;     //X的刻度长度
-    public int YScale=45;     //Y的刻度长度
-    public int XLength=420;        //X轴的长度
-    public int YLength=270;        //Y轴的长度
+
+    public int XPoint=MyUtils.dip2px(getContext(), 33);    //原点的X坐标
+    public int YPoint= MyUtils.dip2px(getContext(), 187);     //原点的Y坐标
+    public int XScale=MyUtils.dip2px(getContext(), 40);     //X的刻度长度
+    public int YScale=MyUtils.dip2px(getContext(), 30);     //Y的刻度长度
+    public int XLength=MyUtils.dip2px(getContext(), 280);        //X轴的长度
+    public int YLength=MyUtils.dip2px(getContext(), 180);        //Y轴的长度
     public String[] XLabel;    //X的刻度
     public String[] YLabel;    //Y的刻度
     public String[] Data;      //数据
@@ -34,6 +37,7 @@ public class LineView extends View {
     public LineView(Context context)
     {
         super(context);
+
     }
     public void SetInfo(String[] XLabels,String[] YLabels,String[] AllData,String strTitle)
     {
@@ -55,7 +59,7 @@ public class LineView extends View {
         paint1.setStyle(Paint.Style.STROKE);
         paint1.setAntiAlias(true);//去锯齿
         paint1.setColor(Color.DKGRAY);
-        paint.setTextSize(20);  //设置轴文字大小
+        paint.setTextSize(MyUtils.sp2px(getContext(), 13));  //设置轴文字大小
         //设置Y轴
         canvas.drawLine(XPoint, YPoint-YLength, XPoint, YPoint, paint);   //轴线
         for(int i=0;i*YScale<YLength ;i++)
@@ -91,7 +95,7 @@ public class LineView extends View {
         }
         canvas.drawLine(XPoint+XLength,YPoint,XPoint+XLength-6,YPoint-3,paint);    //箭头
         canvas.drawLine(XPoint + XLength, YPoint, XPoint + XLength - 6, YPoint + 3, paint);
-        paint.setTextSize(20);
+        paint.setTextSize(MyUtils.sp2px(getContext(), 13));
         canvas.drawText(Title, 150, 50, paint);
     }
     private int YCoord(String y0)  //计算绘制时的Y坐标，无数据时返回-999

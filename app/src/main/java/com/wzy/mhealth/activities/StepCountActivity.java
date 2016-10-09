@@ -112,7 +112,7 @@ public class StepCountActivity extends BaActivity {
         mLineView.SetInfo(
                 new String[]{xvalue[0], xvalue[1], xvalue[2], xvalue[3], xvalue[4], xvalue[5], xvalue[6]},
                 new String[]{"", "2000", "4000", "6000", "8000", "10000"},   //Y轴刻度
-                new String[]{stepvalue[0], stepvalue[1], stepvalue[2], stepvalue[3], stepvalue[4], stepvalue[5], total_step + step+""},  //数据
+                new String[]{stepvalue[0], stepvalue[1], stepvalue[2], stepvalue[3], stepvalue[4], stepvalue[5], total_step + step + ""},  //数据
                 "计步结果"
         );
         view.addView(mLineView);

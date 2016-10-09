@@ -38,10 +38,7 @@ public class DoctorListActivity extends BaActivity {
     private LocationAdapter locationAdapter;
     private PopupWindow mPopupWindow;
     private LinearLayout location;
-    private LinearLayout department;
     private LinearLayout layout_left;
-    private LinearLayout layout_middle;
-    private LinearLayout layout_right;
     private LinearLayout doctorlistLayout;
     private ProvinceAdapter provinceAdapter;
     private TextView locationtTextView;
@@ -53,7 +50,6 @@ public class DoctorListActivity extends BaActivity {
         setContentView(R.layout.activity_doctor_list);
         location = (LinearLayout) findViewById(R.id.total_location);
         locationtTextView = (TextView)location.findViewById(R.id.text_category);
-        department = (LinearLayout) findViewById(R.id.department);
         doctorlistLayout = (LinearLayout) findViewById(R.id.doctorlistLinear);
         location.setOnClickListener(new OnClickListener() {
 
@@ -63,13 +59,6 @@ public class DoctorListActivity extends BaActivity {
                 locationtTextView.setTextColor(0xf000cf00);
                 showPopupWindow(doctorlistLayout.getWidth(),
                         doctorlistLayout.getHeight());
-            }
-        });
-        department.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
             }
         });
 
@@ -145,13 +134,11 @@ private Handler handler=new Handler(){
                 if (position == 1) {
                     provinceAdapter = new ProvinceAdapter(
                             DoctorListActivity.this, list2);
-                    // provinceAdapter.list = list2;
                     cityListView.setAdapter(provinceAdapter);
                     provinceAdapter.notifyDataSetChanged();
                 } else {
                     provinceAdapter = new ProvinceAdapter(
                             DoctorListActivity.this, cityList);
-                    // provinceAdapter.list = list2;
                     cityListView.setAdapter(provinceAdapter);
                     provinceAdapter.notifyDataSetChanged();
                 }
@@ -171,6 +158,5 @@ private Handler handler=new Handler(){
         mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
         mPopupWindow.showAsDropDown(location, 5, 1);
         mPopupWindow.update();
-        // mPopupWindow.setFocusable(true);
     }
 }

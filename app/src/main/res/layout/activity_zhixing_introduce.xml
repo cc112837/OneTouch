@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/title_green"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.wzy.mhealth.activities.ZhixingIntroduceActivity">
 
@@ -33,101 +33,9 @@
             android:src="@mipmap/btn_back" />
     </FrameLayout>
 
-    <ScrollView
+    <WebView
+        android:id="@+id/wv_show"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:src="@mipmap/zhixingintro"
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="3px"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="@color/grey" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="3dp"
-                    android:text="智行预防保健医院"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="3px"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="3dp"
-                    android:layout_weight="1"
-                    android:background="@color/grey" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textSize="17sp"
-                android:text="企业介绍"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:lineSpacingMultiplier="1.2"
-                android:layout_marginRight="10dp"
-                android:text="        西安智行深度(精密)体检中心是一家为企业和个人提供普通健康体检、深度(精密)体检和检后健康改善与美式家庭医生服务的医疗机构。\n      西安智行深度(精密)体检中心是西安规模最大的高端体检与保健中心，营业面积6000平方米。\n      西安智行深度(精密)体检中心秉承早发现、早诊断、早治疗的先进预防医学理念，集权威医疗专家、国际一流检查设备、电脑排检系统、人性化服务流程于一体，对您的健康做以细胞级的深度、精密检测。\n      西安智行深度(精密)体检中心高度尊重与保护您的隐私、追求卓越的医疗质量和客户体验，致力于建立与您的终身关系，长期专注您的的健康状况，为您提供个性化健康改善计划和无碍就医通道服务，“保障健康，优化生命”以“治未病”为追求， 全力协助您掌握更长远的人生，畅享生命的无限欢乐!"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textSize="17sp"
-                android:text="企业文化"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:lineSpacingMultiplier="1.2"
-                android:layout_marginRight="10dp"
-                android:text="      我们的使命：聆听生命，创意健康。\n      我们的价值观：格物、致知、诚意、正心，一切为了客户的健康价值而努力创造。\n      西安智行深度(精密)体检中心是“治未病”先进理念的领先者和倡导者，决心改变“因病就医”的传统观念，为人们发现早期、潜在的隐患和病灶，远离疾病和痛苦，提高生命和生活质量。"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textSize="17sp"
-                android:text="医院地址"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:lineSpacingMultiplier="1.2"
-                android:layout_marginRight="10dp"
-                android:text="      西安市莲湖区丰登南路23号建大洋房(丰庆公园西门向北200米路东)"
-                android:textColor="@color/black" />
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:background="@color/white"></WebView>
 </LinearLayout>

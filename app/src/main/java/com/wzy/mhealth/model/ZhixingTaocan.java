@@ -14,17 +14,72 @@ import java.util.List;
  */
 public class ZhixingTaocan {
 
+
     /**
-     * id : 1
-     * oldPrice : 228
-     * newPrice : 79
-     * name : 入职套餐
+     * phone : 029-68018969
+     * details :  详情
+     * name : 智行体检中心
+     * data : [{"id":15,"oldPrice":0.01,"newPrice":0.01,"name":"ceishi4"}]
+     * img : http://117.34.105.29:8209/mhealth/upload/1475060756700.jpg
+     */
+
+    private String phone;
+    private String details;
+    private String name;
+    private String img;
+    private String adress;
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    /**
+     * id : 15
+     * oldPrice : 0.01
+     * newPrice : 0.01
+     * name : ceishi4
      */
 
     private List<DataEntity> data;
 
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public void setData(List<DataEntity> data) {
         this.data = data;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImg() {
+        return img;
     }
 
     public List<DataEntity> getData() {

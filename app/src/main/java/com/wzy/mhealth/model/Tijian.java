@@ -38,6 +38,15 @@ public class Tijian {
         private String adress;
         private int level;
         private String name;
+        private String img;
+
+        public String getImg() {
+            return img;
+        }
+
+        public void setImg(String img) {
+            this.img = img;
+        }
 
         public void setId(int id) {
             this.id = id;
