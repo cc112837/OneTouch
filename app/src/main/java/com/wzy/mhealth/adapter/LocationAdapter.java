@@ -49,8 +49,6 @@ public class LocationAdapter extends BaseAdapter {
 			viewHolder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.location_item, null);
 			viewHolder.province = (TextView)convertView.findViewById(R.id.province);
-			
-			viewHolder.province.setText(list.get(position));
 			convertView.setTag(viewHolder);
 		}else{
 			viewHolder = (ViewHolder)convertView.getTag();
@@ -60,7 +58,8 @@ public class LocationAdapter extends BaseAdapter {
 		} 
 		else {
 			convertView.setBackgroundColor(0xfff0f0f0);
-		}	
+		}
+		viewHolder.province.setText(list.get(position));
 		return convertView;
 	}
 	public  void setSelectItem(int selectItem) {

@@ -38,7 +38,7 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
     private AMapLocationClient mlocationClient;
     public AMapLocationClientOption mLocationOption = null;
     private ArrayList<ZhixingTaocan.DataEntity> list = new ArrayList<>();
-    private String id;
+    private String id,name,tel,add,content,img;
     private ImageView iv_img;
     private TextView tv_name;
     private TextView tv_add;
@@ -52,6 +52,11 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
         setContentView(R.layout.activity_person_taocan);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        name = intent.getStringExtra("name");
+        tel = intent.getStringExtra("tel");
+        add = intent.getStringExtra("add");
+        content = intent.getStringExtra("content");
+        img = intent.getStringExtra("img");
         init();
     }
 
@@ -98,25 +103,25 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
                     if (zhixing != null) {
                         list.addAll(zhixing.getData());
                         adapter.notifyDataSetChanged();
-                        tv_name.setText("" + zhixing.getName());
+                        tv_name.setText("" + name);
                         headview.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(PersonTaocanActivity.this, ZhixingIntroduceActivity.class);
-                                intent.putExtra("content", zhixing.getDetails() + "");
+                                intent.putExtra("content", content + "");
                                 startActivity(intent);
                             }
                         });
-                        tv_add.setText("地址：" + zhixing.getAdress());
-                        tv_tel.setText("电话：" + zhixing.getPhone());
+                        tv_add.setText("地址：" + add);
+                        tv_tel.setText("电话：" + tel);
                         iv_tel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+zhixing.getPhone()));
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+tel));
                                 startActivity(intent);
                             }
                         });
-                        ImageLoader.getInstance().displayImage(zhixing.getImg(), iv_img);
+                        ImageLoader.getInstance().displayImage(img, iv_img);
 
                     }
                     break;

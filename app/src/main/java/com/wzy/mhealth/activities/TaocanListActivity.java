@@ -60,6 +60,7 @@ public class TaocanListActivity extends Activity {
             switch (msg.what) {
                 case 157:
                     Tijian tijian = (Tijian) msg.obj;
+                    list.clear();
                     list.addAll(tijian.getData());
                     taocanListAdapter.notifyDataSetChanged();
                     lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,12 +68,19 @@ public class TaocanListActivity extends Activity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent(TaocanListActivity.this, PersonTaocanActivity.class);
                             intent.putExtra("id", list.get(position).getId() + "");
+                            intent.putExtra("name",list.get(position).getName()+"");
+                            intent.putExtra("tel",list.get(position).getPhone()+"");
+                            intent.putExtra("add",list.get(position).getAdress()+"");
+                            intent.putExtra("content",list.get(position).getDetails()+"");
+                            intent.putExtra("img",list.get(position).getImg()+"");
                             startActivity(intent);
                         }
                     });
                     break;
                 case 160:
                     Provice provice = (Provice) msg.obj;
+                    locationList.clear();
+                    listid.clear();
                     for (int i = 0; i < provice.getData().size(); i++) {
                         locationList.add(provice.getData().get(i).getProvice());
                         listid.add(provice.getData().get(i).getId() + "");
@@ -82,6 +90,8 @@ public class TaocanListActivity extends Activity {
 
                 case 162:
                     City city = (City) msg.obj;
+                    cityList.clear();
+                    listcityid.clear();
                     for (int i = 0; i < city.getData().size(); i++) {
                         cityList.add(city.getData().get(i).getCity());
                         listcityid.add(city.getData().get(i).getId() + "");
