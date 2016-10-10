@@ -123,7 +123,7 @@ public class TaocanListActivity extends Activity {
         lv_show.setAdapter(taocanListAdapter);
         String url = Constants.SERVER_URL + "MhealthOneCityServlet";
         TiUser user = new TiUser();
-        user.setTel("610100");
+        user.setTel("");
         MyHttpUtils.handData(handler, 157, url, user);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override

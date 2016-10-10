@@ -61,7 +61,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
-                    android:text="西安市"
+                    android:text="全部位置"
                     android:textColor="@drawable/mytext_selector"
                     android:textSize="14.0sp" />
 

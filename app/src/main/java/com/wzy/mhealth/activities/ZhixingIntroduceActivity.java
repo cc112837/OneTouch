@@ -8,7 +8,7 @@ package com.wzy.mhealth.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebSettings;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
@@ -32,13 +32,8 @@ public class ZhixingIntroduceActivity extends BaActivity {
                 finish();
             }
         });
-        WebSettings webSettings = wv_show.getSettings();
-        webSettings.setUseWideViewPort(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setJavaScriptEnabled(true);
-//        webSettings.setBuiltInZoomControls(true);
-        webSettings.setTextZoom(240);
-//        webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
-        wv_show.loadData(content, "text/html; charset=utf-8", "utf-8");
+        WindowManager wm = ZhixingIntroduceActivity.this.getWindowManager();
+        int width = wm.getDefaultDisplay().getWidth()/2-20;
+        wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:"+width+"px !important;}</style></head>"+content, "text/html", "utf-8", null);
     }
 }
