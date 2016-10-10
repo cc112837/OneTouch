@@ -22,6 +22,7 @@ import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderInfo;
+import com.wzy.mhealth.model.Proud;
 import com.wzy.mhealth.model.Provice;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.Regmodel;
@@ -210,6 +211,10 @@ public class MyHttpUtils extends HttpUtils{
           TiUser user=(TiUser) object;
           params.addBodyParameter("id",user.getName());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new City(), handler, what));
+      }
+      if (what==170){
+          params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
+          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Proud(), handler, what));
       }
   }
 }
