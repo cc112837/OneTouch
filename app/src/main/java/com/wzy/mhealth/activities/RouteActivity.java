@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -89,12 +90,16 @@ public class RouteActivity extends BaActivity implements OnMarkerClickListener,
     private AMapLocationClientOption mLocationOption;
 
     private boolean is = true;
+    private String citystart;
+    private String cityend;
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_route);
         ImageView leftBtn=(ImageView) findViewById(R.id.leftBtn);
+        Intent intent = getIntent();
+        cityend = intent.getStringExtra("end");
         leftBtn.setOnClickListener(this);
         mapView = (MapView) findViewById(R.id.map);
         mapView.onCreate(bundle);// 此方法必须重写
@@ -127,6 +132,7 @@ public class RouteActivity extends BaActivity implements OnMarkerClickListener,
         routeSearch.setRouteSearchListener(this);
         startTextView = (EditText) findViewById(R.id.autotextview_roadsearch_start);
         endTextView = (EditText) findViewById(R.id.autotextview_roadsearch_goals);
+        endTextView.setText(cityend+"");
         startImageButton = (ImageButton) findViewById(R.id.imagebtn_roadsearch_startoption);
         startImageButton.setOnClickListener(this);
         endImageButton = (ImageButton) findViewById(R.id.imagebtn_roadsearch_endoption);
@@ -493,6 +499,7 @@ public class RouteActivity extends BaActivity implements OnMarkerClickListener,
         if (mListener != null && amapLocation != null) {
             if (amapLocation != null && amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
+                startTextView.setText(amapLocation.getAddress()+"");
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": "
                         + amapLocation.getErrorInfo();
