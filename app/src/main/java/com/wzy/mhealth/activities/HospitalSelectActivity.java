@@ -15,7 +15,7 @@ import com.wzy.mhealth.model.HospitalEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YiyuanSelectActivity extends BaActivity {
+public class HospitalSelectActivity extends BaActivity {
     private List<HospitalEntity> hospitallist;
 
     private ListView lv;

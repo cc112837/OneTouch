@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -32,18 +31,18 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DoctorDetailActivity;
 import com.wzy.mhealth.activities.DoctorListActivity;
-import com.wzy.mhealth.activities.JiBingActivity;
+import com.wzy.mhealth.activities.DiseaseActivity;
 import com.wzy.mhealth.activities.MainActivity;
+import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
 import com.wzy.mhealth.activities.NewsDetailActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
-import com.wzy.mhealth.activities.PersonTaocanActivity;
 import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.TaocanListActivity;
-import com.wzy.mhealth.activities.TijianOrderActivity;
-import com.wzy.mhealth.activities.TijianRecordActivity;
-import com.wzy.mhealth.activities.TijianYueActivity;
+import com.wzy.mhealth.activities.ExaminationOrderActivity;
+import com.wzy.mhealth.activities.ExaminationRecordActivity;
+import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.adapter.DoctorHomeAdapter;
 import com.wzy.mhealth.adapter.NewsItemAdapter;
 import com.wzy.mhealth.constant.Constants;
@@ -164,11 +163,10 @@ public class HomeNewFragment extends Fragment {
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
         View headview = LayoutInflater.from(getContext()).inflate(R.layout.main_home, null);
         lv_show.addHeaderView(headview);
-        ImageView doctor_more = (ImageView) headview.findViewById(R.id.doctor_more);
+        LinearLayout doctor_more = (LinearLayout) headview.findViewById(R.id.doctor_more);
         doctor_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/9/5 更多医生
                 Intent intent = new Intent(getActivity(), DoctorListActivity.class);
                 startActivity(intent);
             }
@@ -179,15 +177,27 @@ public class HomeNewFragment extends Fragment {
         doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
         gv_doctor.setAdapter(doctorHomeAdapter);
         LinearLayout ll_record = (LinearLayout) headview.findViewById(R.id.ll_record);
-        ll_record.setOnClickListener(new View.OnClickListener() {
+        LinearLayout ll_marry=(LinearLayout) headview.findViewById(R.id.ll_marry);
+        ll_marry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TijianRecordActivity.class);
+                // TODO: 2016/10/11  孕产月中心
+                Intent intent=new Intent(getActivity(),MarryHospitalActivity.class);
                 startActivity(intent);
             }
         });
-        ImageView iv_newsmore = (ImageView) headview.findViewById(R.id.iv_newsmore);
-        iv_newsmore.setOnClickListener(new View.OnClickListener() {
+        ll_record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExaminationRecordActivity.class);
+                startActivity(intent);
+            }
+        });
+        GridView gv_taocan=(GridView) headview.findViewById(R.id.gv_taocan);
+        // TODO: 2016/10/11 添加适配器
+
+        LinearLayout ll_newsmore = (LinearLayout) headview.findViewById(R.id.ll_newsmore);
+        ll_newsmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ChangeFragmentHelper helper = new ChangeFragmentHelper();
@@ -201,7 +211,7 @@ public class HomeNewFragment extends Fragment {
         ll_yuyue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TijianOrderActivity.class);
+                Intent intent = new Intent(getActivity(), ExaminationOrderActivity.class);
                 startActivity(intent);
             }
         });
@@ -213,7 +223,14 @@ public class HomeNewFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+       LinearLayout ll_taocanmore=(LinearLayout) headview.findViewById(R.id.ll_taocanmore);
+        ll_taocanmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TaocanListActivity.class);
+                startActivity(intent);
+            }
+        });
         LinearLayout ll_near_shop = (LinearLayout) headview.findViewById(R.id.ll_near_shop);
         LinearLayout ll_knownage = (LinearLayout) headview.findViewById(R.id.ll_knownage);
         LinearLayout ll_nearhospital = (LinearLayout) headview.findViewById(R.id.ll_nearhospital);
@@ -221,7 +238,7 @@ public class HomeNewFragment extends Fragment {
         ll_knownage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), JiBingActivity.class);
+                Intent intent = new Intent(getActivity(), DiseaseActivity.class);
                 startActivity(intent);
             }
         });
@@ -258,7 +275,7 @@ public class HomeNewFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(), TijianYueActivity.class);
+                Intent intent = new Intent(getActivity(), ExaminationYueActivity.class);
                 startActivity(intent);
             }
         });

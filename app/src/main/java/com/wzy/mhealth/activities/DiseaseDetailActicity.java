@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 
-public class JiBingDetailActicity extends BaActivity {
+public class DiseaseDetailActicity extends BaActivity {
     private ImageView leftBtn;
     private TextView tv_title,tv_content;
     @Override

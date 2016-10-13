@@ -193,7 +193,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
             case 120:
                 StepInfo info= (StepInfo)msg.obj;
                 if(info.getStatus().equals("1")){
-                    Intent intent1=new Intent(TaocanBuyActivity.this,TijianOrderActivity.class);
+                    Intent intent1=new Intent(TaocanBuyActivity.this,ExaminationOrderActivity.class);
                     startActivity(intent1);
                     TaocanBuyActivity.this.finish();
                 }

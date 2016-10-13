@@ -16,7 +16,7 @@ import com.wzy.mhealth.model.Bingli2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BingliActivity extends BaActivity {
+public class MedicalRecordsActivity extends BaActivity {
     private String interactName = "张三";
     private String interactSex = "男";
     private String interactYear = "23";
@@ -76,7 +76,7 @@ public class BingliActivity extends BaActivity {
             Intent intent = new Intent();
             switch (parent.getId()) {
                 case R.id.tab_binglifragment_listview_jiankang:
-                    intent.setClass(BingliActivity.this, JiankangActivity.class);
+                    intent.setClass(MedicalRecordsActivity.this, JiankangActivity.class);
                     if(string.size() == 6){
                         Bundle bundle = new Bundle();
                         bundle.putString("basic", string.get(0)+"  " +string.get(1)+"   "+string.get(2));

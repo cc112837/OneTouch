@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.model.ZhixingTaocan;
+import com.wzy.mhealth.model.Tijian;
 
 import java.util.List;
 
@@ -26,9 +26,9 @@ import java.util.List;
 public class TaoCanAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private Context context;
-    private List<ZhixingTaocan.DataEntity> list;
+    private List<Tijian.DataEntity.TaocanIdEntity> list;
 
-    public TaoCanAdapter(Context context,List<ZhixingTaocan.DataEntity> list) {
+    public TaoCanAdapter(Context context,List<Tijian.DataEntity.TaocanIdEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list=list;
         this.context=context;
@@ -55,8 +55,9 @@ public class TaoCanAdapter extends BaseAdapter{
         ViewHolder viewHolder = null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.taocan_item, null);
+            convertView = mInflater.inflate(R.layout.list_item_fuchan_content, null);
             viewHolder.name = (TextView) convertView.findViewById(R.id.tv_name);
+            viewHolder.tv_sale=(TextView) convertView.findViewById(R.id.tv_sale);
             viewHolder.afterprice = (TextView) convertView.findViewById(R.id.tv_afterprice);
             viewHolder.beforeprice = (TextView) convertView.findViewById(R.id.tv_beforeprice);
             viewHolder.afterprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG); //中划线
@@ -67,12 +68,13 @@ public class TaoCanAdapter extends BaseAdapter{
         viewHolder.beforeprice.setText("¥"+list.get(position).getNewPrice()+"");
         viewHolder.afterprice.setText("¥"+list.get(position).getOldPrice()+"");
         viewHolder.name.setText(list.get(position).getName()+"");
+        viewHolder.tv_sale.setText("已售套餐："+list.get(position).getTaocanNum());
         return convertView;
     }
     static class ViewHolder {
         public TextView name;
         public  TextView afterprice;
-        public TextView beforeprice;
+        public TextView beforeprice,tv_sale;
 
     }
 

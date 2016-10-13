@@ -48,7 +48,7 @@ public class GuahaoActivity extends BaActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GuahaoActivity.this,
-                        YiyuanSelectActivity.class);
+                        HospitalSelectActivity.class);
                 Log.e("选择医院了","");
                 startActivityForResult(intent, guahaoActivity.CODE);
             }

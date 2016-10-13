@@ -59,7 +59,6 @@ public class TaocanListAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.list_taocan_item, null);
             viewHolder.tv_nametijan = (TextView) convertView.findViewById(R.id.tv_nametijan);
             viewHolder.tv_address = (TextView) convertView.findViewById(R.id.tv_address);
-            viewHolder.tv_sale = (TextView) convertView.findViewById(R.id.tv_sale);
             viewHolder.iv_taocan = (ImageView) convertView.findViewById(R.id.iv_taocan);
             viewHolder.iv_1 = (ImageView) convertView.findViewById(R.id.iv_1);
             viewHolder.iv_2 = (ImageView) convertView.findViewById(R.id.iv_2);
@@ -84,10 +83,8 @@ public class TaocanListAdapter extends BaseAdapter {
                 default:
                     break;
         }
-
-        viewHolder.tv_sale.setText("已售套餐："+ list.get(position).getNum());
         viewHolder.tv_address.setText(list.get(position).getAdress() + "");
-        viewHolder.tv_nametijan.setText(list.get(position).getName() + "");
+        viewHolder.tv_nametijan.setText(list.get(position).getCenterName() + "");
         ImageLoader.getInstance().displayImage(list.get(position).getImg(), viewHolder.iv_taocan,com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImage);
         return convertView;
     }
@@ -96,7 +93,6 @@ public class TaocanListAdapter extends BaseAdapter {
         private ImageView iv_taocan, iv_1, iv_2, iv_3, iv_4, iv_5;
         public TextView tv_nametijan;
         public TextView tv_address;
-        public TextView tv_sale;
 
     }
 

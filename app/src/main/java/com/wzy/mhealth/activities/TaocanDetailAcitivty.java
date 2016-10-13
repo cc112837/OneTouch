@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -41,7 +42,7 @@ public class TaocanDetailAcitivty extends Activity {
                             intent1.putExtra("price", taocanDetail.getNewPrice() + "");
                             intent1.putExtra("old", taocanDetail.getOldPrice() + "");
                             intent1.putExtra("id", taocanDetail.getId() + "");
-                            setResult(456,intent);
+                            setResult(456, intent);
                             startActivity(intent1);
                             TaocanDetailAcitivty.this.finish();
                         }
@@ -51,9 +52,10 @@ public class TaocanDetailAcitivty extends Activity {
                     webSettings.setLoadWithOverviewMode(true);
                     webSettings.setJavaScriptEnabled(true);
                     webSettings.setBuiltInZoomControls(true);
-                    webSettings.setTextZoom(240);
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
-                    wv_show.loadData(taocanDetail.getContext(), "text/html; charset=utf-8", "utf-8");
+                    WindowManager wm = TaocanDetailAcitivty.this.getWindowManager();
+                    int width = wm.getDefaultDisplay().getWidth()/2-10;
+                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px !important;}</style></head>" + taocanDetail.getContext(), "text/html", "utf-8", null);
                     break;
             }
         }

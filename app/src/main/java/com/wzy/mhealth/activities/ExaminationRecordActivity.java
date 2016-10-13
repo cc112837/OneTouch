@@ -15,7 +15,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-public class TijianRecordActivity extends BaActivity {
+public class ExaminationRecordActivity extends BaActivity {
     private ImageView leftBtn;
     private Button select;
     private String tag;
@@ -36,11 +36,11 @@ public class TijianRecordActivity extends BaActivity {
                     Info info = (Info) msg.obj;
                     if (info.isSuccess()) {
                         tag = info.getMsg();
-                        Intent intent=new Intent(TijianRecordActivity.this,RecordListActivity.class);
+                        Intent intent=new Intent(ExaminationRecordActivity.this,RecordListActivity.class);
                         intent.putExtra("session",tag);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(TijianRecordActivity.this, "请核实信息是否正确!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ExaminationRecordActivity.this, "请核实信息是否正确!", Toast.LENGTH_LONG).show();
                     }
 
                     break;

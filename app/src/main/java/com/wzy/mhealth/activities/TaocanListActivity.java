@@ -26,6 +26,7 @@ import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,12 +68,13 @@ public class TaocanListActivity extends Activity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent(TaocanListActivity.this, PersonTaocanActivity.class);
-                            intent.putExtra("id", list.get(position).getId() + "");
-                            intent.putExtra("name",list.get(position).getName()+"");
+                            intent.putExtra("id", list.get(position).getTaocanId() + "");
+                            intent.putExtra("name",list.get(position).getCenterName()+"");
                             intent.putExtra("tel",list.get(position).getPhone()+"");
                             intent.putExtra("add",list.get(position).getAdress()+"");
                             intent.putExtra("content",list.get(position).getDetails()+"");
                             intent.putExtra("img",list.get(position).getImg()+"");
+                            intent.putExtra("second", (Serializable) list.get(position).getTaocanId());
                             startActivity(intent);
                         }
                     });

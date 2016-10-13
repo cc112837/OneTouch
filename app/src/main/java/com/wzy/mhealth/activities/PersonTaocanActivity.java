@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +19,11 @@ import com.amap.api.location.AMapLocationListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TaoCanAdapter;
-import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.TiUser;
-import com.wzy.mhealth.model.ZhixingTaocan;
-import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.model.Tijian;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PersonTaocanActivity extends Activity implements AMapLocationListener {
     private ImageView leftBtn;
@@ -37,7 +32,6 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
     TaoCanAdapter adapter;
     private AMapLocationClient mlocationClient;
     public AMapLocationClientOption mLocationOption = null;
-    private ArrayList<ZhixingTaocan.DataEntity> list = new ArrayList<>();
     private String id,name,tel,add,content,img;
     private ImageView iv_img;
     private TextView tv_name;
@@ -45,6 +39,7 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
     private TextView tv_tel;
     private View headview;
     private ImageView iv_tel;
+    private List<Tijian.DataEntity.TaocanIdEntity> second;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +52,7 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
         add = intent.getStringExtra("add");
         content = intent.getStringExtra("content");
         img = intent.getStringExtra("img");
+        second = (List<Tijian.DataEntity.TaocanIdEntity>)intent.getSerializableExtra("second");
         init();
     }
 
@@ -94,57 +90,37 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
         }
     }
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 115:
-                    final ZhixingTaocan zhixing = (ZhixingTaocan) msg.obj;
-                    if (zhixing != null) {
-                        list.addAll(zhixing.getData());
-                        adapter.notifyDataSetChanged();
-                        tv_name.setText("" + name);
-                        headview.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(PersonTaocanActivity.this, ZhixingIntroduceActivity.class);
-                                intent.putExtra("content", content + "");
-                                startActivity(intent);
-                            }
-                        });
-                        tv_add.setText("地址：" + add);
-                        tv_tel.setText("电话：" + tel);
-                        iv_tel.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+tel));
-                                startActivity(intent);
-                            }
-                        });
-                        ImageLoader.getInstance().displayImage(img, iv_img);
-
-                    }
-                    break;
-            }
-        }
-    };
-
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_show = (ListView) findViewById(R.id.lv_show);
         headview = LayoutInflater.from(this).inflate(R.layout.zhidetail_header, null);
-        adapter = new TaoCanAdapter(this, list);
-        String url = Constants.SERVER_URL + "TaoCanCenterServlet";
-        TiUser user = new TiUser();
-        Log.e("setTel", id + "");
-        user.setTel("" + id);
-        MyHttpUtils.handData(handler, 115, url, user);
         iv_img = (ImageView) headview.findViewById(R.id.iv_img);
         tv_name = (TextView) headview.findViewById(R.id.tv_name);
         tv_add = (TextView) headview.findViewById(R.id.tv_add);
         tv_tel = (TextView) headview.findViewById(R.id.tv_tel);
         ImageView iv_addr = (ImageView) headview.findViewById(R.id.iv_address);
         iv_tel = (ImageView) headview.findViewById(R.id.iv_tel);
+        tv_name.setText("" + name);
+        headview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PersonTaocanActivity.this, ZhixingIntroduceActivity.class);
+                intent.putExtra("content", content + "");
+                startActivity(intent);
+            }
+        });
+        tv_add.setText("地址：" + add);
+        tv_tel.setText("电话：" + tel);
+        iv_tel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+tel));
+                startActivity(intent);
+            }
+        });
+        ImageLoader.getInstance().displayImage(img, iv_img);
+        adapter = new TaoCanAdapter(this, second);
+
 
         iv_addr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +145,7 @@ public class PersonTaocanActivity extends Activity implements AMapLocationListen
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position != 0) {
                     Intent intent = new Intent(PersonTaocanActivity.this, TaocanDetailAcitivty.class);
-                    intent.putExtra("id", list.get(position - 1).getId() + "");
+                    intent.putExtra("id", second.get(position - 1).getTaoId() + "");
                     startActivityForResult(intent, 456);
                 }
             }

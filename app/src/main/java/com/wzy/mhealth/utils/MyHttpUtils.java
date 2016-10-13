@@ -216,5 +216,11 @@ public class MyHttpUtils extends HttpUtils{
           params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
           sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Proud(), handler, what));
       }
+      if (what==171){
+          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
+      }
+      if (what==172){
+          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
+      }
   }
 }

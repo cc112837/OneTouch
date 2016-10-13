@@ -13,7 +13,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.NewsAids;
 import com.wzy.mhealth.utils.ReadUtil;
 
-public class JiBingActivity extends BaActivity {
+public class DiseaseActivity extends BaActivity {
     private ListView lv_display, office;
     private ImageView leftBtn;
     private int pos;
@@ -31,7 +31,7 @@ public class JiBingActivity extends BaActivity {
     private void initView() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         office = (ListView) findViewById(R.id.office);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(JiBingActivity.this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(DiseaseActivity.this,
                 R.layout.list_item_text, dess);
         office.setAdapter(adapter);
         lv_display = (ListView) findViewById(R.id.lv_display);
@@ -40,7 +40,7 @@ public class JiBingActivity extends BaActivity {
         for (int i = 0; i < newsAids.getHead().size(); i++) {
             arr[i] = newsAids.getHead().get(i).getTitle();
         }
-        ArrayAdapter adapter1 = new ArrayAdapter<>(JiBingActivity.this,
+        ArrayAdapter adapter1 = new ArrayAdapter<>(DiseaseActivity.this,
                 R.layout.list_item_text_black, arr);
         lv_display.setAdapter(adapter1);
         office.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,7 +76,7 @@ public class JiBingActivity extends BaActivity {
                     }
                 }
                 adapter = new ArrayAdapter<>(
-                        JiBingActivity.this, R.layout.list_item_text_black, s);
+                        DiseaseActivity.this, R.layout.list_item_text_black, s);
                 lv_display.setAdapter(adapter);
                 pos = position;
             }
@@ -91,7 +91,7 @@ public class JiBingActivity extends BaActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(JiBingActivity.this, JiBingDetailActicity.class);
+                Intent intent = new Intent(DiseaseActivity.this, DiseaseDetailActicity.class);
                 String content = null;
                 String title=null;
                 if (pos == 0) {

@@ -1,5 +1,6 @@
 package com.wzy.mhealth.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,14 +17,14 @@ public class Tijian {
 
 
     /**
-     * id : 1
+     * taocanId : [{"oldPrice":0.01,"taocanNum":0,"taoId":6,"newPrice":0.01,"name":"ceishi","context":"具体一个套餐详情"},{"oldPrice":228,"taocanNum":0,"taoId":19,"newPrice":79,"name":"入职套餐","context":"具体一个套餐详情"}]
      * phone : 029-68018969
-     * num : 0
      * adress : 西安市莲湖区丰登南路23号建大洋房(丰庆公园西门向北200米路东)
      * level : 5
-     * details : <p><img src="http://117.34.105.29:8209/mhealth/ueditor/jsp/upload/image/20160929/1475145552248017940.jpg" title="1475145552248017940.jpg" alt="zhixingintro.jpg"/></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 西安智行深度(精密)体检中心是一家为企业和个人提供普通健康体检、深度(精密)体检和检后健康改善与美式家庭医生服务的医疗机构。</p><p>&nbsp;&nbsp; &nbsp; &nbsp;西安智行深度(精密)体检中心是西安规模最大的高端体检与保健中心，营业面积6000平方米。</p><p>&nbsp;&nbsp; &nbsp; &nbsp;西安智行深度(精密)体检中心秉承早发现、早诊断、早治疗的先进预防医学理念，集权威医疗专家、国际一流检查设备、电脑排检系统、人性化服务流程于一体，对您的健康做以细胞级的深度、精密检测。</p><p>&nbsp;&nbsp; &nbsp; &nbsp;西安智行深度(精密)体检中心高度尊重与保护您的隐私、追求卓越的医疗质量和客户体验，致力于建立与您的终身关系，长期专注您的的健康状况，为您提供个性化健康改善计划和无碍就医通道服务，“保障健康，优化生命”以“治未病”为追求，&nbsp;全力协助您掌握更长远的人生，畅享生命的无限欢乐!&nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;医院地址 &nbsp;西安市莲湖区丰登南路23号建大洋房(丰庆公园西门向北200米路东) &nbsp;</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话：68018969（8:00—11:30）<br/></p><p><br/></p>
-     * name : 西安智行深度(精密)体检中心
+     * details :  详情
+     * centerName : 西安智行深度(精密)体检中心
      * img : http://117.34.105.29:8209/mhealth/upload/1475220119774.jpg
+     * centerId : 1
      */
 
     private List<DataEntity> data;
@@ -37,25 +38,26 @@ public class Tijian {
     }
 
     public static class DataEntity {
-        private int id;
         private String phone;
-        private int num;
         private String adress;
         private int level;
         private String details;
-        private String name;
+        private String centerName;
         private String img;
+        private int centerId;
+        /**
+         * oldPrice : 0.01
+         * taocanNum : 0
+         * taoId : 6
+         * newPrice : 0.01
+         * name : ceishi
+         * context : 具体一个套餐详情
+         */
 
-        public void setId(int id) {
-            this.id = id;
-        }
+        private List<TaocanIdEntity> taocanId;
 
         public void setPhone(String phone) {
             this.phone = phone;
-        }
-
-        public void setNum(int num) {
-            this.num = num;
         }
 
         public void setAdress(String adress) {
@@ -70,24 +72,24 @@ public class Tijian {
             this.details = details;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setCenterName(String centerName) {
+            this.centerName = centerName;
         }
 
         public void setImg(String img) {
             this.img = img;
         }
 
-        public int getId() {
-            return id;
+        public void setCenterId(int centerId) {
+            this.centerId = centerId;
+        }
+
+        public void setTaocanId(List<TaocanIdEntity> taocanId) {
+            this.taocanId = taocanId;
         }
 
         public String getPhone() {
             return phone;
-        }
-
-        public int getNum() {
-            return num;
         }
 
         public String getAdress() {
@@ -102,12 +104,77 @@ public class Tijian {
             return details;
         }
 
-        public String getName() {
-            return name;
+        public String getCenterName() {
+            return centerName;
         }
 
         public String getImg() {
             return img;
+        }
+
+        public int getCenterId() {
+            return centerId;
+        }
+
+        public List<TaocanIdEntity> getTaocanId() {
+            return taocanId;
+        }
+
+        public static class TaocanIdEntity implements Serializable{
+            private double oldPrice;
+            private int taocanNum;
+            private int taoId;
+            private double newPrice;
+            private String name;
+            private String context;
+
+            public void setOldPrice(double oldPrice) {
+                this.oldPrice = oldPrice;
+            }
+
+            public void setTaocanNum(int taocanNum) {
+                this.taocanNum = taocanNum;
+            }
+
+            public void setTaoId(int taoId) {
+                this.taoId = taoId;
+            }
+
+            public void setNewPrice(double newPrice) {
+                this.newPrice = newPrice;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public void setContext(String context) {
+                this.context = context;
+            }
+
+            public double getOldPrice() {
+                return oldPrice;
+            }
+
+            public int getTaocanNum() {
+                return taocanNum;
+            }
+
+            public int getTaoId() {
+                return taoId;
+            }
+
+            public double getNewPrice() {
+                return newPrice;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public String getContext() {
+                return context;
+            }
         }
     }
 }

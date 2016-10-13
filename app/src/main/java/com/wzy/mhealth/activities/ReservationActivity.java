@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YuyueActivity extends BaseActivity {
+public class ReservationActivity extends BaseActivity {
     private List<GuaHao> guahaoList;
     private guahaoAdapter adapter;
     private GuaHao guahao = new GuaHao();
@@ -98,9 +98,9 @@ public class YuyueActivity extends BaseActivity {
 
     public void yuyuewancheng(View v) {
         if (guahao == null)
-            Toast.makeText(YuyueActivity.this, "请选择挂号时间", Toast.LENGTH_LONG).show();
+            Toast.makeText(ReservationActivity.this, "请选择挂号时间", Toast.LENGTH_LONG).show();
         else if (guahao.getNumber() == 0)
-            Toast.makeText(YuyueActivity.this, "当前时间已约满，请重新选择挂号时间", Toast.LENGTH_LONG)
+            Toast.makeText(ReservationActivity.this, "当前时间已约满，请重新选择挂号时间", Toast.LENGTH_LONG)
                     .show();
         else {
             Thread th = new Thread() {
@@ -150,21 +150,21 @@ public class YuyueActivity extends BaseActivity {
             while (th.isAlive()) {
             }
             if ("1".equals(s)) {
-                Toast.makeText(YuyueActivity.this, "预约成功", Toast.LENGTH_LONG)
+                Toast.makeText(ReservationActivity.this, "预约成功", Toast.LENGTH_LONG)
                         .show();
                 //// TODO: 2016/4/14
                 Intent intent = new Intent();
-                intent.setClass(YuyueActivity.this, YuyueListActivity.class);
+                intent.setClass(ReservationActivity.this, ReservationListActivity.class);
                 startActivity(intent);
                 GuahaoDoctorListActivity.instance.finish();
                 KeshiselectActivity.instance.finish();
                 finish();
 
             } else if ("0".equals(s))
-                Toast.makeText(YuyueActivity.this,
+                Toast.makeText(ReservationActivity.this,
                         "当前时间已约满，请重新选择挂号时间", Toast.LENGTH_LONG).show();
             else if ("2".equals(s))
-                Toast.makeText(YuyueActivity.this,
+                Toast.makeText(ReservationActivity.this,
                         "预约失败，您已在当前医生该时间段的预约表里", Toast.LENGTH_LONG).show();
         }
     }

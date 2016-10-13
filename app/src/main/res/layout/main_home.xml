@@ -47,47 +47,54 @@
                 android:layout_height="80dp"
                 android:orientation="horizontal">
 
+
                 <LinearLayout
+                    android:id="@+id/ll_private"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="3dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:src="@mipmap/personding" />
 
-                    <LinearLayout
-                        android:id="@+id/ll_private"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_weight="1.7"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:text="私人定制体检"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="个性化定制"
-                            android:textColor="#4e4e4e"
-                            android:textSize="15sp" />
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey_bg" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="center"
-                            android:singleLine="true"
-                            android:text="专家制定专属体检项目"
-                            android:textColor="@color/dark_grey"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_marry"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@mipmap/marry_hospital" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="孕产月中心"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <View
@@ -116,6 +123,7 @@
                         android:textColor="@color/dark_grey"
                         android:textSize="14sp" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <View
@@ -211,7 +219,7 @@
                 android:background="@color/bg_gray" />
 
             <LinearLayout
-                android:id="@+id/ll_intro"
+                android:id="@+id/doctor_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -229,7 +237,7 @@
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:id="@+id/doctor_more"
+
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -241,49 +249,54 @@
                 android:layout_height="1px"
                 android:background="@color/bg_gray" />
 
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="#fff"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:paddingLeft="5dp"-->
-            <!--android:paddingRight="5dp">-->
-
-            <!--<include-->
-            <!--android:id="@+id/ll_doc1"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--layout="@layout/doctor_main_item" />-->
-
-            <!--<include-->
-            <!--android:id="@+id/ll_doc2"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--layout="@layout/doctor_main_item" />-->
-
-            <!--<include-->
-            <!--android:id="@+id/ll_doc3"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--layout="@layout/doctor_main_item" />-->
-
-            <!--<include-->
-            <!--android:id="@+id/ll_doc4"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--layout="@layout/doctor_main_item" />-->
-            <!--</LinearLayout>-->
             <GridView
                 android:id="@+id/gv_doctor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:horizontalSpacing="1px"
                 android:numColumns="4"></GridView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/bg_gray" />
 
+            <LinearLayout
+                android:id="@+id/ll_taocanmore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="2"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="套餐推荐"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/taocan_more"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:src="@mipmap/icon_more" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/bg_gray" />
+
+            <GridView
+                android:id="@+id/gv_taocan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:verticalSpacing="1px"
+                android:numColumns="1"></GridView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -429,6 +442,7 @@
                 android:background="@color/bg_gray" />
 
             <LinearLayout
+                android:id="@+id/ll_newsmore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -446,7 +460,6 @@
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:id="@+id/iv_newsmore"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"

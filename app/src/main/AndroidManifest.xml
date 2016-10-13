@@ -208,16 +208,16 @@
             android:name=".activities.PoiKeywordSearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.JiBingActivity"
+            android:name=".activities.DiseaseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.YuyueListActivity"
+            android:name=".activities.ReservationListActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.GreenPassActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.BingliActivity"
+            android:name=".activities.MedicalRecordsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.JianyanBaogaoActivity"
@@ -226,7 +226,7 @@
             android:name=".activities.ScanresultActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.YiyuanSelectActivity"
+            android:name=".activities.HospitalSelectActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.KeshiselectActivity"
@@ -238,7 +238,7 @@
             android:name=".activities.JiankangActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.JiBingDetailActicity"
+            android:name=".activities.DiseaseDetailActicity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.DoctorListActivity"
@@ -256,7 +256,7 @@
             android:name=".activities.GPSNaviActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.YuyueActivity"
+            android:name=".activities.ReservationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.FriendDetailActivity"
@@ -265,10 +265,10 @@
             android:name=".activities.MyYuyueActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.TijianRecordActivity"
+            android:name=".activities.ExaminationRecordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.TijianYueActivity"
+            android:name=".activities.ExaminationYueActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.DoctorGradeActivity"
@@ -303,14 +303,15 @@
             android:name=".activities.TaocanDetailAcitivty"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.TaocanBuyActivity" />
-        <activity android:name=".activities.TijianOrderActivity" />
+        <activity android:name=".activities.ExaminationOrderActivity" />
         <activity android:name=".activities.RankActivity" />
         <activity android:name=".activities.OrderStatusActivity" />
         <activity android:name=".activities.ProudActivity" />
         <activity android:name=".activities.LightActivity" />
         <activity android:name=".activities.MyGradeActivity" />
         <activity android:name=".activities.SettingActivity" />
-        <activity android:name=".activities.TaocanListActivity"></activity>
+        <activity android:name=".activities.TaocanListActivity" />
+        <activity android:name=".activities.MarryHospitalActivity"></activity>
     </application>
 
 </manifest>

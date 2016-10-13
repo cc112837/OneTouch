@@ -14,7 +14,7 @@ import com.wzy.mhealth.model.YuyueDoctor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YuyueListActivity extends BaActivity {
+public class ReservationListActivity extends BaActivity {
     private List<YuyueDoctor> yuyueDoctorList;
     private YuyueAdapter adapter;
     private ListView list = null;

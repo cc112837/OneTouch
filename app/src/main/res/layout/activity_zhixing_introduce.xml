@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="智行介绍" />
+            android:text="详情介绍" />
 
         <ImageView
             android:id="@+id/leftBtn"

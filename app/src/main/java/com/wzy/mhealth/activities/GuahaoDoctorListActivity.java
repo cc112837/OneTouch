@@ -64,7 +64,7 @@ public class GuahaoDoctorListActivity extends BaActivity {
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent();
-                intent.setClass(GuahaoDoctorListActivity.this, YuyueActivity.class);
+                intent.setClass(GuahaoDoctorListActivity.this, ReservationActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("doctor", doctorlist.get(position));
                 bundle.putSerializable("hospital", hos);
