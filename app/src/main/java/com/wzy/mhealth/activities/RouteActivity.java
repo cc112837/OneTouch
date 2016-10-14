@@ -90,7 +90,6 @@ public class RouteActivity extends BaActivity implements OnMarkerClickListener,
     private AMapLocationClientOption mLocationOption;
 
     private boolean is = true;
-    private String citystart;
     private String cityend;
 
     @Override

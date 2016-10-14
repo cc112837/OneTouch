@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="就诊专车" />
+            android:text="路线详情" />
 
         <ImageView
             android:id="@+id/leftBtn"

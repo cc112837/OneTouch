@@ -291,12 +291,12 @@
                 android:layout_height="1px"
                 android:background="@color/bg_gray" />
 
-            <GridView
+            <com.wzy.mhealth.view.MaternityChildView
                 android:id="@+id/gv_taocan"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:verticalSpacing="1px"
-                android:numColumns="1"></GridView>
+                android:layout_height="0dp"
+                android:layout_weight="1"
+               ></com.wzy.mhealth.view.MaternityChildView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"

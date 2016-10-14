@@ -29,9 +29,12 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
+import com.wzy.mhealth.activities.DiseaseActivity;
 import com.wzy.mhealth.activities.DoctorDetailActivity;
 import com.wzy.mhealth.activities.DoctorListActivity;
-import com.wzy.mhealth.activities.DiseaseActivity;
+import com.wzy.mhealth.activities.ExaminationOrderActivity;
+import com.wzy.mhealth.activities.ExaminationRecordActivity;
+import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.activities.MainActivity;
 import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
@@ -39,18 +42,18 @@ import com.wzy.mhealth.activities.NewsDetailActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
+import com.wzy.mhealth.activities.TaocanDetailAcitivty;
 import com.wzy.mhealth.activities.TaocanListActivity;
-import com.wzy.mhealth.activities.ExaminationOrderActivity;
-import com.wzy.mhealth.activities.ExaminationRecordActivity;
-import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.adapter.DoctorHomeAdapter;
 import com.wzy.mhealth.adapter.NewsItemAdapter;
+import com.wzy.mhealth.adapter.TaocanHomeAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Doctor;
-import com.wzy.mhealth.model.DoctorEntity;
 import com.wzy.mhealth.model.NewsYang;
+import com.wzy.mhealth.model.TaocanEntity;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.LocalImageHolderView;
+import com.wzy.mhealth.view.MaternityChildView;
 import com.wzy.mhealth.view.MyScrollView;
 
 import java.util.ArrayList;
@@ -72,9 +75,12 @@ public class HomeNewFragment extends Fragment {
     private List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list;
     private NewsItemAdapter adapter;
     private MyScrollView my_scroll;
+
+    private List<TaocanEntity.DataEntity> taocanEntitylist = new ArrayList<>();
     private List<Doctor.DataEntity> doctorEntitylist = new ArrayList<>();
-    private List<DoctorEntity> doctorlist;
     private DoctorHomeAdapter doctorHomeAdapter;
+    private TaocanHomeAdapter taocanHomeAdapter;
+    private MaternityChildView gv_taocan;
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -131,10 +137,27 @@ public class HomeNewFragment extends Fragment {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent();
                             intent.setClass(getActivity(), DoctorDetailActivity.class);
-                            intent.putExtra("doctor",doctor.getData().get(position).getId()+"" );
+                            intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
                             startActivity(intent);
                         }
                     });
+                    break;
+                case 173:
+                    TaocanEntity taocanEntity = (TaocanEntity) msg.obj;
+                    taocanEntitylist.clear();
+                    for (int i = 0; i < 4; i++) {
+                        taocanEntitylist.add(taocanEntity.getData().get(i));
+                    }
+                    taocanHomeAdapter.notifyDataSetChanged();
+                    gv_taocan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent=new Intent(getActivity(), TaocanDetailAcitivty.class);
+                            intent.putExtra("id",taocanEntitylist.get(position).getId()+"");
+                            startActivity(intent);
+                        }
+                    });
+
                     break;
             }
         }
@@ -177,12 +200,11 @@ public class HomeNewFragment extends Fragment {
         doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
         gv_doctor.setAdapter(doctorHomeAdapter);
         LinearLayout ll_record = (LinearLayout) headview.findViewById(R.id.ll_record);
-        LinearLayout ll_marry=(LinearLayout) headview.findViewById(R.id.ll_marry);
+        LinearLayout ll_marry = (LinearLayout) headview.findViewById(R.id.ll_marry);
         ll_marry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/10/11  孕产月中心
-                Intent intent=new Intent(getActivity(),MarryHospitalActivity.class);
+                Intent intent = new Intent(getActivity(), MarryHospitalActivity.class);
                 startActivity(intent);
             }
         });
@@ -193,9 +215,11 @@ public class HomeNewFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        GridView gv_taocan=(GridView) headview.findViewById(R.id.gv_taocan);
-        // TODO: 2016/10/11 添加适配器
-
+        String homeurl = Constants.SERVER_URL + "TaoCanManyServlet";
+        MyHttpUtils.handData(handler, 173, homeurl, null);
+        taocanHomeAdapter = new TaocanHomeAdapter(getContext(), taocanEntitylist);
+        gv_taocan = (MaternityChildView) headview.findViewById(R.id.gv_taocan);
+        gv_taocan.setAdapter(taocanHomeAdapter);
         LinearLayout ll_newsmore = (LinearLayout) headview.findViewById(R.id.ll_newsmore);
         ll_newsmore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,7 +247,7 @@ public class HomeNewFragment extends Fragment {
                 startActivity(intent);
             }
         });
-       LinearLayout ll_taocanmore=(LinearLayout) headview.findViewById(R.id.ll_taocanmore);
+        LinearLayout ll_taocanmore = (LinearLayout) headview.findViewById(R.id.ll_taocanmore);
         ll_taocanmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

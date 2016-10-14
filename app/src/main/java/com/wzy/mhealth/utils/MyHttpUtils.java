@@ -32,6 +32,7 @@ import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.StepResult;
 import com.wzy.mhealth.model.TaocanDetail;
+import com.wzy.mhealth.model.TaocanEntity;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
@@ -221,6 +222,9 @@ public class MyHttpUtils extends HttpUtils{
       }
       if (what==172){
           sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
+      }
+      if(what==173){
+          sendData(HttpRequest.HttpMethod.POST,url,null,new MyCallBack(new TaocanEntity(),handler,what));
       }
   }
 }
