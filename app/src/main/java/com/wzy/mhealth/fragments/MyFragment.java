@@ -31,6 +31,8 @@ import com.wzy.mhealth.LeanChat.util.PhotoUtils;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.AboutActivity;
 import com.wzy.mhealth.activities.BarCodeActivity;
+import com.wzy.mhealth.activities.ExaminationOrderActivity;
+import com.wzy.mhealth.activities.ExaminationRecordActivity;
 import com.wzy.mhealth.activities.ManageActivity;
 import com.wzy.mhealth.activities.MyGradeActivity;
 import com.wzy.mhealth.activities.ProudActivity;
@@ -38,6 +40,7 @@ import com.wzy.mhealth.activities.SettingActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Grade;
+import com.wzy.mhealth.model.Proud;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.CacheUtils;
@@ -59,11 +62,10 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class MyFragment extends D3Fragment {
 
-    RelativeLayout logout, myproud, setting, manager, erweima, secret, normal, about, familyHealth;
+    RelativeLayout myrecord, setting, manager, erweima, myorder, about, familyHealth;
     TextView username, tv_gradenum;
-    LinearLayout about1, ll_decrease, ll_grade;
-    ImageView headImage;
-    String iconUrl;
+    LinearLayout about1, ll_decrease, ll_grade, myproud;
+    ImageView headImage,iv_spped;
     String dateTime;
     private AlertDialog avatarDialog;
     private Handler handler = new Handler() {
@@ -83,6 +85,12 @@ public class MyFragment extends D3Fragment {
                         tv_gradenum.setText(grade.getIntegration() + "");
                     }
 
+                    break;
+                case  170:
+                    Proud proud=(Proud) msg.obj;
+                    if (proud.getData().get(0).isStepNum()){
+                        iv_spped.setImageResource(R.mipmap.speed_proud);
+                    }
                     break;
             }
         }
@@ -108,9 +116,13 @@ public class MyFragment extends D3Fragment {
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
+        iv_spped=(ImageView)view.findViewById(R.id.iv_spped);
+        String url= Constants.SERVER_URL+"MedalServlet";
+        MyHttpUtils.handData(handler,170,url,null);
         ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
         ll_grade = (LinearLayout) view.findViewById(R.id.ll_grade);
         tv_gradenum = (TextView) view.findViewById(R.id.tv_gradenum);
+        myproud = (LinearLayout) view.findViewById(R.id.myproud);
         String ul = Constants.SERVER_URL + "StepIntegrationServlet";
         MyHttpUtils.handData(handler, 156, ul, null);
         ll_decrease.setOnClickListener(new View.OnClickListener() {
@@ -127,14 +139,25 @@ public class MyFragment extends D3Fragment {
                 startActivity(intent);
             }
         });
-        myproud = (RelativeLayout) view.findViewById(R.id.myproud);
-
+        myrecord = (RelativeLayout) view.findViewById(R.id.myrecord);
+        myrecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExaminationRecordActivity.class);
+                startActivity(intent);
+            }
+        });
         about1 = (LinearLayout) view.findViewById(R.id.about1);
-
-
         erweima = (RelativeLayout) view.findViewById(R.id.erweima);
         manager = (RelativeLayout) view.findViewById(R.id.manager);
-
+        myorder = (RelativeLayout) view.findViewById(R.id.myorder);
+        myorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ExaminationOrderActivity.class);
+                startActivity(intent);
+            }
+        });
         setting = (RelativeLayout) view.findViewById(R.id.setting);
         about = (RelativeLayout) view.findViewById(R.id.about);
         familyHealth = (RelativeLayout) view.findViewById(R.id.familyHealth);

@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -62,7 +63,7 @@ public class DoctorDetailActivity extends BaActivity {
                 } else if (userEvaluationList.get(0).getTotalRecord() > 2) {
                     Intent intent = new Intent();
                     intent.setClass(DoctorDetailActivity.this, EvaluationListActivity.class);
-                    intent.putExtra("doctorId",doctor+"");
+                    intent.putExtra("doctorId", doctor + "");
                     startActivity(intent);
                 }
             }
@@ -70,72 +71,80 @@ public class DoctorDetailActivity extends BaActivity {
 
 
     }
-private Handler handler=new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what){
-            case 153:
-                final DoctorDetail doctorDetail=(DoctorDetail)msg.obj;
-                name.setText(doctorDetail.getUserName());
-                departmenTextView.setText(doctorDetail.getFirstdep());
-                zhichengTextView.setText(doctorDetail.getDoctorTilte());
-                hospitalTextView.setText(doctorDetail.getHospital());
-                xianqingTextView.setText(doctorDetail.getSpecialization());
-                recommend.setText(doctorDetail.getRecommend() + "");
-                attitude.setText(doctorDetail.getAttitude() + "");
-                level.setText(doctorDetail.getLevel() + "");
 
-                if (doctorDetail.getPricePicture() != 0)
-                    tuwenfeiyong.setText(doctorDetail.getPricePicture() + "元/次");
-                else {
-                    tuwenfeiyong.setText("未开通");
-                    tuwentu = (ImageView) findViewById(R.id.tuwentu);
-                    tuwentu.setImageResource(R.mipmap.camera_doctor_grey);
-                }
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 153:
+                    final DoctorDetail doctorDetail = (DoctorDetail) msg.obj;
+                    name.setText(doctorDetail.getUserName());
+                    departmenTextView.setText(doctorDetail.getFirstdep());
+                    zhichengTextView.setText(doctorDetail.getDoctorTilte());
+                    hospitalTextView.setText(doctorDetail.getHospital());
+                    xianqingTextView.setText(doctorDetail.getSpecialization());
+                    recommend.setText(doctorDetail.getRecommend() + "");
+                    attitude.setText(doctorDetail.getPriceAdd() + "");
+                    level.setText(doctorDetail.getRecommend() + "");
 
-                if (doctorDetail.getPricePhone() != 0)
-                    dianhuafeiyong.setText(doctorDetail.getPricePicture() + "元/分钟");
-                else {
-                    dianhuafeiyong.setText("未开通");
-                    dianhuatu = (ImageView) findViewById(R.id.dianhuatu);
-                    dianhuatu.setImageResource(R.mipmap.phone_doctor_grey);
-                }
-                jiahaofeiyong.setText("未开通");
-                jiahaotu = (ImageView) findViewById(R.id.jiahaotu);
-                jiahaotu.setImageResource(R.mipmap.video_doctor_grey);
-
-                privatefeiyong.setText("未开通");
-                privatetu = (ImageView) findViewById(R.id.privatetu);
-                privatetu.setImageResource(R.mipmap.person_doctor_grey);
-
-                vedioefeiyong.setText("未开通");
-                vediotu = (ImageView) findViewById(R.id.vediotu);
-                vediotu.setImageResource(R.mipmap.before_doctor_grey);
-                tuwenLayout.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setClass(DoctorDetailActivity.this, BuActivity.class);
-                        intent.putExtra("type","1");
-                        intent.putExtra("price", doctorDetail.getPricePicture()+"");
-                        intent.putExtra("doctor",doctorDetail.getDoctorId()+"");
-                        intent.putExtra("name",doctorDetail.getUserName()+"");
-                        startActivity(intent);
+                    if (doctorDetail.getPricePicture() != 0)
+                        tuwenfeiyong.setText(doctorDetail.getPricePicture() + "元/次");
+                    else {
+                        tuwenfeiyong.setText("未开通");
+                        tuwentu = (ImageView) findViewById(R.id.tuwentu);
+                        tuwentu.setImageResource(R.mipmap.camera_doctor_grey);
                     }
-                });
-            break;
+                    dianhuatu = (ImageView) findViewById(R.id.dianhuatu);
+                    if (doctorDetail.getPricePhone() != 0) {
+                        dianhuafeiyong.setText(doctorDetail.getPricePicture() + "元/分钟");
+                        dianhuatu.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" +doctorDetail.getUserEvaluate()));
+                                startActivity(intent);
+                            }
+                        });
+                    } else {
+                        dianhuafeiyong.setText("未开通");
+                        dianhuatu.setImageResource(R.mipmap.phone_doctor_grey);
+                    }
+                    jiahaofeiyong.setText("未开通");
+                    jiahaotu = (ImageView) findViewById(R.id.jiahaotu);
+                    jiahaotu.setImageResource(R.mipmap.video_doctor_grey);
+
+                    privatefeiyong.setText("未开通");
+                    privatetu = (ImageView) findViewById(R.id.privatetu);
+                    privatetu.setImageResource(R.mipmap.person_doctor_grey);
+
+                    vedioefeiyong.setText("未开通");
+                    vediotu = (ImageView) findViewById(R.id.vediotu);
+                    vediotu.setImageResource(R.mipmap.before_doctor_grey);
+                    tuwenLayout.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent();
+                            intent.setClass(DoctorDetailActivity.this, BuActivity.class);
+                            intent.putExtra("type", "1");
+                            intent.putExtra("price", doctorDetail.getPricePicture() + "");
+                            intent.putExtra("doctor", doctorDetail.getDoctorId() + "");
+                            intent.putExtra("name", doctorDetail.getUserName() + "");
+                            startActivity(intent);
+                        }
+                    });
+                    break;
+            }
         }
-    }
-};
+    };
+
     private void init() {
 
 
-        String url= Constants.SERVER_URL+"MhealthOneDoctorServlet";
-        TiUser user=new TiUser();
-        user.setName(doctor+"");
-        MyHttpUtils.handData(handler,153,url,user);
+        String url = Constants.SERVER_URL + "MhealthOneDoctorServlet";
+        TiUser user = new TiUser();
+        user.setName(doctor + "");
+        MyHttpUtils.handData(handler, 153, url, user);
         guanzhuTextView = (TextView) findViewById(R.id.guanzhu);
         TextView xinyiTextView = (TextView) findViewById(R.id.songxinyi);
         tuwenLayout = (LinearLayout) findViewById(R.id.tuwenzixun);
@@ -203,8 +212,6 @@ private Handler handler=new Handler(){
             yonghu2Degree.setText(userEvaluationList.get(1).getDegree() + "");
             yonghu2Pingjia.setText(userEvaluationList.get(1).getComment());
         }
-
-
 
 
     }

@@ -50,21 +50,18 @@
                         android:textSize="17sp" />
 
                     <LinearLayout
+                        android:id="@+id/myproud"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/proud" />
-
-                        <ImageView
+                            android:id="@+id/iv_spped"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/gift_red" />
+                            android:src="@mipmap/speed_grey" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -76,31 +73,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
-                            android:src="@mipmap/love_red" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
                             android:src="@mipmap/love_grey" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:src="@mipmap/speed_proud" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:src="@mipmap/speed_grey" />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="3dp"
-                            android:src="@mipmap/proud" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -178,6 +153,91 @@
                 android:gravity="bottom"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/bg_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/myrecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <ImageView
+                        android:id="@+id/tu71"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/examrecord" />
+
+                    <TextView
+                        android:id="@+id/TextView71"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tu71"
+                        android:text="体检报告"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/ImageView071"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:src="@mipmap/jiantou" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/bg_gray"></RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/myorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <ImageView
+                        android:id="@+id/tu81"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/examorder" />
+
+                    <TextView
+                        android:id="@+id/TextView81"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tu81"
+                        android:text="我的订单"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/ImageView081"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:src="@mipmap/jiantou" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/bg_gray" />
+
                 <RelativeLayout
                     android:id="@+id/erweima"
                     android:layout_width="match_parent"
@@ -216,7 +276,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
+                    android:background="@color/bg_gray"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/manager"
@@ -256,7 +316,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
+                    android:background="@color/bg_gray"></RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/familyHealth"
@@ -293,55 +353,10 @@
                         android:src="@mipmap/jiantou" />
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/myproud"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp">
-
-                    <ImageView
-                        android:id="@+id/tu71"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@mipmap/prouda" />
-
-                    <TextView
-                        android:id="@+id/TextView71"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/tu71"
-                        android:text="我的勋章"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:id="@+id/ImageView071"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="16dp"
-                        android:src="@mipmap/jiantou" />
-                </RelativeLayout>
-
-                <View
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:background="@color/grey_bg" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
+                    android:background="@color/bg_gray" />
 
                 <RelativeLayout
                     android:id="@+id/setting"
@@ -382,13 +397,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
+                    android:background="@color/bg_gray"></RelativeLayout>
 
 
                 <RelativeLayout
@@ -428,7 +437,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
+                    android:background="@color/bg_gray"></RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/about1"
@@ -468,7 +477,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="#dad8d9"></RelativeLayout>
+                    android:background="@color/bg_gray"></RelativeLayout>
 
 
             </LinearLayout>

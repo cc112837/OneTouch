@@ -14,7 +14,7 @@
             android:id="@+id/lv_show"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@color/bg_gray"
+            android:divider="@color/grey_bg"
             android:dividerHeight="1px"></com.wzy.mhealth.view.MyListView>
     </com.wzy.mhealth.view.MyScrollView>
 

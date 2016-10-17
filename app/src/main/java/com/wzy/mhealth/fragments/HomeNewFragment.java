@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -30,30 +29,19 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DiseaseActivity;
-import com.wzy.mhealth.activities.DoctorDetailActivity;
-import com.wzy.mhealth.activities.DoctorListActivity;
-import com.wzy.mhealth.activities.ExaminationOrderActivity;
-import com.wzy.mhealth.activities.ExaminationRecordActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
-import com.wzy.mhealth.activities.MainActivity;
 import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
-import com.wzy.mhealth.activities.NewsDetailActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.TaocanDetailAcitivty;
 import com.wzy.mhealth.activities.TaocanListActivity;
-import com.wzy.mhealth.adapter.DoctorHomeAdapter;
-import com.wzy.mhealth.adapter.NewsItemAdapter;
 import com.wzy.mhealth.adapter.TaocanHomeAdapter;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.Doctor;
-import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.TaocanEntity;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.LocalImageHolderView;
-import com.wzy.mhealth.view.MaternityChildView;
 import com.wzy.mhealth.view.MyScrollView;
 
 import java.util.ArrayList;
@@ -70,17 +58,14 @@ public class HomeNewFragment extends Fragment {
     private ConversationManager conversationManager = ConversationManager.getInstance();
     private TextView countView;
     private ListView lv_show;
-    private GridView gv_doctor;
+    //    private GridView gv_doctor;
     private RelativeLayout title1;
-    private List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list;
-    private NewsItemAdapter adapter;
     private MyScrollView my_scroll;
 
     private List<TaocanEntity.DataEntity> taocanEntitylist = new ArrayList<>();
-    private List<Doctor.DataEntity> doctorEntitylist = new ArrayList<>();
-    private DoctorHomeAdapter doctorHomeAdapter;
+    //    private List<Doctor.DataEntity> doctorEntitylist = new ArrayList<>();
+//    private DoctorHomeAdapter doctorHomeAdapter;
     private TaocanHomeAdapter taocanHomeAdapter;
-    private MaternityChildView gv_taocan;
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -113,47 +98,36 @@ public class HomeNewFragment extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case 21:
-                    NewsYang newsYang = (NewsYang) msg.obj;
-                    if (newsYang.getData().getFlow().getItems().size() == 0) {
-                    } else {
-                        for (int i = 0; i < 3; i++) {
-                            list.add(newsYang.getData().getFlow().getItems().get(i));
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                    break;
-                case 152:
-                    final Doctor doctor = (Doctor) msg.obj;
-                    if (doctor.getData().size() > 4) {
-                        for (int i = 0; i <= 3; i++)
-                            doctorEntitylist.add(doctor.getData().get(i));
-                    } else {
-                        doctorEntitylist.addAll(doctor.getData());
-                    }
-                    doctorHomeAdapter.notifyDataSetChanged();
-                    gv_doctor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent();
-                            intent.setClass(getActivity(), DoctorDetailActivity.class);
-                            intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
-                            startActivity(intent);
-                        }
-                    });
-                    break;
+
+//                case 152:
+//                    final Doctor doctor = (Doctor) msg.obj;
+//                    if (doctor.getData().size() > 4) {
+//                        for (int i = 0; i <= 3; i++)
+//                            doctorEntitylist.add(doctor.getData().get(i));
+//                    } else {
+//                        doctorEntitylist.addAll(doctor.getData());
+//                    }
+//                    doctorHomeAdapter.notifyDataSetChanged();
+//                    gv_doctor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                            Intent intent = new Intent();
+//                            intent.setClass(getActivity(), DoctorDetailActivity.class);
+//                            intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
+//                            startActivity(intent);
+//                        }
+//                    });
+//                    break;
                 case 173:
                     TaocanEntity taocanEntity = (TaocanEntity) msg.obj;
                     taocanEntitylist.clear();
-                    for (int i = 0; i < 4; i++) {
-                        taocanEntitylist.add(taocanEntity.getData().get(i));
-                    }
+                    taocanEntitylist.addAll(taocanEntity.getData());
                     taocanHomeAdapter.notifyDataSetChanged();
-                    gv_taocan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent=new Intent(getActivity(), TaocanDetailAcitivty.class);
-                            intent.putExtra("id",taocanEntitylist.get(position).getId()+"");
+                            Intent intent = new Intent(getActivity(), TaocanDetailAcitivty.class);
+                            intent.putExtra("id", taocanEntitylist.get(position).getId() + "");
                             startActivity(intent);
                         }
                     });
@@ -167,39 +141,30 @@ public class HomeNewFragment extends Fragment {
         loadLocalImage();
         my_scroll = (MyScrollView) view.findViewById(R.id.my_scroll);
         lv_show = (ListView) view.findViewById(R.id.lv_show);
-        list = new ArrayList<>();
-        adapter = new NewsItemAdapter(getContext(), list);
-        lv_show.setAdapter(adapter);
-        String url = "http://api.m.vodjk.com/v1/content?channelid=13&height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page=1&pagesize=20&sign=d2397d89e14070110eba3d4c3c46b40f&time=1408764433&token=3&type=android&width=375";
-        MyHttpUtils.handData(handler, 21, url, null);
-        lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                intent.putExtra("content", list.get(position - 1).getContentid() + "");
-                startActivity(intent);
-            }
-        });
+        String homeurl = Constants.SERVER_URL + "TaoCanManyServlet";
+        MyHttpUtils.handData(handler, 173, homeurl, null);
+        taocanHomeAdapter = new TaocanHomeAdapter(getContext(), taocanEntitylist);
+        lv_show.setAdapter(taocanHomeAdapter);
         title1 = (RelativeLayout) view.findViewById(R.id.title1);
         countView = (TextView) view.findViewById(R.id.countView);
         Button chat_btn = (Button) view.findViewById(R.id.chat_btn);
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
         View headview = LayoutInflater.from(getContext()).inflate(R.layout.main_home, null);
         lv_show.addHeaderView(headview);
-        LinearLayout doctor_more = (LinearLayout) headview.findViewById(R.id.doctor_more);
-        doctor_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DoctorListActivity.class);
-                startActivity(intent);
-            }
-        });
-        gv_doctor = (GridView) headview.findViewById(R.id.gv_doctor);
-        String ur = Constants.SERVER_URL + "MhealthDoctorServlet";
-        MyHttpUtils.handData(handler, 152, ur, null);
-        doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
-        gv_doctor.setAdapter(doctorHomeAdapter);
-        LinearLayout ll_record = (LinearLayout) headview.findViewById(R.id.ll_record);
+        //        String ur = Constants.SERVER_URL + "MhealthDoctorServlet";
+//        MyHttpUtils.handData(handler, 152, ur, null);
+//        LinearLayout doctor_more = (LinearLayout) headview.findViewById(R.id.doctor_more);
+//        doctor_more.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), DoctorListActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        gv_doctor = (GridView) headview.findViewById(R.id.gv_doctor);
+//        doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
+//        gv_doctor.setAdapter(doctorHomeAdapter);
+
         LinearLayout ll_marry = (LinearLayout) headview.findViewById(R.id.ll_marry);
         ll_marry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,35 +173,12 @@ public class HomeNewFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        ll_record.setOnClickListener(new View.OnClickListener() {
+
+        LinearLayout ll_heali = (LinearLayout) headview.findViewById(R.id.ll_heali);
+        ll_heali.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ExaminationRecordActivity.class);
-                startActivity(intent);
-            }
-        });
-        String homeurl = Constants.SERVER_URL + "TaoCanManyServlet";
-        MyHttpUtils.handData(handler, 173, homeurl, null);
-        taocanHomeAdapter = new TaocanHomeAdapter(getContext(), taocanEntitylist);
-        gv_taocan = (MaternityChildView) headview.findViewById(R.id.gv_taocan);
-        gv_taocan.setAdapter(taocanHomeAdapter);
-        LinearLayout ll_newsmore = (LinearLayout) headview.findViewById(R.id.ll_newsmore);
-        ll_newsmore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChangeFragmentHelper helper = new ChangeFragmentHelper();
-                helper.setTargetFragment(new NewsFragment());
-                helper.setIsClearStackBack(true);
-                ((MainActivity) getActivity()).changeFragment(helper);
-                ((MainActivity) getActivity()).getMain_tabBar().check(R.id.main_news);
-            }
-        });
-        LinearLayout ll_yuyue = (LinearLayout) headview.findViewById(R.id.ll_yuyue);
-        ll_yuyue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ExaminationOrderActivity.class);
-                startActivity(intent);
+                // TODO: 2016/10/17  (李医生)
             }
         });
         LinearLayout ll_taocan = (LinearLayout) headview.findViewById(R.id.ll_taocan);
@@ -307,6 +249,7 @@ public class HomeNewFragment extends Fragment {
         ll_private.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: 2016/10/17  （私人定制）
             }
         });
         convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);

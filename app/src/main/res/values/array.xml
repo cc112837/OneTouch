@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        <item>今天</item>
+        <item>一周内</item>
+    </string-array>
+    <string-array name="time">
+        <item>9-11点</item>
+        <item>2-17点</item>
+        <item>17-20点</item>
+    </string-array>
+</resources>
