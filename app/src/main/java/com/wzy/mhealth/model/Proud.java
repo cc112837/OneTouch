@@ -14,8 +14,11 @@ import java.util.List;
  */
 public class Proud {
 
+
     /**
-     * stepNum : false
+     * shop : false
+     * stepNum : true
+     * blood : false
      */
 
     private List<DataEntity> data;
@@ -29,14 +32,32 @@ public class Proud {
     }
 
     public static class DataEntity {
+        private boolean shop;
         private boolean stepNum;
+        private boolean blood;
+
+        public void setShop(boolean shop) {
+            this.shop = shop;
+        }
 
         public void setStepNum(boolean stepNum) {
             this.stepNum = stepNum;
         }
 
+        public void setBlood(boolean blood) {
+            this.blood = blood;
+        }
+
+        public boolean isShop() {
+            return shop;
+        }
+
         public boolean isStepNum() {
             return stepNum;
+        }
+
+        public boolean isBlood() {
+            return blood;
         }
     }
 }

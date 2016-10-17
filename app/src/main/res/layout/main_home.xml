@@ -81,16 +81,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:singleLine="true"
                             android:text="体检专家免费为您量身定制"
                             android:textColor="@color/grey_bg"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
-
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/grey_bg" />
 
                 <View
                     android:layout_width="1px"
@@ -114,6 +111,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:layout_marginTop="3dp"
                         android:text="团体套餐"
                         android:textColor="@color/dark_grey"
                         android:textSize="14sp" />
@@ -148,6 +146,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:layout_marginTop="3dp"
                         android:text="个人套餐"
                         android:textColor="@color/dark_grey"
                         android:textSize="14sp" />
@@ -176,7 +175,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="孕产月中心"
+                        android:text="母婴呵护"
+                        android:layout_marginTop="3dp"
                         android:textColor="@color/dark_grey"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -204,6 +204,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        android:layout_marginTop="3dp"
                         android:text="康复理疗"
                         android:textColor="@color/dark_grey"
                         android:textSize="14sp" />

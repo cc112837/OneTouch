@@ -35,7 +35,12 @@ private Handler handler=new Handler(){
                 if (proud.getData().get(0).isStepNum()){
                     iv_1.setImageResource(R.mipmap.actvit_red);
                 }
-
+                if(proud.getData().get(0).isShop()){
+                    iv_2.setImageResource(R.mipmap.redblood_proud);
+                }
+                if (proud.getData().get(0).isBlood()){
+                    iv_3.setImageResource(R.mipmap.shop_proud);
+                }
             break;
         }
     }

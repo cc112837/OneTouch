@@ -65,7 +65,7 @@ public class MyFragment extends D3Fragment {
     RelativeLayout myrecord, setting, manager, erweima, myorder, about, familyHealth;
     TextView username, tv_gradenum;
     LinearLayout about1, ll_decrease, ll_grade, myproud;
-    ImageView headImage,iv_spped;
+    ImageView headImage,iv_spped,iv_blood,iv_shop;
     String dateTime;
     private AlertDialog avatarDialog;
     private Handler handler = new Handler() {
@@ -90,6 +90,12 @@ public class MyFragment extends D3Fragment {
                     Proud proud=(Proud) msg.obj;
                     if (proud.getData().get(0).isStepNum()){
                         iv_spped.setImageResource(R.mipmap.speed_proud);
+                    }
+                    if(proud.getData().get(0).isShop()){
+                        iv_shop.setImageResource(R.mipmap.gift_red);
+                    }
+                    if (proud.getData().get(0).isBlood()){
+                        iv_shop.setImageResource(R.mipmap.love_red);
                     }
                     break;
             }
@@ -117,6 +123,8 @@ public class MyFragment extends D3Fragment {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
         iv_spped=(ImageView)view.findViewById(R.id.iv_spped);
+        iv_blood=(ImageView)view.findViewById(R.id.iv_blood);
+        iv_shop=(ImageView)view.findViewById(R.id.iv_shop);
         String url= Constants.SERVER_URL+"MedalServlet";
         MyHttpUtils.handData(handler,170,url,null);
         ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
