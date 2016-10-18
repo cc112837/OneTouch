@@ -34,6 +34,7 @@ import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
+import com.wzy.mhealth.activities.QuestionActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.TaocanDetailAcitivty;
 import com.wzy.mhealth.activities.TaocanListActivity;
@@ -120,18 +121,19 @@ public class HomeNewFragment extends Fragment {
 //                    break;
                 case 173:
                     TaocanEntity taocanEntity = (TaocanEntity) msg.obj;
-                    taocanEntitylist.clear();
-                    taocanEntitylist.addAll(taocanEntity.getData());
-                    taocanHomeAdapter.notifyDataSetChanged();
-                    lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(getActivity(), TaocanDetailAcitivty.class);
-                            intent.putExtra("id", taocanEntitylist.get(position).getId() + "");
-                            startActivity(intent);
-                        }
-                    });
-
+                    if (taocanEntity != null) {
+                        taocanEntitylist.clear();
+                        taocanEntitylist.addAll(taocanEntity.getData());
+                        taocanHomeAdapter.notifyDataSetChanged();
+                        lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(getActivity(), TaocanDetailAcitivty.class);
+                                intent.putExtra("id", taocanEntitylist.get(position-1).getTaoId() + "");
+                                startActivity(intent);
+                            }
+                        });
+                    }
                     break;
             }
         }
@@ -249,7 +251,8 @@ public class HomeNewFragment extends Fragment {
         ll_private.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/10/17  （私人定制）
+                Intent intent = new Intent(getActivity(), QuestionActivity.class);
+                startActivity(intent);
             }
         });
         convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);

@@ -13,10 +13,11 @@ import java.util.List;
  * 修改备注：
  */
 public class TaocanEntity {
+
     /**
-     * id : 27
      * oldPrice : 1155
-     * num : 2
+     * taocanNum : 2
+     * taoId : 27
      * newPrice : 578
      * name : 中老年男宾体检套餐
      * image : http://117.34.105.29:8209/mhealth/upload/1475220119774.jpg
@@ -33,23 +34,32 @@ public class TaocanEntity {
     }
 
     public static class DataEntity {
-        private int id;
         private int oldPrice;
-        private int num;
+        private int taocanNum;
+        private int taoId;
         private int newPrice;
         private String name;
         private String image;
+        private String context;
 
-        public void setId(int id) {
-            this.id = id;
+        public String getContext() {
+            return context;
+        }
+
+        public void setContext(String context) {
+            this.context = context;
         }
 
         public void setOldPrice(int oldPrice) {
             this.oldPrice = oldPrice;
         }
 
-        public void setNum(int num) {
-            this.num = num;
+        public void setTaocanNum(int taocanNum) {
+            this.taocanNum = taocanNum;
+        }
+
+        public void setTaoId(int taoId) {
+            this.taoId = taoId;
         }
 
         public void setNewPrice(int newPrice) {
@@ -64,16 +74,16 @@ public class TaocanEntity {
             this.image = image;
         }
 
-        public int getId() {
-            return id;
-        }
-
         public int getOldPrice() {
             return oldPrice;
         }
 
-        public int getNum() {
-            return num;
+        public int getTaocanNum() {
+            return taocanNum;
+        }
+
+        public int getTaoId() {
+            return taoId;
         }
 
         public int getNewPrice() {

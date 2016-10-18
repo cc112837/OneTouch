@@ -70,7 +70,7 @@ public class TaocanHomeAdapter extends BaseAdapter {
         viewHolder.tv_oldprice.setText("原价：¥" + list.get(position).getOldPrice());
         viewHolder.tv_newprice.setText("优惠价：¥" + list.get(position).getNewPrice());
         viewHolder.tv_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
-        viewHolder.tv_sale.setText("已售出：" + list.get(position).getNum());
+        viewHolder.tv_sale.setText("已售出：" + list.get(position).getTaocanNum());
         return convertView;
 
     }
