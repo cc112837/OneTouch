@@ -1,6 +1,8 @@
 package com.wzy.mhealth.activities;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,11 +12,34 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.UpdatePasswordCallback;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Tool;
 
 public class ChangePwdActivity extends BaActivity {
     EditText oldPwdView, pwdView, pwdView1;
     Button subBtn;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 181:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if (stepInfo.getStatus().equals("1")) {
+                        Tool.initToast(getApplicationContext(),
+                                "修改密码成功");
+                        finish();
+                    } else {
+                        Tool.initToast(getApplicationContext(),
+                                "修改密码失败");
+                    }
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +63,7 @@ public class ChangePwdActivity extends BaActivity {
                     Tool.initToast(getApplicationContext(), "两次密码不一致");
                 } else {
 
-                    AVUser user = AVUser.getCurrentUser();
+                    final AVUser user = AVUser.getCurrentUser();
                     user.updatePasswordInBackground(oldPwdView.getText()
                                     .toString(), pwdView.getText().toString(),
                             new UpdatePasswordCallback() {
@@ -46,9 +71,11 @@ public class ChangePwdActivity extends BaActivity {
                                 @Override
                                 public void done(AVException arg0) {
                                     if (arg0 == null) {
-                                        Tool.initToast(getApplicationContext(),
-                                                "修改密码成功");
-                                        finish();
+                                        String uti = Constants.SERVER_URL + "MhealthUserPasswordServlet";
+                                        TiUser user1 = new TiUser();
+                                        user1.setName(user.getUsername()+"");
+                                        user1.setPass(pwdView.getText().toString());
+                                        MyHttpUtils.handData(handler, 181, uti, user1);
                                     } else
                                         Tool.initToast(getApplicationContext(),
                                                 "修改密码失败");
