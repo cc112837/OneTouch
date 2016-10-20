@@ -65,8 +65,14 @@ public class ExaminationRecordActivity extends BaActivity {
             public void onClick(View v) {
                 String card = tijianid.getText().toString();
                 String mi = name.getText().toString();
-                String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + card + "&passwd=" + mi;
-                MyHttpUtils.handData(handler, 2, loginurl, null);
+				if(card!=""||pass!=""){
+					 String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + card + "&passwd=" + mi;
+                     MyHttpUtils.handData(handler, 2, loginurl, null);
+				}
+				else{
+					Toast.makeText(ExaminationRecordActivity.this, "输入不能为空!", Toast.LENGTH_LONG).show();
+				}
+               
             }
         });
         leftBtn.setOnClickListener(new View.OnClickListener() {

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,10 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.ForgetPass;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +35,7 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
     private Button btn_back;
     private String userPhone;
     private String flag;
+    private String phonecode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +61,56 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
         register_btn = (Button) findViewById(R.id.register_btn);
         btn_back = (Button) findViewById(R.id.btn_back);
     }
+   private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 180:
+                    final ForgetPass forgetPass = (ForgetPass) msg.obj;
+                    if (forgetPass.getStatus().equals("1")) {
+                        RequestParams params = new RequestParams();
+                        params.addBodyParameter("appkey", "159b5bdf78770");
+                        params.addBodyParameter("phone", userPhone);
+                        params.addBodyParameter("zone", "86");
+                        params.addBodyParameter("code", phonecode);
+                        new HttpUtils().send(HttpRequest.HttpMethod.POST, "https://webapi.sms.mob.com/sms/verify",
+                                params, new RequestCallBack<Object>() {
+                                    @Override
+                                    public void onSuccess(ResponseInfo<Object> responseInfo) {
+                                        try {
+                                            JSONObject object = new JSONObject(responseInfo.result.toString());
+                                            String s = object.getString("status");
+                                            if ("200".equals(s)) {
+                                                Intent intent=new Intent(RegActivity.this,CheckActivity.class);
+                                                intent.putExtra("phone",userPhone+"");
+                                                intent.putExtra("pass",forgetPass.getPassword()+"");
+                                                intent.putExtra("flag",flag+"");
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Toast.makeText(RegActivity.this, "验证失败", Toast.LENGTH_LONG).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
 
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(HttpException error, String msg) {
+                                    }
+                                });
+
+                    } else {
+                        Toast.makeText(RegActivity.this, forgetPass.getData() + "", Toast.LENGTH_LONG).show();
+                    }
+
+                    break;
+            }
+        }
+    };
     private void initSms() {
         SMSSDK.initSDK(this, "159b5bdf78770", "fb8e5913caefd25208c85911cc52bd82");
 
@@ -63,7 +119,7 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         userPhone = et_phone.getText().toString();
-        final String Phonecode = et_code.getText().toString();
+        phonecode = et_code.getText().toString();
         switch (v.getId()) {
             case R.id.Message_btn:
                 if (userPhone.length() != 11) {
@@ -111,38 +167,10 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.register_btn:
-                RequestParams params = new RequestParams();
-                params.addBodyParameter("appkey", "159b5bdf78770");
-                params.addBodyParameter("phone", userPhone);
-                params.addBodyParameter("zone", "86");
-                params.addBodyParameter("code", Phonecode);
-                new HttpUtils().send(HttpRequest.HttpMethod.POST, "https://webapi.sms.mob.com/sms/verify",
-                        params, new RequestCallBack<Object>() {
-                            @Override
-                            public void onSuccess(ResponseInfo<Object> responseInfo) {
-                                try {
-                                    JSONObject object = new JSONObject(responseInfo.result.toString());
-                                    String s = object.getString("status");
-                                    if ("200".equals(s)) {
-                                        Intent intent=new Intent(RegActivity.this,CheckActivity.class);
-                                        intent.putExtra("phone",userPhone+"");
-                                        intent.putExtra("flag",flag+"");
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(RegActivity.this, "验证失败", Toast.LENGTH_LONG).show();
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                            }
-
-                            @Override
-                            public void onFailure(HttpException error, String msg) {
-                            }
-                        });
+                String uri = Constants.SERVER_URL + "MhealthUserOldPasswordServlet";
+                TiUser user = new TiUser();
+                user.setName(userPhone + "");
+                MyHttpUtils.handData(handler, 180, uri, user);
                 break;
             case R.id.btn_back:
                 finish();
