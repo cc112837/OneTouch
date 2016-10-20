@@ -94,7 +94,8 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         forgetButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, NoContentActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegActivity.class);
+                intent.putExtra("flag","for");
                 startActivity(intent);
             }
         });
@@ -147,6 +148,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegActivity.class);
+                intent.putExtra("flag","reg");
                 startActivity(intent);
             }
         });

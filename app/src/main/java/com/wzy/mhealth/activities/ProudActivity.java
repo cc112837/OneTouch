@@ -32,13 +32,13 @@ private Handler handler=new Handler(){
         switch (msg.what){
             case 170:
                 Proud proud=(Proud) msg.obj;
-                if (proud.getData().get(0).isStepNum()){
+                if (proud.isStepNum()){
                     iv_1.setImageResource(R.mipmap.actvit_red);
                 }
-                if(proud.getData().get(0).isShop()){
+                if(proud.isShop()){
                     iv_2.setImageResource(R.mipmap.redblood_proud);
                 }
-                if (proud.getData().get(0).isBlood()){
+                if (proud.isBlood()){
                     iv_3.setImageResource(R.mipmap.shop_proud);
                 }
             break;

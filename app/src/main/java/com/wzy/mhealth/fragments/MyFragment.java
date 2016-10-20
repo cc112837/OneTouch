@@ -88,13 +88,13 @@ public class MyFragment extends D3Fragment {
                     break;
                 case  170:
                     Proud proud=(Proud) msg.obj;
-                    if (proud.getData().get(0).isStepNum()){
+                    if (proud.isStepNum()){
                         iv_spped.setImageResource(R.mipmap.speed_proud);
                     }
-                    if(proud.getData().get(0).isShop()){
+                    if(proud.isShop()){
                         iv_shop.setImageResource(R.mipmap.gift_red);
                     }
-                    if (proud.getData().get(0).isBlood()){
+                    if (proud.isBlood()){
                         iv_shop.setImageResource(R.mipmap.love_red);
                     }
                     break;

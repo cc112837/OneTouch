@@ -4,30 +4,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.SignUpCallback;
-import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.wzy.mhealth.LeanChat.util.Utils;
-import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.Regmodel;
-import com.wzy.mhealth.model.TiUser;
-import com.wzy.mhealth.utils.MyAndroidUtil;
-import com.wzy.mhealth.utils.MyHttpUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,16 +24,18 @@ import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
 public class RegActivity extends BaActivity implements View.OnClickListener{
-    private EditText et_phone, et_code, register_password;
+    private EditText et_phone, et_code;
     private Button Message_btn, register_btn;
     private Button btn_back;
     private String userPhone;
-    private String pass;
+    private String flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
+        Intent intent=getIntent();
+        flag = intent.getStringExtra("flag");
         initSms();
         initView();
         initEvent();
@@ -60,7 +50,6 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
     private void initView() {
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_code = (EditText) findViewById(R.id.et_code);
-        register_password = (EditText) findViewById(R.id.register_password);
         Message_btn = (Button) findViewById(R.id.Message_btn);
         register_btn = (Button) findViewById(R.id.register_btn);
         btn_back = (Button) findViewById(R.id.btn_back);
@@ -70,34 +59,11 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
         SMSSDK.initSDK(this, "159b5bdf78770", "fb8e5913caefd25208c85911cc52bd82");
 
     }
-private Handler handler=new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what){
-            case 155:
-                Regmodel regmodel=(Regmodel)msg.obj;
-                if(regmodel.getStatus().equals("1")){
-                Utils.toast(R.string.registerSucceed);
-                LeanchatUser.getCurrentUser().setMobilePhoneNumber(userPhone);
-                MyAndroidUtil.editXmlByString(
-                        Constants.LOGIN_ACCOUNT, userPhone);
-                Intent intent = new Intent(RegActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-                }
-                else{
-                    Utils.toast(R.string.register_fail);
-                }
-                break;
-        }
-    }
-};
+
     @Override
     public void onClick(View v) {
         userPhone = et_phone.getText().toString();
         final String Phonecode = et_code.getText().toString();
-        pass = register_password.getText().toString();
         switch (v.getId()) {
             case R.id.Message_btn:
                 if (userPhone.length() != 11) {
@@ -145,11 +111,6 @@ private Handler handler=new Handler(){
                 }
                 break;
             case R.id.register_btn:
-                if(pass.length()<6){
-                    Toast.makeText(this, "请输入6位或者6位以上密码", Toast.LENGTH_SHORT).show();
-                }
-                MyAndroidUtil.editXmlByString("phone", userPhone);
-                MyAndroidUtil.editXmlByString("pass", pass);
                 RequestParams params = new RequestParams();
                 params.addBodyParameter("appkey", "159b5bdf78770");
                 params.addBodyParameter("phone", userPhone);
@@ -163,22 +124,11 @@ private Handler handler=new Handler(){
                                     JSONObject object = new JSONObject(responseInfo.result.toString());
                                     String s = object.getString("status");
                                     if ("200".equals(s)) {
-                                        LeanchatUser.signUpByNameAndPwdAndProperty(userPhone, pass, "user", new SignUpCallback() {
-                                            @Override
-                                            public void done(AVException e) {
-                                                if (e != null) {
-                                                    Utils.toast(MyApplication.getInstance().getString(
-                                                            R.string.registerFailed)
-                                                            + e.getMessage());
-                                                } else {
-                                                    String url=Constants.SERVER_URL+"MhealthUserRegisterServlet";
-                                                    TiUser user=new TiUser();
-                                                    user.setName(userPhone +"");
-                                                    user.setPass(pass + "");
-                                                    MyHttpUtils.handData(handler, 155, url, user);
-                                                }
-                                            }
-                                        });
+                                        Intent intent=new Intent(RegActivity.this,CheckActivity.class);
+                                        intent.putExtra("phone",userPhone+"");
+                                        intent.putExtra("flag",flag+"");
+                                        startActivity(intent);
+                                        finish();
                                     } else {
                                         Toast.makeText(RegActivity.this, "验证失败", Toast.LENGTH_LONG).show();
                                     }
