@@ -117,34 +117,7 @@ private Handler handler=new Handler(){
                 .findViewById(R.id.rootcategory);
         cityListView = (ListView) layout_left.findViewById(R.id.childcategory);
         cityListView.setVisibility(View.INVISIBLE);
-        locationAdapter = new LocationAdapter(DoctorListActivity.this,
-                locationList);
-        locationListView.setAdapter(locationAdapter);
-        locationAdapter.notifyDataSetChanged();
 
-        locationListView.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // TODO Auto-generated method stub
-                locationAdapter.setSelectItem(position);
-                locationAdapter.notifyDataSetInvalidated();
-                cityListView.setVisibility(View.VISIBLE);
-                if (position == 1) {
-                    provinceAdapter = new ProvinceAdapter(
-                            DoctorListActivity.this, list2);
-                    cityListView.setAdapter(provinceAdapter);
-                    provinceAdapter.notifyDataSetChanged();
-                } else {
-                    provinceAdapter = new ProvinceAdapter(
-                            DoctorListActivity.this, cityList);
-                    cityListView.setAdapter(provinceAdapter);
-                    provinceAdapter.notifyDataSetChanged();
-                }
-
-            }
-        });
         mPopupWindow = new PopupWindow(layout_left, width, height * 2 / 3, true);
         mPopupWindow.setOnDismissListener(new OnDismissListener() {
 

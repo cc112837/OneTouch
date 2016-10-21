@@ -20,7 +20,6 @@ import com.wzy.mhealth.adapter.LocationAdapter;
 import com.wzy.mhealth.adapter.ProvinceAdapter;
 import com.wzy.mhealth.adapter.TaocanListAdapter;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.City;
 import com.wzy.mhealth.model.Provice;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
@@ -33,7 +32,7 @@ import java.util.List;
 public class TaocanListActivity extends Activity {
     private ImageView leftBtn;
     private PopupWindow mPopupWindow;
-    public List<String> cityList, locationList;
+    public List<Provice.DataEntity> proviceList = new ArrayList<>();
     private TaocanListAdapter taocanListAdapter;
     private LocationAdapter locationAdapter;
     private ProvinceAdapter provinceAdapter;
@@ -41,15 +40,12 @@ public class TaocanListActivity extends Activity {
     private LinearLayout total_location, order, layout_left, ll_wrap;
     private TextView text_address, order_text;
     private List<Tijian.DataEntity> list = new ArrayList<>();
-    private List<String> listid = new ArrayList<>();
-    private List<String> listcityid = new ArrayList<>();
+    List<Provice.DataEntity.CityArrEntity> cityArr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taocan_list);
-        locationList = new ArrayList<>();
-        cityList = new ArrayList<>();
         taocanListAdapter = new TaocanListAdapter(TaocanListActivity.this, list);
         init();
     }
@@ -69,11 +65,11 @@ public class TaocanListActivity extends Activity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent(TaocanListActivity.this, PersonTaocanActivity.class);
                             intent.putExtra("id", list.get(position).getTaocanId() + "");
-                            intent.putExtra("name",list.get(position).getCenterName()+"");
-                            intent.putExtra("tel",list.get(position).getPhone()+"");
-                            intent.putExtra("add",list.get(position).getAdress()+"");
-                            intent.putExtra("content",list.get(position).getDetails()+"");
-                            intent.putExtra("img",list.get(position).getImg()+"");
+                            intent.putExtra("name", list.get(position).getCenterName() + "");
+                            intent.putExtra("tel", list.get(position).getPhone() + "");
+                            intent.putExtra("add", list.get(position).getAdress() + "");
+                            intent.putExtra("content", list.get(position).getDetails() + "");
+                            intent.putExtra("img", list.get(position).getImg() + "");
                             intent.putExtra("second", (Serializable) list.get(position).getTaocanId());
                             startActivity(intent);
                         }
@@ -81,35 +77,9 @@ public class TaocanListActivity extends Activity {
                     break;
                 case 160:
                     Provice provice = (Provice) msg.obj;
-                    locationList.clear();
-                    listid.clear();
-                    for (int i = 0; i < provice.getData().size(); i++) {
-                        locationList.add(provice.getData().get(i).getProvice());
-                        listid.add(provice.getData().get(i).getId() + "");
-                    }
+                    proviceList.clear();
+                    proviceList.addAll(provice.getData());
                     locationAdapter.notifyDataSetChanged();
-                    break;
-
-                case 162:
-                    City city = (City) msg.obj;
-                    cityList.clear();
-                    listcityid.clear();
-                    for (int i = 0; i < city.getData().size(); i++) {
-                        cityList.add(city.getData().get(i).getCity());
-                        listcityid.add(city.getData().get(i).getId() + "");
-                    }
-                    provinceAdapter.notifyDataSetChanged();
-                    cityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            mPopupWindow.dismiss();
-                            text_address.setText(cityList.get(position)+"");
-                            String url = Constants.SERVER_URL + "MhealthOneCityServlet";
-                            TiUser user = new TiUser();
-                            user.setTel("" + listcityid.get(position));
-                            MyHttpUtils.handData(handler, 157, url, user);
-                        }
-                    });
                     break;
             }
         }
@@ -152,7 +122,7 @@ public class TaocanListActivity extends Activity {
         cityListView = (ListView) layout_left.findViewById(R.id.childcategory);
         cityListView.setVisibility(View.INVISIBLE);
         locationAdapter = new LocationAdapter(TaocanListActivity.this,
-                locationList);
+                proviceList);
         locationListView.setAdapter(locationAdapter);
 
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,15 +132,28 @@ public class TaocanListActivity extends Activity {
                                     int position, long id) {
                 locationAdapter.setSelectItem(position);
                 cityListView.setVisibility(View.VISIBLE);
-                cityList.clear();
+                cityArr = proviceList.get(position).getCityArr();
                 provinceAdapter = new ProvinceAdapter(
-                        TaocanListActivity.this, cityList);
+                        TaocanListActivity.this, cityArr);
                 cityListView.setAdapter(provinceAdapter);
-
+            }
+        });
+        cityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mPopupWindow.dismiss();
+                String url = Constants.SERVER_URL + "MhealthOneCityServlet";
                 TiUser user = new TiUser();
-                user.setName("" + listid.get(position));
-                String url = Constants.SERVER_URL + "MhealthOneProviceServlet";
-                MyHttpUtils.handData(handler, 162, url, user);
+                if(cityArr.get(position).getCityId()==920003){
+                    user.setTel("");
+                    text_address.setText("全部");
+                }
+                else{
+                    user.setTel("" + cityArr.get(position).getCityId());
+                    text_address.setText(cityArr.get(position).getCity() + "");
+                }
+
+                MyHttpUtils.handData(handler, 157, url, user);
             }
         });
         mPopupWindow = new PopupWindow(layout_left, width, height * 2 / 3, true);

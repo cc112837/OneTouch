@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class Provice {
 
+
     /**
-     * id : 110000
-     * sort : 9
      * provice : 北京市
+     * cityArr : [{"cityId":110100,"city":"市辖区"},{"cityId":110200,"city":"县"}]
      */
 
     private List<DataEntity> data;
@@ -31,32 +31,49 @@ public class Provice {
     }
 
     public static class DataEntity {
-        private int id;
-        private int sort;
         private String provice;
+        /**
+         * cityId : 110100
+         * city : 市辖区
+         */
 
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public void setSort(int sort) {
-            this.sort = sort;
-        }
+        private List<CityArrEntity> cityArr;
 
         public void setProvice(String provice) {
             this.provice = provice;
         }
 
-        public int getId() {
-            return id;
-        }
-
-        public int getSort() {
-            return sort;
+        public void setCityArr(List<CityArrEntity> cityArr) {
+            this.cityArr = cityArr;
         }
 
         public String getProvice() {
             return provice;
+        }
+
+        public List<CityArrEntity> getCityArr() {
+            return cityArr;
+        }
+
+        public static class CityArrEntity {
+            private int cityId;
+            private String city;
+
+            public void setCityId(int cityId) {
+                this.cityId = cityId;
+            }
+
+            public void setCity(String city) {
+                this.city = city;
+            }
+
+            public int getCityId() {
+                return cityId;
+            }
+
+            public String getCity() {
+                return city;
+            }
         }
     }
 }

@@ -36,8 +36,8 @@ public class ExaminationRecordActivity extends BaActivity {
                     Info info = (Info) msg.obj;
                     if (info.isSuccess()) {
                         tag = info.getMsg();
-                        Intent intent=new Intent(ExaminationRecordActivity.this,RecordListActivity.class);
-                        intent.putExtra("session",tag);
+                        Intent intent = new Intent(ExaminationRecordActivity.this, RecordListActivity.class);
+                        intent.putExtra("session", tag);
                         startActivity(intent);
                     } else {
                         Toast.makeText(ExaminationRecordActivity.this, "请核实信息是否正确!", Toast.LENGTH_LONG).show();
@@ -65,14 +65,13 @@ public class ExaminationRecordActivity extends BaActivity {
             public void onClick(View v) {
                 String card = tijianid.getText().toString();
                 String mi = name.getText().toString();
-				if(card!=""||pass!=""){
-					 String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + card + "&passwd=" + mi;
-                     MyHttpUtils.handData(handler, 2, loginurl, null);
-				}
-				else{
-					Toast.makeText(ExaminationRecordActivity.this, "输入不能为空!", Toast.LENGTH_LONG).show();
-				}
-               
+                if (("").equals(card) &&("").equals(mi)) {
+                    Toast.makeText(ExaminationRecordActivity.this, "输入不能为空!", Toast.LENGTH_LONG).show();
+                } else {
+                    String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + card + "&passwd=" + mi;
+                    MyHttpUtils.handData(handler, 2, loginurl, null);
+                }
+
             }
         });
         leftBtn.setOnClickListener(new View.OnClickListener() {

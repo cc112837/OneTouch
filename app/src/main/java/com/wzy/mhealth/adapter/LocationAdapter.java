@@ -8,16 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.model.Provice;
 
 import java.util.List;
 
 public class LocationAdapter extends BaseAdapter {
 
 	private Context context;
-	private List<String> list;
+	private List<Provice.DataEntity> list;
 	private LayoutInflater mInflater;
 	private int selectedposition = -1;
-	public LocationAdapter(Context context,List<String> list) {
+	public LocationAdapter(Context context,List<Provice.DataEntity> list) {
 
 		this.context = context;
 		this.list = list;
@@ -25,7 +26,10 @@ public class LocationAdapter extends BaseAdapter {
 	}
 	@Override
 	public int getCount() {
-
+		if(list.size()==0){
+			return 0;
+		}
+		else
 		return list.size();
 	}
 
@@ -59,7 +63,7 @@ public class LocationAdapter extends BaseAdapter {
 		else {
 			convertView.setBackgroundColor(0xfff0f0f0);
 		}
-		viewHolder.province.setText(list.get(position));
+		viewHolder.province.setText(list.get(position).getProvice());
 		return convertView;
 	}
 	public  void setSelectItem(int selectItem) {

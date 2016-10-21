@@ -8,16 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.model.Provice;
 
 import java.util.List;
 
 public class ProvinceAdapter extends BaseAdapter {
 
     private Context context;
-    public List<String> list;
+    public List<Provice.DataEntity.CityArrEntity> list;
     private LayoutInflater mInflater;
 
-    public ProvinceAdapter(Context context, List<String> list) {
+    public ProvinceAdapter(Context context, List<Provice.DataEntity.CityArrEntity> list) {
         this.context = context;
         this.list = list;
         mInflater = LayoutInflater.from(context);
@@ -49,7 +50,7 @@ public class ProvinceAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.province_item, null);
             viewHolder.name = (TextView) convertView.findViewById(R.id.city);
-            viewHolder.name.setText(list.get(position));
+            viewHolder.name.setText(list.get(position).getCity());
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
