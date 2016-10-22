@@ -17,17 +17,17 @@ import com.wzy.mhealth.activities.QuestionActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuestionFragment3 extends Fragment{
-    private Button tv_down, tv_up;
-    private RadioButton cb_a, cb_b, cb_c, cb_d;
-    private RadioGroup rg_data;
+public class QuestionFragment9 extends Fragment {
 
+    private Button tv_down, tv_up;
+    private RadioButton cb_a, cb_b;
+    private RadioGroup rg_data;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v= inflater.inflate(R.layout.fragment_question_fragment3, container, false);
+        View v= inflater.inflate(R.layout.fragment_question_fragment9, container, false);
         init(v);
         return  v;
     }
@@ -45,17 +45,15 @@ public class QuestionFragment3 extends Fragment{
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new QuestionFragment4();
+                Fragment fragment = new QuestionFragmentt();
                 ChangeFragmentHelper helper = new ChangeFragmentHelper();
                 helper.setTargetFragment(fragment);
-                helper.setTargetFragmentTag("fragment3");
+                helper.setTargetFragmentTag("fragment9");
                 ((QuestionActivity) getActivity()).changeFragment(helper);
             }
         });
         cb_a=(RadioButton) v.findViewById(R.id.cb_a);
         cb_b=(RadioButton) v.findViewById(R.id.cb_b);
-        cb_c=(RadioButton) v.findViewById(R.id.cb_c);
-        cb_d=(RadioButton) v.findViewById(R.id.cb_d);
         tv_down.setEnabled(false);
         rg_data=(RadioGroup) v.findViewById(R.id.rg_data);
         rg_data.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -69,16 +67,7 @@ public class QuestionFragment3 extends Fragment{
                     cb_b.getText().toString();
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
-                } else if (checkedId == cb_c.getId()) {
-                    cb_c.getText().toString();
-                    tv_down.setEnabled(true);
-                    tv_down.setBackgroundResource(R.drawable.textview_1);
-                } else if (checkedId == cb_d.getId()) {
-                    cb_d.getText().toString();
-                    tv_down.setEnabled(true);
-                    tv_down.setBackgroundResource(R.drawable.textview_1);
-                }  else {
-                    cb_a.getText().toString();
+                }   else {
                     tv_down.setEnabled(false);
                     tv_down.setBackgroundResource(R.drawable.textview3);
                 }

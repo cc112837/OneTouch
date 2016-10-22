@@ -20,15 +20,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuestionFragment6 extends Fragment {
-
+public class QuestionFragment7 extends Fragment {
     private Button tv_down, tv_up;
-    private CheckBox cb_a, cb_b, cb_c, cb_d,cb_e,cb_f,cb_g;
+    private CheckBox cb_a, cb_b, cb_c, cb_d,cb_e,cb_f,cb_g,cb_h;
     private List<String> list = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_question_fragment6, container, false);
+        View v = inflater.inflate(R.layout.fragment_question_fragment7, container, false);
         init(v);
         return v;
     }
@@ -40,16 +39,17 @@ public class QuestionFragment6 extends Fragment {
         cb_e = (CheckBox) v.findViewById(R.id.cb_e);
         cb_f = (CheckBox) v.findViewById(R.id.cb_f);
         cb_g=(CheckBox) v.findViewById(R.id.cb_g);
+        cb_h=(CheckBox) v.findViewById(R.id.cb_h);
         tv_down = (Button) v.findViewById(R.id.tv_down);
         tv_down.setEnabled(false);
         tv_up = (Button) v.findViewById(R.id.tv_up);
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new QuestionFragment7();
+                Fragment fragment = new QuestionFragment8();
                 ChangeFragmentHelper helper = new ChangeFragmentHelper();
                 helper.setTargetFragment(fragment);
-                helper.setTargetFragmentTag("fragment6");
+                helper.setTargetFragmentTag("fragment7");
                 ((QuestionActivity) getActivity()).changeFragment(helper);
             }
         });
@@ -174,6 +174,23 @@ public class QuestionFragment6 extends Fragment {
                 }
             }
         });
+        cb_h.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    list.add(8 + "");
+                    tv_down.setEnabled(true);
+                    tv_down.setBackgroundResource(R.drawable.textview_1);
+                } else {
+                    list.remove(8 + "");
+                    if (list.size() == 0) {
+                        tv_down.setEnabled(false);
+                        tv_down.setBackgroundResource(R.drawable.textview3);
+                    }
+                }
+            }
+        });
     }
+
 
 }

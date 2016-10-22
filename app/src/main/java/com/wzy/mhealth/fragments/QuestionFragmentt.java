@@ -17,7 +17,7 @@ import com.wzy.mhealth.activities.QuestionActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class QuestionFragment3 extends Fragment{
+public class QuestionFragmentt extends Fragment {
     private Button tv_down, tv_up;
     private RadioButton cb_a, cb_b, cb_c, cb_d;
     private RadioGroup rg_data;
@@ -27,7 +27,7 @@ public class QuestionFragment3 extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v= inflater.inflate(R.layout.fragment_question_fragment3, container, false);
+        View v= inflater.inflate(R.layout.fragment_question_fragmentt, container, false);
         init(v);
         return  v;
     }
@@ -45,10 +45,10 @@ public class QuestionFragment3 extends Fragment{
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new QuestionFragment4();
+                Fragment fragment = new QuestionFragmenttt();
                 ChangeFragmentHelper helper = new ChangeFragmentHelper();
                 helper.setTargetFragment(fragment);
-                helper.setTargetFragmentTag("fragment3");
+                helper.setTargetFragmentTag("fragment10");
                 ((QuestionActivity) getActivity()).changeFragment(helper);
             }
         });
@@ -86,6 +86,7 @@ public class QuestionFragment3 extends Fragment{
         });
 
     }
+
 
 
 }

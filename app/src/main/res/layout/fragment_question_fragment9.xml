@@ -4,18 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context="com.wzy.mhealth.fragments.QuestionFragment5">
+    tools:context="com.wzy.mhealth.fragments.QuestionFragment8">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/textview_2"
         android:padding="13dp"
-        android:text="体检者近期是否有一些不舒服的症状？"
+        android:text="体检者是否6个月内要宝宝的打算?"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/rg_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,12 +23,12 @@
         android:background="@drawable/textview"
         android:orientation="vertical">
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/cb_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="手指，脚趾等小关节的疼痛"
+            android:text="是"
             android:textSize="15sp" />
 
 
@@ -38,86 +38,15 @@
             android:background="@color/grey_bg" />
 
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/cb_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="经常出现颈肩或四肢疼痛，麻木"
+            android:text="否"
             android:textSize="15sp" />
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/grey_bg" />
-
-
-        <CheckBox
-            android:id="@+id/cb_c"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="经常出现小腿肌肉痉挛抽筋"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/grey_bg" />
-
-
-        <CheckBox
-            android:id="@+id/cb_d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="经常感觉头痛头晕"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/grey_bg" />
-
-
-        <CheckBox
-            android:id="@+id/cb_e"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="心慌，胸闷，心前区疼痛，压迫感及胸部不适"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/grey_bg" />
-
-
-        <CheckBox
-            android:id="@+id/cb_f"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="快速消瘦"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/grey_bg" />
-
-
-        <CheckBox
-            android:id="@+id/cb_g"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="经常出现视物模糊的症状"
-            android:textSize="15sp" />
-
-    </LinearLayout>
+    </RadioGroup>
 
     <TextView
         android:layout_width="match_parent"
@@ -145,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.6"
             android:gravity="center"
-            android:text="6/11" />
+            android:text="9/11" />
 
         <Button
             android:id="@+id/tv_down"
