@@ -43,198 +43,202 @@ import com.wzy.mhealth.model.ZhixingTaocan;
 /**
 
  */
-public class MyHttpUtils extends HttpUtils{
-    private static MyHttpUtils httpUtils=new MyHttpUtils();
-    public  static void sendData(HttpRequest.HttpMethod method,String url,RequestParams params,RequestCallBack requestCallBack){
-        if(method== HttpRequest.HttpMethod.GET){
-             httpUtils.send(method, url, requestCallBack);
-        }
-        else if (method== HttpRequest.HttpMethod.POST){
-            httpUtils.send(method,url,params,requestCallBack);
+public class MyHttpUtils extends HttpUtils {
+    private static MyHttpUtils httpUtils = new MyHttpUtils();
+
+    public static void sendData(HttpRequest.HttpMethod method, String url, RequestParams params, RequestCallBack requestCallBack) {
+        if (method == HttpRequest.HttpMethod.GET) {
+            httpUtils.send(method, url, requestCallBack);
+        } else if (method == HttpRequest.HttpMethod.POST) {
+            httpUtils.send(method, url, params, requestCallBack);
         }
     }
-  public static void handData(Handler handler,int what,String url,Object object){
-      RequestParams params = new RequestParams();
-      if(what==1){
-          TiUser user=(TiUser)object;
-          params.addBodyParameter("idnumber",user.getCardId());
-          params.addBodyParameter("name",user.getName());
-          params.addBodyParameter("phone",user.getTel());
-          params.addBodyParameter("sex","0");
-          params.addBodyParameter("passwd",user.getPass());
-          sendData(HttpRequest.HttpMethod.POST,url,params,new MyCallBack(new Info(), handler, what));
-      }
-      if(what==2) {
-          sendData(HttpRequest.HttpMethod.GET, url, params, new MyCallBack(new Info(), handler, what));
-      }
-      if(what==3||what==33){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new TaocanInfo(), handler, what));
-      }
-      if(what==6){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new ItemInfo(), handler, what));
-      }
-      if(what==7){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
-      }
-      if(what==8){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Conclusion(), handler, what));
-      }
-      if(what==14){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NoHuaRecord(), handler, what));
-      }
-      if(what==15){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new HuaYanRecord(), handler, what));
-      }
-      if(what==21){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewsYang(), handler, what));
-      }
-      if(what==22){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewDetail(), handler, what));
 
-      }
-      if(what==23){
-          sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
-      }
-      if(what==31){
-          TiUser step=(TiUser)object;
-          params.addBodyParameter("userName",step.getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
-      }
-      if(what==40){
-          TiUser user=(TiUser)object;
-          params.addBodyParameter("id",user.getName());
-          params.addBodyParameter("number",user.getCardId());
-          sendData(HttpRequest.HttpMethod.POST,url, params,new MyCallBack(new AliPayBack(),handler,what));
+    public static void handData(Handler handler, int what, String url, Object object) {
+        httpUtils.configCurrentHttpCacheExpiry(6000);// 设置超时时间
+        httpUtils.configTimeout(6000);// 连接超时  //指的是连接一个url的连接等待时间。
+        httpUtils.configSoTimeout(6000);// 获取数据超时  //指的是连接上一个url，获取response的返回等待时间
+        RequestParams params = new RequestParams();
+        if (what == 1) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("idnumber", user.getCardId());
+            params.addBodyParameter("name", user.getName());
+            params.addBodyParameter("phone", user.getTel());
+            params.addBodyParameter("sex", "0");
+            params.addBodyParameter("passwd", user.getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Info(), handler, what));
+        }
+        if (what == 2) {
+            sendData(HttpRequest.HttpMethod.GET, url, params, new MyCallBack(new Info(), handler, what));
+        }
+        if (what == 3 || what == 33) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new TaocanInfo(), handler, what));
+        }
+        if (what == 6) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new ItemInfo(), handler, what));
+        }
+        if (what == 7) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
+        }
+        if (what == 8) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Conclusion(), handler, what));
+        }
+        if (what == 14) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NoHuaRecord(), handler, what));
+        }
+        if (what == 15) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new HuaYanRecord(), handler, what));
+        }
+        if (what == 21) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewsYang(), handler, what));
+        }
+        if (what == 22) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewDetail(), handler, what));
 
-      }
-      if (what==112){
-          Friend user=(Friend)object;
-          params.addBodyParameter("userName",user.getUsername());
-          params.addBodyParameter("stepNum",user.getId());
-          params.addBodyParameter("stepTime", user.getMood());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
-      }
-      if (what==113){
-          StepInfo user=(StepInfo)object;
-          params.addBodyParameter("userName",user.getData());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepResult(), handler, what));
-      }
-      if(what==115){
-          TiUser user=(TiUser)object;
-          params.addBodyParameter("id",user.getTel());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ZhixingTaocan(), handler, what));
-      }
-      if(what==120){
-          TiUser user=(TiUser)object;
-          params.addBodyParameter("result",user.getName());
-          params.addBodyParameter("id",user.getTel());
-          params.addBodyParameter("userName", user.getCardId());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
-      }
-      if(what==116){
-          TiUser user=(TiUser)object;
-          params.addBodyParameter("id",user.getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TaocanDetail(), handler, what));
-      }
-      if(what==121){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("userName",user.getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
-      }
-      if(what==122){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("userName",user.getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
-      }
-      if(what==123){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("userName",user.getName());
-          params.addBodyParameter("stepTime",user.getPass());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepRank(), handler, what));
-      }
-      if(what==124){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("stepTime",user.getPass());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
-      }
-      if(what==124){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("stepTime",user.getPass());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
-      }
-      if(what==131){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("OrderId",user.getTel());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
-      }
-      if(what==150){
-          SelfHealth selfHealth=(SelfHealth)object;
-          params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
-          params.addBodyParameter("name",selfHealth.getName());
-          params.addBodyParameter("sex",selfHealth.getSex());
-          params.addBodyParameter("profession",selfHealth.getProfession());
-          params.addBodyParameter("age",selfHealth.getAge());
-          params.addBodyParameter("marrage",selfHealth.getMarrage());
-          params.addBodyParameter("relator",selfHealth.getRelator());
-          params.addBodyParameter("relate",selfHealth.getRelate());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
-      }
-      if(what==151){
-          params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
-      }
-      if (what==152){
-          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Doctor(), handler, what));
-      }
-      if(what==153){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("id",user.getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DoctorDetail(), handler, what));
-      }
-      if(what==155){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("phone",user.getName());
-          params.addBodyParameter("passWord",user.getPass());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Regmodel(), handler, what));
-      }
-      if(what==156){
-          params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Grade(), handler, what));
-      }
-      if(what==157){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("id",user.getTel());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Tijian(), handler, what));
-      }
-      if(what==160){
-          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Provice(), handler, what));
-      }
-      if (what==162){
-          TiUser user=(TiUser) object;
-          params.addBodyParameter("id",user.getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new City(), handler, what));
-      }
-      if (what==170){
-          params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Proud(), handler, what));
-      }
-      if (what==171){
-          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
-      }
-      if (what==172){
-          sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
-      }
-      if(what==173){
-          sendData(HttpRequest.HttpMethod.POST,url,null,new MyCallBack(new TaocanEntity(),handler,what));
-      }
-      if(what==180){
-          params.addBodyParameter("phone",((TiUser)object).getName());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ForgetPass(), handler, what));
-      }
-      if(what==181){
-          params.addBodyParameter("phone",((TiUser)object).getName());
-          params.addBodyParameter("passWord1",((TiUser)object).getPass());
-          sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
-      }
-  }
+        }
+        if (what == 23) {
+            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));
+        }
+        if (what == 31) {
+            TiUser step = (TiUser) object;
+            params.addBodyParameter("userName", step.getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 40) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("id", user.getName());
+            params.addBodyParameter("number", user.getCardId());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AliPayBack(), handler, what));
+
+        }
+        if (what == 112) {
+            Friend user = (Friend) object;
+            params.addBodyParameter("userName", user.getUsername());
+            params.addBodyParameter("stepNum", user.getId());
+            params.addBodyParameter("stepTime", user.getMood());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 113) {
+            StepInfo user = (StepInfo) object;
+            params.addBodyParameter("userName", user.getData());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepResult(), handler, what));
+        }
+        if (what == 115) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("id", user.getTel());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ZhixingTaocan(), handler, what));
+        }
+        if (what == 120) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("result", user.getName());
+            params.addBodyParameter("id", user.getTel());
+            params.addBodyParameter("userName", user.getCardId());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 116) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("id", user.getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TaocanDetail(), handler, what));
+        }
+        if (what == 121) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("userName", user.getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
+        }
+        if (what == 122) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("userName", user.getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderInfo(), handler, what));
+        }
+        if (what == 123) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("userName", user.getName());
+            params.addBodyParameter("stepTime", user.getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepRank(), handler, what));
+        }
+        if (what == 124) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("stepTime", user.getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
+        }
+        if (what == 124) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("stepTime", user.getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
+        }
+        if (what == 131) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("OrderId", user.getTel());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
+        }
+        if (what == 150) {
+            SelfHealth selfHealth = (SelfHealth) object;
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("name", selfHealth.getName());
+            params.addBodyParameter("sex", selfHealth.getSex());
+            params.addBodyParameter("profession", selfHealth.getProfession());
+            params.addBodyParameter("age", selfHealth.getAge());
+            params.addBodyParameter("marrage", selfHealth.getMarrage());
+            params.addBodyParameter("relator", selfHealth.getRelator());
+            params.addBodyParameter("relate", selfHealth.getRelate());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 151) {
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
+        }
+        if (what == 152) {
+            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Doctor(), handler, what));
+        }
+        if (what == 153) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("id", user.getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DoctorDetail(), handler, what));
+        }
+        if (what == 155) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("phone", user.getName());
+            params.addBodyParameter("passWord", user.getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Regmodel(), handler, what));
+        }
+        if (what == 156) {
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Grade(), handler, what));
+        }
+        if (what == 157) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("id", user.getTel());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Tijian(), handler, what));
+        }
+        if (what == 160) {
+            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Provice(), handler, what));
+        }
+        if (what == 162) {
+            TiUser user = (TiUser) object;
+            params.addBodyParameter("id", user.getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new City(), handler, what));
+        }
+        if (what == 170) {
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Proud(), handler, what));
+        }
+        if (what == 171) {
+            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
+        }
+        if (what == 172) {
+            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
+        }
+        if (what == 173) {
+            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new TaocanEntity(), handler, what));
+        }
+        if (what == 180) {
+            params.addBodyParameter("phone", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ForgetPass(), handler, what));
+        }
+        if (what == 181) {
+            params.addBodyParameter("phone", ((TiUser) object).getName());
+            params.addBodyParameter("passWord1", ((TiUser) object).getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+    }
 }

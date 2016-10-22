@@ -314,7 +314,7 @@
         <activity android:name=".activities.MarryHospitalActivity" />
         <activity android:name=".activities.QuestionActivity" />
         <activity android:name=".activities.DoctorLiActivity" />
-        <activity android:name=".activities.CheckActivity"></activity>
+        <activity android:name=".activities.CheckActivity" />
     </application>
 
 </manifest>
