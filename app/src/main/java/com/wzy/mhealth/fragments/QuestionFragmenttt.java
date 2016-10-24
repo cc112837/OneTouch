@@ -3,6 +3,8 @@ package com.wzy.mhealth.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -16,6 +18,10 @@ import android.widget.Toast;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.RecommandActivity;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +31,23 @@ public class QuestionFragmenttt extends Fragment {
     private RadioButton cb_a, cb_b;
     private RadioGroup rg_data;
     private EditText et_advice;
-
+    String choice;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 230:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if (stepInfo.getStatus().equals("1")) {
+                        Intent intent = new Intent(getActivity(), RecommandActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                    break;
+            }
+        }
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,9 +71,10 @@ public class QuestionFragmenttt extends Fragment {
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), RecommandActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                String url = Constants.SERVER_URL + "MhealthUserSurveyCountServlet";
+                TiUser user = new TiUser();
+                user.setName(choice + "");
+                MyHttpUtils.handData(handler, 230, url, user);
             }
         });
         cb_a = (RadioButton) v.findViewById(R.id.cb_a);
@@ -62,7 +85,7 @@ public class QuestionFragmenttt extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == cb_a.getId()) {
-                    cb_a.getText().toString();
+                    choice=cb_a.getText().toString();
                     et_advice.setVisibility(View.VISIBLE);
                     if (!("").equals(et_advice.getText().toString())) {
                         tv_down.setEnabled(true);
@@ -72,7 +95,7 @@ public class QuestionFragmenttt extends Fragment {
                     }
 
                 } else if (checkedId == cb_b.getId()) {
-                    cb_b.getText().toString();
+                    choice=cb_b.getText().toString();
                     tv_down.setEnabled(true);
                     et_advice.setVisibility(View.GONE);
                     tv_down.setBackgroundResource(R.drawable.textview_1);

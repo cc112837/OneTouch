@@ -2,6 +2,8 @@ package com.wzy.mhealth.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -13,6 +15,10 @@ import android.widget.CompoundButton;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.QuestionActivity;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +31,24 @@ public class QuestionFragment6 extends Fragment {
     private Button tv_down, tv_up;
     private CheckBox cb_a, cb_b, cb_c, cb_d,cb_e,cb_f,cb_g,cb_h;
     private List<String> list = new ArrayList<>();
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 232:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if (stepInfo.getStatus().equals("1")) {
+                        Fragment fragment = new QuestionFragment7();
+                        ChangeFragmentHelper helper = new ChangeFragmentHelper();
+                        helper.setTargetFragment(fragment);
+                        helper.setTargetFragmentTag("fragment6");
+                        ((QuestionActivity) getActivity()).changeFragment(helper);
+                    }
+                    break;
+            }
+        }
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,11 +71,14 @@ public class QuestionFragment6 extends Fragment {
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new QuestionFragment7();
-                ChangeFragmentHelper helper = new ChangeFragmentHelper();
-                helper.setTargetFragment(fragment);
-                helper.setTargetFragmentTag("fragment6");
-                ((QuestionActivity) getActivity()).changeFragment(helper);
+                String url = Constants.SERVER_URL + "MhealthUserSurveyCountServlet";
+                TiUser user = new TiUser();
+                StringBuffer s = new StringBuffer();
+                for (int i = 0; i < list.size(); i++) {
+                    s.append(list.get(i));
+                }
+                user.setName(s + "");
+                MyHttpUtils.handData(handler, 232, url, user);
             }
         });
 
@@ -68,6 +95,10 @@ public class QuestionFragment6 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     list.add(1 + "");
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
@@ -84,6 +115,10 @@ public class QuestionFragment6 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     list.add(2 + "");
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
@@ -100,6 +135,10 @@ public class QuestionFragment6 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     list.add(3 + "");
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
@@ -116,6 +155,10 @@ public class QuestionFragment6 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     list.add(4 + "");
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
@@ -132,6 +175,10 @@ public class QuestionFragment6 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     list.add(5 + "");
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
@@ -148,6 +195,10 @@ public class QuestionFragment6 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     list.add(6 + "");
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
@@ -164,6 +215,10 @@ public class QuestionFragment6 extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     list.add(7 + "");
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
@@ -179,7 +234,19 @@ public class QuestionFragment6 extends Fragment {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    list.clear();
                     list.add(8 + "");
+                    cb_g.setChecked(false);
+                    cb_a.setChecked(false);
+                    cb_b.setChecked(false);
+                    cb_c.setChecked(false);
+                    cb_d.setChecked(false);
+                    cb_e.setChecked(false);
+                    cb_f.setChecked(false);
+                    cb_h.setChecked(false);
+                    if (list.contains("" + 8)) {
+                        list.remove(8 + "");
+                    }
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
