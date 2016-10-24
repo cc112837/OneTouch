@@ -116,7 +116,13 @@
             android:padding="10dp"
             android:text="慢性肝病/病毒性肝炎"
             android:textSize="15sp" />
-
+        <CheckBox
+            android:id="@+id/cb_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="以上疾病都没有"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <TextView

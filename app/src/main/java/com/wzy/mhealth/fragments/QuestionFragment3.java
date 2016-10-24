@@ -2,6 +2,8 @@ package com.wzy.mhealth.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -13,6 +15,10 @@ import android.widget.RadioGroup;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.QuestionActivity;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +27,25 @@ public class QuestionFragment3 extends Fragment{
     private Button tv_down, tv_up;
     private RadioButton cb_a, cb_b, cb_c, cb_d;
     private RadioGroup rg_data;
+    String choice;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 225:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if (stepInfo.getStatus().equals("1")) {
+                        Fragment fragment = new QuestionFragment4();
+                        ChangeFragmentHelper helper = new ChangeFragmentHelper();
+                        helper.setTargetFragment(fragment);
+                        helper.setTargetFragmentTag("fragment3");
+                        ((QuestionActivity) getActivity()).changeFragment(helper);
+                    }
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -45,11 +70,10 @@ public class QuestionFragment3 extends Fragment{
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new QuestionFragment4();
-                ChangeFragmentHelper helper = new ChangeFragmentHelper();
-                helper.setTargetFragment(fragment);
-                helper.setTargetFragmentTag("fragment3");
-                ((QuestionActivity) getActivity()).changeFragment(helper);
+                String url = Constants.SERVER_URL + "MhealthUserSurveyCountServlet";
+                TiUser user = new TiUser();
+                user.setName(choice + "");
+                MyHttpUtils.handData(handler, 225, url, user);
             }
         });
         cb_a=(RadioButton) v.findViewById(R.id.cb_a);
@@ -62,23 +86,23 @@ public class QuestionFragment3 extends Fragment{
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == cb_a.getId()) {
-                    cb_a.getText().toString();
+                    choice=cb_a.getText().toString();
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else if (checkedId == cb_b.getId()) {
-                    cb_b.getText().toString();
+                    choice=cb_b.getText().toString();
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else if (checkedId == cb_c.getId()) {
-                    cb_c.getText().toString();
+                    choice=cb_c.getText().toString();
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else if (checkedId == cb_d.getId()) {
-                    cb_d.getText().toString();
+                    choice=cb_d.getText().toString();
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 }  else {
-                    cb_a.getText().toString();
+                    choice=cb_a.getText().toString();
                     tv_down.setEnabled(false);
                     tv_down.setBackgroundResource(R.drawable.textview3);
                 }
