@@ -10,45 +10,47 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 
-public class RecommandActivity extends Activity {
-private ImageView leftBtn,iv_img;
-    private TextView tv_start,tv_name;
-    private LinearLayout ll_taocan;
+public class RecommandActivity extends Activity implements View.OnClickListener {
+    private ImageView leftBtn;
+    private LinearLayout ll_recom;
+    private ImageView recom_img;
+    private TextView tv_recommend, tv_restart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommand);
-       init();
-}
+        init();
+    }
 
     private void init() {
-        leftBtn=(ImageView)findViewById(R.id.leftBtn);
-        tv_start=(TextView) findViewById(R.id.tv_start);
-        ll_taocan=(LinearLayout) findViewById(R.id.ll_taocan);
-        iv_img=(ImageView) findViewById(R.id.iv_img);
-        tv_name=(TextView) findViewById(R.id.tv_name);
-        ll_taocan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        leftBtn = (ImageView) findViewById(R.id.leftBtn);
+        tv_recommend = (TextView) findViewById(R.id.tv_recommend);
+        recom_img = (ImageView) findViewById(R.id.recom_img);
+        tv_restart = (TextView) findViewById(R.id.tv_restart);
+        ll_recom = (LinearLayout) findViewById(R.id.ll_recom);
+        leftBtn.setOnClickListener(this);
+        ll_recom.setOnClickListener(this);
+        tv_restart.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.leftBtn:
+                finish();
+                break;
+            case R.id.ll_recom:
                 Intent intent = new Intent(RecommandActivity.this, TaocanDetailAcitivty.class);
                 intent.putExtra("id", "");
                 startActivity(intent);
-            }
-        });
-        leftBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.tv_restart:
+                Intent intent1 = new Intent(RecommandActivity.this, QuestionActivity.class);
+                startActivity(intent1);
                 finish();
-            }
-        });
-        tv_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(RecommandActivity.this,QuestionActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+                break;
+        }
     }
-
 }
