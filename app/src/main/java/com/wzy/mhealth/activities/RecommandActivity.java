@@ -3,18 +3,41 @@ package com.wzy.mhealth.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Recommend;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class RecommandActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
     private LinearLayout ll_recom;
     private ImageView recom_img;
     private TextView tv_recommend, tv_restart;
+    String id = null;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 222:
+                    Recommend recommend = (Recommend) msg.obj;
+                    if (recommend.getStatus().equals("1")) {
+                        id = recommend.getTaocanId()+"";
+                        ImageLoader.getInstance().displayImage("",recom_img);
+                        tv_recommend.setText(recommend.getTaocanName()+"");
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +47,8 @@ public class RecommandActivity extends Activity implements View.OnClickListener 
     }
 
     private void init() {
+        String url = Constants.SERVER_URL + "MhealthUserTaocanSurveyServlet";
+        MyHttpUtils.handData(handler, 222, url, null);
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         tv_recommend = (TextView) findViewById(R.id.tv_recommend);
         recom_img = (ImageView) findViewById(R.id.recom_img);
@@ -43,7 +68,7 @@ public class RecommandActivity extends Activity implements View.OnClickListener 
                 break;
             case R.id.ll_recom:
                 Intent intent = new Intent(RecommandActivity.this, TaocanDetailAcitivty.class);
-                intent.putExtra("id", "");
+                intent.putExtra("id",id+"");
                 startActivity(intent);
                 break;
             case R.id.tv_restart:

@@ -117,6 +117,13 @@
             android:text="经常出现视物模糊的症状"
             android:textSize="15sp" />
 
+        <CheckBox
+            android:id="@+id/cb_h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="没有以上症状"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <TextView

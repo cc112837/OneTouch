@@ -112,6 +112,8 @@ public class QuestionFragment2 extends Fragment {
 
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    list.clear();
+
                     list.add(4 + "");
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);

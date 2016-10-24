@@ -11,10 +11,11 @@ package com.wzy.mhealth;
  * 修改备注：
  */
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
+import android.support.multidex.MultiDexApplication;
+
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
@@ -35,7 +36,7 @@ import com.wzy.mhealth.constant.ImgConfig;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
-public class MyApplication extends Application implements
+public class MyApplication extends MultiDexApplication implements
         UncaughtExceptionHandler {
     private static MyApplication instance;
     public static SharedPreferences sharedPreferences;

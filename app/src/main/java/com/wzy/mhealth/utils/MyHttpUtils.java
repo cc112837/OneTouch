@@ -25,6 +25,8 @@ import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Proud;
 import com.wzy.mhealth.model.Provice;
+import com.wzy.mhealth.model.Question;
+import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.Regmodel;
 import com.wzy.mhealth.model.Retuback;
@@ -238,6 +240,29 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 181) {
             params.addBodyParameter("phone", ((TiUser) object).getName());
             params.addBodyParameter("passWord1", ((TiUser) object).getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==220){
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Question(), handler, what));
+        }
+        if (what==221){
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("taocanName", ((TiUser) object).getName());
+            params.addBodyParameter("sex", ((TiUser) object).getTel());
+            params.addBodyParameter("count", "0");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==222){
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Recommend(), handler, what));
+        }
+        if(what==223){
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("age", ((TiUser) object).getName());
+            params.addBodyParameter("height", ((TiUser) object).getTel());
+            params.addBodyParameter("weight", ((TiUser) object).getPass());
+            params.addBodyParameter("count", "1");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
     }

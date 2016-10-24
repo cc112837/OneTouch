@@ -23,7 +23,7 @@ import java.util.List;
 public class QuestionFragment6 extends Fragment {
 
     private Button tv_down, tv_up;
-    private CheckBox cb_a, cb_b, cb_c, cb_d,cb_e,cb_f,cb_g;
+    private CheckBox cb_a, cb_b, cb_c, cb_d,cb_e,cb_f,cb_g,cb_h;
     private List<String> list = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +40,7 @@ public class QuestionFragment6 extends Fragment {
         cb_e = (CheckBox) v.findViewById(R.id.cb_e);
         cb_f = (CheckBox) v.findViewById(R.id.cb_f);
         cb_g=(CheckBox) v.findViewById(R.id.cb_g);
+        cb_h=(CheckBox) v.findViewById(R.id.cb_h);
         tv_down = (Button) v.findViewById(R.id.tv_down);
         tv_down.setEnabled(false);
         tv_up = (Button) v.findViewById(R.id.tv_up);
@@ -167,6 +168,22 @@ public class QuestionFragment6 extends Fragment {
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
                     list.remove(7 + "");
+                    if (list.size() == 0) {
+                        tv_down.setEnabled(false);
+                        tv_down.setBackgroundResource(R.drawable.textview3);
+                    }
+                }
+            }
+        });
+        cb_h.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    list.add(8 + "");
+                    tv_down.setEnabled(true);
+                    tv_down.setBackgroundResource(R.drawable.textview_1);
+                } else {
+                    list.remove(8 + "");
                     if (list.size() == 0) {
                         tv_down.setEnabled(false);
                         tv_down.setBackgroundResource(R.drawable.textview3);

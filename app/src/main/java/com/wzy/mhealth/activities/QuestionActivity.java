@@ -13,8 +13,22 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.fragments.ChangeFragmentHelper;
 import com.wzy.mhealth.fragments.QuestionFragment;
+import com.wzy.mhealth.fragments.QuestionFragment1;
+import com.wzy.mhealth.fragments.QuestionFragment2;
+import com.wzy.mhealth.fragments.QuestionFragment3;
+import com.wzy.mhealth.fragments.QuestionFragment4;
+import com.wzy.mhealth.fragments.QuestionFragment5;
+import com.wzy.mhealth.fragments.QuestionFragment6;
+import com.wzy.mhealth.fragments.QuestionFragment7;
+import com.wzy.mhealth.fragments.QuestionFragment8;
+import com.wzy.mhealth.fragments.QuestionFragment9;
+import com.wzy.mhealth.fragments.QuestionFragmentt;
+import com.wzy.mhealth.fragments.QuestionFragmenttt;
+import com.wzy.mhealth.model.Question;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class QuestionActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView leftBtn;
@@ -36,6 +50,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         question_contain = (FrameLayout) findViewById(R.id.question_contain);
+        String url = Constants.SERVER_URL + "MhealthUserSurveyServlet";
+        MyHttpUtils.handData(handler, 220, url, null);
         leftBtn.setOnClickListener(this);
 
     }
@@ -46,22 +62,62 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             super.handleMessage(msg);
             switch (msg.what) {
                 case 220:
-                    new AlertDialog.Builder(QuestionActivity.this).setTitle("提示")
-                            .setMessage("您有未完成的体检定制，是否继续定制？").setPositiveButton("继续定制", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Fragment fragment = new QuestionFragment();
-                            ChangeFragmentHelper helper = new ChangeFragmentHelper();
-                            helper.setTargetFragment(fragment);
-                            helper.setIsClearStackBack(true);
-                            changeFragment(helper);
-                        }
-                    }).setNegativeButton("重新开始", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
+                    final Question question = (Question) msg.obj;
+                    if (question.getPageCount() != 0) {
+                        new AlertDialog.Builder(QuestionActivity.this).setTitle("提示")
+                                .setMessage("您有未完成的体检定制，是否继续定制？").setPositiveButton("继续定制", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Fragment fragment = null;
+                                switch (question.getPageCount()) {
+                                    case 1:
+                                        fragment=new QuestionFragment1();
+                                        break;
+                                    case 2:
+                                        fragment=new QuestionFragment2();
+                                        break;
+                                    case 3:
+                                        fragment=new QuestionFragment3();
+                                        break;
+                                    case 4:
+                                        fragment=new QuestionFragment4();
+                                        break;
+                                    case 5:
+                                        fragment=new QuestionFragment5();
+                                        break;
+                                    case 6:
+                                        fragment=new QuestionFragment6();
+                                        break;
+                                    case 7:
+                                        fragment=new QuestionFragment7();
+                                        break;
+                                    case 8:
+                                        fragment=new QuestionFragment8();
+                                        break;
+                                    case 9:
+                                        fragment=new QuestionFragment9();
+                                        break;
+                                    case 10:
+                                        fragment=new QuestionFragmentt();
+                                        break;
+                                    case 11:
+                                        fragment=new QuestionFragmenttt();
+                                        break;
+                                }
+                                ChangeFragmentHelper helper = new ChangeFragmentHelper();
+                                helper.setTargetFragment(fragment);
+                                helper.setIsClearStackBack(true);
+                                changeFragment(helper);
+                            }
+                        }).setNegativeButton("重新开始", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+                    } else {
+
+                    }
                     break;
             }
         }

@@ -2,6 +2,8 @@ package com.wzy.mhealth.fragments;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,10 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.QuestionActivity;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +26,26 @@ public class QuestionFragment extends Fragment {
     private TextView tv_submit;
     private RadioButton rb_woman, rb_man, cb_self, cb_parent, cb_love, cb_friend, cb_other;
     private RadioGroup rg_sex, rg_classfy;
-
+    String identity;
+    String sex;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 221:
+                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    if(stepInfo.getStatus().equals("1")){
+                        Fragment fragment = new QuestionFragment1();
+                        ChangeFragmentHelper helper = new ChangeFragmentHelper();
+                        helper.setTargetFragment(fragment);
+                        helper.setIsClearStackBack(false);
+                        ((QuestionActivity) getActivity()).changeFragment(helper);
+                    }
+                    break;
+            }
+        }
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,28 +69,28 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == cb_self.getId()) {
-                    cb_self.getText().toString();
+                    identity="1";
                 } else if (checkedId == cb_parent.getId()) {
-                    cb_parent.getText().toString();
+                    identity="2";
                 } else if (checkedId == cb_love.getId()) {
-                    cb_love.getText().toString();
+                    identity="3";
                 } else if (checkedId == cb_friend.getId()) {
-                    cb_friend.getText().toString();
+                    identity="4";
                 } else if (checkedId == cb_other.getId()) {
-                    cb_other.getText().toString();
+                    identity="5";
                 } else {
-                    cb_self.getText().toString();
+                    identity="1";
                 }
             }
         });
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new QuestionFragment1();
-                ChangeFragmentHelper helper = new ChangeFragmentHelper();
-                helper.setTargetFragment(fragment);
-                helper.setIsClearStackBack(false);
-                ((QuestionActivity) getActivity()).changeFragment(helper);
+                String url= Constants.SERVER_URL+"MhealthUserSurveyCountServlet";
+                TiUser user=new TiUser();
+                user.setTel(sex + "");
+                user.setName(identity + "");
+                MyHttpUtils.handData(handler, 221, url, user);
             }
         });
         rb_man = (RadioButton) v.findViewById(R.id.rb_man);
@@ -75,11 +100,11 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == rb_man.getId()) {
-                    rb_man.getText().toString();
+                    sex="1";
                 } else if (checkedId == rb_woman.getId()) {
-                    rb_woman.getText().toString();
+                    sex="2";
                 } else {
-                    rb_man.getText().toString();
+                    sex="1";
                 }
             }
         });
