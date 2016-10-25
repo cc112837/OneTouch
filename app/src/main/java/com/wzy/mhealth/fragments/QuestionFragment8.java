@@ -84,15 +84,15 @@ public class QuestionFragment8 extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == cb_a.getId()) {
-                    choice=cb_a.getText().toString();
+                    choice="1";
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else if (checkedId == cb_b.getId()) {
-                    choice=cb_b.getText().toString();
+                    choice="2";
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else {
-                    choice=cb_a.getText().toString();
+                    choice="1";
                     tv_down.setEnabled(false);
                     tv_down.setBackgroundResource(R.drawable.textview3);
                 }

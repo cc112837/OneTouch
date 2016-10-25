@@ -86,23 +86,23 @@ public class QuestionFragment3 extends Fragment{
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == cb_a.getId()) {
-                    choice=cb_a.getText().toString();
+                    choice="1";
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else if (checkedId == cb_b.getId()) {
-                    choice=cb_b.getText().toString();
+                    choice="2";
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else if (checkedId == cb_c.getId()) {
-                    choice=cb_c.getText().toString();
+                    choice="3";
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 } else if (checkedId == cb_d.getId()) {
-                    choice=cb_d.getText().toString();
+                    choice="4";
                     tv_down.setEnabled(true);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
                 }  else {
-                    choice=cb_a.getText().toString();
+                    choice="1";
                     tv_down.setEnabled(false);
                     tv_down.setBackgroundResource(R.drawable.textview3);
                 }

@@ -85,7 +85,7 @@ public class QuestionFragmenttt extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == cb_a.getId()) {
-                    choice=cb_a.getText().toString();
+                    choice="1";
                     et_advice.setVisibility(View.VISIBLE);
                     if (!("").equals(et_advice.getText().toString())) {
                         tv_down.setEnabled(true);
@@ -95,7 +95,7 @@ public class QuestionFragmenttt extends Fragment {
                     }
 
                 } else if (checkedId == cb_b.getId()) {
-                    choice=cb_b.getText().toString();
+                    choice="2";
                     tv_down.setEnabled(true);
                     et_advice.setVisibility(View.GONE);
                     tv_down.setBackgroundResource(R.drawable.textview_1);
