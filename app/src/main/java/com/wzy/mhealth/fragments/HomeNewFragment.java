@@ -29,6 +29,7 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DiseaseActivity;
+import com.wzy.mhealth.activities.DoctorLiActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
@@ -53,7 +54,7 @@ import de.greenrobot.event.EventBus;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeNewFragment extends Fragment {
+public class HomeNewFragment extends Fragment implements View.OnClickListener{
     private ConvenientBanner convenientBanner;
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     private ConversationManager conversationManager = ConversationManager.getInstance();
@@ -67,6 +68,16 @@ public class HomeNewFragment extends Fragment {
     //    private List<Doctor.DataEntity> doctorEntitylist = new ArrayList<>();
 //    private DoctorHomeAdapter doctorHomeAdapter;
     private TaocanHomeAdapter taocanHomeAdapter;
+    private LinearLayout ll_private;
+    private LinearLayout ll_group;
+    private LinearLayout ll_marry;
+    private LinearLayout ll_heali;
+    private LinearLayout ll_taocan;
+    private LinearLayout ll_taocanmore;
+    private LinearLayout ll_near_shop;
+    private LinearLayout ll_knownage;
+    private LinearLayout ll_nearhospital;
+    private LinearLayout ll_servicemore;
 
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -167,94 +178,26 @@ public class HomeNewFragment extends Fragment {
 //        doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
 //        gv_doctor.setAdapter(doctorHomeAdapter);
 
-        LinearLayout ll_marry = (LinearLayout) headview.findViewById(R.id.ll_marry);
-        ll_marry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MarryHospitalActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        LinearLayout ll_heali = (LinearLayout) headview.findViewById(R.id.ll_heali);
-        ll_heali.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2016/10/17  (李医生)
-            }
-        });
-        LinearLayout ll_taocan = (LinearLayout) headview.findViewById(R.id.ll_taocan);
-        ll_taocan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TaocanListActivity.class);
-                startActivity(intent);
-            }
-        });
-        LinearLayout ll_taocanmore = (LinearLayout) headview.findViewById(R.id.ll_taocanmore);
-        ll_taocanmore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TaocanListActivity.class);
-                startActivity(intent);
-            }
-        });
-        LinearLayout ll_near_shop = (LinearLayout) headview.findViewById(R.id.ll_near_shop);
-        LinearLayout ll_knownage = (LinearLayout) headview.findViewById(R.id.ll_knownage);
-        LinearLayout ll_nearhospital = (LinearLayout) headview.findViewById(R.id.ll_nearhospital);
-        LinearLayout ll_servicemore = (LinearLayout) headview.findViewById(R.id.ll_servicemore);
-        ll_knownage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DiseaseActivity.class);
-                startActivity(intent);
-            }
-        });
-        ll_nearhospital.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 附近医院
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), PoiKeywordSearchActivity.class);
-                intent.putExtra("keyword", "医院");
-                getActivity().startActivity(intent);
-            }
-        });
-        ll_servicemore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NoContentActivity.class);
-                startActivity(intent);
-            }
-        });
-        ll_near_shop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // 附近药房
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), PoiKeywordSearchActivity.class);
-                intent.putExtra("keyword", "药房");
-                getActivity().startActivity(intent);
-            }
-        });
-        LinearLayout ll_group = (LinearLayout) headview.findViewById(R.id.ll_group);
-        ll_group.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getActivity(), ExaminationYueActivity.class);
-                startActivity(intent);
-            }
-        });
-        LinearLayout ll_private = (LinearLayout) headview.findViewById(R.id.ll_private);
-        ll_private.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), QuestionActivity.class);
-                startActivity(intent);
-            }
-        });
+        ll_marry = (LinearLayout) headview.findViewById(R.id.ll_marry);
+        ll_marry.setOnClickListener(this);
+        ll_heali = (LinearLayout) headview.findViewById(R.id.ll_heali);
+        ll_heali.setOnClickListener(this);
+        ll_taocan = (LinearLayout) headview.findViewById(R.id.ll_taocan);
+        ll_taocan.setOnClickListener(this);
+        ll_taocanmore = (LinearLayout) headview.findViewById(R.id.ll_taocanmore);
+        ll_taocanmore.setOnClickListener(this);
+        ll_near_shop = (LinearLayout) headview.findViewById(R.id.ll_near_shop);
+        ll_knownage = (LinearLayout) headview.findViewById(R.id.ll_knownage);
+        ll_nearhospital = (LinearLayout) headview.findViewById(R.id.ll_nearhospital);
+        ll_servicemore = (LinearLayout) headview.findViewById(R.id.ll_servicemore);
+        ll_knownage.setOnClickListener(this);
+        ll_nearhospital.setOnClickListener(this);
+        ll_servicemore.setOnClickListener(this);
+        ll_near_shop.setOnClickListener(this);
+        ll_group = (LinearLayout) headview.findViewById(R.id.ll_group);
+        ll_group.setOnClickListener(this);
+        ll_private = (LinearLayout) headview.findViewById(R.id.ll_private);
+        ll_private.setOnClickListener(this);
         convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);
         convenientBanner.setPages(
                 new CBViewHolderCreator<LocalImageHolderView>() {
@@ -284,27 +227,8 @@ public class HomeNewFragment extends Fragment {
             }
 
         });
-        chat_btn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                // 右上角聊天按钮
-                Intent intent = new Intent(getActivity(), MsgActivity.class);
-                startActivity(intent);
-            }
-
-        });
-        sacn_btn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                // 左上角扫描按钮
-                Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(intent, 0);
-            }
-
-        });
+        chat_btn.setOnClickListener(this);
+        sacn_btn.setOnClickListener(this);
 
     }
 
@@ -443,4 +367,64 @@ public class HomeNewFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.sacn_btn:
+                Intent intent = new Intent(getActivity(), CaptureActivity.class);
+                startActivityForResult(intent, 0);
+            break;
+            case R.id.chat_btn:
+                Intent intent1 = new Intent(getActivity(), MsgActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.ll_private:
+                Intent intent2 = new Intent(getActivity(), QuestionActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.ll_group:
+                Intent intent3 = new Intent(getActivity(), ExaminationYueActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.ll_near_shop:
+                // 附近药房
+                Intent intent4 = new Intent();
+                intent4.setClass(getActivity(), PoiKeywordSearchActivity.class);
+                intent4.putExtra("keyword", "药房");
+                getActivity().startActivity(intent4);
+                break;
+            case R.id.ll_marry:
+                Intent intent5 = new Intent(getActivity(), MarryHospitalActivity.class);
+                startActivity(intent5);
+                break;
+            case R.id.ll_heali:
+                Intent intent6=new Intent(getActivity(), DoctorLiActivity.class);
+                startActivity(intent6);
+                break;
+            case R.id.ll_taocan:
+                Intent intent7 = new Intent(getActivity(), TaocanListActivity.class);
+                startActivity(intent7);
+                break;
+            case R.id.ll_servicemore:
+                Intent intent8 = new Intent(getActivity(), NoContentActivity.class);
+                startActivity(intent8);
+                break;
+            case R.id.ll_taocanmore:
+                Intent intent9 = new Intent(getActivity(), TaocanListActivity.class);
+                startActivity(intent9);
+                break;
+            case R.id.ll_knownage:
+                Intent intentt0 = new Intent(getActivity(), DiseaseActivity.class);
+                startActivity(intentt0);
+                break;
+            case R.id.ll_nearhospital:
+                Intent intentt1 = new Intent();
+                intentt1.setClass(getActivity(), PoiKeywordSearchActivity.class);
+                intentt1.putExtra("keyword", "医院");
+                getActivity().startActivity(intentt1);
+                break;
+
+        }
+
+    }
 }
