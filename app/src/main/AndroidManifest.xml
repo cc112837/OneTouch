@@ -315,7 +315,8 @@
         <activity android:name=".activities.QuestionActivity" />
         <activity android:name=".activities.DoctorLiActivity" />
         <activity android:name=".activities.CheckActivity" />
-        <activity android:name=".activities.RecommandActivity"></activity>
+        <activity android:name=".activities.RecommandActivity" />
+        <activity android:name=".activities.DoctorYuyueActivity"></activity>
     </application>
 
 </manifest>

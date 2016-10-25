@@ -1,28 +1,31 @@
 package com.wzy.mhealth.activities;
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 李医生预约
+ * 创建时间：2016/10/25 11:17
+ */
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 
-public class DoctorLiActivity extends Activity implements View.OnClickListener {
-    private ImageView leftBtn,iv_img;
-    private TextView tv_name;
+public class DoctorYuyueActivity extends Activity implements View.OnClickListener {
+    private ImageView leftBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_li);
+        setContentView(R.layout.activity_doctor_yuyue);
         init();
+
     }
 
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
-        iv_img=(ImageView) findViewById(R.id.iv_img);
-        tv_name=(TextView) findViewById(R.id.tv_name);
         leftBtn.setOnClickListener(this);
     }
 

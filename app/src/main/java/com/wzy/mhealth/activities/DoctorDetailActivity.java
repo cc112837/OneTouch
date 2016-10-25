@@ -30,7 +30,7 @@ public class DoctorDetailActivity extends BaActivity {
     private TextView guanzhuTextView, recommend, attitude, level;
     private TextView yonghu1, yonghu1Degree, yonghu1Pingjia, youbianzi;
     private TextView yonghu2, yonghu2Degree, yonghu2Pingjia, zuobian;
-    private LinearLayout tuwenLayout;
+    private LinearLayout tuwenLayout,vedioyuyue;
     private String doctor;
     private List<UserEvaluation> userEvaluationList;
     private LinearLayout pingjia1, pingjia2;
@@ -148,6 +148,7 @@ public class DoctorDetailActivity extends BaActivity {
         guanzhuTextView = (TextView) findViewById(R.id.guanzhu);
         TextView xinyiTextView = (TextView) findViewById(R.id.songxinyi);
         tuwenLayout = (LinearLayout) findViewById(R.id.tuwenzixun);
+        vedioyuyue=(LinearLayout) findViewById(R.id.vedioyuyue);
         yonghupingjia = (RelativeLayout) findViewById(R.id.yonghupingjia);
         yonghu1 = (TextView) findViewById(R.id.yonghu1);
         yonghu1Degree = (TextView) findViewById(R.id.yonghu1Degree);
