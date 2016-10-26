@@ -5,23 +5,23 @@
     android:layout_height="match_parent"
     android:background="@color/title_green"
     android:fitsSystemWindows="true"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/title_green"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/leftBtn"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
             android:padding="10dp"
             android:paddingLeft="15dp"
-            android:src="@mipmap/btn_back"
-            android:layout_gravity="center_vertical"/>
+            android:src="@mipmap/btn_back" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,11 +31,54 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/fontSizeMidMM" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview4"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="全部"
+            android:textColor="@color/title_green" />
+
+        <TextView
+            android:id="@+id/tv_satis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="满意" />
+
+        <TextView
+            android:id="@+id/tv_nosatis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/textview"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="不满意" />
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/grey_bg">
+        android:background="@color/grey_bg"
+        android:orientation="vertical">
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="0.5px"
@@ -45,7 +88,6 @@
             android:id="@+id/doctorlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="6" >
-        </ListView>
+            android:layout_weight="6"></ListView>
     </LinearLayout>
 </LinearLayout>

@@ -21,7 +21,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class TaocanDetailAcitivty extends Activity {
     private ImageView leftBtn, iv_detail;
-    private TextView tv_old, tv_new, tv_buy, titleView;
+    private TextView tv_old, tv_new, tv_buy, titleView, tv_how;
     private String id;
     private WebView wv_show;
     Intent intent;
@@ -54,7 +54,7 @@ public class TaocanDetailAcitivty extends Activity {
                     webSettings.setBuiltInZoomControls(true);
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
                     WindowManager wm = TaocanDetailAcitivty.this.getWindowManager();
-                    int width = wm.getDefaultDisplay().getWidth()/2-10;
+                    int width = wm.getDefaultDisplay().getWidth() / 2 - 10;
                     wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px !important;}</style></head>" + taocanDetail.getContext(), "text/html", "utf-8", null);
                     break;
             }
@@ -88,6 +88,15 @@ public class TaocanDetailAcitivty extends Activity {
         tv_buy = (TextView) findViewById(R.id.tv_buy);
         wv_show = (WebView) findViewById(R.id.wv_show);
         titleView = (TextView) findViewById(R.id.titleView);
+        tv_how = (TextView) findViewById(R.id.tv_how);
+        tv_how.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TaocanDetailAcitivty.this, EvaluationListActivity.class);
+                intent.putExtra("doctorId", "");
+                startActivity(intent);
+            }
+        });
 //        iv_detail = (ImageView) findViewById(R.id.iv_detail);
         tv_old.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
