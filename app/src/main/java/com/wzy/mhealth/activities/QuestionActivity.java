@@ -2,6 +2,7 @@ package com.wzy.mhealth.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -63,46 +64,45 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             switch (msg.what) {
                 case 220:
                     final Question question = (Question) msg.obj;
-                    if (question.getPageCount() != 0) {
+                    if (question.getPageCount() != -1) {
                         new AlertDialog.Builder(QuestionActivity.this).setTitle("提示")
                                 .setMessage("您有未完成的体检定制，是否继续定制？").setPositiveButton("继续定制", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Fragment fragment = null;
                                 switch (question.getPageCount()) {
+                                    case 0:
+                                        fragment = new QuestionFragment1();
+                                        break;
                                     case 1:
-                                        fragment=new QuestionFragment1();
+                                        fragment = new QuestionFragment2();
                                         break;
                                     case 2:
-                                        fragment=new QuestionFragment2();
+                                        fragment = new QuestionFragment3();
                                         break;
                                     case 3:
-                                        fragment=new QuestionFragment3();
+                                        fragment = new QuestionFragment4();
                                         break;
                                     case 4:
-                                        fragment=new QuestionFragment4();
+                                        fragment = new QuestionFragment5();
                                         break;
                                     case 5:
-                                        fragment=new QuestionFragment5();
+                                        fragment = new QuestionFragment6();
                                         break;
                                     case 6:
-                                        fragment=new QuestionFragment6();
+                                        fragment = new QuestionFragment7();
                                         break;
                                     case 7:
-                                        fragment=new QuestionFragment7();
+                                        fragment = new QuestionFragment8();
                                         break;
                                     case 8:
-                                        fragment=new QuestionFragment8();
+                                        fragment = new QuestionFragment9();
                                         break;
                                     case 9:
-                                        fragment=new QuestionFragment9();
+                                        fragment = new QuestionFragmentt();
                                         break;
                                     case 10:
-                                        fragment=new QuestionFragmentt();
-                                        break;
-                                    case 11:
-                                        fragment=new QuestionFragmenttt();
-                                        break;
+                                        fragment = new QuestionFragmenttt();
                                 }
                                 ChangeFragmentHelper helper = new ChangeFragmentHelper();
                                 helper.setTargetFragment(fragment);
@@ -115,8 +115,9 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                                 dialog.dismiss();
                             }
                         }).show();
-                    } else {
-
+                    } else if (question.getPageCount() == 11) {
+                        Intent intent = new Intent(QuestionActivity.this, RecommandActivity.class);
+                        startActivity(intent);
                     }
                     break;
             }

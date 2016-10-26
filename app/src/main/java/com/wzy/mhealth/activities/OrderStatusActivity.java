@@ -8,7 +8,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +20,12 @@ import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-public class OrderStatusActivity extends Activity {
-    private TextView tv_orderstatus, tv_name, tv_price, back_money, tv_ordernum, tv_orderbuy, tv_bought;
-    private ImageView iv_taointro, iv_taocandetail, leftBtn;
+public class OrderStatusActivity extends Activity implements View.OnClickListener{
+    private TextView tv_orderstatus, tv_name, tv_ordersubmit, tv_price, back_money, tv_ordernum, tv_orderbuy, tv_bought;
+    private ImageView iv_taointro, iv_taocandetail, leftBtn, iv_1, iv_2, iv_3, iv_4, iv_5;
+    private EditText et_comment;
+    int grade;
+    private LinearLayout ll_ordercom;
     String id, name, price, bought, status, creat, num, account, orderid;
     Intent intent;
 
@@ -43,21 +48,31 @@ public class OrderStatusActivity extends Activity {
     }
 
     private void init() {
+        ll_ordercom=(LinearLayout) findViewById(R.id.ll_ordercom);
         tv_orderstatus = (TextView) findViewById(R.id.tv_orderstatus);
+        tv_ordersubmit = (TextView) findViewById(R.id.tv_ordersubmit);
+        tv_ordersubmit.setOnClickListener(this);
+        et_comment = (EditText) findViewById(R.id.et_comment);
+        iv_1 = (ImageView) findViewById(R.id.iv_1);
+        iv_2 = (ImageView) findViewById(R.id.iv_2);
+        iv_3 = (ImageView) findViewById(R.id.iv_3);
+        iv_4 = (ImageView) findViewById(R.id.iv_4);
+        iv_5 = (ImageView) findViewById(R.id.iv_5);
+        iv_1.setOnClickListener(this);
+        iv_2.setOnClickListener(this);
+        iv_3.setOnClickListener(this);
+        iv_4.setOnClickListener(this);
+        iv_5.setOnClickListener(this);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_name.setText("套餐：" + name + "");
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
-        leftBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        leftBtn.setOnClickListener(this);
         tv_price = (TextView) findViewById(R.id.tv_price);
         tv_price.setText("价格：¥" + price + "");
         back_money = (TextView) findViewById(R.id.back_money);
 
         if (status.equals("0")) {
+            ll_ordercom.setVisibility(View.GONE);
             tv_orderstatus.setText("支付成功");
             back_money.setText("申请退款");
             back_money.setEnabled(true);
@@ -89,18 +104,21 @@ public class OrderStatusActivity extends Activity {
                 }
             });
         } else if (status.equals("1")) {
+            ll_ordercom.setVisibility(View.VISIBLE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
             tv_orderstatus.setText("退款完成");
             back_money.setText("退款完成");
 
         } else if (status.equals("2")) {
+            ll_ordercom.setVisibility(View.VISIBLE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
             tv_orderstatus.setText("已体检");
             back_money.setText("订单完成");
 
         } else if (status.equals("3")) {
+            ll_ordercom.setVisibility(View.GONE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
             tv_orderstatus.setText("处理中");
@@ -118,14 +136,7 @@ public class OrderStatusActivity extends Activity {
 
         iv_taointro = (ImageView) findViewById(R.id.iv_taointro);
         iv_taocandetail = (ImageView) findViewById(R.id.iv_taocandetail);
-        iv_taocandetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OrderStatusActivity.this, TaocanDetailAcitivty.class);
-                intent.putExtra("id", id + "");
-                startActivity(intent);
-            }
-        });
+        iv_taocandetail.setOnClickListener(this);
     }
 
     private Handler handler = new Handler() {
@@ -137,7 +148,7 @@ public class OrderStatusActivity extends Activity {
                     if (retuback.getStatus().equals("1")) {
                         Toast.makeText(OrderStatusActivity.this, "您的请求已被受理，一般会在3~5个工作日处理完成", Toast.LENGTH_LONG
                         ).show();
-                        setResult(345,intent);
+                        setResult(345, intent);
                         finish();
                     } else {
                         Toast.makeText(OrderStatusActivity.this, retuback.getMessage(), Toast.LENGTH_LONG
@@ -147,4 +158,62 @@ public class OrderStatusActivity extends Activity {
             }
         }
     };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_taocandetail:
+                Intent intent = new Intent(OrderStatusActivity.this, TaocanDetailAcitivty.class);
+                intent.putExtra("id", id + "");
+                startActivity(intent);
+                break;
+            case R.id.leftBtn:
+                finish();
+                break;
+            case R.id.tv_ordersubmit:
+                String advice=et_comment.getText().toString();
+
+                break;
+            case R.id.iv_1:
+                grade = 1;
+                iv_1.setBackgroundResource(R.mipmap.goldstar1);
+                iv_2.setBackgroundResource(R.mipmap.greystar2);
+                iv_3.setBackgroundResource(R.mipmap.greystar2);
+                iv_4.setBackgroundResource(R.mipmap.greystar2);
+                iv_5.setBackgroundResource(R.mipmap.greystar2);
+                break;
+            case R.id.iv_2:
+                grade = 2;
+                iv_1.setBackgroundResource(R.mipmap.goldstar1);
+                iv_2.setBackgroundResource(R.mipmap.goldstar1);
+                iv_3.setBackgroundResource(R.mipmap.greystar2);
+                iv_4.setBackgroundResource(R.mipmap.greystar2);
+                iv_5.setBackgroundResource(R.mipmap.greystar2);
+                break;
+            case R.id.iv_3:
+                grade = 3;
+                iv_1.setBackgroundResource(R.mipmap.goldstar1);
+                iv_2.setBackgroundResource(R.mipmap.goldstar1);
+                iv_3.setBackgroundResource(R.mipmap.goldstar1);
+                iv_4.setBackgroundResource(R.mipmap.greystar2);
+                iv_5.setBackgroundResource(R.mipmap.greystar2);
+                break;
+            case R.id.iv_4:
+                grade = 4;
+                iv_1.setBackgroundResource(R.mipmap.goldstar1);
+                iv_2.setBackgroundResource(R.mipmap.goldstar1);
+                iv_3.setBackgroundResource(R.mipmap.goldstar1);
+                iv_4.setBackgroundResource(R.mipmap.goldstar1);
+                iv_5.setBackgroundResource(R.mipmap.greystar2);
+                break;
+            case R.id.iv_5:
+                grade = 5;
+                iv_1.setBackgroundResource(R.mipmap.goldstar1);
+                iv_2.setBackgroundResource(R.mipmap.goldstar1);
+                iv_3.setBackgroundResource(R.mipmap.goldstar1);
+                iv_4.setBackgroundResource(R.mipmap.goldstar1);
+                iv_5.setBackgroundResource(R.mipmap.goldstar1);
+                break;
+        }
+    }
 }
