@@ -32,7 +32,7 @@
                     android:background="#b1595959"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="*注意：体检前请先进行体检预约"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="17sp" />
             </FrameLayout>
