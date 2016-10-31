@@ -243,7 +243,6 @@ public class QuestionFragment6 extends Fragment {
                     cb_d.setChecked(false);
                     cb_e.setChecked(false);
                     cb_f.setChecked(false);
-                    cb_h.setChecked(false);
                     if (list.contains("" + 8)) {
                         list.remove(8 + "");
                     }

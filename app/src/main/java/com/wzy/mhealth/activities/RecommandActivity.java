@@ -32,7 +32,7 @@ public class RecommandActivity extends Activity implements View.OnClickListener 
                     Recommend recommend = (Recommend) msg.obj;
                     if (recommend.getStatus().equals("1")) {
                         id = recommend.getTaocanId()+"";
-                        ImageLoader.getInstance().displayImage("",recom_img);
+                        ImageLoader.getInstance().displayImage(recommend.getCenterId(),recom_img);
                         tv_recommend.setText(recommend.getTaocanName()+"");
                     }
                     break;
