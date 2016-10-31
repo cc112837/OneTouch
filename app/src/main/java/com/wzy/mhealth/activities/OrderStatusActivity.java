@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +23,8 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class OrderStatusActivity extends Activity implements View.OnClickListener{
     private TextView tv_orderstatus, tv_name, tv_ordersubmit, tv_price, back_money, tv_ordernum, tv_orderbuy, tv_bought;
-    private ImageView iv_taointro, iv_taocandetail, leftBtn, iv_1, iv_2, iv_3, iv_4, iv_5;
+    private ImageView iv_taointro, iv_taocandetail, leftBtn;
+    CheckBox iv_1, iv_2, iv_3, iv_4, iv_5;
     private EditText et_comment;
     int grade;
     private LinearLayout ll_ordercom;
@@ -53,11 +55,11 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
         tv_ordersubmit = (TextView) findViewById(R.id.tv_ordersubmit);
         tv_ordersubmit.setOnClickListener(this);
         et_comment = (EditText) findViewById(R.id.et_comment);
-        iv_1 = (ImageView) findViewById(R.id.iv_1);
-        iv_2 = (ImageView) findViewById(R.id.iv_2);
-        iv_3 = (ImageView) findViewById(R.id.iv_3);
-        iv_4 = (ImageView) findViewById(R.id.iv_4);
-        iv_5 = (ImageView) findViewById(R.id.iv_5);
+        iv_1 = (CheckBox) findViewById(R.id.iv_1);
+        iv_2 = (CheckBox) findViewById(R.id.iv_2);
+        iv_3 = (CheckBox) findViewById(R.id.iv_3);
+        iv_4 = (CheckBox) findViewById(R.id.iv_4);
+        iv_5 = (CheckBox) findViewById(R.id.iv_5);
         iv_1.setOnClickListener(this);
         iv_2.setOnClickListener(this);
         iv_3.setOnClickListener(this);
@@ -108,7 +110,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
             tv_orderstatus.setText("退款完成");
-            back_money.setText("退款完成");
+            back_money.setVisibility(View.INVISIBLE);
 
         } else if (status.equals("2")) {
             ll_ordercom.setVisibility(View.VISIBLE);
@@ -116,6 +118,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
             tv_orderstatus.setText("已体检");
             back_money.setText("订单完成");
+            back_money.setVisibility(View.INVISIBLE);
 
         } else if (status.equals("3")) {
             ll_ordercom.setVisibility(View.GONE);

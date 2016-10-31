@@ -15,23 +15,23 @@ public class Recommend {
     /**
      * status : 1
      * data : 存在推荐套餐
-     * taocanId : 1
-     * taocanName : 青年套餐
+     * image : http://117.34.105.29:8209/mhealth/upload/1475220119774.png
+     * name : 青年套餐
      * oldPrice : 568
      * newPrice : 268
      * context : 详情
-     * centerId : 关联的机构
+     * taoId : 21
      * taocanNum : 7
      */
 
     private String status;
     private String data;
-    private int taocanId;
-    private String taocanName;
+    private String image;
+    private String name;
     private String oldPrice;
     private String newPrice;
     private String context;
-    private String centerId;
+    private int taoId;
     private String taocanNum;
 
     public void setStatus(String status) {
@@ -42,12 +42,12 @@ public class Recommend {
         this.data = data;
     }
 
-    public void setTaocanId(int taocanId) {
-        this.taocanId = taocanId;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public void setTaocanName(String taocanName) {
-        this.taocanName = taocanName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setOldPrice(String oldPrice) {
@@ -62,8 +62,8 @@ public class Recommend {
         this.context = context;
     }
 
-    public void setCenterId(String centerId) {
-        this.centerId = centerId;
+    public void setTaoId(int taoId) {
+        this.taoId = taoId;
     }
 
     public void setTaocanNum(String taocanNum) {
@@ -78,12 +78,12 @@ public class Recommend {
         return data;
     }
 
-    public int getTaocanId() {
-        return taocanId;
+    public String getImage() {
+        return image;
     }
 
-    public String getTaocanName() {
-        return taocanName;
+    public String getName() {
+        return name;
     }
 
     public String getOldPrice() {
@@ -98,8 +98,8 @@ public class Recommend {
         return context;
     }
 
-    public String getCenterId() {
-        return centerId;
+    public int getTaoId() {
+        return taoId;
     }
 
     public String getTaocanNum() {

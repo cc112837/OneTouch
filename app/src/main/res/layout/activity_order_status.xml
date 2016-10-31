@@ -197,11 +197,11 @@
                 android:background="@color/grey_bg" />
 
             <LinearLayout
+                android:id="@+id/ll_ordercom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ll_ordercom"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -231,41 +231,46 @@
                         android:textColor="@color/dark_grey"
                         android:textSize="15sp" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/iv_1"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="15dp"
-                        android:src="@mipmap/greystar2" />
+                        android:background="@mipmap/greystar2"
+                        android:button="@null" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/iv_2"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/greystar2" />
+                        android:background="@mipmap/greystar2"
+                        android:button="@null" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/iv_3"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/greystar2" />
+                        android:background="@mipmap/greystar2"
+                        android:button="@null" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/iv_4"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/greystar2" />
+                        android:background="@mipmap/greystar2"
+                        android:button="@null" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/iv_5"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/greystar2" />
+                        android:background="@mipmap/greystar2"
+                        android:button="@null" />
                 </LinearLayout>
 
                 <EditText
@@ -275,6 +280,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:background="@drawable/textview"
+                    android:gravity="left"
                     android:hint="请输入您的评价内容"
                     android:lines="4"
                     android:textSize="14sp" />
@@ -284,8 +290,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/textview_1"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:text="提交评价"
                     android:textColor="@color/white" />
             </LinearLayout>

@@ -31,9 +31,9 @@ public class RecommandActivity extends Activity implements View.OnClickListener 
                 case 222:
                     Recommend recommend = (Recommend) msg.obj;
                     if (recommend.getStatus().equals("1")) {
-                        id = recommend.getTaocanId()+"";
-                        ImageLoader.getInstance().displayImage(recommend.getCenterId(),recom_img);
-                        tv_recommend.setText(recommend.getTaocanName()+"");
+                        id = recommend.getTaoId()+"";
+                        ImageLoader.getInstance().displayImage(recommend.getImage(),recom_img);
+                        tv_recommend.setText(recommend.getName()+"");
                     }
                     break;
                 case 261:
