@@ -14,13 +14,15 @@ import java.util.List;
  */
 public class TaocanEntity {
 
+
     /**
-     * oldPrice : 1155
+     * oldPrice : 0.01
      * taocanNum : 2
-     * taoId : 27
-     * newPrice : 578
-     * name : 中老年男宾体检套餐
-     * image : http://117.34.105.29:8209/mhealth/upload/1475220119774.jpg
+     * taoId : 6
+     * newPrice : 0.01
+     * name : ceishi
+     * context : 1473661343789.png
+     * image : http://117.34.105.29:8209/mhealth/upload/1475220119774.png
      */
 
     private List<DataEntity> data;
@@ -34,23 +36,15 @@ public class TaocanEntity {
     }
 
     public static class DataEntity {
-        private int oldPrice;
+        private double oldPrice;
         private int taocanNum;
         private int taoId;
-        private int newPrice;
+        private double newPrice;
         private String name;
-        private String image;
         private String context;
+        private String image;
 
-        public String getContext() {
-            return context;
-        }
-
-        public void setContext(String context) {
-            this.context = context;
-        }
-
-        public void setOldPrice(int oldPrice) {
+        public void setOldPrice(double oldPrice) {
             this.oldPrice = oldPrice;
         }
 
@@ -62,7 +56,7 @@ public class TaocanEntity {
             this.taoId = taoId;
         }
 
-        public void setNewPrice(int newPrice) {
+        public void setNewPrice(double newPrice) {
             this.newPrice = newPrice;
         }
 
@@ -70,11 +64,15 @@ public class TaocanEntity {
             this.name = name;
         }
 
+        public void setContext(String context) {
+            this.context = context;
+        }
+
         public void setImage(String image) {
             this.image = image;
         }
 
-        public int getOldPrice() {
+        public double getOldPrice() {
             return oldPrice;
         }
 
@@ -86,12 +84,16 @@ public class TaocanEntity {
             return taoId;
         }
 
-        public int getNewPrice() {
+        public double getNewPrice() {
             return newPrice;
         }
 
         public String getName() {
             return name;
+        }
+
+        public String getContext() {
+            return context;
         }
 
         public String getImage() {

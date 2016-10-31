@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.ReDefine;
 import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -33,6 +34,14 @@ public class RecommandActivity extends Activity implements View.OnClickListener 
                         id = recommend.getTaocanId()+"";
                         ImageLoader.getInstance().displayImage("",recom_img);
                         tv_recommend.setText(recommend.getTaocanName()+"");
+                    }
+                    break;
+                case 261:
+                    ReDefine reDefine=(ReDefine) msg.obj;
+                    if(reDefine.getStatus().equals("1")){
+                        Intent intent1 = new Intent(RecommandActivity.this, QuestionActivity.class);
+                        startActivity(intent1);
+                        finish();
                     }
                     break;
             }
@@ -72,9 +81,8 @@ public class RecommandActivity extends Activity implements View.OnClickListener 
                 startActivity(intent);
                 break;
             case R.id.tv_restart:
-                Intent intent1 = new Intent(RecommandActivity.this, QuestionActivity.class);
-                startActivity(intent1);
-                finish();
+                String ut=Constants.SERVER_URL+"MhealthUserReSurveyServlet";
+                MyHttpUtils.handData(handler, 261, ut, null);
                 break;
         }
     }

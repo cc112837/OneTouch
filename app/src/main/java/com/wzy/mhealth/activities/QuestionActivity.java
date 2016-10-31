@@ -29,6 +29,7 @@ import com.wzy.mhealth.fragments.QuestionFragment9;
 import com.wzy.mhealth.fragments.QuestionFragmentt;
 import com.wzy.mhealth.fragments.QuestionFragmenttt;
 import com.wzy.mhealth.model.Question;
+import com.wzy.mhealth.model.ReDefine;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class QuestionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -62,9 +63,19 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 261:
+                    ReDefine reDefine = (ReDefine) msg.obj;
+                    if (reDefine.getStatus().equals("1")) {
+                    }
+                    break;
                 case 220:
                     final Question question = (Question) msg.obj;
-                    if (question.getPageCount() != -1) {
+                    if (question.getPageCount() == 11) {
+                        Intent intent = new Intent(QuestionActivity.this, RecommandActivity.class);
+                        startActivity(intent);
+                    } else if (question.getPageCount() == -1) {
+
+                    } else {
                         new AlertDialog.Builder(QuestionActivity.this).setTitle("提示")
                                 .setMessage("您有未完成的体检定制，是否继续定制？").setPositiveButton("继续定制", new DialogInterface.OnClickListener() {
                             @Override
@@ -103,6 +114,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                                         break;
                                     case 10:
                                         fragment = new QuestionFragmenttt();
+                                        break;
                                 }
                                 ChangeFragmentHelper helper = new ChangeFragmentHelper();
                                 helper.setTargetFragment(fragment);
@@ -112,12 +124,11 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                         }).setNegativeButton("重新开始", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                String ut = Constants.SERVER_URL + "MhealthUserReSurveyServlet";
+                                MyHttpUtils.handData(handler, 261, ut, null);
                                 dialog.dismiss();
                             }
                         }).show();
-                    } else if (question.getPageCount() == 11) {
-                        Intent intent = new Intent(QuestionActivity.this, RecommandActivity.class);
-                        startActivity(intent);
                     }
                     break;
             }

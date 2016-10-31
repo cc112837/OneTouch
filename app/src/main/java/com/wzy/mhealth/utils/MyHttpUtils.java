@@ -26,6 +26,7 @@ import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Proud;
 import com.wzy.mhealth.model.Provice;
 import com.wzy.mhealth.model.Question;
+import com.wzy.mhealth.model.ReDefine;
 import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.Regmodel;
@@ -324,6 +325,10 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("medicine", ((TiUser) object).getName());
             params.addBodyParameter("count", "7");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==261){
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ReDefine(), handler, what));
         }
     }
 }

@@ -10,7 +10,7 @@ public class UserEvaluation implements Serializable {
 	private String comment;// 评价
 	private int totalRecord;// 问题
 	public UserEvaluation(){
-		
+
 	}
 	public String getUserid() {
 		return userid;
