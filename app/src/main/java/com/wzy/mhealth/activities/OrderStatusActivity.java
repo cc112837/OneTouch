@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Retuback;
+import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -106,6 +107,10 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
                 }
             });
         } else if (status.equals("1")) {
+            String url=Constants.SERVER_URL+"ChooseEvaluateServlet";
+            TiUser user=new TiUser();
+            user.setName(""+orderid);
+            MyHttpUtils.handData(handler,262,url,user);
             ll_ordercom.setVisibility(View.VISIBLE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
@@ -113,6 +118,10 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
             back_money.setVisibility(View.INVISIBLE);
 
         } else if (status.equals("2")) {
+            String url=Constants.SERVER_URL+"ChooseEvaluateServlet";
+            TiUser user=new TiUser();
+            user.setName(""+orderid);
+            MyHttpUtils.handData(handler,262,url,user);
             ll_ordercom.setVisibility(View.VISIBLE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
@@ -156,6 +165,15 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
                     } else {
                         Toast.makeText(OrderStatusActivity.this, retuback.getMessage(), Toast.LENGTH_LONG
                         ).show();
+                    }
+                    break;
+                case 262:
+                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    if(stepInfo.getStatus().equals("1")){
+                        ll_ordercom.setVisibility(View.GONE);
+                    }
+                    else if(stepInfo.getStatus().equals("0")){
+                        ll_ordercom.setVisibility(View.VISIBLE);
                     }
                     break;
             }
