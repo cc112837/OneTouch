@@ -334,5 +334,11 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("OrderId",((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
+        if(what==263){
+            params.addBodyParameter("OrderId",((TiUser) object).getName());
+            params.addBodyParameter("satisify ",((TiUser) object).getTel());
+            params.addBodyParameter("evaluate",((TiUser) object).getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
     }
 }

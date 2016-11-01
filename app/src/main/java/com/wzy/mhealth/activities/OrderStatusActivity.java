@@ -22,7 +22,7 @@ import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-public class OrderStatusActivity extends Activity implements View.OnClickListener{
+public class OrderStatusActivity extends Activity implements View.OnClickListener {
     private TextView tv_orderstatus, tv_name, tv_ordersubmit, tv_price, back_money, tv_ordernum, tv_orderbuy, tv_bought;
     private ImageView iv_taointro, iv_taocandetail, leftBtn;
     CheckBox iv_1, iv_2, iv_3, iv_4, iv_5;
@@ -51,7 +51,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
     }
 
     private void init() {
-        ll_ordercom=(LinearLayout) findViewById(R.id.ll_ordercom);
+        ll_ordercom = (LinearLayout) findViewById(R.id.ll_ordercom);
         tv_orderstatus = (TextView) findViewById(R.id.tv_orderstatus);
         tv_ordersubmit = (TextView) findViewById(R.id.tv_ordersubmit);
         tv_ordersubmit.setOnClickListener(this);
@@ -107,10 +107,10 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
                 }
             });
         } else if (status.equals("1")) {
-            String url=Constants.SERVER_URL+"ChooseEvaluateServlet";
-            TiUser user=new TiUser();
-            user.setName(""+orderid);
-            MyHttpUtils.handData(handler,262,url,user);
+            String url = Constants.SERVER_URL + "ChooseEvaluateServlet";
+            TiUser user = new TiUser();
+            user.setName("" + orderid);
+            MyHttpUtils.handData(handler, 262, url, user);
             ll_ordercom.setVisibility(View.VISIBLE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
@@ -118,10 +118,10 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
             back_money.setVisibility(View.INVISIBLE);
 
         } else if (status.equals("2")) {
-            String url=Constants.SERVER_URL+"ChooseEvaluateServlet";
-            TiUser user=new TiUser();
-            user.setName(""+orderid);
-            MyHttpUtils.handData(handler,262,url,user);
+            String url = Constants.SERVER_URL + "ChooseEvaluateServlet";
+            TiUser user = new TiUser();
+            user.setName("" + orderid);
+            MyHttpUtils.handData(handler, 262, url, user);
             ll_ordercom.setVisibility(View.VISIBLE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
@@ -168,12 +168,20 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
                     }
                     break;
                 case 262:
-                    StepInfo stepInfo=(StepInfo) msg.obj;
-                    if(stepInfo.getStatus().equals("1")){
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if (stepInfo.getStatus().equals("1")) {
                         ll_ordercom.setVisibility(View.GONE);
-                    }
-                    else if(stepInfo.getStatus().equals("0")){
+                    } else if (stepInfo.getStatus().equals("0")) {
                         ll_ordercom.setVisibility(View.VISIBLE);
+                    }
+                    break;
+                case 263:
+                    StepInfo step = (StepInfo) msg.obj;
+                    if (step.getStatus().equals("1")) {
+                        Toast.makeText(OrderStatusActivity.this, "评价成功", Toast.LENGTH_LONG).show();
+                        ll_ordercom.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(OrderStatusActivity.this, "评价失败，请稍候重试", Toast.LENGTH_LONG).show();
                     }
                     break;
             }
@@ -182,7 +190,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_taocandetail:
                 Intent intent = new Intent(OrderStatusActivity.this, TaocanDetailAcitivty.class);
                 intent.putExtra("id", id + "");
@@ -192,8 +200,13 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
                 finish();
                 break;
             case R.id.tv_ordersubmit:
-                String advice=et_comment.getText().toString();
-
+                String advice = et_comment.getText().toString();
+                String uri = Constants.SERVER_URL + "MhealthOrderEvaluateServlet";
+                TiUser user = new TiUser();
+                user.setName(orderid + "");
+                user.setTel(grade + "");
+                user.setPass(advice + "");
+                MyHttpUtils.handData(handler, 263, uri, user);
                 break;
             case R.id.iv_1:
                 grade = 1;
