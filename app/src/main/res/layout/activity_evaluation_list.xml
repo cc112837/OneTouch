@@ -32,51 +32,58 @@
             android:textSize="@dimen/fontSizeMidMM" />
     </RelativeLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
+        android:id="@+id/rg_all"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal">
 
-        <TextView
+        <RadioButton
             android:id="@+id/tv_all"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textview4"
+            android:background="@drawable/selector_evalution"
+            android:button="@null"
+            android:checked="true"
             android:gravity="center"
             android:padding="5dp"
             android:text="全部"
-            android:textColor="@color/title_green" />
+            android:textColor="@drawable/selector_textcolor" />
 
-        <TextView
+        <RadioButton
             android:id="@+id/tv_satis"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textview"
+            android:background="@drawable/selector_evalution"
+            android:button="@null"
             android:gravity="center"
             android:padding="5dp"
-            android:text="满意" />
+            android:text="满意"
+            android:textColor="@drawable/selector_textcolor" />
 
-        <TextView
+        <RadioButton
             android:id="@+id/tv_nosatis"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:background="@drawable/textview"
+            android:background="@drawable/selector_evalution"
+            android:button="@null"
             android:gravity="center"
             android:padding="5dp"
-            android:text="不满意" />
-    </LinearLayout>
+            android:text="不满意"
+            android:textColor="@drawable/selector_textcolor" />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_bg"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <View

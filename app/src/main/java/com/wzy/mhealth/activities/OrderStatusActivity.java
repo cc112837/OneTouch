@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
     private ImageView iv_taointro, iv_taocandetail, leftBtn;
     CheckBox iv_1, iv_2, iv_3, iv_4, iv_5;
     private EditText et_comment;
-    int grade;
+    int grade=5;
     private LinearLayout ll_ordercom;
     String id, name, price, bought, status, creat, num, account, orderid;
     Intent intent;

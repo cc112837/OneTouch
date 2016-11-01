@@ -32,7 +32,7 @@ public class DoctorDetailActivity extends BaActivity {
     private TextView yonghu2, yonghu2Degree, yonghu2Pingjia, zuobian;
     private LinearLayout tuwenLayout,vedioyuyue;
     private String doctor;
-    private List<UserEvaluation> userEvaluationList;
+    private List<UserEvaluation.DataEntity> userEvaluationList;
     private LinearLayout pingjia1, pingjia2;
     private ImageView youbian, tuwentu, dianhuatu, jiahaotu, privatetu, vediotu;
     private RelativeLayout yonghupingjia;
@@ -46,7 +46,11 @@ public class DoctorDetailActivity extends BaActivity {
         userEvaluationList = new ArrayList<>();
         init();
 
-
+        String url = Constants.SERVER_URL + "MhealthOrderEvaluateCheckServlet";
+        TiUser user = new TiUser();
+        user.setName(doctor+"");
+        user.setPass(1+"");
+        MyHttpUtils.handData(handler, 264, url, user);
         guanzhuTextView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -60,10 +64,11 @@ public class DoctorDetailActivity extends BaActivity {
             @Override
             public void onClick(View v) {
                 if (userEvaluationList.size() == 0) {
-                } else if (userEvaluationList.get(0).getTotalRecord() > 2) {
+                } else if (userEvaluationList.size() > 2) {
                     Intent intent = new Intent();
                     intent.setClass(DoctorDetailActivity.this, EvaluationListActivity.class);
                     intent.putExtra("doctorId", doctor + "");
+                    intent.putExtra("status","1");
                     startActivity(intent);
                 }
             }
@@ -134,6 +139,11 @@ public class DoctorDetailActivity extends BaActivity {
                         }
                     });
                     break;
+                case 264:
+                    UserEvaluation userEvaluation=(UserEvaluation) msg.obj;
+                    userEvaluationList.clear();
+                    userEvaluationList.addAll(userEvaluation.getData());
+                    break;
             }
         }
     };
@@ -179,10 +189,10 @@ public class DoctorDetailActivity extends BaActivity {
             youbianzi.setVisibility(View.GONE);
             youbian.setVisibility(View.GONE);
         } else {
-            zuobian.setText("用户评价（" + userEvaluationList.get(0).getTotalRecord() + "人）");
+            zuobian.setText("用户评价（" + userEvaluationList.size() + "人）");
             youbianzi.setVisibility(View.GONE);
             youbian.setVisibility(View.GONE);
-            if (userEvaluationList.get(0).getTotalRecord() > 2) {
+            if (userEvaluationList.size() > 2) {
                 youbianzi.setVisibility(View.VISIBLE);
                 youbian.setVisibility(View.VISIBLE);
             }
@@ -193,25 +203,25 @@ public class DoctorDetailActivity extends BaActivity {
         } else if (userEvaluationList.size() == 1) {
             pingjia2.setVisibility(View.GONE);
             pingjia1.setVisibility(View.VISIBLE);
-            String str = userEvaluationList.get(0).getUserid();
+            String str = userEvaluationList.get(0).getUserName();
             yonghu1.setText(str.charAt(0) + "****"
                     + str.charAt(str.length() - 1));
-            yonghu1Degree.setText(userEvaluationList.get(0).getDegree() + "");
-            yonghu1Pingjia.setText(userEvaluationList.get(0).getComment());
+            yonghu1Degree.setText(userEvaluationList.get(0).getSatisfy() + "");
+            yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
         } else if (userEvaluationList.size() >= 2) {
             pingjia2.setVisibility(View.VISIBLE);
             pingjia1.setVisibility(View.VISIBLE);
-            String str = userEvaluationList.get(0).getUserid();
+            String str = userEvaluationList.get(0).getUserName();
             yonghu1.setText(str.charAt(0) + "****"
                     + str.charAt(str.length() - 3));
-            yonghu1Degree.setText(userEvaluationList.get(0).getDegree() + "");
-            yonghu1Pingjia.setText(userEvaluationList.get(0).getComment());
+            yonghu1Degree.setText(userEvaluationList.get(0).getSatisfy() + "");
+            yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
 
-            str = userEvaluationList.get(1).getUserid();
+            str = userEvaluationList.get(1).getUserName();
             yonghu2.setText(str.charAt(0) + "****"
                     + str.charAt(str.length() - 3));
-            yonghu2Degree.setText(userEvaluationList.get(1).getDegree() + "");
-            yonghu2Pingjia.setText(userEvaluationList.get(1).getComment());
+            yonghu2Degree.setText(userEvaluationList.get(1).getSatisfy() + "");
+            yonghu2Pingjia.setText(userEvaluationList.get(1).getEvaluate());
         }
 
 

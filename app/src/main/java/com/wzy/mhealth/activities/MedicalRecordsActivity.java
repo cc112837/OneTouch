@@ -10,7 +10,6 @@ import android.widget.ListView;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TabBingli2Adapter;
 import com.wzy.mhealth.adapter.TabBingliAdapter;
-import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.Bingli2;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class MedicalRecordsActivity extends BaActivity {
         ListView jiankang = (ListView) findViewById(R.id.tab_binglifragment_listview_jiankang);
         ListView bingli = (ListView) findViewById(R.id.tab_binglifragment_listview_bingli);
         string.clear();
-        string.addAll(XmppConnection.getInstance().getOwnBingliInfo());
+        string.addAll(null);
         if (string != null && string.size() >= 6)
             jiankang.setAdapter(new TabBingliAdapter(string.get(0), string
                     .get(1), string.get(2), string.get(3), string.get(4),
@@ -46,7 +45,7 @@ public class MedicalRecordsActivity extends BaActivity {
         // (string.get(0), interactSex,interactYear,marriage,haschild,shoushu,
         // this));
         jiankang.setOnItemClickListener(new InteractItemSlectedListener());
-        bingli2List.addAll(XmppConnection.getInstance().getElectronicMedical());
+        bingli2List.addAll(null);
         adapter = new TabBingli2Adapter(this, bingli2List);
 
         bingli.setAdapter(adapter);

@@ -17,7 +17,7 @@ import java.util.List;
 public class TuWenZiXunAdapter extends BaseAdapter {
 
 	private Context context;
-	private List<UserEvaluation> list;
+	private List<UserEvaluation.DataEntity> list;
 	private LayoutInflater mInflater;
 	private DoctorEntity doctor;
 
@@ -27,9 +27,8 @@ public class TuWenZiXunAdapter extends BaseAdapter {
 	private TextView department, recommend, attitude, level;
 
 
-	public TuWenZiXunAdapter(Context context, List<UserEvaluation> list,
+	public TuWenZiXunAdapter(Context context, List<UserEvaluation.DataEntity> list,
 			DoctorEntity doctor) {
-		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.list = list;
 		this.doctor = doctor;
@@ -38,34 +37,27 @@ public class TuWenZiXunAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return (list.size() + 5);
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-
 		return list.get(position);
 
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 
 	@Override
 	public int getViewTypeCount() {
-		// TODO Auto-generated method stub
 		return 5;
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		// TODO Auto-generated method stub
-
 		if (position == 0) {
 			return 0;
 		} else if (position == 1) {
@@ -84,7 +76,6 @@ public class TuWenZiXunAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		ViewHolder viewHolder = null;
 		if (convertView == null) {
 			if (getItemViewType(position) == 0) {
@@ -130,20 +121,20 @@ public class TuWenZiXunAdapter extends BaseAdapter {
 
 				viewHolder.brief = (TextView) convertView
 						.findViewById(R.id.brief2);
-				String str = list.get(position - 5).getUserid();
+				String str = list.get(position - 5).getUserName();
 				viewHolder.user.setText(str.charAt(0) + "****"+ str.charAt(str.length() - 1));
-				viewHolder.manyidu.setText(list.get(position - 5).getDegree()+"");
-				viewHolder.brief.setText(list.get(position - 5).getComment());
+				viewHolder.manyidu.setText(list.get(position - 5).getSatisfy()+"");
+				viewHolder.brief.setText(list.get(position - 5).getEvaluate());
 				convertView.setTag(viewHolder);
 			}
 		} else {
 			if (getItemViewType(position) == 4) {
 
 				viewHolder = (ViewHolder) convertView.getTag();
-				String str = list.get(position - 5).getUserid();
+				String str = list.get(position - 5).getUserName();
 				viewHolder.user.setText(str.charAt(0) + "****"+ str.charAt(str.length() - 1));
-				viewHolder.manyidu.setText(list.get(position - 5).getDegree()+"");
-				viewHolder.brief.setText(list.get(position - 5).getComment());
+				viewHolder.manyidu.setText(list.get(position - 5).getSatisfy()+"");
+				viewHolder.brief.setText(list.get(position - 5).getEvaluate());
 			}
 		}
 

@@ -93,11 +93,11 @@ public class TaocanDetailAcitivty extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(TaocanDetailAcitivty.this,EvaluationListActivity.class);
-                intent.putExtra("doctorId","");
+                intent.putExtra("doctorId",id);
+                intent.putExtra("status","0");
                 startActivity(intent);
             }
         });
-//        iv_detail = (ImageView) findViewById(R.id.iv_detail);
         tv_old.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
     }
 }

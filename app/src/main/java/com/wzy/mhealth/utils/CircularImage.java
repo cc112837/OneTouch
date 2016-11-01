@@ -25,15 +25,7 @@ public class CircularImage extends MaskedImage {
         setImageResource(R.mipmap.default_icon);
     }  
     
-//    public void setBitmap(String username) {
-//    	Bitmap bitmap = XmppConnection.getInstance().getUserImage(username);
-//		if (bitmap!=null) {
-//			setImageBitmap(ImgHandler.ToCircularBig(bitmap));
-//		}
-//		else {
-//			setImageResource(R.drawable.default_icon);
-//		}
-//	}
+
     
   
     public Bitmap createMask() {  

@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.HospitalListAdapter;
-import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.HospitalEntity;
 
 import java.util.ArrayList;
@@ -62,7 +61,6 @@ public class HospitalSelectActivity extends BaActivity {
 
     private void init() {
         // TODO: 2016/5/25 (修改成无网络)
-        hospitallist.addAll(XmppConnection.getInstance().getHospitalList());
 		hospitallist.add(new HospitalEntity("中国人民解放军总医院","三级甲等", "预约量 124.6万",
 				"患者评价 5.9万"));
 		hospitallist.add(new HospitalEntity("上海交通大学医学院附属医院","三级甲等", "预约量 90.6万",

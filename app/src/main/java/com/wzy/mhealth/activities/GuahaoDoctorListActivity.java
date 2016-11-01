@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.GuahaoDoctorListAdapter;
-import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.GuahaoDoctorEntity;
 import com.wzy.mhealth.model.HospitalEntity;
 
@@ -82,7 +81,6 @@ public class GuahaoDoctorListActivity extends BaActivity {
 
     private void init() {
         //// TODO: 2016/5/25 (修改成无网络)
-		doctorlist.addAll(XmppConnection.getInstance().getGuahaoDoctorList(hos.getId(), keshi));
         doctorlist.add(new GuahaoDoctorEntity("邓珊","dengshan", "主任医师",
 				"9.4","接诊量457", "心血管常见病,各种疑难杂症，祖传秘方，童叟无欺",23));
 

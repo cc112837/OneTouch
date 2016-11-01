@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.YuyueAdapter;
-import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.YuyueDoctor;
 
 import java.util.ArrayList;
@@ -49,7 +48,6 @@ public class ReservationListActivity extends BaActivity {
     }
 
     private void init() {
-        yuyueDoctorList.addAll(XmppConnection.getInstance().getOwnGuahaoInfo());
     }
 
 }

@@ -13,7 +13,6 @@ import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.guahaoAdapter;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.inter.XmppConnection;
 import com.wzy.mhealth.model.GuaHao;
 import com.wzy.mhealth.model.GuahaoDoctorEntity;
 import com.wzy.mhealth.utils.DateUtil;
@@ -171,8 +170,6 @@ public class ReservationActivity extends BaseActivity {
 
     private void init() {
         //// TODO: 2016/5/25 (修改成无网络)
-        guahaoList.addAll(XmppConnection.getInstance().getGuahaoList(
-                doctor.getDoctorId()));
 
           guahaoList.add(new GuaHao( "2015-08-14","周五上午",1));
 		  guahaoList.add(new GuaHao( "2015-08-15","周六上午",0));

@@ -40,6 +40,7 @@ import com.wzy.mhealth.model.TaocanEntity;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
+import com.wzy.mhealth.model.UserEvaluation;
 import com.wzy.mhealth.model.ZhixingTaocan;
 
 
@@ -326,19 +327,24 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("count", "7");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if(what==261){
+        if (what == 261) {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ReDefine(), handler, what));
         }
-        if(what==262){
-            params.addBodyParameter("OrderId",((TiUser) object).getName());
+        if (what == 262) {
+            params.addBodyParameter("OrderId", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if(what==263){
-            params.addBodyParameter("OrderId",((TiUser) object).getName());
-            params.addBodyParameter("satisify ",((TiUser) object).getTel());
-            params.addBodyParameter("evaluate",((TiUser) object).getPass());
+        if (what == 263) {
+            params.addBodyParameter("OrderId", ((TiUser) object).getName());
+            params.addBodyParameter("satisify", ((TiUser) object).getTel());
+            params.addBodyParameter("evaluate", ((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 264) {
+            params.addBodyParameter("taoId", ((TiUser) object).getName());
+            params.addBodyParameter("status", ((TiUser) object).getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserEvaluation(), handler, what));
         }
     }
 }
