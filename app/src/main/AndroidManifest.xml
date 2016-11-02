@@ -316,7 +316,8 @@
         <activity android:name=".activities.DoctorLiActivity" />
         <activity android:name=".activities.CheckActivity" />
         <activity android:name=".activities.RecommandActivity" />
-        <activity android:name=".activities.DoctorYuyueActivity"></activity>
+        <activity android:name=".activities.DoctorYuyueActivity" />
+        <activity android:name=".activities.ServiceMoreActivity"></activity>
     </application>
 
 </manifest>

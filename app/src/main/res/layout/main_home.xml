@@ -16,7 +16,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="10dp">
 
                 <com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/convenientBanner"
@@ -211,48 +211,48 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="10dp"-->
-            <!--android:background="@color/bg_gray" />-->
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/bg_gray" />
 
-            <!--<LinearLayout-->
-            <!--android:id="@+id/doctor_more"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal">-->
+            <LinearLayout
+            android:id="@+id/doctor_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <!--<TextView-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginRight="15dp"-->
-            <!--android:layout_weight="2"-->
-            <!--android:paddingBottom="5dp"-->
-            <!--android:paddingTop="5dp"-->
-            <!--android:text="专家推荐"-->
-            <!--android:textColor="@color/dark_grey"-->
-            <!--android:textSize="15sp" />-->
+            <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="2"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:text="专家推荐"
+            android:textColor="@color/dark_grey"
+            android:textSize="15sp" />
 
-            <!--<ImageView-->
+            <ImageView
 
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="0.2"-->
-            <!--android:src="@mipmap/icon_more" />-->
-            <!--</LinearLayout>-->
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:src="@mipmap/icon_more" />
+            </LinearLayout>
 
-            <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1px"-->
-            <!--android:background="@color/bg_gray" />-->
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/bg_gray" />
 
-            <!--<GridView-->
-            <!--android:id="@+id/gv_doctor"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:horizontalSpacing="1px"-->
-            <!--android:numColumns="4"></GridView>-->
+            <GridView
+            android:id="@+id/gv_doctor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="1px"
+            android:numColumns="4"></GridView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -303,14 +303,14 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/near_hospital" />
+                        android:src="@mipmap/siren" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:text="附近医院"
+                        android:text="私人医生"
                         android:textColor="@color/dark_grey"
                         android:textSize="14sp" />
 
@@ -328,14 +328,14 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/near_drugstore" />
+                        android:src="@mipmap/manbing" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:text="附近药店"
+                        android:text="慢病诊疗"
                         android:textColor="@color/dark_grey"
                         android:textSize="14sp" />
 

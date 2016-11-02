@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -29,18 +30,21 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DiseaseActivity;
+import com.wzy.mhealth.activities.DoctorDetailActivity;
 import com.wzy.mhealth.activities.DoctorLiActivity;
+import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
-import com.wzy.mhealth.activities.NoContentActivity;
-import com.wzy.mhealth.activities.PoiKeywordSearchActivity;
 import com.wzy.mhealth.activities.QuestionActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
+import com.wzy.mhealth.activities.ServiceMoreActivity;
 import com.wzy.mhealth.activities.TaocanDetailAcitivty;
 import com.wzy.mhealth.activities.TaocanListActivity;
+import com.wzy.mhealth.adapter.DoctorHomeAdapter;
 import com.wzy.mhealth.adapter.TaocanHomeAdapter;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Doctor;
 import com.wzy.mhealth.model.TaocanEntity;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.LocalImageHolderView;
@@ -54,19 +58,19 @@ import de.greenrobot.event.EventBus;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeNewFragment extends Fragment implements View.OnClickListener{
+public class HomeNewFragment extends Fragment implements View.OnClickListener {
     private ConvenientBanner convenientBanner;
     private ArrayList<Integer> localImages = new ArrayList<Integer>();
     private ConversationManager conversationManager = ConversationManager.getInstance();
     private TextView countView;
     private ListView lv_show;
-    //    private GridView gv_doctor;
+    private GridView gv_doctor;
     private RelativeLayout title1;
     private MyScrollView my_scroll;
 
     private List<TaocanEntity.DataEntity> taocanEntitylist = new ArrayList<>();
-    //    private List<Doctor.DataEntity> doctorEntitylist = new ArrayList<>();
-//    private DoctorHomeAdapter doctorHomeAdapter;
+    private List<Doctor.DataEntity> doctorEntitylist = new ArrayList<>();
+    private DoctorHomeAdapter doctorHomeAdapter;
     private TaocanHomeAdapter taocanHomeAdapter;
     private LinearLayout ll_private;
     private LinearLayout ll_group;
@@ -111,25 +115,25 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener{
         public void handleMessage(Message msg) {
             switch (msg.what) {
 
-//                case 152:
-//                    final Doctor doctor = (Doctor) msg.obj;
-//                    if (doctor.getData().size() > 4) {
-//                        for (int i = 0; i <= 3; i++)
-//                            doctorEntitylist.add(doctor.getData().get(i));
-//                    } else {
-//                        doctorEntitylist.addAll(doctor.getData());
-//                    }
-//                    doctorHomeAdapter.notifyDataSetChanged();
-//                    gv_doctor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            Intent intent = new Intent();
-//                            intent.setClass(getActivity(), DoctorDetailActivity.class);
-//                            intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
-//                            startActivity(intent);
-//                        }
-//                    });
-//                    break;
+                case 152:
+                    final Doctor doctor = (Doctor) msg.obj;
+                    if (doctor.getData().size() > 4) {
+                        for (int i = 0; i <= 3; i++)
+                            doctorEntitylist.add(doctor.getData().get(i));
+                    } else {
+                        doctorEntitylist.addAll(doctor.getData());
+                    }
+                    doctorHomeAdapter.notifyDataSetChanged();
+                    gv_doctor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent();
+                            intent.setClass(getActivity(), DoctorDetailActivity.class);
+                            intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
+                            startActivity(intent);
+                        }
+                    });
+                    break;
                 case 173:
                     TaocanEntity taocanEntity = (TaocanEntity) msg.obj;
                     if (taocanEntity != null) {
@@ -140,7 +144,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener{
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent intent = new Intent(getActivity(), TaocanDetailAcitivty.class);
-                                intent.putExtra("id", taocanEntitylist.get(position-1).getTaoId() + "");
+                                intent.putExtra("id", taocanEntitylist.get(position - 1).getTaoId() + "");
                                 startActivity(intent);
                             }
                         });
@@ -164,19 +168,13 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener{
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
         View headview = LayoutInflater.from(getContext()).inflate(R.layout.main_home, null);
         lv_show.addHeaderView(headview);
-        //        String ur = Constants.SERVER_URL + "MhealthDoctorServlet";
-//        MyHttpUtils.handData(handler, 152, ur, null);
-//        LinearLayout doctor_more = (LinearLayout) headview.findViewById(R.id.doctor_more);
-//        doctor_more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), DoctorListActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        gv_doctor = (GridView) headview.findViewById(R.id.gv_doctor);
-//        doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
-//        gv_doctor.setAdapter(doctorHomeAdapter);
+                String ur = Constants.SERVER_URL + "MhealthDoctorServlet";
+        MyHttpUtils.handData(handler, 152, ur, null);
+        LinearLayout doctor_more = (LinearLayout) headview.findViewById(R.id.doctor_more);
+        doctor_more.setOnClickListener(this);
+        gv_doctor = (GridView) headview.findViewById(R.id.gv_doctor);
+        doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
+        gv_doctor.setAdapter(doctorHomeAdapter);
 
         ll_marry = (LinearLayout) headview.findViewById(R.id.ll_marry);
         ll_marry.setOnClickListener(this);
@@ -369,11 +367,11 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sacn_btn:
                 Intent intent = new Intent(getActivity(), CaptureActivity.class);
                 startActivityForResult(intent, 0);
-            break;
+                break;
             case R.id.chat_btn:
                 Intent intent1 = new Intent(getActivity(), MsgActivity.class);
                 startActivity(intent1);
@@ -388,17 +386,14 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.ll_near_shop:
                 // 附近药房
-                Intent intent4 = new Intent();
-                intent4.setClass(getActivity(), PoiKeywordSearchActivity.class);
-                intent4.putExtra("keyword", "药房");
-                getActivity().startActivity(intent4);
+
                 break;
             case R.id.ll_marry:
                 Intent intent5 = new Intent(getActivity(), MarryHospitalActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.ll_heali:
-                Intent intent6=new Intent(getActivity(), DoctorLiActivity.class);
+                Intent intent6 = new Intent(getActivity(), DoctorLiActivity.class);
                 startActivity(intent6);
                 break;
             case R.id.ll_taocan:
@@ -406,7 +401,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent7);
                 break;
             case R.id.ll_servicemore:
-                Intent intent8 = new Intent(getActivity(), NoContentActivity.class);
+                Intent intent8 = new Intent(getActivity(), ServiceMoreActivity.class);
                 startActivity(intent8);
                 break;
             case R.id.ll_taocanmore:
@@ -418,10 +413,11 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener{
                 startActivity(intentt0);
                 break;
             case R.id.ll_nearhospital:
-                Intent intentt1 = new Intent();
-                intentt1.setClass(getActivity(), PoiKeywordSearchActivity.class);
-                intentt1.putExtra("keyword", "医院");
-                getActivity().startActivity(intentt1);
+               //私人医生
+                break;
+            case R.id.doctor_more:
+                Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
+                startActivity(intent23);
                 break;
 
         }
