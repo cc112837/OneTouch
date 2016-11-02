@@ -50,6 +50,7 @@ public class DoctorDetailActivity extends BaActivity {
         TiUser user = new TiUser();
         user.setName(doctor+"");
         user.setPass(1+"");
+        user.setTel("0");
         MyHttpUtils.handData(handler, 264, url, user);
         guanzhuTextView.setOnClickListener(new View.OnClickListener() {
 
@@ -149,8 +150,6 @@ public class DoctorDetailActivity extends BaActivity {
     };
 
     private void init() {
-
-
         String url = Constants.SERVER_URL + "MhealthOneDoctorServlet";
         TiUser user = new TiUser();
         user.setName(doctor + "");

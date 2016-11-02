@@ -36,6 +36,7 @@ import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
+import com.wzy.mhealth.activities.PrivaDoctorActivity;
 import com.wzy.mhealth.activities.QuestionActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.ServiceMoreActivity;
@@ -386,7 +387,8 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_near_shop:
                 // 附近药房
-
+                Intent intent21=new Intent(getActivity(), PrivaDoctorActivity.class);
+                startActivity(intent21);
                 break;
             case R.id.ll_marry:
                 Intent intent5 = new Intent(getActivity(), MarryHospitalActivity.class);
@@ -413,6 +415,8 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 startActivity(intentt0);
                 break;
             case R.id.ll_nearhospital:
+                Intent intent4=new Intent(getActivity(), PrivaDoctorActivity.class);
+                startActivity(intent4);
                //私人医生
                 break;
             case R.id.doctor_more:
