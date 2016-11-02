@@ -344,6 +344,7 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 264) {
             params.addBodyParameter("taoId", ((TiUser) object).getName());
             params.addBodyParameter("status", ((TiUser) object).getPass());
+            params.addBodyParameter("statify", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserEvaluation(), handler, what));
         }
     }

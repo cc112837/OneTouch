@@ -28,6 +28,7 @@ public class EvaluationListActivity extends BaActivity implements View.OnClickLi
     private RadioGroup rg_all;
     private RadioButton tv_all, tv_satis, tv_nosatis;
     private String status;
+    private String flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class EvaluationListActivity extends BaActivity implements View.OnClickLi
         TiUser user = new TiUser();
         user.setName(doctorId + "");
         user.setPass(status + "");
+        flag = "0";
+        user.setTel(flag);
         MyHttpUtils.handData(handler, 264, url, user);
     }
 
@@ -80,12 +83,30 @@ public class EvaluationListActivity extends BaActivity implements View.OnClickLi
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if(checkedId == tv_all.getId()){
-
-        }else if(checkedId == tv_satis.getId()){
-
-        }else{//tv_nosatis
-
+        if (checkedId == tv_all.getId()) {
+            String url = Constants.SERVER_URL + "MhealthOrderEvaluateCheckServlet";
+            TiUser user = new TiUser();
+            user.setName(doctorId + "");
+            user.setPass(status + "");
+            flag = "0";
+            user.setTel(flag);
+            MyHttpUtils.handData(handler, 264, url, user);
+        } else if (checkedId == tv_satis.getId()) {
+            String url = Constants.SERVER_URL + "MhealthOrderEvaluateCheckServlet";
+            TiUser user = new TiUser();
+            user.setName(doctorId + "");
+            user.setPass(status + "");
+            flag = "1";
+            user.setTel(flag);
+            MyHttpUtils.handData(handler, 264, url, user);
+        } else {//tv_nosatis
+            String url = Constants.SERVER_URL + "MhealthOrderEvaluateCheckServlet";
+            TiUser user = new TiUser();
+            user.setName(doctorId + "");
+            user.setPass(status + "");
+            flag = "2";
+            user.setTel(flag);
+            MyHttpUtils.handData(handler, 264, url, user);
         }
     }
 }

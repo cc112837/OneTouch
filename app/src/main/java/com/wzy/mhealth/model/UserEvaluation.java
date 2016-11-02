@@ -6,17 +6,32 @@ import java.util.List;
 public class UserEvaluation implements Serializable {
 
 
+
 	/**
-	 * createTime : 2016-11-01 11:55:00.0
-	 * evaluate : 哈哈哈
-	 * satisfy : 满意
-	 * userName : 18369956786
+	 * data : [{"userName ":"18516128315","evaluate ":"评价","satisfy":"20%","createTime ":"2016-09-13 08:00:00"}]
+	 * count : 1
+	 */
+
+	private int count;
+	/**
+	 * userName  : 18516128315
+	 * evaluate  : 评价
+	 * satisfy : 20%
+	 * createTime  : 2016-09-13 08:00:00
 	 */
 
 	private List<DataEntity> data;
 
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public void setData(List<DataEntity> data) {
 		this.data = data;
+	}
+
+	public int getCount() {
+		return count;
 	}
 
 	public List<DataEntity> getData() {
@@ -24,13 +39,13 @@ public class UserEvaluation implements Serializable {
 	}
 
 	public static class DataEntity {
-		private String createTime;
+		private String userName;
 		private String evaluate;
 		private String satisfy;
-		private String userName;
+		private String createTime;
 
-		public void setCreateTime(String createTime) {
-			this.createTime = createTime;
+		public void setUserName(String userName) {
+			this.userName = userName;
 		}
 
 		public void setEvaluate(String evaluate) {
@@ -41,12 +56,12 @@ public class UserEvaluation implements Serializable {
 			this.satisfy = satisfy;
 		}
 
-		public void setUserName(String userName) {
-			this.userName = userName;
+		public void setCreateTime(String createTime) {
+			this.createTime = createTime;
 		}
 
-		public String getCreateTime() {
-			return createTime;
+		public String getUserName() {
+			return userName;
 		}
 
 		public String getEvaluate() {
@@ -57,8 +72,8 @@ public class UserEvaluation implements Serializable {
 			return satisfy;
 		}
 
-		public String getUserName() {
-			return userName;
+		public String getCreateTime() {
+			return createTime;
 		}
 	}
 }
