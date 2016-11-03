@@ -133,6 +133,7 @@ public class DoctorDetailActivity extends BaActivity {
                             Intent intent = new Intent();
                             intent.setClass(DoctorDetailActivity.this, BuActivity.class);
                             intent.putExtra("type", "1");
+                            intent.putExtra("id",doctorDetail.getId()+"");
                             intent.putExtra("price", doctorDetail.getPricePicture() + "");
                             intent.putExtra("doctor", doctorDetail.getDoctorId() + "");
                             intent.putExtra("name", doctorDetail.getUserName() + "");

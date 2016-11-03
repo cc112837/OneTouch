@@ -39,14 +39,14 @@ public class Doctor implements Serializable {
 
     public static class DataEntity implements Serializable{
         private int id;
-        private Object sex;
+        private String sex;
         private String firstdep;
-        private Object image;
+        private String image;
         private String userName;
-        private int pricePicture;
+        private double pricePicture;
         private int recommend;
         private String hospital;
-        private Object pricePhone;
+        private double pricePhone;
         private String specialization;
         private String doctorTilte;
         private String doctorId;
@@ -79,7 +79,7 @@ public class Doctor implements Serializable {
             this.id = id;
         }
 
-        public void setSex(Object sex) {
+        public void setSex(String sex) {
             this.sex = sex;
         }
 
@@ -87,7 +87,7 @@ public class Doctor implements Serializable {
             this.firstdep = firstdep;
         }
 
-        public void setImage(Object image) {
+        public void setImage(String image) {
             this.image = image;
         }
 
@@ -107,7 +107,7 @@ public class Doctor implements Serializable {
             this.hospital = hospital;
         }
 
-        public void setPricePhone(Object pricePhone) {
+        public void setPricePhone(double pricePhone) {
             this.pricePhone = pricePhone;
         }
 
@@ -131,7 +131,7 @@ public class Doctor implements Serializable {
             return userName;
         }
 
-        public int getPricePicture() {
+        public double getPricePicture() {
             return pricePicture;
         }
 

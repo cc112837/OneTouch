@@ -139,8 +139,10 @@
             <Button
                 android:id="@+id/btn_pay"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:background="@mipmap/login_btn_icon"
                 android:text="立即购买"
                 android:textColor="#ffffff"

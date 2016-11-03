@@ -35,9 +35,9 @@ public class DoctorDetail {
     private int priceVideo;
     private String image;
     private int recommend;
-    private int pricePicture;
-    private int pricePrivate;
-    private int pricePhone;
+    private double pricePicture;
+    private double pricePrivate;
+    private double pricePhone;
     private int id;
     private int priceAdd;
     private String firstdep;
@@ -125,15 +125,15 @@ public class DoctorDetail {
         return recommend;
     }
 
-    public int getPricePicture() {
+    public double getPricePicture() {
         return pricePicture;
     }
 
-    public int getPricePrivate() {
+    public double getPricePrivate() {
         return pricePrivate;
     }
 
-    public int getPricePhone() {
+    public double getPricePhone() {
         return pricePhone;
     }
 

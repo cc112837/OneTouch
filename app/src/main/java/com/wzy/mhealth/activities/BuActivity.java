@@ -20,12 +20,15 @@ import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.Constants;
 import com.unionpay.UPPayAssistEx;
 import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.ali.PayResult;
 import com.wzy.mhealth.model.AliPayBack;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Tool;
 import com.wzy.mhealth.view.PayRadioGroup;
@@ -46,7 +49,7 @@ public class BuActivity extends BaActivity implements Handler.Callback,
     // private DoctorEntity doctor;
     private TextView doctorname, price, price1, titleName;
     private Button buy;
-    private String stringOfPrice, type, doctorid, name;
+    private String stringOfPrice, type, doctorid, name, id;
     private Context mContext = null;
     private Handler mHandler = null;
     private ProgressDialog mLoadingDialog = null;
@@ -62,8 +65,10 @@ public class BuActivity extends BaActivity implements Handler.Callback,
         @Override
         public void onClick(View v) {
             if (flag == "bank") {
-                String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "AliPayServlet";
-                MyHttpUtils.handData(mHandler, 40, url, null);
+                String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "AliPayceishiServlet";
+                TiUser user = new TiUser();
+                user.setName(id + "");
+                MyHttpUtils.handData(mHandler, 40, url, user);
             } else {
                 Toast.makeText(BuActivity.this, "暂未开通银联，敬请期待", Toast.LENGTH_LONG).show();
 //                mLoadingDialog = ProgressDialog.show(mContext, // context
@@ -89,6 +94,7 @@ public class BuActivity extends BaActivity implements Handler.Callback,
         mContext = this;
         mHandler = new Handler(this);
         doctorid = getIntent().getStringExtra("doctor");
+        id = getIntent().getStringExtra("id");
         name = getIntent().getStringExtra("name");
         stringOfPrice = getIntent().getStringExtra("price");
         type = getIntent().getStringExtra("type");// 1表示是图文咨询
@@ -100,7 +106,7 @@ public class BuActivity extends BaActivity implements Handler.Callback,
         price = (TextView) findViewById(R.id.price);
         price1 = (TextView) findViewById(R.id.price1);
         price.setText(stringOfPrice + "元/次");
-        price1.setText("会员价" + (Integer.parseInt(stringOfPrice) - 1) + "元/次");
+        price1.setText("会员价" + stringOfPrice + "元/次");
         buy = (Button) findViewById(R.id.btn_pay);
         pay_fun.setOnCheckedChangeListener(new PayRadioGroup.OnCheckedChangeListener() {
             @Override
@@ -163,7 +169,30 @@ public class BuActivity extends BaActivity implements Handler.Callback,
                     doStartUnionPayPlugin(this, tn, mMode);
                 }
                 break;
-
+            case 120:
+                StepInfo info = (StepInfo) msg.obj;
+                if (info.getStatus().equals("1")) {
+                    final ChatManager chatManager = ChatManager.getInstance();
+                    chatManager.fetchConversationWithUserId(doctorid,
+                            new AVIMConversationCreatedCallback() {
+                                @Override
+                                public void done(AVIMConversation conversation, AVIMException e) {
+                                    if (e != null) {
+                                        Toast.makeText(BuActivity.this, e.getMessage(),
+                                                Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Intent intent = new Intent(BuActivity.this,
+                                                ChatRoomActivity.class);
+                                        intent.putExtra(Constants.CONVERSATION_ID,
+                                                conversation.getConversationId());
+                                        Tool.initToast(BuActivity.this,
+                                                "支付成功，请24小时内与" + name + "医生咨询");
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
+                }
+                break;
             case 40:
                 AliPayBack stepInfo = (AliPayBack) msg.obj;
                 final String orderInfo = stepInfo.getData();
@@ -188,32 +217,13 @@ public class BuActivity extends BaActivity implements Handler.Callback,
                 // 判断resultStatus 为9000则代表支付成功
                 if (TextUtils.equals(resultStatus, "9000")) {
                     // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-
+                    String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "PayServlet";
+                    TiUser user = new TiUser();
+                    user.setName(resultInfo);
+                    user.setTel(id + "");
+                    user.setCardId(LeanchatUser.getCurrentUser().getUsername());
+                    MyHttpUtils.handData(mHandler, 120, url, user);
                     Toast.makeText(BuActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                    if (doctorid == null
-                            || doctorid.equals(""))
-                        Tool.initToast(BuActivity.this, "支付失败");
-                    else {
-                        final ChatManager chatManager = ChatManager.getInstance();
-                        chatManager.fetchConversationWithUserId(doctorid,
-                                new AVIMConversationCreatedCallback() {
-                                    @Override
-                                    public void done(AVIMConversation conversation, AVIMException e) {
-                                        if (e != null) {
-                                            Toast.makeText(BuActivity.this, e.getMessage(),
-                                                    Toast.LENGTH_LONG).show();
-                                        } else {
-                                            Intent intent = new Intent(BuActivity.this,
-                                                    ChatRoomActivity.class);
-                                            intent.putExtra(Constants.CONVERSATION_ID,
-                                                    conversation.getConversationId());
-                                            Tool.initToast(BuActivity.this,
-                                                    "支付成功，请24小时内与" + name + "医生咨询");
-                                            startActivity(intent);
-                                        }
-                                    }
-                                });
-                    }
                 } else {
                     // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                     Toast.makeText(BuActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
