@@ -45,11 +45,10 @@ public class DoctorListActivity extends BaActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_list);
         location = (LinearLayout) findViewById(R.id.total_location);
-        locationtTextView = (TextView)location.findViewById(R.id.text_category);
+        locationtTextView = (TextView) location.findViewById(R.id.text_category);
         doctorlistLayout = (LinearLayout) findViewById(R.id.doctorlistLinear);
         location.setOnClickListener(new OnClickListener() {
 
@@ -67,7 +66,7 @@ public class DoctorListActivity extends BaActivity {
         locationList = new ArrayList<>();
         cityList = new ArrayList<>();
         list2 = new ArrayList<>();
-        String url= Constants.SERVER_URL+"MhealthDoctorServlet";
+        String url = Constants.SERVER_URL + "MhealthDoctorServlet";
         MyHttpUtils.handData(handler, 152, url, null);
         adapter = new DoctorListAdapter(this, doctorlist);
         lv.setAdapter(adapter);
@@ -84,30 +83,34 @@ public class DoctorListActivity extends BaActivity {
         });
     }
 
-private Handler handler=new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what){
-            case 152:
-                final Doctor doctor=(Doctor)msg.obj;
-                doctorlist.addAll(doctor.getData());
-                adapter.notifyDataSetChanged();
-                lv.setOnItemClickListener(new OnItemClickListener() {
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 152:
+                    final Doctor doctor = (Doctor) msg.obj;
+                    doctorlist.addAll(doctor.getData());
+                    adapter.notifyDataSetChanged();
+                    lv.setOnItemClickListener(new OnItemClickListener() {
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            int position, long id) {
-                        Intent intent = new Intent();
-                        intent.setClass(DoctorListActivity.this, DoctorDetailActivity.class);
-                        intent.putExtra("doctor",doctor.getData().get(position).getId()+"" );
-                        startActivity(intent);
-                    }
-                });
-            break;
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+                            Intent intent = new Intent();
+                            if ("0".equals(doctor.getData().get(position).getId())) {
+                                intent.setClass(DoctorListActivity.this, NoContentActivity.class);
+                            } else {
+                                intent.setClass(DoctorListActivity.this, DoctorDetailActivity.class);
+                                intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
+                            }
+                            startActivity(intent);
+                        }
+                    });
+                    break;
+            }
         }
-    }
-};
+    };
 
 
     private void showPopupWindow(int width, int height) {
@@ -124,7 +127,7 @@ private Handler handler=new Handler(){
             @Override
             public void onDismiss() {
                 // TODO Auto-generated method stub
-                locationtTextView = (TextView)location.findViewById(R.id.text_category);
+                locationtTextView = (TextView) location.findViewById(R.id.text_category);
                 locationtTextView.setTextColor(0xff000000);
             }
         });

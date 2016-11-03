@@ -36,6 +36,7 @@ import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
+import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PrivaDoctorActivity;
 import com.wzy.mhealth.activities.QuestionActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
@@ -129,8 +130,12 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent();
-                            intent.setClass(getActivity(), DoctorDetailActivity.class);
-                            intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
+                            if ("0".equals(doctor.getData().get(position).getId())) {
+                                intent.setClass(getActivity(), NoContentActivity.class);
+                            } else {
+                                intent.setClass(getActivity(), DoctorDetailActivity.class);
+                                intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
+                            }
                             startActivity(intent);
                         }
                     });
@@ -169,7 +174,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
         View headview = LayoutInflater.from(getContext()).inflate(R.layout.main_home, null);
         lv_show.addHeaderView(headview);
-                String ur = Constants.SERVER_URL + "MhealthDoctorServlet";
+        String ur = Constants.SERVER_URL + "MhealthDoctorServlet";
         MyHttpUtils.handData(handler, 152, ur, null);
         LinearLayout doctor_more = (LinearLayout) headview.findViewById(R.id.doctor_more);
         doctor_more.setOnClickListener(this);
@@ -387,7 +392,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_near_shop:
                 // 附近药房
-                Intent intent21=new Intent(getActivity(), PrivaDoctorActivity.class);
+                Intent intent21 = new Intent(getActivity(), PrivaDoctorActivity.class);
                 startActivity(intent21);
                 break;
             case R.id.ll_marry:
@@ -415,9 +420,9 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 startActivity(intentt0);
                 break;
             case R.id.ll_nearhospital:
-                Intent intent4=new Intent(getActivity(), PrivaDoctorActivity.class);
+                Intent intent4 = new Intent(getActivity(), PrivaDoctorActivity.class);
                 startActivity(intent4);
-               //私人医生
+                //私人医生
                 break;
             case R.id.doctor_more:
                 Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
