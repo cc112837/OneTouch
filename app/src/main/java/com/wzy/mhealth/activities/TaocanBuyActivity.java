@@ -75,12 +75,13 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                 MyHttpUtils.handData(mHandler, 40, url, user);
 
             } else {
-                mLoadingDialog = ProgressDialog.show(mContext, // context
-                        "", // title
-                        "正在努力的获取tn中,请稍候...", // message
-                        true); // 进度是否是不确定的，这只和创建进度条有关
-                //*步骤1：从网络开始,获取交易流水号即TN
-                new Thread(TaocanBuyActivity.this).start();
+                Toast.makeText(TaocanBuyActivity.this,"暂未开通银联，敬请期待",Toast.LENGTH_LONG).show();
+//                mLoadingDialog = ProgressDialog.show(mContext, // context
+//                        "", // title
+//                        "正在努力的获取tn中,请稍候...", // message
+//                        true); // 进度是否是不确定的，这只和创建进度条有关
+//                //*步骤1：从网络开始,获取交易流水号即TN
+//                new Thread(TaocanBuyActivity.this).start();
 
             }
         }

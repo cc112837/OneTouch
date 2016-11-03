@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 
 public class PrivaDoctorActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
-    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +19,6 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
 
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
-        title=(TextView) findViewById(R.id.title);
         leftBtn.setOnClickListener(this);
     }
 

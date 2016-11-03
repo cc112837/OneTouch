@@ -5,23 +5,23 @@
     android:layout_height="match_parent"
     android:background="@color/title_green"
     android:fitsSystemWindows="true"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/title_green"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/leftBtn"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
+            android:onClick="leftBtnClick"
             android:padding="10dp"
-            android:src="@mipmap/btn_back"
-            android:onClick="leftBtnClick"/>
+            android:src="@mipmap/btn_back" />
 
         <TextView
             android:id="@+id/titleName"
@@ -32,11 +32,12 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/fontSizeMidMM" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/grey_bg">
+        android:background="@color/grey_bg"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -48,7 +49,7 @@
             android:orientation="horizontal"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp" >
+            android:paddingRight="10dp">
 
             <TextView
                 android:id="@+id/price"
@@ -89,7 +90,7 @@
             android:layout_height="300dp"
             android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp" >
+            android:paddingRight="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -100,35 +101,26 @@
                 android:textStyle="bold" />
 
             <com.wzy.mhealth.view.PayRadioGroup
-                android:id="@+id/genderGroup"
+                android:id="@+id/pay_fun"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                my:orientation="vertical" >
+                my:orientation="vertical">
 
                 <com.wzy.mhealth.view.PayRadioPurified
-                    android:id="@+id/p1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_border_selector"
-                    my:desc="支付银行卡支付，支付更安全"
-                    my:logo1="@drawable/ic_alipay_plugin"
-                    my:radio="@drawable/radio"
-                    my:title1="支付宝客户端支付" />
-
-                <com.wzy.mhealth.view.PayRadioPurified
-                    android:id="@+id/p2"
+                    android:id="@+id/alipay"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_border_selector"
                     my:checked="true"
-                    my:desc="支持银行卡支付，无需登录"
-                    my:logo1="@drawable/ic_alipay_wap"
+                    my:desc="支付银行卡支付，支付更安全"
+                    my:logo1="@drawable/ic_alipay_plugin"
                     my:radio="@drawable/radio"
-                    my:title1="支付宝网页支付" />
+                    my:title1="支付宝"
+                    my:visi="true" />
 
                 <com.wzy.mhealth.view.PayRadioPurified
-                    android:id="@+id/p3"
+                    android:id="@+id/bank"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_border_selector"
@@ -136,23 +128,13 @@
                     my:logo1="@drawable/ic_uppay_plugin"
                     my:radio="@drawable/radio"
                     my:title1="银联支付" />
-
-                <com.wzy.mhealth.view.PayRadioPurified
-                    android:id="@+id/p4"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_border_selector"
-                    my:desc="支持银行卡和财付通账号支付"
-                    my:logo1="@drawable/ic_tenpay_wap"
-                    my:radio="@drawable/radio"
-                    my:title1="财付通支付" />
             </com.wzy.mhealth.view.PayRadioGroup>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_pay"

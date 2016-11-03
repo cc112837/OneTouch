@@ -31,16 +31,15 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DiseaseActivity;
 import com.wzy.mhealth.activities.DoctorDetailActivity;
-import com.wzy.mhealth.activities.DoctorLiActivity;
 import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
-import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PrivaDoctorActivity;
 import com.wzy.mhealth.activities.QuestionActivity;
 import com.wzy.mhealth.activities.ScanresultActivity;
 import com.wzy.mhealth.activities.ServiceMoreActivity;
+import com.wzy.mhealth.activities.SlowAidActivity;
 import com.wzy.mhealth.activities.TaocanDetailAcitivty;
 import com.wzy.mhealth.activities.TaocanListActivity;
 import com.wzy.mhealth.adapter.DoctorHomeAdapter;
@@ -375,56 +374,67 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sacn_btn:
+                //二维码
                 Intent intent = new Intent(getActivity(), CaptureActivity.class);
                 startActivityForResult(intent, 0);
                 break;
             case R.id.chat_btn:
+                //聊天
                 Intent intent1 = new Intent(getActivity(), MsgActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.ll_private:
+                //私人医生
                 Intent intent2 = new Intent(getActivity(), QuestionActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.ll_group:
+                //团体体检
                 Intent intent3 = new Intent(getActivity(), ExaminationYueActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.ll_near_shop:
-                // 附近药房
-                Intent intent21 = new Intent(getActivity(), PrivaDoctorActivity.class);
+                // 慢病诊疗
+                Intent intent21 = new Intent(getActivity(), SlowAidActivity.class);
                 startActivity(intent21);
                 break;
             case R.id.ll_marry:
-                Intent intent5 = new Intent(getActivity(), MarryHospitalActivity.class);
+                //婴幼中心  MarryHospitalActivity
+                Intent intent5 = new Intent(getActivity(), NoContentActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.ll_heali:
-                Intent intent6 = new Intent(getActivity(), DoctorLiActivity.class);
+                //李医生 DoctorLiActivity
+                Intent intent6 = new Intent(getActivity(), NoContentActivity.class);
                 startActivity(intent6);
                 break;
             case R.id.ll_taocan:
+                //套餐列表
                 Intent intent7 = new Intent(getActivity(), TaocanListActivity.class);
                 startActivity(intent7);
                 break;
             case R.id.ll_servicemore:
+                //更多服务
                 Intent intent8 = new Intent(getActivity(), ServiceMoreActivity.class);
                 startActivity(intent8);
                 break;
             case R.id.ll_taocanmore:
+                //套餐列表
                 Intent intent9 = new Intent(getActivity(), TaocanListActivity.class);
                 startActivity(intent9);
                 break;
             case R.id.ll_knownage:
+                //急救知识
                 Intent intentt0 = new Intent(getActivity(), DiseaseActivity.class);
                 startActivity(intentt0);
                 break;
             case R.id.ll_nearhospital:
+                //私人医生
                 Intent intent4 = new Intent(getActivity(), PrivaDoctorActivity.class);
                 startActivity(intent4);
-                //私人医生
                 break;
             case R.id.doctor_more:
+                //更多医生
                 Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
                 startActivity(intent23);
                 break;
