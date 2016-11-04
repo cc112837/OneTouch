@@ -102,6 +102,7 @@ public class DoctorListActivity extends BaActivity {
                                 intent.setClass(DoctorListActivity.this, NoContentActivity.class);
                             } else {
                                 intent.setClass(DoctorListActivity.this, DoctorDetailActivity.class);
+                                intent.putExtra("id",doctor.getData().get(position).getDoctorId()+"");
                                 intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
                             }
                             startActivity(intent);
@@ -126,7 +127,6 @@ public class DoctorListActivity extends BaActivity {
 
             @Override
             public void onDismiss() {
-                // TODO Auto-generated method stub
                 locationtTextView = (TextView) location.findViewById(R.id.text_category);
                 locationtTextView.setTextColor(0xff000000);
             }

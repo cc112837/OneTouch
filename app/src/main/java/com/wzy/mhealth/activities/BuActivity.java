@@ -217,7 +217,7 @@ public class BuActivity extends BaActivity implements Handler.Callback,
                 // 判断resultStatus 为9000则代表支付成功
                 if (TextUtils.equals(resultStatus, "9000")) {
                     // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                    String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "PayServlet";
+                    String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "PayDoctorServlet";
                     TiUser user = new TiUser();
                     user.setName(resultInfo);
                     user.setTel(id + "");

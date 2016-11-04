@@ -31,7 +31,7 @@ public class DoctorDetailActivity extends BaActivity {
     private TextView yonghu1, yonghu1Degree, yonghu1Pingjia, youbianzi;
     private TextView yonghu2, yonghu2Degree, yonghu2Pingjia, zuobian;
     private LinearLayout tuwenLayout,vedioyuyue;
-    private String doctor;
+    private String doctor,doctorid;
     private List<UserEvaluation.DataEntity> userEvaluationList;
     private LinearLayout pingjia1, pingjia2;
     private ImageView youbian, tuwentu, dianhuatu, jiahaotu, privatetu, vediotu;
@@ -43,15 +43,16 @@ public class DoctorDetailActivity extends BaActivity {
         setContentView(R.layout.activity_doctor_detail);
         Intent intent = getIntent();
         doctor = intent.getStringExtra("doctor");
+        doctorid=intent.getStringExtra("id");
         userEvaluationList = new ArrayList<>();
         init();
-
         String url = Constants.SERVER_URL + "MhealthOrderEvaluateCheckServlet";
         TiUser user = new TiUser();
-        user.setName(doctor+"");
-        user.setPass(1+"");
+        user.setName(doctorid + "");
+        user.setPass(1 + "");
         user.setTel("0");
         MyHttpUtils.handData(handler, 264, url, user);
+
         guanzhuTextView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -61,19 +62,7 @@ public class DoctorDetailActivity extends BaActivity {
             }
         });
 
-        yonghupingjia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (userEvaluationList.size() == 0) {
-                } else if (userEvaluationList.size() > 2) {
-                    Intent intent = new Intent();
-                    intent.setClass(DoctorDetailActivity.this, EvaluationListActivity.class);
-                    intent.putExtra("doctorId", doctor + "");
-                    intent.putExtra("status","1");
-                    startActivity(intent);
-                }
-            }
-        });
+
 
 
     }
@@ -145,16 +134,66 @@ public class DoctorDetailActivity extends BaActivity {
                     UserEvaluation userEvaluation=(UserEvaluation) msg.obj;
                     userEvaluationList.clear();
                     userEvaluationList.addAll(userEvaluation.getData());
+                    yonghupingjia.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (userEvaluationList.size() == 0) {
+                            } else if (userEvaluationList.size() > 2) {
+                                Intent intent = new Intent();
+                                intent.setClass(DoctorDetailActivity.this, EvaluationListActivity.class);
+                                intent.putExtra("doctorId", doctorid + "");
+                                intent.putExtra("status", "1");
+                                startActivity(intent);
+                            }
+                        }
+                    });
+                    if (userEvaluationList.size() == 0) {
+                        zuobian.setText("暂无任何用户评价");
+                        youbianzi.setVisibility(View.GONE);
+                        youbian.setVisibility(View.GONE);
+                    } else {
+                        zuobian.setText("用户评价（" + userEvaluationList.size() + "人）");
+                        youbianzi.setVisibility(View.GONE);
+                        youbian.setVisibility(View.GONE);
+                        if (userEvaluationList.size() > 2) {
+                            youbianzi.setVisibility(View.VISIBLE);
+                            youbian.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    if (userEvaluationList.size() == 0) {
+                        pingjia1.setVisibility(View.GONE);
+                        pingjia2.setVisibility(View.GONE);
+                    } else if (userEvaluationList.size() == 1) {
+                        pingjia2.setVisibility(View.GONE);
+                        pingjia1.setVisibility(View.VISIBLE);
+                        String str = userEvaluationList.get(0).getUserName();
+                        yonghu1.setText(str.charAt(0) + "****"
+                                + str.charAt(str.length() - 1));
+                        yonghu1Degree.setText("满意度"+userEvaluationList.get(0).getSatisfy());
+                        yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
+                    } else if (userEvaluationList.size() >= 2) {
+                        pingjia2.setVisibility(View.VISIBLE);
+                        pingjia1.setVisibility(View.VISIBLE);
+                        String str = userEvaluationList.get(0).getUserName();
+                        yonghu1.setText(str.charAt(0) + "****"
+                                + str.charAt(str.length() - 3));
+                        yonghu1Degree.setText("满意度"+userEvaluationList.get(0).getSatisfy() + "");
+                        yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
+
+                        str = userEvaluationList.get(1).getUserName();
+                        yonghu2.setText(str.charAt(0) + "****"
+                                + str.charAt(str.length() - 3));
+                        yonghu2Degree.setText("满意度"+userEvaluationList.get(1).getSatisfy() + "");
+                        yonghu2Pingjia.setText(userEvaluationList.get(1).getEvaluate());
+                    }
+
                     break;
             }
         }
     };
 
     private void init() {
-        String url = Constants.SERVER_URL + "MhealthOneDoctorServlet";
-        TiUser user = new TiUser();
-        user.setName(doctor + "");
-        MyHttpUtils.handData(handler, 153, url, user);
+
         guanzhuTextView = (TextView) findViewById(R.id.guanzhu);
         TextView xinyiTextView = (TextView) findViewById(R.id.songxinyi);
         tuwenLayout = (LinearLayout) findViewById(R.id.tuwenzixun);
@@ -184,47 +223,10 @@ public class DoctorDetailActivity extends BaActivity {
         jiahaofeiyong = (TextView) findViewById(R.id.jiahaofeiyong);
         vedioefeiyong = (TextView) findViewById(R.id.vediofeiyong);
         dianhuafeiyong = (TextView) findViewById(R.id.dianhuafeiyong);
-        if (userEvaluationList.size() == 0) {
-            zuobian.setText("暂无任何用户评价");
-            youbianzi.setVisibility(View.GONE);
-            youbian.setVisibility(View.GONE);
-        } else {
-            zuobian.setText("用户评价（" + userEvaluationList.size() + "人）");
-            youbianzi.setVisibility(View.GONE);
-            youbian.setVisibility(View.GONE);
-            if (userEvaluationList.size() > 2) {
-                youbianzi.setVisibility(View.VISIBLE);
-                youbian.setVisibility(View.VISIBLE);
-            }
-        }
-        if (userEvaluationList.size() == 0) {
-            pingjia1.setVisibility(View.GONE);
-            pingjia2.setVisibility(View.GONE);
-        } else if (userEvaluationList.size() == 1) {
-            pingjia2.setVisibility(View.GONE);
-            pingjia1.setVisibility(View.VISIBLE);
-            String str = userEvaluationList.get(0).getUserName();
-            yonghu1.setText(str.charAt(0) + "****"
-                    + str.charAt(str.length() - 1));
-            yonghu1Degree.setText(userEvaluationList.get(0).getSatisfy() + "");
-            yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
-        } else if (userEvaluationList.size() >= 2) {
-            pingjia2.setVisibility(View.VISIBLE);
-            pingjia1.setVisibility(View.VISIBLE);
-            String str = userEvaluationList.get(0).getUserName();
-            yonghu1.setText(str.charAt(0) + "****"
-                    + str.charAt(str.length() - 3));
-            yonghu1Degree.setText(userEvaluationList.get(0).getSatisfy() + "");
-            yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
-
-            str = userEvaluationList.get(1).getUserName();
-            yonghu2.setText(str.charAt(0) + "****"
-                    + str.charAt(str.length() - 3));
-            yonghu2Degree.setText(userEvaluationList.get(1).getSatisfy() + "");
-            yonghu2Pingjia.setText(userEvaluationList.get(1).getEvaluate());
-        }
-
-
+        String url = Constants.SERVER_URL + "MhealthOneDoctorServlet";
+        TiUser user = new TiUser();
+        user.setName(doctor + "");
+        MyHttpUtils.handData(handler, 153, url, user);
     }
 
     public void leftBtnClick(View v) {
