@@ -45,6 +45,7 @@ import com.wzy.mhealth.activities.TaocanListActivity;
 import com.wzy.mhealth.adapter.DoctorHomeAdapter;
 import com.wzy.mhealth.adapter.TaocanHomeAdapter;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.BannerItem;
 import com.wzy.mhealth.model.Doctor;
 import com.wzy.mhealth.model.TaocanEntity;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -61,7 +62,7 @@ import de.greenrobot.event.EventBus;
  */
 public class HomeNewFragment extends Fragment implements View.OnClickListener {
     private ConvenientBanner convenientBanner;
-    private ArrayList<Integer> localImages = new ArrayList<Integer>();
+    private ArrayList<BannerItem> localImages = new ArrayList<>();
     private ConversationManager conversationManager = ConversationManager.getInstance();
     private TextView countView;
     private ListView lv_show;
@@ -103,13 +104,6 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-
-    private void loadLocalImage() {
-        localImages.add(R.mipmap.carouse1);
-        localImages.add(R.mipmap.carouse2);
-        localImages.add(R.mipmap.carouse3);
-        localImages.add(R.mipmap.carouse4);
-    }
 
     private Handler handler = new Handler() {
         @Override
@@ -154,15 +148,34 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                             }
                         });
                     }
+                    for (int i = 0; i < 5; i++) {
+                        BannerItem bannerItem = new BannerItem();
+                        bannerItem.setTitle(taocanEntity.getData().get(i).getName());
+                        bannerItem.setUrl(taocanEntity.getData().get(i).getImage());
+                        bannerItem.setId(taocanEntity.getData().get(i).getTaoId()+"");
+                        localImages.add(bannerItem);
+                    }
+                    convenientBanner.setPages(
+                            new CBViewHolderCreator<LocalImageHolderView>() {
+                                @Override
+                                public LocalImageHolderView createHolder() {
+                                    return new LocalImageHolderView();
+                                }
+                            }, localImages)
+                            //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                            .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
+                                    //设置指示器的方向
+                            .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
                     break;
             }
         }
     };
 
     public void initView(View view) {
-        loadLocalImage();
         my_scroll = (MyScrollView) view.findViewById(R.id.my_scroll);
         lv_show = (ListView) view.findViewById(R.id.lv_show);
+        View headview = LayoutInflater.from(getContext()).inflate(R.layout.main_home, null);
+        convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);
         String homeurl = Constants.SERVER_URL + "TaoCanManyServlet";
         MyHttpUtils.handData(handler, 173, homeurl, null);
         taocanHomeAdapter = new TaocanHomeAdapter(getContext(), taocanEntitylist);
@@ -171,7 +184,6 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         countView = (TextView) view.findViewById(R.id.countView);
         Button chat_btn = (Button) view.findViewById(R.id.chat_btn);
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
-        View headview = LayoutInflater.from(getContext()).inflate(R.layout.main_home, null);
         lv_show.addHeaderView(headview);
         String ur = Constants.SERVER_URL + "MhealthDoctorServlet";
         MyHttpUtils.handData(handler, 152, ur, null);
@@ -201,20 +213,6 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         ll_group.setOnClickListener(this);
         ll_private = (LinearLayout) headview.findViewById(R.id.ll_private);
         ll_private.setOnClickListener(this);
-        convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);
-        convenientBanner.setPages(
-                new CBViewHolderCreator<LocalImageHolderView>() {
-                    @Override
-                    public LocalImageHolderView createHolder() {
-                        return new LocalImageHolderView();
-                    }
-                }, localImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
-                        //设置指示器的方向
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
-
-
         my_scroll.setScrollViewListener(new MyScrollView.ScrollViewListener() {
             @Override
             public void onScrollChanged(MyScrollView scrollView, int x, int y, int oldx, int oldy) {
