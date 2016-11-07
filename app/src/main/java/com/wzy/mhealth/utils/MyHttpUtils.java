@@ -352,5 +352,10 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("type", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new BingZhen(), handler, what));
         }
+        if (what == 266) {
+            params.addBodyParameter("userName", ((TiUser) object).getName());
+            params.addBodyParameter("imgUrl", ((TiUser) object).getTel());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
     }
 }

@@ -98,6 +98,9 @@ public class MyFragment extends D3Fragment {
                         iv_shop.setImageResource(R.mipmap.love_red);
                     }
                     break;
+                case 266:
+                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    break;
             }
         }
     };
@@ -249,7 +252,7 @@ public class MyFragment extends D3Fragment {
         familyHealth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/7/8 我的计步 家人健康FamilyHealthActivity
+                // 我的计步 家人健康FamilyHealthActivity
                 TiUser step = new TiUser();
                 step.setName(LeanchatUser.getCurrentUser().getUsername());
                 String ul = Constants.SERVER_URL + "StepNumInitServlet";
@@ -351,6 +354,11 @@ public class MyFragment extends D3Fragment {
                             if (arg0 == null) {
                                 LeanchatUser curUser = LeanchatUser.getCurrentUser(LeanchatUser.class);
                                 String avatarUrl = curUser.getAvatarUrl();
+                                String urll=Constants.SERVER_URL+"MhealthUserImageServlet";
+                                TiUser useri=new TiUser();
+                                useri.setName(LeanchatUser.getCurrentUser().getUsername());
+                                useri.setTel(avatarUrl+"");
+                                MyHttpUtils.handData(handler, 266, urll, useri);
                                 ImageLoader
                                         .getInstance()
                                         .displayImage(
