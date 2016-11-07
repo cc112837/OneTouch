@@ -319,7 +319,8 @@
         <activity android:name=".activities.DoctorYuyueActivity" />
         <activity android:name=".activities.ServiceMoreActivity" />
         <activity android:name=".activities.PrivaDoctorActivity" />
-        <activity android:name=".activities.SlowAidActivity"></activity>
+        <activity android:name=".activities.SlowAidActivity" />
+        <activity android:name=".activities.SlowAidDetailActivity"></activity>
     </application>
 
 </manifest>

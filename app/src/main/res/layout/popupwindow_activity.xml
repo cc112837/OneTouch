@@ -52,7 +52,8 @@
             android:layout_weight="1"
             android:background="@drawable/textview"
             android:entries="@array/languages"
-            android:padding="15dp"></Spinner>
+            android:padding="15dp">
+        </Spinner>
 
         <Spinner
             android:id="@+id/sp_time"

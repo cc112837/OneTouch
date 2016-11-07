@@ -15,54 +15,107 @@ public class DoctorDetail {
 
     /**
      * priceVideo : 3
+     * sex :
+     * outpatientCatagory :
+     * consultNumber : 0
      * image : 2.jpg
+     * pricePicture : 0.01
      * recommend : 9
-     * pricePicture : 3
      * pricePrivate : 3
      * pricePhone : 3
      * id : 19
      * priceAdd : 3
+     * attitude : 98
      * firstdep : 妇科
+     * level : 99
      * doctorId : 57ecc97cda2f60004f451fe0
-     * userEvaluate : 18369956786
+     * orderNumber : 0
      * userName : 吴聪聪
      * doctorTilte : 主治医生
+     * registerFee : 0
      * specialization :  妇科
      * hospital : 西安交通大学第一医院
      * introduction :  毕业于西安交通大学
      */
 
-    private int priceVideo;
+    private double priceVideo;
+    private String sex;
+    private String outpatientCatagory;
+    private int consultNumber;
     private String image;
-    private int recommend;
     private double pricePicture;
+    private int recommend;
     private double pricePrivate;
+    private String userEvaluate;
     private double pricePhone;
     private int id;
-    private int priceAdd;
+    private double priceAdd;
+    private int attitude;
     private String firstdep;
+    private int level;
     private String doctorId;
-    private String userEvaluate;
+    private int orderNumber;
     private String userName;
     private String doctorTilte;
+    private double registerFee;
     private String specialization;
     private String hospital;
     private String introduction;
 
+    public void setPriceVideo(double priceVideo) {
+        this.priceVideo = priceVideo;
+    }
+
+    public void setPricePrivate(double pricePrivate) {
+        this.pricePrivate = pricePrivate;
+    }
+
+    public String getUserEvaluate() {
+        return userEvaluate;
+    }
+
+    public void setUserEvaluate(String userEvaluate) {
+        this.userEvaluate = userEvaluate;
+    }
+
+    public void setPricePhone(double pricePhone) {
+        this.pricePhone = pricePhone;
+    }
+
+    public void setPriceAdd(double priceAdd) {
+        this.priceAdd = priceAdd;
+    }
+
+    public void setRegisterFee(double registerFee) {
+        this.registerFee = registerFee;
+    }
+
     public void setPriceVideo(int priceVideo) {
         this.priceVideo = priceVideo;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setOutpatientCatagory(String outpatientCatagory) {
+        this.outpatientCatagory = outpatientCatagory;
+    }
+
+    public void setConsultNumber(int consultNumber) {
+        this.consultNumber = consultNumber;
     }
 
     public void setImage(String image) {
         this.image = image;
     }
 
-    public void setRecommend(int recommend) {
-        this.recommend = recommend;
+    public void setPricePicture(double pricePicture) {
+        this.pricePicture = pricePicture;
     }
 
-    public void setPricePicture(int pricePicture) {
-        this.pricePicture = pricePicture;
+    public void setRecommend(int recommend) {
+        this.recommend = recommend;
     }
 
     public void setPricePrivate(int pricePrivate) {
@@ -81,16 +134,24 @@ public class DoctorDetail {
         this.priceAdd = priceAdd;
     }
 
+    public void setAttitude(int attitude) {
+        this.attitude = attitude;
+    }
+
     public void setFirstdep(String firstdep) {
         this.firstdep = firstdep;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public void setDoctorId(String doctorId) {
         this.doctorId = doctorId;
     }
 
-    public void setUserEvaluate(String userEvaluate) {
-        this.userEvaluate = userEvaluate;
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public void setUserName(String userName) {
@@ -99,6 +160,10 @@ public class DoctorDetail {
 
     public void setDoctorTilte(String doctorTilte) {
         this.doctorTilte = doctorTilte;
+    }
+
+    public void setRegisterFee(int registerFee) {
+        this.registerFee = registerFee;
     }
 
     public void setSpecialization(String specialization) {
@@ -113,20 +178,32 @@ public class DoctorDetail {
         this.introduction = introduction;
     }
 
-    public int getPriceVideo() {
+    public double getPriceVideo() {
         return priceVideo;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getOutpatientCatagory() {
+        return outpatientCatagory;
+    }
+
+    public int getConsultNumber() {
+        return consultNumber;
     }
 
     public String getImage() {
         return image;
     }
 
-    public int getRecommend() {
-        return recommend;
-    }
-
     public double getPricePicture() {
         return pricePicture;
+    }
+
+    public int getRecommend() {
+        return recommend;
     }
 
     public double getPricePrivate() {
@@ -141,20 +218,28 @@ public class DoctorDetail {
         return id;
     }
 
-    public int getPriceAdd() {
+    public double getPriceAdd() {
         return priceAdd;
+    }
+
+    public int getAttitude() {
+        return attitude;
     }
 
     public String getFirstdep() {
         return firstdep;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
     public String getDoctorId() {
         return doctorId;
     }
 
-    public String getUserEvaluate() {
-        return userEvaluate;
+    public int getOrderNumber() {
+        return orderNumber;
     }
 
     public String getUserName() {
@@ -163,6 +248,10 @@ public class DoctorDetail {
 
     public String getDoctorTilte() {
         return doctorTilte;
+    }
+
+    public double getRegisterFee() {
+        return registerFee;
     }
 
     public String getSpecialization() {
