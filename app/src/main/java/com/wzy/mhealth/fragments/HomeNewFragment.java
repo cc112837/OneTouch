@@ -218,8 +218,8 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
             public void onScrollChanged(MyScrollView scrollView, int x, int y, int oldx, int oldy) {
                 if (y <= 0) {
                     title1.setBackgroundColor(Color.argb((int) 0, 0, 0, 0));//AGB由相关工具获得，或者美工提供
-                } else if (y > 0 && y <= 50) {
-                    float scale = (float) y / 50;
+                } else if (y > 0 && y <= 500) {
+                    float scale = (float) y / 500;
                     float alpha = (255 * scale);
                     title1.setBackgroundColor(Color.argb((int) alpha, 2, 185, 157));
                 } else {
