@@ -43,6 +43,15 @@ public class TaocanEntity {
         private String name;
         private String context;
         private String image;
+        private String img;
+
+        public String getImg() {
+            return img;
+        }
+
+        public void setImg(String img) {
+            this.img = img;
+        }
 
         public void setOldPrice(double oldPrice) {
             this.oldPrice = oldPrice;

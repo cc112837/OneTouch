@@ -11,7 +11,7 @@
     <color name="grey_e">#FFeeeeee</color>
     <color name="title_green">#02b99d</color>
     <!-- 透明颜色 -->
-    <color name="transparent_background">#00000000</color>
+    <color name="transparent_background">#5000</color>
 
     <color name="blue">#214EDF</color>
     <color name="green">#ff1ac01a</color>

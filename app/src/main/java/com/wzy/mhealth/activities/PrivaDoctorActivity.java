@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.wzy.mhealth.R;
@@ -19,6 +21,8 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 public class PrivaDoctorActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
     private WebView wv_show;
+    private Button btn_select;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -53,8 +57,10 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
 
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
+        btn_select=(Button) findViewById(R.id.btn_select);
         leftBtn.setOnClickListener(this);
         wv_show=(WebView) findViewById(R.id.wv_show);
+        btn_select.setOnClickListener(this);
     }
 
     @Override
@@ -62,6 +68,10 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.leftBtn:
                 finish();
+                break;
+            case R.id.btn_select:
+                Intent intent=new Intent(PrivaDoctorActivity.this,PopupActivity.class);
+                startActivity(intent);
                 break;
         }
     }

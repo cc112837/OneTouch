@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.wzy.mhealth.R;
@@ -13,6 +14,7 @@ import com.wzy.mhealth.R;
 public class SlowAidDetailActivity extends Activity {
     private WebView wv_show;
     private ImageView leftBtn;
+    private Button btn_select;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +34,13 @@ public class SlowAidDetailActivity extends Activity {
         webSettings.setUseWideViewPort(true);
         webSettings.setTextZoom(120);
         wv_show.loadData(detail, "text/html; charset=utf-8", "utf-8");
+        btn_select = (Button) findViewById(R.id.btn_select);
+        btn_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SlowAidDetailActivity.this,PopupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

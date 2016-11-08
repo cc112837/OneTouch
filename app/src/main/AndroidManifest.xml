@@ -320,7 +320,8 @@
         <activity android:name=".activities.ServiceMoreActivity" />
         <activity android:name=".activities.PrivaDoctorActivity" />
         <activity android:name=".activities.SlowAidActivity" />
-        <activity android:name=".activities.SlowAidDetailActivity"></activity>
+        <activity android:name=".activities.SlowAidDetailActivity" />
+        <activity android:name=".activities.PopupActivity" android:theme="@style/DialogTheme1"/>
     </application>
 
 </manifest>

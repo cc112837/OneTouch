@@ -12,6 +12,15 @@
     <style name="DialogTheme" parent="@android:style/Theme.Holo.NoActionBar.TranslucentDecor">
         <item name="android:editTextStyle">@style/Widget.EditText.White</item>
     </style>
+
+    <style name="DialogTheme1" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/transparent_background</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置背景为透明 -->
+
+    </style>
+
     <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/black</item>
     </style>

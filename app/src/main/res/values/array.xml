@@ -2,6 +2,7 @@
 <resources>
     <string-array name="languages">
         <item>今天</item>
+        <item>明天</item>
         <item>一周内</item>
     </string-array>
     <string-array name="time">

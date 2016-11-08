@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVUser;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -23,9 +22,6 @@ import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +30,7 @@ import java.util.List;
 public class RankActivity extends Activity {
     private ImageView leftBtn, iv_userhead, iv_mytank;
     private ListView lv_show;
-    private TextView tv_namemy, tv_rankmy, tv_daystep, tv_count;
+    private TextView tv_namemy, tv_who, tv_rankmy, tv_daystep, tv_count;
     private CheckBox cb_prasid;
     private List<AllStepRank.DataEntity> list = new ArrayList<>();
     private Handler handler = new Handler() {
@@ -46,10 +42,12 @@ public class RankActivity extends Activity {
                     StepRank stepRank = (StepRank) msg.obj;
                     tv_rankmy.setText(stepRank.getRank() + "");
                     tv_daystep.setText(stepRank.getStepNum() + "");
+                    ImageLoader.getInstance().displayImage(stepRank.getImage(), iv_mytank, PhotoUtils.avatarImageOption);
                     break;
                 case 124:
-
                     AllStepRank allStepRank = (AllStepRank) msg.obj;
+                    tv_who.setText(allStepRank.getData().get(0).getUserName() + "占领了封面");
+                    ImageLoader.getInstance().displayImage(allStepRank.getData().get(0).getImage(), iv_userhead, PhotoUtils.avatarImageOption);
                     rankAdapter.setList(allStepRank.getData());
                     rankAdapter.notifyDataSetChanged();
                     break;
@@ -97,7 +95,7 @@ public class RankActivity extends Activity {
         MyHttpUtils.handData(handler, 124, uri, user1);
         View headview = LayoutInflater.from(RankActivity.this).inflate(R.layout.list_rank_header, null);
         lv_show.addHeaderView(headview);
-
+        tv_who = (TextView) headview.findViewById(R.id.tv_who);
         iv_mytank = (ImageView) headview.findViewById(R.id.iv_mytank);
         tv_rankmy = (TextView) headview.findViewById(R.id.tv_rankmy);
         tv_namemy = (TextView) headview.findViewById(R.id.tv_namemy);
@@ -106,21 +104,6 @@ public class RankActivity extends Activity {
         cb_prasid = (CheckBox) headview.findViewById(R.id.cb_prasid);
         tv_namemy.setText(LeanchatUser.getCurrentUser().getUsername());
         iv_userhead = (ImageView) headview.findViewById(R.id.iv_userhead);
-
-        LeanchatUser curUser = AVUser.getCurrentUser(LeanchatUser.class);
-        String avatarUrl = curUser.getAvatarUrl();
-        if (avatarUrl == null) {
-            try {
-                JSONObject object = new JSONObject(curUser.toString());
-                JSONObject serverData = object.getJSONObject("serverData");
-                JSONObject avatar = serverData.getJSONObject("avatar");
-                avatarUrl = avatar.getString("url");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        ImageLoader.getInstance().displayImage(avatarUrl, iv_mytank, PhotoUtils.avatarImageOption);
-        ImageLoader.getInstance().displayImage(avatarUrl, iv_userhead, PhotoUtils.avatarImageOption);
         leftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
