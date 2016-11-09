@@ -37,7 +37,7 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
                     webSettings.setBuiltInZoomControls(true);
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
                     WindowManager wm = PrivaDoctorActivity.this.getWindowManager();
-                    int width = wm.getDefaultDisplay().getWidth()/2-10;
+                    int width = wm.getDefaultDisplay().getWidth() / 2 - 10;
                     wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px !important;}</style></head>" + bingZhen.getData().get(0).getDetails(), "text/html", "utf-8", null);
                     break;
             }
@@ -57,9 +57,9 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
 
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
-        btn_select=(Button) findViewById(R.id.btn_select);
+        btn_select = (Button) findViewById(R.id.btn_select);
         leftBtn.setOnClickListener(this);
-        wv_show=(WebView) findViewById(R.id.wv_show);
+        wv_show = (WebView) findViewById(R.id.wv_show);
         btn_select.setOnClickListener(this);
     }
 
@@ -70,9 +70,28 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
                 finish();
                 break;
             case R.id.btn_select:
-                Intent intent=new Intent(PrivaDoctorActivity.this,PopupActivity.class);
+                Intent intent = new Intent(PrivaDoctorActivity.this, PopupActivity.class);
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setBackgroundAlpha(0.5f);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setBackgroundAlpha(1.0f);
+    }
+
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        getWindow().setAttributes(lp);
     }
 }
