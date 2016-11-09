@@ -17,6 +17,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.RecordShowActivity;
 import com.wzy.mhealth.adapter.RecordListAdapter;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.HuaYanRecord;
 import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.SubjectTest;
@@ -58,7 +59,7 @@ public class TotalFragment extends Fragment implements
                         TestItem testItem=new TestItem(s,list);
                         collist.add(testItem);
                     }
-                    String huaurl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_assayX.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
+                    String huaurl = Constants.SERVER_ZHIXING+"reportAction!app_assayX.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
                     MyHttpUtils.handData(handler, 15, huaurl, null);
                     break;
                 case 15:
@@ -122,7 +123,7 @@ public class TotalFragment extends Fragment implements
     }
 
     private void initData() {
-        String nourl = "http://113.201.59.226:8081/Healwis/base/reportAction!app_resultX.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
+        String nourl =Constants.SERVER_ZHIXING+ "reportAction!app_resultX.action?sessid=" + ((RecordShowActivity) getActivity()).getSession() + "&studyid=" + ((RecordShowActivity) getActivity()).getStudid();
         MyHttpUtils.handData(handler, 14, nourl, null);
     }
 

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -68,7 +69,7 @@ public class DoctorGradeActivity extends BaActivity {
         tv_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://113.201.59.226:8081/Healwis/base/evaluationAction!app_evalOne.action?sessid=" + sessid + "&rid=" + rid + "&itemcode=" + itemcode + "&studyid=" + studyid + "&etype=s&marks=" + grade + "&rdesc=" + content;
+                String url = Constants.SERVER_ZHIXING+"evaluationAction!app_evalOne.action?sessid=" + sessid + "&rid=" + rid + "&itemcode=" + itemcode + "&studyid=" + studyid + "&etype=s&marks=" + grade + "&rdesc=" + content;
                 MyHttpUtils.handData(handler, 2, url, null);
             }
         });

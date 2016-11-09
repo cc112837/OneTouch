@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -72,7 +73,7 @@ public class RecordListActivity extends BaActivity {
         adapter = new ArrayAdapter(
                 RecordListActivity.this, R.layout.list_item_text_black,list);
         lv_showid.setAdapter(adapter);
-        String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchAccept.action?sessid=" +tag;
+        String renurl = Constants.SERVER_ZHIXING+"recordAction!app_matchAccept.action?sessid=" +tag;
         MyHttpUtils.handData(handler, 7, renurl, null);
     }
 

@@ -40,5 +40,5 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:divider="@color/bg_gray"
-        android:dividerHeight="1px"></ListView>
+        android:dividerHeight="5dp"></ListView>
 </LinearLayout>

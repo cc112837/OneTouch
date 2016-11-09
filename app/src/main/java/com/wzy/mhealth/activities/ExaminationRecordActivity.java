@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -68,7 +69,7 @@ public class ExaminationRecordActivity extends BaActivity {
                 if (("").equals(card) ||("").equals(mi)) {
                     Toast.makeText(ExaminationRecordActivity.this, "输入不能为空!", Toast.LENGTH_LONG).show();
                 } else {
-                    String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + card + "&passwd=" + mi;
+                    String loginurl = Constants.SERVER_ZHIXING+"personAction!app_login.action?idnumber=" + card + "&passwd=" + mi;
                     MyHttpUtils.handData(handler, 2, loginurl, null);
                 }
 

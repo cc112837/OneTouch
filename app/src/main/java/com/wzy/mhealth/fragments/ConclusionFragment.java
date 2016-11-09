@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.RecordShowActivity;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -73,7 +74,7 @@ private Handler handler=new Handler(){
         tv_yi=(TextView) v.findViewById(R.id.tv_yi);
         tv_advise=(TextView) v.findViewById(R.id.tv_advise);
         tv_conclu=(TextView) v.findViewById(R.id.tv_conclu);
-        String url="http://113.201.59.226:8081/Healwis/base/reportAction!app_summary.action?sessid="+((RecordShowActivity)getActivity()).getSession()+"&studyid="+((RecordShowActivity)getActivity()).getStudid();
+        String url= Constants.SERVER_ZHIXING+"reportAction!app_summary.action?sessid="+((RecordShowActivity)getActivity()).getSession()+"&studyid="+((RecordShowActivity)getActivity()).getStudid();
         MyHttpUtils.handData(handler,8,url,null);
     }
 

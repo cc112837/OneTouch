@@ -18,6 +18,7 @@ import com.avos.avoscloud.SignUpCallback;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.TaocanInfo;
@@ -73,7 +74,7 @@ public class ExaminationYueActivity extends Activity {
 
                             }
                         });
-                        String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + cardid + "&passwd=" + pass;
+                        String loginurl = Constants.SERVER_ZHIXING+"personAction!app_login.action?idnumber=" + cardid + "&passwd=" + pass;
                         MyHttpUtils.handData(handler, 2, loginurl, null);
                     }
                     break;
@@ -82,7 +83,7 @@ public class ExaminationYueActivity extends Activity {
                     if (info.isSuccess()) {
                         Toast.makeText(ExaminationYueActivity.this, "校验成功!", Toast.LENGTH_LONG).show();
                         tag = info.getMsg();
-                        String recurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchCheck.action?sessid=" + tag;
+                        String recurl = Constants.SERVER_ZHIXING+"recordAction!app_matchCheck.action?sessid=" + tag;
                         MyHttpUtils.handData(handler, 23, recurl, null);
                     } else {
                         Toast.makeText(ExaminationYueActivity.this, "校验失败!", Toast.LENGTH_LONG).show();
@@ -91,7 +92,7 @@ public class ExaminationYueActivity extends Activity {
                 case 23:
                     Record rec = (Record) msg.obj;
                     if (rec.getTotal() == -1 || rec.getTotal() == 0) {
-                        String renurl = "http://113.201.59.226:8081/Healwis/base/recordAction!app_matchOrder.action?sessid=" + tag;
+                        String renurl =Constants.SERVER_ZHIXING+ "recordAction!app_matchOrder.action?sessid=" + tag;
                         MyHttpUtils.handData(handler, 33, renurl, null);
                     } else {
                         Intent intent = new Intent(ExaminationYueActivity.this, MyYuyueActivity.class);
@@ -178,10 +179,10 @@ public class ExaminationYueActivity extends Activity {
                 SharedPreferences sp = getSharedPreferences("reg", MODE_PRIVATE);
                 final String reg = sp.getString(name, null);
                 if ("cc".equals(reg)) {
-                    String loginurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_login.action?idnumber=" + cardid + "&passwd=" + pass;
+                    String loginurl = Constants.SERVER_ZHIXING+"personAction!app_login.action?idnumber=" + cardid + "&passwd=" + pass;
                     MyHttpUtils.handData(handler, 2, loginurl, null);
                 } else {
-                    String regurl = "http://113.201.59.226:8081/Healwis/base/personAction!app_reg.action";
+                    String regurl = Constants.SERVER_ZHIXING+"personAction!app_reg.action";
                     TiUser user = new TiUser();
                     user.setName(name);
                     user.setCardId(cardid);

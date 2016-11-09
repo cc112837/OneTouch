@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.TijianAdapter;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.fragments.TijianYuyueFragment;
 import com.wzy.mhealth.fragments.XianChaFragment;
 import com.wzy.mhealth.model.ChaTiContent;
@@ -87,7 +88,7 @@ public class MyYuyueActivity extends FragmentActivity {
         if (id=="") {
             Toast.makeText(MyYuyueActivity.this, "请先进行体检预约", 2000).show();
         } else {
-            String itemurl = "http://113.201.59.226:8081/Healwis/base/itemAction!app_jcxm.action?sessid=" + session + "&id=" + id;
+            String itemurl = Constants.SERVER_ZHIXING+"itemAction!app_jcxm.action?sessid=" + session + "&id=" + id;
             MyHttpUtils.handData(handler, 6, itemurl, null);
         }
     }

@@ -7,6 +7,7 @@ public class Constants {
 	public final static String STEP = "step";
 	public final static String STEPDATE="data";
 	public final static boolean IS_DEBUG = true;
+	public final static String SERVER_ZHIXING = "http://113.201.59.226:8081/Healwis/exam/";
 	public final static String SERVER_URL = "http://117.34.105.29:8818/mhealth/servlet/";
 	public final static String PATH =  Util.getInstance().getExtPath()+"/xmpp";
 	public final static String SAVE_IMG_PATH = PATH + "/images";//设置保存图片文件的路径

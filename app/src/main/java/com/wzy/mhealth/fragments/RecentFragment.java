@@ -20,6 +20,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.activities.TestSelfActivity;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -141,7 +142,7 @@ public class RecentFragment extends Fragment {
                 // TODO: 2016/6/27
                 session = ((TestSelfActivity) getActivity()).getSession();
                 id = ((TestSelfActivity) getActivity()).geteId();
-                String url = "http://113.201.59.226:8081/Healwis/base/recordAction!app_appointment.action?sessid=" + session + "&id=" + id + "&appointmentDate=" + time + "&rdesc=" + content;
+                String url = Constants.SERVER_ZHIXING+"recordAction!app_appointment.action?sessid=" + session + "&id=" + id + "&appointmentDate=" + time + "&rdesc=" + content;
                 MyHttpUtils.handData(handler, 2, url, null);
 
             }
