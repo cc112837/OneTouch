@@ -20,6 +20,7 @@ import com.wzy.mhealth.model.AllStepRank;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,15 +38,18 @@ public class RankAdapter extends BaseAdapter {
     private Context context;
     private List<AllStepRank.DataEntity> list;
     private Handler handler;
-    public RankAdapter(Context context,List<AllStepRank.DataEntity> list,Handler handler) {
+
+    public RankAdapter(Context context, List<AllStepRank.DataEntity> list, Handler handler) {
         mInflater = LayoutInflater.from(context);
-        this.list=list;
-        this.context=context;
-        this.handler=handler;
+        this.list = list;
+        this.context = context;
+        this.handler = handler;
     }
-    public void setList(List<AllStepRank.DataEntity> list){
-        this.list=list;
+
+    public void setList(List<AllStepRank.DataEntity> list) {
+        this.list = list;
     }
+
     @Override
     public int getCount() {
         return list.size();
@@ -63,7 +67,7 @@ public class RankAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final ViewHolder viewHolder ;
+        final ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.list_item_tank, null);
@@ -77,35 +81,44 @@ public class RankAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_name.setText(""+list.get(position).getUserName());
-        viewHolder.tv_rank.setText(position+1+"");
-        viewHolder.tv_dastep.setText(""+list.get(position).getStepNum());
+        viewHolder.tv_name.setText("" + list.get(position).getUserName());
+        viewHolder.tv_rank.setText(position + 1 + "");
+        viewHolder.tv_dastep.setText("" + list.get(position).getStepNum());
         viewHolder.tv_count.setText("" + list.get(position).getLikeNum());
         viewHolder.cb_prasid.setChecked(list.get(position).isLike());
         ImageLoader.getInstance().displayImage(list.get(position).getImage(), viewHolder.iv_tank, PhotoUtils.avatarImageOption);
+        int value = list.get(position).getLikeNum();
+        final List<Integer> flag = new ArrayList<>();
+        flag.add(value);
         viewHolder.cb_prasid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 if (isChecked) {
-                    viewHolder.tv_count.setText(1+ list.get(position).getLikeNum()+"");
+                    int c = 1 + flag.get(0);
+                    flag.clear();
+                    flag.add(c);
                 } else {
-                    if(list.get(position).getLikeNum()>=1)
-                    viewHolder.tv_count.setText(list.get(position).getLikeNum() - 1 + "");
+                    int c = flag.get(0) - 1;
+                    flag.clear();
+                    flag.add(c);
                 }
-                String url= Constants.SERVER_URL+"LikeNumServlet";
-                TiUser user=new TiUser();
-                user.setName(LeanchatUser.getCurrentUser().getUsername()+"");
-                user.setCardId(list.get(position).getStepNumId()+"");
-                MyHttpUtils.handData(handler,268,url,user);
+                viewHolder.tv_count.setText(flag.get(0) + "");
+                String url = Constants.SERVER_URL + "LikeNumServlet";
+                TiUser user = new TiUser();
+                user.setName(LeanchatUser.getCurrentUser().getUsername() + "");
+                user.setCardId(list.get(position).getStepNumId() + "");
+                MyHttpUtils.handData(handler, 268, url, user);
             }
         });
         return convertView;
     }
+
     static class ViewHolder {
         public TextView tv_rank;
-        public  TextView tv_name;
-        public  TextView tv_dastep;
-        public  TextView tv_count;
+        public TextView tv_name;
+        public TextView tv_dastep;
+        public TextView tv_count;
         public CheckBox cb_prasid;
         public ImageView iv_tank;
     }

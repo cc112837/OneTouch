@@ -35,6 +35,8 @@ public class RankActivity extends Activity {
     private ListView lv_show;
     private TextView tv_namemy, tv_who, tv_rankmy, tv_daystep, tv_count;
     private CheckBox cb_prasid;
+    private RankAdapter rankAdapter;
+    private LinearLayout ll_see;
     private List<AllStepRank.DataEntity> list = new ArrayList<>();
     private Handler handler = new Handler() {
         @Override
@@ -62,8 +64,7 @@ public class RankActivity extends Activity {
             }
         }
     };
-    private RankAdapter rankAdapter;
-    private LinearLayout ll_see;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +85,9 @@ public class RankActivity extends Activity {
 
         lv_show = (ListView) findViewById(R.id.lv_show);
         String uri = Constants.SERVER_URL + "StepNumRankServlet";
-        TiUser user1 = new TiUser();
-        SimpleDateFormat sf1 = new SimpleDateFormat("yyyy-MM-dd");
-        String nowdat = sf1.format(new Date());
-        user1.setPass(nowdat);
         rankAdapter = new RankAdapter(RankActivity.this, list,handler);
         lv_show.setAdapter(rankAdapter);
-        MyHttpUtils.handData(handler, 124, uri, user1);
+        MyHttpUtils.handData(handler, 124, uri, user);
         View headview = LayoutInflater.from(RankActivity.this).inflate(R.layout.list_rank_header, null);
         lv_show.addHeaderView(headview);
         ll_see = (LinearLayout)headview.findViewById(R.id.ll_see);

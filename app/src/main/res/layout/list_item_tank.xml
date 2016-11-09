@@ -42,8 +42,8 @@
         android:layout_marginLeft="3dp"
         android:gravity="center"
         android:text="10000"
-        android:textColor="@color/title_green"
-        android:textSize="17sp" />
+        android:textColor="#30f247"
+        android:textSize="22sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -164,6 +164,7 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 124) {
             TiUser user = (TiUser) object;
+            params.addBodyParameter("userName", user.getName());
             params.addBodyParameter("stepTime", user.getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
         }
