@@ -42,6 +42,7 @@ import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.model.UserEvaluation;
+import com.wzy.mhealth.model.Zan;
 import com.wzy.mhealth.model.ZhixingTaocan;
 
 
@@ -160,11 +161,6 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", user.getName());
             params.addBodyParameter("stepTime", user.getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepRank(), handler, what));
-        }
-        if (what == 124) {
-            TiUser user = (TiUser) object;
-            params.addBodyParameter("stepTime", user.getPass());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
         }
         if (what == 124) {
             TiUser user = (TiUser) object;
@@ -364,6 +360,16 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("order", ((TiUser) object).getCardId());
             params.addBodyParameter("telephone", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 268) {
+            params.addBodyParameter("userName", ((TiUser) object).getName());
+            params.addBodyParameter("stepNumId", ((TiUser) object).getCardId());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==269){
+            params.addBodyParameter("stepTime", ((TiUser) object).getPass());
+            params.addBodyParameter("userName", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Zan(), handler, what));
         }
     }
 }

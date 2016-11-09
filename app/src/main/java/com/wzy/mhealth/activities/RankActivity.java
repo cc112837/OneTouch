@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.RankAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.AllStepRank;
+import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -40,8 +43,10 @@ public class RankActivity extends Activity {
             switch (msg.what) {
                 case 123:
                     StepRank stepRank = (StepRank) msg.obj;
-                    tv_rankmy.setText(stepRank.getRank() + "");
+                    tv_rankmy.setText(stepRank.getRank()+1 + "");
                     tv_daystep.setText(stepRank.getStepNum() + "");
+                    tv_count.setText(stepRank.getLikeNum()+"");
+                    cb_prasid.setEnabled(false);
                     ImageLoader.getInstance().displayImage(stepRank.getImage(), iv_mytank, PhotoUtils.avatarImageOption);
                     break;
                 case 124:
@@ -51,10 +56,14 @@ public class RankActivity extends Activity {
                     rankAdapter.setList(allStepRank.getData());
                     rankAdapter.notifyDataSetChanged();
                     break;
+                case 268:
+                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    break;
             }
         }
     };
     private RankAdapter rankAdapter;
+    private LinearLayout ll_see;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +81,6 @@ public class RankActivity extends Activity {
         String nowdata = sf.format(new Date());
         user.setPass(nowdata);
         MyHttpUtils.handData(handler, 123, url, user);
-//        cb_prasid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                int position = (int) buttonView.getTag(R.id.cb_prasid);
-//                if (isChecked) {
-//
-//                } else {
-//
-//                }
-//            }
-//        });
 
         lv_show = (ListView) findViewById(R.id.lv_show);
         String uri = Constants.SERVER_URL + "StepNumRankServlet";
@@ -90,11 +88,12 @@ public class RankActivity extends Activity {
         SimpleDateFormat sf1 = new SimpleDateFormat("yyyy-MM-dd");
         String nowdat = sf1.format(new Date());
         user1.setPass(nowdat);
-        rankAdapter = new RankAdapter(RankActivity.this, list);
+        rankAdapter = new RankAdapter(RankActivity.this, list,handler);
         lv_show.setAdapter(rankAdapter);
         MyHttpUtils.handData(handler, 124, uri, user1);
         View headview = LayoutInflater.from(RankActivity.this).inflate(R.layout.list_rank_header, null);
         lv_show.addHeaderView(headview);
+        ll_see = (LinearLayout)headview.findViewById(R.id.ll_see);
         tv_who = (TextView) headview.findViewById(R.id.tv_who);
         iv_mytank = (ImageView) headview.findViewById(R.id.iv_mytank);
         tv_rankmy = (TextView) headview.findViewById(R.id.tv_rankmy);
@@ -108,6 +107,13 @@ public class RankActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        ll_see.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(RankActivity.this,CommentActivity.class);
+                startActivity(intent);
             }
         });
 

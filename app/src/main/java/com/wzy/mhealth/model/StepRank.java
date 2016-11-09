@@ -13,23 +13,20 @@ package com.wzy.mhealth.model;
 public class StepRank {
 
     /**
-     * stepNum : 1550
+     * stepNum : 1426
      * rank : 2
-     * userName : 18089292757
+     * likeNum : 0
+     * stepNumId : 564
+     * userName : 17092933912
+     * image : http://ac-cirdf9pJ.clouddn.com/d71b8dKTdoKMxIKZQA2cALC
      */
 
     private int stepNum;
     private int rank;
+    private int likeNum;
+    private int stepNumId;
     private String userName;
     private String image;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public void setStepNum(int stepNum) {
         this.stepNum = stepNum;
@@ -39,8 +36,20 @@ public class StepRank {
         this.rank = rank;
     }
 
+    public void setLikeNum(int likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public void setStepNumId(int stepNumId) {
+        this.stepNumId = stepNumId;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getStepNum() {
@@ -51,7 +60,19 @@ public class StepRank {
         return rank;
     }
 
+    public int getLikeNum() {
+        return likeNum;
+    }
+
+    public int getStepNumId() {
+        return stepNumId;
+    }
+
     public String getUserName() {
         return userName;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

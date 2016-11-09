@@ -22,7 +22,7 @@ import java.io.IOException;
 public class PhotoUtils {
     public static DisplayImageOptions avatarImage = new DisplayImageOptions.Builder()
             .showImageOnLoading(R.drawable.ic_defaluat)
-            .showImageForEmptyUri(R.drawable.ic_defaluat)
+            .showImageForEmptyUri(R.drawable.no_emrrn)
             .showImageOnFail(R.drawable.ic_defaluat)
             .cacheInMemory(true)
             .cacheOnDisc(true)

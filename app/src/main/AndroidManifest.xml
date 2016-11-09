@@ -321,7 +321,10 @@
         <activity android:name=".activities.PrivaDoctorActivity" />
         <activity android:name=".activities.SlowAidActivity" />
         <activity android:name=".activities.SlowAidDetailActivity" />
-        <activity android:name=".activities.PopupActivity" android:theme="@style/DialogTheme1"/>
+        <activity
+            android:name=".activities.PopupActivity"
+            android:theme="@style/DialogTheme1" />
+        <activity android:name=".activities.CommentActivity"></activity>
     </application>
 
 </manifest>

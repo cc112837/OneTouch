@@ -29,15 +29,16 @@ public class PopupActivity extends Activity {
     private String time;
     private String data;
     private String content;
-    private Handler handler=new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 267:
-                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    Toast.makeText(PopupActivity.this, "提交成功，请注意接听电话", Toast.LENGTH_LONG).show();
                     finish();
-                break;
+                    break;
             }
         }
     };
@@ -48,10 +49,10 @@ public class PopupActivity extends Activity {
         setContentView(R.layout.activity_popup);
         Intent intent = getIntent();
         content = intent.getStringExtra("content");
-        Window window=getWindow();
+        Window window = getWindow();
         WindowManager.LayoutParams wl = window.getAttributes();
-        wl.flags=WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
-        wl.alpha=1.0f;   // 　　这句就是设置窗口里控件的透明度的．０.０全透明．１.０不透明．
+        wl.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+        wl.alpha = 1.0f;   // 　　这句就是设置窗口里控件的透明度的．０.０全透明．１.０不透明．
         window.setAttributes(wl);
         init();
     }
@@ -95,16 +96,16 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String phone = et_phone.getText().toString();
-                if(phone.length()!=11){
-                    Toast.makeText(PopupActivity.this,"请输入正确的手机号",Toast.LENGTH_LONG).show();
+                if (phone.length() != 11) {
+                    Toast.makeText(PopupActivity.this, "请输入正确的手机号", Toast.LENGTH_LONG).show();
                 }
-                String url= Constants.SERVER_URL+"MedicalCommonConsultServlet";
-                TiUser user=new TiUser();
+                String url = Constants.SERVER_URL + "MedicalCommonConsultServlet";
+                TiUser user = new TiUser();
                 user.setName(content);
                 user.setTel(phone);
                 user.setPass(data);
                 user.setCardId(time);
-                MyHttpUtils.handData(handler,267,url,user);
+                MyHttpUtils.handData(handler, 267, url, user);
             }
         });
     }

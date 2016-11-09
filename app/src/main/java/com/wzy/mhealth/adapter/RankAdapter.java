@@ -1,6 +1,7 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,15 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.AllStepRank;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,12 +35,13 @@ import java.util.List;
 public class RankAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
-    private List<String> flag= new ArrayList<>();
     private List<AllStepRank.DataEntity> list;
-    public RankAdapter(Context context,List<AllStepRank.DataEntity> list) {
+    private Handler handler;
+    public RankAdapter(Context context,List<AllStepRank.DataEntity> list,Handler handler) {
         mInflater = LayoutInflater.from(context);
         this.list=list;
         this.context=context;
+        this.handler=handler;
     }
     public void setList(List<AllStepRank.DataEntity> list){
         this.list=list;
@@ -57,8 +62,8 @@ public class RankAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder ;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final ViewHolder viewHolder ;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.list_item_tank, null);
@@ -75,19 +80,23 @@ public class RankAdapter extends BaseAdapter {
         viewHolder.tv_name.setText(""+list.get(position).getUserName());
         viewHolder.tv_rank.setText(position+1+"");
         viewHolder.tv_dastep.setText(""+list.get(position).getStepNum());
-        viewHolder.tv_count.setText(""+"0");
-        viewHolder.cb_prasid.setTag(R.id.cb_prasid, position);
+        viewHolder.tv_count.setText("" + list.get(position).getLikeNum());
+        viewHolder.cb_prasid.setChecked(list.get(position).isLike());
         ImageLoader.getInstance().displayImage(list.get(position).getImage(), viewHolder.iv_tank, PhotoUtils.avatarImageOption);
-        viewHolder.cb_prasid.setChecked(flag.contains(position + ""));
         viewHolder.cb_prasid.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int position = (int) buttonView.getTag(R.id.cb_prasid);
                 if (isChecked) {
-                    flag.add(position + "");
+                    viewHolder.tv_count.setText(1+ list.get(position).getLikeNum()+"");
                 } else {
-                    flag.remove(position + "");
+                    if(list.get(position).getLikeNum()>=1)
+                    viewHolder.tv_count.setText(list.get(position).getLikeNum() - 1 + "");
                 }
+                String url= Constants.SERVER_URL+"LikeNumServlet";
+                TiUser user=new TiUser();
+                user.setName(LeanchatUser.getCurrentUser().getUsername()+"");
+                user.setCardId(list.get(position).getStepNumId()+"");
+                MyHttpUtils.handData(handler,268,url,user);
             }
         });
         return convertView;
@@ -99,7 +108,5 @@ public class RankAdapter extends BaseAdapter {
         public  TextView tv_count;
         public CheckBox cb_prasid;
         public ImageView iv_tank;
-
-
     }
 }
