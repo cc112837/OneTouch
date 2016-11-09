@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="gjksdg;fd"
+                android:text=""
                 android:textColor="@color/red"
                 android:textSize="22sp" />
         </LinearLayout>
@@ -75,8 +75,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
             android:text="10000"
-            android:textColor="@color/title_green"
-            android:textSize="22sp" />
+            android:textColor="#30f247"
+            android:textSize="28sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"

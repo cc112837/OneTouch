@@ -45,9 +45,14 @@ public class RankActivity extends Activity {
             switch (msg.what) {
                 case 123:
                     StepRank stepRank = (StepRank) msg.obj;
-                    tv_rankmy.setText(stepRank.getRank()+1 + "");
+                    tv_rankmy.setText(stepRank.getRank() + 1 + "");
                     tv_daystep.setText(stepRank.getStepNum() + "");
-                    tv_count.setText(stepRank.getLikeNum()+"");
+                    tv_count.setText(stepRank.getLikeNum() + "");
+                    if (stepRank.getLikeNum() > 0) {
+                        cb_prasid.setChecked(true);
+                    } else {
+                        cb_prasid.setChecked(false);
+                    }
                     cb_prasid.setEnabled(false);
                     ImageLoader.getInstance().displayImage(stepRank.getImage(), iv_mytank, PhotoUtils.avatarImageOption);
                     break;
@@ -59,7 +64,7 @@ public class RankActivity extends Activity {
                     rankAdapter.notifyDataSetChanged();
                     break;
                 case 268:
-                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    StepInfo stepInfo = (StepInfo) msg.obj;
                     break;
             }
         }
@@ -85,12 +90,12 @@ public class RankActivity extends Activity {
 
         lv_show = (ListView) findViewById(R.id.lv_show);
         String uri = Constants.SERVER_URL + "StepNumRankServlet";
-        rankAdapter = new RankAdapter(RankActivity.this, list,handler);
+        rankAdapter = new RankAdapter(RankActivity.this, list, handler);
         lv_show.setAdapter(rankAdapter);
         MyHttpUtils.handData(handler, 124, uri, user);
         View headview = LayoutInflater.from(RankActivity.this).inflate(R.layout.list_rank_header, null);
         lv_show.addHeaderView(headview);
-        ll_see = (LinearLayout)headview.findViewById(R.id.ll_see);
+        ll_see = (LinearLayout) headview.findViewById(R.id.ll_see);
         tv_who = (TextView) headview.findViewById(R.id.tv_who);
         iv_mytank = (ImageView) headview.findViewById(R.id.iv_mytank);
         tv_rankmy = (TextView) headview.findViewById(R.id.tv_rankmy);
@@ -109,7 +114,7 @@ public class RankActivity extends Activity {
         ll_see.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(RankActivity.this,CommentActivity.class);
+                Intent intent = new Intent(RankActivity.this, CommentActivity.class);
                 startActivity(intent);
             }
         });

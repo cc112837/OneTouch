@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class RegActivity extends BaActivity implements View.OnClickListener{
+public class RegActivity extends BaActivity implements View.OnClickListener {
     private EditText et_phone, et_code;
     private Button Message_btn, register_btn;
     private Button btn_back;
@@ -41,7 +41,7 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
-        Intent intent=getIntent();
+        Intent intent = getIntent();
         flag = intent.getStringExtra("flag");
         initSms();
         initView();
@@ -61,11 +61,12 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
         register_btn = (Button) findViewById(R.id.register_btn);
         btn_back = (Button) findViewById(R.id.btn_back);
     }
-   private Handler handler=new Handler(){
+
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 180:
                     final ForgetPass forgetPass = (ForgetPass) msg.obj;
                     if (forgetPass.getStatus().equals("1")) {
@@ -82,10 +83,10 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
                                             JSONObject object = new JSONObject(responseInfo.result.toString());
                                             String s = object.getString("status");
                                             if ("200".equals(s)) {
-                                                Intent intent=new Intent(RegActivity.this,CheckActivity.class);
-                                                intent.putExtra("phone",userPhone+"");
-                                                intent.putExtra("pass",forgetPass.getPassword()+"");
-                                                intent.putExtra("flag",flag+"");
+                                                Intent intent = new Intent(RegActivity.this, CheckActivity.class);
+                                                intent.putExtra("phone", userPhone + "");
+                                                intent.putExtra("pass", forgetPass.getPassword() + "");
+                                                intent.putExtra("flag", flag + "");
                                                 startActivity(intent);
                                                 finish();
                                             } else {
@@ -111,6 +112,7 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
             }
         }
     };
+
     private void initSms() {
         SMSSDK.initSDK(this, "159b5bdf78770", "fb8e5913caefd25208c85911cc52bd82");
 
@@ -167,10 +169,14 @@ public class RegActivity extends BaActivity implements View.OnClickListener{
                 }
                 break;
             case R.id.register_btn:
-                String uri = Constants.SERVER_URL + "MhealthUserOldPasswordServlet";
-                TiUser user = new TiUser();
-                user.setName(userPhone + "");
-                MyHttpUtils.handData(handler, 180, uri, user);
+                if ((userPhone.length() == 11) && (phonecode.length() == 4)) {
+                    String uri = Constants.SERVER_URL + "MhealthUserOldPasswordServlet";
+                    TiUser user = new TiUser();
+                    user.setName(userPhone + "");
+                    MyHttpUtils.handData(handler, 180, uri, user);
+                } else {
+                    Toast.makeText(this, "请确保手机号码和验证码输入正确", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btn_back:
                 finish();
