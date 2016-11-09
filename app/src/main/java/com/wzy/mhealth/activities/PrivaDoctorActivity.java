@@ -22,14 +22,14 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
     private ImageView leftBtn;
     private WebView wv_show;
     private Button btn_select;
-
+    private BingZhen bingZhen;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 265:
-                    BingZhen bingZhen = (BingZhen) msg.obj;
+                    bingZhen = (BingZhen) msg.obj;
                     WebSettings webSettings = wv_show.getSettings();
                     webSettings.setUseWideViewPort(true);
                     webSettings.setLoadWithOverviewMode(true);
@@ -43,6 +43,7 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
             }
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,7 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
                 break;
             case R.id.btn_select:
                 Intent intent = new Intent(PrivaDoctorActivity.this, PopupActivity.class);
+                intent.putExtra("content",bingZhen.getData().get(0).getId()+"");
                 startActivity(intent);
                 break;
         }

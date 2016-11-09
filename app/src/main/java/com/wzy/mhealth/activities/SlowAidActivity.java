@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -44,6 +43,7 @@ public class SlowAidActivity extends Activity {
 
                             Intent intent=new Intent(SlowAidActivity.this,SlowAidDetailActivity.class);
                             intent.putExtra("detail",bingZhen.getData().get(position).getDetails());
+                            intent.putExtra("id",bingZhen.getData().get(position).getId()+"");
                             startActivity(intent);
                         }
                     });
@@ -76,21 +76,5 @@ public class SlowAidActivity extends Activity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        setBackgroundAlpha(0.5f);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setBackgroundAlpha(1.0f);
-    }
-    public void setBackgroundAlpha(float bgAlpha) {
-        WindowManager.LayoutParams lp = getWindow()
-                .getAttributes();
-        lp.alpha = bgAlpha;
-        getWindow().setAttributes(lp);
-    }
 }

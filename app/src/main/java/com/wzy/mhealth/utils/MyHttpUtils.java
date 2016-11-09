@@ -357,5 +357,13 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("imgUrl", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
+        if (what == 267) {
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("id", ((TiUser) object).getName());
+            params.addBodyParameter("orderTime", ((TiUser) object).getPass());
+            params.addBodyParameter("order", ((TiUser) object).getCardId());
+            params.addBodyParameter("telephone", ((TiUser) object).getTel());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class SlowAidDetailActivity extends Activity {
         });
         Intent intent = getIntent();
         String detail = intent.getStringExtra("detail");
+        final String id=intent.getStringExtra("id");
         WebSettings webSettings = wv_show.getSettings();
         webSettings.setUseWideViewPort(true);
         webSettings.setTextZoom(120);
@@ -39,8 +41,26 @@ public class SlowAidDetailActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(SlowAidDetailActivity.this,PopupActivity.class);
+                intent.putExtra("content",id);
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        setBackgroundAlpha(0.5f);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setBackgroundAlpha(1.0f);
+    }
+    public void setBackgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow()
+                .getAttributes();
+        lp.alpha = bgAlpha;
+        getWindow().setAttributes(lp);
     }
 }

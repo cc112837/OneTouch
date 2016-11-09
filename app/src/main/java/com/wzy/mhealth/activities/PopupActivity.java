@@ -1,8 +1,10 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class PopupActivity extends Activity {
     private Spinner sp_time;
@@ -21,13 +27,27 @@ public class PopupActivity extends Activity {
     private TextView tv_cancle;
     private TextView tv_confirm;
     private String time;
-    private AdapterView.OnItemSelectedListener listener;
     private String data;
+    private String content;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 267:
+                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    finish();
+                break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup);
+        Intent intent = getIntent();
+        content = intent.getStringExtra("content");
         Window window=getWindow();
         WindowManager.LayoutParams wl = window.getAttributes();
         wl.flags=WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
@@ -75,8 +95,16 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String phone = et_phone.getText().toString();
-                Toast.makeText(PopupActivity.this,data + "***" + time + "dianhua" + phone,Toast.LENGTH_LONG).show();
-                Log.e("jieguoshi", data + "***" + time + "dianhua" + phone);
+                if(phone.length()!=11){
+                    Toast.makeText(PopupActivity.this,"请输入正确的手机号",Toast.LENGTH_LONG).show();
+                }
+                String url= Constants.SERVER_URL+"MedicalCommonConsultServlet";
+                TiUser user=new TiUser();
+                user.setName(content);
+                user.setTel(phone);
+                user.setPass(data);
+                user.setCardId(time);
+                MyHttpUtils.handData(handler,267,url,user);
             }
         });
     }
