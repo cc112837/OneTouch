@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -16,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avoscloud.leanchatlib.utils.PhotoUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Retuback;
@@ -30,7 +31,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
     private EditText et_comment;
     int grade=5;
     private LinearLayout ll_ordercom;
-    String id, name, price, bought, status, creat, num, account, orderid;
+    String id, name, price, bought, status, creat, num, account, orderid,image;
     Intent intent;
 
     @Override
@@ -46,8 +47,8 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
         creat = intent.getStringExtra("creat");
         status = intent.getStringExtra("status");
         num = intent.getStringExtra("num");//订单编号
-        account = intent.getStringExtra("account");//流水号
         orderid = intent.getStringExtra("orderid");
+        image=intent.getStringExtra("image");
         init();
     }
 
@@ -56,6 +57,8 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
         tv_orderstatus = (TextView) findViewById(R.id.tv_orderstatus);
         tv_ordersubmit = (TextView) findViewById(R.id.tv_ordersubmit);
         tv_ordersubmit.setOnClickListener(this);
+        iv_taointro=(ImageView) findViewById(R.id.iv_taointro);
+        ImageLoader.getInstance().displayImage(image,iv_taointro, PhotoUtils.avatarImage);
         et_comment = (EditText) findViewById(R.id.et_comment);
         iv_1 = (CheckBox) findViewById(R.id.iv_1);
         iv_2 = (CheckBox) findViewById(R.id.iv_2);
@@ -126,7 +129,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
             ll_ordercom.setVisibility(View.VISIBLE);
             back_money.setEnabled(false);
             back_money.setBackgroundResource(R.drawable.btn_default_small_normal_disable);
-            tv_orderstatus.setText("已体检");
+            tv_orderstatus.setText("已完成");
             back_money.setText("订单完成");
             back_money.setVisibility(View.INVISIBLE);
 

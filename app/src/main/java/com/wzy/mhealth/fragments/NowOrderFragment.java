@@ -54,7 +54,7 @@ public class NowOrderFragment extends Fragment {
                                 intent.putExtra("creat", list.get(position).getCreateTime() + "");
                                 intent.putExtra("num", list.get(position).getShopOrder() + "");
                                 intent.putExtra("orderid", list.get(position).getOrderId() + "");
-                                intent.putExtra("account", list.get(position).getShopNumber() + "");
+                                intent.putExtra("image", list.get(position).getImage() + "");
                                 startActivityForResult(intent, 345);
                             }
                         });

@@ -16,16 +16,17 @@ public class OrderInfo {
 
 
     /**
-     * createTime : 2016-09-19 15:14:50.0
-     * shopNumber : 2016091921001004430266499957
+     * createTime : 2016-09-18 13:41:27
+     * shopNumber : null
      * payMoney : 0.01
-     * status : 0
-     * tradeTime : 2016-09-19 15:13:57.0
+     * status : 1
+     * tradeTime : 2016-09-18 13:41:23
      * shopName : ceishi
      * shopId : 6
-     * OrderId : 10
+     * OrderId : 4
      * userName : 18369956786
-     * shopOrder : 091915143358521
+     * image : 1475220119774.png
+     * shopOrder : 0918134113-1250
      */
 
     private List<DataEntity> data;
@@ -40,23 +41,20 @@ public class OrderInfo {
 
     public static class DataEntity {
         private String createTime;
-        private String shopNumber;
         private double payMoney;
         private int status;
         private String tradeTime;
         private String shopName;
         private int shopId;
-        private int OrderId;
+        private int orderId;
         private String userName;
+        private String image;
         private String shopOrder;
 
         public void setCreateTime(String createTime) {
             this.createTime = createTime;
         }
 
-        public void setShopNumber(String shopNumber) {
-            this.shopNumber = shopNumber;
-        }
 
         public void setPayMoney(double payMoney) {
             this.payMoney = payMoney;
@@ -78,12 +76,16 @@ public class OrderInfo {
             this.shopId = shopId;
         }
 
-        public void setOrderId(int OrderId) {
-            this.OrderId = OrderId;
+        public void setOrderId(int orderId) {
+            this.orderId = orderId;
         }
 
         public void setUserName(String userName) {
             this.userName = userName;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
         }
 
         public void setShopOrder(String shopOrder) {
@@ -94,9 +96,6 @@ public class OrderInfo {
             return createTime;
         }
 
-        public String getShopNumber() {
-            return shopNumber;
-        }
 
         public double getPayMoney() {
             return payMoney;
@@ -119,16 +118,19 @@ public class OrderInfo {
         }
 
         public int getOrderId() {
-            return OrderId;
+            return orderId;
         }
 
         public String getUserName() {
             return userName;
         }
 
+        public String getImage() {
+            return image;
+        }
+
         public String getShopOrder() {
             return shopOrder;
         }
     }
-
 }
