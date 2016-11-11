@@ -22,7 +22,7 @@
     <RelativeLayout
         android:id="@+id/title1"
         android:layout_width="fill_parent"
-        android:layout_height="75dp"
+        android:layout_height="70dp"
         android:background="@color/transparent"
         android:gravity="center_vertical"
         android:paddingTop="25dp">
