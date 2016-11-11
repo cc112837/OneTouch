@@ -170,7 +170,7 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 131) {
             TiUser user = (TiUser) object;
-            params.addBodyParameter("OrderId", user.getTel());
+            params.addBodyParameter("orderId", user.getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
         }
         if (what == 150) {
@@ -330,11 +330,11 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ReDefine(), handler, what));
         }
         if (what == 262) {
-            params.addBodyParameter("OrderId", ((TiUser) object).getName());
+            params.addBodyParameter("orderId", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 263) {
-            params.addBodyParameter("OrderId", ((TiUser) object).getName());
+            params.addBodyParameter("orderId", ((TiUser) object).getName());
             params.addBodyParameter("satisify", ((TiUser) object).getTel());
             params.addBodyParameter("evaluate", ((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
