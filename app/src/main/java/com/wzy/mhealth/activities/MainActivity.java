@@ -27,6 +27,7 @@ import com.wzy.mhealth.fragments.FriendFragment;
 import com.wzy.mhealth.fragments.HomeNewFragment;
 import com.wzy.mhealth.fragments.MyFragment;
 import com.wzy.mhealth.fragments.NewsFragment;
+import com.wzy.mhealth.fragments.ShopFragment;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton main_home;
     private RadioButton main_friend;
     private RadioButton main_my;
-    private RadioButton main_news;
+    private RadioButton main_news,main_shop;
     private Fragment fragment;
     private TextView countView;
     private RadioGroup main_tabBar;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         main_tabBar = ((RadioGroup) findViewById(R.id.main_tabBar));
         main_tabBar.check(R.id.main_home);
         fragment = null;
+        main_shop=(RadioButton) findViewById(R.id.main_shop);
         main_home = (RadioButton) findViewById(R.id.main_home);
         main_friend = (RadioButton) findViewById(R.id.main_friend);
         main_my = (RadioButton) findViewById(R.id.main_my);
@@ -102,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.main_news:
                         fragment = new NewsFragment();
+                        break;
+                    case R.id.main_shop:
+                        fragment = new ShopFragment();
                         break;
                     case R.id.main_friend:
                         fragment = new FriendFragment();
