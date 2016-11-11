@@ -54,11 +54,12 @@ public class MsgActivity extends BaseActivity {
         titleView.setText("消息列表");
         back();
         conversationManager = ConversationManager.getInstance();
-        //// TODO: 2016/2/22 (修改)
+
         imClientStateView =View.inflate(getApplicationContext(),R.layout.chat_client_state_view,null);
         listView = (ListView) findViewById(R.id.fragment_conversation_srl_view);
         itemAdapter = new ConversationListAdapter(this);
         listView.setAdapter(itemAdapter);
+        itemAdapter.notifyDataSetChanged();
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -88,14 +89,12 @@ public class MsgActivity extends BaseActivity {
     }
 
     private void back() {
-        // TODO Auto-generated method stub
         ImageView imageback = (ImageView) findViewById(R.id.leftBtn_back);
 
         imageback.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 finish();
             }
         });
