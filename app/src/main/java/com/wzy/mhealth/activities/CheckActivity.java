@@ -103,78 +103,76 @@ public class CheckActivity extends Activity implements View.OnClickListener {
             case R.id.check_btn:
                 if (pass.length() < 6 || again.length() < 6) {
                     Toast.makeText(this, "请输入6位或者6位以上密码", Toast.LENGTH_SHORT).show();
-                }
-                if (!pass.equals(again)) {
+                } else if (!pass.equals(again)) {
                     Toast.makeText(this, "请确认密码是否输入一致", Toast.LENGTH_SHORT).show();
-
-                }
-                if ("reg".equals(flag)) {
-                    LeanchatUser.signUpByNameAndPwdAndProperty(userPhone, pass, "user", new SignUpCallback() {
-                        @Override
-                        public void done(AVException e) {
-                            if (e != null) {
-                                Utils.toast(MyApplication.getInstance().getString(
-                                        R.string.registerFailed)
-                                        + e.getMessage());
-                            } else {
-                                String url = Constants.SERVER_URL + "MhealthUserRegisterServlet";
-                                TiUser user = new TiUser();
-                                user.setName(userPhone + "");
-                                user.setPass(pass + "");
-                                MyHttpUtils.handData(handler, 155, url, user);
-                            }
-                        }
-                    });
                 } else {
-                    LeanchatUser.logInInBackground(userPhone, forpass,
-                            new LogInCallback<LeanchatUser>() {
-                                @Override
-                                public void done(LeanchatUser avUser, AVException e) {
-                                    if (e == null) {
-                                        AVUser aUser = AVUser.getCurrentUser();
-                                        aUser.get("property");
-                                        if (aUser.get("property").equals("user")) {
-                                            // 第二个参数：登录标记 Tag
-                                            ChatManager chatManager = ChatManager.getInstance();
-                                            chatManager.setupManagerWithUserId(AVUser.getCurrentUser().getObjectId());
-                                            chatManager.openClient(null);
-                                            aUser.updatePasswordInBackground(forpass, pass,
-                                                    new UpdatePasswordCallback() {
+                    if ("reg".equals(flag)) {
+                        LeanchatUser.signUpByNameAndPwdAndProperty(userPhone, pass, "user", new SignUpCallback() {
+                            @Override
+                            public void done(AVException e) {
+                                if (e != null) {
+                                    Utils.toast(MyApplication.getInstance().getString(
+                                            R.string.registerFailed)
+                                            + e.getMessage());
+                                } else {
+                                    String url = Constants.SERVER_URL + "MhealthUserRegisterServlet";
+                                    TiUser user = new TiUser();
+                                    user.setName(userPhone + "");
+                                    user.setPass(pass + "");
+                                    MyHttpUtils.handData(handler, 155, url, user);
+                                }
+                            }
+                        });
+                    } else {
+                        LeanchatUser.logInInBackground(userPhone, forpass,
+                                new LogInCallback<LeanchatUser>() {
+                                    @Override
+                                    public void done(LeanchatUser avUser, AVException e) {
+                                        if (e == null) {
+                                            AVUser aUser = AVUser.getCurrentUser();
+                                            aUser.get("property");
+                                            if (aUser.get("property").equals("user")) {
+                                                // 第二个参数：登录标记 Tag
+                                                ChatManager chatManager = ChatManager.getInstance();
+                                                chatManager.setupManagerWithUserId(AVUser.getCurrentUser().getObjectId());
+                                                chatManager.openClient(null);
+                                                aUser.updatePasswordInBackground(forpass, pass,
+                                                        new UpdatePasswordCallback() {
 
-                                                        @Override
-                                                        public void done(AVException arg0) {
-                                                            if (arg0 == null) {
-                                                                String uti = Constants.SERVER_URL + "MhealthUserPasswordServlet";
-                                                                TiUser user1 = new TiUser();
-                                                                user1.setName(userPhone);
-                                                                user1.setPass(pass);
-                                                                MyHttpUtils.handData(handler, 181, uti, user1);
-                                                            } else
-                                                                Tool.initToast(getApplicationContext(),
-                                                                        "设置密码失败");
-                                                        }
-                                                    });
+                                                            @Override
+                                                            public void done(AVException arg0) {
+                                                                if (arg0 == null) {
+                                                                    String uti = Constants.SERVER_URL + "MhealthUserPasswordServlet";
+                                                                    TiUser user1 = new TiUser();
+                                                                    user1.setName(userPhone);
+                                                                    user1.setPass(pass);
+                                                                    MyHttpUtils.handData(handler, 181, uti, user1);
+                                                                } else
+                                                                    Tool.initToast(getApplicationContext(),
+                                                                            "设置密码失败");
+                                                            }
+                                                        });
 
-                                        } else {
-                                            ChatManager chatManager = ChatManager.getInstance();
-                                            chatManager.closeWithCallback(new AVIMClientCallback() {
-                                                @Override
-                                                public void done(AVIMClient avimClient, AVIMException e) {
-                                                }
-                                            });
-                                            PushManager.getInstance().unsubscribeCurrentUserChannel();
-                                            AVUser.logOut();
+                                            } else {
+                                                ChatManager chatManager = ChatManager.getInstance();
+                                                chatManager.closeWithCallback(new AVIMClientCallback() {
+                                                    @Override
+                                                    public void done(AVIMClient avimClient, AVIMException e) {
+                                                    }
+                                                });
+                                                PushManager.getInstance().unsubscribeCurrentUserChannel();
+                                                AVUser.logOut();
+                                                Tool.initToast(CheckActivity.this,
+                                                        getResources().getString(R.string.login_error));
+                                            }
+                                        } else
                                             Tool.initToast(CheckActivity.this,
                                                     getResources().getString(R.string.login_error));
-                                        }
-                                    } else
-                                        Tool.initToast(CheckActivity.this,
-                                                getResources().getString(R.string.login_error));
-                                }
-                            }, LeanchatUser.class);
+                                    }
+                                }, LeanchatUser.class);
 
+                    }
                 }
-
                 break;
         }
     }

@@ -170,10 +170,47 @@ public class RegActivity extends BaActivity implements View.OnClickListener {
                 break;
             case R.id.register_btn:
                 if ((userPhone.length() == 11) && (phonecode.length() == 4)) {
-                    String uri = Constants.SERVER_URL + "MhealthUserOldPasswordServlet";
-                    TiUser user = new TiUser();
-                    user.setName(userPhone + "");
-                    MyHttpUtils.handData(handler, 180, uri, user);
+                    if (flag.equals("reg")) {
+                        RequestParams params = new RequestParams();
+                        params.addBodyParameter("appkey", "159b5bdf78770");
+                        params.addBodyParameter("phone", userPhone);
+                        params.addBodyParameter("zone", "86");
+                        params.addBodyParameter("code", phonecode);
+                        new HttpUtils().send(HttpRequest.HttpMethod.POST, "https://webapi.sms.mob.com/sms/verify",
+                                params, new RequestCallBack<Object>() {
+                                    @Override
+                                    public void onSuccess(ResponseInfo<Object> responseInfo) {
+                                        try {
+                                            JSONObject object = new JSONObject(responseInfo.result.toString());
+                                            String s = object.getString("status");
+                                            if ("200".equals(s)) {
+                                                Intent intent = new Intent(RegActivity.this, CheckActivity.class);
+                                                intent.putExtra("phone", userPhone + "");
+                                                intent.putExtra("pass",  "");
+                                                intent.putExtra("flag", flag + "");
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Toast.makeText(RegActivity.this, "验证失败", Toast.LENGTH_LONG).show();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(HttpException error, String msg) {
+                                    }
+                                });
+                    } else {
+                        String uri = Constants.SERVER_URL + "MhealthUserOldPasswordServlet";
+                        TiUser user = new TiUser();
+                        user.setName(userPhone + "");
+                        MyHttpUtils.handData(handler, 180, uri, user);
+                    }
+
                 } else {
                     Toast.makeText(this, "请确保手机号码和验证码输入正确", Toast.LENGTH_SHORT).show();
                 }

@@ -27,7 +27,6 @@ import com.wzy.mhealth.fragments.FriendFragment;
 import com.wzy.mhealth.fragments.HomeNewFragment;
 import com.wzy.mhealth.fragments.MyFragment;
 import com.wzy.mhealth.fragments.NewsFragment;
-import com.wzy.mhealth.fragments.ShopFragment;
 
 import java.util.List;
 
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new NewsFragment();
                         break;
                     case R.id.main_shop:
-                        fragment = new ShopFragment();
+                        fragment = new HomeNewFragment();
                         break;
                     case R.id.main_friend:
                         fragment = new FriendFragment();
