@@ -85,7 +85,7 @@
                 android:text="商城"
                 android:textColor="@drawable/selector_textcolor"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                />
 
             <RadioButton
                 android:id="@+id/main_friend"
