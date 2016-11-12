@@ -2,7 +2,6 @@ package com.wzy.mhealth.LeanChat.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,10 +61,11 @@ public class ConversationListAdapter extends ArrayAdapter<Room> {
 
         final Room room = getItem(position);
         AVIMConversation conversation = room.getConversation();
-
-        if (new Date().getTime() - room.getLastMessage().getTimestamp() > 24 * 60 * 60 * 1000) {
-            ChatManager.getInstance().getRoomsTable()
-                    .deleteRoom(room.getConversationId());
+        if ( null!=room.getLastMessage()) {
+            if (new Date().getTime() - room.getLastMessage().getTimestamp() > 24 * 60 * 60 * 1000) {
+                ChatManager.getInstance().getRoomsTable()
+                        .deleteRoom(room.getConversationId());
+            }
         }
 
         if (null != conversation) {
