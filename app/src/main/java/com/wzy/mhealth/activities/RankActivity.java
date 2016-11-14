@@ -45,7 +45,7 @@ public class RankActivity extends Activity {
             switch (msg.what) {
                 case 123:
                     StepRank stepRank = (StepRank) msg.obj;
-                    tv_rankmy.setText(stepRank.getRank() + 1 + "");
+                    tv_rankmy.setText(stepRank.getRank()+ "");
                     tv_daystep.setText(stepRank.getStepNum() + "");
                     tv_count.setText(stepRank.getLikeNum() + "");
                     if (stepRank.getLikeNum() > 0) {

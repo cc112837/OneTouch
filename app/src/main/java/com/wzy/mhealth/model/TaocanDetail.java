@@ -12,22 +12,23 @@ package com.wzy.mhealth.model;
  */
 public class TaocanDetail {
 
+
     /**
-     * id : 1
+     * taoId : 1
      * oldPrice : 228
      * newPrice : 79
      * name : 入职套餐
-     * context : http://localhost:8080/mhealth/upload/upload\160829023423542.png
+     * context : 11
      */
 
-    private int id;
-    private double oldPrice;
-    private double newPrice;
+    private int taoId;
+    private int oldPrice;
+    private int newPrice;
     private String name;
     private String context;
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTaoId(int taoId) {
+        this.taoId = taoId;
     }
 
     public void setOldPrice(int oldPrice) {
@@ -46,15 +47,15 @@ public class TaocanDetail {
         this.context = context;
     }
 
-    public int getId() {
-        return id;
+    public int getTaoId() {
+        return taoId;
     }
 
-    public double getOldPrice() {
+    public int getOldPrice() {
         return oldPrice;
     }
 
-    public double getNewPrice() {
+    public int getNewPrice() {
         return newPrice;
     }
 

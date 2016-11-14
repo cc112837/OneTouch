@@ -26,6 +26,8 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private void init(View v) {
         leftBtn = (ImageView) v.findViewById(R.id.leftBtn);
         rightBtn = (ImageView) v.findViewById(R.id.rightBtn);
+        leftBtn.setOnClickListener(this);
+        rightBtn.setOnClickListener(this);
     }
 
 

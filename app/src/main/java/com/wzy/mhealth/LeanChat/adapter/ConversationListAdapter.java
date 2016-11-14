@@ -62,7 +62,7 @@ public class ConversationListAdapter extends ArrayAdapter<Room> {
         final Room room = getItem(position);
         AVIMConversation conversation = room.getConversation();
         if ( null!=room.getLastMessage()) {
-            if (new Date().getTime() - room.getLastMessage().getTimestamp() > 24 * 60 * 60 * 1000) {
+            if (new Date().getTime() - room.getConversation().getCreatedAt().getTime() > 24 * 60 * 60 * 1000) {
                 ChatManager.getInstance().getRoomsTable()
                         .deleteRoom(room.getConversationId());
             }
@@ -78,7 +78,6 @@ public class ConversationListAdapter extends ArrayAdapter<Room> {
                 if (null != user) {
                     ImageLoader.getInstance().displayImage(user.getAvatarUrl(),
                             vh.recentAvatarView, PhotoUtils.avatarImageOptions);
-
                     if (user.getUsername().equals("mdoctor"))
                         vh.recentNameView.setText("一点医生");
                 }

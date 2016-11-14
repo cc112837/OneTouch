@@ -41,7 +41,7 @@ public class TaocanDetailAcitivty extends Activity {
                             intent1.putExtra("name", taocanDetail.getName() + "");
                             intent1.putExtra("price", taocanDetail.getNewPrice() + "");
                             intent1.putExtra("old", taocanDetail.getOldPrice() + "");
-                            intent1.putExtra("id", taocanDetail.getId() + "");
+                            intent1.putExtra("id", taocanDetail.getTaoId() + "");
                             setResult(456, intent);
                             startActivity(intent1);
                             TaocanDetailAcitivty.this.finish();
