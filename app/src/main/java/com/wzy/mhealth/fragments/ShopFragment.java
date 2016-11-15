@@ -1,6 +1,7 @@
 package com.wzy.mhealth.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,10 +12,11 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.CartActivity;
+import com.wzy.mhealth.activities.ShoporderActivity;
 import com.wzy.mhealth.adapter.ShopAdapter;
 import com.wzy.mhealth.model.Shop;
 
@@ -22,21 +24,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShopFragment extends Fragment implements View.OnClickListener {
-    private ImageView leftBtn, rightBtn,shop_header;
+    private ImageView leftBtn, rightBtn, shop_header;
     private TextView tv_count;
-    private List<Shop.DataEntity>list=new ArrayList<>();
+    private List<Shop.DataEntity> list = new ArrayList<>();
     private ShopAdapter shopAdapter;
     private GridView gv_shop;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 270:
                     tv_count.setText("");
-                    ImageLoader.getInstance().displayImage("",shop_header);
+                    ImageLoader.getInstance().displayImage("", shop_header);
                     shopAdapter.notifyDataSetChanged();
-                break;
+                    break;
             }
         }
     };
@@ -54,8 +56,8 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         leftBtn = (ImageView) v.findViewById(R.id.leftBtn);
         rightBtn = (ImageView) v.findViewById(R.id.rightBtn);
         tv_count = (TextView) v.findViewById(R.id.tv_count);
-        shop_header=(ImageView) v.findViewById(R.id.shop_header);
-        gv_shop=(GridView) v.findViewById(R.id.gv_shop);
+        shop_header = (ImageView) v.findViewById(R.id.shop_header);
+        gv_shop = (GridView) v.findViewById(R.id.gv_shop);
         shopAdapter = new ShopAdapter(getActivity(), list);
         gv_shop.setAdapter(shopAdapter);
 //        String url= Constants.SERVER_URL+"";
@@ -67,12 +69,15 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.leftBtn:
-                Toast.makeText(getActivity(), "您点击了订单", Toast.LENGTH_LONG).show();
+                intent = new Intent(getActivity(), ShoporderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.rightBtn:
-                Toast.makeText(getActivity(), "您点击了购物车", Toast.LENGTH_LONG).show();
+                intent = new Intent(getActivity(), CartActivity.class);
+                startActivity(intent);
                 break;
         }
     }

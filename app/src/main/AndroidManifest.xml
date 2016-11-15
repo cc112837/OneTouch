@@ -326,7 +326,9 @@
             android:theme="@style/DialogTheme1" />
         <activity android:name=".activities.CommentActivity" />
         <activity android:name=".activities.AddressActivity" />
-        <activity android:name=".activities.UpdaAddressActivity"></activity>
+        <activity android:name=".activities.UpdaAddressActivity" />
+        <activity android:name=".activities.CartActivity" />
+        <activity android:name=".activities.ShoporderActivity"></activity>
     </application>
 
 </manifest>
