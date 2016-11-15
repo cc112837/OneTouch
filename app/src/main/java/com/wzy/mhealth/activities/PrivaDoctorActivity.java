@@ -34,13 +34,15 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
                     WebSettings webSettings = wv_show.getSettings();
                     webSettings.setLoadWithOverviewMode(true);
                     webSettings.setJavaScriptEnabled(true);
+                    webSettings.setUseWideViewPort(false);  //将图片调整到适合webview的大小
                     webSettings.setBuiltInZoomControls(true);
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
                     DisplayMetrics dm = new DisplayMetrics();
                     //取得窗口属性
                     getWindowManager().getDefaultDisplay().getMetrics(dm);
                     //窗口的宽度
-                    int screenWidth = dm.widthPixels/2-20;
+                    float density = dm.density;
+                    float screenWidth = dm.widthPixels/density-10;
                     wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + screenWidth + "px!important;}</style></head>" + bingZhen.getData().get(0).getDetails(), "text/html", "utf-8", null);
                     break;
             }

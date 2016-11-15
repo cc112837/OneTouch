@@ -6,8 +6,8 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -48,13 +48,16 @@ public class TaocanDetailAcitivty extends Activity {
                         }
                     });
                     WebSettings webSettings = wv_show.getSettings();
-                    webSettings.setUseWideViewPort(true);
                     webSettings.setLoadWithOverviewMode(true);
                     webSettings.setJavaScriptEnabled(true);
                     webSettings.setBuiltInZoomControls(true);
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
-                    WindowManager wm = TaocanDetailAcitivty.this.getWindowManager();
-                    int width = wm.getDefaultDisplay().getWidth()/2-10;
+                    DisplayMetrics dm = new DisplayMetrics();
+                    //取得窗口属性
+                    getWindowManager().getDefaultDisplay().getMetrics(dm);
+                    //窗口的宽度
+                    float density = dm.density;
+                    float width = dm.widthPixels/density-10;
                     wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + taocanDetail.getContext(), "text/html", "utf-8", null);
                     break;
             }

@@ -35,6 +35,7 @@ public class SlowAidDetailActivity extends Activity {
         final String id=intent.getStringExtra("id");
         WebSettings webSettings = wv_show.getSettings();
         webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(false);  //将图片调整到适合webview的大小
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(true);
         webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
@@ -42,7 +43,8 @@ public class SlowAidDetailActivity extends Activity {
         //取得窗口属性
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         //窗口的宽度
-        int screenWidth = dm.widthPixels/2-20;
+        float density = dm.density;
+        float screenWidth = dm.widthPixels/density-10;
         wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + screenWidth + "px!important;}</style></head>" +detail, "text/html", "utf-8", null);
         btn_select = (Button) findViewById(R.id.btn_select);
         btn_select.setOnClickListener(new View.OnClickListener() {
