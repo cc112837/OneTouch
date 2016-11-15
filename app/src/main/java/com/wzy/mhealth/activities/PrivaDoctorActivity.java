@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
@@ -31,14 +32,16 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
                 case 265:
                     bingZhen = (BingZhen) msg.obj;
                     WebSettings webSettings = wv_show.getSettings();
-                    webSettings.setUseWideViewPort(true);
                     webSettings.setLoadWithOverviewMode(true);
                     webSettings.setJavaScriptEnabled(true);
                     webSettings.setBuiltInZoomControls(true);
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
-                    WindowManager wm = PrivaDoctorActivity.this.getWindowManager();
-                    int width = wm.getDefaultDisplay().getWidth() / 2 - 10;
-                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px !important;}</style></head>" + bingZhen.getData().get(0).getDetails(), "text/html", "utf-8", null);
+                    DisplayMetrics dm = new DisplayMetrics();
+                    //取得窗口属性
+                    getWindowManager().getDefaultDisplay().getMetrics(dm);
+                    //窗口的宽度
+                    int screenWidth = dm.widthPixels/2-20;
+                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + screenWidth + "px!important;}</style></head>" + bingZhen.getData().get(0).getDetails(), "text/html", "utf-8", null);
                     break;
             }
         }

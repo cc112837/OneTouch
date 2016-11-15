@@ -55,7 +55,7 @@ public class TaocanDetailAcitivty extends Activity {
                     webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
                     WindowManager wm = TaocanDetailAcitivty.this.getWindowManager();
                     int width = wm.getDefaultDisplay().getWidth()/2-10;
-                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px !important;}</style></head>" + taocanDetail.getContext(), "text/html", "utf-8", null);
+                    wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + taocanDetail.getContext(), "text/html", "utf-8", null);
                     break;
             }
         }

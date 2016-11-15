@@ -3,6 +3,7 @@ package com.wzy.mhealth.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
@@ -33,9 +34,16 @@ public class SlowAidDetailActivity extends Activity {
         String detail = intent.getStringExtra("detail");
         final String id=intent.getStringExtra("id");
         WebSettings webSettings = wv_show.getSettings();
-        webSettings.setUseWideViewPort(true);
-        webSettings.setTextZoom(120);
-        wv_show.loadData(detail, "text/html; charset=utf-8", "utf-8");
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
+        DisplayMetrics dm = new DisplayMetrics();
+        //取得窗口属性
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        //窗口的宽度
+        int screenWidth = dm.widthPixels/2-20;
+        wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + screenWidth + "px!important;}</style></head>" +detail, "text/html", "utf-8", null);
         btn_select = (Button) findViewById(R.id.btn_select);
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override

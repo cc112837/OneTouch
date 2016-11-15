@@ -34,6 +34,6 @@ public class ZhixingIntroduceActivity extends BaActivity {
         });
         WindowManager wm = ZhixingIntroduceActivity.this.getWindowManager();
         int width = wm.getDefaultDisplay().getWidth()/2-20;
-        wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:"+width+"px !important;}</style></head>"+content, "text/html", "utf-8", null);
+        wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:"+width+"px!important;}</style></head>"+content, "text/html", "utf-8", null);
     }
 }
