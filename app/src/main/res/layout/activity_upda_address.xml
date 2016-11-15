@@ -190,8 +190,10 @@
                 android:id="@+id/sw_default"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:text="开"
                 android:textColor="@color/black"
+                android:thumb="@null"
+                android:track="@null"
+                android:background="@drawable/toggle_btn"
                 android:checked="true"
                 android:layout_height="wrap_content"
                 />

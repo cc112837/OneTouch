@@ -189,7 +189,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
         }
-        if (what == 152) {
+        if (what == 152) {//医生列表
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Doctor(), handler, what));
         }
         if (what == 153) {
@@ -230,7 +230,7 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 172) {
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
         }
-        if (what == 173) {
+        if (what == 173) {//套餐列表
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new TaocanEntity(), handler, what));
         }
         if (what == 180) {
@@ -370,6 +370,10 @@ public class MyHttpUtils extends HttpUtils {
         if(what==269){
             params.addBodyParameter("stepTime", ((TiUser) object).getPass());
             params.addBodyParameter("userName", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Zan(), handler, what));
+        }
+        if(what==270){//商城首页
+            params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Zan(), handler, what));
         }
     }

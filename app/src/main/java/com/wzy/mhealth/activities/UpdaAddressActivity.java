@@ -41,10 +41,10 @@ public class UpdaAddressActivity extends Activity implements View.OnClickListene
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-                if (isChecked) {
-                    sw_default.setText("开");
-                } else {
-                    sw_default.setText("关");
+                if (isChecked) {//开
+
+                } else {//关
+
                 }
             }
         });
