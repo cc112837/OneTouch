@@ -190,8 +190,11 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                                         getResources().getString(R.string.login_error));
                             }
                         } else
-                            Tool.initToast(LoginActivity.this,
-                                    getResources().getString(R.string.login_error));
+                        if (e.getCode() == 1) {
+                            Tool.initToast(LoginActivity.this, "登录错误次数已超上限,请20分钟后重试");
+                        } else {
+                            Tool.initToast(LoginActivity.this, e.getMessage());
+                        }
                     }
                 }, LeanchatUser.class);
     }

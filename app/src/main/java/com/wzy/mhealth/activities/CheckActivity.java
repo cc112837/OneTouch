@@ -165,9 +165,11 @@ public class CheckActivity extends Activity implements View.OnClickListener {
                                                 Tool.initToast(CheckActivity.this,
                                                         getResources().getString(R.string.login_error));
                                             }
-                                        } else
+                                        } else {
                                             Tool.initToast(CheckActivity.this,
-                                                    getResources().getString(R.string.login_error));
+                                                  "验证失败");
+                                        }
+
                                     }
                                 }, LeanchatUser.class);
 
