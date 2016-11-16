@@ -123,20 +123,22 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
         newid = (TextView) findViewById(R.id.newid);
         stepperCustom = (SnappingStepper) findViewById(R.id.stepperCustom);
         if(null==old){
-            stepperCustom.setEnabled(true);
+            stepperCustom.setVisibility(View.INVISIBLE);
+            tv_price.setText(Double.parseDouble(price) + "元");
         }
-        stepperCustom.setOnValueChangeListener(new SnappingStepperValueChangeListener() {
-            @Override
-            public void onValueChange(View view, int value) {
-                switch (view.getId()) {
-                    case R.id.stepperCustom:
-                        number=value;
-                        tv_price.setText(Double.parseDouble(price) * value + "元");
-                        break;
+        else {
+            stepperCustom.setOnValueChangeListener(new SnappingStepperValueChangeListener() {
+                @Override
+                public void onValueChange(View view, int value) {
+                    switch (view.getId()) {
+                        case R.id.stepperCustom:
+                            number = value;
+                            tv_price.setText(Double.parseDouble(price) * value + "元");
+                            break;
+                    }
                 }
-            }
-        });
-
+            });
+        }
         tv_price.setText(price + "元");
         tv_name.setText(name + "");
         newid.setText(price + "元");
