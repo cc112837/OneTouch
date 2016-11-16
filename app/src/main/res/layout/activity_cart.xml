@@ -40,6 +40,54 @@
         android:background="@color/white"
         android:orientation="vertical">
 
+        <ListView
+            android:id="@+id/lv_cart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@color/grey_bg"
+            android:dividerHeight="1px"></ListView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio"
+                android:button="@null"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="全选"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="13dp"
+                android:text="合计：¥50.00"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_cal"
+                android:layout_width="0dp"
+                android:background="@color/red"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="去结算()" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -380,5 +380,8 @@ public class MyHttpUtils extends HttpUtils {
         if(what==271){//私人医生价格
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Pridefine(), handler, what));
         }
+        if(what==272){//购物车页面
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Pridefine(), handler, what));
+        }
     }
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stepper="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <CheckBox
+        android:id="@+id/cb_check"
+        android:layout_width="wrap_content"
+        android:button="@null"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/radio" />
+
+    <ImageView
+        android:id="@+id/iv_shop"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:layout_margin="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_shopname"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:text="商品的名称"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="¥50.00"
+                android:textColor="@color/red"
+                android:textSize="16sp" />
+
+            <com.bigkoo.snappingstepper.SnappingStepper
+                android:id="@+id/stepperCustom"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                stepper:max="200"
+                stepper:min="1"
+                stepper:step="1"
+                stepper:stepper_background="@color/white"
+                stepper:stepper_contentBackground="@mipmap/content_number"
+                stepper:stepper_contentTextColor="@color/orange"
+                stepper:stepper_contentTextSize="17"
+                stepper:stepper_leftButtonBackground="@mipmap/left_number"
+                stepper:stepper_rightButtonBackground="@mipmap/right_number"
+                stepper:value="1" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
