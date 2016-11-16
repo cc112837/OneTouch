@@ -45,16 +45,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"></WebView>
 
-        <Button
-            android:id="@+id/btn_select"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/orange"
-            android:text="立即预约咨询"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btn_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/title_green"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="定金：¥1000"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/orange"
+                android:text="立即预约咨询"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
     </FrameLayout>
 
 </LinearLayout>

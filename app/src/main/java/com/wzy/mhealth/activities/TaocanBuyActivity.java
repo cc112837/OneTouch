@@ -122,6 +122,9 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
         tv_name = (TextView) findViewById(R.id.tv_name);
         newid = (TextView) findViewById(R.id.newid);
         stepperCustom = (SnappingStepper) findViewById(R.id.stepperCustom);
+        if(null==old){
+            stepperCustom.setEnabled(true);
+        }
         stepperCustom.setOnValueChangeListener(new SnappingStepperValueChangeListener() {
             @Override
             public void onValueChange(View view, int value) {
@@ -133,6 +136,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                 }
             }
         });
+
         tv_price.setText(price + "元");
         tv_name.setText(name + "");
         newid.setText(price + "元");

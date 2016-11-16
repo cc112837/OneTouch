@@ -25,9 +25,11 @@ public class PopupActivity extends Activity {
     private Spinner sp_data;
     private EditText et_phone;
     private TextView tv_cancle;
+    private String flag;
+    private String name, id;
     private TextView tv_confirm;
     private String time;
-    private String data;
+    private String data, price;
     private String content;
     private Handler handler = new Handler() {
         @Override
@@ -36,7 +38,16 @@ public class PopupActivity extends Activity {
             switch (msg.what) {
                 case 267:
                     StepInfo stepInfo = (StepInfo) msg.obj;
-                    Toast.makeText(PopupActivity.this, "提交成功，请注意接听电话", Toast.LENGTH_LONG).show();
+                    if (stepInfo.getStatus().equals("1")) {
+                        Toast.makeText(PopupActivity.this, "提交成功，请注意接听电话", Toast.LENGTH_LONG).show();
+                        if ("private".equals(flag)) {
+                            Intent intent = new Intent(PopupActivity.this, TaocanBuyActivity.class);
+                            intent.putExtra("name", name);
+                            intent.putExtra("price", price);
+                            intent.putExtra("id", id);
+                            startActivity(intent);
+                        }
+                    }
                     finish();
                     break;
             }
@@ -49,6 +60,10 @@ public class PopupActivity extends Activity {
         setContentView(R.layout.activity_popup);
         Intent intent = getIntent();
         content = intent.getStringExtra("content");
+        flag = intent.getStringExtra("flag");
+        name = intent.getStringExtra("name");
+        price = intent.getStringExtra("price");
+        id = intent.getStringExtra("id");
         Window window = getWindow();
         WindowManager.LayoutParams wl = window.getAttributes();
         wl.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
