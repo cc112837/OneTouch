@@ -112,7 +112,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", step.getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 40) {
+        if (what == 40) {//医生咨询支付
             TiUser user = (TiUser) object;
             params.addBodyParameter("id", user.getName());
             params.addBodyParameter("number", user.getCardId());
@@ -175,7 +175,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("orderId", user.getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
         }
-        if(what==149){//科室分类
+        if (what == 149) {//科室分类
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new FirstDep(), handler, what));
         }
         if (what == 150) {
@@ -374,19 +374,19 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("stepNumId", ((TiUser) object).getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if(what==269){
+        if (what == 269) {
             params.addBodyParameter("stepTime", ((TiUser) object).getPass());
             params.addBodyParameter("userName", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Zan(), handler, what));
         }
-        if(what==270){//商城首页
-            params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
+        if (what == 270) {//商城首页
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Zan(), handler, what));
         }
-        if(what==271){//私人医生价格
+        if (what == 271) {//私人医生价格
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Pridefine(), handler, what));
         }
-        if(what==272){//购物车页面
+        if (what == 272) {//购物车页面
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Pridefine(), handler, what));
         }
     }

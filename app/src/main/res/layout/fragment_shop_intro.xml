@@ -2,7 +2,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:stepper="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.wzy.mhealth.fragments.ShopIntroFragment">
 
+    <com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cb_shop"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:canLoop="true" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/bg_gray" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:text="商品名称"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tv_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="商品名称的详细介绍是，想不明白美好神奇那就是你反抗精神的"
+        android:textColor="@color/red"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/tv_per"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="¥56.00"
+        android:textColor="@color/red"
+        android:textSize="24sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/bg_gray" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="数量"
+            android:textColor="@color/dark_grey"
+            android:textSize="16sp" />
+
+        <com.bigkoo.snappingstepper.SnappingStepper
+            android:id="@+id/stepperCustom"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            stepper:max="200"
+            stepper:min="1"
+            stepper:step="1"
+            stepper:stepper_background="@color/white"
+            stepper:stepper_contentBackground="@mipmap/content_number"
+            stepper:stepper_contentTextColor="@color/orange"
+            stepper:stepper_contentTextSize="17"
+            stepper:stepper_leftButtonBackground="@mipmap/left_number"
+            stepper:stepper_rightButtonBackground="@mipmap/right_number"
+            stepper:value="1" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/bg_gray" />
 </LinearLayout>
