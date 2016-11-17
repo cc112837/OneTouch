@@ -14,63 +14,65 @@ import java.util.List;
 
 public class LocationAdapter extends BaseAdapter {
 
-	private Context context;
-	private List<Provice.DataEntity> list;
-	private LayoutInflater mInflater;
-	private int selectedposition = -1;
-	public LocationAdapter(Context context,List<Provice.DataEntity> list) {
+    private Context context;
+    private List<Provice.DataEntity> list;
+    private LayoutInflater mInflater;
+    private int selectedposition = -1;
 
-		this.context = context;
-		this.list = list;
-		mInflater = LayoutInflater.from(context);
-	}
-	@Override
-	public int getCount() {
-		if(list.size()==0){
-			return 0;
-		}
-		else
-		return list.size();
-	}
+    public LocationAdapter(Context context, List<Provice.DataEntity> list) {
 
-	@Override
-	public Object getItem(int position) {
+        this.context = context;
+        this.list = list;
+        mInflater = LayoutInflater.from(context);
+    }
 
-		return list.get(position);
-	}
+    @Override
+    public int getCount() {
+        if (list.size() == 0) {
+            return 0;
+        } else
+            return list.size();
+    }
 
-	@Override
-	public long getItemId(int position) {
+    @Override
+    public Object getItem(int position) {
 
-		return position;
-	}
+        return list.get(position);
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public long getItemId(int position) {
 
-		ViewHolder viewHolder = null;
-		if(convertView == null){
-			viewHolder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.location_item, null);
-			viewHolder.province = (TextView)convertView.findViewById(R.id.province);
-			convertView.setTag(viewHolder);
-		}else{
-			viewHolder = (ViewHolder)convertView.getTag();
-		}
-		if (position == selectedposition) {
-			convertView.setBackgroundColor(0xffffffff);
-		} 
-		else {
-			convertView.setBackgroundColor(0xfff0f0f0);
-		}
-		viewHolder.province.setText(list.get(position).getProvice());
-		return convertView;
-	}
-	public  void setSelectItem(int selectItem) {
-		 this.selectedposition = selectItem;
-	}
-	 class ViewHolder{
-		public TextView province;
-	}
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        ViewHolder viewHolder = null;
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            convertView = mInflater.inflate(R.layout.province_item, null);
+            viewHolder.province = (TextView) convertView.findViewById(R.id.city);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        if (position == selectedposition) {
+            convertView.setBackgroundColor(0xffffffff);
+        } else {
+            convertView.setBackgroundColor(0xfff0f0f0);
+        }
+        viewHolder.province.setText(list.get(position).getProvice());
+        return convertView;
+    }
+
+    public void setSelectItem(int selectItem) {
+        this.selectedposition = selectItem;
+    }
+
+    class ViewHolder {
+        public TextView province;
+    }
 
 }

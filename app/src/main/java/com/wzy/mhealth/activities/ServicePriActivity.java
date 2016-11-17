@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.wzy.mhealth.R;
 
-public class ServicePri extends BaActivity {
+public class ServicePriActivity extends BaActivity {
     private ImageView leftBtn;
 
     @Override

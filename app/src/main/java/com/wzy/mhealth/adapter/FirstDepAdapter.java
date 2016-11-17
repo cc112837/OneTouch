@@ -8,17 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.model.Provice;
+import com.wzy.mhealth.model.FirstDep;
 
 import java.util.List;
 
-public class ProvinceAdapter extends BaseAdapter {
+public class FirstDepAdapter extends BaseAdapter {
 
     private Context context;
-    public List<Provice.DataEntity.CityArrEntity> list;
+    public List<FirstDep.DataEntity> list;
     private LayoutInflater mInflater;
 
-    public ProvinceAdapter(Context context, List<Provice.DataEntity.CityArrEntity> list) {
+    public FirstDepAdapter(Context context, List<FirstDep.DataEntity> list) {
         this.context = context;
         this.list = list;
         mInflater = LayoutInflater.from(context);
@@ -48,18 +48,18 @@ public class ProvinceAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.province_item, null);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.city);
+            convertView = mInflater.inflate(R.layout.keshi_item, null);
+            viewHolder.tv_keshi = (TextView) convertView.findViewById(R.id.tv_keshi);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.name.setText(list.get(position).getCity());
+        viewHolder.tv_keshi.setText(list.get(position).getFirstDepName());
         return convertView;
     }
 
     static class ViewHolder {
-        public TextView name;
+        public TextView tv_keshi;
 
     }
 

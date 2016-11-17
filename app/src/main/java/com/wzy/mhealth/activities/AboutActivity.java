@@ -20,7 +20,7 @@ public class AboutActivity extends BaActivity {
         tv_service.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AboutActivity.this, ServicePri.class);
+                Intent intent = new Intent(AboutActivity.this, ServicePriActivity.class);
                 startActivity(intent);
             }
         });

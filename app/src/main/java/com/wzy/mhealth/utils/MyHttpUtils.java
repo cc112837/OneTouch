@@ -14,6 +14,7 @@ import com.wzy.mhealth.model.City;
 import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.model.Doctor;
 import com.wzy.mhealth.model.DoctorDetail;
+import com.wzy.mhealth.model.FirstDep;
 import com.wzy.mhealth.model.ForgetPass;
 import com.wzy.mhealth.model.Friend;
 import com.wzy.mhealth.model.Grade;
@@ -174,6 +175,9 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("orderId", user.getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
         }
+        if(what==149){//科室分类
+            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new FirstDep(), handler, what));
+        }
         if (what == 150) {
             SelfHealth selfHealth = (SelfHealth) object;
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
@@ -191,7 +195,9 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
         }
         if (what == 152) {//医生列表
-            sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Doctor(), handler, what));
+            params.addBodyParameter("firstDepId", ((TiUser) object).getName());
+            params.addBodyParameter("evaluate", ((TiUser) object).getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Doctor(), handler, what));
         }
         if (what == 153) {
             TiUser user = (TiUser) object;
@@ -208,12 +214,12 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Grade(), handler, what));
         }
-        if (what == 157) {
+        if (what == 157) {//体检机构列表
             TiUser user = (TiUser) object;
             params.addBodyParameter("id", user.getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Tijian(), handler, what));
         }
-        if (what == 160) {
+        if (what == 160) {//省市联动
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Provice(), handler, what));
         }
         if (what == 162) {
@@ -247,18 +253,18 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Question(), handler, what));
         }
-        if (what == 221) {
+        if (what == 221) {//问卷调查0
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("taocanName", ((TiUser) object).getName());
             params.addBodyParameter("sex", ((TiUser) object).getTel());
             params.addBodyParameter("count", "0");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 222) {
+        if (what == 222) {//问卷调查判断
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Recommend(), handler, what));
         }
-        if (what == 223) {
+        if (what == 223) {//问卷调查1
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("age", ((TiUser) object).getName());
             params.addBodyParameter("height", ((TiUser) object).getTel());
@@ -266,61 +272,61 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("count", "1");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 224) {
+        if (what == 224) {//问卷调查2
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("live", ((TiUser) object).getName());
             params.addBodyParameter("count", "2");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 225) {
+        if (what == 225) {//问卷调查3
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("time", ((TiUser) object).getName());
             params.addBodyParameter("count", "3");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 226) {
+        if (what == 226) {//问卷调查4
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("disease", ((TiUser) object).getName());
             params.addBodyParameter("count", "4");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 227) {
+        if (what == 227) {//问卷调查8
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("inspect", ((TiUser) object).getName());
             params.addBodyParameter("count", "8");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 228) {
+        if (what == 228) {//问卷调查9
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("baby", ((TiUser) object).getName());
             params.addBodyParameter("count", "9");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 229) {
+        if (what == 229) {//问卷调查10
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("price", ((TiUser) object).getName());
             params.addBodyParameter("count", "10");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 230) {
+        if (what == 230) {//问卷调查11
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("supplement", ((TiUser) object).getName());
             params.addBodyParameter("count", "11");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 231) {
+        if (what == 231) {//问卷调查5
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("illness", ((TiUser) object).getName());
             params.addBodyParameter("count", "5");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 232) {
+        if (what == 232) {//问卷调查6
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("symptom", ((TiUser) object).getName());
             params.addBodyParameter("count", "6");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 233) {
+        if (what == 233) {//问卷调查7
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("medicine", ((TiUser) object).getName());
             params.addBodyParameter("count", "7");
@@ -334,13 +340,13 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("orderId", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 263) {
+        if (what == 263) {//满意度评价
             params.addBodyParameter("orderId", ((TiUser) object).getName());
             params.addBodyParameter("satisify", ((TiUser) object).getTel());
             params.addBodyParameter("evaluate", ((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 264) {
+        if (what == 264) {//查看评价
             params.addBodyParameter("taoId", ((TiUser) object).getName());
             params.addBodyParameter("status", ((TiUser) object).getPass());
             params.addBodyParameter("statify", ((TiUser) object).getTel());

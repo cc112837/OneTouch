@@ -202,40 +202,16 @@
             android:name=".activities.RouteActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.GuahaoActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.PoiKeywordSearchActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.DiseaseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ReservationListActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.GreenPassActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.MedicalRecordsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.JianyanBaogaoActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.ScanresultActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.HospitalSelectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.KeshiselectActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.GuahaoDoctorListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.JiankangActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.DiseaseDetailActicity"
@@ -254,9 +230,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.GPSNaviActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.ReservationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.FriendDetailActivity"
@@ -294,7 +267,7 @@
             android:name=".activities.NewsDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ServicePri"
+            android:name=".activities.ServicePriActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.PersonTaocanActivity"

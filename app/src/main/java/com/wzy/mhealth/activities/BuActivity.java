@@ -46,7 +46,6 @@ import java.util.Map;
 
 public class BuActivity extends BaActivity implements Handler.Callback,
         Runnable {
-    // private DoctorEntity doctor;
     private TextView doctorname, price, price1, titleName;
     private Button buy;
     private String stringOfPrice, type, doctorid, name, id;

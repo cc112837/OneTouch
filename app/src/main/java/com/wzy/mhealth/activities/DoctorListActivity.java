@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -19,10 +20,11 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.DoctorListAdapter;
-import com.wzy.mhealth.adapter.LocationAdapter;
-import com.wzy.mhealth.adapter.ProvinceAdapter;
+import com.wzy.mhealth.adapter.FirstDepAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Doctor;
+import com.wzy.mhealth.model.FirstDep;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
@@ -30,66 +32,36 @@ import java.util.List;
 
 public class DoctorListActivity extends BaActivity {
 
-    private List<Doctor.DataEntity> doctorlist;
-    private List<String> locationList;
-    public List<String> cityList, list2;
-    private ListView lv, locationListView, cityListView;
+    private List<Doctor.DataEntity> doctorlist = new ArrayList<>();
+    private List<FirstDep.DataEntity> firstDeplist = new ArrayList<>();
+    private List<String> list = new ArrayList<>();
+    private ListView lv;
     private DoctorListAdapter adapter;
-    private LocationAdapter locationAdapter;
     private PopupWindow mPopupWindow;
-    private LinearLayout location;
+    private LinearLayout location, order;
     private LinearLayout layout_left;
     private LinearLayout doctorlistLayout;
-    private ProvinceAdapter provinceAdapter;
-    private TextView locationtTextView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_list);
-        location = (LinearLayout) findViewById(R.id.total_location);
-        locationtTextView = (TextView) location.findViewById(R.id.text_category);
-        doctorlistLayout = (LinearLayout) findViewById(R.id.doctorlistLinear);
-        location.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                locationtTextView.setTextColor(0xf000cf00);
-                showPopupWindow(doctorlistLayout.getWidth(),
-                        doctorlistLayout.getHeight());
-            }
-        });
-
-        lv = (ListView) findViewById(R.id.doctorlist);
-        doctorlist = new ArrayList<>();
-        locationList = new ArrayList<>();
-        cityList = new ArrayList<>();
-        list2 = new ArrayList<>();
-        String url = Constants.SERVER_URL + "MhealthDoctorServlet";
-        MyHttpUtils.handData(handler, 152, url, null);
-        adapter = new DoctorListAdapter(this, doctorlist);
-        lv.setAdapter(adapter);
-
-        //返回箭头
-        ImageView imageback = (ImageView) findViewById(R.id.leftBtn);
-
-        imageback.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
+    private TextView locationtTextView,order_text;
+    private ListView lv_keshi;
+    private FirstDepAdapter firstDepAdapter;
+    String firstDepid = "";
+    String flag = "";
+    boolean change = true;
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 149:
+                    FirstDep firstDep = (FirstDep) msg.obj;
+                    firstDeplist.clear();
+                    firstDeplist.addAll(firstDep.getData());
+                    firstDepAdapter.notifyDataSetChanged();
+                    break;
                 case 152:
                     final Doctor doctor = (Doctor) msg.obj;
+                    doctorlist.clear();
                     doctorlist.addAll(doctor.getData());
                     adapter.notifyDataSetChanged();
                     lv.setOnItemClickListener(new OnItemClickListener() {
@@ -102,7 +74,7 @@ public class DoctorListActivity extends BaActivity {
                                 intent.setClass(DoctorListActivity.this, NoContentActivity.class);
                             } else {
                                 intent.setClass(DoctorListActivity.this, DoctorDetailActivity.class);
-                                intent.putExtra("id",doctor.getData().get(position).getDoctorId()+"");
+                                intent.putExtra("id", doctor.getData().get(position).getDoctorId() + "");
                                 intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
                             }
                             startActivity(intent);
@@ -112,23 +84,110 @@ public class DoctorListActivity extends BaActivity {
             }
         }
     };
+    private ArrayAdapter arrayAdapter;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_doctor_list);
+        adapter = new DoctorListAdapter(this, doctorlist);
+        init();
+    }
+
+    private void init() {
+        list.add("评价最高");
+        list.add("人气最高");
+        list.add("默认");
+        ImageView imageback = (ImageView) findViewById(R.id.leftBtn);
+        imageback.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        location = (LinearLayout) findViewById(R.id.total_location);
+        order = (LinearLayout) findViewById(R.id.order);
+        order.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                change = false;
+                showPopupWindow(doctorlistLayout.getWidth(),
+                        doctorlistLayout.getHeight());
+            }
+        });
+        location.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                change = true;
+                String url = Constants.SERVER_URL + "MhealthFirstDepServlet";
+                MyHttpUtils.handData(handler, 149, url, null);
+                showPopupWindow(doctorlistLayout.getWidth(),
+                        doctorlistLayout.getHeight());
+            }
+        });
+        locationtTextView = (TextView) location.findViewById(R.id.text_category);
+        order_text = (TextView) order.findViewById(R.id.order_text);
+        doctorlistLayout = (LinearLayout) findViewById(R.id.doctorlistLinear);
+        lv = (ListView) findViewById(R.id.doctorlist);
+        lv.setAdapter(adapter);
+        String url = Constants.SERVER_URL + "MhealthDoctorOrderServlet";
+        TiUser user = new TiUser();
+        user.setName("");
+        user.setPass("");
+        MyHttpUtils.handData(handler, 152, url, user);
+    }
 
 
     private void showPopupWindow(int width, int height) {
         layout_left = (LinearLayout) LayoutInflater.from(
-                DoctorListActivity.this).inflate(R.layout.popup_category, null);
-        locationListView = (ListView) layout_left
-                .findViewById(R.id.rootcategory);
-        cityListView = (ListView) layout_left.findViewById(R.id.childcategory);
-        cityListView.setVisibility(View.INVISIBLE);
+                DoctorListActivity.this).inflate(R.layout.popup_keshi, null);
+        lv_keshi = (ListView) layout_left
+                .findViewById(R.id.lv_keshi);
+        if (change) {
+            firstDepAdapter = new FirstDepAdapter(DoctorListActivity.this, firstDeplist);
+            lv_keshi.setAdapter(firstDepAdapter);
+            lv_keshi.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    mPopupWindow.dismiss();
+                    locationtTextView.setText(firstDeplist.get(position).getFirstDepName());
+                    String url = Constants.SERVER_URL + "MhealthDoctorOrderServlet";
+                    TiUser user = new TiUser();
+                    firstDepid = firstDeplist.get(position).getFirstDepId() + "";
+                    user.setName(firstDepid);
+                    user.setPass(flag);
+                    MyHttpUtils.handData(handler, 152, url, user);
+                }
+            });
+        } else {
+            arrayAdapter = new ArrayAdapter(DoctorListActivity.this, R.layout.keshi_item, R.id.tv_keshi, list);
+            lv_keshi.setAdapter(arrayAdapter);
+            lv_keshi.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    mPopupWindow.dismiss();
+                    order_text.setText(list.get(position)+"");
+                    String url = Constants.SERVER_URL + "MhealthDoctorOrderServlet";
+                    TiUser user = new TiUser();
+                    flag = list.get(position) + "";
+                    user.setName(firstDepid);
+                    user.setPass(flag);
+                    MyHttpUtils.handData(handler, 152, url, user);
+                }
+            });
+        }
 
-        mPopupWindow = new PopupWindow(layout_left, width, height * 2 / 3, true);
+
+        mPopupWindow = new PopupWindow(layout_left, width, height * 1/ 3, true);
         mPopupWindow.setOnDismissListener(new OnDismissListener() {
 
             @Override
             public void onDismiss() {
-                locationtTextView = (TextView) location.findViewById(R.id.text_category);
                 locationtTextView.setTextColor(0xff000000);
+                order_text.setTextColor(0xff000000);
             }
         });
         mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
