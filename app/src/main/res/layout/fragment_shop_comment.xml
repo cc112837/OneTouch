@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wzy.mhealth.fragments.ShopCommentFragment">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:id="@+id/rg_all"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tv_all"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_evalution"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="全部"
+            android:textColor="@drawable/selector_textcolor" />
+
+        <RadioButton
+            android:id="@+id/tv_satis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_evalution"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="满意"
+            android:textColor="@drawable/selector_textcolor" />
+
+        <RadioButton
+            android:id="@+id/tv_nosatis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_evalution"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="不满意"
+            android:textColor="@drawable/selector_textcolor" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.5px"
+            android:background="#666666" />
+
+        <ListView
+            android:id="@+id/lv_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6"></ListView>
+    </LinearLayout>
+
+</LinearLayout>

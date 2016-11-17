@@ -20,6 +20,7 @@
     <dimen name="register_margin">10.0dp</dimen>
 
     <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_middle">15sp</dimen>
     <dimen name="registerLeftWidth">100dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->

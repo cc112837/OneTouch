@@ -302,7 +302,8 @@
         <activity android:name=".activities.UpdaAddressActivity" />
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.ShoporderActivity" />
-        <activity android:name=".activities.ShopDetailActivity"></activity>
+        <activity android:name=".activities.ShopDetailActivity" />
+        <activity android:name=".activities.ShopBuyActivity"></activity>
     </application>
 
 </manifest>
