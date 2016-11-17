@@ -48,6 +48,11 @@
             android:divider="@color/grey_bg"
             android:dividerHeight="1px"></ListView>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/dark_grey" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,6 +63,7 @@
                 android:id="@+id/cb_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:background="@drawable/radio"
                 android:button="@null"
                 android:gravity="center" />
@@ -81,13 +87,13 @@
             <TextView
                 android:id="@+id/tv_cal"
                 android:layout_width="0dp"
-                android:background="@color/red"
-                android:textColor="@color/white"
-                android:gravity="center"
-                android:textSize="16sp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="去结算()" />
+                android:background="@color/red"
+                android:gravity="center"
+                android:text="去结算()"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

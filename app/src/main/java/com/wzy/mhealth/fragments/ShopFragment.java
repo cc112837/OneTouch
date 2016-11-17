@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CartActivity;
+import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.activities.ShoporderActivity;
 import com.wzy.mhealth.adapter.ShopAdapter;
 import com.wzy.mhealth.model.Shop;
@@ -38,6 +40,13 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
                     tv_count.setText("");
                     ImageLoader.getInstance().displayImage("", shop_header);
                     shopAdapter.notifyDataSetChanged();
+                    gv_shop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent=new Intent(getActivity(),ShopDetailActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                     break;
             }
         }
