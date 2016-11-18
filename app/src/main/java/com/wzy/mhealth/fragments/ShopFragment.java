@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CartActivity;
 import com.wzy.mhealth.activities.ShopDetailActivity;
+import com.wzy.mhealth.activities.ShoporderActivity;
 import com.wzy.mhealth.adapter.ShopAdapter;
 import com.wzy.mhealth.model.Shop;
 
@@ -79,8 +80,8 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-            case R.id.leftBtn://ShoporderActivity
-                intent = new Intent(getActivity(), ShopDetailActivity.class);
+            case R.id.leftBtn:
+                intent = new Intent(getActivity(), ShoporderActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rightBtn:
