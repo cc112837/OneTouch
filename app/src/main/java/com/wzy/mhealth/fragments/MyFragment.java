@@ -31,6 +31,7 @@ import com.wzy.mhealth.LeanChat.util.PhotoUtils;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.AboutActivity;
 import com.wzy.mhealth.activities.BarCodeActivity;
+import com.wzy.mhealth.activities.DecreseActivity;
 import com.wzy.mhealth.activities.ExaminationOrderActivity;
 import com.wzy.mhealth.activities.ExaminationRecordActivity;
 import com.wzy.mhealth.activities.ManageActivity;
@@ -60,13 +61,13 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyFragment extends D3Fragment {
+public class MyFragment extends D3Fragment implements View.OnClickListener {
 
-    RelativeLayout myrecord, setting, manager, erweima, myorder, about, familyHealth;
-    TextView username, tv_gradenum;
-    LinearLayout about1, ll_decrease, ll_grade, myproud;
-    ImageView headImage,iv_spped,iv_blood,iv_shop;
-    String dateTime;
+    private RelativeLayout myrecord, setting, manager, erweima, myorder, about, familyHealth;
+    private LinearLayout about1, ll_decrease, ll_grade, myproud;
+    private ImageView headImage, iv_spped, iv_blood, iv_shop;
+    private String dateTime;
+    private TextView cameraPic, albumPic, username, tv_gradenum;
     private AlertDialog avatarDialog;
     private Handler handler = new Handler() {
         @Override
@@ -86,20 +87,20 @@ public class MyFragment extends D3Fragment {
                     }
 
                     break;
-                case  170:
-                    Proud proud=(Proud) msg.obj;
-                    if (proud.isStepNum()){
+                case 170:
+                    Proud proud = (Proud) msg.obj;
+                    if (proud.isStepNum()) {
                         iv_spped.setImageResource(R.mipmap.speed_proud);
                     }
-                    if(proud.isShop()){
+                    if (proud.isShop()) {
                         iv_shop.setImageResource(R.mipmap.gift_red);
                     }
-                    if (proud.isBlood()){
+                    if (proud.isBlood()) {
                         iv_shop.setImageResource(R.mipmap.love_red);
                     }
                     break;
                 case 266:
-                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    StepInfo stepInfo = (StepInfo) msg.obj;
                     break;
             }
         }
@@ -125,50 +126,22 @@ public class MyFragment extends D3Fragment {
                              Bundle savedInstanceState) {
         View view = setContentView(inflater, R.layout.fragment_my);
         ShareSDK.initSDK(getContext());
-        iv_spped=(ImageView)view.findViewById(R.id.iv_spped);
-        iv_blood=(ImageView)view.findViewById(R.id.iv_blood);
-        iv_shop=(ImageView)view.findViewById(R.id.iv_shop);
-        String url= Constants.SERVER_URL+"MedalServlet";
-        MyHttpUtils.handData(handler,170,url,null);
+        iv_spped = (ImageView) view.findViewById(R.id.iv_spped);
+        iv_blood = (ImageView) view.findViewById(R.id.iv_blood);
+        iv_shop = (ImageView) view.findViewById(R.id.iv_shop);
+        String url = Constants.SERVER_URL + "MedalServlet";
+        MyHttpUtils.handData(handler, 170, url, null);
         ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
         ll_grade = (LinearLayout) view.findViewById(R.id.ll_grade);
         tv_gradenum = (TextView) view.findViewById(R.id.tv_gradenum);
         myproud = (LinearLayout) view.findViewById(R.id.myproud);
         String ul = Constants.SERVER_URL + "StepIntegrationServlet";
         MyHttpUtils.handData(handler, 156, ul, null);
-        ll_decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 2016/9/21 优惠劵 
-            }
-        });
-        ll_grade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MyGradeActivity.class);
-                intent.putExtra("count", tv_gradenum.getText().toString());
-                startActivity(intent);
-            }
-        });
         myrecord = (RelativeLayout) view.findViewById(R.id.myrecord);
-        myrecord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ExaminationRecordActivity.class);
-                startActivity(intent);
-            }
-        });
         about1 = (LinearLayout) view.findViewById(R.id.about1);
         erweima = (RelativeLayout) view.findViewById(R.id.erweima);
         manager = (RelativeLayout) view.findViewById(R.id.manager);
         myorder = (RelativeLayout) view.findViewById(R.id.myorder);
-        myorder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ExaminationOrderActivity.class);
-                startActivity(intent);
-            }
-        });
         setting = (RelativeLayout) view.findViewById(R.id.setting);
         about = (RelativeLayout) view.findViewById(R.id.about);
         familyHealth = (RelativeLayout) view.findViewById(R.id.familyHealth);
@@ -176,20 +149,7 @@ public class MyFragment extends D3Fragment {
         username.setText(Constants.USER_NAME);
         headImage = (ImageView) view.findViewById(R.id.headView);
         LeanchatUser curUser = AVUser.getCurrentUser(LeanchatUser.class);
-        setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
-            }
-        });
-        myproud.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProudActivity.class);
-                startActivity(intent);
-            }
-        });
+
         String avatarUrl = curUser.getAvatarUrl();
         if (avatarUrl == null) {
             try {
@@ -201,65 +161,22 @@ public class MyFragment extends D3Fragment {
                 e.printStackTrace();
             }
         }
-
         MyAndroidUtil.editXmlByString(
                 Constants.icon, avatarUrl);
         ImageLoader.getInstance().displayImage(avatarUrl, headImage,
                 com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOption);
-        manager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ManageActivity.class);
-                startActivity(intent);
-            }
-        });
-        headImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AvatarDialog();
-            }
-        });
-        about1.setOnClickListener(new View.OnClickListener() {
-            /**
-             * 创建人：吴聪聪
-             * 邮箱:cc112837@163.com
-             * 创建时间：2016/4/5 14:35
-             */
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AboutActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        erweima.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), BarCodeActivity.class);
-                getActivity().startActivity(intent);
-
-            }
-        });
-
-        about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showShare();
-            }
-        });
-        familyHealth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 我的计步 家人健康FamilyHealthActivity
-                TiUser step = new TiUser();
-                step.setName(LeanchatUser.getCurrentUser().getUsername());
-                String ul = Constants.SERVER_URL + "StepNumInitServlet";
-                MyHttpUtils.handData(handler, 31, ul, step);
-
-            }
-        });
+        manager.setOnClickListener(this);
+        headImage.setOnClickListener(this);
+        setting.setOnClickListener(this);
+        myproud.setOnClickListener(this);
+        about1.setOnClickListener(this);
+        erweima.setOnClickListener(this);
+        about.setOnClickListener(this);
+        myrecord.setOnClickListener(this);
+        ll_decrease.setOnClickListener(this);
+        ll_grade.setOnClickListener(this);
+        myorder.setOnClickListener(this);
+        familyHealth.setOnClickListener(this);
         return view;
     }
 
@@ -277,28 +194,10 @@ public class MyFragment extends D3Fragment {
         avatarDialog.show();
         avatarDialog.setContentView(v);
         avatarDialog.getWindow().setGravity(Gravity.CENTER);
-        TextView albumPic = (TextView) v.findViewById(R.id.album_pic);
-        TextView cameraPic = (TextView) v.findViewById(R.id.camera_pic);
-        albumPic.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                avatarDialog.dismiss();
-                Date date1 = new Date(System.currentTimeMillis());
-                dateTime = date1.getTime() + "";
-                showAvatarFromAlbum();
-            }
-        });
-        cameraPic.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                avatarDialog.dismiss();
-                Date date = new Date(System.currentTimeMillis());
-                dateTime = date.getTime() + "";
-                showAvatarFromCamera();
-            }
-        });
+        albumPic = (TextView) v.findViewById(R.id.album_pic);
+        cameraPic = (TextView) v.findViewById(R.id.camera_pic);
+        albumPic.setOnClickListener(this);
+        cameraPic.setOnClickListener(this);
     }
 
     private void showAvatarFromCamera() {
@@ -354,10 +253,10 @@ public class MyFragment extends D3Fragment {
                             if (arg0 == null) {
                                 LeanchatUser curUser = LeanchatUser.getCurrentUser(LeanchatUser.class);
                                 String avatarUrl = curUser.getAvatarUrl();
-                                String urll=Constants.SERVER_URL+"MhealthUserImageServlet";
-                                TiUser useri=new TiUser();
+                                String urll = Constants.SERVER_URL + "MhealthUserImageServlet";
+                                TiUser useri = new TiUser();
                                 useri.setName(LeanchatUser.getCurrentUser().getUsername());
-                                useri.setTel(avatarUrl+"");
+                                useri.setTel(avatarUrl + "");
                                 MyHttpUtils.handData(handler, 266, urll, useri);
                                 ImageLoader
                                         .getInstance()
@@ -439,5 +338,74 @@ public class MyFragment extends D3Fragment {
         oks.setSiteUrl("http://www.wandoujia.com/apps/com.wzy.mhealth/download");
         // 启动分享GUI
         oks.show(getContext());
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.ll_decrease:
+                intent = new Intent(getActivity(), DecreseActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.ll_grade:
+                intent = new Intent(getActivity(), MyGradeActivity.class);
+                intent.putExtra("count", tv_gradenum.getText().toString());
+                startActivity(intent);
+                break;
+            case R.id.myrecord:
+                intent = new Intent(getActivity(), ExaminationRecordActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.erweima:
+                intent = new Intent();
+                intent.setClass(getActivity(), BarCodeActivity.class);
+                getActivity().startActivity(intent);
+                break;
+            case R.id.manager:
+                intent = new Intent(getActivity(), ManageActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.setting:
+                intent = new Intent(getActivity(), SettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.myproud:
+                intent = new Intent(getActivity(), ProudActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.album_pic:
+                avatarDialog.dismiss();
+                Date date1 = new Date(System.currentTimeMillis());
+                dateTime = date1.getTime() + "";
+                showAvatarFromAlbum();
+                break;
+            case R.id.myorder:
+                intent = new Intent(getActivity(), ExaminationOrderActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.familyHealth:
+                TiUser step = new TiUser();
+                step.setName(LeanchatUser.getCurrentUser().getUsername());
+                String ul = Constants.SERVER_URL + "StepNumInitServlet";
+                MyHttpUtils.handData(handler, 31, ul, step);
+                break;
+            case R.id.about1:
+                intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.headView:
+                AvatarDialog();
+                break;
+            case R.id.about:
+                showShare();
+                break;
+            case R.id.camera_pic:
+                avatarDialog.dismiss();
+                Date date = new Date(System.currentTimeMillis());
+                dateTime = date.getTime() + "";
+                showAvatarFromCamera();
+                break;
+        }
     }
 }

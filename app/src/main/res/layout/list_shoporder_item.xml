@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,8 +62,8 @@
         <ImageView
             android:id="@+id/iv_car"
             android:layout_width="16dp"
-            android:scaleType="fitXY"
             android:layout_height="16dp"
+            android:scaleType="fitXY"
             android:src="@mipmap/shop_car" />
 
         <LinearLayout
@@ -103,6 +103,27 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:id="@+id/ll_only"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_shoptitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="商品名称" />
+            <TextView
+                android:id="@+id/tv_shopnum"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:text="数量：2" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

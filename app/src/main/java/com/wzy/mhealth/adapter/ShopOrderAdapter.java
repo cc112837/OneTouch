@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
@@ -67,15 +68,21 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.iv_delete = (ImageView) convertView.findViewById(R.id.iv_delete);
             viewHolder.tv_click1 = (TextView) convertView.findViewById(R.id.tv_click1);
             viewHolder.tv_click2= (TextView) convertView.findViewById(R.id.tv_click2);
+            viewHolder.tv_shoptitle = (TextView) convertView.findViewById(R.id.tv_shoptitle);
+            viewHolder.tv_shopnum= (TextView) convertView.findViewById(R.id.tv_shopnum);
             viewHolder.tv_shoping=(TextView) convertView.findViewById(R.id.tv_shoping);
+            viewHolder.ll_only=(LinearLayout) convertView.findViewById(R.id.ll_only);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        viewHolder.ll_only.setVisibility(View.VISIBLE);
         viewHolder.iv_car.setVisibility(View.VISIBLE);
         viewHolder.tv_orderstatus.setText("已完成");//订单状态
         viewHolder.tv_shopname.setText("店铺名");
         viewHolder.tv_shoping.setText("运输中");
+        viewHolder.tv_shoptitle.setText("商品名称");
+        viewHolder.tv_shopnum.setText("数量："+3);
         viewHolder.tv_number.setText("共"+2+"件商品");
         viewHolder.tv_price.setText("实付款：¥"+23.3);
         viewHolder.tv_time.setText("2016-12-32 11:00:00");
@@ -103,7 +110,8 @@ public class ShopOrderAdapter extends BaseAdapter {
 
     static class ViewHolder {
         public TextView tv_shopname,tv_shoping,tv_time,tv_price,tv_number;
-        public TextView tv_orderstatus, tv_click1,tv_click2;
+        public TextView tv_orderstatus, tv_click1,tv_click2,tv_shoptitle,tv_shopnum;
         private ImageView iv_order,iv_delete,iv_car;
+        private LinearLayout ll_only;
     }
 }
