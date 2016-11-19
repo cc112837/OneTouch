@@ -10,7 +10,9 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.AllStepRank;
 import com.wzy.mhealth.model.BingZhen;
+import com.wzy.mhealth.model.Cart;
 import com.wzy.mhealth.model.Conclusion;
+import com.wzy.mhealth.model.Decrease;
 import com.wzy.mhealth.model.Doctor;
 import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.FirstDep;
@@ -34,6 +36,7 @@ import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.Regmodel;
 import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.SelfHealth;
+import com.wzy.mhealth.model.Shop;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.StepResult;
@@ -225,7 +228,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Proud(), handler, what));
         }
-        if (what == 171||what == 172) {//套餐详情页面
+        if (what == 171 || what == 172) {//套餐详情页面
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
         }
         if (what == 173) {//套餐列表
@@ -372,13 +375,21 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 270) {//商城首页
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Zan(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Shop(), handler, what));
         }
         if (what == 271) {//私人医生价格
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Pridefine(), handler, what));
         }
         if (what == 272) {//购物车页面
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Pridefine(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Cart(), handler, what));
+        }
+        if (what == 273) {//可使用优惠劵
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Decrease(), handler, what));
+
+        }
+        if (what == 274) {//不可使用优惠劵
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Decrease(), handler, what));
+
         }
     }
 }
