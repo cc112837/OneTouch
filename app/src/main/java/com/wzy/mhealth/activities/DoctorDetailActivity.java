@@ -12,12 +12,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
+import com.avoscloud.leanchatlib.controller.ChatManager;
+import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.UserEvaluation;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +36,8 @@ public class DoctorDetailActivity extends BaActivity {
     private TextView guanzhuTextView, recommend, attitude, level;
     private TextView yonghu1, yonghu1Degree, yonghu1Pingjia, youbianzi;
     private TextView yonghu2, yonghu2Degree, yonghu2Pingjia, zuobian;
-    private LinearLayout tuwenLayout,vedioyuyue;
-    private String doctor,doctorid;
+    private LinearLayout tuwenLayout, vedioyuyue;
+    private String doctor, doctorid;
     private List<UserEvaluation.DataEntity> userEvaluationList;
     private LinearLayout pingjia1, pingjia2;
     private ImageView youbian, tuwentu, dianhuatu, jiahaotu, privatetu, vediotu;
@@ -43,7 +49,7 @@ public class DoctorDetailActivity extends BaActivity {
         setContentView(R.layout.activity_doctor_detail);
         Intent intent = getIntent();
         doctor = intent.getStringExtra("doctor");
-        doctorid=intent.getStringExtra("id");
+        doctorid = intent.getStringExtra("id");
         userEvaluationList = new ArrayList<>();
         init();
         String url = Constants.SERVER_URL + "MhealthOrderEvaluateCheckServlet";
@@ -61,8 +67,6 @@ public class DoctorDetailActivity extends BaActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
-
-
 
 
     }
@@ -83,7 +87,7 @@ public class DoctorDetailActivity extends BaActivity {
                     attitude.setText(doctorDetail.getPriceAdd() + "");
                     level.setText(doctorDetail.getRecommend() + "");
 
-                    if (doctorDetail.getPricePicture() != 0)
+                    if (doctorDetail.getPricePicture() >= 0)
                         tuwenfeiyong.setText(doctorDetail.getPricePicture() + "元/次");
                     else {
                         tuwenfeiyong.setText("未开通");
@@ -91,12 +95,12 @@ public class DoctorDetailActivity extends BaActivity {
                         tuwentu.setImageResource(R.mipmap.camera_doctor_grey);
                     }
                     dianhuatu = (ImageView) findViewById(R.id.dianhuatu);
-                    if (doctorDetail.getPricePhone() != 0) {
+                    if (doctorDetail.getPricePhone() >= 0) {
                         dianhuafeiyong.setText(doctorDetail.getPricePicture() + "元/分钟");
                         dianhuatu.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" +doctorDetail.getUserEvaluate()));
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + doctorDetail.getUserEvaluate()));
                                 startActivity(intent);
                             }
                         });
@@ -104,34 +108,72 @@ public class DoctorDetailActivity extends BaActivity {
                         dianhuafeiyong.setText("未开通");
                         dianhuatu.setImageResource(R.mipmap.phone_doctor_grey);
                     }
-                    jiahaofeiyong.setText("未开通");
                     jiahaotu = (ImageView) findViewById(R.id.jiahaotu);
-                    jiahaotu.setImageResource(R.mipmap.video_doctor_grey);
-
-                    privatefeiyong.setText("未开通");
+                    if (doctorDetail.getPriceVideo() >= 0) {
+                        jiahaofeiyong.setText("" + doctorDetail.getPriceVideo());
+                        jiahaotu.setImageResource(R.mipmap.video_doctor);
+                    } else {
+                        jiahaofeiyong.setText("未开通");
+                        jiahaotu.setImageResource(R.mipmap.video_doctor_grey);
+                    }
                     privatetu = (ImageView) findViewById(R.id.privatetu);
-                    privatetu.setImageResource(R.mipmap.person_doctor_grey);
-
-                    vedioefeiyong.setText("未开通");
+                    if (doctorDetail.getPricePrivate() >= 0) {
+                        privatefeiyong.setText("" + doctorDetail.getPricePrivate());
+                        privatetu.setImageResource(R.mipmap.person_doctor);
+                    } else {
+                        privatefeiyong.setText("未开通");
+                        privatetu.setImageResource(R.mipmap.person_doctor_grey);
+                    }
                     vediotu = (ImageView) findViewById(R.id.vediotu);
-                    vediotu.setImageResource(R.mipmap.before_doctor_grey);
+                    if (doctorDetail.getPriceAdd() >= 0) {
+                        vedioefeiyong.setText("未开通");
+                        vediotu.setImageResource(R.mipmap.before_doctor_grey);
+                    } else {
+                        vedioefeiyong.setText("未开通");
+                        vediotu.setImageResource(R.mipmap.before_doctor_grey);
+                    }
+
+
                     tuwenLayout.setOnClickListener(new View.OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent();
-                            intent.setClass(DoctorDetailActivity.this, BuActivity.class);
-                            intent.putExtra("type", "1");
-                            intent.putExtra("id",doctorDetail.getId()+"");
-                            intent.putExtra("price", doctorDetail.getPricePicture() + "");
-                            intent.putExtra("doctor", doctorDetail.getDoctorId() + "");
-                            intent.putExtra("name", doctorDetail.getUserName() + "");
-                            startActivity(intent);
+                            if (doctorDetail.getPricePicture() == 0) {
+                                ChatManager chatManager = ChatManager.getInstance();
+                                chatManager.fetchConversationWithUserId(doctorid,
+                                        new AVIMConversationCreatedCallback() {
+                                            @Override
+                                            public void done(AVIMConversation conversation, AVIMException e) {
+                                                if (e != null) {
+                                                    Toast.makeText(DoctorDetailActivity.this, e.getMessage(),
+                                                            Toast.LENGTH_LONG).show();
+                                                } else {
+                                                    Intent intent = new Intent(DoctorDetailActivity.this,
+                                                            ChatRoomActivity.class);
+                                                    intent.putExtra(com.avoscloud.leanchatlib.utils.Constants.CONVERSATION_ID,
+                                                            conversation.getConversationId());
+                                                    Tool.initToast(DoctorDetailActivity.this,
+                                                            "支付成功，请24小时内与" + name + "医生咨询");
+                                                    startActivity(intent);
+                                                }
+                                            }
+                                        });
+                            } else {
+                                Intent intent = new Intent();
+                                intent.setClass(DoctorDetailActivity.this, BuActivity.class);
+                                intent.putExtra("type", "1");
+                                intent.putExtra("id", doctorDetail.getId() + "");
+                                intent.putExtra("price", doctorDetail.getPricePicture() + "");
+                                intent.putExtra("doctor", doctorDetail.getDoctorId() + "");
+                                intent.putExtra("name", doctorDetail.getUserName() + "");
+                                startActivity(intent);
+                            }
+
                         }
                     });
                     break;
                 case 264:
-                    UserEvaluation userEvaluation=(UserEvaluation) msg.obj;
+                    UserEvaluation userEvaluation = (UserEvaluation) msg.obj;
                     userEvaluationList.clear();
                     userEvaluationList.addAll(userEvaluation.getData());
                     yonghupingjia.setOnClickListener(new View.OnClickListener() {
@@ -169,7 +211,7 @@ public class DoctorDetailActivity extends BaActivity {
                         String str = userEvaluationList.get(0).getUserName();
                         yonghu1.setText(str.charAt(0) + "****"
                                 + str.charAt(str.length() - 1));
-                        yonghu1Degree.setText("满意度"+userEvaluationList.get(0).getSatisfy());
+                        yonghu1Degree.setText("满意度" + userEvaluationList.get(0).getSatisfy());
                         yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
                     } else if (userEvaluationList.size() >= 2) {
                         pingjia2.setVisibility(View.VISIBLE);
@@ -177,13 +219,13 @@ public class DoctorDetailActivity extends BaActivity {
                         String str = userEvaluationList.get(0).getUserName();
                         yonghu1.setText(str.charAt(0) + "****"
                                 + str.charAt(str.length() - 3));
-                        yonghu1Degree.setText("满意度"+userEvaluationList.get(0).getSatisfy() + "");
+                        yonghu1Degree.setText("满意度" + userEvaluationList.get(0).getSatisfy() + "");
                         yonghu1Pingjia.setText(userEvaluationList.get(0).getEvaluate());
 
                         str = userEvaluationList.get(1).getUserName();
                         yonghu2.setText(str.charAt(0) + "****"
                                 + str.charAt(str.length() - 3));
-                        yonghu2Degree.setText("满意度"+userEvaluationList.get(1).getSatisfy() + "");
+                        yonghu2Degree.setText("满意度" + userEvaluationList.get(1).getSatisfy() + "");
                         yonghu2Pingjia.setText(userEvaluationList.get(1).getEvaluate());
                     }
 
@@ -197,7 +239,7 @@ public class DoctorDetailActivity extends BaActivity {
         guanzhuTextView = (TextView) findViewById(R.id.guanzhu);
         TextView xinyiTextView = (TextView) findViewById(R.id.songxinyi);
         tuwenLayout = (LinearLayout) findViewById(R.id.tuwenzixun);
-        vedioyuyue=(LinearLayout) findViewById(R.id.vedioyuyue);
+        vedioyuyue = (LinearLayout) findViewById(R.id.vedioyuyue);
         yonghupingjia = (RelativeLayout) findViewById(R.id.yonghupingjia);
         yonghu1 = (TextView) findViewById(R.id.yonghu1);
         yonghu1Degree = (TextView) findViewById(R.id.yonghu1Degree);
