@@ -37,6 +37,7 @@ import com.wzy.mhealth.model.Regmodel;
 import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.Shop;
+import com.wzy.mhealth.model.ShopDetail;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.StepResult;
@@ -374,7 +375,6 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Zan(), handler, what));
         }
         if (what == 270) {//商城首页
-            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Shop(), handler, what));
         }
         if (what == 271) {//私人医生价格
@@ -390,6 +390,10 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 274) {//不可使用优惠劵
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Decrease(), handler, what));
 
+        }
+        if(what==275){//商品详情
+            params.addBodyParameter("productId", ((TiUser) object).getCardId());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopDetail(), handler, what));
         }
     }
 }

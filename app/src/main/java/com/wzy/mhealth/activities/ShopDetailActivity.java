@@ -26,11 +26,22 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
     private ViewPager vp_shopdetail;
     private List<Fragment> fragments;
     private Button btn_buy,btn_cart;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_detail);
+        id = getIntent().getStringExtra("id");
+        setId(id);
         init();
     }
 

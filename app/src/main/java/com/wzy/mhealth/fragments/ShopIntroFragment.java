@@ -15,7 +15,12 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.snappingstepper.SnappingStepper;
 import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.ShopDetailActivity;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.BannerItem;
+import com.wzy.mhealth.model.ShopDetail;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.LocalImageHolderView;
 
 import java.util.ArrayList;
@@ -25,19 +30,27 @@ public class ShopIntroFragment extends Fragment {
     private SnappingStepper stepperCustom;
     private TextView tv_per, tv_intro, tv_name;
     private ArrayList<BannerItem> localImages = new ArrayList<>();
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case 275:
+                    ShopDetail shopDetail=(ShopDetail) msg.obj;
+                    break;
             }
         }
     };
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_shop_intro, container, false);
+        String id = ((ShopDetailActivity) getActivity()).getId();
+        String url= Constants.SERVER_URL+"MhealthOneProductServlet";
+        TiUser user = new TiUser();
+        user.setCardId(id+"");
+        MyHttpUtils.handData(handler, 275, url, user);
         init(v);
         return v;
     }

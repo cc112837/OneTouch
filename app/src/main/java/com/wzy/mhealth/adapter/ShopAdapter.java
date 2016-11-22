@@ -1,15 +1,17 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.inter.MyRecyItemClickListener;
 import com.wzy.mhealth.model.Shop;
 
 import java.util.List;
@@ -24,54 +26,68 @@ import java.util.List;
  * 修改时间：2016/11/15 14:38
  * 修改备注：
  */
-public class ShopAdapter extends BaseAdapter{
-    private LayoutInflater mInflater;
+public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder> {
     private Context context;
+    private LayoutInflater inflater;
     private List<Shop.DataEntity> list;
-    public ShopAdapter(Context context, List<Shop.DataEntity> list) {
-        mInflater = LayoutInflater.from(context);
-        this.list=list;
-        this.context=context;
+    private MyRecyItemClickListener listener;
+
+    public void setOnItemClickListener(MyRecyItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
+    public ShopAdapter(Context context, List<Shop.DataEntity> alllist) {
+        this.context = context;
+        this.list = alllist;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public int getCount() {
+    public ShopAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View inflate = inflater.inflate(R.layout.shop_list_item, parent, false);
+        MyViewHolder myViewHolder = new MyViewHolder(inflate);
+        return myViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(final ShopAdapter.MyViewHolder viewHolder, int position) {
+        viewHolder.tv_oldprice.setText("" + list.get(position).getProductOldPrice());
+        viewHolder.tv_name.setText("" + list.get(position).getProductName());
+        viewHolder.tv_newprice.setText("" + list.get(position).getProductNewPrice());
+        ImageLoader.getInstance().displayImage(list.get(position).getProductImageSmall(), viewHolder.iv_home, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
+    }
+
+    @Override
+    public int getItemCount() {
         return list.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return list.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder ;
-        if (convertView == null) {
-            viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.shop_list_item, null);
-            viewHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
-            viewHolder.tv_oldprice = (TextView) convertView.findViewById(R.id.tv_oldprice);
-            viewHolder.iv_home=(ImageView) convertView.findViewById(R.id.iv_home);
-            viewHolder.tv_newprice = (TextView) convertView.findViewById(R.id.tv_newprice);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-        viewHolder.tv_oldprice.setText("");
-        viewHolder.tv_name.setText("");
-        viewHolder.tv_newprice.setText("");
-        ImageLoader.getInstance().displayImage("",viewHolder.iv_home);
-        return convertView;
-    }
-    static class ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_name;
-        public  TextView tv_oldprice,tv_newprice;
+        public TextView tv_oldprice, tv_newprice;
         private ImageView iv_home;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_oldprice = (TextView) itemView.findViewById(R.id.tv_oldprice);
+            iv_home = (ImageView) itemView.findViewById(R.id.iv_home);
+            tv_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+            tv_newprice = (TextView) itemView.findViewById(R.id.tv_newprice);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (listener != null) {
+                listener.onItemClick(v, getLayoutPosition());
+            }
+        }
     }
 }
+
+
+
+
+
