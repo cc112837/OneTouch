@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:orientation="horizontal"
         android:padding="10dp">
 
@@ -15,14 +15,16 @@
             android:id="@+id/iv_taocan"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_weight="1"
+            android:layout_weight="1.1"
             android:scaleType="fitXY"
             android:src="@mipmap/zhixingintro" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -30,7 +32,6 @@
                 android:id="@+id/tv_nametijan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:gravity="center_horizontal"
                 android:text="体检机构名称"
                 android:textColor="@color/dark_grey"

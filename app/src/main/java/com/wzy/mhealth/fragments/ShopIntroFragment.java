@@ -17,11 +17,10 @@ import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.BannerItem;
 import com.wzy.mhealth.model.ShopDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
-import com.wzy.mhealth.view.LocalImageHolderView;
+import com.wzy.mhealth.view.LocalImageView;
 
 import java.util.ArrayList;
 
@@ -29,7 +28,7 @@ public class ShopIntroFragment extends Fragment {
     private ConvenientBanner cb_shop;
     private SnappingStepper stepperCustom;
     private TextView tv_per, tv_intro, tv_name;
-    private ArrayList<BannerItem> localImages = new ArrayList<>();
+    private ArrayList<String> localImages = new ArrayList<>();
 
     private Handler handler = new Handler() {
         @Override
@@ -38,6 +37,21 @@ public class ShopIntroFragment extends Fragment {
             switch (msg.what) {
                 case 275:
                     ShopDetail shopDetail=(ShopDetail) msg.obj;
+                    localImages.add(shopDetail.getProductImageBig());
+                    tv_name.setText(shopDetail.getProductName() + "");
+                    tv_intro.setText(shopDetail.getData());
+                    tv_per.setText(shopDetail.getProductNewPrice()+"");
+                    cb_shop.setPages(
+                            new CBViewHolderCreator<LocalImageView>() {
+                                @Override
+                                public LocalImageView createHolder() {
+                                    return new LocalImageView();
+                                }
+                            }, localImages)
+                            //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                            .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
+                                    //设置指示器的方向
+                            .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
                     break;
             }
         }
@@ -71,17 +85,7 @@ public class ShopIntroFragment extends Fragment {
                 }
             }
         });
-        cb_shop.setPages(
-                new CBViewHolderCreator<LocalImageHolderView>() {
-                    @Override
-                    public LocalImageHolderView createHolder() {
-                        return new LocalImageHolderView();
-                    }
-                }, localImages)
-                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
-                        //设置指示器的方向
-                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+
     }
 
 

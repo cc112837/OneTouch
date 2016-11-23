@@ -69,7 +69,7 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
         vp_shopdetail=(ViewPager) findViewById(R.id.vp_shopdetail);
         TijianAdapter adapter = new TijianAdapter(getSupportFragmentManager(), fragments);
         vp_shopdetail.setAdapter(adapter);
-        vp_shopdetail.setCurrentItem(1);
+        vp_shopdetail.setCurrentItem(0);
         vp_shopdetail.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

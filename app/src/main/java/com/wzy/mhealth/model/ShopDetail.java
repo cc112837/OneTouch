@@ -13,25 +13,19 @@ package com.wzy.mhealth.model;
 public class ShopDetail {
 
     /**
-     * productImageBig : upload/files/201611211030474Zujn8h6.png
+     * productImageBig : upload/files/20161121102139jprZEZCB.png
      * status : 1
-     * productNewPrice : 49.8
+     * productNewPrice : 10.8
      * data : 存在此商品
-     * productPackaging : <p><img src="http://117.34.105.29:8818/jeecg/plug-in/umeditor/jsp/upload1/20161121/70901479695441713.png" _src="http://117.34.105.29:8818/jeecg/plug-in/umeditor/jsp/upload1/20161121/70901479695441713.png"/></p>
-     * productIntroduce : <p><img src="http://117.34.105.29:8818/jeecg/plug-in/umeditor/jsp/upload1/20161121/48551479694763053.jpg" _src="http://117.34.105.29:8818/jeecg/plug-in/umeditor/jsp/upload1/20161121/48551479694763053.jpg"/></p>
-     * productName : 有机青稞米500g
-     * productParameter : <p><img src="http://117.34.105.29:8818/jeecg/plug-in/umeditor/jsp/upload1/20161121/64621479695431603.png" _src="http://117.34.105.29:8818/jeecg/plug-in/umeditor/jsp/upload1/20161121/64621479695431603.png"/></p>
-     * productId : f5a2e99d5884b056015884b8ac890001
+     * productName : 有机青稞米100g
+     * productId : f5a2e99d5884b056015884b056520000
      */
 
     private String productImageBig;
     private String status;
     private double productNewPrice;
     private String data;
-    private String productPackaging;
-    private String productIntroduce;
     private String productName;
-    private String productParameter;
     private String productId;
 
     public void setProductImageBig(String productImageBig) {
@@ -50,20 +44,8 @@ public class ShopDetail {
         this.data = data;
     }
 
-    public void setProductPackaging(String productPackaging) {
-        this.productPackaging = productPackaging;
-    }
-
-    public void setProductIntroduce(String productIntroduce) {
-        this.productIntroduce = productIntroduce;
-    }
-
     public void setProductName(String productName) {
         this.productName = productName;
-    }
-
-    public void setProductParameter(String productParameter) {
-        this.productParameter = productParameter;
     }
 
     public void setProductId(String productId) {
@@ -86,20 +68,8 @@ public class ShopDetail {
         return data;
     }
 
-    public String getProductPackaging() {
-        return productPackaging;
-    }
-
-    public String getProductIntroduce() {
-        return productIntroduce;
-    }
-
     public String getProductName() {
         return productName;
-    }
-
-    public String getProductParameter() {
-        return productParameter;
     }
 
     public String getProductId() {

@@ -38,6 +38,7 @@ import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.Shop;
 import com.wzy.mhealth.model.ShopDetail;
+import com.wzy.mhealth.model.ShopDetail2;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
 import com.wzy.mhealth.model.StepResult;
@@ -391,9 +392,13 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Decrease(), handler, what));
 
         }
-        if(what==275){//商品详情
+        if (what == 275) {//商品详情/商品
             params.addBodyParameter("productId", ((TiUser) object).getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopDetail(), handler, what));
+        }
+        if (what == 276) {//商品详情/详情
+            params.addBodyParameter("productId", ((TiUser) object).getCardId());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopDetail2(), handler, what));
         }
     }
 }

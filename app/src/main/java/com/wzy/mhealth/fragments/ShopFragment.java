@@ -8,11 +8,14 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CartActivity;
@@ -26,12 +29,13 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopFragment extends Fragment implements View.OnClickListener {
+public class ShopFragment extends Fragment implements View.OnClickListener,SearchView.OnQueryTextListener {
     private ImageView leftBtn, rightBtn;
     private TextView tv_count;
     private List<Shop.DataEntity> list = new ArrayList<>();
     private ShopAdapter shopAdapter;
     private RecyclerView gv_shop;
+    private SearchView searchView;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -58,6 +62,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init(View v) {
+        searchView=(SearchView) v.findViewById(R.id.searchView);
         leftBtn = (ImageView) v.findViewById(R.id.leftBtn);
         rightBtn = (ImageView) v.findViewById(R.id.rightBtn);
         tv_count = (TextView) v.findViewById(R.id.tv_count);
@@ -72,6 +77,13 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         MyHttpUtils.handData(handler, 270, url, null);
         leftBtn.setOnClickListener(this);
         rightBtn.setOnClickListener(this);
+        searchView.setIconifiedByDefault(false);
+        //为该SearchView组件设置事件监听器
+        searchView.setOnQueryTextListener(this);
+        //设置该SearchView显示搜索按钮
+        searchView.setSubmitButtonEnabled(true);
+        //设置该SearchView内默认显示的提示文本
+        searchView.setQueryHint("查找");
     }
 
 
@@ -88,5 +100,24 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Toast.makeText(getActivity(), "您选择的是：" + query, Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if(TextUtils.isEmpty(newText))
+        {
+            //清除ListView的过滤
+        }
+        else
+        {
+            //使用用户输入的内容对ListView的列表项进行过滤
+        }
+        return true;
     }
 }
