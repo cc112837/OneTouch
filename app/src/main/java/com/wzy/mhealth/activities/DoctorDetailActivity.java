@@ -33,7 +33,7 @@ public class DoctorDetailActivity extends BaActivity {
     private TextView name, departmenTextView, zhichengTextView,
             hospitalTextView, xianqingTextView, tuwenfeiyong, dianhuafeiyong,
             jiahaofeiyong, privatefeiyong, vedioefeiyong;
-    private TextView guanzhuTextView, recommend, attitude, level;
+    private TextView  recommend, attitude, level;
     private TextView yonghu1, yonghu1Degree, yonghu1Pingjia, youbianzi;
     private TextView yonghu2, yonghu2Degree, yonghu2Pingjia, zuobian;
     private LinearLayout tuwenLayout, vedioyuyue;
@@ -59,14 +59,6 @@ public class DoctorDetailActivity extends BaActivity {
         user.setTel("0");
         MyHttpUtils.handData(handler, 264, url, user);
 
-        guanzhuTextView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(DoctorDetailActivity.this, "1111",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
 
 
     }
@@ -236,8 +228,6 @@ public class DoctorDetailActivity extends BaActivity {
 
     private void init() {
 
-        guanzhuTextView = (TextView) findViewById(R.id.guanzhu);
-        TextView xinyiTextView = (TextView) findViewById(R.id.songxinyi);
         tuwenLayout = (LinearLayout) findViewById(R.id.tuwenzixun);
         vedioyuyue = (LinearLayout) findViewById(R.id.vedioyuyue);
         yonghupingjia = (RelativeLayout) findViewById(R.id.yonghupingjia);

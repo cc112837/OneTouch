@@ -270,9 +270,6 @@
             android:name=".activities.ServicePriActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.PersonTaocanActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.TaocanDetailAcitivty"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.TaocanBuyActivity" />

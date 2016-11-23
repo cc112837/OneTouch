@@ -1,25 +1,23 @@
 package com.wzy.mhealth.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.activities.PersonTaocanActivity;
-import com.wzy.mhealth.adapter.TaocanListAdapter;
+import com.wzy.mhealth.adapter.TaocanAllAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.view.DividerItemDecoration;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +26,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class YueZiFragment extends Fragment {
-    private ListView lv_show;
-    TaocanListAdapter adapter;
+    private RecyclerView lv_show;
+    TaocanAllAdapter adapter;
     List<Tijian.DataEntity> list = new ArrayList<>();
     private Handler handler = new Handler() {
         @Override
@@ -40,7 +38,6 @@ public class YueZiFragment extends Fragment {
                     Tijian taocanEntity = (Tijian) msg.obj;
                     list.clear();
                     list.addAll(taocanEntity.getData());
-                    adapter = new TaocanListAdapter(getActivity(),list);
                     lv_show.setAdapter(adapter);
                     break;
             }
@@ -58,21 +55,14 @@ public class YueZiFragment extends Fragment {
     }
 
     private void init(View v) {
-        lv_show = (ListView) v.findViewById(R.id.lv_show);
-        lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), PersonTaocanActivity.class);
-                intent.putExtra("id", list.get(position).getTaocanId() + "");
-                intent.putExtra("name", list.get(position).getCenterName() + "");
-                intent.putExtra("tel", list.get(position).getPhone() + "");
-                intent.putExtra("add", list.get(position).getAdress() + "");
-                intent.putExtra("content", list.get(position).getDetails() + "");
-                intent.putExtra("img", list.get(position).getImg() + "");
-                intent.putExtra("second", (Serializable) list.get(position).getTaocanId());
-                startActivity(intent);
-            }
-        });
+        lv_show = (RecyclerView) v.findViewById(R.id.lv_show);
+        adapter = new TaocanAllAdapter(getActivity());
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        lv_show.setLayoutManager(manager);
+        lv_show.setAdapter(adapter);
+        lv_show.addItemDecoration(new DividerItemDecoration(
+                getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        adapter.setData(list);
     }
 
 

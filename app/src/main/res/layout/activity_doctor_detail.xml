@@ -112,26 +112,6 @@
                     android:layout_marginTop="15dp"
                     android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/guanzhu"
-                        android:layout_width="75dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/textview_border_1"
-                        android:gravity="center"
-                        android:text="+ 关注"
-                        android:textColor="#00cf00"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/songxinyi"
-                        android:layout_width="75dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/textview_border_2"
-                        android:gravity="center"
-                        android:text="送心意"
-                        android:textColor="#ef0000"
-                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
 

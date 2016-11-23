@@ -1,11 +1,12 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,14 +19,14 @@ import android.widget.TextView;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.LocationAdapter;
 import com.wzy.mhealth.adapter.ProvinceAdapter;
-import com.wzy.mhealth.adapter.TaocanListAdapter;
+import com.wzy.mhealth.adapter.TaocanAllAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Provice;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.view.DividerItemDecoration;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +34,11 @@ public class TaocanListActivity extends Activity {
     private ImageView leftBtn;
     private PopupWindow mPopupWindow;
     public List<Provice.DataEntity> proviceList = new ArrayList<>();
-    private TaocanListAdapter taocanListAdapter;
+    private TaocanAllAdapter taocanListAdapter;
     private LocationAdapter locationAdapter;
     private ProvinceAdapter provinceAdapter;
-    private ListView lv_show, locationListView, cityListView;
+    private RecyclerView rv_show;
+    private ListView  locationListView, cityListView;
     private LinearLayout total_location, order, layout_left, ll_wrap;
     private TextView text_address, order_text;
     private List<Tijian.DataEntity> list = new ArrayList<>();
@@ -46,7 +48,7 @@ public class TaocanListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taocan_list);
-        taocanListAdapter = new TaocanListAdapter(TaocanListActivity.this, list);
+        taocanListAdapter = new TaocanAllAdapter(TaocanListActivity.this);
         init();
     }
 
@@ -60,20 +62,6 @@ public class TaocanListActivity extends Activity {
                     list.clear();
                     list.addAll(tijian.getData());
                     taocanListAdapter.notifyDataSetChanged();
-                    lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(TaocanListActivity.this, PersonTaocanActivity.class);
-                            intent.putExtra("id", list.get(position).getTaocanId() + "");
-                            intent.putExtra("name", list.get(position).getCenterName() + "");
-                            intent.putExtra("tel", list.get(position).getPhone() + "");
-                            intent.putExtra("add", list.get(position).getAdress() + "");
-                            intent.putExtra("content", list.get(position).getDetails() + "");
-                            intent.putExtra("img", list.get(position).getImg() + "");
-                            intent.putExtra("second", (Serializable) list.get(position).getTaocanId());
-                            startActivity(intent);
-                        }
-                    });
                     break;
                 case 160:
                     Provice provice = (Provice) msg.obj;
@@ -86,13 +74,18 @@ public class TaocanListActivity extends Activity {
     };
 
     private void init() {
-        lv_show = (ListView) findViewById(R.id.lv_show);
+        rv_show = (RecyclerView) findViewById(R.id.lv_show);
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         ll_wrap = (LinearLayout) findViewById(R.id.ll_wrap);
         total_location = (LinearLayout) findViewById(R.id.total_location);
         order = (LinearLayout) findViewById(R.id.order);
         order_text = (TextView) findViewById(R.id.order_text);
-        lv_show.setAdapter(taocanListAdapter);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        rv_show.setLayoutManager(manager);
+        rv_show.setAdapter(taocanListAdapter);
+        rv_show.addItemDecoration(new DividerItemDecoration(
+                TaocanListActivity.this, DividerItemDecoration.VERTICAL_LIST));
+        taocanListAdapter.setData(list);
         String url = Constants.SERVER_URL + "MhealthOneCityServlet";
         TiUser user = new TiUser();
         user.setTel("");
@@ -161,7 +154,6 @@ public class TaocanListActivity extends Activity {
 
             @Override
             public void onDismiss() {
-                // TODO Auto-generated method stub
                 text_address = (TextView) total_location.findViewById(R.id.text_address);
                 text_address.setTextColor(0xff000000);
             }

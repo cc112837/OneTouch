@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MaternityFragment">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lv_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/grey_bg"
-        android:dividerHeight="1px"></ListView>
+        android:dividerHeight="1px"></android.support.v7.widget.RecyclerView>
 </FrameLayout>

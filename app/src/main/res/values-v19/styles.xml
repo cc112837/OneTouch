@@ -6,6 +6,7 @@
         res/values-v11/styles.xml on API 14+ devices.
     -->
     <style name="AppTheme" parent="BaseAppTheme">
+        <item name="android:listDivider">@drawable/line</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
