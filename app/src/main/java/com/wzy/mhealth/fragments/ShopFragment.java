@@ -77,7 +77,6 @@ public class ShopFragment extends Fragment implements View.OnClickListener,Searc
         MyHttpUtils.handData(handler, 270, url, null);
         leftBtn.setOnClickListener(this);
         rightBtn.setOnClickListener(this);
-        searchView.setIconifiedByDefault(false);
         //为该SearchView组件设置事件监听器
         searchView.setOnQueryTextListener(this);
         //设置该SearchView显示搜索按钮

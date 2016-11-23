@@ -38,7 +38,12 @@ public class ShopDetailFragment extends Fragment implements RadioGroup.OnChecked
                     productIntroduce = shopDetail2.getProductIntroduce();
                     productPackaging = shopDetail2.getProductPackaging();
                     productParameter = shopDetail2.getProductParameter();
-
+                    DisplayMetrics dm = new DisplayMetrics();
+                    //取得窗口属性
+                    getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+                    float density = dm.density;
+                    float width = dm.widthPixels / density - 10;
+                    wv_shopdisplay.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + productIntroduce, "text/html", "utf-8", null);
                     break;
             }
         }
