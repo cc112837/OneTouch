@@ -16,11 +16,10 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CartActivity;
-import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.activities.ShoporderActivity;
+import com.wzy.mhealth.adapter.SectionedSpanSizeLookup;
 import com.wzy.mhealth.adapter.ShopAdapter;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.inter.MyRecyItemClickListener;
 import com.wzy.mhealth.model.Shop;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -42,17 +41,8 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
                      Shop shop=(Shop) msg.obj;
                     list.clear();
                     list.addAll(shop.getData());
-                    tv_count.setText("" + shop.getProductNum());
+                    tv_count.setText("" );
                     shopAdapter.notifyDataSetChanged();
-                    shopAdapter.setOnItemClickListener(new MyRecyItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-                            Intent intent=new Intent(getActivity(),ShopDetailActivity.class);
-                            intent.putExtra("id",list.get(position).getProductId()+"");
-                            startActivity(intent);
-                        }
-                    });
-
                     break;
             }
         }
@@ -72,10 +62,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         rightBtn = (ImageView) v.findViewById(R.id.rightBtn);
         tv_count = (TextView) v.findViewById(R.id.tv_count);
         gv_shop = (RecyclerView) v.findViewById(R.id.gv_shop);
+        shopAdapter = new ShopAdapter(getActivity());
         GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
+        manager.setSpanSizeLookup(new SectionedSpanSizeLookup(shopAdapter, manager));
         gv_shop.setLayoutManager(manager);
-        shopAdapter = new ShopAdapter(getActivity(), list);
         gv_shop.setAdapter(shopAdapter);
+        shopAdapter.setData(list);
         String url= Constants.SERVER_URL+"MhealthProductServlet";
         MyHttpUtils.handData(handler, 270, url, null);
         leftBtn.setOnClickListener(this);

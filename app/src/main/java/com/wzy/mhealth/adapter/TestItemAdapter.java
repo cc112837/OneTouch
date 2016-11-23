@@ -15,6 +15,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.DoctorGradeActivity;
 import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.model.ChaTiContent;
+import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ public class TestItemAdapter extends BaseAdapter {
     private List<String> list = new ArrayList<>();
 
     public TestItemAdapter(Context context, List<ChaTiContent> contentList, LayoutInflater inflater) {
-        // TODO Auto-generated constructor stub
         this.con = context;
         this.contentList = contentList;
         mInflater = inflater;
@@ -34,7 +34,7 @@ public class TestItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return contentList.size();
+        return MyUtils.isEmpty(contentList) ? 0 : contentList.size();
 
     }
 
@@ -51,7 +51,6 @@ public class TestItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         final ChildHolder childHolder;
         if (convertView == null) {
             childHolder = new ChildHolder();

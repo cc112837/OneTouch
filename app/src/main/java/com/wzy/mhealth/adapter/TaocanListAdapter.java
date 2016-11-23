@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Tijian;
+import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class TaocanListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        return MyUtils.isEmpty(list) ? 0 : list.size();
     }
 
     @Override

@@ -19,6 +19,7 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.AllStepRank;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class RankAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        return MyUtils.isEmpty(list) ? 0 : list.size();
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Doctor;
+import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class DoctorHomeAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     public DoctorHomeAdapter(Context context, List<Doctor.DataEntity> list) {
-        // TODO Auto-generated constructor stub
         this.context = context;
         this.list = list;
         mInflater = LayoutInflater.from(context);
@@ -29,25 +29,21 @@ public class DoctorHomeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        return list.size();
+        return MyUtils.isEmpty(list) ? 0 : list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         ViewHolder viewHolder = null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -63,7 +59,7 @@ public class DoctorHomeAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tv_name.setText(list.get(position).getUserName());
-        ImageLoader.getInstance().displayImage("",viewHolder.iv_doctorhead,com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions );
+        ImageLoader.getInstance().displayImage(list.get(position).getImage(),viewHolder.iv_doctorhead,com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
         viewHolder.tv_pre.setText(list.get(position).getFirstdep());
         viewHolder.tv_hosi.setText(list.get(position).getDoctorTilte());
         return convertView;

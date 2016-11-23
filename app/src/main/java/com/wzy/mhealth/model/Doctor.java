@@ -123,7 +123,7 @@ public class Doctor implements Serializable {
             return firstdep;
         }
 
-        public Object getImage() {
+        public String getImage() {
             return image;
         }
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.amap.api.services.core.PoiItem;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class RouteSearchAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return poiItems.size();
+		return MyUtils.isEmpty(poiItems) ? 0 : poiItems.size();
 	}
 
 	@Override

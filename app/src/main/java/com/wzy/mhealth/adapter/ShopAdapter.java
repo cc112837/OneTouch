@@ -1,18 +1,21 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
-import android.graphics.Paint;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.inter.MyRecyItemClickListener;
+import com.wzy.mhealth.activities.ShopDetailActivity;
+import com.wzy.mhealth.holder.DescHolder;
+import com.wzy.mhealth.holder.HeaderHolder;
 import com.wzy.mhealth.model.Shop;
+import com.wzy.mhealth.utils.MyUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 
 import java.util.List;
 
@@ -26,66 +29,99 @@ import java.util.List;
  * 修改时间：2016/11/15 14:38
  * 修改备注：
  */
-public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder> {
-    private Context context;
-    private LayoutInflater inflater;
-    private List<Shop.DataEntity> list;
-    private MyRecyItemClickListener listener;
+public class ShopAdapter extends SectionedRecyclerViewAdapter<HeaderHolder, DescHolder, RecyclerView.ViewHolder> {
 
-    public void setOnItemClickListener(MyRecyItemClickListener listener) {
-        this.listener = listener;
+    public List<Shop.DataEntity> allTagList;
+    private Context mContext;
+    private LayoutInflater mInflater;
+    private SparseBooleanArray mBooleanMap;//记录下哪个section是被打开的
+
+    public ShopAdapter(Context context) {
+        mContext = context;
+        mInflater = LayoutInflater.from(context);
+        mBooleanMap = new SparseBooleanArray();
     }
 
-
-    public ShopAdapter(Context context, List<Shop.DataEntity> alllist) {
-        this.context = context;
-        this.list = alllist;
-        inflater = LayoutInflater.from(context);
-    }
-
-    @Override
-    public ShopAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = inflater.inflate(R.layout.shop_list_item, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(inflate);
-        return myViewHolder;
+    public void setData(List<Shop.DataEntity> allTagList) {
+        this.allTagList = allTagList;
+        notifyDataSetChanged();
     }
 
     @Override
-    public void onBindViewHolder(final ShopAdapter.MyViewHolder viewHolder, int position) {
-        viewHolder.tv_oldprice.setText("" + list.get(position).getProductOldPrice());
-        viewHolder.tv_name.setText("" + list.get(position).getProductName());
-        viewHolder.tv_newprice.setText("" + list.get(position).getProductNewPrice());
-        ImageLoader.getInstance().displayImage(list.get(position).getProductImageSmall(), viewHolder.iv_home, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
+    protected int getSectionCount() {
+        return MyUtils.isEmpty(allTagList) ? 0 : allTagList.size();
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
+    protected int getItemCountForSection(int section) {
+        int count = allTagList.get(section).getProductData().size();
+//        if (count >= 8 && !mBooleanMap.get(section)) {
+//            count = 8;
+//        }
+        return MyUtils.isEmpty(allTagList.get(section).getProductData()) ? 0 : count;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView tv_name;
-        public TextView tv_oldprice, tv_newprice;
-        private ImageView iv_home;
+    //是否有footer布局
+    @Override
+    protected boolean hasFooterInSection(int section) {
+        return false;
+    }
 
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-            tv_oldprice = (TextView) itemView.findViewById(R.id.tv_oldprice);
-            iv_home = (ImageView) itemView.findViewById(R.id.iv_home);
-            tv_oldprice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
-            tv_newprice = (TextView) itemView.findViewById(R.id.tv_newprice);
-            itemView.setOnClickListener(this);
-        }
+    @Override
+    protected HeaderHolder onCreateSectionHeaderViewHolder(ViewGroup parent, int viewType) {
+        return new HeaderHolder(mInflater.inflate(R.layout.image_header, parent, false));
+    }
 
-        @Override
-        public void onClick(View v) {
-            if (listener != null) {
-                listener.onItemClick(v, getLayoutPosition());
+    @Override
+    protected RecyclerView.ViewHolder onCreateSectionFooterViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    protected DescHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
+        return new DescHolder(mInflater.inflate(R.layout.shop_list_item, parent, false));
+    }
+
+    @Override
+    protected void onBindSectionHeaderViewHolder(HeaderHolder holder,int section) {
+//        boolean isOpen = mBooleanMap.get(section);
+//        String text = isOpen ? "展开" : "关闭";
+//        mBooleanMap.put(section, !isOpen);
+//        holder.openView.setText(text);
+        ImageLoader.getInstance().displayImage(allTagList.get(section).getShowImage(), holder.shop_header, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
+        holder.shop_header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.show(mContext, "点击了区头");
             }
-        }
+        });
+
+    }
+
+    @Override
+    protected void onBindSectionFooterViewHolder(RecyclerView.ViewHolder holder, int section) {
+
+    }
+
+    @Override
+    protected void onBindItemViewHolder(DescHolder holder, final int section, final int position) {
+        holder.tv_oldprice.setText("" + allTagList.get(section).getProductData().get(position).getProductOldPrice());
+        holder.tv_name.setText("" + allTagList.get(section).getProductData().get(position).getProductName());
+        holder.tv_newprice.setText("" + allTagList.get(section).getProductData().get(position).getProductNewPrice());
+        ImageLoader.getInstance().displayImage(allTagList.get(section).getProductData().get(position).getProductImageSmall(), holder.iv_home, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
+        holder.ll_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mContext,ShopDetailActivity.class);
+                intent.putExtra("id",allTagList.get(section).getProductData().get(position).getProductId()+"");
+                mContext.startActivity(intent);
+            }
+        });
     }
 }
+
+
+
 
 
 

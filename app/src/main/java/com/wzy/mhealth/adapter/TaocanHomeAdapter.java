@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.TaocanEntity;
+import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class TaocanHomeAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     public TaocanHomeAdapter(Context context, List<TaocanEntity.DataEntity> list) {
-        // TODO Auto-generated constructor stub
         this.context = context;
         this.list = list;
         mInflater = LayoutInflater.from(context);
@@ -30,25 +30,21 @@ public class TaocanHomeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        return list.size();
+        return MyUtils.isEmpty(list) ? 0 : list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         ViewHolder viewHolder = null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
