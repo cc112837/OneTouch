@@ -70,9 +70,8 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/gv_shop"
-            android:divider="@color/dark_grey"
-            android:dividerHeight="1dp"
             android:layout_width="match_parent"
+            android:background="@color/bg_gray"
             android:layout_height="match_parent"
             ></android.support.v7.widget.RecyclerView>
     </LinearLayout>
