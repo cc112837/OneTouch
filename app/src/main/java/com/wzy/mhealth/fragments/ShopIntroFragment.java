@@ -30,6 +30,7 @@ public class ShopIntroFragment extends Fragment {
     private TextView tv_per, tv_intro, tv_name;
     private ArrayList<String> localImages = new ArrayList<>();
 
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -60,6 +61,7 @@ public class ShopIntroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_shop_intro, container, false);
+        ((ShopDetailActivity)getActivity()).setValuenum(1);
         String id = ((ShopDetailActivity) getActivity()).getId();
         String url= Constants.SERVER_URL+"MhealthOneProductServlet";
         TiUser user = new TiUser();
@@ -80,7 +82,7 @@ public class ShopIntroFragment extends Fragment {
             public void onValueChange(View view, int value) {
                 switch (view.getId()) {
                     case R.id.stepperCustom:
-
+                        ((ShopDetailActivity)getActivity()).setValuenum(value);
                         break;
                 }
             }

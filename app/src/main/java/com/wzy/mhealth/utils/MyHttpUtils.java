@@ -400,5 +400,11 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("productId", ((TiUser) object).getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopDetail2(), handler, what));
         }
+        if (what == 277) {//加入购物车
+            params.addBodyParameter("productId", ((Pridefine) object).getName());
+            params.addBodyParameter("productNumber",((Pridefine) object).getTaoId()+"");
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
     }
 }
