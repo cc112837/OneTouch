@@ -382,6 +382,7 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Pridefine(), handler, what));
         }
         if (what == 272) {//购物车页面
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Cart(), handler, what));
         }
         if (what == 273) {//可使用优惠劵

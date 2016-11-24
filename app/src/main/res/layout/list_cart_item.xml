@@ -9,18 +9,18 @@
     <CheckBox
         android:id="@+id/cb_check"
         android:layout_width="wrap_content"
-        android:button="@null"
-        android:layout_marginLeft="5dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/radio" />
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/radio"
+        android:button="@null" />
 
     <ImageView
         android:id="@+id/iv_shop"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:scaleType="fitXY"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,21 +46,34 @@
 
             <TextView
                 android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="¥50.00"
                 android:textColor="@color/red"
                 android:textSize="16sp" />
-
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="数量：0"
+                android:visibility="gone"
+                android:textColor="@color/orange"
+                android:textSize="16sp" />
             <com.bigkoo.snappingstepper.SnappingStepper
                 android:id="@+id/stepperCustom"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                stepper:max="200"
+                stepper:max="100"
                 stepper:min="1"
                 stepper:step="1"
                 stepper:stepper_background="@color/white"
