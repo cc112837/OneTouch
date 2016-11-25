@@ -137,8 +137,11 @@ public class CartActivity extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.tv_cal:
-                intent = new Intent(CartActivity.this, ShopBuyActivity.class);
-                startActivity(intent);
+                if (cartDetail.size() > 0) {
+                    intent = new Intent(CartActivity.this, ShopBuyActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
         }
     }

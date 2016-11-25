@@ -7,6 +7,7 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.wzy.mhealth.model.Address;
 import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.AllStepRank;
 import com.wzy.mhealth.model.BingZhen;
@@ -403,8 +404,26 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 277) {//加入购物车
             params.addBodyParameter("productId", ((Pridefine) object).getName());
-            params.addBodyParameter("productNumber",((Pridefine) object).getTaoId()+"");
+            params.addBodyParameter("productNumber", ((Pridefine) object).getTaoId() + "");
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 278) {//收货地址
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Address(), handler, what));
+        }
+        if (what == 279) {//添加或者修改收货地址
+            params.addBodyParameter("consignee", ((Recommend) object).getName());
+            params.addBodyParameter("telephone",((Recommend) object).getTaocanNum());
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("area",((Recommend) object).getData());
+            params.addBodyParameter("address",((Recommend) object).getContext());
+            params.addBodyParameter("sid",((Recommend) object).getTaoId()+"");
+            params.addBodyParameter("addressId",((Recommend) object).getStatus()+"");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 280) {//删除收货地址
+            params.addBodyParameter("addressId", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
     }

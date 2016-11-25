@@ -89,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
                 android:background="@null"
+                android:inputType="number"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
         </LinearLayout>
@@ -181,27 +182,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="注：每次下单会使用改地址"
+                    android:text="注：每次下单会使用该地址"
                     android:textColor="@color/dark_grey"
                     android:textSize="13sp" />
             </LinearLayout>
 
-            <Switch
+            <CheckBox
                 android:id="@+id/sw_default"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:thumb="@null"
-                android:track="@null"
-                android:background="@drawable/toggle_btn"
-                android:checked="true"
                 android:layout_height="wrap_content"
-                />
+                android:layout_gravity="center"
+                android:background="@drawable/toggle_btn"
+                android:button="@null"
+                android:textColor="@color/black" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/grey_bg" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/red"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
     </LinearLayout>
 </LinearLayout>

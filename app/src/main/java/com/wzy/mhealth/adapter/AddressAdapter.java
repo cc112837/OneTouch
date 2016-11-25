@@ -1,6 +1,8 @@
 package com.wzy.mhealth.adapter;
+
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +53,7 @@ public class AddressAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder ;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -64,13 +66,16 @@ public class AddressAdapter extends BaseAdapter{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_tel.setText("");
-        viewHolder.tv_name.setText("");
-        viewHolder.tv_addressitem.setText("");
+        viewHolder.tv_tel.setText(list.get(position).getTelephone()+"");
+        viewHolder.tv_name.setText(list.get(position).getName()+"");
+        viewHolder.tv_addressitem.setText(list.get(position).getAddress()+"");
         viewHolder.iv_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent  intent=new Intent(context, UpdaAddressActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("id",list.get(position));
+                intent.putExtras(bundle);
                 intent.putExtra("flag","update");
                 context.startActivity(intent);
             }

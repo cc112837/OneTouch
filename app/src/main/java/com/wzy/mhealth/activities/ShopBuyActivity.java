@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,7 +62,16 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
         tv_name.setText("");
         tv_tel.setText("");
         tv_address.setText("");
-        headview.setOnClickListener(this);
+        lv_shopbuy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0){
+                    Intent intent= new Intent(ShopBuyActivity.this, AddressActivity.class);
+                    intent.putExtra("flag", "update");
+                    startActivity(intent);
+                }
+            }
+        });
         leftBtn.setOnClickListener(this);
         tv_cal.setOnClickListener(this);
     }
@@ -72,11 +82,6 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.leftBtn:
                 finish();
-                break;
-            case R.id.headView:
-                intent= new Intent(ShopBuyActivity.this, UpdaAddressActivity.class);
-                intent.putExtra("flag", "update");
-                startActivity(intent);
                 break;
             case R.id.tv_cal:
                 Toast.makeText(ShopBuyActivity.this,"结算",Toast.LENGTH_LONG).show();
