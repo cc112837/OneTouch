@@ -32,7 +32,9 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CartActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
@@ -40,7 +42,6 @@ public class CartActivity extends Activity implements View.OnClickListener {
     private CheckBox cb_radio;
     private CartAdapter cartAdapter;
     private TextView tv_total, tv_cal;
-    private List<String> flaglist = new ArrayList<>();
     private List<Cart.DataEntity> list = new ArrayList<>();
     private List<Cart.DataEntity> cartDetail = new ArrayList<>();
     private Handler handler = new Handler() {
@@ -52,22 +53,25 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     final Cart cart = (Cart) msg.obj;
                     list.clear();
                     list.addAll(cart.getData());
+                    cartAdapter.setList(list);
                     totalprice(cartDetail);
                     tv_cal.setOnClickListener(CartActivity.this);
                     cartAdapter.notifyDataSetChanged();
                     cb_radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if (isChecked) {
-                                flaglist.clear();
                                 for (int i = 0; i < list.size(); i++) {
-                                    flaglist.add(i + "");
+                                    cartAdapter.selectedMap.put(i, true);
                                 }
-                                cartAdapter.setFlaglist(flaglist);
                             } else {
-                                flaglist.clear();
-                                cartAdapter.setFlaglist(flaglist);
-                                cartDetail.clear();
+                                if (!cartAdapter.selectedMap.containsValue(false)) {
+                                    for (int i = 0; i < list.size(); i++) {
+                                        cartAdapter.selectedMap.put(i, false);
+                                    }
+                                    cartDetail.clear();
+                                }
                                 totalprice(cartDetail);
                             }
                             cartAdapter.notifyDataSetChanged();
@@ -120,8 +124,8 @@ public class CartActivity extends Activity implements View.OnClickListener {
         tv_total = (TextView) findViewById(R.id.tv_total);
         cb_radio = (CheckBox) findViewById(R.id.cb_radio);
         cartAdapter = new CartAdapter(this, list);
-        cartAdapter.setFlaglist(flaglist);
         lv_cart.setAdapter(cartAdapter);
+        cartAdapter.setList(list);
         leftBtn.setOnClickListener(this);
     }
 
@@ -142,11 +146,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
     class CartAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
         private Context context;
-        private List<String> flaglist;
-
-        public void setFlaglist(List<String> flaglist) {
-            this.flaglist = flaglist;
-        }
+        Map<Integer, Boolean> selectedMap;
 
         private List<Cart.DataEntity> list;
 
@@ -154,8 +154,14 @@ public class CartActivity extends Activity implements View.OnClickListener {
             mInflater = LayoutInflater.from(context);
             this.context = context;
             this.list = list;
+            selectedMap = new HashMap<>();
         }
 
+        public void setList(List<Cart.DataEntity> list) {
+            for (int i = 0; i < list.size(); i++) {
+                selectedMap.put(i, false);
+            }
+        }
 
         @Override
         public int getCount() {
@@ -178,7 +184,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
             if (convertView == null) {
                 viewHolder = new ViewHolder();
                 convertView = mInflater.inflate(R.layout.list_cart_item, null);
-                viewHolder.tv_count=(TextView) convertView.findViewById(R.id.tv_count);
+                viewHolder.tv_count = (TextView) convertView.findViewById(R.id.tv_count);
                 viewHolder.cb_check = (CheckBox) convertView.findViewById(R.id.cb_check);
                 viewHolder.tv_shopname = (TextView) convertView.findViewById(R.id.tv_shopname);
                 viewHolder.stepperCustom = (SnappingStepper) convertView.findViewById(R.id.stepperCustom);
@@ -205,12 +211,9 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     }
                 }
             });
-            viewHolder.tv_price.setText("" + String.format("%.2f",list.get(position).getProductNewPrice() * list.get(position).getProductNumber()));
+            viewHolder.tv_price.setText("" + String.format("%.2f", list.get(position).getProductNewPrice() * list.get(position).getProductNumber()));
+            viewHolder.cb_check.setChecked(selectedMap.get(position));
             viewHolder.cb_check.setTag(R.id.cb_check, position);
-            viewHolder.cb_check.setChecked(flaglist.contains(position + ""));
-            if(flaglist.size()==list.size()&&list!=null&&flaglist!=null){
-                cb_radio.setChecked(true);
-            }
             viewHolder.cb_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -218,19 +221,25 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     if (isChecked) {
                         viewHolder.stepperCustom.setVisibility(View.VISIBLE);
                         viewHolder.tv_count.setVisibility(View.GONE);
-                        flaglist.add(position + "");
+                        selectedMap.put(position, true);
                         cartDetail.add(list.get(position));
                         cartAdapter.notifyDataSetChanged();
+                        if (!cartAdapter.selectedMap.containsValue(false)) {
+                            cb_radio.setChecked(true);
+                        }
+                        totalprice(cartDetail);
                     } else {
+                        selectedMap.put(position, false);
                         viewHolder.tv_count.setText("数量:" + list.get(position).getProductNumber());
                         viewHolder.stepperCustom.setVisibility(View.GONE);
                         viewHolder.tv_count.setVisibility(View.VISIBLE);
-                        flaglist.remove(position + "");
                         cartDetail.remove(list.get(position));
                         cartAdapter.notifyDataSetChanged();
+                        if (cartAdapter.selectedMap.containsValue(false)) {
+                            cb_radio.setChecked(false);
+                        }
+                        totalprice(cartDetail);
                     }
-                    totalprice(cartDetail);
-                    notifyDataSetChanged();
                 }
             });
             viewHolder.tv_shopname.setText("" + list.get(position).getProductName());
@@ -240,7 +249,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
 
         class ViewHolder {
             public TextView tv_shopname;
-            public TextView tv_price,tv_count;
+            public TextView tv_price, tv_count;
             public SnappingStepper stepperCustom;
             private ImageView iv_shop;
             private CheckBox cb_check;
