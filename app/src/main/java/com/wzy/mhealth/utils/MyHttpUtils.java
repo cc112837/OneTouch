@@ -423,7 +423,7 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 280) {//删除收货地址
-            params.addBodyParameter("addressId", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("addressId",((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
     }

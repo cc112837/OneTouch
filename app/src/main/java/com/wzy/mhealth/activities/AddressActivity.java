@@ -93,6 +93,13 @@ public class AddressActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        String url = Constants.SERVER_URL + "MhealthShopAddressServlet";
+        MyHttpUtils.handData(handler, 278, url, null);
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.leftBtn:
