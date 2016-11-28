@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Cart;
+import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.MyUtils;
 
@@ -79,6 +80,12 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     });
 
                     break;
+                case 282:
+                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    if(stepInfo.getStatus().equals("1")){
+                        cartAdapter.notifyDataSetChanged();
+                    }
+                    break;
             }
         }
     };
@@ -126,6 +133,28 @@ public class CartActivity extends Activity implements View.OnClickListener {
         cartAdapter = new CartAdapter(this, list);
         lv_cart.setAdapter(cartAdapter);
         cartAdapter.setList(list);
+        // TODO: 2016/11/26  
+//        lv_cart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+//                new AlertDialog.Builder(CartActivity.this).setTitle("删除提示")
+//                        .setMessage("您确定要删除这个商品吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        String uri = Constants.SERVER_URL + "MhealthShoppingCartDeleteServlet";
+//                        TiUser user = new TiUser();
+//                        user.setName(list.get(position).getShopcartId()+ "");
+//                        MyHttpUtils.handData(handler, 282, uri, user);
+//                    }
+//                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                }).show();
+//                return false;
+//            }
+//        });
         leftBtn.setOnClickListener(this);
     }
 
@@ -197,6 +226,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
+            viewHolder.tv_count.setText("数量:" + list.get(position).getProductNumber());
             viewHolder.stepperCustom.setValue(list.get(position).getProductNumber());
             viewHolder.stepperCustom.setOnValueChangeListener(new SnappingStepperValueChangeListener() {
                 @Override
@@ -233,7 +263,6 @@ public class CartActivity extends Activity implements View.OnClickListener {
                         totalprice(cartDetail);
                     } else {
                         selectedMap.put(position, false);
-                        viewHolder.tv_count.setText("数量:" + list.get(position).getProductNumber());
                         viewHolder.stepperCustom.setVisibility(View.GONE);
                         viewHolder.tv_count.setVisibility(View.VISIBLE);
                         cartDetail.remove(list.get(position));

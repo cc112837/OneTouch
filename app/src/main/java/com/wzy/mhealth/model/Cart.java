@@ -49,10 +49,19 @@ public class Cart {
 
     public static class DataEntity {
         private int productNumber;
+        private String productId;
         private double productNewPrice;
         private String shopcartId;
         private String productImageSmall;
         private String productName;
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
 
         public void setProductNumber(int productNumber) {
             this.productNumber = productNumber;

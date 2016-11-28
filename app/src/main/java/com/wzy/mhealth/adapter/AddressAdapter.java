@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,11 +62,18 @@ public class AddressAdapter extends BaseAdapter{
             viewHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
             viewHolder.tv_tel = (TextView) convertView.findViewById(R.id.tv_tel);
             viewHolder.iv_add=(ImageView) convertView.findViewById(R.id.iv_add);
+            viewHolder.cb_check=(CheckBox) convertView.findViewById(R.id.cb_check);
             viewHolder.tv_addressitem = (TextView) convertView.findViewById(R.id.tv_addressitem);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        if(list.get(position).getSid()==1){
+            viewHolder.cb_check.setChecked(true);
+        }else{
+            viewHolder.cb_check.setChecked(false);
+        }
+
         viewHolder.tv_tel.setText(list.get(position).getTelephone()+"");
         viewHolder.tv_name.setText(list.get(position).getName()+"");
         viewHolder.tv_addressitem.setText(list.get(position).getAddress()+"");
@@ -86,5 +94,6 @@ public class AddressAdapter extends BaseAdapter{
         public TextView tv_name;
         public  TextView tv_tel,tv_addressitem;
         private ImageView iv_add;
+        private CheckBox cb_check;
     }
 }

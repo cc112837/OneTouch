@@ -90,6 +90,12 @@ public class AddressActivity extends Activity implements View.OnClickListener {
                 return false;
             }
         });
+        lv_address.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
     }
 
     @Override

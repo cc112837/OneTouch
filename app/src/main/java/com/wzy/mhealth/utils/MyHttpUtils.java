@@ -14,6 +14,7 @@ import com.wzy.mhealth.model.BingZhen;
 import com.wzy.mhealth.model.Cart;
 import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.model.Decrease;
+import com.wzy.mhealth.model.DefaultAdress;
 import com.wzy.mhealth.model.Doctor;
 import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.FirstDep;
@@ -414,16 +415,24 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 279) {//添加或者修改收货地址
             params.addBodyParameter("consignee", ((Recommend) object).getName());
-            params.addBodyParameter("telephone",((Recommend) object).getTaocanNum());
+            params.addBodyParameter("telephone", ((Recommend) object).getTaocanNum());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
-            params.addBodyParameter("area",((Recommend) object).getData());
-            params.addBodyParameter("address",((Recommend) object).getContext());
-            params.addBodyParameter("sid",((Recommend) object).getTaoId()+"");
-            params.addBodyParameter("addressId",((Recommend) object).getStatus()+"");
+            params.addBodyParameter("area", ((Recommend) object).getData());
+            params.addBodyParameter("address", ((Recommend) object).getContext());
+            params.addBodyParameter("sid", ((Recommend) object).getTaoId() + "");
+            params.addBodyParameter("addressId", ((Recommend) object).getStatus() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 280) {//删除收货地址
-            params.addBodyParameter("addressId",((TiUser) object).getName());
+            params.addBodyParameter("addressId", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 281) {//用户默认地址
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DefaultAdress(), handler, what));
+        }
+        if (what == 282) {//删除购物车商品
+            params.addBodyParameter("shopcartId", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
     }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,6 +39,10 @@ public class UpdaAddressActivity extends Activity implements View.OnClickListene
                     StepInfo stepInfo = (StepInfo) msg.obj;
                     if (("1").equals(stepInfo.getStatus())) {
                         ToastUtil.show(UpdaAddressActivity.this, "保存成功");
+                        finish();
+                    }
+                    else{
+                        ToastUtil.show(UpdaAddressActivity.this, stepInfo.getData());
                     }
                     break;
             }
@@ -87,6 +90,11 @@ public class UpdaAddressActivity extends Activity implements View.OnClickListene
             et_city.setText(addre.getAddress() + "");
             et_tel.setText(addre.getTelephone() + "");
             et_adddetail.setText(addre.getAddress() + "");
+            if(addre.getSid()==1){  sw_default.setChecked(true);}
+            else{
+                sw_default.setChecked(false);
+            }
+
         }
     }
 
@@ -108,7 +116,6 @@ public class UpdaAddressActivity extends Activity implements View.OnClickListene
                 recommend.setContext(adddetail);
                 recommend.setTaoId(flagdefault);
                 if (flag.equals("update")) {
-                    Log.e("打印id",addre.getAddressId() + "");
                     recommend.setStatus(addre.getAddressId() + "");
                 }
                 else{

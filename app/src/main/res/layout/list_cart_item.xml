@@ -64,7 +64,6 @@
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="数量：0"
-                android:visibility="gone"
                 android:textColor="@color/orange"
                 android:textSize="16sp" />
             <com.bigkoo.snappingstepper.SnappingStepper
@@ -76,6 +75,7 @@
                 stepper:max="100"
                 stepper:min="1"
                 stepper:step="1"
+                android:visibility="gone"
                 stepper:stepper_background="@color/white"
                 stepper:stepper_contentBackground="@mipmap/content_number"
                 stepper:stepper_contentTextColor="@color/orange"

@@ -15,9 +15,10 @@ import java.util.List;
  */
 public class Address {
 
+
     /**
      * addressNum : 4
-     * data : [{"userName":"梦想宇宙","name":"小邢","telephone":"888182569","address":"有机青稞米100g","addressId":"f5a2e99d5884b056015884b056520000"}]
+     * data : [{"userName":"梦想宇宙","name":"小邢","telephone":"888182569","address":"有机青稞米100g","sid":1,"addressId":"f5a2e99d5884b056015884b056520000"}]
      */
 
     private int addressNum;
@@ -26,6 +27,7 @@ public class Address {
      * name : 小邢
      * telephone : 888182569
      * address : 有机青稞米100g
+     * sid : 1
      * addressId : f5a2e99d5884b056015884b056520000
      */
 
@@ -52,6 +54,7 @@ public class Address {
         private String name;
         private String telephone;
         private String address;
+        private int sid;
         private String addressId;
 
         public void setUserName(String userName) {
@@ -68,6 +71,10 @@ public class Address {
 
         public void setAddress(String address) {
             this.address = address;
+        }
+
+        public void setSid(int sid) {
+            this.sid = sid;
         }
 
         public void setAddressId(String addressId) {
@@ -88,6 +95,10 @@ public class Address {
 
         public String getAddress() {
             return address;
+        }
+
+        public int getSid() {
+            return sid;
         }
 
         public String getAddressId() {
