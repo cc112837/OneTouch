@@ -67,16 +67,16 @@ public class QuestionFragment1 extends Fragment implements TextWatcher {
         tv_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(et_age.getText().toString())<0||Integer.parseInt(et_age.getText().toString())>120){
-                    Toast.makeText(getActivity(),"年龄输入不符合规范",Toast.LENGTH_LONG).show();
+                if (Integer.parseInt(et_age.getText().toString()) < 0 || Integer.parseInt(et_age.getText().toString()) > 120) {
+                    Toast.makeText(getActivity(), "年龄输入不符合规范", Toast.LENGTH_LONG).show();
+                } else {
+                    String url = Constants.SERVER_URL + "MhealthUserSurveyCountServlet";
+                    TiUser user = new TiUser();
+                    user.setName(et_age.getText().toString() + "");
+                    user.setTel(et_height.getText().toString() + "");
+                    user.setPass(et_weight.getText().toString() + "");
+                    MyHttpUtils.handData(handler, 223, url, user);
                 }
-                String url = Constants.SERVER_URL + "MhealthUserSurveyCountServlet";
-                TiUser user = new TiUser();
-                user.setName(et_age.getText().toString() + "");
-                user.setTel(et_height.getText().toString() + "");
-                user.setPass(et_weight.getText().toString() + "");
-                MyHttpUtils.handData(handler, 223, url, user);
-
             }
         });
 
