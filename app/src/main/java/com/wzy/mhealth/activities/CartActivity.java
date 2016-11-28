@@ -7,7 +7,9 @@ package com.wzy.mhealth.activities;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +17,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -29,6 +32,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Cart;
 import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.MyUtils;
 
@@ -83,7 +87,10 @@ public class CartActivity extends Activity implements View.OnClickListener {
                 case 282:
                     StepInfo stepInfo=(StepInfo) msg.obj;
                     if(stepInfo.getStatus().equals("1")){
-                        cartAdapter.notifyDataSetChanged();
+                        cartDetail.clear();
+                        totalprice(cartDetail);
+                        String url = Constants.SERVER_URL + "MhealthShoppingCartServlet";
+                        MyHttpUtils.handData(handler, 272, url, null);
                     }
                     break;
             }
@@ -133,28 +140,27 @@ public class CartActivity extends Activity implements View.OnClickListener {
         cartAdapter = new CartAdapter(this, list);
         lv_cart.setAdapter(cartAdapter);
         cartAdapter.setList(list);
-        // TODO: 2016/11/26  
-//        lv_cart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-//                new AlertDialog.Builder(CartActivity.this).setTitle("删除提示")
-//                        .setMessage("您确定要删除这个商品吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        String uri = Constants.SERVER_URL + "MhealthShoppingCartDeleteServlet";
-//                        TiUser user = new TiUser();
-//                        user.setName(list.get(position).getShopcartId()+ "");
-//                        MyHttpUtils.handData(handler, 282, uri, user);
-//                    }
-//                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                }).show();
-//                return false;
-//            }
-//        });
+        lv_cart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                new AlertDialog.Builder(CartActivity.this).setTitle("删除提示")
+                        .setMessage("您确定要删除这个商品吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String uri = Constants.SERVER_URL + "MhealthShoppingCartDeleteServlet";
+                        TiUser user = new TiUser();
+                        user.setName(list.get(position).getShopcartId()+ "");
+                        MyHttpUtils.handData(handler, 282, uri, user);
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+                return false;
+            }
+        });
         leftBtn.setOnClickListener(this);
     }
 
