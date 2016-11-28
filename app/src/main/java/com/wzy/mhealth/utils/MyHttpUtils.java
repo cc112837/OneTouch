@@ -73,7 +73,7 @@ public class MyHttpUtils extends HttpUtils {
         httpUtils.configTimeout(6000);// 连接超时  //指的是连接一个url的连接等待时间。
         httpUtils.configSoTimeout(6000);// 获取数据超时  //指的是连接上一个url，获取response的返回等待时间
         RequestParams params = new RequestParams();
-        if (what == 1) {
+        if (what == 1) {//智行注册验证
             TiUser user = (TiUser) object;
             params.addBodyParameter("idnumber", user.getCardId());
             params.addBodyParameter("name", user.getName());
@@ -149,7 +149,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", user.getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 116) {
+        if (what == 116) {//套餐详情
             TiUser user = (TiUser) object;
             params.addBodyParameter("id", user.getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TaocanDetail(), handler, what));
@@ -176,7 +176,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("stepTime", user.getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AllStepRank(), handler, what));
         }
-        if (what == 131) {
+        if (what == 131) {//退款
             TiUser user = (TiUser) object;
             params.addBodyParameter("orderId", user.getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
@@ -196,7 +196,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("relate", selfHealth.getRelate());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 151) {
+        if (what == 151) {//健康管理页面数据请求
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
         }
@@ -433,6 +433,11 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 282) {//删除购物车商品
             params.addBodyParameter("shopcartId", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 283) {//收货临时地址
+            params.addBodyParameter("userName", ((TiUser) object).getName());
+            params.addBodyParameter("addressId", ((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
     }

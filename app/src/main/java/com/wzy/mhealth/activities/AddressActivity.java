@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.AddressAdapter;
 import com.wzy.mhealth.constant.Constants;
@@ -46,6 +47,12 @@ public class AddressActivity extends Activity implements View.OnClickListener {
                     if (("1").equals(stepInfo.getStatus())) {
                         String url = Constants.SERVER_URL + "MhealthShopAddressServlet";
                         MyHttpUtils.handData(handler, 278, url, null);
+                    }
+                    break;
+                case 283:
+                    StepInfo step = (StepInfo) msg.obj;
+                    if(step.getStatus().equals("1")){
+                        finish();
                     }
                     break;
             }
@@ -87,13 +94,17 @@ public class AddressActivity extends Activity implements View.OnClickListener {
                         dialog.dismiss();
                     }
                 }).show();
-                return false;
+                return true;
             }
         });
         lv_address.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                String uri = Constants.SERVER_URL + "MhealthShopAddressChooseServlet";
+                TiUser user = new TiUser();
+                user.setName(LeanchatUser.getCurrentUser().getUsername());
+                user.setPass(list.get(position).getAddressId() + "");
+                MyHttpUtils.handData(handler, 283, uri, user);
             }
         });
     }
