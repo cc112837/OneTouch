@@ -20,6 +20,7 @@ import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.ToastUtil;
+import com.wzy.mhealth.utils.Util;
 
 public class UpdaAddressActivity extends Activity implements View.OnClickListener {
     private TextView title;
@@ -109,20 +110,25 @@ public class UpdaAddressActivity extends Activity implements View.OnClickListene
                 String city = et_city.getText().toString();
                 String tel = et_tel.getText().toString();
                 String who = tv_who.getText().toString();
-                String url = Constants.SERVER_URL + "MhealthShopAddressSaveServlet";
-                Recommend recommend = new Recommend();
-                recommend.setName(who);
-                recommend.setData(city);
-                recommend.setContext(adddetail);
-                recommend.setTaoId(flagdefault);
-                if (flag.equals("update")) {
-                    recommend.setStatus(addre.getAddressId() + "");
+                if(Util.getInstance().isMobileNumber(tel)){
+                    String url = Constants.SERVER_URL + "MhealthShopAddressSaveServlet";
+                    Recommend recommend = new Recommend();
+                    recommend.setName(who);
+                    recommend.setData(city);
+                    recommend.setContext(adddetail);
+                    recommend.setTaoId(flagdefault);
+                    if (flag.equals("update")) {
+                        recommend.setStatus(addre.getAddressId() + "");
+                    }
+                    else{
+                        recommend.setStatus("");
+                    }
+                    recommend.setTaocanNum(tel);
+                    MyHttpUtils.handData(handler, 279, url, recommend);
+                }else{
+                    ToastUtil.show(UpdaAddressActivity.this,"请输入正确的手机号码");
                 }
-                else{
-                    recommend.setStatus("");
-                }
-                recommend.setTaocanNum(tel);
-                MyHttpUtils.handData(handler, 279, url, recommend);
+
                 break;
         }
     }

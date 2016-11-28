@@ -1,9 +1,5 @@
 package com.wzy.mhealth.utils;
 
-import java.text.DecimalFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.content.Context;
 import android.os.Environment;
 import android.os.IBinder;
@@ -14,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+
+import java.text.DecimalFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Util {
 	private static Util util;
@@ -129,7 +129,7 @@ public class Util {
 	/**
 	 * 判断邮箱的正确性
 	 * 
-	 * @param mobiles
+	 * @param email
 	 * @return
 	 */
 	public boolean isEmail(String email) {
