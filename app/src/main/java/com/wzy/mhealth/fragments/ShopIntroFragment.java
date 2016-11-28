@@ -38,7 +38,8 @@ public class ShopIntroFragment extends Fragment {
             switch (msg.what) {
                 case 275:
                     ShopDetail shopDetail=(ShopDetail) msg.obj;
-                    localImages.add(shopDetail.getProductImageBig());
+                    localImages.clear();
+                    localImages.addAll(shopDetail.getProductImageBig());
                     tv_name.setText(shopDetail.getProductName() + "");
                     tv_intro.setText(shopDetail.getData());
                     tv_per.setText(shopDetail.getProductNewPrice()+"");

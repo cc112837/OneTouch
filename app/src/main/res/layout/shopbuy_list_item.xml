@@ -11,6 +11,7 @@
         android:padding="10dp">
 
         <ImageView
+            android:id="@+id/iv_disshow"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@mipmap/ic_launcher" />

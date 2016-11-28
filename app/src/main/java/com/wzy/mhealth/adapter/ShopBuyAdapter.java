@@ -6,13 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.DecreseActivity;
 import com.wzy.mhealth.activities.TicketActivity;
-import com.wzy.mhealth.model.ShopBuy;
+import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
@@ -30,9 +32,9 @@ import java.util.List;
 public class ShopBuyAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
-    private List<ShopBuy.DataEntity> list;
+    private List<ShopCart.DataEntity> list;
 
-    public ShopBuyAdapter(Context context, List<ShopBuy.DataEntity> list) {
+    public ShopBuyAdapter(Context context, List<ShopCart.DataEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
         this.context = context;
@@ -59,6 +61,7 @@ public class ShopBuyAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.shopbuy_list_item, null);
+            viewHolder.iv_disshow=(ImageView) convertView.findViewById(R.id.iv_disshow);
             viewHolder.ll_only = (LinearLayout) convertView.findViewById(R.id.ll_only);
             viewHolder.tv_shopnum = (TextView) convertView.findViewById(R.id.tv_shopnum);
             viewHolder.ll_tiket = (LinearLayout) convertView.findViewById(R.id.ll_tiket);
@@ -88,17 +91,19 @@ public class ShopBuyAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-        viewHolder.tv_increase.setText("+¥" + 23);
-        viewHolder.tv_decrease.setText("-¥" + 23);
-        viewHolder.tv_shopnum.setText("数量：" + 2);
+        ImageLoader.getInstance().displayImage(list.get(position).getProductImageSmall(),viewHolder.iv_disshow, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
+        viewHolder.tv_increase.setText("+¥" + 0);
+        viewHolder.tv_decrease.setText("-¥" + 0);
+        viewHolder.tv_shopnum.setText("数量：" + list.get(position).getProductNumber());
         viewHolder.tv_crease.setText("¥" + 23);
-        viewHolder.tv_value.setText(2 + "张可用");
-        viewHolder.tv_shoptitle.setText("商品名称");
+        viewHolder.tv_value.setText(0+ "张可用");
+        viewHolder.tv_shoptitle.setText(""+list.get(position).getProductName());
         viewHolder.tv_use.setText("未使用");
         return convertView;
     }
 
     static class ViewHolder {
+        public ImageView iv_disshow;
         public TextView tv_shoptitle, tv_shopnum;
         public TextView tv_value, tv_use, tv_crease, tv_increase, tv_decrease;
         private LinearLayout ll_only, ll_tiket, ll_decrease;

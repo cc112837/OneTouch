@@ -31,11 +31,20 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Cart;
+import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.MyUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,13 +94,19 @@ public class CartActivity extends Activity implements View.OnClickListener {
 
                     break;
                 case 282:
-                    StepInfo stepInfo=(StepInfo) msg.obj;
-                    if(stepInfo.getStatus().equals("1")){
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if (stepInfo.getStatus().equals("1")) {
                         cartDetail.clear();
                         totalprice(cartDetail);
                         String url = Constants.SERVER_URL + "MhealthShoppingCartServlet";
                         MyHttpUtils.handData(handler, 272, url, null);
                     }
+                    break;
+                case 284:
+                    ShopCart shopCart = (ShopCart) msg.obj;
+                    Intent intent = new Intent(CartActivity.this, ShopBuyActivity.class);
+                    intent.putExtra("shop", (Serializable) shopCart.getData());
+                    startActivity(intent);
                     break;
             }
         }
@@ -118,8 +133,6 @@ public class CartActivity extends Activity implements View.OnClickListener {
             tv_total.setText("合计：¥" + String.format("%.2f", mdoubTotal));
             tv_cal.setText("去结算（" + count + ")");
         }
-
-
     }
 
     @Override
@@ -149,7 +162,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         String uri = Constants.SERVER_URL + "MhealthShoppingCartDeleteServlet";
                         TiUser user = new TiUser();
-                        user.setName(list.get(position).getShopcartId()+ "");
+                        user.setName(list.get(position).getShopcartId() + "");
                         MyHttpUtils.handData(handler, 282, uri, user);
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -173,12 +186,74 @@ public class CartActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.tv_cal:
                 if (cartDetail.size() > 0) {
-                    intent = new Intent(CartActivity.this, ShopBuyActivity.class);
-                    startActivity(intent);
+                    String url = Constants.SERVER_URL + "MhealthShoppingCartBuyServlet";
+                    TiUser user = new TiUser();
+                    JSONArray jsonArray=new JSONArray();
+                    for (int i = 0; i < cartDetail.size(); i++) {
+                        try {
+                            JSONObject object=new JSONObject();
+                            object.put("productId",cartDetail.get(i).getProductId());
+                            object.put("productNum", cartDetail.get(i).getProductNumber());
+                            jsonArray.put(object);//向json数组里面添加对象
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    user.setName(jsonArray.toString());
+                    MyHttpUtils.handData(handler, 284, url, user);
+                } else {
+                    ToastUtil.show(CartActivity.this, "请选择商品");
                 }
-
                 break;
         }
+    }
+
+    /**
+     * 构造支付订单参数信息
+     *
+     * @param map 支付订单参数
+     * @return
+     */
+    public static String buildOrderParam(Map<String, String> map) {
+        List<String> keys = new ArrayList<String>(map.keySet());
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < keys.size() - 1; i++) {
+            String key = keys.get(i);
+            String value = map.get(key);
+            sb.append(buildKeyValue(key, value, true));
+            sb.append(",");
+        }
+
+        String tailKey = keys.get(keys.size() - 1);
+        String tailValue = map.get(tailKey);
+        sb.append(buildKeyValue(tailKey, tailValue, true));
+
+        return sb.toString();
+    }
+
+    /**
+     * 拼接键值对
+     *
+     * @param key
+     * @param value
+     * @param isEncode
+     * @return
+     */
+    private static String buildKeyValue(String key, String value, boolean isEncode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(key);
+        sb.append(":");
+        if (isEncode) {
+            try {
+                sb.append(URLEncoder.encode(value, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                sb.append(value);
+            }
+        } else {
+            sb.append(value);
+        }
+        return sb.toString();
     }
 
     class CartAdapter extends BaseAdapter {

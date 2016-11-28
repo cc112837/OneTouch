@@ -18,7 +18,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.ShopBuyAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.DefaultAdress;
-import com.wzy.mhealth.model.ShopBuy;
+import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
@@ -32,8 +32,9 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     private TextView tv_tel;
     private TextView tv_address;
     private ListView lv_shopbuy;
-    private List<ShopBuy.DataEntity> list = new ArrayList<>();
+    private List<ShopCart.DataEntity> list = new ArrayList<>();
     private ShopBuyAdapter shopBuyAdapter;
+    private List<ShopCart.DataEntity> shop;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -60,13 +61,14 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_buy);
+        shop = (List<ShopCart.DataEntity>) getIntent().getSerializableExtra("shop");
         init();
     }
 
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_shopbuy = (ListView) findViewById(R.id.lv_shopbuy);
-        shopBuyAdapter = new ShopBuyAdapter(this, list);
+        shopBuyAdapter = new ShopBuyAdapter(this, shop);
         lv_shopbuy.setAdapter(shopBuyAdapter);
         headview = LayoutInflater.from(ShopBuyActivity.this).inflate(R.layout.shoporder_header, null);
         lv_shopbuy.addHeaderView(headview);
@@ -79,8 +81,14 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
         MyHttpUtils.handData(handler, 281, url, null);
         tv_cal = (TextView) findViewById(R.id.tv_cal);
         tv_total = (TextView) findViewById(R.id.tv_total);
-        tv_total.setText("实付款：¥" + 20);
-        tv_cal.setText("去结算（" + 2 + ")");
+        double value=0;
+        int num=0;
+        for (int i=0;i<shop.size();i++){
+            num+=shop.get(i).getProductNumber();
+            value+=shop.get(i).getTotalPrice();
+        }
+        tv_total.setText("实付款：¥" +String.format("%.2f",value) );
+        tv_cal.setText("去结算（" + num + ")");
         lv_shopbuy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -1,5 +1,7 @@
 package com.wzy.mhealth.model;
 
+import java.util.List;
+
 /**
  * 项目名称：mhealth
  * 类描述：
@@ -12,25 +14,22 @@ package com.wzy.mhealth.model;
  */
 public class ShopDetail {
 
+
     /**
-     * productImageBig : upload/files/20161121102139jprZEZCB.png
+     * productImageBig : ["http://117.34.105.29:8818/mhealth/upload/files/1477387864441.jpg","http://117.34.105.29:8818/mhealth/upload/files/1477387864444.jpg"]
      * status : 1
-     * productNewPrice : 10.8
+     * productNewPrice : 49.8
      * data : 存在此商品
-     * productName : 有机青稞米100g
-     * productId : f5a2e99d5884b056015884b056520000
+     * productName : 有机青稞米500g
+     * productId : f5a2e99d5884b056015884b8ac890001
      */
 
-    private String productImageBig;
     private String status;
     private double productNewPrice;
     private String data;
     private String productName;
     private String productId;
-
-    public void setProductImageBig(String productImageBig) {
-        this.productImageBig = productImageBig;
-    }
+    private List<String> productImageBig;
 
     public void setStatus(String status) {
         this.status = status;
@@ -52,8 +51,8 @@ public class ShopDetail {
         this.productId = productId;
     }
 
-    public String getProductImageBig() {
-        return productImageBig;
+    public void setProductImageBig(List<String> productImageBig) {
+        this.productImageBig = productImageBig;
     }
 
     public String getStatus() {
@@ -74,5 +73,9 @@ public class ShopDetail {
 
     public String getProductId() {
         return productId;
+    }
+
+    public List<String> getProductImageBig() {
+        return productImageBig;
     }
 }
