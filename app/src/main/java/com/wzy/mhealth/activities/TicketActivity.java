@@ -94,6 +94,7 @@ public class TicketActivity extends Activity implements View.OnClickListener, Ra
             ll_header.setVisibility(View.VISIBLE);
         } else if (checkedId == rb_addticket.getId()) {
             ll_addticket.setVisibility(View.VISIBLE);
+			 ll_header.setVisibility(View.GONE);
             ll_electric.setVisibility(View.GONE);
         } else if (checkedId == rb_people.getId()) {
             tv_company.setVisibility(View.GONE);

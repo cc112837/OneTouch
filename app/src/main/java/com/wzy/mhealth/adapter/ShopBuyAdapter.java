@@ -95,7 +95,7 @@ public class ShopBuyAdapter extends BaseAdapter {
         viewHolder.tv_increase.setText("+¥" + 0);
         viewHolder.tv_decrease.setText("-¥" + 0);
         viewHolder.tv_shopnum.setText("数量：" + list.get(position).getProductNumber());
-        viewHolder.tv_crease.setText("¥" + 23);
+        viewHolder.tv_crease.setText("¥" + String.format("%.2f",list.get(position).getTotalPrice));
         viewHolder.tv_value.setText(0+ "张可用");
         viewHolder.tv_shoptitle.setText(""+list.get(position).getProductName());
         viewHolder.tv_use.setText("未使用");
