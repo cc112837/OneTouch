@@ -108,6 +108,10 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     intent.putExtra("shop", (Serializable) shopCart.getData());
                     startActivity(intent);
                     break;
+                case 285:
+                    StepInfo stepInfo1=(StepInfo) msg.obj;
+
+                    break;
             }
         }
     };
@@ -321,6 +325,11 @@ public class CartActivity extends Activity implements View.OnClickListener {
                             cartAdapter.notifyDataSetChanged();
                             totalprice(cartDetail);
                             notifyDataSetChanged();
+                            String url=Constants.SERVER_URL+"MhealthShoppingCartNumServlet";
+                            TiUser user=new TiUser();
+                            user.setName(value+"");
+                            user.setCardId(list.get(position).getShopcartId()+"");
+                            MyHttpUtils.handData(handler,285,url,user);
                             break;
                     }
                 }
