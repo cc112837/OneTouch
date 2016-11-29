@@ -69,6 +69,8 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
                     StepInfo stepInfo = (StepInfo) msg.obj;
                     if (stepInfo.getStatus().equals("1")) {
                         ToastUtil.show(ShopDetailActivity.this, "购物车加入成功");
+                        String uri = Constants.SERVER_URL + "MhealthShoppingCartDisplayServlet";
+                        MyHttpUtils.handData(handler, 286, uri, null);
                     } else {
                         ToastUtil.show(ShopDetailActivity.this, stepInfo.getData());
                     }
@@ -80,16 +82,14 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
                     startActivity(intent);
                     break;
                 case 286:
-                    ShopBuy shopBuy=(ShopBuy) msg.obj;
-                    if(shopBuy.getStatus().equals("1")){
-                        if(shopBuy.getProductNum()==0){
+                    ShopBuy shopBuy = (ShopBuy) msg.obj;
+                    if (shopBuy.getStatus().equals("1")) {
+                        if (shopBuy.getProductNum() == 0) {
                             tv_count.setVisibility(View.GONE);
+                        } else {
+                            tv_count.setText(shopBuy.getProductNum() + "");
                         }
-                        else{
-                            tv_count.setText(shopBuy.getProductNum()+"");
-                        }
-                    }
-                    else{
+                    } else {
                         tv_count.setVisibility(View.GONE);
                     }
 
@@ -122,8 +122,8 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
         title.setOnClickListener(this);
         title_2.setOnClickListener(this);
         tv_count = (TextView) findViewById(R.id.tv_count);
-        String uri=Constants.SERVER_URL+"MhealthShoppingCartDisplayServlet";
-        MyHttpUtils.handData(handler,286,uri,null);
+        String uri = Constants.SERVER_URL + "MhealthShoppingCartDisplayServlet";
+        MyHttpUtils.handData(handler, 286, uri, null);
         fragments = new ArrayList<>();
         ShopIntroFragment introFragmentFragment = new ShopIntroFragment();
         fragments.add(introFragmentFragment);
