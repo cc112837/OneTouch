@@ -19,10 +19,17 @@ import com.wzy.mhealth.fragments.ShopCommentFragment;
 import com.wzy.mhealth.fragments.ShopDetailFragment;
 import com.wzy.mhealth.fragments.ShopIntroFragment;
 import com.wzy.mhealth.model.Pridefine;
+import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.ToastUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +48,7 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
     public void setId(String id) {
         this.id = id;
     }
+
     private int valuenum;
 
     public int getValuenum() {
@@ -57,12 +65,18 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
             super.handleMessage(msg);
             switch (msg.what) {
                 case 277:
-                    StepInfo stepInfo=(StepInfo) msg.obj;
-                    if(stepInfo.getStatus().equals("1")){
-                        ToastUtil.show(ShopDetailActivity.this,"购物车加入成功");
-                    }else{
-                        ToastUtil.show(ShopDetailActivity.this,stepInfo.getData());
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if (stepInfo.getStatus().equals("1")) {
+                        ToastUtil.show(ShopDetailActivity.this, "购物车加入成功");
+                    } else {
+                        ToastUtil.show(ShopDetailActivity.this, stepInfo.getData());
                     }
+                    break;
+                case 284:
+                    ShopCart shopCart = (ShopCart) msg.obj;
+                    Intent intent = new Intent(ShopDetailActivity.this, ShopBuyActivity.class);
+                    intent.putExtra("shop", (Serializable) shopCart.getData());
+                    startActivity(intent);
                     break;
             }
         }
@@ -151,15 +165,28 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.btn_cart:
-                String url=Constants.SERVER_URL+"MhealthShoppingCartSaveServlet";
-                Pridefine user=new Pridefine();
+                String url = Constants.SERVER_URL + "MhealthShoppingCartSaveServlet";
+                Pridefine user = new Pridefine();
                 user.setName(id);
                 user.setTaoId(getValuenum());
                 MyHttpUtils.handData(handler, 277, url, user);
                 break;
             case R.id.btn_buy:
-                intent = new Intent(ShopDetailActivity.this, ShopBuyActivity.class);
-                startActivity(intent);
+
+                String uri = Constants.SERVER_URL + "MhealthShoppingCartBuyServlet";
+                TiUser tiUser = new TiUser();
+                JSONArray jsonArray = new JSONArray();
+                try {
+                    JSONObject object = new JSONObject();
+                    object.put("productId", getId() + "");
+                    object.put("productNum", getValuenum() + "");
+                    jsonArray.put(object);//向json数组里面添加对象
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                tiUser.setName(jsonArray.toString());
+                MyHttpUtils.handData(handler, 284, uri, tiUser);
+
                 break;
             case R.id.title_0:
                 vp_shopdetail.setCurrentItem(0);
