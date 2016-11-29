@@ -55,9 +55,6 @@ public class ShopAdapter extends SectionedRecyclerViewAdapter<HeaderHolder, Desc
     @Override
     protected int getItemCountForSection(int section) {
         int count = allTagList.get(section).getProductData().size();
-//        if (count >= 8 && !mBooleanMap.get(section)) {
-//            count = 8;
-//        }
         return MyUtils.isEmpty(allTagList.get(section).getProductData()) ? 0 : count;
     }
 
@@ -83,11 +80,7 @@ public class ShopAdapter extends SectionedRecyclerViewAdapter<HeaderHolder, Desc
     }
 
     @Override
-    protected void onBindSectionHeaderViewHolder(HeaderHolder holder,int section) {
-//        boolean isOpen = mBooleanMap.get(section);
-//        String text = isOpen ? "展开" : "关闭";
-//        mBooleanMap.put(section, !isOpen);
-//        holder.openView.setText(text);
+    protected void onBindSectionHeaderViewHolder(HeaderHolder holder, int section) {
         ImageLoader.getInstance().displayImage(allTagList.get(section).getShowImage(), holder.shop_header, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
         holder.shop_header.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,15 +98,15 @@ public class ShopAdapter extends SectionedRecyclerViewAdapter<HeaderHolder, Desc
 
     @Override
     protected void onBindItemViewHolder(DescHolder holder, final int section, final int position) {
-        holder.tv_oldprice.setText("" + allTagList.get(section).getProductData().get(position).getProductOldPrice());
+        holder.tv_oldprice.setText("原价：¥" + allTagList.get(section).getProductData().get(position).getProductOldPrice());
         holder.tv_name.setText("" + allTagList.get(section).getProductData().get(position).getProductName());
-        holder.tv_newprice.setText("" + allTagList.get(section).getProductData().get(position).getProductNewPrice());
+        holder.tv_newprice.setText("现价：¥" + allTagList.get(section).getProductData().get(position).getProductNewPrice());
         ImageLoader.getInstance().displayImage(allTagList.get(section).getProductData().get(position).getProductImageSmall(), holder.iv_home, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
         holder.ll_content.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext,ShopDetailActivity.class);
-                intent.putExtra("id",allTagList.get(section).getProductData().get(position).getProductId()+"");
+                Intent intent = new Intent(mContext, ShopDetailActivity.class);
+                intent.putExtra("id", allTagList.get(section).getProductData().get(position).getProductId() + "");
                 mContext.startActivity(intent);
             }
         });

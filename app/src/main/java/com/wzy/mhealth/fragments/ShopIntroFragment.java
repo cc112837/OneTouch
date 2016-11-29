@@ -42,7 +42,7 @@ public class ShopIntroFragment extends Fragment {
                     localImages.addAll(shopDetail.getProductImageBig());
                     tv_name.setText(shopDetail.getProductName() + "");
                     tv_intro.setText(shopDetail.getData());
-                    tv_per.setText(shopDetail.getProductNewPrice()+"");
+                    tv_per.setText("¥"+shopDetail.getProductNewPrice());
                     cb_shop.setPages(
                             new CBViewHolderCreator<LocalImageView>() {
                                 @Override

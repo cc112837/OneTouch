@@ -443,6 +443,7 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 284) {//加入购物车
             params.addBodyParameter("result", ((TiUser) object).getName());
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopCart(), handler, what));
         }
     }
