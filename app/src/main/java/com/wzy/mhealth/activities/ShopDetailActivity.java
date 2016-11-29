@@ -19,6 +19,7 @@ import com.wzy.mhealth.fragments.ShopCommentFragment;
 import com.wzy.mhealth.fragments.ShopDetailFragment;
 import com.wzy.mhealth.fragments.ShopIntroFragment;
 import com.wzy.mhealth.model.Pridefine;
+import com.wzy.mhealth.model.ShopBuy;
 import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
@@ -78,6 +79,21 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
                     intent.putExtra("shop", (Serializable) shopCart.getData());
                     startActivity(intent);
                     break;
+                case 286:
+                    ShopBuy shopBuy=(ShopBuy) msg.obj;
+                    if(shopBuy.getStatus().equals("1")){
+                        if(shopBuy.getProductNum()==0){
+                            tv_count.setVisibility(View.GONE);
+                        }
+                        else{
+                            tv_count.setText(shopBuy.getProductNum()+"");
+                        }
+                    }
+                    else{
+                        tv_count.setVisibility(View.GONE);
+                    }
+
+                    break;
             }
         }
     };
@@ -106,6 +122,8 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
         title.setOnClickListener(this);
         title_2.setOnClickListener(this);
         tv_count = (TextView) findViewById(R.id.tv_count);
+        String uri=Constants.SERVER_URL+"MhealthShoppingCartDisplayServlet";
+        MyHttpUtils.handData(handler,286,uri,null);
         fragments = new ArrayList<>();
         ShopIntroFragment introFragmentFragment = new ShopIntroFragment();
         fragments.add(introFragmentFragment);

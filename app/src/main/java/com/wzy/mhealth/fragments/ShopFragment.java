@@ -24,12 +24,13 @@ import com.wzy.mhealth.adapter.SectionedSpanSizeLookup;
 import com.wzy.mhealth.adapter.ShopAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Shop;
+import com.wzy.mhealth.model.ShopBuy;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopFragment extends Fragment implements View.OnClickListener,SearchView.OnQueryTextListener {
+public class ShopFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
     private ImageView leftBtn, rightBtn;
     private TextView tv_count;
     private List<Shop.DataEntity> list = new ArrayList<>();
@@ -42,11 +43,23 @@ public class ShopFragment extends Fragment implements View.OnClickListener,Searc
             super.handleMessage(msg);
             switch (msg.what) {
                 case 270:
-                     Shop shop=(Shop) msg.obj;
+                    Shop shop = (Shop) msg.obj;
                     list.clear();
                     list.addAll(shop.getData());
-                    tv_count.setText("" );
                     shopAdapter.notifyDataSetChanged();
+                    break;
+                case 286:
+                    ShopBuy shopBuy = (ShopBuy) msg.obj;
+                    if (shopBuy.getStatus().equals("1")) {
+                        if (shopBuy.getProductNum() == 0) {
+                            tv_count.setVisibility(View.GONE);
+                        } else {
+                            tv_count.setText(shopBuy.getProductNum() + "");
+                        }
+                    } else {
+                        tv_count.setVisibility(View.GONE);
+                    }
+
                     break;
             }
         }
@@ -62,10 +75,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener,Searc
     }
 
     private void init(View v) {
-        searchView=(SearchView) v.findViewById(R.id.searchView);
+        searchView = (SearchView) v.findViewById(R.id.searchView);
         leftBtn = (ImageView) v.findViewById(R.id.leftBtn);
         rightBtn = (ImageView) v.findViewById(R.id.rightBtn);
         tv_count = (TextView) v.findViewById(R.id.tv_count);
+        String uri = Constants.SERVER_URL + "MhealthShoppingCartDisplayServlet";
+        MyHttpUtils.handData(handler, 286, uri, null);
         gv_shop = (RecyclerView) v.findViewById(R.id.gv_shop);
         shopAdapter = new ShopAdapter(getActivity());
         GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
@@ -73,7 +88,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener,Searc
         gv_shop.setLayoutManager(manager);
         gv_shop.setAdapter(shopAdapter);
         shopAdapter.setData(list);
-        String url= Constants.SERVER_URL+"MhealthProductServlet";
+        String url = Constants.SERVER_URL + "MhealthProductServlet";
         MyHttpUtils.handData(handler, 270, url, null);
         leftBtn.setOnClickListener(this);
         rightBtn.setOnClickListener(this);
@@ -109,12 +124,9 @@ public class ShopFragment extends Fragment implements View.OnClickListener,Searc
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if(TextUtils.isEmpty(newText))
-        {
+        if (TextUtils.isEmpty(newText)) {
             //清除ListView的过滤
-        }
-        else
-        {
+        } else {
             //使用用户输入的内容对ListView的列表项进行过滤
         }
         return true;

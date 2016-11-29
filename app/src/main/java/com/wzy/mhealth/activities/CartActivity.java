@@ -109,7 +109,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     startActivity(intent);
                     break;
                 case 285:
-                    StepInfo stepInfo1=(StepInfo) msg.obj;
+                    StepInfo stepInfo1 = (StepInfo) msg.obj;
 
                     break;
             }
@@ -175,7 +175,15 @@ public class CartActivity extends Activity implements View.OnClickListener {
                         dialog.dismiss();
                     }
                 }).show();
-                return false;
+                return true;
+            }
+        });
+        lv_cart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CartActivity.this, ShopDetailActivity.class);
+                intent.putExtra("id", list.get(position).getProductId() + "");
+                startActivity(intent);
             }
         });
         leftBtn.setOnClickListener(this);
@@ -192,11 +200,11 @@ public class CartActivity extends Activity implements View.OnClickListener {
                 if (cartDetail.size() > 0) {
                     String url = Constants.SERVER_URL + "MhealthShoppingCartBuyServlet";
                     TiUser user = new TiUser();
-                    JSONArray jsonArray=new JSONArray();
+                    JSONArray jsonArray = new JSONArray();
                     for (int i = 0; i < cartDetail.size(); i++) {
                         try {
-                            JSONObject object=new JSONObject();
-                            object.put("productId",cartDetail.get(i).getProductId());
+                            JSONObject object = new JSONObject();
+                            object.put("productId", cartDetail.get(i).getProductId());
                             object.put("productNum", cartDetail.get(i).getProductNumber());
                             jsonArray.put(object);//向json数组里面添加对象
                         } catch (JSONException e) {
@@ -325,11 +333,11 @@ public class CartActivity extends Activity implements View.OnClickListener {
                             cartAdapter.notifyDataSetChanged();
                             totalprice(cartDetail);
                             notifyDataSetChanged();
-                            String url=Constants.SERVER_URL+"MhealthShoppingCartNumServlet";
-                            TiUser user=new TiUser();
-                            user.setName(value+"");
-                            user.setCardId(list.get(position).getShopcartId()+"");
-                            MyHttpUtils.handData(handler,285,url,user);
+                            String url = Constants.SERVER_URL + "MhealthShoppingCartNumServlet";
+                            TiUser user = new TiUser();
+                            user.setName(value + "");
+                            user.setCardId(list.get(position).getShopcartId() + "");
+                            MyHttpUtils.handData(handler, 285, url, user);
                             break;
                     }
                 }

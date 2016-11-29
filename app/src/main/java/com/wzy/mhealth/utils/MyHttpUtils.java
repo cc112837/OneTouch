@@ -39,6 +39,7 @@ import com.wzy.mhealth.model.Regmodel;
 import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.Shop;
+import com.wzy.mhealth.model.ShopBuy;
 import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.model.ShopDetail;
 import com.wzy.mhealth.model.ShopDetail2;
@@ -450,6 +451,10 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("productNumber", ((TiUser) object).getName());
             params.addBodyParameter("shopcartId",((TiUser) object).getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 286) {//加入购物车
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopBuy(), handler, what));
         }
     }
 }
