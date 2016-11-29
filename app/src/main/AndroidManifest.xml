@@ -125,6 +125,9 @@
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.CartBuyActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait" />
         <activity

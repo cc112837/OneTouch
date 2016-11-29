@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.ShopBuyAdapter;
@@ -32,6 +31,7 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     private TextView tv_tel;
     private TextView tv_address;
     private ListView lv_shopbuy;
+    String addressid,totalprice;
     private List<ShopCart.DataEntity> list = new ArrayList<>();
     private ShopBuyAdapter shopBuyAdapter;
     private List<ShopCart.DataEntity> shop;
@@ -45,6 +45,7 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
                     if (defaultAdress.getStatus().equals("1")) {
                        ll_have.setVisibility(View.VISIBLE);
                         tv_newadd.setVisibility(View.GONE);
+                        addressid=defaultAdress.getAddressId()+"";
                         tv_name.setText(defaultAdress.getName() + "");
                         tv_tel.setText(defaultAdress.getTelephone() + "");
                         tv_address.setText(defaultAdress.getAddress());
@@ -87,6 +88,7 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
             num+=shop.get(i).getProductNumber();
             value+=shop.get(i).getTotalPrice();
         }
+        totalprice=String.format("%.2f",value);
         tv_total.setText("实付款：¥" +String.format("%.2f",value) );
         tv_cal.setText("去结算（" + num + ")");
         lv_shopbuy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -112,13 +114,15 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent;
         switch (v.getId()) {
             case R.id.leftBtn:
                 finish();
                 break;
             case R.id.tv_cal:
-                Toast.makeText(ShopBuyActivity.this, "结算", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(ShopBuyActivity.this,CartBuyActivity.class);
+                intent.putExtra("price",totalprice);
+                intent.putExtra("addressId",addressid+"");
+                startActivity(intent);
                 break;
         }
     }

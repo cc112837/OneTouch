@@ -416,7 +416,7 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Address(), handler, what));
         }
         if (what == 279) {//添加或者修改收货地址
-            params.addBodyParameter("consignee", ((Recommend) object).getName());
+            params.addBodyParameter("name", ((Recommend) object).getName());
             params.addBodyParameter("telephone", ((Recommend) object).getTaocanNum());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("area", ((Recommend) object).getData());
@@ -447,14 +447,20 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopCart(), handler, what));
         }
-        if(what==285){
+        if (what == 285) {
             params.addBodyParameter("productNumber", ((TiUser) object).getName());
-            params.addBodyParameter("shopcartId",((TiUser) object).getCardId());
+            params.addBodyParameter("shopcartId", ((TiUser) object).getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 286) {//加入购物车
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopBuy(), handler, what));
+        }
+        if (what == 287) {//商品购买
+            params.addBodyParameter("totalPrice", ((TiUser) object).getName());
+            params.addBodyParameter("addressId", ((TiUser) object).getCardId());
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AliPayBack(), handler, what));
         }
     }
 }
