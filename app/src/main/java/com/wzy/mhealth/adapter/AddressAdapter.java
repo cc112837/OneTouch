@@ -76,7 +76,7 @@ public class AddressAdapter extends BaseAdapter{
 
         viewHolder.tv_tel.setText(list.get(position).getTelephone()+"");
         viewHolder.tv_name.setText(list.get(position).getName()+"");
-        viewHolder.tv_addressitem.setText(list.get(position).getAddress()+"");
+        viewHolder.tv_addressitem.setText(list.get(position).getArea()+list.get(position).getAddress()+"");
         viewHolder.iv_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

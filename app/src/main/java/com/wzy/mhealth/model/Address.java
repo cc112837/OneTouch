@@ -17,18 +17,18 @@ public class Address {
 
 
     /**
-     * addressNum : 4
-     * data : [{"userName":"梦想宇宙","name":"小邢","telephone":"888182569","address":"有机青稞米100g","sid":1,"addressId":"f5a2e99d5884b056015884b056520000"}]
+     * data : [{"sid":1,"area":"陕西西安阎良","address":"黄山路","name":"小樱","telephone":"185****8884","addressId":"f5a2e99d58aec9e60158af329c440010"}]
+     * addressNum : 1
      */
 
     private int addressNum;
     /**
-     * userName : 梦想宇宙
-     * name : 小邢
-     * telephone : 888182569
-     * address : 有机青稞米100g
      * sid : 1
-     * addressId : f5a2e99d5884b056015884b056520000
+     * area : 陕西西安阎良
+     * address : 黄山路
+     * name : 小樱
+     * telephone : 185****8884
+     * addressId : f5a2e99d58aec9e60158af329c440010
      */
 
     private List<DataEntity> data;
@@ -50,15 +50,23 @@ public class Address {
     }
 
     public static class DataEntity implements Serializable{
-        private String userName;
+        private int sid;
+        private String area;
+        private String address;
         private String name;
         private String telephone;
-        private String address;
-        private int sid;
         private String addressId;
 
-        public void setUserName(String userName) {
-            this.userName = userName;
+        public void setSid(int sid) {
+            this.sid = sid;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
         }
 
         public void setName(String name) {
@@ -69,20 +77,20 @@ public class Address {
             this.telephone = telephone;
         }
 
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public void setSid(int sid) {
-            this.sid = sid;
-        }
-
         public void setAddressId(String addressId) {
             this.addressId = addressId;
         }
 
-        public String getUserName() {
-            return userName;
+        public int getSid() {
+            return sid;
+        }
+
+        public String getArea() {
+            return area;
+        }
+
+        public String getAddress() {
+            return address;
         }
 
         public String getName() {
@@ -91,14 +99,6 @@ public class Address {
 
         public String getTelephone() {
             return telephone;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public int getSid() {
-            return sid;
         }
 
         public String getAddressId() {

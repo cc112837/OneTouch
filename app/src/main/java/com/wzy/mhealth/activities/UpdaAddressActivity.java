@@ -88,7 +88,7 @@ public class UpdaAddressActivity extends Activity implements View.OnClickListene
         } else {
             title.setText("修改收货地址");
             tv_who.setText(addre.getName() + "");
-            et_city.setText(addre.getAddress() + "");
+            et_city.setText(addre.getArea() + "");
             et_tel.setText(addre.getTelephone() + "");
             et_adddetail.setText(addre.getAddress() + "");
             if(addre.getSid()==1){  sw_default.setChecked(true);}
