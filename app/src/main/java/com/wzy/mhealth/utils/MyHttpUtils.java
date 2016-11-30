@@ -462,5 +462,11 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AliPayBack(), handler, what));
         }
+        if (what == 288) {//同步参数返回
+            params.addBodyParameter("result", ((TiUser) object).getName());
+            params.addBodyParameter("addressId", ((TiUser) object).getCardId());
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
     }
 }

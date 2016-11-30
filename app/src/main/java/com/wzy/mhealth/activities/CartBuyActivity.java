@@ -160,10 +160,10 @@ public class CartBuyActivity extends Activity implements Handler.Callback,
                     doStartUnionPayPlugin(this, tn, mMode);
                 }
                 break;
-            case 120:
+            case 288:
                 StepInfo info = (StepInfo) msg.obj;
                 if (info.getStatus().equals("1")) {
-                    Intent intent1 = new Intent(CartBuyActivity.this, ExaminationOrderActivity.class);
+                    Intent intent1 = new Intent(CartBuyActivity.this, ShoporderActivity.class);
                     startActivity(intent1);
                     CartBuyActivity.this.finish();
                 }
@@ -192,13 +192,11 @@ public class CartBuyActivity extends Activity implements Handler.Callback,
                 String resultStatus = payResult.getResultStatus();
                 // 判断resultStatus 为9000则代表支付成功
                 if (TextUtils.equals(resultStatus, "9000")) {
-                    // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-//                    String url = Constants.SERVER_URL + "PayServlet";
-//                    TiUser user = new TiUser();
-//                    user.setName(resultInfo);
-//                    user.setTel(id + "");
-//                    user.setCardId(LeanchatUser.getCurrentUser().getUsername());
-//                    MyHttpUtils.handData(mHandler, 120, url, user);
+                    String url = Constants.SERVER_URL + "MhealthShopPayServlet";
+                    TiUser user = new TiUser();
+                    user.setName(resultInfo);
+                    user.setCardId(addressId+"");
+                    MyHttpUtils.handData(mHandler,288, url, user);
                     Toast.makeText(CartBuyActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 } else {
                     // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
