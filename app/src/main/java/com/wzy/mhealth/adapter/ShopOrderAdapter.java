@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.ShopOrder;
 import com.wzy.mhealth.utils.MyUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 
 import java.util.List;
 
@@ -62,57 +63,100 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_shopname = (TextView) convertView.findViewById(R.id.tv_shopname);
             viewHolder.tv_orderstatus = (TextView) convertView.findViewById(R.id.tv_orderstatus);
             viewHolder.iv_car = (ImageView) convertView.findViewById(R.id.iv_car);
+            viewHolder.iv_shop = (ImageView) convertView.findViewById(R.id.iv_shop);
             viewHolder.iv_order = (ImageView) convertView.findViewById(R.id.iv_order);
-            viewHolder.tv_time=(TextView) convertView.findViewById(R.id.tv_time);
+            viewHolder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
             viewHolder.tv_price = (TextView) convertView.findViewById(R.id.tv_price);
-            viewHolder.tv_number=(TextView) convertView.findViewById(R.id.tv_number);
+            viewHolder.tv_number = (TextView) convertView.findViewById(R.id.tv_number);
             viewHolder.iv_delete = (ImageView) convertView.findViewById(R.id.iv_delete);
             viewHolder.tv_click1 = (TextView) convertView.findViewById(R.id.tv_click1);
-            viewHolder.tv_click2= (TextView) convertView.findViewById(R.id.tv_click2);
+            viewHolder.tv_click2 = (TextView) convertView.findViewById(R.id.tv_click2);
             viewHolder.tv_shoptitle = (TextView) convertView.findViewById(R.id.tv_shoptitle);
-            viewHolder.tv_shopnum= (TextView) convertView.findViewById(R.id.tv_shopnum);
-            viewHolder.tv_shoping=(TextView) convertView.findViewById(R.id.tv_shoping);
-            viewHolder.ll_only=(LinearLayout) convertView.findViewById(R.id.ll_only);
+            viewHolder.tv_shopnum = (TextView) convertView.findViewById(R.id.tv_shopnum);
+            viewHolder.tv_shoping = (TextView) convertView.findViewById(R.id.tv_shoping);
+            viewHolder.ll_only = (LinearLayout) convertView.findViewById(R.id.ll_only);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.ll_only.setVisibility(View.VISIBLE);
-        viewHolder.iv_car.setVisibility(View.VISIBLE);
-        viewHolder.tv_orderstatus.setText("已完成");//订单状态
-        viewHolder.tv_shopname.setText("店铺名");
-        viewHolder.tv_shoping.setText("运输中");
-        viewHolder.tv_shoptitle.setText("商品名称");
-        viewHolder.tv_shopnum.setText("数量："+3);
-        viewHolder.tv_number.setText("共"+2+"件商品");
-        viewHolder.tv_price.setText("实付款：¥"+23.3);
-        viewHolder.tv_time.setText("2016-12-32 11:00:00");
-        viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if ("未发货".equals(list.get(position).getShopStatus())) {
+            viewHolder.iv_car.setVisibility(View.INVISIBLE);
+            viewHolder.iv_delete.setVisibility(View.GONE);
+            viewHolder.tv_click1.setText("提醒发货");
+            viewHolder.tv_click2.setText("我要退款");
+            viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.show(context,"我要退款");
+                }
+            });
+            viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.show(context,"提醒发货");
+                }
+            });
+        } else if("未收货".equals(list.get(position).getShopStatus())) {
+            viewHolder.iv_car.setVisibility(View.VISIBLE);
+            viewHolder.iv_delete.setVisibility(View.GONE);
+            viewHolder.tv_click1.setText("查看物流");
+            viewHolder.tv_click2.setText("确认收货");
+            viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.show(context, "确认收货");
+                }
+            });
+            viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.show(context, "查看物流");
+                }
+            });
+        }else{
+            viewHolder.iv_delete.setVisibility(View.VISIBLE);
+            viewHolder.iv_car.setVisibility(View.VISIBLE);
+            viewHolder.tv_click1.setText("再次购买");
+            viewHolder.tv_click2.setText("评价晒单");
+            viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.show(context, "再次购买");
+                }
+            });
+            viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtil.show(context, "评价晒单");
+                }
+            });
+        }
+        viewHolder.tv_orderstatus.setText(list.get(position).getShopStatus() + "");//订单状态
+        viewHolder.tv_shopname.setText(list.get(position).getBussinessName() + "");
+        viewHolder.tv_shoping.setText(list.get(position).getLogistate() + "");
+        viewHolder.tv_shoptitle.setText("" + list.get(position).getShopName());
+        viewHolder.tv_shopnum.setText("数量：" + list.get(position).getShopNum());
+        viewHolder.tv_number.setText("共" + list.get(position).getShopNum() + "件商品");
+        viewHolder.tv_price.setText("实付款：¥" + String.format("%.2f", list.get(position).getShopPrice()));
+        viewHolder.tv_time.setText("" + list.get(position).getShopDate());
 
-            }
-        });
         viewHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-        viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-        ImageLoader.getInstance().displayImage("", viewHolder.iv_order, PhotoUtils.avatarImageOption);
+        ImageLoader.getInstance().displayImage(list.get(position).getBussinessImage(), viewHolder.iv_order, PhotoUtils.avatarImageOption);
+        ImageLoader.getInstance().displayImage(list.get(position).getShopImage(), viewHolder.iv_shop, PhotoUtils.avatarImageOptions);
         return convertView;
     }
 
     static class ViewHolder {
-        public TextView tv_shopname,tv_shoping,tv_time,tv_price,tv_number;
-        public TextView tv_orderstatus, tv_click1,tv_click2,tv_shoptitle,tv_shopnum;
-        private ImageView iv_order,iv_delete,iv_car;
+        public TextView tv_shopname, tv_shoping, tv_time, tv_price, tv_number;
+        public TextView tv_orderstatus, tv_click1, tv_click2, tv_shoptitle, tv_shopnum;
+        private ImageView iv_order, iv_delete, iv_car,iv_shop;
         private LinearLayout ll_only;
     }
 }

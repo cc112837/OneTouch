@@ -18,7 +18,10 @@ import android.widget.RadioGroup;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.ShopOrderAdapter;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ShopOrder;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,12 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-
+                case 289:
+                    ShopOrder shopOrder = (ShopOrder) msg.obj;
+                    list.clear();
+                    list.addAll(shopOrder.getData());
+                    shopOrderAdapter.notifyDataSetChanged();
+                    break;
             }
         }
     };
@@ -59,6 +67,10 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
         rb_shop = (RadioButton) findViewById(R.id.rb_shop);
         shopOrderAdapter = new ShopOrderAdapter(this, list);
         lv_shoporder.setAdapter(shopOrderAdapter);
+        String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
+        TiUser user = new TiUser();
+        user.setName("");
+        MyHttpUtils.handData(handler, 289, url, user);
         leftBtn.setOnClickListener(this);
         rg_all.setOnCheckedChangeListener(this);
     }
@@ -74,14 +86,17 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
+        TiUser user = new TiUser();
         if (checkedId == rb_allshop.getId()) {
-
+            user.setName("");
         } else if (checkedId == rb_wait.getId()) {
-
+            user.setName("0");
         } else if (checkedId == rb_shop.getId()) {
-
+            user.setName("1");
         } else {//已完成
-
+            user.setName("2");
         }
+        MyHttpUtils.handData(handler, 289, url, user);
     }
 }
