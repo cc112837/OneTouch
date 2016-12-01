@@ -94,7 +94,7 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context, "提醒发货");
+                    ToastUtil.show(context, "已提醒卖家尽快为您发货");
                 }
             });
         } else if ("待收货".equals(list.get(position).getShopStatus())) {

@@ -197,6 +197,7 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
                 try {
                     JSONObject object = new JSONObject();
                     object.put("productId", getId() + "");
+                    object.put("shopCartId","");
                     object.put("productNum", getValuenum() + "");
                     jsonArray.put(object);//向json数组里面添加对象
                 } catch (JSONException e) {
