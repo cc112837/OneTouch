@@ -1,10 +1,6 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +17,6 @@ import com.alipay.sdk.app.PayTask;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.bigkoo.snappingstepper.SnappingStepper;
 import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
-import com.unionpay.UPPayAssistEx;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.ali.PayResult;
 import com.wzy.mhealth.constant.Constants;
@@ -32,17 +27,9 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.Map;
 
-public class TaocanBuyActivity extends Activity implements Handler.Callback,
-        Runnable {
+public class TaocanBuyActivity extends Activity implements Handler.Callback{
     private ImageView leftBtn;
     private SnappingStepper stepperCustom;
     private Button btn_pay;
@@ -51,19 +38,12 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
     private PayRadioPurified bank, alipay;
     private TextView tv_price, newid, tv_name;
     private String name, price, old,id;
-    private Context mContext = null;
     private Handler mHandler = null;
     int number=1;
     Intent intent;
-    private ProgressDialog mLoadingDialog = null;
     private static final int SDK_ALIPAY_FLAG = 1;
-    private static final int SDK_UNIONPAY_FLAG = 2;
-    /*****************************************************************
-     * mMode参数解释： "00" - 启动银联正式环境 "01" - 连接银联测试环境
-     *****************************************************************/
-    private final String mMode = "01";
-    private static final String TN_URL_01 = "http://101.231.204.84:8091/sim/getacptn";
-    String flag = "bank";
+    private static final int SDK_WeChat_FLAG = 2;
+   String flag = "bank";
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -75,28 +55,18 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                 MyHttpUtils.handData(mHandler, 40, url, user);
 
             } else {
-                Toast.makeText(TaocanBuyActivity.this,"暂未开通银联，敬请期待",Toast.LENGTH_LONG).show();
-//                mLoadingDialog = ProgressDialog.show(mContext, // context
-//                        "", // title
-//                        "正在努力的获取tn中,请稍候...", // message
-//                        true); // 进度是否是不确定的，这只和创建进度条有关
-//                //*步骤1：从网络开始,获取交易流水号即TN
-//                new Thread(TaocanBuyActivity.this).start();
+                Toast.makeText(TaocanBuyActivity.this,"暂未开通其他支付，敬请期待",Toast.LENGTH_LONG).show();
+
 
             }
         }
     };
 
-    public void doStartUnionPayPlugin(Activity activity, String tn,
-                                      String mode) {
-        UPPayAssistEx.startPay(activity, null, null, tn, mode);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taocan_buy);
-        mContext = this;
         mHandler = new Handler(this);
         intent = getIntent();
         name = intent.getStringExtra("name");
@@ -153,7 +123,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
                 for (int i = 0; i < group.getChildCount(); i++) {
                     ((PayRadioPurified) group.getChildAt(i)).setChangeImg(checkedId);
                 }
-                if ("银联支付".equals(rl.getTextTitle())) {
+                if ("微信支付".equals(rl.getTextTitle())) {
                     flag = "yinlian";
                 } else {
                     flag = "bank";
@@ -171,31 +141,8 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-            case SDK_UNIONPAY_FLAG:
-                if (mLoadingDialog.isShowing()) {
-                    mLoadingDialog.dismiss();
-                }
+            case SDK_WeChat_FLAG:
 
-                String tn = "";
-                if (msg.obj == null || ((String) msg.obj).length() == 0) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("错误提示");
-                    builder.setMessage("网络连接失败,请重试!");
-                    builder.setNegativeButton("确定",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    builder.create().show();
-                } else {
-                    tn = (String) msg.obj;
-                    /*************************************************
-                     * 步骤2：通过银联工具类启动支付插件
-                     ************************************************/
-                    doStartUnionPayPlugin(this, tn, mMode);
-                }
                 break;
             case 120:
                 StepInfo info= (StepInfo)msg.obj;
@@ -248,99 +195,6 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback,
         return false;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /*************************************************
-         * 步骤3：处理银联手机支付控件返回的支付结果
-         ************************************************/
-        if (data == null) {
-            return;
-        }
 
-        String msg = "";
-        /*
-         * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
-         */
-        String str = data.getExtras().getString("pay_result");
-        if (str.equalsIgnoreCase("success")) {
-            // 支付成功后，extra中如果存在result_data，取出校验
-            // result_data结构见c）result_data参数说明
-            if (data.hasExtra("result_data")) {
-                String result = data.getExtras().getString("result_data");
-                try {
-                    JSONObject resultJson = new JSONObject(result);
-                    String sign = resultJson.getString("sign");
-                    String dataOrg = resultJson.getString("data");
-                    // 验签证书同后台验签证书
-                    // 此处的verify，商户需送去商户后台做验签
-                    boolean ret = verify(dataOrg, sign, mMode);
-                    if (ret) {
-                        // 验证通过后，显示支付结果
-                        msg = "支付成功！";
-                    } else {
-                        // 验证不通过后的处理
-                        // 建议通过商户后台查询支付结果
-                        msg = "支付失败！";
-                    }
-                } catch (JSONException e) {
-                }
-            } else {
-                // 未收到签名信息
-                // 建议通过商户后台查询支付结果
-                msg = "支付成功！";
-            }
-        } else if (str.equalsIgnoreCase("fail")) {
-            msg = "支付失败！";
-        } else if (str.equalsIgnoreCase("cancel")) {
-            msg = "用户取消了支付";
-        }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("支付结果通知");
-        builder.setMessage(msg);
-        builder.setInverseBackgroundForced(true);
-        // builder.setCustomTitle();
-        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.create().show();
-    }
-
-    @Override
-    public void run() {
-        String tn = null;
-        InputStream is;
-        try {
-
-            String url = TN_URL_01;
-            URL myURL = new URL(url);
-            URLConnection ucon = myURL.openConnection();
-            ucon.setConnectTimeout(120000);
-            is = ucon.getInputStream();
-            int i = -1;
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            while ((i = is.read()) != -1) {
-                baos.write(i);
-            }
-
-            tn = baos.toString();
-            is.close();
-            baos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Message msg = mHandler.obtainMessage();
-        msg.obj = tn;
-        msg.what=SDK_UNIONPAY_FLAG;
-        mHandler.sendMessage(msg);
-    }
-
-    private boolean verify(String msg, String sign64, String mode) {
-        return true;
-    }
 
 }

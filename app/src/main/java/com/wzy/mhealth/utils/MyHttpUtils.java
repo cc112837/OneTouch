@@ -469,10 +469,13 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if(what==289){
+        if (what == 289) {//商品订单分类
             params.addBodyParameter("type", ((TiUser) object).getName());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopOrder(), handler, what));
+        }
+        if (what == 290) {
+
         }
     }
 }

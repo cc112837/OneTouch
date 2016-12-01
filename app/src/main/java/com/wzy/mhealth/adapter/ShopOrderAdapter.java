@@ -1,6 +1,7 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.ShopCommentActivity;
 import com.wzy.mhealth.model.ShopOrder;
 import com.wzy.mhealth.utils.MyUtils;
 import com.wzy.mhealth.utils.ToastUtil;
@@ -55,7 +57,7 @@ public class ShopOrderAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
@@ -119,15 +121,19 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.iv_car.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setText("再次购买");
             viewHolder.tv_click2.setText("评价晒单");
-            viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
+            viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ToastUtil.show(context, "再次购买");
                 }
             });
-            viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
+            viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent=new Intent(context,ShopCommentActivity.class);
+                    intent.putExtra("image",list.get(position).getShopImage());
+                    intent.putExtra("id","");
+                    context.startActivity(intent);
                     ToastUtil.show(context, "评价晒单");
                 }
             });

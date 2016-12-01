@@ -112,7 +112,7 @@
                 my:desc="支持手机网银支付"
                 my:logo1="@drawable/ic_uppay_plugin"
                 my:radio="@drawable/radio"
-                my:title1="银联支付" />
+                my:title1="微信支付" />
         </com.wzy.mhealth.view.PayRadioGroup>
 
         <LinearLayout

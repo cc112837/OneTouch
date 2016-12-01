@@ -304,8 +304,9 @@
         <activity android:name=".activities.ShoporderActivity" />
         <activity android:name=".activities.ShopDetailActivity" />
         <activity android:name=".activities.ShopBuyActivity" />
-        <activity android:name=".activities.DecreseActivity"></activity>
-        <activity android:name=".activities.TicketActivity"></activity>
+        <activity android:name=".activities.DecreseActivity" />
+        <activity android:name=".activities.TicketActivity" />
+        <activity android:name=".activities.ShopCommentActivity"></activity>
     </application>
 
 </manifest>
