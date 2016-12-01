@@ -80,7 +80,7 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.ll_only.setVisibility(View.VISIBLE);
-        if ("未发货".equals(list.get(position).getShopStatus())) {
+        if ("待发货".equals(list.get(position).getShopStatus())) {
             viewHolder.iv_car.setVisibility(View.INVISIBLE);
             viewHolder.iv_delete.setVisibility(View.GONE);
             viewHolder.tv_click1.setText("提醒发货");
@@ -88,16 +88,16 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context,"我要退款");
+                    ToastUtil.show(context, "我要退款");
                 }
             });
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context,"提醒发货");
+                    ToastUtil.show(context, "提醒发货");
                 }
             });
-        } else if("未收货".equals(list.get(position).getShopStatus())) {
+        } else if ("待收货".equals(list.get(position).getShopStatus())) {
             viewHolder.iv_car.setVisibility(View.VISIBLE);
             viewHolder.iv_delete.setVisibility(View.GONE);
             viewHolder.tv_click1.setText("查看物流");
@@ -114,7 +114,7 @@ public class ShopOrderAdapter extends BaseAdapter {
                     ToastUtil.show(context, "查看物流");
                 }
             });
-        }else{
+        } else {
             viewHolder.iv_delete.setVisibility(View.VISIBLE);
             viewHolder.iv_car.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setText("再次购买");
@@ -156,7 +156,7 @@ public class ShopOrderAdapter extends BaseAdapter {
     static class ViewHolder {
         public TextView tv_shopname, tv_shoping, tv_time, tv_price, tv_number;
         public TextView tv_orderstatus, tv_click1, tv_click2, tv_shoptitle, tv_shopnum;
-        private ImageView iv_order, iv_delete, iv_car,iv_shop;
+        private ImageView iv_order, iv_delete, iv_car, iv_shop;
         private LinearLayout ll_only;
     }
 }

@@ -123,6 +123,7 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
                 intent.putExtra("price",totalprice);
                 intent.putExtra("addressId",addressid+"");
                 startActivity(intent);
+                finish();
                 break;
         }
     }
