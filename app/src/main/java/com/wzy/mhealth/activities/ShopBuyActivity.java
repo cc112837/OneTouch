@@ -19,22 +19,24 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.DefaultAdress;
 import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShopBuyActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
-    private View headview=null;
+    private View headview = null;
     private LinearLayout ll_have;
-    private TextView tv_name, tv_total, tv_cal,tv_newadd;
+    private TextView tv_name, tv_total, tv_cal, tv_newadd;
     private TextView tv_tel;
     private TextView tv_address;
     private ListView lv_shopbuy;
-    String addressid,totalprice;
+    String addressid, totalprice;
     private List<ShopCart.DataEntity> list = new ArrayList<>();
     private ShopBuyAdapter shopBuyAdapter;
     private List<ShopCart.DataEntity> shop;
+    boolean flag = false;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -43,15 +45,17 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
                 case 281:
                     DefaultAdress defaultAdress = (DefaultAdress) msg.obj;
                     if (defaultAdress.getStatus().equals("1")) {
-                       ll_have.setVisibility(View.VISIBLE);
+                        flag = true;
+                        ll_have.setVisibility(View.VISIBLE);
                         tv_newadd.setVisibility(View.GONE);
-                        addressid=defaultAdress.getAddressId()+"";
+                        addressid = defaultAdress.getAddressId() + "";
                         tv_name.setText(defaultAdress.getName() + "");
                         tv_tel.setText(defaultAdress.getTelephone() + "");
                         tv_address.setText(defaultAdress.getAddress());
                     } else {
+                        flag = false;
                         ll_have.setVisibility(View.GONE);
-                       tv_newadd.setVisibility(View.VISIBLE);
+                        tv_newadd.setVisibility(View.VISIBLE);
                     }
                     break;
             }
@@ -76,20 +80,20 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
         tv_name = (TextView) headview.findViewById(R.id.tv_name);
         tv_tel = (TextView) headview.findViewById(R.id.tv_tel);
         tv_address = (TextView) headview.findViewById(R.id.tv_address);
-        tv_newadd= (TextView) headview.findViewById(R.id.tv_newadd);
-        ll_have=(LinearLayout) headview.findViewById(R.id.ll_have);
+        tv_newadd = (TextView) headview.findViewById(R.id.tv_newadd);
+        ll_have = (LinearLayout) headview.findViewById(R.id.ll_have);
         String url = Constants.SERVER_URL + "MhealthShopAddressDefaultServlet";
         MyHttpUtils.handData(handler, 281, url, null);
         tv_cal = (TextView) findViewById(R.id.tv_cal);
         tv_total = (TextView) findViewById(R.id.tv_total);
-        double value=0;
-        int num=0;
-        for (int i=0;i<shop.size();i++){
-            num+=shop.get(i).getProductNumber();
-            value+=shop.get(i).getTotalPrice();
+        double value = 0;
+        int num = 0;
+        for (int i = 0; i < shop.size(); i++) {
+            num += shop.get(i).getProductNumber();
+            value += shop.get(i).getTotalPrice();
         }
-        totalprice=String.format("%.2f",value);
-        tv_total.setText("实付款：¥" +String.format("%.2f",value) );
+        totalprice = String.format("%.2f", value);
+        tv_total.setText("实付款：¥" + String.format("%.2f", value));
         tv_cal.setText("去结算（" + num + ")");
         lv_shopbuy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -119,11 +123,15 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.tv_cal:
-                Intent intent=new Intent(ShopBuyActivity.this,CartBuyActivity.class);
-                intent.putExtra("price",totalprice);
-                intent.putExtra("addressId",addressid+"");
-                startActivity(intent);
-                finish();
+                if (flag) {
+                    Intent intent = new Intent(ShopBuyActivity.this, CartBuyActivity.class);
+                    intent.putExtra("price", totalprice);
+                    intent.putExtra("addressId", addressid + "");
+                    startActivity(intent);
+                    finish();
+                } else {
+                    ToastUtil.show(ShopBuyActivity.this, "请填写收货地址");
+                }
                 break;
         }
     }

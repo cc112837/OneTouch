@@ -21,6 +21,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.ShopOrderAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ShopOrder;
+import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -40,11 +41,40 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
             super.handleMessage(msg);
             switch (msg.what) {
                 case 289:
-                    Log.e("jfj","kfkf");
                     ShopOrder shopOrder = (ShopOrder) msg.obj;
                     list.clear();
                     list.addAll(shopOrder.getData());
                     shopOrderAdapter.notifyDataSetChanged();
+                    break;
+                case 292:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    if ("1".equals(stepInfo.getStatus())) {
+                        Log.e("提醒", "催货");
+                    }
+                    break;
+                case 293:
+                    StepInfo stepInf = (StepInfo) msg.obj;
+                    if ("1".equals(stepInf.getStatus())) {
+                        String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
+                        TiUser user = new TiUser();
+                        user.setName("1");
+                        MyHttpUtils.handData(handler, 289, url, user);
+                    }
+                    break;
+                case 294:
+                    StepInfo stepIn = (StepInfo) msg.obj;
+                    if ("1".equals(stepIn.getStatus())) {
+                        Log.e("退款", "退款中");
+                    }
+                    break;
+                case 295:
+                    StepInfo stepI = (StepInfo) msg.obj;
+                    if ("1".equals(stepI.getStatus())) {
+                        String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
+                        TiUser user = new TiUser();
+                        user.setName("1");
+                        MyHttpUtils.handData(handler, 289, url, user);
+                    }
                     break;
 
             }
@@ -68,7 +98,7 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
         lv_shoporder = (ListView) findViewById(R.id.lv_shoporder);
         rb_complete = (RadioButton) findViewById(R.id.rb_complete);
         rb_shop = (RadioButton) findViewById(R.id.rb_shop);
-        shopOrderAdapter = new ShopOrderAdapter(this, list);
+        shopOrderAdapter = new ShopOrderAdapter(this, list,handler);
         lv_shoporder.setAdapter(shopOrderAdapter);
         String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
         TiUser user = new TiUser();

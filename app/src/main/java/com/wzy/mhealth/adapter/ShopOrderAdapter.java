@@ -1,10 +1,10 @@
 package com.wzy.mhealth.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,6 @@ import com.wzy.mhealth.activities.ShopCommentActivity;
 import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ShopOrder;
-import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.MyUtils;
@@ -42,41 +41,13 @@ public class ShopOrderAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
     private List<ShopOrder.DataEntity> list;
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 292:
-                    StepInfo stepInfo = new StepInfo();
-                    if ("1".equals(stepInfo.getStatus())) {
-                        Log.e("提醒", "催货");
-                    }
-                    break;
-                case 293:
-                    StepInfo stepInf = new StepInfo();
-                    if ("1".equals(stepInf.getStatus())) {
-                        Log.e("zhixing","*****");
-                        String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
-                        TiUser user = new TiUser();
-                        user.setName("");
-                        MyHttpUtils.handData(handler, 289, url, user);
-                    }
-                    break;
-                case 294:
-                    StepInfo stepIn = new StepInfo();
-                    if ("1".equals(stepIn.getStatus())) {
-                        Log.e("退款", "退款中");
-                    }
-                    break;
-            }
-        }
-    };
+    private Handler handler;
 
-    public ShopOrderAdapter(Context context, List<ShopOrder.DataEntity> list) {
+    public ShopOrderAdapter(Context context, List<ShopOrder.DataEntity> list,Handler handler) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
         this.context = context;
+        this.handler=handler;
     }
 
     @Override
@@ -131,6 +102,8 @@ public class ShopOrderAdapter extends BaseAdapter {
         if ("待发货".equals(list.get(position).getShopStatus())) {
             viewHolder.iv_car.setVisibility(View.INVISIBLE);
             viewHolder.iv_delete.setVisibility(View.GONE);
+            viewHolder.tv_click1.setVisibility(View.VISIBLE);
+            viewHolder.tv_click2.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setText("提醒发货");
             viewHolder.tv_click2.setText("我要退款");
             viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +129,8 @@ public class ShopOrderAdapter extends BaseAdapter {
         } else if ("待收货".equals(list.get(position).getShopStatus())) {
             viewHolder.iv_car.setVisibility(View.VISIBLE);
             viewHolder.iv_delete.setVisibility(View.GONE);
+            viewHolder.tv_click1.setVisibility(View.VISIBLE);
+            viewHolder.tv_click2.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setText("查看物流");
             viewHolder.tv_click2.setText("确认收货");
             viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
@@ -173,9 +148,11 @@ public class ShopOrderAdapter extends BaseAdapter {
                     ToastUtil.show(context, "查看物流");
                 }
             });
-        } else {
+        } else if("已完成".equals(list.get(position).getShopStatus())){
             viewHolder.iv_delete.setVisibility(View.VISIBLE);
             viewHolder.iv_car.setVisibility(View.VISIBLE);
+            viewHolder.tv_click1.setVisibility(View.VISIBLE);
+            viewHolder.tv_click2.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setText("再次购买");
             if ("0".equals(list.get(position).getEvaluateStatu())) {
                 viewHolder.tv_click2.setText("评价订单");
@@ -208,6 +185,12 @@ public class ShopOrderAdapter extends BaseAdapter {
             });
 
         }
+        else{
+            viewHolder.iv_delete.setVisibility(View.VISIBLE);
+            viewHolder.iv_car.setVisibility(View.GONE);
+            viewHolder.tv_click1.setVisibility(View.GONE);
+            viewHolder.tv_click2.setVisibility(View.GONE);
+        }
         viewHolder.tv_orderstatus.setText(list.get(position).getShopStatus() + "");//订单状态
         viewHolder.tv_shopname.setText(list.get(position).getBussinessName() + "");
         viewHolder.tv_shoping.setText(list.get(position).getLogistate() + "");
@@ -220,7 +203,21 @@ public class ShopOrderAdapter extends BaseAdapter {
         viewHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new AlertDialog.Builder(context).setTitle("删除提示")
+                        .setMessage("您确定要删除这个订单吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String uri = Constants.SERVER_URL + "";
+                        TiUser user = new TiUser();
+                        user.setName(list.get(position).getOrderId() + "");
+                        MyHttpUtils.handData(handler,295, uri, user);
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
             }
         });
 
