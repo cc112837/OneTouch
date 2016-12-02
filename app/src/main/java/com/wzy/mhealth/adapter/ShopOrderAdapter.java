@@ -207,7 +207,7 @@ public class ShopOrderAdapter extends BaseAdapter {
                         .setMessage("您确定要删除这个订单吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String uri = Constants.SERVER_URL + "";
+                        String uri = Constants.SERVER_URL + "MhealthOrderDeleteServlet";
                         TiUser user = new TiUser();
                         user.setName(list.get(position).getOrderId() + "");
                         MyHttpUtils.handData(handler,295, uri, user);

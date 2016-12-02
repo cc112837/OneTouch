@@ -58,6 +58,7 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
                         String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
                         TiUser user = new TiUser();
                         user.setName("1");
+                        rb_shop.setChecked(true);
                         MyHttpUtils.handData(handler, 289, url, user);
                     }
                     break;
@@ -72,7 +73,8 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
                     if ("1".equals(stepI.getStatus())) {
                         String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
                         TiUser user = new TiUser();
-                        user.setName("1");
+                        user.setName("2");
+                        rb_complete.setChecked(true);
                         MyHttpUtils.handData(handler, 289, url, user);
                     }
                     break;
