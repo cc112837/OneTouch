@@ -124,7 +124,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_border_selector"
-                    my:desc="支持手机网银支付"
+                    my:desc="亿万用户的选择，更快更安全"
                     my:logo1="@drawable/ic_uppay_plugin"
                     my:radio="@drawable/radio"
                     my:title1="微信支付" />

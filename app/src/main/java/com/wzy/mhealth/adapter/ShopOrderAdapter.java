@@ -83,6 +83,14 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.ll_only.setVisibility(View.VISIBLE);
+        viewHolder.ll_only.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context,ShopDetailActivity.class);
+                intent.putExtra("id",""+list.get(position).getProductId());
+                context.startActivity(intent);
+            }
+        });
         if ("待发货".equals(list.get(position).getShopStatus())) {
             viewHolder.iv_car.setVisibility(View.INVISIBLE);
             viewHolder.iv_delete.setVisibility(View.GONE);
@@ -121,7 +129,27 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.iv_delete.setVisibility(View.VISIBLE);
             viewHolder.iv_car.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setText("再次购买");
-            viewHolder.tv_click2.setText("评价晒单");
+            if("0".equals(list.get(position).getEvaluateStatu())){
+                viewHolder.tv_click2.setText("评价订单");
+                viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ShopCommentActivity.class);
+                        intent.putExtra("image", list.get(position).getShopImage());
+                        intent.putExtra("id", "" + list.get(position).getOrderId());
+                        context.startActivity(intent);
+                    }
+                });
+            }else {
+                viewHolder.tv_click2.setText("已评价过");
+                viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.show(context,"您已经评价过了");
+                    }
+                });
+            }
+
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -130,15 +158,7 @@ public class ShopOrderAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-            viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(context,ShopCommentActivity.class);
-                    intent.putExtra("image",list.get(position).getShopImage());
-                    intent.putExtra("id", "" + list.get(position).getOrderId());
-                    context.startActivity(intent);
-                }
-            });
+
         }
         viewHolder.tv_orderstatus.setText(list.get(position).getShopStatus() + "");//订单状态
         viewHolder.tv_shopname.setText(list.get(position).getBussinessName() + "");

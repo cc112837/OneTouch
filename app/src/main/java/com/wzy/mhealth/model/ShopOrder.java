@@ -25,7 +25,6 @@ public class ShopOrder {
      * shopStatus : 待收货
      * bussinessName : 经稞
      * shopPrice : 0.01
-     * shopId : f5a2e99d5884b056015884c5f2c80003
      * shopName : 有机青稞米2.5kg礼盒装
      * shopImage : http://117.34.105.29:8818/mhealth/upload/files/20161128141912FBHYgXcG.jpg
      * shopNum : 1
@@ -61,10 +60,23 @@ public class ShopOrder {
         private String shopName;
         private String shopImage;
         private int shopNum;
+        private String evaluateStatu;
         private String bussinessImage;
         private String logistate;
         private String shopDate;
         private String orderId;
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
+
+        public String getEvaluateStatu() {
+            return evaluateStatu;
+        }
+
+        public void setEvaluateStatu(String evaluateStatu) {
+            this.evaluateStatu = evaluateStatu;
+        }
 
         public void setShopStatus(String shopStatus) {
             this.shopStatus = shopStatus;
@@ -78,9 +90,6 @@ public class ShopOrder {
             this.shopPrice = shopPrice;
         }
 
-        public void setShopId(String shopId) {
-            this.productId = shopId;
-        }
 
         public void setShopName(String shopName) {
             this.shopName = shopName;

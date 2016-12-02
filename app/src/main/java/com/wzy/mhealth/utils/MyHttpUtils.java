@@ -443,12 +443,12 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("addressId", ((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 284) {//加入购物车
+        if (what == 284) {//购物车点击结算
             params.addBodyParameter("result", ((TiUser) object).getName());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopCart(), handler, what));
         }
-        if (what == 285) {
+        if (what == 285) {//购物车加减数量
             params.addBodyParameter("productNumber", ((TiUser) object).getName());
             params.addBodyParameter("shopcartId", ((TiUser) object).getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
@@ -474,13 +474,13 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopOrder(), handler, what));
         }
-        if (what == 290) {
+        if (what == 290) {//商品评价
             params.addBodyParameter("orderId", ((TiUser) object).getCardId());
-            params.addBodyParameter("evaluate", ((TiUser) object).getTel());
-            params.addBodyParameter("satisify", ((TiUser) object).getPass());
+            params.addBodyParameter("satisify", ((TiUser) object).getTel());
+            params.addBodyParameter("evaluate", ((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if(what==291){
+        if (what == 291) {//查看订单评价
             params.addBodyParameter("productId", ((TiUser) object).getCardId());
             params.addBodyParameter("statify", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserEvaluation(), handler, what));
