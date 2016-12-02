@@ -475,7 +475,15 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopOrder(), handler, what));
         }
         if (what == 290) {
-
+            params.addBodyParameter("orderId", ((TiUser) object).getCardId());
+            params.addBodyParameter("evaluate", ((TiUser) object).getTel());
+            params.addBodyParameter("satisify", ((TiUser) object).getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==291){
+            params.addBodyParameter("productId", ((TiUser) object).getCardId());
+            params.addBodyParameter("statify", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserEvaluation(), handler, what));
         }
     }
 }

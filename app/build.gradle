@@ -52,4 +52,5 @@ dependencies {
     compile 'com.bigkoo:snappingstepper:1.0.2'
     compile project(':Steplibrary')
     compile files('libs/alipaySingle-20160825.jar')
+    compile files('libs/libammsdk.jar')
 }

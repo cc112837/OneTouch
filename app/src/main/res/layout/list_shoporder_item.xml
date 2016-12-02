@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -109,8 +110,8 @@
             android:id="@+id/ll_only"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -118,11 +119,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="商品名称" />
+
             <TextView
                 android:id="@+id/tv_shopnum"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="数量：2" />
         </LinearLayout>
     </LinearLayout>

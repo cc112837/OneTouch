@@ -131,8 +131,9 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
+        <EditText
             android:id="@+id/tv_advise"
+            android:gravity="left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/bg_gray"

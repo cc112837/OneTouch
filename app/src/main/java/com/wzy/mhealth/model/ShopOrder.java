@@ -16,21 +16,23 @@ public class ShopOrder {
 
 
     /**
-     * data : [{"shopStatus":"未发货","bussinessName":"经稞","shopPrice":0.01,"shopName":"有机青稞米500g","shopImage":"http://117.34.105.29:8818/mhealth/upload/files/20161128141803jIaDjJeU.jpg","shopNum":1,"bussinessImage":"http://117.34.105.29:8818/mhealth/upload/files/20161130152742E51RY7b3.jpg","logistate":"您的订单已支付，还未发货，请等待","shopDate":"2016-11-30 11:31:10.0"}]
+     * data : [{"shopStatus":"待收货","bussinessName":"经稞","shopPrice":0.01,"shopId":"f5a2e99d5884b056015884c5f2c80003","shopName":"有机青稞米2.5kg礼盒装","shopImage":"http://117.34.105.29:8818/mhealth/upload/files/20161128141912FBHYgXcG.jpg","shopNum":1,"bussinessImage":"http://117.34.105.29:8818/mhealth/upload/files/20161130152818vxYRdCX7.jpg","logistate":"您的订单正在派送中，请耐心等待","shopDate":"2016-11-30 16:58:25.0","orderId":"f5a2e99d58b4363c0158b474d42b0001"}]
      * number : 1
      */
 
     private int number;
     /**
-     * shopStatus : 未发货
+     * shopStatus : 待收货
      * bussinessName : 经稞
      * shopPrice : 0.01
-     * shopName : 有机青稞米500g
-     * shopImage : http://117.34.105.29:8818/mhealth/upload/files/20161128141803jIaDjJeU.jpg
+     * shopId : f5a2e99d5884b056015884c5f2c80003
+     * shopName : 有机青稞米2.5kg礼盒装
+     * shopImage : http://117.34.105.29:8818/mhealth/upload/files/20161128141912FBHYgXcG.jpg
      * shopNum : 1
-     * bussinessImage : http://117.34.105.29:8818/mhealth/upload/files/20161130152742E51RY7b3.jpg
-     * logistate : 您的订单已支付，还未发货，请等待
-     * shopDate : 2016-11-30 11:31:10.0
+     * bussinessImage : http://117.34.105.29:8818/mhealth/upload/files/20161130152818vxYRdCX7.jpg
+     * logistate : 您的订单正在派送中，请耐心等待
+     * shopDate : 2016-11-30 16:58:25.0
+     * orderId : f5a2e99d58b4363c0158b474d42b0001
      */
 
     private List<DataEntity> data;
@@ -55,12 +57,14 @@ public class ShopOrder {
         private String shopStatus;
         private String bussinessName;
         private double shopPrice;
+        private String productId;
         private String shopName;
         private String shopImage;
         private int shopNum;
         private String bussinessImage;
         private String logistate;
         private String shopDate;
+        private String orderId;
 
         public void setShopStatus(String shopStatus) {
             this.shopStatus = shopStatus;
@@ -72,6 +76,10 @@ public class ShopOrder {
 
         public void setShopPrice(double shopPrice) {
             this.shopPrice = shopPrice;
+        }
+
+        public void setShopId(String shopId) {
+            this.productId = shopId;
         }
 
         public void setShopName(String shopName) {
@@ -98,6 +106,10 @@ public class ShopOrder {
             this.shopDate = shopDate;
         }
 
+        public void setOrderId(String orderId) {
+            this.orderId = orderId;
+        }
+
         public String getShopStatus() {
             return shopStatus;
         }
@@ -108,6 +120,10 @@ public class ShopOrder {
 
         public double getShopPrice() {
             return shopPrice;
+        }
+
+        public String getProductId() {
+            return productId;
         }
 
         public String getShopName() {
@@ -132,6 +148,10 @@ public class ShopOrder {
 
         public String getShopDate() {
             return shopDate;
+        }
+
+        public String getOrderId() {
+            return orderId;
         }
     }
 }

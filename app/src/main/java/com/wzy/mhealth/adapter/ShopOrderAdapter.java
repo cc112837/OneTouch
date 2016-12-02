@@ -14,6 +14,7 @@ import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.ShopCommentActivity;
+import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.model.ShopOrder;
 import com.wzy.mhealth.utils.MyUtils;
 import com.wzy.mhealth.utils.ToastUtil;
@@ -124,7 +125,9 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context, "再次购买");
+                    Intent intent=new Intent(context,ShopDetailActivity.class);
+                    intent.putExtra("id",""+list.get(position).getProductId());
+                    context.startActivity(intent);
                 }
             });
             viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
@@ -132,9 +135,8 @@ public class ShopOrderAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     Intent intent=new Intent(context,ShopCommentActivity.class);
                     intent.putExtra("image",list.get(position).getShopImage());
-                    intent.putExtra("id","");
+                    intent.putExtra("id", "" + list.get(position).getOrderId());
                     context.startActivity(intent);
-                    ToastUtil.show(context, "评价晒单");
                 }
             });
         }
