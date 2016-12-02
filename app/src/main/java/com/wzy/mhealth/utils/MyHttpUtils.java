@@ -485,5 +485,17 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("statify", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserEvaluation(), handler, what));
         }
+        if (what == 292) {//提醒发货
+            params.addBodyParameter("orderId", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 293) {//确认收货
+            params.addBodyParameter("orderId", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 293) {//申请商品退款
+            params.addBodyParameter("orderId", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
     }
 }

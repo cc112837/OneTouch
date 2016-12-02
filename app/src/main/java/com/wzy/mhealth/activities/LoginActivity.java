@@ -48,6 +48,7 @@ import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * @author cc112837@163.com
@@ -57,7 +58,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
     private Button loginBtn, regButton,forgetButton;
     private EditText nameText, pwdText;
     private String name, pwd;
-    private ImageView iv_qqlogin,iv_weibologin,headicon;
+    private ImageView iv_qqlogin,iv_weibologin,headicon,iv_wechatlogin;
     private LinearLayout loginLinear, qidongLinear;
     private static final int MSG_AUTH_CANCEL = 2;
     private static final int MSG_AUTH_ERROR= 3;
@@ -79,6 +80,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             finishLogin();
         }
         initTitle();
+        iv_wechatlogin=(ImageView) findViewById(R.id.iv_wechatlogin);
         loginLinear = (LinearLayout) findViewById(R.id.loginLinear);
         qidongLinear = (LinearLayout) findViewById(R.id.qidongLinear);
         iv_qqlogin=(ImageView) findViewById(R.id.iv_qqlogin);
@@ -95,7 +97,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegActivity.class);
-                intent.putExtra("flag","for");
+                intent.putExtra("flag", "for");
                 startActivity(intent);
             }
         });
@@ -120,7 +122,6 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         iv_qqlogin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //// TODO: 2016/3/22
                 Platform qq = ShareSDK.getPlatform(QQ.NAME);
                 if (qq.isValid ()) {
                     qq.removeAccount();
@@ -131,10 +132,22 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                 qq.authorize();
             }
         });
+        iv_wechatlogin.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
+                if (wechat.isValid ()) {
+                    wechat.removeAccount();
+                }
+                wechat.SSOSetting(false);  //设置false表示使用SSO授权方式
+                wechat.setPlatformActionListener(LoginActivity.this); // 设置分享事件回调
+                wechat.showUser(null);
+                wechat.authorize();
+            }
+        });
         iv_weibologin.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2016/3/22
                 Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
                 if (weibo.isValid ()) {
                     weibo.removeAccount();
@@ -246,7 +259,6 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
 
     @Override
     public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -313,13 +325,45 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                         });
 
                     }
-
-                    if(SinaWeibo.NAME.equals(platform)){
+                    else if(SinaWeibo.NAME.equals(platform)){
                         final String  nickname=res.get("name").toString();
                         final String icon=res.get("avatar_hd").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()),AVUser.AVThirdPartyUserAuth.SNS_SINA_WEIBO , plat
+                                        .getUserId());
+                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>(){
+                            @Override
+                            public void done(AVUser user, AVException e) {
+                                if (e == null) {
+                                    MyAndroidUtil.editXmlByString(
+                                            Constants.LOGIN_ACCOUNT, nickname);
+                                    user.setUsername(nickname);
+                                    user.put("property", "user");
+                                    AVFile avFile = new AVFile(nickname,icon,null);
+                                    user.put("avatar", avFile);
+                                    user.signUpInBackground(new SignUpCallback() {
+                                        @Override
+                                        public void done(AVException e) {
+
+                                        }
+                                    });
+                                    name=nickname;
+                                    finishLogin();
+                                } else {
+                                    Log.e("user执行失败了",user+"");
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                    }
+                    else if(Wechat.NAME.equals(platform)){
+                        final String  nickname=res.get("nickname").toString();
+                        final String icon=res.get("headimgurl").toString();
+                        AVUser.AVThirdPartyUserAuth auth =
+                                new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
+                                        .getExpiresTime()),AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIXIN , plat
                                         .getUserId());
                         AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>(){
                             @Override
@@ -370,7 +414,6 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

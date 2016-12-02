@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -39,11 +40,13 @@ public class ShoporderActivity extends Activity implements View.OnClickListener,
             super.handleMessage(msg);
             switch (msg.what) {
                 case 289:
+                    Log.e("jfj","kfkf");
                     ShopOrder shopOrder = (ShopOrder) msg.obj;
                     list.clear();
                     list.addAll(shopOrder.getData());
                     shopOrderAdapter.notifyDataSetChanged();
                     break;
+
             }
         }
     };

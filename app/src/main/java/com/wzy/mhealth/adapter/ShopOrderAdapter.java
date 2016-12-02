@@ -2,6 +2,9 @@ package com.wzy.mhealth.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.ShopCommentActivity;
 import com.wzy.mhealth.activities.ShopDetailActivity;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ShopOrder;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.MyUtils;
 import com.wzy.mhealth.utils.ToastUtil;
 
@@ -35,6 +42,36 @@ public class ShopOrderAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
     private List<ShopOrder.DataEntity> list;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 292:
+                    StepInfo stepInfo = new StepInfo();
+                    if ("1".equals(stepInfo.getStatus())) {
+                        Log.e("提醒", "催货");
+                    }
+                    break;
+                case 293:
+                    StepInfo stepInf = new StepInfo();
+                    if ("1".equals(stepInf.getStatus())) {
+                        Log.e("zhixing","*****");
+                        String url = Constants.SERVER_URL + "MhealthShopOrderServlet";
+                        TiUser user = new TiUser();
+                        user.setName("");
+                        MyHttpUtils.handData(handler, 289, url, user);
+                    }
+                    break;
+                case 294:
+                    StepInfo stepIn = new StepInfo();
+                    if ("1".equals(stepIn.getStatus())) {
+                        Log.e("退款", "退款中");
+                    }
+                    break;
+            }
+        }
+    };
 
     public ShopOrderAdapter(Context context, List<ShopOrder.DataEntity> list) {
         mInflater = LayoutInflater.from(context);
@@ -59,7 +96,7 @@ public class ShopOrderAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.list_shoporder_item, null);
@@ -86,8 +123,8 @@ public class ShopOrderAdapter extends BaseAdapter {
         viewHolder.ll_only.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context,ShopDetailActivity.class);
-                intent.putExtra("id",""+list.get(position).getProductId());
+                Intent intent = new Intent(context, ShopDetailActivity.class);
+                intent.putExtra("id", "" + list.get(position).getProductId());
                 context.startActivity(intent);
             }
         });
@@ -99,13 +136,21 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context, "我要退款");
+                    viewHolder.tv_click2.setText("退款中");
+                    String url = Constants.SERVER_URL + "MhealthOrderBackServlet";
+                    TiUser user = new TiUser();
+                    user.setName("" + list.get(position).getOrderId());
+                    MyHttpUtils.handData(handler, 294, url, user);
                 }
             });
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ToastUtil.show(context, "已提醒卖家尽快为您发货");
+                    String url = Constants.SERVER_URL + "MhealthOrderExpetingServlet";
+                    TiUser user = new TiUser();
+                    user.setName("" + list.get(position).getOrderId());
+                    MyHttpUtils.handData(handler, 292, url, user);
                 }
             });
         } else if ("待收货".equals(list.get(position).getShopStatus())) {
@@ -116,7 +161,10 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context, "确认收货");
+                    String url = Constants.SERVER_URL + "MhealthOrderGoodServlet";
+                    TiUser user = new TiUser();
+                    user.setName("" + list.get(position).getOrderId());
+                    MyHttpUtils.handData(handler, 293, url, user);
                 }
             });
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +177,7 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.iv_delete.setVisibility(View.VISIBLE);
             viewHolder.iv_car.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setText("再次购买");
-            if("0".equals(list.get(position).getEvaluateStatu())){
+            if ("0".equals(list.get(position).getEvaluateStatu())) {
                 viewHolder.tv_click2.setText("评价订单");
                 viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -140,12 +188,12 @@ public class ShopOrderAdapter extends BaseAdapter {
                         context.startActivity(intent);
                     }
                 });
-            }else {
+            } else {
                 viewHolder.tv_click2.setText("已评价过");
                 viewHolder.tv_click2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtil.show(context,"您已经评价过了");
+                        ToastUtil.show(context, "您已经评价过了");
                     }
                 });
             }
@@ -153,8 +201,8 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context,ShopDetailActivity.class);
-                    intent.putExtra("id",""+list.get(position).getProductId());
+                    Intent intent = new Intent(context, ShopDetailActivity.class);
+                    intent.putExtra("id", "" + list.get(position).getProductId());
                     context.startActivity(intent);
                 }
             });
