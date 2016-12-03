@@ -453,7 +453,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("shopcartId", ((TiUser) object).getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 286) {//加入购物车
+        if (what == 286) {//购物车数量
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopBuy(), handler, what));
         }

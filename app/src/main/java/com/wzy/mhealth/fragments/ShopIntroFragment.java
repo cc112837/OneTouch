@@ -17,6 +17,7 @@ import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.BannerItem;
 import com.wzy.mhealth.model.ShopDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -28,7 +29,7 @@ public class ShopIntroFragment extends Fragment {
     private ConvenientBanner cb_shop;
     private SnappingStepper stepperCustom;
     private TextView tv_per, tv_intro, tv_name;
-    private ArrayList<String> localImages = new ArrayList<>();
+    private ArrayList<BannerItem> localImages = new ArrayList<>();
 
 
     private Handler handler = new Handler() {
@@ -37,36 +38,44 @@ public class ShopIntroFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 275:
-                    ShopDetail shopDetail=(ShopDetail) msg.obj;
-                    localImages.clear();
-                    localImages.addAll(shopDetail.getProductImageBig());
-                    tv_name.setText(shopDetail.getProductName() + "");
-                    tv_intro.setText(shopDetail.getData());
-                    tv_per.setText("¥"+shopDetail.getProductNewPrice());
-                    cb_shop.setPages(
-                            new CBViewHolderCreator<LocalImageView>() {
-                                @Override
-                                public LocalImageView createHolder() {
-                                    return new LocalImageView();
-                                }
-                            }, localImages)
-                            //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                            .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.common_msg_tips})
-                                    //设置指示器的方向
-                            .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
-                    break;
+                    ShopDetail shopDetail = (ShopDetail) msg.obj;
+                    if (shopDetail != null) {
+                        localImages.clear();
+                        for (int i = 0; i < shopDetail.getProductImageBig().size(); i++) {
+                            BannerItem bannerItem = new BannerItem();
+                            bannerItem.setTitle(i + 1 + "/" + shopDetail.getProductImageBig().size());
+                            bannerItem.setUrl(shopDetail.getProductImageBig().get(i));
+                            localImages.add(bannerItem);
+                        }
+                        tv_name.setText(shopDetail.getProductName() + "");
+                        tv_intro.setText(shopDetail.getData());
+                        tv_per.setText("¥" + shopDetail.getProductNewPrice());
+                        cb_shop.setPages(
+                                new CBViewHolderCreator<LocalImageView>() {
+                                    @Override
+                                    public LocalImageView createHolder() {
+                                        return new LocalImageView();
+                                    }
+                                }, localImages)
+                                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                                .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.common_msg_tips})
+                                        //设置指示器的方向
+                                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+                        break;
+                    }
             }
         }
     };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_shop_intro, container, false);
-        ((ShopDetailActivity)getActivity()).setValuenum(1);
+        ((ShopDetailActivity) getActivity()).setValuenum(1);
         String id = ((ShopDetailActivity) getActivity()).getId();
-        String url= Constants.SERVER_URL+"MhealthOneProductServlet";
+        String url = Constants.SERVER_URL + "MhealthOneProductServlet";
         TiUser user = new TiUser();
-        user.setCardId(id+"");
+        user.setCardId(id + "");
         MyHttpUtils.handData(handler, 275, url, user);
         init(v);
         return v;
@@ -83,7 +92,7 @@ public class ShopIntroFragment extends Fragment {
             public void onValueChange(View view, int value) {
                 switch (view.getId()) {
                     case R.id.stepperCustom:
-                        ((ShopDetailActivity)getActivity()).setValuenum(value);
+                        ((ShopDetailActivity) getActivity()).setValuenum(value);
                         break;
                 }
             }

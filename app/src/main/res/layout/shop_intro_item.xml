@@ -1,0 +1,25 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/sdv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:background="@mipmap/shop_intro_back"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="25dp"
+        android:layout_marginRight="25dp"
+        android:padding="15dp"
+        android:text="1/2"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp" />
+
+</FrameLayout>

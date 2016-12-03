@@ -117,6 +117,13 @@ public class ShopFragment extends Fragment implements View.OnClickListener, Sear
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        String uri = Constants.SERVER_URL + "MhealthShoppingCartDisplayServlet";
+        MyHttpUtils.handData(handler, 286, uri, null);
+    }
+
+    @Override
     public boolean onQueryTextSubmit(String query) {
         Toast.makeText(getActivity(), "您选择的是：" + query, Toast.LENGTH_SHORT).show();
         return true;
