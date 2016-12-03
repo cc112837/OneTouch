@@ -22,6 +22,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,8 +44,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +55,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
     private CheckBox cb_radio;
     private CartAdapter cartAdapter;
     private TextView tv_total, tv_cal;
+    private LinearLayout ll_bottom,ll_repalce;
     private List<Cart.DataEntity> list = new ArrayList<>();
     private List<Cart.DataEntity> cartDetail = new ArrayList<>();
     private Handler handler = new Handler() {
@@ -67,31 +67,38 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     final Cart cart = (Cart) msg.obj;
                     list.clear();
                     list.addAll(cart.getData());
-                    cartAdapter.setList(list);
-                    totalprice(cartDetail);
-                    tv_cal.setOnClickListener(CartActivity.this);
-                    cartAdapter.notifyDataSetChanged();
-                    cb_radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    if(list.size()==0){
+                        ll_bottom.setVisibility(View.GONE);
+                        ll_repalce.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        ll_repalce.setVisibility(View.GONE);
+                        ll_bottom.setVisibility(View.VISIBLE);
+                        cartAdapter.setList(list);
+                        totalprice(cartDetail);
+                        tv_cal.setOnClickListener(CartActivity.this);
+                        cartAdapter.notifyDataSetChanged();
+                        cb_radio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                for (int i = 0; i < list.size(); i++) {
-                                    cartAdapter.selectedMap.put(i, true);
-                                }
-                            } else {
-                                if (!cartAdapter.selectedMap.containsValue(false)) {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if (isChecked) {
                                     for (int i = 0; i < list.size(); i++) {
-                                        cartAdapter.selectedMap.put(i, false);
+                                        cartAdapter.selectedMap.put(i, true);
                                     }
-                                    cartDetail.clear();
+                                } else {
+                                    if (!cartAdapter.selectedMap.containsValue(false)) {
+                                        for (int i = 0; i < list.size(); i++) {
+                                            cartAdapter.selectedMap.put(i, false);
+                                        }
+                                        cartDetail.clear();
+                                    }
+                                    totalprice(cartDetail);
                                 }
-                                totalprice(cartDetail);
+                                cartAdapter.notifyDataSetChanged();
                             }
-                            cartAdapter.notifyDataSetChanged();
-                        }
-                    });
-
+                        });
+                    }
                     break;
                 case 282:
                     StepInfo stepInfo = (StepInfo) msg.obj;
@@ -149,6 +156,8 @@ public class CartActivity extends Activity implements View.OnClickListener {
     }
 
     private void init() {
+        ll_bottom=(LinearLayout)findViewById(R.id.ll_bottom);
+        ll_repalce=(LinearLayout)findViewById(R.id.ll_repalce);
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_cart = (ListView) findViewById(R.id.lv_cart);
         tv_cal = (TextView) findViewById(R.id.tv_cal);
@@ -221,53 +230,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    /**
-     * 构造支付订单参数信息
-     *
-     * @param map 支付订单参数
-     * @return
-     */
-    public static String buildOrderParam(Map<String, String> map) {
-        List<String> keys = new ArrayList<String>(map.keySet());
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < keys.size() - 1; i++) {
-            String key = keys.get(i);
-            String value = map.get(key);
-            sb.append(buildKeyValue(key, value, true));
-            sb.append(",");
-        }
-
-        String tailKey = keys.get(keys.size() - 1);
-        String tailValue = map.get(tailKey);
-        sb.append(buildKeyValue(tailKey, tailValue, true));
-
-        return sb.toString();
-    }
-
-    /**
-     * 拼接键值对
-     *
-     * @param key
-     * @param value
-     * @param isEncode
-     * @return
-     */
-    private static String buildKeyValue(String key, String value, boolean isEncode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(key);
-        sb.append(":");
-        if (isEncode) {
-            try {
-                sb.append(URLEncoder.encode(value, "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-                sb.append(value);
-            }
-        } else {
-            sb.append(value);
-        }
-        return sb.toString();
-    }
 
     class CartAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
