@@ -36,7 +36,7 @@ public class AllStepRank {
     public static class DataEntity {
         private int stepNum;
         private int likeNum;
-        private int stepNumId;
+        private String stepNumId;
         private String image;
         private String userName;
         private boolean like;
@@ -49,7 +49,7 @@ public class AllStepRank {
             this.likeNum = likeNum;
         }
 
-        public void setStepNumId(int stepNumId) {
+        public void setStepNumId(String stepNumId) {
             this.stepNumId = stepNumId;
         }
 
@@ -73,7 +73,7 @@ public class AllStepRank {
             return likeNum;
         }
 
-        public int getStepNumId() {
+        public String getStepNumId() {
             return stepNumId;
         }
 

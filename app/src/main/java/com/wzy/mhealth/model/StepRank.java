@@ -24,7 +24,7 @@ public class StepRank {
     private int stepNum;
     private int rank;
     private int likeNum;
-    private int stepNumId;
+    private String stepNumId;
     private String userName;
     private String image;
 
@@ -40,7 +40,7 @@ public class StepRank {
         this.likeNum = likeNum;
     }
 
-    public void setStepNumId(int stepNumId) {
+    public void setStepNumId(String stepNumId) {
         this.stepNumId = stepNumId;
     }
 
@@ -64,7 +64,7 @@ public class StepRank {
         return likeNum;
     }
 
-    public int getStepNumId() {
+    public String getStepNumId() {
         return stepNumId;
     }
 
