@@ -1,16 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stepper="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:stepper="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.wzy.mhealth.fragments.ShopIntroFragment">
 
     <com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cb_shop"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="220dp"
+        android:layout_marginTop="10dp"
         app:canLoop="true" />
 
     <View
@@ -37,33 +37,51 @@
         android:text="商品名称的详细介绍是，想不明白美好神奇那就是你反抗精神的"
         android:textColor="@color/red"
         android:textSize="14sp" />
-    <TextView
-        android:id="@+id/tv_per"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="15dp"
         android:layout_marginBottom="10dp"
-        android:text="¥56.00"
-        android:textColor="@color/red"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_per"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="¥56.00"
+            android:textColor="@color/red"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_sale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="已售：4"
+            android:textColor="@color/title_green"
+            android:textSize="16sp" />
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@color/bg_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="数量"
             android:textColor="@color/dark_grey"
@@ -86,6 +104,7 @@
             stepper:stepper_rightButtonBackground="@mipmap/right_number"
             stepper:value="1" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"

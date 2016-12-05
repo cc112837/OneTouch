@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class ShopIntroFragment extends Fragment {
     private ConvenientBanner cb_shop;
     private SnappingStepper stepperCustom;
-    private TextView tv_per, tv_intro, tv_name;
+    private TextView tv_per, tv_intro, tv_name,tv_sale;
     private ArrayList<BannerItem> localImages = new ArrayList<>();
 
 
@@ -47,6 +47,7 @@ public class ShopIntroFragment extends Fragment {
                             bannerItem.setUrl(shopDetail.getProductImageBig().get(i));
                             localImages.add(bannerItem);
                         }
+                        tv_sale.setText("已售："+0);
                         tv_name.setText(shopDetail.getProductName() + "");
                         tv_intro.setText(shopDetail.getData());
                         tv_per.setText("¥" + shopDetail.getProductNewPrice());
@@ -58,9 +59,8 @@ public class ShopIntroFragment extends Fragment {
                                     }
                                 }, localImages)
                                 //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                                .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.common_msg_tips})
                                         //设置指示器的方向
-                                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+                               ;
                         break;
                     }
             }
@@ -86,6 +86,7 @@ public class ShopIntroFragment extends Fragment {
         stepperCustom = (SnappingStepper) v.findViewById(R.id.stepperCustom);
         tv_per = (TextView) v.findViewById(R.id.tv_per);
         tv_intro = (TextView) v.findViewById(R.id.tv_intro);
+        tv_sale=(TextView) v.findViewById(R.id.tv_sale);
         tv_name = (TextView) v.findViewById(R.id.tv_name);
         stepperCustom.setOnValueChangeListener(new SnappingStepperValueChangeListener() {
             @Override
