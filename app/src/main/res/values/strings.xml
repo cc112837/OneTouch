@@ -10,7 +10,7 @@
     <string name="dialog_title">提示</string>
     <string name="dialog_delete_friends">确定要删除当前好友?</string>
     <string name="dialog_group_name_message">请输入群名称</string>
-
+    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
     <string name="cancel">取消</string>
     <string name="login_str">登录</string>
     <string name="register_str">注册</string>

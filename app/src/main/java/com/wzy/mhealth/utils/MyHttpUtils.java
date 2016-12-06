@@ -50,6 +50,7 @@ import com.wzy.mhealth.model.StepResult;
 import com.wzy.mhealth.model.TaocanDetail;
 import com.wzy.mhealth.model.TaocanEntity;
 import com.wzy.mhealth.model.TaocanInfo;
+import com.wzy.mhealth.model.TestWeChat;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.model.UserEvaluation;
@@ -488,6 +489,12 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 292||what==293||what==294||what==295) {//提醒发货//确认收货//申请商品退款//删除订单
             params.addBodyParameter("orderId", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==296){//微信支付
+            params.addBodyParameter("totalPrice", ((TiUser) object).getName());
+            params.addBodyParameter("addressId", ((TiUser) object).getCardId());
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TestWeChat(), handler, what));
         }
     }
 }

@@ -17,6 +17,8 @@ import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.Constants;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.ali.PayResult;
@@ -31,9 +33,10 @@ import com.wzy.mhealth.view.PayRadioPurified;
 import java.util.Map;
 
 
-public class BuActivity extends BaActivity implements Handler.Callback{
+public class BuActivity extends BaActivity implements Handler.Callback {
     private TextView doctorname, price, price1, titleName;
     private Button buy;
+    private IWXAPI api;
     private String stringOfPrice, type, doctorid, name, id;
     private Handler mHandler = null;
     private static final int SDK_ALIPAY_FLAG = 1;
@@ -48,8 +51,7 @@ public class BuActivity extends BaActivity implements Handler.Callback{
                 user.setName(id + "");
                 MyHttpUtils.handData(mHandler, 40, url, user);
             } else {
-                Toast.makeText(BuActivity.this, "暂未开通其他支付", Toast.LENGTH_LONG).show();
-
+                // TODO: 2016/12/6 微信支付
             }
         }
     };
@@ -59,6 +61,7 @@ public class BuActivity extends BaActivity implements Handler.Callback{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bu);
+        api = WXAPIFactory.createWXAPI(this, "wxee8f5f748fbea43c");
         mHandler = new Handler(this);
         doctorid = getIntent().getStringExtra("doctor");
         id = getIntent().getStringExtra("id");
@@ -111,7 +114,6 @@ public class BuActivity extends BaActivity implements Handler.Callback{
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case SDK_WeChat_FLAG:
-
 
 
                 break;

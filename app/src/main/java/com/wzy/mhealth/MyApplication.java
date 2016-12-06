@@ -67,7 +67,6 @@ public class MyApplication extends MultiDexApplication implements
         AVUser.alwaysUseSubUserClass(LeanchatUser.class);
         AVOSCloud.initialize(this, appId, appKey);
 
-
         AVObject.registerSubclass(AddRequest.class);
         AVObject.registerSubclass(UpdateInfo.class);
         // 节省流量

@@ -6,19 +6,27 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.alipay.sdk.app.PayTask;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.ali.PayResult;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TestWeChat;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.PackageUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
 
@@ -30,6 +38,7 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
     private PayRadioGroup pay_fun;
     private PayRadioPurified bank, alipay;
     private TextView tv_price;
+    private IWXAPI api;
     private Handler mHandler = null;
     Intent intent;
     String addressId,price;
@@ -40,6 +49,7 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
         @Override
         public void onClick(View v) {
             if (flag == "bank") {
+                //支付宝支付
                 String url = Constants.SERVER_URL + "MhealthShopingPayServlet";
                 TiUser user = new TiUser();
                 user.setName(price);
@@ -47,7 +57,17 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
                 MyHttpUtils.handData(mHandler, 287, url, user);
 
             } else {
-                Toast.makeText(CartBuyActivity.this, "暂未开通其他服务，敬请期待", Toast.LENGTH_LONG).show();
+                //微信支付
+                if(PackageUtils.isWeixinAvilible(CartBuyActivity.this)){
+                    String url = Constants.SERVER_URL + "WeiXinPayServlet";
+                    TiUser user = new TiUser();
+                    user.setName(price);
+                    user.setCardId(addressId);
+                    MyHttpUtils.handData(mHandler, 296, url, user);
+                }else{
+                    ToastUtil.show(CartBuyActivity.this,"请先安装微信");
+                }
+
 
             }
         }
@@ -59,6 +79,7 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_cartbuy);
+            api = WXAPIFactory.createWXAPI(this, "wxee8f5f748fbea43c");
             mHandler = new Handler(this);
             intent = getIntent();
             price = intent.getStringExtra("price");
@@ -112,6 +133,35 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
                         Intent intent1 = new Intent(CartBuyActivity.this, ShoporderActivity.class);
                         startActivity(intent1);
                         CartBuyActivity.this.finish();
+                    }
+
+                    break;
+                case 296:
+                    TestWeChat testWeChat=(TestWeChat) msg.obj;
+                    Toast.makeText(CartBuyActivity.this, "获取订单中...", Toast.LENGTH_SHORT).show();
+                    try{
+                            Log.e("get server pay params:", testWeChat.toString());
+                            if(null != testWeChat &&"SUCCESS".equals(testWeChat.getResult_code()) ){
+                                PayReq req = new PayReq();
+                                req.appId			= testWeChat.getAppid();
+                                req.partnerId		= testWeChat.getMch_id();
+                                req.prepayId		= testWeChat.getPrepay_id();
+                                req.nonceStr		= testWeChat.getNonce_str();
+                                req.timeStamp		= testWeChat.getTimestamp();
+                                req.packageValue	= testWeChat.getPackageX();
+                                req.sign			= testWeChat.getSign();
+                                req.extData			= testWeChat.getTrade_type(); // optional
+                                Log.e("hah","正常调起支付");
+                                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                                api.sendReq(req);
+                            }else{
+                                Log.e("PAY_GET", "返回错误" + testWeChat.getReturn_code());
+                                Toast.makeText(CartBuyActivity.this, "返回错误"+testWeChat.getReturn_msg(), Toast.LENGTH_SHORT).show();
+                            }
+                    }catch(Exception e){
+                        Log.e("PAY_GET", "异常："+e.getMessage());
+                        Toast.makeText(CartBuyActivity.this, "异常："+e.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
 
                     break;

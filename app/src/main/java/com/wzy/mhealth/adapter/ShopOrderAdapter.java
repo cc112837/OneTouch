@@ -146,7 +146,7 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context, "查看物流");
+                    ToastUtil.show(context, "暂无物流信息");
                 }
             });
         } else if("已完成".equals(list.get(position).getShopStatus())){
