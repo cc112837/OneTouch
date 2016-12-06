@@ -25,11 +25,20 @@ public class ShopDetail {
      */
 
     private String status;
+    private int saledNumber;
     private double productNewPrice;
     private String data;
     private String productName;
     private String productId;
     private List<String> productImageBig;
+
+    public int getSaledNumber() {
+        return saledNumber;
+    }
+
+    public void setSaledNumber(int saledNumber) {
+        this.saledNumber = saledNumber;
+    }
 
     public void setStatus(String status) {
         this.status = status;

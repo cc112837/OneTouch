@@ -110,6 +110,7 @@ public class ShopOrderAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     viewHolder.tv_click2.setText("退款中");
+                    ToastUtil.show(context,"申请已受理，预计会在1~3个工作日内到帐");
                     String url = Constants.SERVER_URL + "MhealthOrderBackServlet";
                     TiUser user = new TiUser();
                     user.setName("" + list.get(position).getOrderId());

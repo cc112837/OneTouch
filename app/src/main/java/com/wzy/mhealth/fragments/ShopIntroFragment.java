@@ -47,7 +47,7 @@ public class ShopIntroFragment extends Fragment {
                             bannerItem.setUrl(shopDetail.getProductImageBig().get(i));
                             localImages.add(bannerItem);
                         }
-                        tv_sale.setText("已售："+0);
+                        tv_sale.setText("已售："+shopDetail.getSaledNumber());
                         tv_name.setText(shopDetail.getProductName() + "");
                         tv_intro.setText(shopDetail.getData());
                         tv_per.setText("¥" + shopDetail.getProductNewPrice());
@@ -55,7 +55,7 @@ public class ShopIntroFragment extends Fragment {
                                 new CBViewHolderCreator<LocalImageView>() {
                                     @Override
                                     public LocalImageView createHolder() {
-                                        return new LocalImageView();
+                                       return new LocalImageView();
                                     }
                                 }, localImages)
                                 //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
