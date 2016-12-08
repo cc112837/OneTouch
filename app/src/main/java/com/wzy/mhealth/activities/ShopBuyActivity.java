@@ -128,7 +128,7 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
                     intent.putExtra("price", totalprice);
                     intent.putExtra("addressId", addressid + "");
                     startActivity(intent);
-                    finish();
+                    ShopBuyActivity.this.finish();
                 } else {
                     ToastUtil.show(ShopBuyActivity.this, "请填写收货地址");
                 }

@@ -147,9 +147,9 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
                                 req.packageValue	= testWeChat.getPackageX();
                                 req.sign			= testWeChat.getSign();
                                 req.extData			= testWeChat.getTrade_type(); // optional
-                                Log.e("hah","正常调起支付");
                                 // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
                                 api.sendReq(req);
+                                CartBuyActivity.this.finish();
                             }else{
                                 Toast.makeText(CartBuyActivity.this, "返回错误"+testWeChat.getReturn_msg(), Toast.LENGTH_SHORT).show();
                             }
@@ -158,7 +158,6 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
                         Toast.makeText(CartBuyActivity.this, "异常："+e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
-
                     break;
                 case 287:
                     AliPayBack stepInfo = (AliPayBack) msg.obj;

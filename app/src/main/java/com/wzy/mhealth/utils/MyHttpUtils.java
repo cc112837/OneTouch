@@ -490,11 +490,15 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("orderId", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if(what==296){//微信支付
+        if(what==296){//微信支付商品订单
             params.addBodyParameter("totalPrice", ((TiUser) object).getName());
             params.addBodyParameter("addressId", ((TiUser) object).getCardId());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TestWeChat(), handler, what));
+        }
+        if(what==297){
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
         }
     }
 }

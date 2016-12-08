@@ -2,23 +2,46 @@ package com.wzy.mhealth.wxapi;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.ShoporderActivity;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Retuback;
+import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler,View.OnClickListener{
     private IWXAPI api;
 	private ImageView leftBtn;
+	private TextView tv_show;
+	private Handler handler=new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.what){
+				case 297:
+					Retuback retuback=(Retuback) msg.obj;
+					if("1".equals(retuback.getStatus())){
+						Intent intent=new Intent(WXPayEntryActivity.this, ShoporderActivity.class);
+						startActivity(intent);
+						finish();
+					}
+					break;
+			}
+		}
+	};
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +56,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler,V
 	private void init() {
 		leftBtn=(ImageView) findViewById(R.id.leftBtn);
 		leftBtn.setOnClickListener(this);
+		tv_show=(TextView) findViewById(R.id.tv_show);
 	}
 
 	@Override
@@ -48,14 +72,14 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler,V
 
 	@Override
 	public void onResp(BaseResp resp) {
-		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("提示");
-			builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
-			builder.show();
-		}
 		if(0==resp.errCode){
-			// TODO: 2016/12/6 验证同步信息
+			// 验证同步信息
+			String url= Constants.SERVER_URL+"MhealthWeiXinPayServlet";
+			MyHttpUtils.handData(handler,297,url,null);
+		}
+		else{
+			tv_show.setText("支付结果"+resp.errCode);
+			ToastUtil.show(WXPayEntryActivity.this,resp.errStr);
 		}
 	}
 
