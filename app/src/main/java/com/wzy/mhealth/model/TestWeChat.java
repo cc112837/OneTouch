@@ -14,16 +14,18 @@ import com.google.gson.annotations.SerializedName;
  */
 public class TestWeChat {
 
-    /**
-     * timestamp : 20161206150742
+
+
+   /**
+     * timestamp : 1481102662
      * result_code : SUCCESS
-     * sign : 70B910B3AA30F1521EDFEEE8BD5515D9
-     * mch_id : 1419840502
-     * prepay_id : wx20161206150739124bdcc6cf0740539186
+     * sign : 1316245E5CC73139FD2BB5290A8FBA06
+     * noncestr : fjLJkMoxrknZpWo5
+     * partnerid : 1419840502
+     * prepayid : wx201612071723462a17759b4e0946566969
      * return_msg : OK
      * package : Sign=WXPay
      * appid : wxee8f5f748fbea43c
-     * nonce_str : k3GwOC8oFjPZZo5G
      * return_code : SUCCESS
      * trade_type : APP
      */
@@ -31,32 +33,15 @@ public class TestWeChat {
     private String timestamp;
     private String result_code;
     private String sign;
-    private String mch_id;
-    private String prepay_id;
+    private String noncestr;
+    private String partnerid;
+    private String prepayid;
     private String return_msg;
     @SerializedName("package")
     private String packageX;
     private String appid;
-    private String nonce_str;
     private String return_code;
     private String trade_type;
-
-    @Override
-    public String toString() {
-        return "TestWeChat{" +
-                "timestamp='" + timestamp + '\'' +
-                ", result_code='" + result_code + '\'' +
-                ", sign='" + sign + '\'' +
-                ", mch_id='" + mch_id + '\'' +
-                ", prepay_id='" + prepay_id + '\'' +
-                ", return_msg='" + return_msg + '\'' +
-                ", packageX='" + packageX + '\'' +
-                ", appid='" + appid + '\'' +
-                ", nonce_str='" + nonce_str + '\'' +
-                ", return_code='" + return_code + '\'' +
-                ", trade_type='" + trade_type + '\'' +
-                '}';
-    }
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
@@ -70,12 +55,16 @@ public class TestWeChat {
         this.sign = sign;
     }
 
-    public void setMch_id(String mch_id) {
-        this.mch_id = mch_id;
+    public void setNoncestr(String noncestr) {
+        this.noncestr = noncestr;
     }
 
-    public void setPrepay_id(String prepay_id) {
-        this.prepay_id = prepay_id;
+    public void setPartnerid(String partnerid) {
+        this.partnerid = partnerid;
+    }
+
+    public void setPrepayid(String prepayid) {
+        this.prepayid = prepayid;
     }
 
     public void setReturn_msg(String return_msg) {
@@ -88,10 +77,6 @@ public class TestWeChat {
 
     public void setAppid(String appid) {
         this.appid = appid;
-    }
-
-    public void setNonce_str(String nonce_str) {
-        this.nonce_str = nonce_str;
     }
 
     public void setReturn_code(String return_code) {
@@ -114,12 +99,16 @@ public class TestWeChat {
         return sign;
     }
 
-    public String getMch_id() {
-        return mch_id;
+    public String getNoncestr() {
+        return noncestr;
     }
 
-    public String getPrepay_id() {
-        return prepay_id;
+    public String getPartnerid() {
+        return partnerid;
+    }
+
+    public String getPrepayid() {
+        return prepayid;
     }
 
     public String getReturn_msg() {
@@ -132,10 +121,6 @@ public class TestWeChat {
 
     public String getAppid() {
         return appid;
-    }
-
-    public String getNonce_str() {
-        return nonce_str;
     }
 
     public String getReturn_code() {

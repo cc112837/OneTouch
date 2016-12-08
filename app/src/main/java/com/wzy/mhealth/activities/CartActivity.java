@@ -293,7 +293,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
                             cartDetail.remove(list.get(position));
                             list.get(position).setProductNumber(value);
                             cartDetail.add(list.get(position));
-                            viewHolder.tv_price.setText("" + String.format("%.2f", list.get(position).getProductNewPrice() * value));
+                            viewHolder.tv_price.setText("" + String.format("%.2f", list.get(position).getProductNewPrice()));
                             cartAdapter.notifyDataSetChanged();
                             totalprice(cartDetail);
                             notifyDataSetChanged();
@@ -306,7 +306,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     }
                 }
             });
-            viewHolder.tv_price.setText("" + String.format("%.2f", list.get(position).getProductNewPrice() * list.get(position).getProductNumber()));
+            viewHolder.tv_price.setText("" + String.format("%.2f", list.get(position).getProductNewPrice()));
             viewHolder.cb_check.setChecked(selectedMap.get(position));
             viewHolder.cb_check.setTag(R.id.cb_check, position);
             viewHolder.cb_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

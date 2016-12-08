@@ -43,7 +43,6 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
     Intent intent;
     String addressId,price;
     private static final int SDK_ALIPAY_FLAG = 1;
-    private static final int SDK_WECHAT_FLAG = 2;
    String flag = "bank";
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -124,9 +123,6 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case SDK_WECHAT_FLAG:
-                    //其他支付
-                    break;
                 case 288:
                     StepInfo info = (StepInfo) msg.obj;
                     if (info.getStatus().equals("1")) {
@@ -140,13 +136,13 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
                     TestWeChat testWeChat=(TestWeChat) msg.obj;
                     Toast.makeText(CartBuyActivity.this, "获取订单中...", Toast.LENGTH_SHORT).show();
                     try{
-                            Log.e("get server pay params:", testWeChat.toString());
+
                             if(null != testWeChat &&"SUCCESS".equals(testWeChat.getResult_code()) ){
                                 PayReq req = new PayReq();
                                 req.appId			= testWeChat.getAppid();
-                                req.partnerId		= testWeChat.getMch_id();
-                                req.prepayId		= testWeChat.getPrepay_id();
-                                req.nonceStr		= testWeChat.getNonce_str();
+                                req.partnerId		= testWeChat.getPartnerid();
+                                req.prepayId		= testWeChat.getPrepayid();
+                                req.nonceStr		= testWeChat.getNoncestr();
                                 req.timeStamp		= testWeChat.getTimestamp();
                                 req.packageValue	= testWeChat.getPackageX();
                                 req.sign			= testWeChat.getSign();
@@ -155,7 +151,6 @@ public class CartBuyActivity extends Activity implements Handler.Callback{
                                 // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
                                 api.sendReq(req);
                             }else{
-                                Log.e("PAY_GET", "返回错误" + testWeChat.getReturn_code());
                                 Toast.makeText(CartBuyActivity.this, "返回错误"+testWeChat.getReturn_msg(), Toast.LENGTH_SHORT).show();
                             }
                     }catch(Exception e){
