@@ -158,6 +158,6 @@ public class ConversationManager {
               agent.sendText(MyApplication.getInstance().getString(R.string.message_when_agree_request));
             }
           }
-        });
+        },ConversationType.Single.getValue());
   }
 }

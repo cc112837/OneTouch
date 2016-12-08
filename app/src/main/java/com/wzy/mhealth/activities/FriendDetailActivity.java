@@ -23,6 +23,7 @@ import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.activity.AVBaseActivity;
 import com.avoscloud.leanchatlib.controller.ChatManager;
+import com.avoscloud.leanchatlib.model.ConversationType;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.Constants;
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
@@ -176,7 +177,7 @@ public class FriendDetailActivity extends AVBaseActivity implements View.OnClick
                                     finish();
                                 }
                             }
-                        });
+                        }, ConversationType.Single.getValue());
 
                 break;
             case R.id.addFriendBtn:// 添加好友

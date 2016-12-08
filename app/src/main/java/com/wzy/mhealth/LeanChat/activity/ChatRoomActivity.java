@@ -160,7 +160,7 @@ public class ChatRoomActivity extends AVBaseActivity {
 							updateConversation(arg0);
 						}
 					}
-				});
+				},ConversationType.Single.getValue());
 	}
 
 	@Override

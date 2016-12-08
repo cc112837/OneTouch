@@ -15,6 +15,7 @@ import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
+import com.avoscloud.leanchatlib.model.ConversationType;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.Constants;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -138,7 +139,7 @@ public class BuActivity extends BaActivity implements Handler.Callback {
                                         startActivity(intent);
                                     }
                                 }
-                            });
+                            }, ConversationType.Doctor.getValue());
                 }
                 break;
             case 40:

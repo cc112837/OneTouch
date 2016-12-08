@@ -191,10 +191,10 @@ public class ChatManager extends AVIMClientEventHandler {
      * @param userId
      * @param callback
      */
-    public void fetchConversationWithUserId(final String userId, final AVIMConversationCreatedCallback callback) {
+    public void fetchConversationWithUserId(final String userId, final AVIMConversationCreatedCallback callback, final int type) {
         AVIMConversationQuery query = imClient.getQuery();
         query.withMembers(Arrays.asList(userId, selfId));
-        query.whereEqualTo(ConversationType.ATTR_TYPE_KEY, ConversationType.Single.getValue());
+        query.whereEqualTo(ConversationType.ATTR_TYPE_KEY,type);
         query.orderByDescending(KEY_UPDATED_AT);
         query.limit(1);
 
@@ -208,7 +208,7 @@ public class ChatManager extends AVIMClientEventHandler {
                         callback.done(conversations.get(0), null);
                     } else {
                         Map<String, Object> attrs = new HashMap<String, Object>();
-                        attrs.put(ConversationType.TYPE_KEY, ConversationType.Single.getValue());
+                        attrs.put(ConversationType.TYPE_KEY,type );//ConversationType.Single.getValue()
                         imClient.createConversation(Arrays.asList(userId, selfId), attrs, callback);
                     }
                 }

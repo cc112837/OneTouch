@@ -61,8 +61,8 @@ public class ConversationListAdapter extends ArrayAdapter<Room> {
 
         final Room room = getItem(position);
         AVIMConversation conversation = room.getConversation();
-        if ( null!=room.getLastMessage()) {
-            if (new Date().getTime() - room.getConversation().getCreatedAt().getTime() > 24 * 60 * 60 * 1000) {
+        if ( null!=room.getLastMessage()&&(ConversationType.Doctor.getValue()==conversation.getAttribute(ConversationType.ATTR_TYPE_KEY))) {
+            if (new Date().getTime() - room.getConversation().getLastMessageAt().getTime() > 1 * 60 * 60 * 1000) {
                 ChatManager.getInstance().getRoomsTable()
                         .deleteRoom(room.getConversationId());
             }

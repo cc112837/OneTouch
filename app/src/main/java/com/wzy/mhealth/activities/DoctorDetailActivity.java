@@ -16,6 +16,7 @@ import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
+import com.avoscloud.leanchatlib.model.ConversationType;
 import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
@@ -149,7 +150,7 @@ public class DoctorDetailActivity extends BaActivity {
                                                     startActivity(intent);
                                                 }
                                             }
-                                        });
+                                        }, ConversationType.Doctor.getValue());
                             } else {
                                 Intent intent = new Intent();
                                 intent.setClass(DoctorDetailActivity.this, BuActivity.class);

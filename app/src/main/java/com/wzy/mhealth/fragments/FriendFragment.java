@@ -34,6 +34,7 @@ import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
+import com.avoscloud.leanchatlib.model.ConversationType;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.Constants;
 import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
@@ -323,13 +324,12 @@ public class FriendFragment extends D3Fragment {
                         } else {
                             Intent intent = new Intent(getActivity(),
                                     ChatRoomActivity.class);
-
                             intent.putExtra(Constants.CONVERSATION_ID,
                                     conversation.getConversationId());
                             startActivity(intent);
                         }
                     }
-                });
+                }, ConversationType.Single.getValue());
 
     }
 
