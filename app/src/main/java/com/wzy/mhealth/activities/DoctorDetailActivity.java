@@ -89,7 +89,7 @@ public class DoctorDetailActivity extends BaActivity {
                     }
                     dianhuatu = (ImageView) findViewById(R.id.dianhuatu);
                     if (doctorDetail.getPricePhone() >= 0) {
-                        dianhuafeiyong.setText(doctorDetail.getPricePicture() + "元/分钟");
+                        dianhuafeiyong.setText(doctorDetail.getPricePicture() + "元/次");
                         dianhuatu.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -103,7 +103,7 @@ public class DoctorDetailActivity extends BaActivity {
                     }
                     jiahaotu = (ImageView) findViewById(R.id.jiahaotu);
                     if (doctorDetail.getPriceVideo() >= 0) {
-                        jiahaofeiyong.setText("" + doctorDetail.getPriceVideo());
+                        jiahaofeiyong.setText(doctorDetail.getPriceVideo()+"元/次");
                         jiahaotu.setImageResource(R.mipmap.video_doctor);
                     } else {
                         jiahaofeiyong.setText("未开通");
@@ -111,7 +111,7 @@ public class DoctorDetailActivity extends BaActivity {
                     }
                     privatetu = (ImageView) findViewById(R.id.privatetu);
                     if (doctorDetail.getPricePrivate() >= 0) {
-                        privatefeiyong.setText("" + doctorDetail.getPricePrivate());
+                        privatefeiyong.setText( doctorDetail.getPricePrivate()+"元/次");
                         privatetu.setImageResource(R.mipmap.person_doctor);
                     } else {
                         privatefeiyong.setText("未开通");

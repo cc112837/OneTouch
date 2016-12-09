@@ -2,6 +2,7 @@ package com.wzy.mhealth.LeanChat.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +62,9 @@ public class ConversationListAdapter extends ArrayAdapter<Room> {
 
         final Room room = getItem(position);
         AVIMConversation conversation = room.getConversation();
+        Log.e("时间",Integer.parseInt(conversation.getAttribute(ConversationType.TYPE_KEY).toString())+"&&&"+ConversationType.Doctor.getValue());
         if (ConversationType.Doctor.getValue()==Integer.parseInt(conversation.getAttribute(ConversationType.TYPE_KEY).toString())) {
-            if (null!=room.getLastMessage()&&(new Date().getTime() - room.getConversation().getLastMessageAt().getTime() > 1 * 60 * 60 * 1000)) {
+            if (null!=room.getLastMessage()&&(new Date().getTime() - room.getLastMessage().getTimestamp() > 60  * 60 * 1000)) {
                 ChatManager.getInstance().getRoomsTable()
                         .deleteRoom(room.getConversationId());
             }
@@ -72,7 +74,7 @@ public class ConversationListAdapter extends ArrayAdapter<Room> {
 
             vh.recentNameView.setText(ConversationHelper
                     .nameOfConversation(conversation));
-            if (ConversationHelper.typeOfConversation(conversation) == ConversationType.Single) {
+            if (ConversationHelper.typeOfConversation(conversation) == ConversationType.Single||ConversationHelper.typeOfConversation(conversation) == ConversationType.Doctor) {
                 LeanchatUser user = (LeanchatUser) CacheService
                         .lookupUser(ConversationHelper.otherIdOfConversation(conversation));
                 if (null != user) {

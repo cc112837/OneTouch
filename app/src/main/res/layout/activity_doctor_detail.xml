@@ -32,7 +32,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:fillViewport="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -550,12 +551,14 @@
                         android:id="@+id/youbianzi"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/youbian"
+                        android:layout_gravity="center_vertical|right"
                         android:gravity="center_vertical"
                         android:text="全部评价"
-                        android:textColor="#c0c0c0"
-                        android:textSize="14sp" />
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/youbian"
+                        android:layout_toStartOf="@+id/youbian" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -655,129 +658,6 @@
                         android:textColor="#000000"
                         android:textSize="15sp" />
 
-                </LinearLayout>
-            </LinearLayout>
-            <!-- 用户评价和心意墙分割 -->
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#f0f0f0" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <RelativeLayout
-                    android:id="@+id/xinyiqiang"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center_vertical"
-                        android:text="心意墙（37）"
-                        android:textColor="#222222"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:id="@+id/youbian22"
-                        android:layout_width="20dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:background="@mipmap/right"
-                        android:scaleType="fitXY" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:layout_toLeftOf="@id/youbian22"
-                        android:gravity="center_vertical"
-                        android:text="查看全部"
-                        android:textColor="#c0c0c0"
-                        android:textSize="14sp" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#f0f0f0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal" >
-
-                    <!-- <ImageView /> -->
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/xinyiyonghu1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="微信登陆用户"
-                            android:textColor="#666666"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:id="@+id/xinyiyonghu1liuyan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:text="该用户没有留言"
-                            android:textColor="#666666"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#f0f0f0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:orientation="horizontal" >
-
-                    <!-- <ImageView /> -->
-
-                    <LinearLayout
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/xinyiyonghu2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="159*********9"
-                            android:textColor="#666666"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:id="@+id/xinyiyonghu2liuyan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:text="谢谢您的指导"
-                            android:textColor="#000000"
-                            android:textSize="13sp" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

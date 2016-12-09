@@ -18,7 +18,8 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.ShoporderActivity;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.Retuback;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.ToastUtil;
 
@@ -32,7 +33,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler,V
 			super.handleMessage(msg);
 			switch (msg.what){
 				case 297:
-					Retuback retuback=(Retuback) msg.obj;
+					StepInfo retuback=(StepInfo) msg.obj;
 					if("1".equals(retuback.getStatus())){
 						Intent intent=new Intent(WXPayEntryActivity.this, ShoporderActivity.class);
 						startActivity(intent);
@@ -74,8 +75,10 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler,V
 	public void onResp(BaseResp resp) {
 		if(0==resp.errCode){
 			// 验证同步信息
-			String url= Constants.SERVER_URL+"MhealthWeiXinPayServlet";
-			MyHttpUtils.handData(handler,297,url,null);
+			String url= Constants.SERVER_URL+"MhealthShopPayServlet";
+			TiUser user=new TiUser();
+			user.setName("");
+			MyHttpUtils.handData(handler,288,url,user);
 		}
 		else{
 			tv_show.setText("支付结果"+resp.errCode);

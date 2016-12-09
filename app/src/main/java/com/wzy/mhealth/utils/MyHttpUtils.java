@@ -462,11 +462,11 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("totalPrice", ((TiUser) object).getName());
             params.addBodyParameter("addressId", ((TiUser) object).getCardId());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("type",((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AliPayBack(), handler, what));
         }
-        if (what == 288) {//同步参数返回
+        if (what == 288) {//同步参数返回(支付宝。微信)
             params.addBodyParameter("result", ((TiUser) object).getName());
-            params.addBodyParameter("addressId", ((TiUser) object).getCardId());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
@@ -494,11 +494,8 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("totalPrice", ((TiUser) object).getName());
             params.addBodyParameter("addressId", ((TiUser) object).getCardId());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("type",((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TestWeChat(), handler, what));
-        }
-        if(what==297){
-            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Retuback(), handler, what));
         }
     }
 }
