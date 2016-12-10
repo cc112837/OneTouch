@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,8 +17,8 @@ import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
 import com.avoscloud.leanchatlib.model.ConversationType;
-import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.Constants;
+import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
@@ -25,8 +26,11 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.ali.PayResult;
 import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TestWeChat;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.PackageUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 import com.wzy.mhealth.utils.Tool;
 import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
@@ -41,18 +45,29 @@ public class BuActivity extends BaActivity implements Handler.Callback {
     private String stringOfPrice, type, doctorid, name, id;
     private Handler mHandler = null;
     private static final int SDK_ALIPAY_FLAG = 1;
-    private static final int SDK_WeChat_FLAG = 2;
     String flag = "bank";
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (flag == "bank") {
-                String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "AliPayceishiServlet";
+                String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "AliPayServlet";
                 TiUser user = new TiUser();
                 user.setName(id + "");
+                user.setCardId("1");
+                user.setPass("2");
                 MyHttpUtils.handData(mHandler, 40, url, user);
             } else {
-                // TODO: 2016/12/6 微信支付
+                //微信支付
+                if (PackageUtils.isWeixinAvilible(BuActivity.this)) {
+                    String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "AliPayceishiServlet";
+                    TiUser user = new TiUser();
+                    user.setName(id);
+                    user.setCardId("1");
+                    user.setPass("2");
+                    MyHttpUtils.handData(mHandler, 297, url, user);
+                } else {
+                    ToastUtil.show(BuActivity.this, "请先安装微信");
+                }
             }
         }
     };
@@ -114,10 +129,7 @@ public class BuActivity extends BaActivity implements Handler.Callback {
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-            case SDK_WeChat_FLAG:
 
-
-                break;
             case 120:
                 StepInfo info = (StepInfo) msg.obj;
                 if (info.getStatus().equals("1")) {
@@ -159,6 +171,33 @@ public class BuActivity extends BaActivity implements Handler.Callback {
                 Thread payThread = new Thread(payRunnable);
                 payThread.start();
                 break;
+            case 297:
+                TestWeChat testWeChat = (TestWeChat) msg.obj;
+                Toast.makeText(BuActivity.this, "获取订单中...", Toast.LENGTH_SHORT).show();
+                try {
+
+                    if (null != testWeChat && "SUCCESS".equals(testWeChat.getResult_code())) {
+                        PayReq req = new PayReq();
+                        req.appId = testWeChat.getAppid();
+                        req.partnerId = testWeChat.getPartnerid();
+                        req.prepayId = testWeChat.getPrepayid();
+                        req.nonceStr = testWeChat.getNoncestr();
+                        req.timeStamp = testWeChat.getTimestamp();
+                        req.packageValue = testWeChat.getPackageX();
+                        req.sign = testWeChat.getSign();
+                        req.extData = testWeChat.getTrade_type(); // optional
+                        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                        api.sendReq(req);
+                        BuActivity.this.finish();
+                    } else {
+                        Toast.makeText(BuActivity.this, "返回错误" + testWeChat.getReturn_msg(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.e("PAY_GET", "异常：" + e.getMessage());
+                    Toast.makeText(BuActivity.this, "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+                break;
             case SDK_ALIPAY_FLAG:
                 PayResult payResult = new PayResult((Map<String, String>) msg.obj);
                 String resultInfo = payResult.getResult();// 同步返回需要验证的信息
@@ -166,11 +205,10 @@ public class BuActivity extends BaActivity implements Handler.Callback {
                 // 判断resultStatus 为9000则代表支付成功
                 if (TextUtils.equals(resultStatus, "9000")) {
                     // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                    String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "PayDoctorServlet";
+                    String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "PayServlet";
                     TiUser user = new TiUser();
                     user.setName(resultInfo);
                     user.setTel(id + "");
-                    user.setCardId(LeanchatUser.getCurrentUser().getUsername());
                     MyHttpUtils.handData(mHandler, 120, url, user);
                     Toast.makeText(BuActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 } else {

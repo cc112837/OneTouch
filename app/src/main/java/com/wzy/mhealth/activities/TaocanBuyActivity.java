@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,16 +15,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
-import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.bigkoo.snappingstepper.SnappingStepper;
 import com.bigkoo.snappingstepper.listener.SnappingStepperValueChangeListener;
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.ali.PayResult;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.AliPayBack;
 import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TestWeChat;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.PackageUtils;
+import com.wzy.mhealth.utils.ToastUtil;
 import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
 
@@ -33,6 +39,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
     private ImageView leftBtn;
     private SnappingStepper stepperCustom;
     private Button btn_pay;
+    private IWXAPI api;
     private LinearLayout ll_youhui;
     private PayRadioGroup pay_fun;
     private PayRadioPurified bank, alipay;
@@ -42,7 +49,6 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
     int number=1;
     Intent intent;
     private static final int SDK_ALIPAY_FLAG = 1;
-    private static final int SDK_WeChat_FLAG = 2;
    String flag = "bank";
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -52,12 +58,21 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
                 TiUser user=new TiUser();
                 user.setName(id);
                 user.setCardId(number+"");
+                user.setPass("1");
                 MyHttpUtils.handData(mHandler, 40, url, user);
 
             } else {
-                Toast.makeText(TaocanBuyActivity.this,"暂未开通其他支付，敬请期待",Toast.LENGTH_LONG).show();
-
-
+                //微信支付
+                if (PackageUtils.isWeixinAvilible(TaocanBuyActivity.this)) {
+                    String url = com.wzy.mhealth.constant.Constants.SERVER_URL + "AliPayceishiServlet";
+                    TiUser user = new TiUser();
+                    user.setName(id);
+                    user.setCardId(number+"");
+                    user.setPass("1");
+                    MyHttpUtils.handData(mHandler, 297, url, user);
+                } else {
+                    ToastUtil.show(TaocanBuyActivity.this, "请先安装微信");
+                }
             }
         }
     };
@@ -67,6 +82,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taocan_buy);
+        api = WXAPIFactory.createWXAPI(this, "wxee8f5f748fbea43c");
         mHandler = new Handler(this);
         intent = getIntent();
         name = intent.getStringExtra("name");
@@ -141,9 +157,6 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-            case SDK_WeChat_FLAG:
-
-                break;
             case 120:
                 StepInfo info= (StepInfo)msg.obj;
                 if(info.getStatus().equals("1")){
@@ -170,6 +183,33 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
                 Thread payThread = new Thread(payRunnable);
                 payThread.start();
                 break;
+            case 297:
+                TestWeChat testWeChat = (TestWeChat) msg.obj;
+                Toast.makeText(TaocanBuyActivity.this, "获取订单中...", Toast.LENGTH_SHORT).show();
+                try {
+
+                    if (null != testWeChat && "SUCCESS".equals(testWeChat.getResult_code())) {
+                        PayReq req = new PayReq();
+                        req.appId = testWeChat.getAppid();
+                        req.partnerId = testWeChat.getPartnerid();
+                        req.prepayId = testWeChat.getPrepayid();
+                        req.nonceStr = testWeChat.getNoncestr();
+                        req.timeStamp = testWeChat.getTimestamp();
+                        req.packageValue = testWeChat.getPackageX();
+                        req.sign = testWeChat.getSign();
+                        req.extData = testWeChat.getTrade_type(); // optional
+                        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                        api.sendReq(req);
+                        TaocanBuyActivity.this.finish();
+                    } else {
+                        Toast.makeText(TaocanBuyActivity.this, "返回错误" + testWeChat.getReturn_msg(), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.e("PAY_GET", "异常：" + e.getMessage());
+                    Toast.makeText(TaocanBuyActivity.this, "异常：" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+                break;
             case SDK_ALIPAY_FLAG:
                 PayResult payResult = new PayResult((Map<String, String>) msg.obj);
                 String resultInfo = payResult.getResult();// 同步返回需要验证的信息
@@ -181,7 +221,6 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
                     TiUser user=new TiUser();
                     user.setName(resultInfo);
                     user.setTel(id+"");
-                    user.setCardId(LeanchatUser.getCurrentUser().getUsername());
                     MyHttpUtils.handData(mHandler,120,url,user);
                     Toast.makeText(TaocanBuyActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 } else {

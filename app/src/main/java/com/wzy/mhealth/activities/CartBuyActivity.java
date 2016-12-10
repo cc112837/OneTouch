@@ -47,18 +47,21 @@ public class CartBuyActivity extends Activity implements Handler.Callback {
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String url = Constants.SERVER_URL + "MhealthShopingPayServlet";
-            TiUser user = new TiUser();
-            user.setName(price);
-            user.setCardId(addressId);
+
             if (flag == "bank") {
                 //支付宝支付
-                user.setPass("1");
+                String url = Constants.SERVER_URL + "MhealthShopingPayServlet";
+                TiUser user = new TiUser();
+                user.setName(price);
+                user.setCardId(addressId);
                 MyHttpUtils.handData(mHandler, 287, url, user);
             } else {
                 //微信支付
                 if (PackageUtils.isWeixinAvilible(CartBuyActivity.this)) {
-                    user.setPass("2");
+                    String url = Constants.SERVER_URL + "WeiXinPayServlet";
+                    TiUser user = new TiUser();
+                    user.setName(price);
+                    user.setCardId(addressId);
                     MyHttpUtils.handData(mHandler, 296, url, user);
                 } else {
                     ToastUtil.show(CartBuyActivity.this, "请先安装微信");

@@ -16,7 +16,6 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.activities.ShoporderActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
@@ -32,12 +31,10 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler,V
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch (msg.what){
-				case 297:
+				case 288:
 					StepInfo retuback=(StepInfo) msg.obj;
 					if("1".equals(retuback.getStatus())){
-						Intent intent=new Intent(WXPayEntryActivity.this, ShoporderActivity.class);
-						startActivity(intent);
-						finish();
+						WXPayEntryActivity.this.finish();
 					}
 					break;
 			}
