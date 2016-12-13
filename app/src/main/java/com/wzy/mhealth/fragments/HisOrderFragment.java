@@ -54,6 +54,7 @@ public class HisOrderFragment extends Fragment {
                                 intent.putExtra("status", list.get(position).getStatus() + "");
                                 intent.putExtra("orderid", list.get(position).getOrderId() + "");
                                 intent.putExtra("image", list.get(position).getImage() + "");
+                                intent.putExtra("type",list.get(position).getShopType()+"");
                                 startActivity(intent);
                             }
                         });

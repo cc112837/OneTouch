@@ -44,10 +44,8 @@ public class OrderRouteActivity extends Activity implements View.OnClickListener
                 Toast.makeText(OrderRouteActivity.this, "复制成功!", Toast.LENGTH_LONG).show();
                 break;
             case R.id.tv_confuse:
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse("https://m.kuaidi100.com");
-                intent.setData(content_url);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://m.kuaidi100.com"));
                 startActivity(intent);
                 break;
             case R.id.leftBtn:

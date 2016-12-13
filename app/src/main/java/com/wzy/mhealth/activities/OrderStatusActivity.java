@@ -33,6 +33,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
     private LinearLayout ll_ordercom;
     String id, name, price, bought, status, creat, num, account, orderid,image;
     Intent intent;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
         num = intent.getStringExtra("num");//订单编号
         orderid = intent.getStringExtra("orderid");
         image=intent.getStringExtra("image");
+        type = intent.getStringExtra("type");
         init();
     }
 
@@ -196,9 +198,18 @@ public class OrderStatusActivity extends Activity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_taocandetail:
-                Intent intent = new Intent(OrderStatusActivity.this, TaocanDetailAcitivty.class);
-                intent.putExtra("id", id + "");
-                startActivity(intent);
+                if("1".equals(type)){
+                    Intent intent = new Intent(OrderStatusActivity.this, TaocanDetailAcitivty.class);
+                    intent.putExtra("id", id + "");
+                    startActivity(intent);
+                }
+                else if("3".equals(type)){
+                    Intent intent = new Intent(OrderStatusActivity.this, PrivaDoctorActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    iv_taocandetail.setVisibility(View.GONE);
+                }
                 break;
             case R.id.leftBtn:
                 finish();

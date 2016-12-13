@@ -74,9 +74,9 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_shopbuy = (ListView) findViewById(R.id.lv_shopbuy);
         shopBuyAdapter = new ShopBuyAdapter(this, shop);
-        lv_shopbuy.setAdapter(shopBuyAdapter);
         headview = LayoutInflater.from(ShopBuyActivity.this).inflate(R.layout.shoporder_header, null);
         lv_shopbuy.addHeaderView(headview);
+        lv_shopbuy.setAdapter(shopBuyAdapter);
         tv_name = (TextView) headview.findViewById(R.id.tv_name);
         tv_tel = (TextView) headview.findViewById(R.id.tv_tel);
         tv_address = (TextView) headview.findViewById(R.id.tv_address);

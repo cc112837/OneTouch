@@ -128,6 +128,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                                 intent.setClass(getActivity(), NoContentActivity.class);
                             } else {
                                 intent.setClass(getActivity(), DoctorDetailActivity.class);
+                                intent.putExtra("id", doctor.getData().get(position).getDoctorId() + "");
                                 intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
                             }
                             startActivity(intent);

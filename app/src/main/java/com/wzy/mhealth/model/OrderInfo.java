@@ -16,17 +16,17 @@ public class OrderInfo {
 
 
     /**
-     * createTime : 2016-09-18 13:41:27
-     * shopNumber : null
+     * createTime : 2016-12-09 11:03:01
+     * shopType : 2
      * payMoney : 0.01
-     * status : 1
-     * tradeTime : 2016-09-18 13:41:23
-     * shopName : ceishi
-     * shopId : 6
-     * OrderId : 4
-     * userName : 18369956786
-     * image : 1475220119774.png
-     * shopOrder : 0918134113-1250
+     * status : 2
+     * tradeTime : 2016-12-09 11:03:04
+     * shopName : 吴聪聪
+     * shopId : 19
+     * userName : fff
+     * image : http://117.34.105.29:8818/mhealth/upload/2.jpg
+     * shopOrder : 120911025321459
+     * orderId : 31
      */
 
     private List<DataEntity> data;
@@ -41,20 +41,24 @@ public class OrderInfo {
 
     public static class DataEntity {
         private String createTime;
+        private int shopType;
         private double payMoney;
         private int status;
         private String tradeTime;
         private String shopName;
         private int shopId;
-        private int orderId;
         private String userName;
         private String image;
         private String shopOrder;
+        private int orderId;
 
         public void setCreateTime(String createTime) {
             this.createTime = createTime;
         }
 
+        public void setShopType(int shopType) {
+            this.shopType = shopType;
+        }
 
         public void setPayMoney(double payMoney) {
             this.payMoney = payMoney;
@@ -76,10 +80,6 @@ public class OrderInfo {
             this.shopId = shopId;
         }
 
-        public void setOrderId(int orderId) {
-            this.orderId = orderId;
-        }
-
         public void setUserName(String userName) {
             this.userName = userName;
         }
@@ -92,10 +92,17 @@ public class OrderInfo {
             this.shopOrder = shopOrder;
         }
 
+        public void setOrderId(int orderId) {
+            this.orderId = orderId;
+        }
+
         public String getCreateTime() {
             return createTime;
         }
 
+        public int getShopType() {
+            return shopType;
+        }
 
         public double getPayMoney() {
             return payMoney;
@@ -117,10 +124,6 @@ public class OrderInfo {
             return shopId;
         }
 
-        public int getOrderId() {
-            return orderId;
-        }
-
         public String getUserName() {
             return userName;
         }
@@ -131,6 +134,10 @@ public class OrderInfo {
 
         public String getShopOrder() {
             return shopOrder;
+        }
+
+        public int getOrderId() {
+            return orderId;
         }
     }
 }
