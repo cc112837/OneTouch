@@ -180,12 +180,12 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         String homeurl = Constants.SERVER_URL + "TaoCanManyServlet";
         MyHttpUtils.handData(handler, 173, homeurl, null);
         taocanHomeAdapter = new TaocanHomeAdapter(getContext(), taocanEntitylist);
+        lv_show.addHeaderView(headview);
         lv_show.setAdapter(taocanHomeAdapter);
         title1 = (RelativeLayout) view.findViewById(R.id.title1);
         countView = (TextView) view.findViewById(R.id.countView);
         Button chat_btn = (Button) view.findViewById(R.id.chat_btn);
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
-        lv_show.addHeaderView(headview);
         String ur = Constants.SERVER_URL + "MhealthDoctorOrderServlet";
         TiUser user = new TiUser();
         user.setName("");
