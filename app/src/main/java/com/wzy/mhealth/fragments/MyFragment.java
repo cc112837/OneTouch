@@ -22,7 +22,8 @@ import android.widget.TextView;
 
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -47,9 +48,6 @@ import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.CacheUtils;
 import com.wzy.mhealth.utils.MyAndroidUtil;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -148,23 +146,17 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
         username = (TextView) view.findViewById(R.id.username);
         username.setText(Constants.USER_NAME);
         headImage = (ImageView) view.findViewById(R.id.headView);
-        LeanchatUser curUser = AVUser.getCurrentUser(LeanchatUser.class);
-
-        String avatarUrl = curUser.getAvatarUrl();
-        if (avatarUrl == null) {
-            try {
-                JSONObject object = new JSONObject(curUser.toString());
-                JSONObject serverData = object.getJSONObject("serverData");
-                JSONObject avatar = serverData.getJSONObject("avatar");
-                avatarUrl = avatar.getString("url");
-            } catch (JSONException e) {
-                e.printStackTrace();
+        LeanchatUser.getCurrentUser().fetchInBackground(new GetCallback<AVObject>() {
+            @Override
+            public void done(AVObject avObject, AVException e) {
+                LeanchatUser user = (LeanchatUser) avObject;
+                String  avatarUrl = user.getAvatarUrl();
+                MyAndroidUtil.editXmlByString(
+                        Constants.icon, avatarUrl);
+                ImageLoader.getInstance().displayImage(avatarUrl, headImage,
+                        com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOption);
             }
-        }
-        MyAndroidUtil.editXmlByString(
-                Constants.icon, avatarUrl);
-        ImageLoader.getInstance().displayImage(avatarUrl, headImage,
-                com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOption);
+        });
         manager.setOnClickListener(this);
         headImage.setOnClickListener(this);
         setting.setOnClickListener(this);

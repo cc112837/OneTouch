@@ -35,7 +35,7 @@ public class DiseaseActivity extends BaActivity {
                 R.layout.list_item_text, dess);
         office.setAdapter(adapter);
         lv_display = (ListView) findViewById(R.id.lv_display);
-        final NewsAids newsAids = new Gson().fromJson(ReadUtil.readFromRaw(getApplicationContext()), NewsAids.class);
+        final NewsAids newsAids = new Gson().fromJson(ReadUtil.readFromRaw(getApplicationContext(),R.raw.aid), NewsAids.class);
         String arr[] = new String[newsAids.getHead().size()];
         for (int i = 0; i < newsAids.getHead().size(); i++) {
             arr[i] = newsAids.getHead().get(i).getTitle();

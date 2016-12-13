@@ -2,8 +2,6 @@ package com.wzy.mhealth.utils;
 
 import android.content.Context;
 
-import com.wzy.mhealth.R;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,10 +13,10 @@ public class ReadUtil {
     /**
      * 从raw中读取txt
      */
-    public  static String readFromRaw(Context context) {
+    public  static String readFromRaw(Context context,int content) {
         String text = null;
         try {
-            InputStream is = context.getResources().openRawResource(R.raw.aid);
+            InputStream is = context.getResources().openRawResource(content);
             text = readTextFromSDcard(is);
             return text;
 

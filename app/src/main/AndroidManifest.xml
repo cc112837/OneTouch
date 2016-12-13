@@ -64,7 +64,6 @@
             android:value="6bee2cdc2ac673629c875baf2869a6ef" />
 
         <activity android:name=".ali.H5PayDemoActivity" />
-
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -107,7 +106,7 @@
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
         <activity
             android:name=".LeanChat.activity.ChatRoomActivity"
             android:screenOrientation="portrait"
@@ -165,12 +164,12 @@
                 <action android:name="com.avoscloud.chat.INVITATION_ACTION" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name=".AppRegister">
+        <receiver android:name=".AppRegister">
             <intent-filter>
                 <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
             </intent-filter>
         </receiver>
+
         <service android:name="com.avos.avoscloud.PushService" />
 
         <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
@@ -302,7 +301,8 @@
         <activity android:name=".activities.ShopBuyActivity" />
         <activity android:name=".activities.DecreseActivity" />
         <activity android:name=".activities.TicketActivity" />
-        <activity android:name=".activities.ShopCommentActivity"></activity>
+        <activity android:name=".activities.ShopCommentActivity" />
+        <activity android:name=".activities.OrderRouteActivity"></activity>
     </application>
 
 </manifest>

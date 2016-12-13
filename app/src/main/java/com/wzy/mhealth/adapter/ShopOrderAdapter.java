@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.activities.OrderRouteActivity;
 import com.wzy.mhealth.activities.ShopCommentActivity;
 import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.constant.Constants;
@@ -43,11 +44,11 @@ public class ShopOrderAdapter extends BaseAdapter {
     private List<ShopOrder.DataEntity> list;
     private Handler handler;
 
-    public ShopOrderAdapter(Context context, List<ShopOrder.DataEntity> list,Handler handler) {
+    public ShopOrderAdapter(Context context, List<ShopOrder.DataEntity> list, Handler handler) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
         this.context = context;
-        this.handler=handler;
+        this.handler = handler;
     }
 
     @Override
@@ -110,7 +111,7 @@ public class ShopOrderAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     viewHolder.tv_click2.setText("退款中");
-                    ToastUtil.show(context,"申请已受理，预计会在1~3个工作日内到帐");
+                    ToastUtil.show(context, "申请已受理，预计会在1~3个工作日内到帐");
                     String url = Constants.SERVER_URL + "MhealthOrderBackServlet";
                     TiUser user = new TiUser();
                     user.setName("" + list.get(position).getOrderId());
@@ -146,10 +147,11 @@ public class ShopOrderAdapter extends BaseAdapter {
             viewHolder.tv_click1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtil.show(context, "暂无物流信息");
+                    Intent intent = new Intent(context, OrderRouteActivity.class);
+                    context.startActivity(intent);
                 }
             });
-        } else if("已完成".equals(list.get(position).getShopStatus())){
+        } else if ("已完成".equals(list.get(position).getShopStatus())) {
             viewHolder.iv_delete.setVisibility(View.VISIBLE);
             viewHolder.iv_car.setVisibility(View.VISIBLE);
             viewHolder.tv_click1.setVisibility(View.VISIBLE);
@@ -185,8 +187,7 @@ public class ShopOrderAdapter extends BaseAdapter {
                 }
             });
 
-        }
-        else{
+        } else {
             viewHolder.iv_delete.setVisibility(View.VISIBLE);
             viewHolder.iv_car.setVisibility(View.GONE);
             viewHolder.tv_click1.setVisibility(View.GONE);
@@ -211,7 +212,7 @@ public class ShopOrderAdapter extends BaseAdapter {
                         String uri = Constants.SERVER_URL + "MhealthOrderDeleteServlet";
                         TiUser user = new TiUser();
                         user.setName(list.get(position).getOrderId() + "");
-                        MyHttpUtils.handData(handler,295, uri, user);
+                        MyHttpUtils.handData(handler, 295, uri, user);
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override

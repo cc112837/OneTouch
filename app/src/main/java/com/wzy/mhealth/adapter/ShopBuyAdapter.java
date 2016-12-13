@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.DecreseActivity;
-import com.wzy.mhealth.activities.TicketActivity;
 import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.utils.MyUtils;
 
@@ -79,9 +78,10 @@ public class ShopBuyAdapter extends BaseAdapter {
         viewHolder.ll_only.setVisibility(View.VISIBLE);
         viewHolder.ll_tiket.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {//发票信息
-                Intent intent = new Intent(context, TicketActivity.class);
-                context.startActivity(intent);
+            public void onClick(View v) {
+                // TODO: 2016/12/12 发票信息
+//                Intent intent = new Intent(context, TicketActivity.class);
+//                context.startActivity(intent);
             }
         });
         viewHolder.ll_decrease.setOnClickListener(new View.OnClickListener() {
