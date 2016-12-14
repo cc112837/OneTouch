@@ -91,10 +91,10 @@ public class RankActivity extends Activity {
         lv_show = (ListView) findViewById(R.id.lv_show);
         String uri = Constants.SERVER_URL + "StepNumRankServlet";
         rankAdapter = new RankAdapter(RankActivity.this, list, handler);
+		 View headview = LayoutInflater.from(RankActivity.this).inflate(R.layout.list_rank_header, null);
+        lv_show.addHeaderView(headview);
         lv_show.setAdapter(rankAdapter);
         MyHttpUtils.handData(handler, 124, uri, user);
-        View headview = LayoutInflater.from(RankActivity.this).inflate(R.layout.list_rank_header, null);
-        lv_show.addHeaderView(headview);
         ll_see = (LinearLayout) headview.findViewById(R.id.ll_see);
         tv_who = (TextView) headview.findViewById(R.id.tv_who);
         iv_mytank = (ImageView) headview.findViewById(R.id.iv_mytank);
