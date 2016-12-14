@@ -98,7 +98,7 @@ public class UpdaAddressActivity extends Activity implements View.OnClickListene
         String s = ReadUtil.readFromRaw(getApplicationContext(), R.raw.provice);
         parseJson(s);
         pvOptions.setPicker(provinceBeanList, cityList, districtList, true);
-        pvOptions.setCyclic(false, true, true);
+        pvOptions.setCyclic(false, false, false);
         pvOptions.setSelectOptions(0, 0, 0);
         pvOptions.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
             @Override
