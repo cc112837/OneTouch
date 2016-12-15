@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="1.可以用于兑换医生咨询时间\n2.使用积分在商城中兑换部分商品（暂未开放）\n  ●多种实物商品\n  ●兑换优惠劵\n  ●其他积分活动"
+            android:text="1.可以用于兑换医生咨询时间（暂未开放）\n2.使用积分在商城中兑换部分商品（暂未开放）\n  ●多种实物商品\n  ●兑换优惠劵\n  ●其他积分活动"
             android:textColor="@color/grey"
             android:textSize="12sp" />
     </LinearLayout>

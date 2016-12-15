@@ -31,9 +31,9 @@ public class TaocanDetailAcitivty extends Activity {
             switch (msg.what) {
                 case 116:
                     final TaocanDetail taocanDetail = (TaocanDetail) msg.obj;
-                    tv_old.setText(taocanDetail.getOldPrice() + "元");
+                    tv_old.setText("原价：¥" +taocanDetail.getOldPrice() + "元");
                     titleView.setText(taocanDetail.getName() + "");
-                    tv_new.setText(taocanDetail.getNewPrice() + "元");
+                    tv_new.setText("¥" +taocanDetail.getNewPrice() + "元");
                     tv_buy.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
