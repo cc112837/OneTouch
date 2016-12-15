@@ -300,37 +300,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher, Platform
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIBO, plat
                                         .getUserId());
-                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
-                            @Override
-                            public void done(AVUser user, AVException e) {
-                                if (e == null) {
-                                    //恭喜你，已经和我们的 AVUser 绑定成功
-
-                                    MyAndroidUtil.editXmlByString(
-                                            Constants.LOGIN_ACCOUNT, nickname);
-                                    user.setUsername(nickname);
-                                    user.put("property", "user");
-                                    AVFile avFile = new AVFile(nickname, icon, null);
-                                    user.put("avatar", avFile);
-                                    user.signUpInBackground(new SignUpCallback() {
-                                        @Override
-                                        public void done(AVException e) {
-                                            String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
-                                            TiUser useri = new TiUser();
-                                            useri.setName(LeanchatUser.getCurrentUser().getUsername());
-                                            useri.setTel(icon + "");
-                                            MyHttpUtils.handData(handler, 266, urll, useri);
-                                        }
-                                    });
-                                    name = nickname;
-                                    finishLogin();
-                                } else {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-
+                        authThrid(nickname, icon, auth);
                     } else if (SinaWeibo.NAME.equals(platform)) {
                         final String nickname = res.get("name").toString();
                         final String icon = res.get("avatar_hd").toString();
@@ -338,35 +308,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher, Platform
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_SINA_WEIBO, plat
                                         .getUserId());
-                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
-                            @Override
-                            public void done(AVUser user, AVException e) {
-                                if (e == null) {
-                                    MyAndroidUtil.editXmlByString(
-                                            Constants.LOGIN_ACCOUNT, nickname);
-                                    user.setUsername(nickname);
-                                    user.put("property", "user");
-                                    AVFile avFile = new AVFile(nickname, icon, null);
-                                    user.put("avatar", avFile);
-                                    user.signUpInBackground(new SignUpCallback() {
-                                        @Override
-                                        public void done(AVException e) {
-                                            String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
-                                            TiUser useri = new TiUser();
-                                            useri.setName(LeanchatUser.getCurrentUser().getUsername());
-                                            useri.setTel(icon + "");
-                                            MyHttpUtils.handData(handler, 266, urll, useri);
-                                        }
-                                    });
-                                    name = nickname;
-                                    finishLogin();
-                                } else {
-                                    Log.e("user执行失败了", user + "");
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
+                        authThrid(nickname, icon, auth);
                     } else if (Wechat.NAME.equals(platform)) {
                         final String nickname = res.get("nickname").toString();
                         final String icon = res.get("headimgurl").toString();
@@ -374,38 +316,8 @@ public class LoginActivity extends BaseActivity implements TextWatcher, Platform
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIXIN, plat
                                         .getUserId());
-                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
-                            @Override
-                            public void done(AVUser user, AVException e) {
-                                if (e == null) {
-                                    MyAndroidUtil.editXmlByString(
-                                            Constants.LOGIN_ACCOUNT, nickname);
-                                    user.setUsername(nickname);
-                                    user.put("property", "user");
-                                    AVFile avFile = new AVFile(nickname, icon, null);
-                                    user.put("avatar", avFile);
-                                    user.signUpInBackground(new SignUpCallback() {
-                                        @Override
-                                        public void done(AVException e) {
-                                            String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
-                                            TiUser useri = new TiUser();
-                                            useri.setName(LeanchatUser.getCurrentUser().getUsername());
-                                            useri.setTel(icon + "");
-                                            MyHttpUtils.handData(handler, 266, urll, useri);
-                                        }
-                                    });
-                                    name = nickname;
-                                    finishLogin();
-                                } else {
-                                    Log.e("user执行失败了", user + "");
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
+                        authThrid(nickname, icon, auth);
                     }
-
-
                 }
                 break;
 
@@ -415,6 +327,38 @@ public class LoginActivity extends BaseActivity implements TextWatcher, Platform
         }
 
     };
+
+    public void authThrid(final String nickname, final String icon, AVUser.AVThirdPartyUserAuth auth) {
+        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
+            @Override
+            public void done(AVUser user, AVException e) {
+                if (e == null) {
+                    MyAndroidUtil.editXmlByString(
+                            Constants.LOGIN_ACCOUNT, nickname);
+                    user.setUsername(nickname);
+                    user.put("property", "user");
+                    AVFile avFile = new AVFile(nickname, icon, null);
+                    user.put("avatar", avFile);
+                    user.signUpInBackground(new SignUpCallback() {
+                        @Override
+                        public void done(AVException e) {
+                            String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
+                            TiUser useri = new TiUser();
+                            useri.setName(LeanchatUser.getCurrentUser().getUsername());
+                            useri.setTel(icon + "");
+                            MyHttpUtils.handData(handler, 266, urll, useri);
+                        }
+                    });
+                    name = nickname;
+                    finishLogin();
+                } else {
+                    Log.e("user执行失败了", user + "");
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
 
     Thread thread = new Thread(new Runnable() {
         @Override
