@@ -19,6 +19,7 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.Util;
 
 public class PopupActivity extends Activity {
     private Spinner sp_time;
@@ -39,13 +40,15 @@ public class PopupActivity extends Activity {
                 case 267:
                     StepInfo stepInfo = (StepInfo) msg.obj;
                     if (stepInfo.getStatus().equals("1")) {
-                        Toast.makeText(PopupActivity.this, "提交成功，请注意接听电话", Toast.LENGTH_LONG).show();
                         if ("private".equals(flag)) {
+                            Toast.makeText(PopupActivity.this, "提交成功，请支付订金", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(PopupActivity.this, TaocanBuyActivity.class);
                             intent.putExtra("name", name);
                             intent.putExtra("price", price);
                             intent.putExtra("id", id);
                             startActivity(intent);
+                        }else{
+                            Toast.makeText(PopupActivity.this, "提交成功，请注意接听电话", Toast.LENGTH_LONG).show();
                         }
                     }
                     finish();
@@ -111,16 +114,18 @@ public class PopupActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String phone = et_phone.getText().toString();
-                if (phone.length() != 11) {
+                if (Util.getInstance().isMobileNumber(phone)) {
                     Toast.makeText(PopupActivity.this, "请输入正确的手机号", Toast.LENGTH_LONG).show();
+                }else{
+                    String url = Constants.SERVER_URL + "MedicalCommonConsultServlet";
+                    TiUser user = new TiUser();
+                    user.setName(content);
+                    user.setTel(phone);
+                    user.setPass(data);
+                    user.setCardId(time);
+                    MyHttpUtils.handData(handler, 267, url, user);
                 }
-                String url = Constants.SERVER_URL + "MedicalCommonConsultServlet";
-                TiUser user = new TiUser();
-                user.setName(content);
-                user.setTel(phone);
-                user.setPass(data);
-                user.setCardId(time);
-                MyHttpUtils.handData(handler, 267, url, user);
+
             }
         });
     }
