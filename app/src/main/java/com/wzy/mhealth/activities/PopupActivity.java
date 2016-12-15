@@ -115,8 +115,6 @@ public class PopupActivity extends Activity {
             public void onClick(View v) {
                 String phone = et_phone.getText().toString();
                 if (Util.getInstance().isMobileNumber(phone)) {
-                    Toast.makeText(PopupActivity.this, "请输入正确的手机号", Toast.LENGTH_LONG).show();
-                }else{
                     String url = Constants.SERVER_URL + "MedicalCommonConsultServlet";
                     TiUser user = new TiUser();
                     user.setName(content);
@@ -124,6 +122,8 @@ public class PopupActivity extends Activity {
                     user.setPass(data);
                     user.setCardId(time);
                     MyHttpUtils.handData(handler, 267, url, user);
+                }else{
+                    Toast.makeText(PopupActivity.this, "请输入正确的手机号", Toast.LENGTH_LONG).show();
                 }
 
             }
