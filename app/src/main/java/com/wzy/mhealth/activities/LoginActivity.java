@@ -37,7 +37,9 @@ import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyAndroidUtil;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Tool;
 
 import java.util.HashMap;
@@ -52,16 +54,15 @@ import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * @author cc112837@163.com
- *
  */
-public class LoginActivity extends BaseActivity implements TextWatcher ,PlatformActionListener{
-    private Button loginBtn, regButton,forgetButton;
+public class LoginActivity extends BaseActivity implements TextWatcher, PlatformActionListener {
+    private Button loginBtn, regButton, forgetButton;
     private EditText nameText, pwdText;
     private String name, pwd;
-    private ImageView iv_qqlogin,iv_weibologin,headicon,iv_wechatlogin;
+    private ImageView iv_qqlogin, iv_weibologin, headicon, iv_wechatlogin;
     private LinearLayout loginLinear, qidongLinear;
     private static final int MSG_AUTH_CANCEL = 2;
-    private static final int MSG_AUTH_ERROR= 3;
+    private static final int MSG_AUTH_ERROR = 3;
     private static final int MSG_AUTH_COMPLETE = 4;
 
     @Override
@@ -80,18 +81,18 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             finishLogin();
         }
         initTitle();
-        iv_wechatlogin=(ImageView) findViewById(R.id.iv_wechatlogin);
+        iv_wechatlogin = (ImageView) findViewById(R.id.iv_wechatlogin);
         loginLinear = (LinearLayout) findViewById(R.id.loginLinear);
         qidongLinear = (LinearLayout) findViewById(R.id.qidongLinear);
-        iv_qqlogin=(ImageView) findViewById(R.id.iv_qqlogin);
-        iv_weibologin=(ImageView) findViewById(R.id.iv_weibologin);
+        iv_qqlogin = (ImageView) findViewById(R.id.iv_qqlogin);
+        iv_weibologin = (ImageView) findViewById(R.id.iv_weibologin);
         nameText = (EditText) findViewById(R.id.nameText);
         pwdText = (EditText) findViewById(R.id.pwdText);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         regButton = (Button) findViewById(R.id.regButton);
         forgetButton = (Button) findViewById(R.id.forgetButton);
-        headicon=(ImageView) findViewById(R.id.headicon);
-        ImageLoader.getInstance().displayImage(MyApplication.sharedPreferences.getString(Constants.icon,null), headicon,
+        headicon = (ImageView) findViewById(R.id.headicon);
+        ImageLoader.getInstance().displayImage(MyApplication.sharedPreferences.getString(Constants.icon, null), headicon,
                 PhotoUtils.avatarlogin);
         forgetButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -123,7 +124,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             @Override
             public void onClick(View v) {
                 Platform qq = ShareSDK.getPlatform(QQ.NAME);
-                if (qq.isValid ()) {
+                if (qq.isValid()) {
                     qq.removeAccount();
                 }
                 qq.SSOSetting(false);  //设置false表示使用SSO授权方式
@@ -136,7 +137,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             @Override
             public void onClick(View v) {
                 Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
-                if (wechat.isValid ()) {
+                if (wechat.isValid()) {
                     wechat.removeAccount();
                 }
                 wechat.SSOSetting(false);  //设置false表示使用SSO授权方式
@@ -149,19 +150,20 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             @Override
             public void onClick(View v) {
                 Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
-                if (weibo.isValid ()) {
+                if (weibo.isValid()) {
                     weibo.removeAccount();
                 }
                 weibo.SSOSetting(false);  //设置false表示使用SSO授权方式
                 weibo.setPlatformActionListener(LoginActivity.this); // 设置分享事件回调
                 weibo.showUser(null);
                 weibo.authorize();
-            }});
+            }
+        });
         regButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegActivity.class);
-                intent.putExtra("flag","reg");
+                intent.putExtra("flag", "reg");
                 startActivity(intent);
             }
         });
@@ -202,8 +204,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                                 Tool.initToast(LoginActivity.this,
                                         getResources().getString(R.string.login_error));
                             }
-                        } else
-                        if (e.getCode() == 1) {
+                        } else if (e.getCode() == 1) {
                             Tool.initToast(LoginActivity.this, "登录错误次数已超上限,请20分钟后重试");
                         } else {
                             Tool.initToast(LoginActivity.this, e.getMessage());
@@ -278,26 +279,28 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                 case MSG_AUTH_CANCEL: {
                     //取消授权
                     Toast.makeText(getApplicationContext(), "取消授权", Toast.LENGTH_SHORT).show();
-                } break;
+                }
+                break;
                 case MSG_AUTH_ERROR: {
                     //授权失败
-                    Toast.makeText(LoginActivity.this,"授权错误", Toast.LENGTH_SHORT).show();
-                } break;
+                    Toast.makeText(LoginActivity.this, "授权错误", Toast.LENGTH_SHORT).show();
+                }
+                break;
                 case MSG_AUTH_COMPLETE: {
                     //授权成功
                     Toast.makeText(LoginActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
                     Object[] objs = (Object[]) msg.obj;
                     String platform = (String) objs[0];
                     HashMap<String, Object> res = (HashMap<String, Object>) objs[1];
-                    final PlatformDb plat =(PlatformDb)objs[2];
-                    if(QQ.NAME.equals(platform)){
-                        final String  nickname=res.get("nickname").toString();
-                        final String icon=res.get("figureurl_qq_2").toString();
+                    final PlatformDb plat = (PlatformDb) objs[2];
+                    if (QQ.NAME.equals(platform)) {
+                        final String nickname = res.get("nickname").toString();
+                        final String icon = res.get("figureurl_qq_2").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
-                                        .getExpiresTime()),AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIBO, plat
+                                        .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIBO, plat
                                         .getUserId());
-                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>(){
+                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
                             @Override
                             public void done(AVUser user, AVException e) {
                                 if (e == null) {
@@ -307,15 +310,19 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                                             Constants.LOGIN_ACCOUNT, nickname);
                                     user.setUsername(nickname);
                                     user.put("property", "user");
-                                    AVFile avFile = new AVFile(nickname,icon,null);
+                                    AVFile avFile = new AVFile(nickname, icon, null);
                                     user.put("avatar", avFile);
                                     user.signUpInBackground(new SignUpCallback() {
                                         @Override
                                         public void done(AVException e) {
-
+                                            String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
+                                            TiUser useri = new TiUser();
+                                            useri.setName(LeanchatUser.getCurrentUser().getUsername());
+                                            useri.setTel(icon + "");
+                                            MyHttpUtils.handData(handler, 266, urll, useri);
                                         }
                                     });
-                                    name=nickname;
+                                    name = nickname;
                                     finishLogin();
                                 } else {
                                     e.printStackTrace();
@@ -324,15 +331,14 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                             }
                         });
 
-                    }
-                    else if(SinaWeibo.NAME.equals(platform)){
-                        final String  nickname=res.get("name").toString();
-                        final String icon=res.get("avatar_hd").toString();
+                    } else if (SinaWeibo.NAME.equals(platform)) {
+                        final String nickname = res.get("name").toString();
+                        final String icon = res.get("avatar_hd").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
-                                        .getExpiresTime()),AVUser.AVThirdPartyUserAuth.SNS_SINA_WEIBO , plat
+                                        .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_SINA_WEIBO, plat
                                         .getUserId());
-                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>(){
+                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
                             @Override
                             public void done(AVUser user, AVException e) {
                                 if (e == null) {
@@ -340,32 +346,35 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                                             Constants.LOGIN_ACCOUNT, nickname);
                                     user.setUsername(nickname);
                                     user.put("property", "user");
-                                    AVFile avFile = new AVFile(nickname,icon,null);
+                                    AVFile avFile = new AVFile(nickname, icon, null);
                                     user.put("avatar", avFile);
                                     user.signUpInBackground(new SignUpCallback() {
                                         @Override
                                         public void done(AVException e) {
-
+                                            String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
+                                            TiUser useri = new TiUser();
+                                            useri.setName(LeanchatUser.getCurrentUser().getUsername());
+                                            useri.setTel(icon + "");
+                                            MyHttpUtils.handData(handler, 266, urll, useri);
                                         }
                                     });
-                                    name=nickname;
+                                    name = nickname;
                                     finishLogin();
                                 } else {
-                                    Log.e("user执行失败了",user+"");
+                                    Log.e("user执行失败了", user + "");
                                     e.printStackTrace();
                                 }
 
                             }
                         });
-                    }
-                    else if(Wechat.NAME.equals(platform)){
-                        final String  nickname=res.get("nickname").toString();
-                        final String icon=res.get("headimgurl").toString();
+                    } else if (Wechat.NAME.equals(platform)) {
+                        final String nickname = res.get("nickname").toString();
+                        final String icon = res.get("headimgurl").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
-                                        .getExpiresTime()),AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIXIN , plat
+                                        .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIXIN, plat
                                         .getUserId());
-                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>(){
+                        AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
                             @Override
                             public void done(AVUser user, AVException e) {
                                 if (e == null) {
@@ -373,18 +382,22 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                                             Constants.LOGIN_ACCOUNT, nickname);
                                     user.setUsername(nickname);
                                     user.put("property", "user");
-                                    AVFile avFile = new AVFile(nickname,icon,null);
+                                    AVFile avFile = new AVFile(nickname, icon, null);
                                     user.put("avatar", avFile);
                                     user.signUpInBackground(new SignUpCallback() {
                                         @Override
                                         public void done(AVException e) {
-
+                                            String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
+                                            TiUser useri = new TiUser();
+                                            useri.setName(LeanchatUser.getCurrentUser().getUsername());
+                                            useri.setTel(icon + "");
+                                            MyHttpUtils.handData(handler, 266, urll, useri);
                                         }
                                     });
-                                    name=nickname;
+                                    name = nickname;
                                     finishLogin();
                                 } else {
-                                    Log.e("user执行失败了",user+"");
+                                    Log.e("user执行失败了", user + "");
                                     e.printStackTrace();
                                 }
 
@@ -393,8 +406,8 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
                     }
 
 
-
-                } break;
+                }
+                break;
 
                 default:
                     break;
@@ -436,14 +449,13 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
             Message msg = new Message();
             msg.what = MSG_AUTH_COMPLETE;
             PlatformDb platDB = platform.getDb();//获取数平台数据DB
-            msg.obj = new Object[]{platform.getName(), res,platDB};
+            msg.obj = new Object[]{platform.getName(), res, platDB};
             handler.sendMessage(msg);
 
 
         }
 
     }
-
 
 
     @Override
@@ -461,11 +473,11 @@ public class LoginActivity extends BaseActivity implements TextWatcher ,Platform
         }
 
     }
+
     protected void onPause() {
         super.onPause();
         AVAnalytics.onPause(this);
     }
-
 
 
 }

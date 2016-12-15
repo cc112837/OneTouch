@@ -150,7 +150,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
             @Override
             public void done(AVObject avObject, AVException e) {
                 LeanchatUser user = (LeanchatUser) avObject;
-                String  avatarUrl = user.getAvatarUrl();
+                String avatarUrl = user.getAvatarUrl();
                 MyAndroidUtil.editXmlByString(
                         Constants.icon, avatarUrl);
                 ImageLoader.getInstance().displayImage(avatarUrl, headImage,
