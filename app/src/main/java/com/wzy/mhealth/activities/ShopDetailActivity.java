@@ -79,6 +79,7 @@ public class ShopDetailActivity extends FragmentActivity implements View.OnClick
                     ShopCart shopCart = (ShopCart) msg.obj;
                     Intent intent = new Intent(ShopDetailActivity.this, ShopBuyActivity.class);
                     intent.putExtra("shop", (Serializable) shopCart.getData());
+                    intent.putExtra("sub",shopCart.getPrefPrice());
                     startActivity(intent);
                     break;
                 case 286:

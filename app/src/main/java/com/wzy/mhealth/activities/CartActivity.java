@@ -113,6 +113,7 @@ public class CartActivity extends Activity implements View.OnClickListener {
                     ShopCart shopCart = (ShopCart) msg.obj;
                     Intent intent = new Intent(CartActivity.this, ShopBuyActivity.class);
                     intent.putExtra("shop", (Serializable) shopCart.getData());
+                    intent.putExtra("sub",shopCart.getPrefPrice());
                     startActivity(intent);
                     break;
                 case 285:

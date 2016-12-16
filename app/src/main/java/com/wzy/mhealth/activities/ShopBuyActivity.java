@@ -38,6 +38,7 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     private ShopBuyAdapter shopBuyAdapter;
     private List<ShopCart.DataEntity> shop;
     boolean flag = false;
+    private double sub;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,10 +64,13 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
         }
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_buy);
+        sub = getIntent().getDoubleExtra("sub", 0.00);
         shop = (List<ShopCart.DataEntity>) getIntent().getSerializableExtra("shop");
         init();
     }
@@ -95,10 +99,10 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
             num += shop.get(i).getProductNumber();
             value += shop.get(i).getTotalPrice();
         }
-        totalprice = String.format("%.2f", value);
-        tv_total.setText("实付款：¥" + String.format("%.2f", value));
+        totalprice = String.format("%.2f", value-sub);
+        tv_total.setText("实付款：¥" + totalprice);
         tv_cal.setText("去结算（" + num + ")");
-        tv_decrease.setText("优惠：-¥"+0);
+        tv_decrease.setText("优惠：-¥"+String.format("%.2f", sub));
         tv_beforetotal.setText("原价：¥"+String.format("%.2f", value));
         tv_beforetotal.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         lv_shopbuy.setOnItemClickListener(new AdapterView.OnItemClickListener() {

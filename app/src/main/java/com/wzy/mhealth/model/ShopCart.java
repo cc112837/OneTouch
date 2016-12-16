@@ -17,18 +17,32 @@ public class ShopCart {
 
 
     /**
-     * productNumber : 3
-     * productNewPrice : 258
-     * productImageSmall : http://117.34.105.29:8818/mhealth/upload/files/20161128141912FBHYgXcG.jpg
-     * productName : 有机青稞米2.5kg礼盒装
-     * totalPrice : 774
-     * productId : f5a2e99d5884b056015884c5f2c80003
+     * prefPrice  : 0.0
+     * data : [{"productNewPrice":10.8,"productNumber ":10,"productName":"小邢","productImageSmall ":"888182569","totalPrice  ":50.23,"productId":"f5a2e99d5884b056015884b056520000"}]
+     */
+
+    private double prefPrice;
+    /**
+     * productNewPrice : 10.8
+     * productNumber  : 10
+     * productName : 小邢
+     * productImageSmall  : 888182569
+     * totalPrice   : 50.23
+     * productId : f5a2e99d5884b056015884b056520000
      */
 
     private List<DataEntity> data;
 
+    public void setPrefPrice(double prefPrice) {
+        this.prefPrice = prefPrice;
+    }
+
     public void setData(List<DataEntity> data) {
         this.data = data;
+    }
+
+    public double getPrefPrice() {
+        return prefPrice;
     }
 
     public List<DataEntity> getData() {
@@ -36,30 +50,30 @@ public class ShopCart {
     }
 
     public static class DataEntity implements Serializable{
-        private int productNumber;
         private double productNewPrice;
-        private String productImageSmall;
+        private int productNumber;
         private String productName;
+        private String productImageSmall;
         private double totalPrice;
         private String productId;
 
-        public void setProductNumber(int productNumber) {
-            this.productNumber = productNumber;
-        }
-
-        public void setProductNewPrice(int productNewPrice) {
+        public void setProductNewPrice(double productNewPrice) {
             this.productNewPrice = productNewPrice;
         }
 
-        public void setProductImageSmall(String productImageSmall) {
-            this.productImageSmall = productImageSmall;
+        public void setProductNumber(int productNumber) {
+            this.productNumber = productNumber;
         }
 
         public void setProductName(String productName) {
             this.productName = productName;
         }
 
-        public void setTotalPrice(int totalPrice) {
+        public void setProductImageSmall(String productImageSmall) {
+            this.productImageSmall = productImageSmall;
+        }
+
+        public void setTotalPrice(double totalPrice) {
             this.totalPrice = totalPrice;
         }
 
@@ -67,20 +81,20 @@ public class ShopCart {
             this.productId = productId;
         }
 
-        public int getProductNumber() {
-            return productNumber;
-        }
-
         public double getProductNewPrice() {
             return productNewPrice;
         }
 
-        public String getProductImageSmall() {
-            return productImageSmall;
+        public int getProductNumber() {
+            return productNumber;
         }
 
         public String getProductName() {
             return productName;
+        }
+
+        public String getProductImageSmall() {
+            return productImageSmall;
         }
 
         public double getTotalPrice() {
