@@ -1,6 +1,8 @@
 package com.wzy.mhealth.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -65,7 +67,6 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,11 +100,11 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
             num += shop.get(i).getProductNumber();
             value += shop.get(i).getTotalPrice();
         }
-        totalprice = String.format("%.2f", value-sub);
+        totalprice = String.format("%.2f", value - sub);
         tv_total.setText("实付款：¥" + totalprice);
-        tv_cal.setText("去结算（" + num + ")");
-        tv_decrease.setText("优惠：-¥"+String.format("%.2f", sub));
-        tv_beforetotal.setText("原价：¥"+String.format("%.2f", value));
+        tv_cal.setText("去结算(" + num + ")");
+        tv_decrease.setText("优惠：-¥" + String.format("%.2f", sub));
+        tv_beforetotal.setText("原价：¥" + String.format("%.2f", value));
         tv_beforetotal.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         lv_shopbuy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -130,7 +131,18 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.leftBtn:
-                finish();
+                new AlertDialog.Builder(ShopBuyActivity.this).setTitle("提示")
+                        .setMessage("便宜不等人，请三思而行").setPositiveButton("去意已决~", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).setNegativeButton("我再想想", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
                 break;
             case R.id.tv_cal:
                 if (flag) {
