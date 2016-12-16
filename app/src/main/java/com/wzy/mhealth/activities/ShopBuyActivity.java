@@ -2,6 +2,7 @@ package com.wzy.mhealth.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,7 +30,7 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     private View headview = null;
     private LinearLayout ll_have;
     private TextView tv_name, tv_total, tv_cal, tv_newadd;
-    private TextView tv_tel;
+    private TextView tv_tel, tv_decrease, tv_beforetotal;
     private TextView tv_address;
     private ListView lv_shopbuy;
     String addressid, totalprice;
@@ -73,6 +74,8 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
     private void init() {
         leftBtn = (ImageView) findViewById(R.id.leftBtn);
         lv_shopbuy = (ListView) findViewById(R.id.lv_shopbuy);
+        tv_decrease = (TextView) findViewById(R.id.tv_decrease);
+        tv_beforetotal = (TextView) findViewById(R.id.tv_beforetotal);
         shopBuyAdapter = new ShopBuyAdapter(this, shop);
         headview = LayoutInflater.from(ShopBuyActivity.this).inflate(R.layout.shoporder_header, null);
         lv_shopbuy.addHeaderView(headview);
@@ -95,6 +98,9 @@ public class ShopBuyActivity extends Activity implements View.OnClickListener {
         totalprice = String.format("%.2f", value);
         tv_total.setText("实付款：¥" + String.format("%.2f", value));
         tv_cal.setText("去结算（" + num + ")");
+        tv_decrease.setText("优惠：-¥"+0);
+        tv_beforetotal.setText("原价：¥"+String.format("%.2f", value));
+        tv_beforetotal.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         lv_shopbuy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

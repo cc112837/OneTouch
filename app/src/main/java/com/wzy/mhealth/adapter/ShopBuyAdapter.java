@@ -1,7 +1,6 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.activities.DecreseActivity;
 import com.wzy.mhealth.model.ShopCart;
 import com.wzy.mhealth.utils.MyUtils;
 
@@ -64,13 +62,13 @@ public class ShopBuyAdapter extends BaseAdapter {
             viewHolder.ll_only = (LinearLayout) convertView.findViewById(R.id.ll_only);
             viewHolder.tv_shopnum = (TextView) convertView.findViewById(R.id.tv_shopnum);
             viewHolder.ll_tiket = (LinearLayout) convertView.findViewById(R.id.ll_tiket);
-            viewHolder.ll_decrease = (LinearLayout) convertView.findViewById(R.id.ll_decrease);
+//            viewHolder.ll_decrease = (LinearLayout) convertView.findViewById(R.id.ll_decrease);
             viewHolder.tv_shoptitle = (TextView) convertView.findViewById(R.id.tv_shoptitle);
-            viewHolder.tv_value = (TextView) convertView.findViewById(R.id.tv_value);
-            viewHolder.tv_use = (TextView) convertView.findViewById(R.id.tv_use);
+//            viewHolder.tv_value = (TextView) convertView.findViewById(R.id.tv_value);
+//            viewHolder.tv_use = (TextView) convertView.findViewById(R.id.tv_use);
             viewHolder.tv_crease = (TextView) convertView.findViewById(R.id.tv_crease);
             viewHolder.tv_increase = (TextView) convertView.findViewById(R.id.tv_increase);
-            viewHolder.tv_decrease = (TextView) convertView.findViewById(R.id.tv_decrease);
+//            viewHolder.tv_decrease = (TextView) convertView.findViewById(R.id.tv_decrease);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -84,28 +82,28 @@ public class ShopBuyAdapter extends BaseAdapter {
 //                context.startActivity(intent);
             }
         });
-        viewHolder.ll_decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {//优惠券
-                Intent intent = new Intent(context, DecreseActivity.class);
-                context.startActivity(intent);
-            }
-        });
+//        viewHolder.ll_decrease.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {//优惠券
+//                Intent intent = new Intent(context, DecreseActivity.class);
+//                context.startActivity(intent);
+//            }
+//        });
         ImageLoader.getInstance().displayImage(list.get(position).getProductImageSmall(),viewHolder.iv_disshow, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
         viewHolder.tv_increase.setText("+¥" + 0);
-        viewHolder.tv_decrease.setText("-¥" + 0);
+//        viewHolder.tv_decrease.setText("-¥" + 0);
         viewHolder.tv_shopnum.setText("数量：" + list.get(position).getProductNumber());
         viewHolder.tv_crease.setText("¥" + String.format("%.2f",list.get(position).getTotalPrice()));
-        viewHolder.tv_value.setText(0+ "张可用");
+//        viewHolder.tv_value.setText(0+ "张可用");
         viewHolder.tv_shoptitle.setText(""+list.get(position).getProductName());
-        viewHolder.tv_use.setText("未使用");
+//        viewHolder.tv_use.setText("未使用");
         return convertView;
     }
 
     static class ViewHolder {
         public ImageView iv_disshow;
         public TextView tv_shoptitle, tv_shopnum;
-        public TextView tv_value, tv_use, tv_crease, tv_increase, tv_decrease;
-        private LinearLayout ll_only, ll_tiket, ll_decrease;
+        public TextView  tv_crease, tv_increase;//tv_value, tv_use,, tv_decrease
+        private LinearLayout ll_only, ll_tiket;// ll_decrease
     }
 }

@@ -48,6 +48,7 @@
             android:layout_weight="1"
             android:divider="@color/bg_gray"
             android:dividerHeight="10dp"></ListView>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -63,21 +64,45 @@
                 android:id="@+id/tv_total"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:gravity="right"
                 android:layout_height="wrap_content"
-                android:padding="13dp"
+                android:padding="10dp"
                 android:text="实付款：¥50.00"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_beforetotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="原价：¥50.00"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_decrease"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="优惠：-¥20.00"
+                    android:textColor="@color/orange"
+                    android:textSize="11sp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_cal"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/red"
+                android:gravity="center"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:gravity="center"
                 android:text="去结算()"
                 android:textColor="@color/white"
                 android:textSize="16sp" />

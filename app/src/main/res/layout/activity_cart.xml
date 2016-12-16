@@ -36,6 +36,7 @@
 
     <LinearLayout
         android:id="@+id/ll_repalce"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_gray"
@@ -68,7 +69,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ListView
             android:id="@+id/lv_cart"
@@ -107,7 +108,9 @@
 
             <TextView
                 android:id="@+id/tv_total"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
                 android:layout_height="wrap_content"
                 android:padding="13dp"
                 android:text="合计：¥50.00"
@@ -116,10 +119,11 @@
 
             <TextView
                 android:id="@+id/tv_cal"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@color/red"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
                 android:gravity="center"
                 android:text="去结算()"
                 android:textColor="@color/white"
