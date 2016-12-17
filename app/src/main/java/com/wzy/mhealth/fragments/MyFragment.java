@@ -41,7 +41,6 @@ import com.wzy.mhealth.activities.ProudActivity;
 import com.wzy.mhealth.activities.SettingActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.Grade;
 import com.wzy.mhealth.model.Proud;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
@@ -65,7 +64,8 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
     private LinearLayout about1, ll_decrease, ll_grade, myproud;
     private ImageView headImage, iv_spped, iv_blood, iv_shop;
     private String dateTime;
-    private TextView cameraPic, albumPic, username, tv_gradenum;
+    private Proud proud;
+    private TextView cameraPic, albumPic, username, tv_gradenum,tv_decrease;
     private AlertDialog avatarDialog;
     private Handler handler = new Handler() {
         @Override
@@ -78,15 +78,11 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
                         startActivity(intent);
                     }
                     break;
-                case 156:
-                    Grade grade = (Grade) msg.obj;
-                    if (grade != null) {
-                        tv_gradenum.setText(grade.getIntegration() + "");
-                    }
 
-                    break;
                 case 170:
-                    Proud proud = (Proud) msg.obj;
+                    proud = (Proud) msg.obj;
+                    tv_gradenum.setText(proud.getIntegration()+"");
+                    tv_decrease.setText(proud.getCouponNum()+"");
                     if (proud.isStepNum()) {
                         iv_spped.setImageResource(R.mipmap.speed_proud);
                     }
@@ -94,7 +90,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
                         iv_shop.setImageResource(R.mipmap.gift_red);
                     }
                     if (proud.isBlood()) {
-                        iv_shop.setImageResource(R.mipmap.love_red);
+                        iv_blood.setImageResource(R.mipmap.love_red);
                     }
                     break;
                 case 266:
@@ -103,6 +99,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
             }
         }
     };
+
 
 
     public void onAttach(Activity activity) {
@@ -127,14 +124,13 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
         iv_spped = (ImageView) view.findViewById(R.id.iv_spped);
         iv_blood = (ImageView) view.findViewById(R.id.iv_blood);
         iv_shop = (ImageView) view.findViewById(R.id.iv_shop);
-        String url = Constants.SERVER_URL + "MedalServlet";
+        tv_decrease=(TextView) view.findViewById(R.id.tv_decrease);
+        String url = Constants.SERVER_URL + "StepIntegrationServlet";
         MyHttpUtils.handData(handler, 170, url, null);
         ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
         ll_grade = (LinearLayout) view.findViewById(R.id.ll_grade);
         tv_gradenum = (TextView) view.findViewById(R.id.tv_gradenum);
         myproud = (LinearLayout) view.findViewById(R.id.myproud);
-        String ul = Constants.SERVER_URL + "StepIntegrationServlet";
-        MyHttpUtils.handData(handler, 156, ul, null);
         myrecord = (RelativeLayout) view.findViewById(R.id.myrecord);
         about1 = (LinearLayout) view.findViewById(R.id.about1);
         erweima = (RelativeLayout) view.findViewById(R.id.erweima);
@@ -364,6 +360,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
                 break;
             case R.id.myproud:
                 intent = new Intent(getActivity(), ProudActivity.class);
+                intent.putExtra("proud",proud);
                 startActivity(intent);
                 break;
             case R.id.album_pic:

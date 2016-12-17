@@ -20,7 +20,6 @@ import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.FirstDep;
 import com.wzy.mhealth.model.ForgetPass;
 import com.wzy.mhealth.model.Friend;
-import com.wzy.mhealth.model.Grade;
 import com.wzy.mhealth.model.HuaYanRecord;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.model.ItemInfo;
@@ -222,10 +221,6 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("passWord", user.getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Regmodel(), handler, what));
         }
-        if (what == 156) {//我的积分
-            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Grade(), handler, what));
-        }
         if (what == 157) {//体检机构列表
             TiUser user = (TiUser) object;
             params.addBodyParameter("id", user.getTel());
@@ -234,7 +229,7 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 160) {//省市联动
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Provice(), handler, what));
         }
-        if (what == 170) {//我的勋章
+        if (what == 170) {//我的勋章.积分 优惠劵
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Proud(), handler, what));
         }
