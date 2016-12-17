@@ -393,11 +393,9 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Cart(), handler, what));
         }
-        if (what == 273) {//可使用优惠劵
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Decrease(), handler, what));
-
-        }
-        if (what == 274) {//不可使用优惠劵
+        if (what == 273||what == 274) {//可使用优惠劵//不可使用优惠劵
+            params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("type",((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Decrease(), handler, what));
 
         }

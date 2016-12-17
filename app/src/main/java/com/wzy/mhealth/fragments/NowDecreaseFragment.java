@@ -14,6 +14,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.DecreaseAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Decrease;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
@@ -30,6 +31,10 @@ public class NowDecreaseFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what){
                 case 273:
+                    Decrease decrease=(Decrease) msg.obj;
+                    if(decrease!=null){
+                        list.addAll(decrease.getData());
+                    }
                     decreaseAdapter.notifyDataSetChanged();
                     break;
             }
@@ -49,8 +54,10 @@ public class NowDecreaseFragment extends Fragment {
         lv_decrease=(ListView) v.findViewById(R.id.lv_decrease);
         decreaseAdapter = new DecreaseAdapter(getActivity(), list);
         lv_decrease.setAdapter(decreaseAdapter);
-        String url= Constants.SERVER_URL+"";
-        MyHttpUtils.handData(handler, 273, url, null);
+        String url= Constants.SERVER_URL+"MhealthShopCouponServlet";
+        TiUser user=new TiUser();
+        user.setPass("0");
+        MyHttpUtils.handData(handler, 273, url, user);
     }
 
 

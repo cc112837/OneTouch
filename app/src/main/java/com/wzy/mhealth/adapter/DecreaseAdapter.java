@@ -66,10 +66,11 @@ public class DecreaseAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_value.setText("有效期2016-12-23 12:00:00");
-        viewHolder.tv_cross.setText("200");
-        viewHolder.tv_chao.setText("满200可用");
+        viewHolder.tv_value.setText("有效期:"+list.get(position).getCouponTime());
+        viewHolder.tv_cross.setText(""+list.get(position).getCouponPrice());
+        viewHolder.tv_chao.setText("满"+list.get(position).getMuchPrice()+"可用");
         viewHolder.tv_money.setText("¥");
+        viewHolder.cb_check.setVisibility(View.GONE);
         viewHolder.cb_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
