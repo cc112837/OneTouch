@@ -57,7 +57,7 @@ public class TaocanDetailAcitivty extends Activity {
                     getWindowManager().getDefaultDisplay().getMetrics(dm);
                     //窗口的宽度
                     float density = dm.density;
-                    float width = dm.widthPixels/density-10;
+                    float width = dm.widthPixels/density-15;
                     wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + taocanDetail.getContext(), "text/html", "utf-8", null);
                     break;
             }

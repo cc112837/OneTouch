@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -34,12 +33,7 @@ public class NewsDetailActivity extends BaActivity {
                     WebSettings webSettings = wv_dis.getSettings();
                     webSettings.setUseWideViewPort(true);
                     webSettings.setTextZoom(120);
-                    webSettings.setBuiltInZoomControls(true);
-                    webSettings.setDisplayZoomControls(false);
-                    WindowManager wm = NewsDetailActivity.this.getWindowManager();
-                    int width = wm.getDefaultDisplay().getWidth()/2-20;
-                    wv_dis.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + newDetail.getMedicalContext(), "text/html", "utf-8", null);
-
+                    wv_dis.loadData(newDetail.getMedicalContext(), "text/html; charset=utf-8", "utf-8");
             }
         }
     };

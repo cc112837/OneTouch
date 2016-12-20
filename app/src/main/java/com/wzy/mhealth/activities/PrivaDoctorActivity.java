@@ -46,7 +46,7 @@ public class PrivaDoctorActivity extends Activity implements View.OnClickListene
                     getWindowManager().getDefaultDisplay().getMetrics(dm);
                     //窗口的宽度
                     float density = dm.density;
-                    float screenWidth = dm.widthPixels / density - 10;
+                    float screenWidth = dm.widthPixels / density - 15;
                     wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:" + screenWidth + "px!important;}</style></head>" + bingZhen.getData().get(0).getDetails(), "text/html", "utf-8", null);
                     break;
                 case 271:
