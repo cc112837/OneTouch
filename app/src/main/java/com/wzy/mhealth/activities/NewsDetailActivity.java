@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -30,10 +31,19 @@ public class NewsDetailActivity extends BaActivity {
             switch (msg.what) {
                 case 22:
                     NewDetail newDetail = (NewDetail) msg.obj;
+                    DisplayMetrics dm = new DisplayMetrics();
+                    //取得窗口属性
+                    getWindowManager().getDefaultDisplay().getMetrics(dm);
+                    //窗口的宽度
+                    float density = dm.density;
+                    float width = dm.widthPixels/density-15;
                     WebSettings webSettings = wv_dis.getSettings();
-                    webSettings.setUseWideViewPort(true);
-                    webSettings.setTextZoom(120);
-                    wv_dis.loadData(newDetail.getMedicalContext(), "text/html; charset=utf-8", "utf-8");
+                    webSettings.setLoadWithOverviewMode(true);
+                    webSettings.setJavaScriptEnabled(true);
+                    webSettings.setUseWideViewPort(false);  //将图片调整到适合webview的大小
+                    webSettings.setBuiltInZoomControls(true);
+                    webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
+                    wv_dis.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + newDetail.getMedicalContext(), "text/html", "utf-8", null);
             }
         }
     };
