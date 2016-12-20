@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
@@ -34,6 +35,9 @@ public class ZhixingIntroduceActivity extends BaActivity {
         });
         WindowManager wm = ZhixingIntroduceActivity.this.getWindowManager();
         int width = wm.getDefaultDisplay().getWidth()/2-20;
+        WebSettings webSettings = wv_show.getSettings();
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
         wv_show.loadDataWithBaseURL(null, "<head><style>img{max-width:"+width+"px!important;}</style></head>"+content, "text/html", "utf-8", null);
     }
 }

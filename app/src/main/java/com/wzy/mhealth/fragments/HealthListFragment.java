@@ -17,7 +17,9 @@ import com.wzy.mhealth.LeanChat.view.XListView;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.NewsDetailActivity;
 import com.wzy.mhealth.adapter.NewsItemAdapter;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.NewsYang;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class HealthListFragment extends Fragment implements XListView.IXListView
     private XListView lv_show;
     private NewsItemAdapter adapter;
     int page;
-    private List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list;
+    private List<NewsYang.DataEntity> list;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -46,7 +48,7 @@ public class HealthListFragment extends Fragment implements XListView.IXListView
                     }
                     NewsYang newsYang = (NewsYang) msg.obj;
                     lv_show.stopRefresh();
-                    list.addAll(newsYang.getData().getFlow().getItems());
+                    list.addAll(newsYang.getData());
                     adapter.notifyDataSetChanged();
                     break;
             }
@@ -90,27 +92,36 @@ public class HealthListFragment extends Fragment implements XListView.IXListView
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
-                intent.putExtra("content", list.get(position-1).getContentid()+"");
+                intent.putExtra("content", list.get(position-1).getMedicalId()+"");
                 startActivity(intent);
             }
         });
         page = 1;
-        String url = "http://api.m.vodjk.com/v1/content?channelid="+contentid+"&height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page=" + page + "&pagesize=20&sign=d2397d89e14070110eba3d4c3c46b40f&time=1408764433&token=3&type=android&width=375";
-        MyHttpUtils.handData(handler, 21, url, null);
+        String url= Constants.SERVER_URL+"MedicalArticleServlet";
+        TiUser user=new TiUser();
+        user.setName(contentid+"");
+        user.setPass(page+"");
+        MyHttpUtils.handData(handler, 21, url, user);
     }
 
 
     @Override
     public void onRefresh() {
         page = 1;
-        String url = "http://api.m.vodjk.com/v1/content?channelid="+contentid+"&height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page=" + page + "&pagesize=20&sign=d2397d89e14070110eba3d4c3c46b40f&time=1408764433&token=3&type=android&width=375";
-        MyHttpUtils.handData(handler, 21, url, null);
+        String url= Constants.SERVER_URL+"MedicalArticleServlet";
+        TiUser user=new TiUser();
+        user.setName(contentid + "");
+        user.setPass(page + "");
+        MyHttpUtils.handData(handler, 21, url, user);
     }
 
     @Override
     public void onLoadMore() {
         page++;
-        String url = "http://api.m.vodjk.com/v1/content?channelid="+contentid+"&height=210.9375&ip=192.168.1.107&modules=flow%3A1%2Cslider%3A1&page=" + page + "&pagesize=20&sign=d2397d89e14070110eba3d4c3c46b40f&time=1408764433&token=3&type=android&width=375";
-        MyHttpUtils.handData(handler, 21, url, null);
+        String url= Constants.SERVER_URL+"MedicalArticleServlet";
+        TiUser user=new TiUser();
+        user.setName(contentid+"");
+        user.setPass(page+"");
+        MyHttpUtils.handData(handler, 21, url, user);
     }
 }

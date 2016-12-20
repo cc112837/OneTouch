@@ -76,12 +76,12 @@ public class NewsFragment extends Fragment {
 
         vp_news = (ViewPager) v.findViewById(R.id.vp_news);
         List<Fragment> fragmentList = new ArrayList<>();
-        HealthListFragment health1 = new HealthListFragment(13+"");
-        HealthListFragment health2 = new HealthListFragment(19+"");
-        HealthListFragment health3 = new HealthListFragment(31+"");
-        HealthListFragment health4 = new HealthListFragment(35+"");
-        HealthListFragment health5 = new HealthListFragment(33+"");
-        HealthListFragment health6 = new HealthListFragment(25+"");
+        HealthListFragment health1 = new HealthListFragment("1");
+        HealthListFragment health2 = new HealthListFragment("2");
+        HealthListFragment health3 = new HealthListFragment("3");
+        HealthListFragment health4 = new HealthListFragment("4");
+        HealthListFragment health5 = new HealthListFragment("5");
+        HealthListFragment health6 = new HealthListFragment("6");
 
         fragmentList.add(health1);
         fragmentList.add(health2);

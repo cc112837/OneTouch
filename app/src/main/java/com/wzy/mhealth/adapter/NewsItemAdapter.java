@@ -29,9 +29,9 @@ import java.util.List;
 public class NewsItemAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private Context context;
-    private List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list;
+    private List<NewsYang.DataEntity> list;
 
-    public NewsItemAdapter(Context context, List<NewsYang.DataEntity.FlowEntity.ItemsEntity> list) {
+    public NewsItemAdapter(Context context, List<NewsYang.DataEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list=list;
         this.context=context;
@@ -65,8 +65,8 @@ public class NewsItemAdapter extends BaseAdapter{
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        ImageLoader.getInstance().displayImage(list.get(position).getThumb(), viewHolder.iv_img, PhotoUtils.avatarImage);
-        viewHolder.tv_title.setText(list.get(position).getTitle());
+        ImageLoader.getInstance().displayImage(list.get(position).getMedicalImage(), viewHolder.iv_img, PhotoUtils.avatarImage);
+        viewHolder.tv_title.setText(list.get(position).getMedicalTitle());
         return convertView;
     }
    class ViewHolder {

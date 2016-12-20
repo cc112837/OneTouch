@@ -61,11 +61,13 @@ public class DecreaseAdapter extends BaseAdapter {
             viewHolder.tv_value = (TextView) convertView.findViewById(R.id.tv_value);
             viewHolder.cb_check = (CheckBox) convertView.findViewById(R.id.cb_check);
             viewHolder.tv_chao = (TextView) convertView.findViewById(R.id.tv_chao);
+			viewHolder.tv_type = (TextView) convertView.findViewById(R.id.tv_type);
             viewHolder.tv_money = (TextView) convertView.findViewById(R.id.tv_money);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+//		viewHolder.tv_type.setText("仅可购买"+list.get(position).getIsUserd());
         viewHolder.tv_value.setText("有效期:"+list.get(position).getCouponTime());
         viewHolder.tv_cross.setText(""+list.get(position).getCouponPrice());
         viewHolder.tv_chao.setText("满"+list.get(position).getMuchPrice()+"可用");
@@ -84,7 +86,7 @@ public class DecreaseAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        public TextView tv_cross, tv_money;
+        public TextView tv_cross, tv_money,tv_type;
         public TextView tv_value, tv_chao;
         private CheckBox cb_check;
     }

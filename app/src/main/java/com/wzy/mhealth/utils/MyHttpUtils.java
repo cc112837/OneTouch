@@ -106,12 +106,14 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 15) {
             sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new HuaYanRecord(), handler, what));
         }
-        if (what == 21) {
-            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewsYang(), handler, what));
+        if (what == 21) {//资讯列表页面
+            params.addBodyParameter("type", ((TiUser) object).getName());
+            params.addBodyParameter("pageCount", ((TiUser) object).getPass());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new NewsYang(), handler, what));
         }
-        if (what == 22) {
-            sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new NewDetail(), handler, what));
-
+        if (what == 22) {//资讯详情页面
+            params.addBodyParameter("medicalId", ((TiUser) object).getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new NewDetail(), handler, what));
         }
         if (what == 23) {
             sendData(HttpRequest.HttpMethod.GET, url, null, new MyCallBack(new Record(), handler, what));

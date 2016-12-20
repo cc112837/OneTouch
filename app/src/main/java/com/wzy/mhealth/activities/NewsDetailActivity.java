@@ -10,13 +10,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.NewDetail;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 public class NewsDetailActivity extends BaActivity {
@@ -31,7 +34,11 @@ public class NewsDetailActivity extends BaActivity {
                     WebSettings webSettings = wv_dis.getSettings();
                     webSettings.setUseWideViewPort(true);
                     webSettings.setTextZoom(120);
-                    wv_dis.loadData(newDetail.getData().getContent().getArticle().getHtml(), "text/html; charset=utf-8", "utf-8");
+                    webSettings.setBuiltInZoomControls(true);
+                    webSettings.setDisplayZoomControls(false);
+                    WindowManager wm = NewsDetailActivity.this.getWindowManager();
+                    int width = wm.getDefaultDisplay().getWidth()/2-20;
+                    wv_dis.loadDataWithBaseURL(null, "<head><style>img{max-width:" + width + "px!important;}</style></head>" + newDetail.getMedicalContext(), "text/html", "utf-8", null);
 
             }
         }
@@ -48,8 +55,10 @@ public class NewsDetailActivity extends BaActivity {
                 Toast.makeText(NewsDetailActivity.this, "没有具体内容", Toast.LENGTH_LONG).show();
             } else {
                 wv_dis = (WebView) findViewById(R.id.wv_dis);
-                String url = "http://api.m.vodjk.com/v1/article?contentid=" + contentid + "&height=667.0&ip=192.168.1.107&modules=content%3A1&sign=983a172c96d973a4a528c02844bea991&time=1468463373&token=3&type=android&width=375.0";
-                MyHttpUtils.handData(handler, 22, url, null);
+                String url = Constants.SERVER_URL+"MedicalArticleDetailServlet";
+                TiUser user=new TiUser();
+                user.setName(contentid+"");
+                MyHttpUtils.handData(handler, 22, url, user);
             }
             leftBtn = (ImageView) findViewById(R.id.leftBtn);
             leftBtn.setOnClickListener(new View.OnClickListener() {
