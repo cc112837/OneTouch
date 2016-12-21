@@ -23,7 +23,9 @@ import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVOSCloud;
+import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.SignUpCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
@@ -43,6 +45,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Tool;
 
 import java.util.HashMap;
+import java.util.List;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
@@ -291,33 +294,27 @@ public class LoginActivity extends BaseActivity implements TextWatcher, Platform
                     Toast.makeText(LoginActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
                     Object[] objs = (Object[]) msg.obj;
                     String platform = (String) objs[0];
-                    HashMap<String, Object> res = (HashMap<String, Object>) objs[1];
                     final PlatformDb plat = (PlatformDb) objs[2];
                     if (QQ.NAME.equals(platform)) {
-                        final String nickname = res.get("nickname").toString();
-                        final String icon = res.get("figureurl_qq_2").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIBO, plat
                                         .getUserId());
-                        authThrid(nickname, icon, auth);
+                        authThrid(plat.getUserName(), plat.getUserIcon(), auth);
                     } else if (SinaWeibo.NAME.equals(platform)) {
-                        final String nickname = res.get("name").toString();
-                        final String icon = res.get("avatar_hd").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_SINA_WEIBO, plat
                                         .getUserId());
-                        authThrid(nickname, icon, auth);
+                        authThrid(plat.getUserName(), plat.getUserIcon(), auth);
                     } else if (Wechat.NAME.equals(platform)) {
-                        final String nickname = res.get("nickname").toString();
-                        final String icon = res.get("headimgurl").toString();
                         AVUser.AVThirdPartyUserAuth auth =
                                 new AVUser.AVThirdPartyUserAuth(plat.getToken(), String.valueOf(plat
                                         .getExpiresTime()), AVUser.AVThirdPartyUserAuth.SNS_TENCENT_WEIXIN, plat
                                         .getUserId());
-                        authThrid(nickname, icon, auth);
+                        authThrid(plat.getUserName(), plat.getUserIcon(), auth);
                     }
+
                 }
                 break;
 
@@ -331,11 +328,26 @@ public class LoginActivity extends BaseActivity implements TextWatcher, Platform
     public void authThrid(final String nickname, final String icon, AVUser.AVThirdPartyUserAuth auth) {
         AVUser.loginWithAuthData(auth, new LogInCallback<AVUser>() {
             @Override
-            public void done(AVUser user, AVException e) {
+            public void done(final AVUser user, AVException e) {
                 if (e == null) {
-                    MyAndroidUtil.editXmlByString(
-                            Constants.LOGIN_ACCOUNT, nickname);
-                    user.setUsername(nickname);
+                    AVQuery<LeanchatUser> query = AVUser.getQuery(LeanchatUser.class);
+                    query.whereEqualTo(LeanchatUser.USERNAME, nickname);
+                    query.findInBackground(new FindCallback<LeanchatUser>() {
+                        @Override
+                        public void done(List<LeanchatUser> list, AVException e) {
+                            if (e == null) {
+                                if (list.size() > 0) {
+                                    user.setUsername(nickname + (char) (Math.random() * ('z' - 'a') + 'a') + (int) (Math.random() * (10 - 1) + 1));
+                                } else {
+                                    user.setUsername(nickname);
+                                }
+                            } else {
+                                user.setUsername(nickname);
+                            }
+                        }
+                    });
+
+
                     user.put("property", "user");
                     AVFile avFile = new AVFile(nickname, icon, null);
                     user.put("avatar", avFile);
@@ -344,8 +356,11 @@ public class LoginActivity extends BaseActivity implements TextWatcher, Platform
                         public void done(AVException e) {
                             String urll = Constants.SERVER_URL + "MhealthUserOtherLoginServlet";
                             TiUser useri = new TiUser();
+                            MyAndroidUtil.editXmlByString(
+                                    Constants.LOGIN_ACCOUNT, LeanchatUser.getCurrentUser().getUsername());
                             useri.setName(LeanchatUser.getCurrentUser().getUsername());
-                            useri.setTel(icon + "");
+                            useri.setTel(LeanchatUser.getCurrentUser().getAvatarUrl() + "");
+                            useri.setCardId(LeanchatUser.getCurrentUser().getObjectId() + "");
                             MyHttpUtils.handData(handler, 266, urll, useri);
                         }
                     });

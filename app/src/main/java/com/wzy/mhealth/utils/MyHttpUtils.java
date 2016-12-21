@@ -359,6 +359,7 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 266) {//向服务端传用户图像
             params.addBodyParameter("userName", ((TiUser) object).getName());
+            params.addBodyParameter("objectId",((TiUser)object).getCardId());
             params.addBodyParameter("imgUrl", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
