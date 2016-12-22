@@ -150,10 +150,10 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                             }
                         });
                     }
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < taocanEntity.getData().size(); i++) {
                         BannerItem bannerItem = new BannerItem();
-                        bannerItem.setTitle(taocanEntity.getData().get(i).getName());
-                        bannerItem.setUrl(taocanEntity.getData().get(i).getImg());
+                        bannerItem.setTitle(taocanEntity.getData().get(i).getName()+"");
+                        bannerItem.setUrl(taocanEntity.getData().get(i).getImg()+"");
                         bannerItem.setId(taocanEntity.getData().get(i).getTaoId()+"");
                         localImages.add(bannerItem);
                     }

@@ -55,23 +55,23 @@ public class NewsFragment extends Fragment {
         tabLayout.addTab(tab1);
 
         TabLayout.Tab tab2 = tabLayout.newTab();
-        tab2.setText("养生");
+        tab2.setText("健康");
         tabLayout.addTab(tab2);
 
         TabLayout.Tab tab3 = tabLayout.newTab();
-        tab3.setText("情感");
+        tab3.setText("医疗");
         tabLayout.addTab(tab3);
 
         TabLayout.Tab tab4 = tabLayout.newTab();
-        tab4.setText("美容");
+        tab4.setText("食品");
         tabLayout.addTab(tab4);
 
         TabLayout.Tab tab5 = tabLayout.newTab();
-        tab5.setText("男性");
+        tab5.setText("生物");
         tabLayout.addTab(tab5);
 
         TabLayout.Tab tab6 = tabLayout.newTab();
-        tab6.setText("女性");
+        tab6.setText("行业");
         tabLayout.addTab(tab6);
 
         vp_news = (ViewPager) v.findViewById(R.id.vp_news);
