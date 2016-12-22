@@ -146,7 +146,7 @@ public class DoctorDetailActivity extends BaActivity {
                                                     intent.putExtra(com.avoscloud.leanchatlib.utils.Constants.CONVERSATION_ID,
                                                             conversation.getConversationId());
                                                     Tool.initToast(DoctorDetailActivity.this,
-                                                            "支付成功，请24小时内与" + name + "医生咨询");
+                                                            "支付成功，请24小时内与" + doctorDetail.getUserName() + "医生咨询");
                                                     startActivity(intent);
                                                 }
                                             }
