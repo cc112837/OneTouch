@@ -115,7 +115,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="优惠劵"
+                android:text="优惠券"
                 android:textSize="16sp"
                 android:textColor="@color/dark_grey"
                 android:gravity="center_vertical"
@@ -123,7 +123,7 @@
                 android:layout_height="match_parent" />
             <TextView
                 android:layout_width="wrap_content"
-                android:text="使用优惠劵>"
+                android:text="使用优惠券>"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/black"

@@ -149,7 +149,7 @@ public class TaocanBuyActivity extends Activity implements Handler.Callback{
         ll_youhui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(TaocanBuyActivity.this, "暂无优惠劵！", Toast.LENGTH_LONG).show();
+                Toast.makeText(TaocanBuyActivity.this, "暂无优惠券！", Toast.LENGTH_LONG).show();
             }
         });
     }

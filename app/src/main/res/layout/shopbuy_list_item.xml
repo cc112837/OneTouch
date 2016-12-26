@@ -103,7 +103,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="明细（电子）个人"
+            android:text="不开发票"
             android:textColor="@color/black" />
     </LinearLayout>
 

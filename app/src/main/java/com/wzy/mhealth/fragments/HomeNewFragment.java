@@ -30,8 +30,7 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DiseaseActivity;
-import com.wzy.mhealth.activities.DoctorDetailActivity;
-import com.wzy.mhealth.activities.DoctorListActivity;
+import com.wzy.mhealth.activities.DoctorLiActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
 import com.wzy.mhealth.activities.MsgActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
@@ -124,13 +123,14 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent();
-                            if ("0".equals(doctor.getData().get(position).getId())) {
-                                intent.setClass(getActivity(), NoContentActivity.class);
-                            } else {
-                                intent.setClass(getActivity(), DoctorDetailActivity.class);
-                                intent.putExtra("id", doctor.getData().get(position).getDoctorId() + "");
-                                intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
-                            }
+//                            if ("0".equals(doctor.getData().get(position).getId())) {
+//                                intent.setClass(getActivity(), NoContentActivity.class);
+//                            } else {
+//                                intent.setClass(getActivity(), DoctorDetailActivity.class);
+//                                intent.putExtra("id", doctor.getData().get(position).getDoctorId() + "");
+//                                intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
+//                            }
+                            intent.setClass(getActivity(), NoContentActivity.class);
                             startActivity(intent);
                         }
                     });
@@ -140,6 +140,25 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                     if (taocanEntity != null) {
                         taocanEntitylist.clear();
                         taocanEntitylist.addAll(taocanEntity.getData());
+                        for (int i = 0; i < taocanEntity.getData().size(); i++) {
+                            BannerItem bannerItem = new BannerItem();
+                            bannerItem.setTitle(taocanEntity.getData().get(i).getName() + "");
+                            bannerItem.setUrl(taocanEntity.getData().get(i).getImg() + "");
+                            bannerItem.setId(taocanEntity.getData().get(i).getTaoId() + "");
+                            localImages.add(bannerItem);
+                        }
+                        convenientBanner.setPages(
+                                new CBViewHolderCreator<LocalImageHolderView>() {
+                                    @Override
+                                    public LocalImageHolderView createHolder() {
+                                        return new LocalImageHolderView();
+                                    }
+                                }, localImages)
+                                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                                .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
+                                        //设置指示器的方向
+                                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+
                         taocanHomeAdapter.notifyDataSetChanged();
                         lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -150,24 +169,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                             }
                         });
                     }
-                    for (int i = 0; i < taocanEntity.getData().size(); i++) {
-                        BannerItem bannerItem = new BannerItem();
-                        bannerItem.setTitle(taocanEntity.getData().get(i).getName()+"");
-                        bannerItem.setUrl(taocanEntity.getData().get(i).getImg()+"");
-                        bannerItem.setId(taocanEntity.getData().get(i).getTaoId()+"");
-                        localImages.add(bannerItem);
-                    }
-                    convenientBanner.setPages(
-                            new CBViewHolderCreator<LocalImageHolderView>() {
-                                @Override
-                                public LocalImageHolderView createHolder() {
-                                    return new LocalImageHolderView();
-                                }
-                            }, localImages)
-                            //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                            .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
-                                    //设置指示器的方向
-                            .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+
                     break;
             }
         }
@@ -408,7 +410,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_heali:
                 //李医生 DoctorLiActivity
-                Intent intent6 = new Intent(getActivity(), NoContentActivity.class);
+                Intent intent6 = new Intent(getActivity(), DoctorLiActivity.class);
                 startActivity(intent6);
                 break;
             case R.id.ll_taocan:
@@ -438,7 +440,8 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.doctor_more:
                 //更多医生
-                Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
+//                Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
+                Intent intent23 = new Intent(getActivity(), NoContentActivity.class);
                 startActivity(intent23);
                 break;
 
