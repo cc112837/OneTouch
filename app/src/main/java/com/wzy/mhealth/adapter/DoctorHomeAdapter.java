@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Doctor;
+import com.wzy.mhealth.utils.ImageUtil;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class DoctorHomeAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tv_name.setText(list.get(position).getUserName());
-        ImageLoader.getInstance().displayImage(list.get(position).getImage(),viewHolder.iv_doctorhead,com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
+        ImageLoader.getInstance().displayImage(list.get(position).getImage(),viewHolder.iv_doctorhead, ImageUtil.avatarlistdoctor);
         viewHolder.tv_pre.setText(list.get(position).getFirstdep());
         viewHolder.tv_hosi.setText(list.get(position).getDoctorTilte());
         return convertView;

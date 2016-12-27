@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Doctor;
+import com.wzy.mhealth.utils.ImageUtil;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
@@ -70,6 +72,7 @@ public class DoctorListAdapter extends BaseAdapter {
         viewHolder.zhicheng.setText(list.get(position).getDoctorTilte());
         viewHolder.hospital.setText(list.get(position).getHospital());
         viewHolder.hospital.setSingleLine(true);
+        ImageLoader.getInstance().displayImage("",viewHolder.photo, ImageUtil.avatarlistdoctor);
         viewHolder.brief.setText(list.get(position).getSpecialization() + "");
         viewHolder.brief.setSingleLine(true);
         viewHolder.score.setText(list.get(position).getRecommend() + "");

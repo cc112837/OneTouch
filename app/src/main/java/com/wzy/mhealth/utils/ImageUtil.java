@@ -1,13 +1,5 @@
 package com.wzy.mhealth.utils;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,6 +9,18 @@ import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.wzy.mhealth.R;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @SuppressLint("NewApi")
 public class ImageUtil
@@ -32,7 +36,19 @@ public class ImageUtil
 		byte[] data = readinputStream(inStream);
 		return data;
 	}
-
+	public static DisplayImageOptions avatarlistdoctor = new DisplayImageOptions.Builder()
+			.showImageOnLoading(R.mipmap.doctor_man)
+			.showImageForEmptyUri(R.mipmap.doctor_man)
+			.showImageOnFail(R.mipmap.doctor_man)
+			.cacheInMemory(true)
+			.cacheOnDisc(true)
+			.considerExifParams(true)
+			.imageScaleType(ImageScaleType.EXACTLY)
+			.bitmapConfig(Bitmap.Config.RGB_565)
+			.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
+					//.displayer(new RoundedBitmapDisplayer(20))
+					//.displayer(new FadeInBitmapDisplayer(100))// 淡入
+			.build();
 	public static byte[] readinputStream(InputStream inputStream)
 	{
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

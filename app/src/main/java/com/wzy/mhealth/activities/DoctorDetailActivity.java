@@ -17,12 +17,14 @@ import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
 import com.avoscloud.leanchatlib.model.ConversationType;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.LeanChat.activity.ChatRoomActivity;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.UserEvaluation;
+import com.wzy.mhealth.utils.ImageUtil;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Tool;
 
@@ -41,7 +43,7 @@ public class DoctorDetailActivity extends BaActivity {
     private String doctor, doctorid;
     private List<UserEvaluation.DataEntity> userEvaluationList;
     private LinearLayout pingjia1, pingjia2;
-    private ImageView youbian, tuwentu, dianhuatu, jiahaotu, privatetu, vediotu;
+    private ImageView youbian, tuwentu, photo,dianhuatu, jiahaotu, privatetu, vediotu,p;
     private RelativeLayout yonghupingjia;
 
     @Override
@@ -72,6 +74,7 @@ public class DoctorDetailActivity extends BaActivity {
                 case 153:
                     final DoctorDetail doctorDetail = (DoctorDetail) msg.obj;
                     name.setText(doctorDetail.getUserName());
+                    ImageLoader.getInstance().displayImage(doctorDetail.getImage(),photo, ImageUtil.avatarlistdoctor);
                     departmenTextView.setText(doctorDetail.getFirstdep());
                     zhichengTextView.setText(doctorDetail.getDoctorTilte());
                     hospitalTextView.setText(doctorDetail.getHospital());
@@ -228,7 +231,7 @@ public class DoctorDetailActivity extends BaActivity {
     };
 
     private void init() {
-
+        photo=(ImageView) findViewById(R.id.photo);
         tuwenLayout = (LinearLayout) findViewById(R.id.tuwenzixun);
         vedioyuyue = (LinearLayout) findViewById(R.id.vedioyuyue);
         yonghupingjia = (RelativeLayout) findViewById(R.id.yonghupingjia);
