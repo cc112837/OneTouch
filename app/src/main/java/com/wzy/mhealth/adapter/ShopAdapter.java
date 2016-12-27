@@ -15,7 +15,6 @@ import com.wzy.mhealth.holder.DescHolder;
 import com.wzy.mhealth.holder.HeaderHolder;
 import com.wzy.mhealth.model.Shop;
 import com.wzy.mhealth.utils.MyUtils;
-import com.wzy.mhealth.utils.ToastUtil;
 
 import java.util.List;
 
@@ -85,7 +84,7 @@ public class ShopAdapter extends SectionedRecyclerViewAdapter<HeaderHolder, Desc
         holder.shop_header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.show(mContext, "点击了区头");
+                //点击区头的位置
             }
         });
 
