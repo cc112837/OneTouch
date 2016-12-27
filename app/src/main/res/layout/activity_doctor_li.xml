@@ -34,345 +34,328 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
 
-            <ImageView
-                android:id="@+id/iv_img"
-                android:layout_width="0dp"
-                android:layout_height="130dp"
-                android:layout_weight="2"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/zhixingintro" />
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="Dr.SamLi"
-                    android:textSize="17sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/iv_1"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@mipmap/goldstar1" />
-
-                    <ImageView
-                        android:id="@+id/iv_2"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@mipmap/goldstar1" />
-
-                    <ImageView
-                        android:id="@+id/iv_3"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@mipmap/goldstar1" />
-
-                    <ImageView
-                        android:id="@+id/iv_4"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@mipmap/goldstar1" />
-
-                    <ImageView
-                        android:id="@+id/iv_5"
-                        android:layout_width="12dp"
-                        android:layout_height="12dp"
-                        android:src="@mipmap/goldstar1" />
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_img"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="2"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/doctor_li" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="3"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_tel"
-                        android:layout_width="0dp"
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
+                        android:gravity="center"
                         android:singleLine="true"
-                        android:text="电话：010-84256966"
-                        android:textSize="13sp" />
+                        android:text="Dr.SamLi"
+                        android:textSize="17sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_1"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@mipmap/goldstar1" />
+
+                        <ImageView
+                            android:id="@+id/iv_2"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@mipmap/goldstar1" />
+
+                        <ImageView
+                            android:id="@+id/iv_3"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@mipmap/goldstar1" />
+
+                        <ImageView
+                            android:id="@+id/iv_4"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@mipmap/goldstar1" />
+
+                        <ImageView
+                            android:id="@+id/iv_5"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@mipmap/goldstar1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_tel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:text="电话：010-84256966"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_tel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/tel" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_add"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="北京市朝阳区光熙门北里22号李医生康复"
+                            android:textSize="13sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/addr" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1"
+                    android:background="@color/grey" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="医生推荐" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1"
+                    android:background="@color/grey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_doctor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <ImageView
-                        android:id="@+id/iv_tel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_doctorhead"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/tel" />
+                        android:src="@mipmap/doctorli2" />
+
+                    <TextView
+                        android:id="@+id/tv_name0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="卢金地"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_pre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="康复理疗师"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="13sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/ll_doctor1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_add"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="北京市朝阳区光熙门北里22号李医生康复"
-                        android:textSize="13sp" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <ImageView
-                        android:id="@+id/iv_address"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_doctorhead1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:src="@mipmap/addr" />
+                        android:src="@mipmap/doctor_li1" />
+
+                    <TextView
+                        android:id="@+id/tv_name1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="李宏图"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_pre1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="品牌创始人"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="13sp" />
+
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_doctor2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/iv_doctorhead2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/doctor_li3" />
+
+                    <TextView
+                        android:id="@+id/tv_name2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="侯猛"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_pre2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="康复训练师"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:gravity="center_vertical">
-
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="1px"
-                android:layout_weight="1"
-                android:background="@color/grey" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="医生推荐" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="1px"
-                android:layout_weight="1"
-                android:background="@color/grey" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/bg_gray" />
 
             <LinearLayout
-                android:id="@+id/ll_doctor"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/iv_doctorhead"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/doctor_man" />
+                android:layout_margin="10dp"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/tv_name0"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="医生"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="14sp" />
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1"
+                    android:background="@color/grey" />
 
                 <TextView
-                    android:id="@+id/tv_pre"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="主任医师"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="13sp" />
+                    android:text="公司介绍" />
 
                 <TextView
-                    android:id="@+id/tv_hosi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="科室"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="13sp" />
+                    android:layout_width="0dp"
+                    android:layout_height="1px"
+                    android:layout_weight="1"
+                    android:background="@color/grey" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_doctor1"
-                android:layout_width="0dp"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/iv_doctorhead1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/doctor_man" />
-
-                <TextView
-                    android:id="@+id/tv_name1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="医生"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_pre1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="主任医师"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_hosi1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="科室"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_doctor2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/iv_doctorhead2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/doctor_man" />
-
-                <TextView
-                    android:id="@+id/tv_name2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="医生"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_pre2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="主任医师"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tv_hosi2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="科室"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="13sp" />
-            </LinearLayout>
+                android:padding="10dp"
+                android:text="       Dr.SamLi 是由李宏图医生于新西兰创建的运动康复品牌。\n      品牌自创立起，就以“打造全球领先的运动康复领导品牌”为发展愿景，以“为更多运动人群提供快速、专业、实用的运动健康管理方式” 为发展目标。在第一个战略布局期间，公司逐步搭建线上、线下、运动人群与运动相关产业的运动健康平台。平台涵盖了运动人群个性化、运动健康管理服务、运动健康衍生品销售、运动健康相关产业专业化培训加盟、赛事保障服务等多个不同渠道的多元化业务模块，并且与诸多的知名企业建立起企业运动健康管理合作关系。\n      截至2016年，公司有效整合几乎所有排名在全球排名前100名，亚洲地区前30名及中国前10名的商学院，深度凝聚超过5000余名走过玄奘之路的EMBA成员。\n
+     未来，Dr.Sam Li希望凭借着自己优秀的经营模式和专业团队，在国内实现全面化的覆盖，并且将会逐步向国际相关领域进行发展，使得Dr.Sam Li品牌在更大的舞台绽放自己的光彩。
+设施介绍
+     \n         ●运动康复训练区\n
+运动康复训练大厅其功能主要是从运动人体力学的角度帮助患者解决机体损伤的根源性问题，采用最新的先进运动康复设备，包括振动台、椭圆机、灵动跑步机、跑台、划船机、抗阻力训练设备以及一些小训练器械组成，可完成心肺、肌肉、关节等功能康复和提高训练。
+      \n         ●综合治疗区\n
+综合治疗区是康复治疗的核心区域，由VIP治疗室和PT治疗室组成，可满足80%以上的康复项目需求。PT治疗室目前有足底压力检测仪、日本磁疗仪、12导联多点位低频电刺激仪、超高能肌肉恢复共振仪以及各种功能的短波、超声波仪器等各种治疗仪器。配合以李宏图医生创立的Dr.Sam Li五层诊疗体系，通过特殊治疗手法结合仪器对运动损伤康复、肌肉关节功能性退化都有显著治愈效果。VIP治疗室在满足治疗功能的同时还能为VIP客户提供更为私密的空间，满足客户对高隐私度的要求。
+     \n         ●多功能培训室\n
+多功能康复教学大厅承载主要的培训任务，针对康复、运动健康、老年康复产业提供专业的人才培训课程。该厅功能齐全、设施先进，可实现远程互动、模拟训练、多媒体教学、沙龙聚会、学术交流、教学培训等功能，大厅可容纳10张教学用治疗床，可满足30人同时实践练习的需要。" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/bg_gray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="1px"
-                android:layout_weight="1"
-                android:background="@color/grey" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="公司介绍" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="1px"
-                android:layout_weight="1"
-                android:background="@color/grey" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="公司具体的介绍" />
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
