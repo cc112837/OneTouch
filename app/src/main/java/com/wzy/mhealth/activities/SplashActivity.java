@@ -13,7 +13,7 @@ import com.wzy.mhealth.utils.PackageUtils;
  * 创建人：吴聪聪
  * 邮箱:cc112837@163.com
  * 创建时间：2016/3/31 11:25
-*/
+ */
 public class SplashActivity extends FragmentActivity {
 
     @Override
@@ -37,24 +37,27 @@ public class SplashActivity extends FragmentActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 //说明登录过，不需要进入导航页，直接进入主界面
                 //当新版本与旧版本一致时直接跳转进入主界面
-                if (newVersion.equals(version)) {
-
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                } else {//需要进入导航页
-                    Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+//                if (newVersion.equals(version)) {
+//
+//                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//
+//                } else {//需要进入导航页
+//                    Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
             }
         });
         thread.start();
     }
+
     protected void onPause() {
         super.onPause();
         AVAnalytics.onPause(this);

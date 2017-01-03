@@ -40,9 +40,9 @@ public class GuideFragment extends android.support.v4.app.Fragment {
     private void initView(View ret) {
         List<Integer> images = new ArrayList<>();
 
-        images.add(R.mipmap.wel1);
-        images.add(R.mipmap.wel2);
-        images.add(R.mipmap.wel3);
+        images.add(R.mipmap.qidongyemian);
+        images.add(R.mipmap.qidongyemian);
+        images.add(R.mipmap.qidongyemian);
 
         Bundle arguments = getArguments();
 
