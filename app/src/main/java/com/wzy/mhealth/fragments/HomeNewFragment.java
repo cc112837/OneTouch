@@ -41,6 +41,7 @@ import com.wzy.mhealth.activities.ServiceMoreActivity;
 import com.wzy.mhealth.activities.SlowAidActivity;
 import com.wzy.mhealth.activities.TaocanDetailAcitivty;
 import com.wzy.mhealth.activities.TaocanListActivity;
+import com.wzy.mhealth.activities.YearPrideActivity;
 import com.wzy.mhealth.adapter.DoctorHomeAdapter;
 import com.wzy.mhealth.adapter.TaocanHomeAdapter;
 import com.wzy.mhealth.constant.Constants;
@@ -405,7 +406,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_marry:
                 //婴幼中心  MarryHospitalActivity
-                Intent intent5 = new Intent(getActivity(), NoContentActivity.class);
+                Intent intent5 = new Intent(getActivity(), YearPrideActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.ll_heali:

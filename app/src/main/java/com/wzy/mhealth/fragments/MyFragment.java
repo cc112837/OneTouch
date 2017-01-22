@@ -311,19 +311,19 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         oks.setTitle("一点就医");
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-        oks.setTitleUrl("http://www.wandoujia.com/apps/com.wzy.mhealth/download");
+        oks.setTitleUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.wzy.mhealth");
         // text是分享文本，所有平台都需要这个字段
         oks.setText("一点就医");
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
         oks.setImageUrl("http://pp.myapp.com/ma_icon/0/icon_42275805_1467870148/96");//
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://www.wandoujia.com/apps/com.wzy.mhealth/download");
+        oks.setUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.wzy.mhealth");
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
         oks.setComment("一点就医");
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("http://www.wandoujia.com/apps/com.wzy.mhealth/download");
+        oks.setSiteUrl("http://a.app.qq.com/o/simple.jsp?pkgname=com.wzy.mhealth");
         // 启动分享GUI
         oks.show(getContext());
     }

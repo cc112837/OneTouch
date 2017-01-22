@@ -6,7 +6,7 @@
     android:background="@color/title_green"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.wzy.mhealth.AboutActivity">
+    tools:context="com.wzy.mhealth.activities.AboutActivity">
 
     <RelativeLayout
         android:id="@+id/title1"
