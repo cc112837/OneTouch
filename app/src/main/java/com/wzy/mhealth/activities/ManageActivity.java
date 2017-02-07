@@ -1,24 +1,32 @@
 package com.wzy.mhealth.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.adapter.ManageAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ManageActivity extends BaActivity implements View.OnClickListener {
     private ImageView leftBtn_back;
-    private Button submit;
-    private EditText nameView, rg_sex, tv_birth, et_hunyu, medicalHistory;
+    private ListView lv_show;
+    private ManageAdapter manageAdapter;
+    private TextView tv_how;
+    private List<SelfHealth.DataEntity> list=new ArrayList<>();
 
     private Handler handler = new Handler() {
         @Override
@@ -33,12 +41,16 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
                     break;
                 case 151:
                     SelfHealth selfHealth = (SelfHealth) msg.obj;
-                    nameView.setText("" + selfHealth.getName());
-                    tv_birth.setText("" + selfHealth.getAge());
-                    rg_sex.setText("" + selfHealth.getSex());
-                    et_hunyu.setText("" + selfHealth.getMarrage());
-
-                    medicalHistory.setText("" + selfHealth.getRelate());
+                    list.addAll(selfHealth.getData());
+                    manageAdapter.notifyDataSetChanged();
+                    lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent=new Intent(ManageActivity.this,AidsManagerActivity.class);
+                            intent.putExtra("flag","updata");
+                            startActivity(intent);
+                        }
+                    });
                     break;
             }
         }
@@ -48,23 +60,18 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
+        String url= Constants.SERVER_URL+"";
+        MyHttpUtils.handData(handler,151,url,"");
         initView();
-        String uri = Constants.SERVER_URL + "MedicalHealthQueryServlet";
-        MyHttpUtils.handData(handler, 151, uri, null);
-
     }
 
     private void initView() {
-        submit = (Button) findViewById(R.id.submit);
-        medicalHistory = ((EditText) findViewById(R.id.medicalHistory));
-        et_hunyu = ((EditText) findViewById(R.id.et_hunyu));
-        rg_sex = ((EditText) findViewById(R.id.rg_sex));
-        nameView = ((EditText) findViewById(R.id.nameView));
-        tv_birth = ((EditText) findViewById(R.id.tv_birthid));
-
+        tv_how=(TextView) findViewById(R.id.tv_how);
+        lv_show=(ListView) findViewById(R.id.lv_show);
+        tv_how.setOnClickListener(this);
+        manageAdapter=new ManageAdapter(ManageActivity.this,list);
         leftBtn_back = ((ImageView) findViewById(R.id.leftBtn_back));
         leftBtn_back.setOnClickListener(this);
-        submit.setOnClickListener(this);
     }
 
     @Override
@@ -73,28 +80,12 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
             case R.id.leftBtn_back:
                 finish();
                 break;
-            case R.id.submit:
-
-                String name = nameView.getText().toString();
-                String sex = rg_sex.getText().toString();
-                String medical = medicalHistory.getText().toString();
-                String hun = et_hunyu.getText().toString();
-                String birth = tv_birth.getText().toString();
-                if (name.equals("")) {
-                    Toast.makeText(ManageActivity.this, "用户名不能为空", Toast.LENGTH_LONG).show();
-                } else {
-                    String url = Constants.SERVER_URL + "MedicalHealthServlet";
-                    SelfHealth selfHealth = new SelfHealth();
-                    selfHealth.setName(name);
-                    selfHealth.setAge(birth);
-                    selfHealth.setMarrage(hun);
-
-                    selfHealth.setSex(sex);
-                    selfHealth.setRelate(medical);
-
-                    MyHttpUtils.handData(handler, 150, url, selfHealth);
-                }
+            case R.id.tv_how:
+                Intent intent=new Intent(ManageActivity.this,AidsManagerActivity.class);
+                intent.putExtra("flag","new");
+                startActivity(intent);
                 break;
+
 
 
         }

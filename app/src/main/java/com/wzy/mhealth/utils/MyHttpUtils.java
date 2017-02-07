@@ -193,17 +193,17 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 150) {//健康管家
             SelfHealth selfHealth = (SelfHealth) object;
-            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
-            params.addBodyParameter("name", selfHealth.getName());
-            params.addBodyParameter("sex", selfHealth.getSex());
-            params.addBodyParameter("profession", selfHealth.getProfession());
-            params.addBodyParameter("age", selfHealth.getAge());
-            params.addBodyParameter("marrage", selfHealth.getMarrage());
-            params.addBodyParameter("relator", selfHealth.getRelator());
-            params.addBodyParameter("relate", selfHealth.getRelate());
+//            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+//            params.addBodyParameter("name", selfHealth.getName());
+//            params.addBodyParameter("sex", selfHealth.getSex());
+//            params.addBodyParameter("profession", selfHealth.getProfession());
+//            params.addBodyParameter("age", selfHealth.getAge());
+//            params.addBodyParameter("marrage", selfHealth.getMarrage());
+//            params.addBodyParameter("relator", selfHealth.getRelator());
+//            params.addBodyParameter("relate", selfHealth.getRelate());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if (what == 151) {//健康管理页面数据请求
+        if (what == 151) {//病历管理页面数据请求
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
         }

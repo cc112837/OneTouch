@@ -1,5 +1,7 @@
 package com.wzy.mhealth.model;
 
+import java.util.List;
+
 /**
  * 项目名称：mhealth
  * 类描述：
@@ -11,78 +13,48 @@ package com.wzy.mhealth.model;
  * 修改备注：
  */
 public class SelfHealth {
-
+    private int number;
     /**
-     * name : 梦想宇宙
-     * sex : 男
-     * profession : IT员
-     * age : 26
-     * marrage : 是
-     * relator : 无
-     * relate : 无
+     * firstDepName : 妇科
+     * firstDepId : 1
      */
 
-    private String name;
-    private String sex;
-    private String profession;
-    private String age;
-    private String marrage;
-    private String relator;
-    private String relate;
+    private List<DataEntity> data;
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setData(List<DataEntity> data) {
+        this.data = data;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession;
+    public int getNumber() {
+        return number;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public List<DataEntity> getData() {
+        return data;
     }
 
-    public void setMarrage(String marrage) {
-        this.marrage = marrage;
-    }
+    public static class DataEntity {
+        private String firstDepName;
+        private int firstDepId;
 
-    public void setRelator(String relator) {
-        this.relator = relator;
-    }
+        public void setFirstDepName(String firstDepName) {
+            this.firstDepName = firstDepName;
+        }
 
-    public void setRelate(String relate) {
-        this.relate = relate;
-    }
+        public void setFirstDepId(int firstDepId) {
+            this.firstDepId = firstDepId;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public String getFirstDepName() {
+            return firstDepName;
+        }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public String getProfession() {
-        return profession;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public String getMarrage() {
-        return marrage;
-    }
-
-    public String getRelator() {
-        return relator;
-    }
-
-    public String getRelate() {
-        return relate;
+        public int getFirstDepId() {
+            return firstDepId;
+        }
     }
 }
