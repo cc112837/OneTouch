@@ -303,7 +303,8 @@
         <activity android:name=".activities.TicketActivity" />
         <activity android:name=".activities.ShopCommentActivity" />
         <activity android:name=".activities.OrderRouteActivity" />
-        <activity android:name=".activities.YearPrideActivity"></activity>
+        <activity android:name=".activities.YearPrideActivity" />
+        <activity android:name=".activities.ContactActivity"></activity>
     </application>
 
 </manifest>
