@@ -30,6 +30,7 @@ import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DiseaseActivity;
+import com.wzy.mhealth.activities.DoctorDetailActivity;
 import com.wzy.mhealth.activities.DoctorLiActivity;
 import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
@@ -125,14 +126,13 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             Intent intent = new Intent();
-//                            if ("0".equals(doctor.getData().get(position).getId())) {
-//                                intent.setClass(getActivity(), NoContentActivity.class);
-//                            } else {
-//                                intent.setClass(getActivity(), DoctorDetailActivity.class);
-//                                intent.putExtra("id", doctor.getData().get(position).getDoctorId() + "");
-//                                intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
-//                            }
-                            intent.setClass(getActivity(), NoContentActivity.class);
+                            if ("0".equals(doctor.getData().get(position).getId())) {
+                                intent.setClass(getActivity(), NoContentActivity.class);
+                            } else {
+                                intent.setClass(getActivity(), DoctorDetailActivity.class);
+                                intent.putExtra("id", doctor.getData().get(position).getDoctorId() + "");
+                                intent.putExtra("doctor", doctor.getData().get(position).getId() + "");
+                            }
                             startActivity(intent);
                         }
                     });
