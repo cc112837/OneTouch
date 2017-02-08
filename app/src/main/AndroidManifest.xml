@@ -206,9 +206,6 @@
             android:name=".activities.DiseaseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.GreenPassActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.ScanresultActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -21,8 +21,9 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ManageActivity extends BaActivity implements View.OnClickListener {
-    private ImageView leftBtn_back;
+    private ImageView leftBtn;
     private ListView lv_show;
     private ManageAdapter manageAdapter;
     private TextView tv_how;
@@ -70,8 +71,8 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
         lv_show=(ListView) findViewById(R.id.lv_show);
         tv_how.setOnClickListener(this);
         manageAdapter=new ManageAdapter(ManageActivity.this,list);
-        leftBtn_back = ((ImageView) findViewById(R.id.leftBtn_back));
-        leftBtn_back.setOnClickListener(this);
+        leftBtn = ((ImageView) findViewById(R.id.leftBtn));
+        leftBtn.setOnClickListener(this);
     }
 
     @Override
