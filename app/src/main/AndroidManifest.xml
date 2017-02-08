@@ -300,9 +300,9 @@
         <activity android:name=".activities.TicketActivity" />
         <activity android:name=".activities.ShopCommentActivity" />
         <activity android:name=".activities.OrderRouteActivity" />
-        <activity android:name=".activities.YearPrideActivity" />
         <activity android:name=".activities.ContactActivity" />
-        <activity android:name=".activities.AidsManagerActivity"></activity>
+        <activity android:name=".activities.AidsManagerActivity" />
+        <activity android:name=".activities.ScannerImageAcitvity"></activity>
     </application>
 
 </manifest>

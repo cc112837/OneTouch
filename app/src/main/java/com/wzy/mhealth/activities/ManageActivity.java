@@ -78,7 +78,7 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.leftBtn_back:
+            case R.id.leftBtn:
                 finish();
                 break;
             case R.id.tv_how:

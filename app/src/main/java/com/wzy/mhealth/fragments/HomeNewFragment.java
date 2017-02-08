@@ -31,7 +31,9 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.CaptureActivity;
 import com.wzy.mhealth.activities.DiseaseActivity;
 import com.wzy.mhealth.activities.DoctorLiActivity;
+import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
+import com.wzy.mhealth.activities.MarryHospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PrivaDoctorActivity;
@@ -41,7 +43,6 @@ import com.wzy.mhealth.activities.ServiceMoreActivity;
 import com.wzy.mhealth.activities.SlowAidActivity;
 import com.wzy.mhealth.activities.TaocanDetailAcitivty;
 import com.wzy.mhealth.activities.TaocanListActivity;
-import com.wzy.mhealth.activities.YearPrideActivity;
 import com.wzy.mhealth.adapter.DoctorHomeAdapter;
 import com.wzy.mhealth.adapter.TaocanHomeAdapter;
 import com.wzy.mhealth.constant.Constants;
@@ -406,7 +407,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_marry:
                 //婴幼中心  MarryHospitalActivity
-                Intent intent5 = new Intent(getActivity(), YearPrideActivity.class);
+                Intent intent5 = new Intent(getActivity(), MarryHospitalActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.ll_heali:
@@ -441,8 +442,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.doctor_more:
                 //更多医生
-//                Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
-                Intent intent23 = new Intent(getActivity(), NoContentActivity.class);
+                Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
                 startActivity(intent23);
                 break;
 
