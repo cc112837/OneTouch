@@ -302,6 +302,7 @@
         <activity android:name=".activities.OrderRouteActivity" />
         <activity android:name=".activities.ContactActivity" />
         <activity android:name=".activities.AidsManagerActivity" />
+        <activity android:name=".activities.OrderDoctorActivity"></activity>
     </application>
 
 </manifest>
