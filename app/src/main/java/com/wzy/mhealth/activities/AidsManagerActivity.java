@@ -2,12 +2,10 @@ package com.wzy.mhealth.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -24,7 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.wzy.mhealth.LeanChat.util.PathUtils;
+import com.wzy.mhealth.LeanChat.util.PhotoUtils;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.model.ImageItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class AidsManagerActivity extends AppCompatActivity {
     private Bitmap bmp;
     private SimpleAdapter simpleAdapter;
     private List imageItem;
+    private List<ImageItem> listitem=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class AidsManagerActivity extends AppCompatActivity {
         gridView1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position>0){
+                if (position > 0) {
                     dialog(position);
                 }
                 return false;
@@ -108,18 +110,11 @@ public class AidsManagerActivity extends AppCompatActivity {
                 } else if (position == 0) { //点击图片位置为+ 0对应0张图片
                     Toast.makeText(AidsManagerActivity.this, "添加图片", Toast.LENGTH_SHORT).show();
                     //选择图片
-                    Intent intent = new Intent(Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
                     startActivityForResult(intent, IMAGE_OPEN);
                     //通过onResume()刷新数据
                 } else {
-                    HashMap<String, Object> map = (HashMap<String, Object>) imageItem.get(position);
-                    Bitmap itemImage = (Bitmap) map.get("itemImage");
-                    Intent intent = new Intent(AidsManagerActivity.this, ScannerImageAcitvity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("bitmap", itemImage);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
                 }
             }
         });
@@ -136,11 +131,6 @@ public class AidsManagerActivity extends AppCompatActivity {
                 tvDate.setText(getTime(date));
             }
         });
-        String flag = getIntent().getStringExtra("flag");
-        if ("new".equals("flag")) {
-
-        } else {
-        }
     }
 
     //刷新图片
@@ -174,30 +164,53 @@ public class AidsManagerActivity extends AppCompatActivity {
         }
     }
 
+    private String saveCropAvatar(Intent data) {
+        Bundle extras = data.getExtras();
+        String path = null;
+        if (extras != null) {
+            Bitmap bitmap = extras.getParcelable("data");
+            if (bitmap != null) {
+                path = PathUtils.getAvatarCropPath();
+                PhotoUtils.saveBitmap(path, bitmap);
+                if (bitmap != null && bitmap.isRecycled() == false) {
+                    bitmap.recycle();
+                }
+            }
+        }
+        return path;
+    }
+
+    public void startPhotoZoom(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
+        intent.putExtra("crop", "true");
+        intent.putExtra("scale", true);
+        intent.putExtra("scaleUpIfNeeded", true);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, 3);
+
+    }
+
     //获取图片路径 响应startActivityForResult
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //打开图片
         if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {
-            Uri uri = data.getData();
-            if (!TextUtils.isEmpty(uri.getAuthority())) {
-                //查询选择图片
-                Cursor cursor = getContentResolver().query(
-                        uri,
-                        new String[]{MediaStore.Images.Media.DATA},
-                        null,
-                        null,
-                        null);
-                //返回 没找到选择图片
-                if (null == cursor) {
-                    return;
-                }
-                //光标移动至开头 获取图片路径
-                cursor.moveToFirst();
-                pathImage = cursor.getString(cursor
-                        .getColumnIndex(MediaStore.Images.Media.DATA));
+            try {
+                startPhotoZoom(data.getData());
+            } catch (NullPointerException e) {
+                e.printStackTrace();// 用户点击取消操作
             }
-        }  //end if 打开图片
+        } else if (requestCode == 3) {
+            pathImage = saveCropAvatar(data);
+            ImageItem imageItem = new ImageItem();
+            imageItem.setPath(pathImage);
+            listitem.add(imageItem);
+        }
     }
 
     public static String getTime(Date date) {
@@ -214,6 +227,7 @@ public class AidsManagerActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 imageItem.remove(position);
+                listitem.remove(position-1);
                 simpleAdapter.notifyDataSetChanged();
             }
         });

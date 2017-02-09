@@ -47,9 +47,8 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
                     lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent=new Intent(ManageActivity.this,AidsManagerActivity.class);
-                            intent.putExtra("flag","updata");
-                            startActivity(intent);
+//                            Intent intent=new Intent(ManageActivity.this,AidsManagerActivity.class);
+//                            startActivity(intent);
                         }
                     });
                     break;
@@ -83,7 +82,6 @@ public class ManageActivity extends BaActivity implements View.OnClickListener {
                 break;
             case R.id.tv_how:
                 Intent intent=new Intent(ManageActivity.this,AidsManagerActivity.class);
-                intent.putExtra("flag","new");
                 startActivity(intent);
                 break;
 

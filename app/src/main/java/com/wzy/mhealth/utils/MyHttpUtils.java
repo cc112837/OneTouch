@@ -501,11 +501,6 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("number", user.getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TestWeChat(), handler, what));
         }
-        if(what==298){//大礼包
-            TiUser user = (TiUser) object;
-            params.addBodyParameter("objectId", user.getCardId());
-            params.addBodyParameter("userName",user.getName());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
-        }
+
     }
 }
