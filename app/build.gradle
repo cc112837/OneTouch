@@ -12,7 +12,7 @@ android {
         abortOnError false
     }
     dexOptions {
-        javaMaxHeapSize"4g"
+        javaMaxHeapSize "4g"
     }
     defaultConfig {
         applicationId "com.wzy.mhealth"
@@ -35,23 +35,24 @@ repositories {
     }
 }
 dependencies {
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.bigkoo:pickerview:2.1.0'
     compile files('libs/zxing.jar')
-    compile 'com.bigkoo:convenientbanner:2.0.4'
     compile project(':leanchatlib')
     compile project(':onekeyshare')
     compile name: 'SMSSDK-2.1.3', ext: 'aar'
-    compile 'com.jiechic.library:xUtils:2.6.14'
-    compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/AMap_3DMap_V3.2.0.1_20160122.jar')
     compile files('libs/AMap_android_API_2DMap_Lib_V2.7.0_20151124.jar')
     compile files('libs/AMap_Location_v2.0.0_20151117.jar')
     compile files('libs/AMap_Navi_v1.7.0.1_20160203.jar')
     compile files('libs/AMap_Services_V2.7.0_20151125.jar')
     compile files('libs/Msc.jar')
-    compile 'com.bigkoo:snappingstepper:1.0.2'
     compile project(':Steplibrary')
     compile files('libs/alipaySingle-20160825.jar')
     compile files('libs/libammsdk.jar')
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.bigkoo:pickerview:2.1.0'
+    compile 'com.bigkoo:convenientbanner:2.0.4'
+    compile 'com.jiechic.library:xUtils:2.6.14'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.bigkoo:snappingstepper:1.0.2'
+    compile 'com.android.support:support-v4:23.4.0'
 }

@@ -1,93 +1,98 @@
 package com.wzy.mhealth.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.adapter.ManageAdapter;
-import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.SelfHealth;
-import com.wzy.mhealth.model.StepInfo;
-import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.adapter.TijianAdapter;
+import com.wzy.mhealth.fragments.BookMangerFragment;
+import com.wzy.mhealth.fragments.UserMangerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ManageActivity extends BaActivity implements View.OnClickListener {
+public class ManageActivity extends FragmentActivity{
+    private Button rb_noworder,rb_hisorder;
+    private ViewPager vp_order;
+    private List<Fragment> fragments;
     private ImageView leftBtn;
-    private ListView lv_show;
-    private ManageAdapter manageAdapter;
-    private TextView tv_how;
-    private List<SelfHealth.DataEntity> list=new ArrayList<>();
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 150:
-                    StepInfo stepInfo = (StepInfo) msg.obj;
-                    if ("1".equals(stepInfo.getStatus())) {
-                        Toast.makeText(ManageActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
-                    } else
-                        Toast.makeText(ManageActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
-                    break;
-                case 151:
-                    SelfHealth selfHealth = (SelfHealth) msg.obj;
-                    list.addAll(selfHealth.getData());
-                    manageAdapter.notifyDataSetChanged();
-                    lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                            Intent intent=new Intent(ManageActivity.this,AidsManagerActivity.class);
-//                            startActivity(intent);
-                        }
-                    });
-                    break;
-            }
-        }
-    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
-        String url= Constants.SERVER_URL+"";
-        MyHttpUtils.handData(handler,151,url,"");
-        initView();
     }
-
-    private void initView() {
-        tv_how=(TextView) findViewById(R.id.tv_how);
-        lv_show=(ListView) findViewById(R.id.lv_show);
-        tv_how.setOnClickListener(this);
-        manageAdapter=new ManageAdapter(ManageActivity.this,list);
-        leftBtn = ((ImageView) findViewById(R.id.leftBtn));
-        leftBtn.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.leftBtn:
+    private void init() {
+        rb_hisorder=(Button) findViewById(R.id.rb_hisorder);
+        rb_noworder=(Button) findViewById(R.id.rb_noworder);
+        vp_order=(ViewPager) findViewById(R.id.vp_order);
+        leftBtn=(ImageView) findViewById(R.id.leftBtn);
+        leftBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
-                break;
-            case R.id.tv_how:
-                Intent intent=new Intent(ManageActivity.this,AidsManagerActivity.class);
-                startActivity(intent);
-                break;
-
-
-
-        }
-
+            }
+        });
+        rb_noworder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbTextColorSet(rb_noworder, rb_hisorder);
+                vp_order.setCurrentItem(0);
+            }
+        });
+        rb_hisorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rbTextColorSet(rb_hisorder, rb_noworder);
+                vp_order.setCurrentItem(1);
+            }
+        });
+        addViewpager();
     }
+    private void addViewpager() {
+        fragments = new ArrayList<>();
+        BookMangerFragment nowFragment = new BookMangerFragment();
+        fragments.add(nowFragment);
+        UserMangerFragment hisFragment = new UserMangerFragment();
+        fragments.add(hisFragment);
+        TijianAdapter adapter = new TijianAdapter(getSupportFragmentManager(), fragments);
+        vp_order.setAdapter(adapter);
+        /*添加监听器*/
+        vp_order.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == 0) {
+                    rbTextColorSet(rb_noworder, rb_hisorder);
+                } else {
+                    rbTextColorSet(rb_hisorder, rb_noworder);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+    private void rbTextColorSet(Button b1,Button b2 )
+    {
+        b1.setTextColor(getResources().getColor(R.color.title_green));
+        b2.setTextColor(getResources().getColor(R.color.dark_grey));
+    }
+
+
+
 }

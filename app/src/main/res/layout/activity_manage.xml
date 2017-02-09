@@ -7,6 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.wzy.mhealth.activities.ManageActivity">
+
     <RelativeLayout
         android:id="@+id/title1"
         android:layout_width="fill_parent"
@@ -19,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="病历管理"
+            android:text="健康管家"
             android:textColor="#ffffff"
             android:textSize="18sp" />
 
@@ -30,22 +31,47 @@
             android:padding="10dp"
             android:src="@mipmap/btn_back" />
 
-        <TextView
-            android:id="@+id/tv_how"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/textview_border_4"
-            android:padding="5dp"
-            android:text="+添加病历"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/rb_noworder"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="病历管理"
+            android:textColor="@color/title_green"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="40dp"
+            android:background="@color/grey_bg" />
+
+        <Button
+            android:id="@+id/rb_hisorder"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="用户管理"
+            android:textColor="@color/dark_grey"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey_bg" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -53,11 +79,9 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/lv_show"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_order"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@color/grey"
-            android:dividerHeight="1px"></ListView>
+            android:layout_height="match_parent"></android.support.v4.view.ViewPager>
     </LinearLayout>
 </LinearLayout>

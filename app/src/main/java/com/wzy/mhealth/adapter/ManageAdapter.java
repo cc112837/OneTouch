@@ -57,17 +57,18 @@ public class ManageAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.order_header, null);
             viewHolder.tv_data = (TextView) convertView.findViewById(R.id.tv_data);
             viewHolder.tv_num = (TextView) convertView.findViewById(R.id.tv_num);
+            viewHolder.tv_hosi=(TextView) convertView.findViewById(R.id.tv_hosi);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
+        viewHolder.tv_hosi.setText("医院名称是");
         viewHolder.tv_data.setText("2017-09-21");
         viewHolder.tv_num.setText("体检报告");
         return convertView;
     }
 
     static class ViewHolder {
-        public TextView tv_data, tv_num;
+        public TextView tv_data, tv_num,tv_hosi;
     }
 }
