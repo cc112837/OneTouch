@@ -29,6 +29,7 @@ public class ManageActivity extends FragmentActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage);
+        init();
     }
     private void init() {
         rb_hisorder=(Button) findViewById(R.id.rb_hisorder);
