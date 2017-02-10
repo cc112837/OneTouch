@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.model.SelfHealth;
+import com.wzy.mhealth.model.UserManger;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
@@ -26,9 +26,9 @@ import java.util.List;
 public class UserManageAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
-    private List<SelfHealth.DataEntity> list;
+    private List<UserManger.DataEntity> list;
 
-    public UserManageAdapter(Context context, List<SelfHealth.DataEntity> list) {
+    public UserManageAdapter(Context context, List<UserManger.DataEntity> list) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
         this.context = context;
@@ -60,7 +60,7 @@ public class UserManageAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_name.setText("医院名称是");
+        viewHolder.tv_name.setText(list.get(position).getName()+"");
         return convertView;
     }
 

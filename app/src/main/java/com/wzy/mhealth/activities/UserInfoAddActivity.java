@@ -2,6 +2,8 @@ package com.wzy.mhealth.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,12 +15,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.Recommend;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.UserManger;
+import com.wzy.mhealth.utils.MyHttpUtils;
+
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserInfoAddActivity extends AppCompatActivity implements TextWatcher {
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 299:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    Toast.makeText(UserInfoAddActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
 
     @Bind(R.id.titleView)
     TextView titleView;
@@ -38,6 +59,8 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
     TextView tvSave;
     @Bind(R.id.et_card)
     EditText etCard;
+    private UserManger.DataEntity user;
+    private String flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +70,17 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
         Intent intent = getIntent();
         etCard.addTextChangedListener(this);
         etName.addTextChangedListener(this);
-        String flag = intent.getStringExtra("flag");
+        flag = intent.getStringExtra("flag");
         if ("new".equals(flag)) {
 
         } else {
-            titleView.setText("");
+            user = (UserManger.DataEntity) intent.getSerializableExtra("user");
+            titleView.setText("" + user.getName());
+            etCard.setText("" + user.getUserID());
+            etName.setText(user.getName() + "");
+            tvSex.setText(user.getSex() + "");
+            tvBirth.setText(user.getBirth() + "");
+            tvAge.setText(user.getAge() + "");
         }
     }
 
@@ -68,7 +97,19 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
                     if (etCard.getText().toString().length() != 18) {
                         Toast.makeText(UserInfoAddActivity.this, "请输入正确的身份证号", Toast.LENGTH_LONG).show();
                     } else {
-
+                        String url = Constants.SERVER_URL + "UserManagerSaveServlet";
+                        Recommend tiUser = new Recommend();
+                        tiUser.setName(etName.getText().toString() + "");
+                        if ("new".equals(flag)) {
+                            tiUser.setStatus("");
+                        } else {
+                            tiUser.setStatus(user.getUserManageId() + "");
+                        }
+                        tiUser.setNewPrice(etCard.getText().toString()+"");
+                        tiUser.setImage(tvSex.getText().toString() + "");
+                        tiUser.setData(tvAge.getText().toString() + "");
+                        tiUser.setContext(tvBirth.getText().toString() + "");
+                        MyHttpUtils.handData(handler, 299, url, tiUser);
                     }
                 }
                 break;
@@ -90,18 +131,19 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
         String name = etName.getText().toString();
         String card = etCard.getText().toString();
         if (("").equals(name) || ("").equals(card)) {
-            Toast.makeText(UserInfoAddActivity.this, "输入不能为空", Toast.LENGTH_LONG).show();
         } else if (card.length() != 18) {
-            Toast.makeText(UserInfoAddActivity.this, "请输入正确的身份证号", Toast.LENGTH_LONG).show();
         } else {
             String birth = card.substring(6, 14);
+            int age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(etCard.getText().toString().substring(6, 10)) + 1;
             tvBirth.setText(birth);
+            tvAge.setText(age + "");
             int i = Integer.parseInt(String.valueOf(card.charAt(16)));
-            if(1%2==0){
+            if (i % 2 == 0) {
                 tvSex.setText("女");
-            }else{
+            } else {
                 tvSex.setText("男");
             }
+
         }
     }
 }

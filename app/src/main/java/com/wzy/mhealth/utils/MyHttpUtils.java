@@ -1,6 +1,7 @@
 package com.wzy.mhealth.utils;
 
 import android.os.Handler;
+import android.util.Log;
 
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.lidroid.xutils.HttpUtils;
@@ -53,6 +54,7 @@ import com.wzy.mhealth.model.TestWeChat;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.model.UserEvaluation;
+import com.wzy.mhealth.model.UserManger;
 import com.wzy.mhealth.model.Zan;
 import com.wzy.mhealth.model.ZhixingTaocan;
 
@@ -126,8 +128,8 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 40) {//医生咨询(套餐支付)
             TiUser user = (TiUser) object;
             params.addBodyParameter("id", user.getName());
-            params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
-            params.addBodyParameter("type",user.getPass());
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("type", user.getPass());
             params.addBodyParameter("number", user.getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AliPayBack(), handler, what));
 
@@ -359,7 +361,7 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 266) {//向服务端传用户图像
             params.addBodyParameter("userName", ((TiUser) object).getName());
-            params.addBodyParameter("objectId",((TiUser)object).getCardId());
+            params.addBodyParameter("objectId", ((TiUser) object).getCardId());
             params.addBodyParameter("imgUrl", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
@@ -391,9 +393,9 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Cart(), handler, what));
         }
-        if (what == 273||what == 274) {//可使用优惠劵//不可使用优惠劵
-            params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
-            params.addBodyParameter("type",((TiUser) object).getPass());
+        if (what == 273 || what == 274) {//可使用优惠劵//不可使用优惠劵
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("type", ((TiUser) object).getPass());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Decrease(), handler, what));
 
         }
@@ -483,27 +485,42 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("statify", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserEvaluation(), handler, what));
         }
-        if (what == 292||what==293||what==294||what==295) {//提醒发货//确认收货//申请商品退款//删除订单
+        if (what == 292 || what == 293 || what == 294 || what == 295) {//提醒发货//确认收货//申请商品退款//删除订单
             params.addBodyParameter("orderId", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
-        if(what==296){//微信支付商品订单
+        if (what == 296) {//微信支付商品订单
             params.addBodyParameter("totalPrice", ((TiUser) object).getName());
             params.addBodyParameter("addressId", ((TiUser) object).getCardId());
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TestWeChat(), handler, what));
         }
-        if(what==297){//微信支付套餐。医生咨询
+        if (what == 297) {//微信支付套餐。医生咨询
             TiUser user = (TiUser) object;
             params.addBodyParameter("id", user.getName());
-            params.addBodyParameter("userName",LeanchatUser.getCurrentUser().getUsername());
-            params.addBodyParameter("type",user.getPass());
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("type", user.getPass());
             params.addBodyParameter("number", user.getCardId());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TestWeChat(), handler, what));
         }
-        if(what==298){//用户管理页面
-            params.addBodyParameter("number", "");
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new TestWeChat(), handler, what));
+        if (what == 298) {//用户管理页面
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserManger(), handler, what));
+        }
+        if (what == 299) {
+            params.addBodyParameter("name", ((Recommend) object).getName());
+            params.addBodyParameter("userID", ((Recommend) object).getNewPrice() + "");
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("sex", ((Recommend) object).getImage());
+            params.addBodyParameter("age", ((Recommend) object).getData());
+            params.addBodyParameter("birth", ((Recommend) object).getContext() + "");
+            params.addBodyParameter("userManageId", ((Recommend) object).getStatus() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+
+        }
+        if (what == 300) {
+            params.addBodyParameter("userManageId", ((Recommend) object).getStatus() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
 
     }
