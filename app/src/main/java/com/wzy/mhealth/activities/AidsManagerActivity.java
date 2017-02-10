@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -21,12 +23,20 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.bigkoo.pickerview.TimePickerView;
 import com.wzy.mhealth.LeanChat.util.PathUtils;
 import com.wzy.mhealth.LeanChat.util.PhotoUtils;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ImageItem;
+import com.wzy.mhealth.model.Recommend;
+import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
+import org.json.JSONArray;
+
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,6 +48,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AidsManagerActivity extends AppCompatActivity {
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 150:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    Toast.makeText(AidsManagerActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
+                    break;
+            }
+        }
+    };
     private GridView gridView1;
     private TimePickerView pvOptions;
     private final int IMAGE_OPEN = 1;        //打开图片标记
@@ -64,7 +86,7 @@ public class AidsManagerActivity extends AppCompatActivity {
     private Bitmap bmp;
     private SimpleAdapter simpleAdapter;
     private List imageItem;
-    private List<ImageItem> listitem=new ArrayList<>();
+    private List<ImageItem> listitem = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,7 +249,7 @@ public class AidsManagerActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 imageItem.remove(position);
-                listitem.remove(position-1);
+                listitem.remove(position - 1);
                 simpleAdapter.notifyDataSetChanged();
             }
         });
@@ -292,6 +314,24 @@ public class AidsManagerActivity extends AppCompatActivity {
                 tvExamrecord.setChecked(false);
                 break;
             case R.id.tv_submit:
+                String data = tvDate.getText().toString();
+                String et_hos = etPer.getText().toString();
+                if (("").equals(data) || ("").equals(et_hos)) {
+                    Toast.makeText(AidsManagerActivity.this, "请检查输入内容是否有空值", Toast.LENGTH_LONG).show();
+                } else {
+                    String url = Constants.SERVER_URL + "CaseImageUploadServlet";
+                    Recommend recommend = new Recommend();
+                    recommend.setImage(et_hos);
+                    recommend.setData(data);
+                    recommend.setContext(type + "");
+                    recommend.setName(LeanchatUser.getCurrentUser().getUsername() + "");
+                    JSONArray jsonArray = new JSONArray();
+                    for (int i = 0; i < listitem.size(); i++) {
+                        jsonArray.put(new File(listitem.get(i).getPath()));
+                    }
+                    recommend.setNewPrice(jsonArray.toString());
+                    MyHttpUtils.handData(handler, 150, url, recommend);
+                }
                 break;
         }
     }

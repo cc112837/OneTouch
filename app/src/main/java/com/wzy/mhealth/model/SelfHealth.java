@@ -13,48 +13,50 @@ import java.util.List;
  * 修改备注：
  */
 public class SelfHealth {
-    private int number;
-    /**
-     * firstDepName : 妇科
-     * firstDepId : 1
-     */
 
     private List<DataEntity> data;
 
-    public void setNumber(int number) {
-        this.number = number;
+    public List<DataEntity> getData() {
+        return data;
     }
 
     public void setData(List<DataEntity> data) {
         this.data = data;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public List<DataEntity> getData() {
-        return data;
-    }
-
     public static class DataEntity {
-        private String firstDepName;
-        private int firstDepId;
+        /**
+         * medicalDate : 2017-02-08
+         * medicalType : 体检报告
+         * medicalId : f5a2e99d5884b056015884b056520000
+         */
 
-        public void setFirstDepName(String firstDepName) {
-            this.firstDepName = firstDepName;
+        private String medicalDate;
+        private String medicalType;
+        private String medicalId;
+
+        public String getMedicalDate() {
+            return medicalDate;
         }
 
-        public void setFirstDepId(int firstDepId) {
-            this.firstDepId = firstDepId;
+        public void setMedicalDate(String medicalDate) {
+            this.medicalDate = medicalDate;
         }
 
-        public String getFirstDepName() {
-            return firstDepName;
+        public String getMedicalType() {
+            return medicalType;
         }
 
-        public int getFirstDepId() {
-            return firstDepId;
+        public void setMedicalType(String medicalType) {
+            this.medicalType = medicalType;
+        }
+
+        public String getMedicalId() {
+            return medicalId;
+        }
+
+        public void setMedicalId(String medicalId) {
+            this.medicalId = medicalId;
         }
     }
 }

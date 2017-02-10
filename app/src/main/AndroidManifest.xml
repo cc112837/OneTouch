@@ -136,10 +136,6 @@
             android:name=".activities.SearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.ManageActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
             android:name=".activities.AboutActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -303,7 +299,9 @@
         <activity android:name=".activities.ContactActivity" />
         <activity android:name=".activities.AidsManagerActivity" />
         <activity android:name=".activities.OrderDoctorActivity" />
-        <activity android:name=".activities.UserInfoAddActivity"></activity>
+        <activity android:name=".activities.UserInfoAddActivity" />
+        <activity android:name=".activities.UserManagerActivity" />
+        <activity android:name=".activities.BookMangerActivity"></activity>
     </application>
 
 </manifest>

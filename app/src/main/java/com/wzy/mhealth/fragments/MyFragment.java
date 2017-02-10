@@ -35,11 +35,11 @@ import com.wzy.mhealth.activities.BarCodeActivity;
 import com.wzy.mhealth.activities.DecreseActivity;
 import com.wzy.mhealth.activities.ExaminationOrderActivity;
 import com.wzy.mhealth.activities.ExaminationRecordActivity;
-import com.wzy.mhealth.activities.ManageActivity;
 import com.wzy.mhealth.activities.MyGradeActivity;
 import com.wzy.mhealth.activities.ProudActivity;
 import com.wzy.mhealth.activities.SettingActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
+import com.wzy.mhealth.activities.UserManagerActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Proud;
 import com.wzy.mhealth.model.StepInfo;
@@ -351,7 +351,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
                 getActivity().startActivity(intent);
                 break;
             case R.id.manager:
-                intent = new Intent(getActivity(), ManageActivity.class);
+                intent = new Intent(getActivity(), UserManagerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.setting:

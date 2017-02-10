@@ -1,7 +1,6 @@
 package com.wzy.mhealth.utils;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.lidroid.xutils.HttpUtils;
@@ -193,16 +192,17 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 149) {//科室分类
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new FirstDep(), handler, what));
         }
+        if(what==148){//删除病历管理
+            params.addBodyParameter("medicalId ", ((TiUser)object).getCardId()+"");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
         if (what == 150) {//健康管家
-            SelfHealth selfHealth = (SelfHealth) object;
-//            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
-//            params.addBodyParameter("name", selfHealth.getName());
-//            params.addBodyParameter("sex", selfHealth.getSex());
-//            params.addBodyParameter("profession", selfHealth.getProfession());
-//            params.addBodyParameter("age", selfHealth.getAge());
-//            params.addBodyParameter("marrage", selfHealth.getMarrage());
-//            params.addBodyParameter("relator", selfHealth.getRelator());
-//            params.addBodyParameter("relate", selfHealth.getRelate());
+            Recommend selfHealth = (Recommend) object;
+            params.addBodyParameter("userName", selfHealth.getName());
+            params.addBodyParameter("caseDate", selfHealth.getData());
+            params.addBodyParameter("medicalInstitution", selfHealth.getImage());
+            params.addBodyParameter("caseType", selfHealth.getContext());
+            params.addBodyParameter("imagePath", selfHealth.getNewPrice());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 151) {//病历管理页面数据请求
@@ -507,9 +507,9 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserManger(), handler, what));
         }
-        if (what == 299) {
+        if (what == 299) {//删除用户管理
             params.addBodyParameter("name", ((Recommend) object).getName());
-            params.addBodyParameter("userID", ((Recommend) object).getNewPrice() + "");
+            params.addBodyParameter("userId", ((Recommend) object).getNewPrice() + "");
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("sex", ((Recommend) object).getImage());
             params.addBodyParameter("age", ((Recommend) object).getData());
@@ -519,7 +519,7 @@ public class MyHttpUtils extends HttpUtils {
 
         }
         if (what == 300) {
-            params.addBodyParameter("userManageId", ((Recommend) object).getStatus() + "");
+            params.addBodyParameter("userManageId", ((TiUser) object).getCardId() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
 

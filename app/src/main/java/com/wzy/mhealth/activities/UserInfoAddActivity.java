@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserInfoAddActivity extends AppCompatActivity implements TextWatcher {
+    @Bind(R.id.ll_aid)
+    LinearLayout llAid;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -84,7 +87,7 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
         }
     }
 
-    @OnClick({R.id.leftBtn, R.id.tv_save})
+    @OnClick({R.id.leftBtn, R.id.tv_save, R.id.ll_aid})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.leftBtn:
@@ -105,7 +108,7 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
                         } else {
                             tiUser.setStatus(user.getUserManageId() + "");
                         }
-                        tiUser.setNewPrice(etCard.getText().toString()+"");
+                        tiUser.setNewPrice(etCard.getText().toString() + "");
                         tiUser.setImage(tvSex.getText().toString() + "");
                         tiUser.setData(tvAge.getText().toString() + "");
                         tiUser.setContext(tvBirth.getText().toString() + "");
@@ -113,6 +116,11 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
                     }
                 }
                 break;
+            case R.id.ll_aid:
+                Intent intent = new Intent(UserInfoAddActivity.this, BookMangerActivity.class);
+                startActivity(intent);
+                break;
+
         }
     }
 
@@ -145,5 +153,9 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
             }
 
         }
+    }
+
+    @OnClick(R.id.ll_aid)
+    public void onClick() {
     }
 }
