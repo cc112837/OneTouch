@@ -62,9 +62,9 @@ public class ManageAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_hosi.setText("医院名称是");
-        viewHolder.tv_data.setText("2017-09-21");
-        viewHolder.tv_num.setText("体检报告");
+        viewHolder.tv_hosi.setText(""+list.get(position).getMedicalType());
+        viewHolder.tv_data.setText(""+list.get(position).getMedicalDate());
+        viewHolder.tv_num.setText(""+list.get(position).getMedicalType());
         return convertView;
     }
 

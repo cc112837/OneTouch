@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +25,14 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class BookMangerActivity extends AppCompatActivity {
+    @Bind(R.id.leftBtn)
+    ImageView leftBtn;
     private ListView lv_show;
     private ManageAdapter manageAdapter;
     private TextView tv_how;
@@ -61,7 +68,7 @@ public class BookMangerActivity extends AppCompatActivity {
                                     dialog.dismiss();
                                     String url = Constants.SERVER_URL + "CaseManageDeleteServlet";
                                     TiUser tiUser = new TiUser();
-                                    tiUser.setCardId(list.get(position).getMedicalId()+ "");
+                                    tiUser.setCardId(list.get(position).getMedicalId() + "");
                                     MyHttpUtils.handData(handler, 148, url, tiUser);
 
                                 }
@@ -85,6 +92,7 @@ public class BookMangerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_manger);
+        ButterKnife.bind(this);
         initView();
         String url = Constants.SERVER_URL + "CaseManageServlet";
         MyHttpUtils.handData(handler, 151, url, null);
@@ -102,5 +110,10 @@ public class BookMangerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @OnClick(R.id.leftBtn)
+    public void onClick() {
+        finish();
     }
 }

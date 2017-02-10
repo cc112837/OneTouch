@@ -94,7 +94,7 @@ public class AidsManagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aids_manager);
         ButterKnife.bind(this);
         gridView1 = (GridView) findViewById(R.id.gridView1);
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_defaluat);
+        bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.addicon);
         imageItem = new ArrayList<>();
         HashMap<String, Object> map = new HashMap<>();
         map.put("itemImage", bmp);

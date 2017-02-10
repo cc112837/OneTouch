@@ -301,7 +301,8 @@
         <activity android:name=".activities.OrderDoctorActivity" />
         <activity android:name=".activities.UserInfoAddActivity" />
         <activity android:name=".activities.UserManagerActivity" />
-        <activity android:name=".activities.BookMangerActivity"></activity>
+        <activity android:name=".activities.BookMangerActivity" />
+        <activity android:name=".activities.OrderInfoActivity"></activity>
     </application>
 
 </manifest>
