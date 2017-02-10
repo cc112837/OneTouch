@@ -164,6 +164,7 @@
             android:background="@color/grey_bg"></RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/ll_name"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:orientation="horizontal">
@@ -223,15 +224,15 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_sex"
+            <EditText
+                android:id="@+id/et_address"
+                android:background="@color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center_vertical"
                 android:hint="西安市"
-                android:lines="2"
                 android:maxLines="2"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
@@ -261,8 +262,9 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_age"
+            <EditText
+                android:id="@+id/et_aidness"
+                android:background="@color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -295,9 +297,10 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_birth"
+            <EditText
+                android:id="@+id/et_descri"
                 android:layout_width="0dp"
+                android:background="@color/white"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
@@ -317,7 +320,6 @@
             android:background="@color/grey_bg"></RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/ll_aid"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center_vertical"
@@ -335,6 +337,7 @@
                 android:textSize="16sp" />
 
             <RadioGroup
+                android:id="@+id/rg_agree"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -342,12 +345,14 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/rb_agree"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="是" />
 
                 <RadioButton
+                    android:id="@+id/rb_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="否" />
@@ -367,6 +372,7 @@
             android:gravity="center">
 
             <TextView
+                android:id="@+id/tv_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
