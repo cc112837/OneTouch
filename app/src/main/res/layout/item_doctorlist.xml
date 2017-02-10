@@ -66,27 +66,35 @@
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="姓名"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/zhicheng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/textview5"
+                    android:padding="2dp"
+                    android:text="职称名称"
+                    android:textColor="@color/title_green"
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/department"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:text="部门"
                     android:textColor="#666666"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/zhicheng"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="职称名称"
-                    android:textColor="#666666"
-                    android:textSize="14sp" />
+
             </LinearLayout>
 
 
@@ -126,13 +134,15 @@
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:src="@mipmap/camera_doctor" />
+
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
                 android:background="#c0c0c0" />
+
             <ImageView
                 android:id="@+id/phonefee"
                 android:layout_width="0dp"
@@ -140,39 +150,45 @@
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:src="@mipmap/phone_doctor" />
+
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
                 android:background="#c0c0c0" />
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:src="@mipmap/video_doctor_grey" />
+
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
                 android:background="#c0c0c0" />
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:src="@mipmap/person_doctor_grey" />
+
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="3dp"
                 android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
                 android:background="#c0c0c0" />
+
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

@@ -2,24 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/title_green"
     android:fitsSystemWindows="true"
-    android:background="@color/title_green" >
+    android:orientation="vertical">
+
     <RelativeLayout
         android:id="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/title_green"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/leftBtn"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"
+            android:onClick="leftBtnClick"
             android:padding="10dp"
-            android:src="@mipmap/btn_back"
-            android:onClick="leftBtnClick"/>
+            android:src="@mipmap/btn_back" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
             android:textColor="#ffffff"
             android:textSize="@dimen/fontSizeMidMM" />
     </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,60 +41,68 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ffffff"
-            android:orientation="vertical" >
-
+            android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/photo"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:background="@mipmap/doctor_women"
                     android:scaleType="fitXY" />
 
                 <LinearLayout
-                    android:layout_width="180dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical" >
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="姓名"
-                        android:textSize="18sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal" >
+                        android:layout_marginTop="10dp"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/department"
+                            android:id="@+id/name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="部门"
-                            android:textColor="#666666"
-                            android:textSize="15sp" />
+                            android:text="姓名"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
 
                         <TextView
                             android:id="@+id/zhicheng"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
                             android:layout_marginLeft="10dp"
+                            android:background="@drawable/textview5"
+                            android:padding="2dp"
                             android:text="职称名称"
+                            android:textColor="@color/title_green"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/department"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:text="部门"
                             android:textColor="#666666"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <TextView
@@ -111,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="15dp"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                 </LinearLayout>
             </LinearLayout>
@@ -125,20 +135,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/tuwenzixun"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_marginTop="7dp"
                         android:id="@+id/tuwen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:gravity="center"
                         android:text="图文咨询"
                         android:textColor="#666666"
@@ -174,13 +184,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_marginTop="7dp"
                         android:id="@+id/dianhua"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:gravity="center"
                         android:text="电话咨询"
                         android:textColor="#666666"
@@ -216,13 +226,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/jiahao"
-                        android:layout_marginTop="7dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:gravity="center"
                         android:text="视频咨询"
                         android:textColor="#666666"
@@ -258,14 +268,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:gravity="center"
                         android:text="私人医生"
-                        android:layout_marginTop="7dp"
                         android:textColor="#666666"
                         android:textSize="13sp" />
 
@@ -293,20 +303,21 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center_vertical"
                     android:background="#c0c0c0" />
+
                 <LinearLayout
                     android:id="@+id/vedioyuyue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/vedio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
                         android:gravity="center"
                         android:text="预约挂号"
-                        android:layout_marginTop="7dp"
                         android:textColor="#666666"
                         android:textSize="12sp" />
 
@@ -314,8 +325,8 @@
                         android:id="@+id/vediotu"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_margin="10dp"
                         android:layout_gravity="center"
+                        android:layout_margin="10dp"
                         android:background="@mipmap/before_doctor_grey"
                         android:scaleType="fitXY" />
 
@@ -346,12 +357,12 @@
                 android:id="@+id/yishengxiangqing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -368,9 +379,9 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="10dp"
-                        android:visibility="gone"
                         android:background="@mipmap/right"
-                        android:scaleType="fitXY" />
+                        android:scaleType="fitXY"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <View
@@ -401,7 +412,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:baselineAligned="false"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -409,7 +420,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -434,9 +445,9 @@
                             android:background="#FF8C00"
                             android:gravity="center"
                             android:text="高"
-                            android:visibility="gone"
                             android:textColor="#ffffff"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:visibility="gone" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -444,7 +455,7 @@
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -470,8 +481,8 @@
                             android:gravity="center"
                             android:text="高"
                             android:textColor="#ffffff"
-                            android:visibility="gone"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:visibility="gone" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -479,7 +490,7 @@
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -504,9 +515,9 @@
                             android:background="#FF8C00"
                             android:gravity="center"
                             android:text="高"
-                            android:visibility="gone"
                             android:textColor="#ffffff"
-                            android:textSize="13sp" />
+                            android:textSize="13sp"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -520,13 +531,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/yonghupingjia"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/zuobian"
@@ -551,14 +562,14 @@
                         android:id="@+id/youbianzi"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
                         android:layout_gravity="center_vertical|right"
+                        android:layout_toLeftOf="@+id/youbian"
+                        android:layout_toStartOf="@+id/youbian"
                         android:gravity="center_vertical"
                         android:text="全部评价"
                         android:textColor="@color/dark_grey"
-                        android:textSize="14sp"
-                        android:layout_alignParentTop="true"
-                        android:layout_toLeftOf="@+id/youbian"
-                        android:layout_toStartOf="@+id/youbian" />
+                        android:textSize="14sp" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -567,7 +578,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <View
                         android:layout_width="match_parent"
@@ -579,7 +590,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/yonghu1"
@@ -617,7 +628,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <View
                         android:layout_width="match_parent"
@@ -628,7 +639,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/yonghu2"
