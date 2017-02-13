@@ -12,12 +12,16 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.OrderDoctorHeader;
+import com.wzy.mhealth.model.Recommend;
+import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -27,7 +31,7 @@ import butterknife.OnClick;
 
 public class OrderInfoActivity extends AppCompatActivity {
 
-
+    String identity="0";
     @Bind(R.id.leftBtn)
     ImageView leftBtn;
     @Bind(R.id.photo)
@@ -75,9 +79,17 @@ public class OrderInfoActivity extends AppCompatActivity {
                     name.setText(orderDoctorHeader.getDoctorName());
                     tvData.setText(orderDoctorHeader.getAppointTime());
                     break;
+                case 303:
+                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    Toast.makeText(OrderInfoActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
+                    if("1".equals(stepInfo.getStatus())){
+                      //前往支付页面
+                    }
+                    break;
             }
         }
     };
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +99,23 @@ public class OrderInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String time = intent.getStringExtra("time");
         String flag = intent.getStringExtra("flag");
-        String id = intent.getStringExtra("id");
+        id = intent.getStringExtra("id");
         TiUser tiUser = new TiUser();
         tiUser.setName(time);
         tiUser.setCardId(id);
         tiUser.setPass(flag);
         String url = Constants.SERVER_URL + "PatientCounselingServlet";
         MyHttpUtils.handData(handler, 302, url, tiUser);
+        rgAgree.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == rbAgree.getId()) {
+                    identity = "0";
+                } else {
+                    identity = "1";
+                }
+            }
+        });
 
     }
 
@@ -110,7 +132,6 @@ public class OrderInfoActivity extends AppCompatActivity {
     }
 
 
-
     @OnClick({R.id.leftBtn, R.id.ll_name, R.id.tv_submit})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -123,6 +144,23 @@ public class OrderInfoActivity extends AppCompatActivity {
                 startActivityForResult(intent, 19);
                 break;
             case R.id.tv_submit:
+                String name = etName.getText().toString();
+                String addre = etAidness.getText().toString();
+                String desci = etDescri.getText().toString();
+                if ("".equals(name) || "".equals(addre) || "".equals(desci)) {
+                    Toast.makeText(OrderInfoActivity.this, "输入不能为空", Toast.LENGTH_LONG).show();
+                } else {
+                    String url = Constants.SERVER_URL + "PatientCounselingSaveServlet";
+                    Recommend recommend = new Recommend();
+                    recommend.setNewPrice(tvData.getText().toString());
+                    recommend.setName(name);
+                    recommend.setData(addre);
+                    recommend.setContext(desci);
+                    recommend.setImage(LeanchatUser.getCurrentUser().getUsername());
+                    recommend.setOldPrice(id);
+                    recommend.setStatus(identity);
+                    MyHttpUtils.handData(handler, 303, url, recommend);
+                }
                 break;
         }
     }

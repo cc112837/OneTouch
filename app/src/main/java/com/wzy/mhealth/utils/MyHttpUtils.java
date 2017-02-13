@@ -534,5 +534,15 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("appontAfter", ((TiUser) object).getPass() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderDoctorHeader(), handler, what));
         }
+        if (what == 303) {//填写预约的提交
+            params.addBodyParameter("appointTime", ((Recommend) object).getNewPrice() + "");
+            params.addBodyParameter("name", ((Recommend) object).getName() + "");
+            params.addBodyParameter("illness", ((Recommend) object).getContext() + "");
+            params.addBodyParameter("userName", ((Recommend) object).getImage() + "");
+            params.addBodyParameter("doctorId", ((Recommend) object).getOldPrice() + "");
+            params.addBodyParameter("checkCase", ((Recommend) object).getStatus() + "");
+            params.addBodyParameter("caseness", ((Recommend) object).getData() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
     }
 }
