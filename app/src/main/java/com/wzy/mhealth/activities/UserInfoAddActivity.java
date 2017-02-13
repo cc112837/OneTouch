@@ -94,33 +94,41 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
                 finish();
                 break;
             case R.id.tv_save:
-                if (("").equals(etName.getText().toString()) || ("").equals(etCard.getText().toString())) {
-                    Toast.makeText(UserInfoAddActivity.this, "输入不能为空", Toast.LENGTH_LONG).show();
-                } else {
-                    if (etCard.getText().toString().length() != 18) {
-                        Toast.makeText(UserInfoAddActivity.this, "请输入正确的身份证号", Toast.LENGTH_LONG).show();
-                    } else {
-                        String url = Constants.SERVER_URL + "UserManagerSaveServlet";
-                        Recommend tiUser = new Recommend();
-                        tiUser.setName(etName.getText().toString() + "");
-                        if ("new".equals(flag)) {
-                            tiUser.setStatus("");
-                        } else {
-                            tiUser.setStatus(user.getUserManageId() + "");
-                        }
-                        tiUser.setNewPrice(etCard.getText().toString() + "");
-                        tiUser.setImage(tvSex.getText().toString() + "");
-                        tiUser.setData(tvAge.getText().toString() + "");
-                        tiUser.setContext(tvBirth.getText().toString() + "");
-                        MyHttpUtils.handData(handler, 299, url, tiUser);
-                    }
-                }
+                aidUse();
                 break;
             case R.id.ll_aid:
+                if("new".equals(flag)){
+                    aidUse();
+                }
                 Intent intent = new Intent(UserInfoAddActivity.this, BookMangerActivity.class);
+                intent.putExtra("name",etName.getText().toString()+"");
                 startActivity(intent);
                 break;
 
+        }
+    }
+
+    public void aidUse() {
+        if (("").equals(etName.getText().toString()) || ("").equals(etCard.getText().toString())) {
+            Toast.makeText(UserInfoAddActivity.this, "输入不能为空", Toast.LENGTH_LONG).show();
+        } else {
+            if (etCard.getText().toString().length() != 18) {
+                Toast.makeText(UserInfoAddActivity.this, "请输入正确的身份证号", Toast.LENGTH_LONG).show();
+            } else {
+                String url = Constants.SERVER_URL + "UserManagerSaveServlet";
+                Recommend tiUser = new Recommend();
+                tiUser.setName(etName.getText().toString() + "");
+                if ("new".equals(flag)) {
+                    tiUser.setStatus("");
+                } else {
+                    tiUser.setStatus(user.getUserManageId() + "");
+                }
+                tiUser.setNewPrice(etCard.getText().toString() + "");
+                tiUser.setImage(tvSex.getText().toString() + "");
+                tiUser.setData(tvAge.getText().toString() + "");
+                tiUser.setContext(tvBirth.getText().toString() + "");
+                MyHttpUtils.handData(handler, 299, url, tiUser);
+            }
         }
     }
 

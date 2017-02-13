@@ -32,11 +32,9 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ImageItem;
 import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-import org.json.JSONArray;
-
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,6 +54,10 @@ public class AidsManagerActivity extends AppCompatActivity {
                 case 150:
                     StepInfo stepInfo = (StepInfo) msg.obj;
                     Toast.makeText(AidsManagerActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
+                    break;
+                case 147:
+                    StepInfo stepInf = (StepInfo) msg.obj;
+                    Toast.makeText(AidsManagerActivity.this, stepInf.getData(), Toast.LENGTH_LONG).show();
                     break;
             }
         }
@@ -87,12 +89,14 @@ public class AidsManagerActivity extends AppCompatActivity {
     private SimpleAdapter simpleAdapter;
     private List imageItem;
     private List<ImageItem> listitem = new ArrayList<>();
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aids_manager);
         ButterKnife.bind(this);
+        name = getIntent().getStringExtra("name");
         gridView1 = (GridView) findViewById(R.id.gridView1);
         bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.addicon);
         imageItem = new ArrayList<>();
@@ -232,6 +236,10 @@ public class AidsManagerActivity extends AppCompatActivity {
             ImageItem imageItem = new ImageItem();
             imageItem.setPath(pathImage);
             listitem.add(imageItem);
+            String url = Constants.SERVER_URL + "CaseImageUploadServlet";
+            TiUser tiUser = new TiUser();
+            tiUser.setPass(pathImage);
+            MyHttpUtils.handData(handler, 147, url, tiUser);
         }
     }
 
@@ -319,17 +327,18 @@ public class AidsManagerActivity extends AppCompatActivity {
                 if (("").equals(data) || ("").equals(et_hos)) {
                     Toast.makeText(AidsManagerActivity.this, "请检查输入内容是否有空值", Toast.LENGTH_LONG).show();
                 } else {
-                    String url = Constants.SERVER_URL + "CaseImageUploadServlet";
+                    String url = Constants.SERVER_URL + "CaseManageAddServlet";
                     Recommend recommend = new Recommend();
                     recommend.setImage(et_hos);
                     recommend.setData(data);
                     recommend.setContext(type + "");
                     recommend.setName(LeanchatUser.getCurrentUser().getUsername() + "");
-                    JSONArray jsonArray = new JSONArray();
-                    for (int i = 0; i < listitem.size(); i++) {
-                        jsonArray.put(new File(listitem.get(i).getPath()));
-                    }
-                    recommend.setNewPrice(jsonArray.toString());
+                    recommend.setOldPrice(name);
+//                    JSONArray jsonArray = new JSONArray();
+//                    for (int i = 0; i < listitem.size(); i++) {
+//                        jsonArray.put(new File(listitem.get(i).getPath()));
+//                    }
+//                    recommend.setNewPrice(jsonArray.toString());
                     MyHttpUtils.handData(handler, 150, url, recommend);
                 }
                 break;

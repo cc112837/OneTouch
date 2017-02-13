@@ -59,6 +59,8 @@ import com.wzy.mhealth.model.UserManger;
 import com.wzy.mhealth.model.Zan;
 import com.wzy.mhealth.model.ZhixingTaocan;
 
+import java.io.File;
+
 
 /**
 
@@ -194,8 +196,13 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 149) {//科室分类
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new FirstDep(), handler, what));
         }
-        if(what==148){//删除病历管理
-            params.addBodyParameter("medicalId ", ((TiUser)object).getCardId()+"");
+        if (what == 148) {//删除病历管理
+            params.addBodyParameter("medicalId ", ((TiUser) object).getCardId() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 147) {
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("imagePath", new File(((TiUser) object).getPass()));
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 150) {//健康管家
@@ -204,7 +211,8 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("caseDate", selfHealth.getData());
             params.addBodyParameter("medicalInstitution", selfHealth.getImage());
             params.addBodyParameter("caseType", selfHealth.getContext());
-            params.addBodyParameter("imagePath", selfHealth.getNewPrice());
+            params.addBodyParameter("name", selfHealth.getOldPrice());
+//            params.addBodyParameter("imagePath", selfHealth.getNewPrice());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 151) {//病历管理页面数据请求

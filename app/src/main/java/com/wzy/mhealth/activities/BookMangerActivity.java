@@ -87,12 +87,14 @@ public class BookMangerActivity extends AppCompatActivity {
             }
         }
     };
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_manger);
         ButterKnife.bind(this);
+        name = getIntent().getStringExtra("name");
         initView();
         String url = Constants.SERVER_URL + "CaseManageServlet";
         MyHttpUtils.handData(handler, 151, url, null);
@@ -107,6 +109,7 @@ public class BookMangerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookMangerActivity.this, AidsManagerActivity.class);
+                intent.putExtra("name",name);
                 startActivity(intent);
             }
         });
