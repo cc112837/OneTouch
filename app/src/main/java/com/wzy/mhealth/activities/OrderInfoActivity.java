@@ -1,6 +1,9 @@
 package com.wzy.mhealth.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -10,13 +13,20 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.avoscloud.leanchatlib.utils.PhotoUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.OrderDoctorHeader;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OrderInfoActivity extends AppCompatActivity {
+
 
     @Bind(R.id.leftBtn)
     ImageView leftBtn;
@@ -33,11 +43,11 @@ public class OrderInfoActivity extends AppCompatActivity {
     @Bind(R.id.tv_data)
     TextView tvData;
     @Bind(R.id.et_name)
-    EditText etName;
+    TextView etName;
     @Bind(R.id.ll_name)
     LinearLayout llName;
     @Bind(R.id.et_address)
-    EditText etAddress;
+    TextView etAddress;
     @Bind(R.id.et_aidness)
     EditText etAidness;
     @Bind(R.id.et_descri)
@@ -50,20 +60,67 @@ public class OrderInfoActivity extends AppCompatActivity {
     RadioGroup rgAgree;
     @Bind(R.id.tv_submit)
     TextView tvSubmit;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 302:
+                    OrderDoctorHeader orderDoctorHeader = (OrderDoctorHeader) msg.obj;
+                    ImageLoader.getInstance().displayImage(orderDoctorHeader.getDoctorImage(), photo, PhotoUtils.avatarImageOptions);
+                    etAddress.setText(orderDoctorHeader.getAdrress());
+                    zhicheng.setText(orderDoctorHeader.getDoctorTitle());
+                    department.setText(orderDoctorHeader.getFirstdep());
+                    hospital.setText(orderDoctorHeader.getHospital());
+                    name.setText(orderDoctorHeader.getDoctorName());
+                    tvData.setText(orderDoctorHeader.getAppointTime());
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_info);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        String time = intent.getStringExtra("time");
+        String flag = intent.getStringExtra("flag");
+        String id = intent.getStringExtra("id");
+        TiUser tiUser = new TiUser();
+        tiUser.setName(time);
+        tiUser.setCardId(id);
+        tiUser.setPass(flag);
+        String url = Constants.SERVER_URL + "PatientCounselingServlet";
+        MyHttpUtils.handData(handler, 302, url, tiUser);
+
     }
 
-    @OnClick({R.id.leftBtn, R.id.ll_name, R.id.ll_aid, R.id.tv_submit})
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case RESULT_OK:
+                Bundle b = data.getExtras(); //data为B中回传的Intent
+                String str = b.getString("name");//str即为回传的值
+                etName.setText(str);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
+    @OnClick({R.id.leftBtn, R.id.ll_name, R.id.tv_submit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.leftBtn:
+                finish();
                 break;
             case R.id.ll_name:
+                Intent intent = new Intent(OrderInfoActivity.this, UserManagerActivity.class);
+                intent.putExtra("flag", "see");
+                startActivityForResult(intent, 19);
                 break;
             case R.id.tv_submit:
                 break;

@@ -14,7 +14,6 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.OrderDoctor;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
-import com.wzy.mhealth.view.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +57,7 @@ public class OrderDoctorActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvShow.setLayoutManager(linearLayoutManager);
         doctorAdapter = new OrderDoctorAdapter(getApplicationContext(), friends);
+        doctorAdapter.setId(flag);
         rvShow.setAdapter(doctorAdapter);
     }
 

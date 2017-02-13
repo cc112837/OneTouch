@@ -27,6 +27,7 @@ import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderDoctor;
+import com.wzy.mhealth.model.OrderDoctorHeader;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Pridefine;
 import com.wzy.mhealth.model.Proud;
@@ -527,6 +528,11 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("doctorId", ((TiUser) object).getCardId() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderDoctor(), handler, what));
         }
-
+        if (what == 302) {//填写预约挂号页面
+            params.addBodyParameter("doctorId", ((TiUser) object).getCardId() + "");
+            params.addBodyParameter("appontTime", ((TiUser) object).getName() + "");
+            params.addBodyParameter("appontAfter", ((TiUser) object).getPass() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderDoctorHeader(), handler, what));
+        }
     }
 }

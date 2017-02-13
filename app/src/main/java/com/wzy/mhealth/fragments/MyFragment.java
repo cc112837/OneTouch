@@ -352,6 +352,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
                 break;
             case R.id.manager:
                 intent = new Intent(getActivity(), UserManagerActivity.class);
+                intent.putExtra("flag","user");
                 startActivity(intent);
                 break;
             case R.id.setting:
