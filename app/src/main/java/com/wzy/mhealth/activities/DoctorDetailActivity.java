@@ -122,13 +122,20 @@ public class DoctorDetailActivity extends BaActivity {
                     }
                     vediotu = (ImageView) findViewById(R.id.vediotu);
                     if (doctorDetail.getPriceAdd() >= 0) {
-                        vedioefeiyong.setText("未开通");
-                        vediotu.setImageResource(R.mipmap.before_doctor_grey);
+                        vedioefeiyong.setText(doctorDetail.getPriceAdd()+"元");
+                        vediotu.setImageResource(R.mipmap.before_doctor);
                     } else {
                         vedioefeiyong.setText("未开通");
                         vediotu.setImageResource(R.mipmap.before_doctor_grey);
                     }
-
+                    vediotu.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent=new Intent(DoctorDetailActivity.this,OrderDoctorActivity.class);
+                            intent.putExtra("flag",doctorid);
+                            startActivity(intent);
+                        }
+                    });
 
                     tuwenLayout.setOnClickListener(new View.OnClickListener() {
 

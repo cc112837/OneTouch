@@ -26,6 +26,7 @@ import com.wzy.mhealth.model.ItemInfo;
 import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
+import com.wzy.mhealth.model.OrderDoctor;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Pridefine;
 import com.wzy.mhealth.model.Proud;
@@ -518,9 +519,13 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
 
         }
-        if (what == 300) {
+        if (what == 300) {//用户删除管理
             params.addBodyParameter("userManageId", ((TiUser) object).getCardId() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if (what == 301) {//预约挂号页面
+            params.addBodyParameter("doctorId", ((TiUser) object).getCardId() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderDoctor(), handler, what));
         }
 
     }

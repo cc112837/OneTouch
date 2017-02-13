@@ -62,7 +62,7 @@ public class ManageAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_hosi.setText(""+list.get(position).getMedicalType());
+        viewHolder.tv_hosi.setText(""+list.get(position).getMedicalInstitution());
         viewHolder.tv_data.setText(""+list.get(position).getMedicalDate());
         viewHolder.tv_num.setText(""+list.get(position).getMedicalType());
         return convertView;

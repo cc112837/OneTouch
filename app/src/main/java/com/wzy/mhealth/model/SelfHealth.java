@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class SelfHealth {
 
+
     private List<DataEntity> data;
 
     public List<DataEntity> getData() {
@@ -28,11 +29,13 @@ public class SelfHealth {
         /**
          * medicalDate : 2017-02-08
          * medicalType : 体检报告
+         * medicalInstitution : 第四军医大
          * medicalId : f5a2e99d5884b056015884b056520000
          */
 
         private String medicalDate;
         private String medicalType;
+        private String medicalInstitution;
         private String medicalId;
 
         public String getMedicalDate() {
@@ -49,6 +52,14 @@ public class SelfHealth {
 
         public void setMedicalType(String medicalType) {
             this.medicalType = medicalType;
+        }
+
+        public String getMedicalInstitution() {
+            return medicalInstitution;
+        }
+
+        public void setMedicalInstitution(String medicalInstitution) {
+            this.medicalInstitution = medicalInstitution;
         }
 
         public String getMedicalId() {

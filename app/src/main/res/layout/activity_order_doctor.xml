@@ -39,5 +39,52 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/grey_e" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="20px"
+            android:background="@drawable/textview6">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_show"
+                android:padding="1px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/grey_e" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:paddingLeft="10dp"
+            android:text="预约规则"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/grey_bg" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:padding="10dp"
+            android:text="1.放号周期：7天；\n2.放号时间：8:30；\n3.停挂时间：下午14:00停止，次日与预约挂号（周五14:00停挂至下周一）；\n4.退号时间：就诊前一工作日14:00前取消；"
+            android:textColor="@color/dark_grey"
+            android:textSize="14sp" />
     </LinearLayout>
 </LinearLayout>
