@@ -97,7 +97,9 @@ public class BookMangerActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         initView();
         String url = Constants.SERVER_URL + "CaseManageServlet";
-        MyHttpUtils.handData(handler, 151, url, null);
+        TiUser tiUser=new TiUser();
+        tiUser.setName(name);
+        MyHttpUtils.handData(handler, 151, url, tiUser);
 
     }
 
@@ -105,6 +107,7 @@ public class BookMangerActivity extends AppCompatActivity {
         lv_show = (ListView) findViewById(R.id.lv_show);
         tv_how = (TextView) findViewById(R.id.tv_how);
         manageAdapter = new ManageAdapter(BookMangerActivity.this, list);
+        lv_show.setAdapter(manageAdapter);
         tv_how.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

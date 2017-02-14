@@ -201,23 +201,21 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 147) {
-            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("imagePath", new File(((TiUser) object).getPass()));
-            params.addBodyParameter("name1", ((TiUser) object).getTel());
+            params.addBodyParameter("userManageId", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 150) {//健康管家
             Recommend selfHealth = (Recommend) object;
-            params.addBodyParameter("userName", selfHealth.getName());
             params.addBodyParameter("caseDate", selfHealth.getData());
             params.addBodyParameter("medicalInstitution", selfHealth.getImage());
             params.addBodyParameter("caseType", selfHealth.getContext());
-            params.addBodyParameter("name", selfHealth.getOldPrice());
+            params.addBodyParameter("userManageId", selfHealth.getOldPrice());
 //            params.addBodyParameter("imagePath", selfHealth.getNewPrice());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 151) {//病历管理页面数据请求
-            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
+            params.addBodyParameter("userManageId", ((TiUser)object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new SelfHealth(), handler, what));
         }
         if (what == 152) {//医生列表

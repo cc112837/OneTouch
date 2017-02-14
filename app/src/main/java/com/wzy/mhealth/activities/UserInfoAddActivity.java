@@ -101,7 +101,7 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
                     aidUse();
                 }
                 Intent intent = new Intent(UserInfoAddActivity.this, BookMangerActivity.class);
-                intent.putExtra("name",etName.getText().toString()+"");
+                intent.putExtra("name",user.getUserManageId()+"");
                 startActivity(intent);
                 break;
 

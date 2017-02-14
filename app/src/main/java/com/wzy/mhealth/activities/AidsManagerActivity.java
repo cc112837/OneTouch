@@ -14,7 +14,6 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -27,7 +26,6 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.bigkoo.pickerview.TimePickerView;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
@@ -192,57 +190,6 @@ public class AidsManagerActivity extends AppCompatActivity {
         }
     }
 
-//    private String saveCropAvatar(Intent data) {
-//        Bundle extras = data.getExtras();
-//        String path = null;
-//        if (extras != null) {
-//            Bitmap bitmap = extras.getParcelable("data");
-//            if (bitmap != null) {
-//                path = saveToSdCard(bitmap);
-//                PhotoUtils.saveBitmap(path, bitmap);
-//                if (bitmap != null && bitmap.isRecycled() == false) {
-//                    bitmap.recycle();
-//                }
-//            }
-//        }
-//        return path;
-//    }
-
-//    public String saveToSdCard(Bitmap bitmap) {
-//        Date date = new Date(System.currentTimeMillis());
-//        String dateTime = date.getTime() + "";
-//        String files = CacheUtils.getCacheDirectory(AidsManagerActivity.this, true, "icon") + dateTime + ".jpg";
-//        File file = new File(files);
-//        try {
-//            FileOutputStream out = new FileOutputStream(file);
-//            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
-//                out.flush();
-//                out.close();
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        // LogUtils.i(TAG, file.getAbsolutePath());
-//        return file.getAbsolutePath();
-//    }
-
-//    public void startPhotoZoom(Uri uri) {
-//        Intent intent = new Intent("com.android.camera.action.CROP");
-//        intent.setDataAndType(uri, "image/*");
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//        intent.putExtra("outputX", 300);
-//        intent.putExtra("outputY", 300 );
-//        intent.putExtra("crop", "true");
-//        intent.putExtra("scale", true);
-//        intent.putExtra("scaleUpIfNeeded", true);
-//        intent.putExtra("return-data", true);
-//        startActivityForResult(intent, 3);
-//
-//    }
-
     //获取图片路径 响应startActivityForResult
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -250,21 +197,18 @@ public class AidsManagerActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {
             try {
                 Uri photoUri  = data.getData();
-//                startPhotoZoom(photoUri);
                 String[] pojo = { MediaStore.MediaColumns.DATA };
                 Cursor cursor = AidsManagerActivity.this.getContentResolver().query(photoUri, pojo, null, null, null);
                 if (cursor != null) {
                     int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
                     cursor.moveToFirst();
                     pathImage = cursor.getString(columnIndex);
-                    Log.e("path", pathImage + "))))");
                     ImageItem imageItem = new ImageItem();
                     imageItem.setPath(pathImage);
                     listitem.add(imageItem);
                     String url = Constants.SERVER_URL + "CaseImageUploadServlet";
                     TiUser tiUser = new TiUser();
                     tiUser.setPass(pathImage);
-
                     tiUser.setTel(name);
                     MyHttpUtils.handData(handler, 147, url, tiUser);
                     if (Integer.parseInt(Build.VERSION.SDK) < 14) {
@@ -274,8 +218,6 @@ public class AidsManagerActivity extends AppCompatActivity {
             } catch (NullPointerException e) {
                 e.printStackTrace();// 用户点击取消操作
             }
-        } else if (requestCode == 3) {
-//            pathImage = saveCropAvatar(data);
         }
     }
 
@@ -368,7 +310,6 @@ public class AidsManagerActivity extends AppCompatActivity {
                     recommend.setImage(et_hos);
                     recommend.setData(data);
                     recommend.setContext(type + "");
-                    recommend.setName(LeanchatUser.getCurrentUser().getUsername() + "");
                     recommend.setOldPrice(name);
 //                    JSONArray jsonArray = new JSONArray();
 //                    for (int i = 0; i < listitem.size(); i++) {
