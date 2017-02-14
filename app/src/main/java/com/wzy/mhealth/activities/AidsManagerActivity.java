@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,7 +26,6 @@ import android.widget.Toast;
 
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.bigkoo.pickerview.TimePickerView;
-import com.wzy.mhealth.LeanChat.util.PathUtils;
 import com.wzy.mhealth.LeanChat.util.PhotoUtils;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
@@ -33,8 +33,13 @@ import com.wzy.mhealth.model.ImageItem;
 import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.CacheUtils;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -196,7 +201,7 @@ public class AidsManagerActivity extends AppCompatActivity {
         if (extras != null) {
             Bitmap bitmap = extras.getParcelable("data");
             if (bitmap != null) {
-                path = PathUtils.getAvatarCropPath();
+                path = saveToSdCard(bitmap);
                 PhotoUtils.saveBitmap(path, bitmap);
                 if (bitmap != null && bitmap.isRecycled() == false) {
                     bitmap.recycle();
@@ -205,7 +210,27 @@ public class AidsManagerActivity extends AppCompatActivity {
         }
         return path;
     }
-
+    public String saveToSdCard(Bitmap bitmap) {
+        Date date = new Date(System.currentTimeMillis());
+        String dateTime = date.getTime() + "";
+        String files = CacheUtils.getCacheDirectory(AidsManagerActivity.this, true, "icon") + dateTime + ".jpg";
+        File file = new File(files);
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
+                out.flush();
+                out.close();
+            }
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // LogUtils.i(TAG, file.getAbsolutePath());
+        return file.getAbsolutePath();
+    }
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
@@ -239,6 +264,7 @@ public class AidsManagerActivity extends AppCompatActivity {
             String url = Constants.SERVER_URL + "CaseImageUploadServlet";
             TiUser tiUser = new TiUser();
             tiUser.setPass(pathImage);
+            Log.e("hahah",pathImage);
             MyHttpUtils.handData(handler, 147, url, tiUser);
         }
     }
