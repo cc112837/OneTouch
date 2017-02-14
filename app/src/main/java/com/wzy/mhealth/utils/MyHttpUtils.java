@@ -197,12 +197,13 @@ public class MyHttpUtils extends HttpUtils {
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new FirstDep(), handler, what));
         }
         if (what == 148) {//删除病历管理
-            params.addBodyParameter("medicalId ", ((TiUser) object).getCardId() + "");
+            params.addBodyParameter("medicalId", ((TiUser) object).getCardId() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 147) {
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername());
             params.addBodyParameter("imagePath", new File(((TiUser) object).getPass()));
+            params.addBodyParameter("name1", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
         if (what == 150) {//健康管家

@@ -2,12 +2,15 @@ package com.wzy.mhealth.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -26,20 +29,14 @@ import android.widget.Toast;
 
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.bigkoo.pickerview.TimePickerView;
-import com.wzy.mhealth.LeanChat.util.PhotoUtils;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ImageItem;
 import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
-import com.wzy.mhealth.utils.CacheUtils;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -195,56 +192,56 @@ public class AidsManagerActivity extends AppCompatActivity {
         }
     }
 
-    private String saveCropAvatar(Intent data) {
-        Bundle extras = data.getExtras();
-        String path = null;
-        if (extras != null) {
-            Bitmap bitmap = extras.getParcelable("data");
-            if (bitmap != null) {
-                path = saveToSdCard(bitmap);
-                PhotoUtils.saveBitmap(path, bitmap);
-                if (bitmap != null && bitmap.isRecycled() == false) {
-                    bitmap.recycle();
-                }
-            }
-        }
-        return path;
-    }
-    public String saveToSdCard(Bitmap bitmap) {
-        Date date = new Date(System.currentTimeMillis());
-        String dateTime = date.getTime() + "";
-        String files = CacheUtils.getCacheDirectory(AidsManagerActivity.this, true, "icon") + dateTime + ".jpg";
-        File file = new File(files);
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
-                out.flush();
-                out.close();
-            }
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // LogUtils.i(TAG, file.getAbsolutePath());
-        return file.getAbsolutePath();
-    }
-    public void startPhotoZoom(Uri uri) {
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 300);
-        intent.putExtra("outputY", 300);
-        intent.putExtra("crop", "true");
-        intent.putExtra("scale", true);
-        intent.putExtra("scaleUpIfNeeded", true);
-        intent.putExtra("return-data", true);
-        startActivityForResult(intent, 3);
+//    private String saveCropAvatar(Intent data) {
+//        Bundle extras = data.getExtras();
+//        String path = null;
+//        if (extras != null) {
+//            Bitmap bitmap = extras.getParcelable("data");
+//            if (bitmap != null) {
+//                path = saveToSdCard(bitmap);
+//                PhotoUtils.saveBitmap(path, bitmap);
+//                if (bitmap != null && bitmap.isRecycled() == false) {
+//                    bitmap.recycle();
+//                }
+//            }
+//        }
+//        return path;
+//    }
 
-    }
+//    public String saveToSdCard(Bitmap bitmap) {
+//        Date date = new Date(System.currentTimeMillis());
+//        String dateTime = date.getTime() + "";
+//        String files = CacheUtils.getCacheDirectory(AidsManagerActivity.this, true, "icon") + dateTime + ".jpg";
+//        File file = new File(files);
+//        try {
+//            FileOutputStream out = new FileOutputStream(file);
+//            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
+//                out.flush();
+//                out.close();
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        // LogUtils.i(TAG, file.getAbsolutePath());
+//        return file.getAbsolutePath();
+//    }
+
+//    public void startPhotoZoom(Uri uri) {
+//        Intent intent = new Intent("com.android.camera.action.CROP");
+//        intent.setDataAndType(uri, "image/*");
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+//        intent.putExtra("outputX", 300);
+//        intent.putExtra("outputY", 300 );
+//        intent.putExtra("crop", "true");
+//        intent.putExtra("scale", true);
+//        intent.putExtra("scaleUpIfNeeded", true);
+//        intent.putExtra("return-data", true);
+//        startActivityForResult(intent, 3);
+//
+//    }
 
     //获取图片路径 响应startActivityForResult
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -252,20 +249,33 @@ public class AidsManagerActivity extends AppCompatActivity {
         //打开图片
         if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {
             try {
-                startPhotoZoom(data.getData());
+                Uri photoUri  = data.getData();
+//                startPhotoZoom(photoUri);
+                String[] pojo = { MediaStore.MediaColumns.DATA };
+                Cursor cursor = AidsManagerActivity.this.getContentResolver().query(photoUri, pojo, null, null, null);
+                if (cursor != null) {
+                    int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
+                    cursor.moveToFirst();
+                    pathImage = cursor.getString(columnIndex);
+                    Log.e("path", pathImage + "))))");
+                    ImageItem imageItem = new ImageItem();
+                    imageItem.setPath(pathImage);
+                    listitem.add(imageItem);
+                    String url = Constants.SERVER_URL + "CaseImageUploadServlet";
+                    TiUser tiUser = new TiUser();
+                    tiUser.setPass(pathImage);
+
+                    tiUser.setTel(name);
+                    MyHttpUtils.handData(handler, 147, url, tiUser);
+                    if (Integer.parseInt(Build.VERSION.SDK) < 14) {
+                        cursor.close();
+                    }
+                }
             } catch (NullPointerException e) {
                 e.printStackTrace();// 用户点击取消操作
             }
         } else if (requestCode == 3) {
-            pathImage = saveCropAvatar(data);
-            ImageItem imageItem = new ImageItem();
-            imageItem.setPath(pathImage);
-            listitem.add(imageItem);
-            String url = Constants.SERVER_URL + "CaseImageUploadServlet";
-            TiUser tiUser = new TiUser();
-            tiUser.setPass(pathImage);
-            Log.e("hahah",pathImage);
-            MyHttpUtils.handData(handler, 147, url, tiUser);
+//            pathImage = saveCropAvatar(data);
         }
     }
 
