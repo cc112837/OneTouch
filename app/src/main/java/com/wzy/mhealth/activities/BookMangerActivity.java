@@ -54,6 +54,7 @@ public class BookMangerActivity extends AppCompatActivity {
                     break;
                 case 151:
                     SelfHealth selfHealth = (SelfHealth) msg.obj;
+                    list.clear();
                     list.addAll(selfHealth.getData());
                     manageAdapter.notifyDataSetChanged();
                     lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {

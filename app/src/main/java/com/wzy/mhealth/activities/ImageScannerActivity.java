@@ -36,18 +36,19 @@ public class ImageScannerActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 32:
-                    ScanImage scanImage=(ScanImage) msg.obj;
-                    if(scanImage.getStatus().equals("1")){
-                    imageList.addAll(scanImage.getMdicalPicture());
-                    convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-                        @Override
-                        public NetworkImageHolderView createHolder() {
-                            return new NetworkImageHolderView();
-                        }
-                    }, imageList).setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white}).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+                    ScanImage scanImage = (ScanImage) msg.obj;
+                    if (scanImage.getStatus().equals("1")) {
+                        imageList.clear();
+                        imageList.addAll(scanImage.getMdicalPicture());
+                        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+                            @Override
+                            public NetworkImageHolderView createHolder() {
+                                return new NetworkImageHolderView();
+                            }
+                        }, imageList).setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white}).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
 
-                   }else{
-                        Toast.makeText(ImageScannerActivity.this,scanImage.getData(),Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(ImageScannerActivity.this, scanImage.getData(), Toast.LENGTH_LONG).show();
                     }
                     break;
 
@@ -62,7 +63,7 @@ public class ImageScannerActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         String name = getIntent().getStringExtra("name");
         TiUser tiUser = new TiUser();
-        tiUser.setName(""+name);
+        tiUser.setName("" + name);
         String url = Constants.SERVER_URL + "CaseManageByIdServlet";
         MyHttpUtils.handData(handler, 32, url, tiUser);
 

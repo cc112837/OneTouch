@@ -24,7 +24,6 @@ public class NetworkImageHolderView implements Holder<String> {
     @Override
     public View createView(Context context) {
         imageView = new ImageView(context);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         return imageView;
     }
     @Override
