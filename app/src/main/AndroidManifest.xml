@@ -302,7 +302,8 @@
         <activity android:name=".activities.UserInfoAddActivity" />
         <activity android:name=".activities.UserManagerActivity" />
         <activity android:name=".activities.BookMangerActivity" />
-        <activity android:name=".activities.OrderInfoActivity"></activity>
+        <activity android:name=".activities.OrderInfoActivity" />
+        <activity android:name=".activities.ImageScannerActivity"></activity>
     </application>
 
 </manifest>

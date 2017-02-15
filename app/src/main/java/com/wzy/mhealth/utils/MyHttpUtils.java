@@ -38,6 +38,7 @@ import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.Regmodel;
 import com.wzy.mhealth.model.Retuback;
+import com.wzy.mhealth.model.ScanImage;
 import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.Shop;
 import com.wzy.mhealth.model.ShopBuy;
@@ -127,6 +128,11 @@ public class MyHttpUtils extends HttpUtils {
             TiUser step = (TiUser) object;
             params.addBodyParameter("userName", step.getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==32){//图片浏览
+            TiUser step = (TiUser) object;
+            params.addBodyParameter("medicalId", step.getName());
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ScanImage(), handler, what));
         }
         if (what == 40) {//医生咨询(套餐支付)
             TiUser user = (TiUser) object;

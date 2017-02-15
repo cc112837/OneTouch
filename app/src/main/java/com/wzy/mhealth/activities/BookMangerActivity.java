@@ -44,6 +44,12 @@ public class BookMangerActivity extends AppCompatActivity {
             switch (msg.what) {
                 case 148:
                     StepInfo stepInfo = (StepInfo) msg.obj;
+                    if("1".equals(stepInfo.getStatus())){
+                        String url = Constants.SERVER_URL + "CaseManageServlet";
+                        TiUser tiUser=new TiUser();
+                        tiUser.setName(name);
+                        MyHttpUtils.handData(handler, 151, url, tiUser);
+                    }
                     Toast.makeText(BookMangerActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
                     break;
                 case 151:
@@ -53,7 +59,9 @@ public class BookMangerActivity extends AppCompatActivity {
                     lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                            Intent intent = new Intent(BookMangerActivity.this, ImageScannerActivity.class);
+                            intent.putExtra("name",list.get(position).getMedicalId());
+                            startActivity(intent);
                         }
                     });
                     lv_show.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

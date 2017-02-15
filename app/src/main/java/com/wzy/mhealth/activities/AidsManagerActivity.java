@@ -54,6 +54,9 @@ public class AidsManagerActivity extends AppCompatActivity {
                 case 150:
                     StepInfo stepInfo = (StepInfo) msg.obj;
                     Toast.makeText(AidsManagerActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
+                    if("1".equals(stepInfo.getStatus())){
+                        finish();
+                    }
                     break;
                 case 147:
                     StepInfo stepInf = (StepInfo) msg.obj;

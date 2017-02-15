@@ -150,8 +150,15 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
         } else if (card.length() != 18) {
         } else {
             String birth = card.substring(6, 14);
-            int age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(etCard.getText().toString().substring(6, 10)) + 1;
-            tvBirth.setText(birth);
+            StringBuffer stringBuffer = new StringBuffer();
+            stringBuffer.append(birth.substring(0,4)).append("-").append(birth.substring(4,6)).append("-").append(birth.substring(6));
+            int age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(etCard.getText().toString().substring(6, 10));
+            if(Calendar.getInstance().get(Calendar.MONTH)<=Integer.parseInt(birth.substring(4,6))){
+                if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)<=Integer.parseInt(birth.substring(6)))age--;
+            }else{
+                age--;
+            }
+            tvBirth.setText(stringBuffer.toString());
             tvAge.setText(age + "");
             int i = Integer.parseInt(String.valueOf(card.charAt(16)));
             if (i % 2 == 0) {
