@@ -126,6 +126,15 @@ public class BookMangerActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String url = Constants.SERVER_URL + "CaseManageServlet";
+        TiUser tiUser=new TiUser();
+        tiUser.setName(name);
+        MyHttpUtils.handData(handler, 151, url, tiUser);
+    }
+
     @OnClick(R.id.leftBtn)
     public void onClick() {
         finish();

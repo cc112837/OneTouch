@@ -56,6 +56,7 @@ import com.wzy.mhealth.model.TestWeChat;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.model.UserEvaluation;
+import com.wzy.mhealth.model.UserManageAid;
 import com.wzy.mhealth.model.UserManger;
 import com.wzy.mhealth.model.Zan;
 import com.wzy.mhealth.model.ZhixingTaocan;
@@ -530,7 +531,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("age", ((Recommend) object).getData());
             params.addBodyParameter("birth", ((Recommend) object).getContext() + "");
             params.addBodyParameter("userManageId", ((Recommend) object).getStatus() + "");
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserManageAid(), handler, what));
 
         }
         if (what == 300) {//用户删除管理

@@ -18,9 +18,10 @@ import android.widget.Toast;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Recommend;
-import com.wzy.mhealth.model.StepInfo;
+import com.wzy.mhealth.model.UserManageAid;
 import com.wzy.mhealth.model.UserManger;
 import com.wzy.mhealth.utils.MyHttpUtils;
+import com.wzy.mhealth.utils.Util;
 
 import java.util.Calendar;
 
@@ -31,14 +32,20 @@ import butterknife.OnClick;
 public class UserInfoAddActivity extends AppCompatActivity implements TextWatcher {
     @Bind(R.id.ll_aid)
     LinearLayout llAid;
+    String aid = "aid";
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 299:
-                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    UserManageAid stepInfo = (UserManageAid) msg.obj;
                     Toast.makeText(UserInfoAddActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
+                    if ("new".equals(flag) && "1".equals(stepInfo.getStatus())&&aid.equals("aidll")) {
+                        Intent intent = new Intent(UserInfoAddActivity.this, BookMangerActivity.class);
+                        intent.putExtra("name", stepInfo.getUserManageId() + "");
+                        startActivity(intent);
+                    }
                     break;
             }
         }
@@ -94,15 +101,18 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
                 finish();
                 break;
             case R.id.tv_save:
+                aid = "aid";
                 aidUse();
                 break;
             case R.id.ll_aid:
-                if("new".equals(flag)){
+                aid = "aidll";
+                if ("new".equals(flag)) {
                     aidUse();
+                } else {
+                    Intent intent = new Intent(UserInfoAddActivity.this, BookMangerActivity.class);
+                    intent.putExtra("name", user.getUserManageId() + "");
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(UserInfoAddActivity.this, BookMangerActivity.class);
-                intent.putExtra("name",user.getUserManageId()+"");
-                startActivity(intent);
                 break;
 
         }
@@ -112,7 +122,7 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
         if (("").equals(etName.getText().toString()) || ("").equals(etCard.getText().toString())) {
             Toast.makeText(UserInfoAddActivity.this, "输入不能为空", Toast.LENGTH_LONG).show();
         } else {
-            if (etCard.getText().toString().length() != 18) {
+            if (!Util.getInstance().isCardId(etCard.getText().toString())) {
                 Toast.makeText(UserInfoAddActivity.this, "请输入正确的身份证号", Toast.LENGTH_LONG).show();
             } else {
                 String url = Constants.SERVER_URL + "UserManagerSaveServlet";
@@ -147,15 +157,17 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
         String name = etName.getText().toString();
         String card = etCard.getText().toString();
         if (("").equals(name) || ("").equals(card)) {
-        } else if (card.length() != 18) {
+        } else if (!Util.getInstance().isCardId(card)) {
+            Toast.makeText(UserInfoAddActivity.this, "请输入正确的身份证号", Toast.LENGTH_LONG).show();
         } else {
             String birth = card.substring(6, 14);
             StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append(birth.substring(0,4)).append("-").append(birth.substring(4,6)).append("-").append(birth.substring(6));
+            stringBuffer.append(birth.substring(0, 4)).append("-").append(birth.substring(4, 6)).append("-").append(birth.substring(6));
             int age = Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(etCard.getText().toString().substring(6, 10));
-            if(Calendar.getInstance().get(Calendar.MONTH)<=Integer.parseInt(birth.substring(4,6))){
-                if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)<=Integer.parseInt(birth.substring(6)))age--;
-            }else{
+            if (Calendar.getInstance().get(Calendar.MONTH) <= Integer.parseInt(birth.substring(4, 6))) {
+                if (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) <= Integer.parseInt(birth.substring(6)))
+                    age--;
+            } else {
                 age--;
             }
             tvBirth.setText(stringBuffer.toString());
