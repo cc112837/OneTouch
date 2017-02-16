@@ -40,12 +40,15 @@ public class ImageScannerActivity extends AppCompatActivity {
                     if (scanImage.getStatus().equals("1")) {
                         imageList.clear();
                         imageList.addAll(scanImage.getMdicalPicture());
+//                        if(imageList.size()<=1){
+//                            imageList.addAll(scanImage.getMdicalPicture());
+//                        }
                         convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
                             @Override
                             public NetworkImageHolderView createHolder() {
                                 return new NetworkImageHolderView();
                             }
-                        }, imageList).setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white}).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+                        }, imageList).setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.common_msg_tips}).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
 
                     } else {
                         Toast.makeText(ImageScannerActivity.this, scanImage.getData(), Toast.LENGTH_LONG).show();

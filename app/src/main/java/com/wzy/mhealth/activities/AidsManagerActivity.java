@@ -1,5 +1,6 @@
 package com.wzy.mhealth.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -46,6 +47,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AidsManagerActivity extends AppCompatActivity {
+    private ProgressDialog pdialog;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -54,11 +56,12 @@ public class AidsManagerActivity extends AppCompatActivity {
                 case 150:
                     StepInfo stepInfo = (StepInfo) msg.obj;
                     Toast.makeText(AidsManagerActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
-                    if("1".equals(stepInfo.getStatus())){
+                    if ("1".equals(stepInfo.getStatus())) {
                         finish();
                     }
                     break;
                 case 147:
+                    pdialog.dismiss();
                     StepInfo stepInf = (StepInfo) msg.obj;
                     Toast.makeText(AidsManagerActivity.this, stepInf.getData(), Toast.LENGTH_LONG).show();
                     break;
@@ -199,8 +202,8 @@ public class AidsManagerActivity extends AppCompatActivity {
         //打开图片
         if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {
             try {
-                Uri photoUri  = data.getData();
-                String[] pojo = { MediaStore.MediaColumns.DATA };
+                Uri photoUri = data.getData();
+                String[] pojo = {MediaStore.MediaColumns.DATA};
                 Cursor cursor = AidsManagerActivity.this.getContentResolver().query(photoUri, pojo, null, null, null);
                 if (cursor != null) {
                     int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
@@ -209,11 +212,6 @@ public class AidsManagerActivity extends AppCompatActivity {
                     ImageItem imageItem = new ImageItem();
                     imageItem.setPath(pathImage);
                     listitem.add(imageItem);
-                    String url = Constants.SERVER_URL + "CaseImageUploadServlet";
-                    TiUser tiUser = new TiUser();
-                    tiUser.setPass(pathImage);
-                    tiUser.setTel(name);
-                    MyHttpUtils.handData(handler, 147, url, tiUser);
                     if (Integer.parseInt(Build.VERSION.SDK) < 14) {
                         cursor.close();
                     }
@@ -303,23 +301,30 @@ public class AidsManagerActivity extends AppCompatActivity {
                 tvExamrecord.setChecked(false);
                 break;
             case R.id.tv_submit:
-                String data = tvDate.getText().toString();
-                String et_hos = etPer.getText().toString();
-                if (("").equals(data) || ("").equals(et_hos)) {
-                    Toast.makeText(AidsManagerActivity.this, "请检查输入内容是否有空值", Toast.LENGTH_LONG).show();
+                if (listitem.size() == 0) {
+                    Toast.makeText(AidsManagerActivity.this, "请先上传照片", Toast.LENGTH_LONG).show();
                 } else {
-                    String url = Constants.SERVER_URL + "CaseManageAddServlet";
-                    Recommend recommend = new Recommend();
-                    recommend.setImage(et_hos);
-                    recommend.setData(data);
-                    recommend.setContext(type + "");
-                    recommend.setOldPrice(name);
-//                    JSONArray jsonArray = new JSONArray();
-//                    for (int i = 0; i < listitem.size(); i++) {
-//                        jsonArray.put(new File(listitem.get(i).getPath()));
-//                    }
-//                    recommend.setNewPrice(jsonArray.toString());
-                    MyHttpUtils.handData(handler, 150, url, recommend);
+                    for (int i = 0; i < listitem.size(); i++) {
+                        pdialog = ProgressDialog.show(AidsManagerActivity.this, "正在加载...", "系统正在处理您的请求");
+                        String url = Constants.SERVER_URL + "CaseImageUploadServlet";
+                        TiUser tiUser = new TiUser();
+                        tiUser.setPass(listitem.get(i).getPath());
+                        tiUser.setTel(name);
+                        MyHttpUtils.handData(handler, 147, url, tiUser);
+                    }
+                    String data = tvDate.getText().toString();
+                    String et_hos = etPer.getText().toString();
+                    if (("").equals(data) || ("").equals(et_hos)) {
+                        Toast.makeText(AidsManagerActivity.this, "请检查输入内容是否有空值", Toast.LENGTH_LONG).show();
+                    } else {
+                        String url = Constants.SERVER_URL + "CaseManageAddServlet";
+                        Recommend recommend = new Recommend();
+                        recommend.setImage(et_hos);
+                        recommend.setData(data);
+                        recommend.setContext(type + "");
+                        recommend.setOldPrice(name);
+                        MyHttpUtils.handData(handler, 150, url, recommend);
+                    }
                 }
                 break;
         }
