@@ -19,9 +19,9 @@ import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
+import com.wzy.mhealth.model.DoctorBuy;
 import com.wzy.mhealth.model.OrderDoctorHeader;
 import com.wzy.mhealth.model.Recommend;
-import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -80,10 +80,16 @@ public class OrderInfoActivity extends AppCompatActivity {
                     tvData.setText(orderDoctorHeader.getAppointTime());
                     break;
                 case 303:
-                    StepInfo stepInfo = (StepInfo) msg.obj;
+                    DoctorBuy stepInfo = (DoctorBuy) msg.obj;
                     Toast.makeText(OrderInfoActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
                     if("1".equals(stepInfo.getStatus())){
-                      //前往支付页面
+                        Intent intent = new Intent();
+                        intent.setClass(OrderInfoActivity.this, OrderDoctorBuyActivity.class);
+                        intent.putExtra("type", "4");
+                        intent.putExtra("id", stepInfo.getAppointId() + "");
+                        intent.putExtra("price", stepInfo.getPriceAdd() + "");
+                        intent.putExtra("name", stepInfo.getDoctorName() + "");
+                        startActivity(intent);
                     }
                     break;
             }

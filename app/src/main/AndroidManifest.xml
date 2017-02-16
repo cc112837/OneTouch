@@ -303,7 +303,8 @@
         <activity android:name=".activities.UserManagerActivity" />
         <activity android:name=".activities.BookMangerActivity" />
         <activity android:name=".activities.OrderInfoActivity" />
-        <activity android:name=".activities.ImageScannerActivity"></activity>
+        <activity android:name=".activities.ImageScannerActivity" />
+        <activity android:name=".activities.OrderDoctorBuyActivity"></activity>
     </application>
 
 </manifest>

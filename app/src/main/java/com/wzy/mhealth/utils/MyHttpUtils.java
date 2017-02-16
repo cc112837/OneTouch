@@ -16,6 +16,7 @@ import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.model.Decrease;
 import com.wzy.mhealth.model.DefaultAdress;
 import com.wzy.mhealth.model.Doctor;
+import com.wzy.mhealth.model.DoctorBuy;
 import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.FirstDep;
 import com.wzy.mhealth.model.ForgetPass;
@@ -556,7 +557,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("doctorId", ((Recommend) object).getOldPrice() + "");
             params.addBodyParameter("checkCase", ((Recommend) object).getStatus() + "");
             params.addBodyParameter("caseness", ((Recommend) object).getData() + "");
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DoctorBuy(), handler, what));
         }
     }
 }
