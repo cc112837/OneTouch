@@ -105,7 +105,10 @@ public class UserManagerActivity extends AppCompatActivity {
                     break;
                 case 300:
                     StepInfo stepInfo = (StepInfo) msg.obj;
-                    userManageAdapter.notifyDataSetChanged();
+                    if("1".equals(stepInfo.getStatus())){
+                        String url = Constants.SERVER_URL + "UserManagerServlet";
+                        MyHttpUtils.handData(handler, 298, url, null);
+                    }
                     Toast.makeText(UserManagerActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
                     break;
             }
