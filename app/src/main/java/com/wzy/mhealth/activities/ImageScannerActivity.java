@@ -48,7 +48,7 @@ public class ImageScannerActivity extends AppCompatActivity {
                             public NetworkImageHolderView createHolder() {
                                 return new NetworkImageHolderView();
                             }
-                        }, imageList).setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.common_msg_tips}).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+                        }, imageList).setPageIndicator(new int[]{R.mipmap.dot_white, R.mipmap.common_msg_tips}).setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
 
                     } else {
                         Toast.makeText(ImageScannerActivity.this, scanImage.getData(), Toast.LENGTH_LONG).show();

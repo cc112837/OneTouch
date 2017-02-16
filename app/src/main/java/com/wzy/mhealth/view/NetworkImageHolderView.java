@@ -1,11 +1,13 @@
 package com.wzy.mhealth.view;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.wzy.mhealth.R;
 
 /**
  * 项目名称：mhealth
@@ -19,15 +21,15 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  */
 
 public class NetworkImageHolderView implements Holder<String> {
-    private ImageView imageView;
-
+    private View view;
     @Override
     public View createView(Context context) {
-        imageView = new ImageView(context);
-        return imageView;
+        view = LayoutInflater.from(context).inflate(R.layout.banner_item1, null, false);
+        return view;
     }
     @Override
     public void UpdateUI(Context context, int position, String data) {
-        ImageLoader.getInstance().displayImage(data,imageView);
+        ImageView imageView=(ImageView) view.findViewById(R.id.sdv_background);
+        ImageLoader.getInstance().displayImage(data, imageView, com.avoscloud.leanchatlib.utils.PhotoUtils.avatarImageOptions);
     }
 }
