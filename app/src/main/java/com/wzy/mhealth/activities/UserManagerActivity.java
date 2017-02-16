@@ -56,6 +56,7 @@ public class UserManagerActivity extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent mIntent = new Intent();
                                 mIntent.putExtra("name", list.get(position).getName());
+                                mIntent.putExtra("id", list.get(position).getUserManageId());
                                 // 设置结果，并进行传送
                                 setResult(RESULT_OK, mIntent);
                                 finish();//此处一定要调用finish()方法

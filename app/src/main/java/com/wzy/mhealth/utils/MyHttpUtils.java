@@ -550,7 +550,7 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 303) {//填写预约的提交
             params.addBodyParameter("appointTime", ((Recommend) object).getNewPrice() + "");
-            params.addBodyParameter("name", ((Recommend) object).getName() + "");
+            params.addBodyParameter("userManageId", ((Recommend) object).getName() + "");
             params.addBodyParameter("illness", ((Recommend) object).getContext() + "");
             params.addBodyParameter("userName", ((Recommend) object).getImage() + "");
             params.addBodyParameter("doctorId", ((Recommend) object).getOldPrice() + "");

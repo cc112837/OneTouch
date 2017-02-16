@@ -90,6 +90,7 @@ public class OrderInfoActivity extends AppCompatActivity {
         }
     };
     private String id;
+    private String id1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +125,8 @@ public class OrderInfoActivity extends AppCompatActivity {
             case RESULT_OK:
                 Bundle b = data.getExtras(); //data为B中回传的Intent
                 String str = b.getString("name");//str即为回传的值
+                //str即为回传的值
+                id1 = b.getString("id");
                 etName.setText(str);
                 break;
             default:
@@ -153,7 +156,7 @@ public class OrderInfoActivity extends AppCompatActivity {
                     String url = Constants.SERVER_URL + "PatientCounselingSaveServlet";
                     Recommend recommend = new Recommend();
                     recommend.setNewPrice(tvData.getText().toString());
-                    recommend.setName(name);
+                    recommend.setName(id1);
                     recommend.setData(addre);
                     recommend.setContext(desci);
                     recommend.setImage(LeanchatUser.getCurrentUser().getUsername());
