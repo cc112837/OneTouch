@@ -48,7 +48,7 @@ import butterknife.OnClick;
 
 public class AidsManagerActivity extends AppCompatActivity {
     private ProgressDialog pdialog;
-	private int  count=0；
+	private int  count=0;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -64,7 +64,7 @@ public class AidsManagerActivity extends AppCompatActivity {
                 case 147:
                     pdialog.dismiss();
                     StepInfo stepInf = (StepInfo) msg.obj;
-					if("1".equals(stepInfo.getStatus())){
+					if("1".equals(stepInf.getStatus())){
 						count++;
 					}
                     Toast.makeText(AidsManagerActivity.this, stepInf.getData(), Toast.LENGTH_LONG).show();
