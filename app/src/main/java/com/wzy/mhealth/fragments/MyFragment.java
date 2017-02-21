@@ -140,7 +140,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
         about = (RelativeLayout) view.findViewById(R.id.about);
         familyHealth = (RelativeLayout) view.findViewById(R.id.familyHealth);
         username = (TextView) view.findViewById(R.id.username);
-        username.setText(Constants.USER_NAME);
+        username.setText(LeanchatUser.getCurrentUser().getUsername());
         headImage = (ImageView) view.findViewById(R.id.headView);
         LeanchatUser.getCurrentUser().fetchInBackground(new GetCallback<AVObject>() {
             @Override
