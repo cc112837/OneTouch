@@ -48,6 +48,7 @@ import butterknife.OnClick;
 
 public class AidsManagerActivity extends AppCompatActivity {
     private ProgressDialog pdialog;
+	private int  count=0；
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -63,6 +64,9 @@ public class AidsManagerActivity extends AppCompatActivity {
                 case 147:
                     pdialog.dismiss();
                     StepInfo stepInf = (StepInfo) msg.obj;
+					if("1".equals(stepInfo.getStatus())){
+						count++;
+					}
                     Toast.makeText(AidsManagerActivity.this, stepInf.getData(), Toast.LENGTH_LONG).show();
                     break;
             }
@@ -312,6 +316,7 @@ public class AidsManagerActivity extends AppCompatActivity {
                         tiUser.setTel(name);
                         MyHttpUtils.handData(handler, 147, url, tiUser);
                     }
+					if(count==1){
                     String data = tvDate.getText().toString();
                     String et_hos = etPer.getText().toString();
                     if (("").equals(data) || ("").equals(et_hos)) {
@@ -325,6 +330,7 @@ public class AidsManagerActivity extends AppCompatActivity {
                         recommend.setOldPrice(name);
                         MyHttpUtils.handData(handler, 150, url, recommend);
                     }
+					}
                 }
                 break;
         }
