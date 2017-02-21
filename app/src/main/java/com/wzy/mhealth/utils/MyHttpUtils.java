@@ -240,6 +240,7 @@ public class MyHttpUtils extends HttpUtils {
             TiUser user = (TiUser) object;
             params.addBodyParameter("phone", user.getName());
             params.addBodyParameter("passWord", user.getPass());
+            params.addBodyParameter("objectId", user.getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Regmodel(), handler, what));
         }
         if (what == 157) {//体检机构列表

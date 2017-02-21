@@ -119,6 +119,7 @@ public class CheckActivity extends Activity implements View.OnClickListener {
                                     TiUser user = new TiUser();
                                     user.setName(userPhone + "");
                                     user.setPass(pass + "");
+                                    user.setTel(LeanchatUser.getCurrentUser().getObjectId());
                                     MyHttpUtils.handData(handler, 155, url, user);
                                 }
                             }
