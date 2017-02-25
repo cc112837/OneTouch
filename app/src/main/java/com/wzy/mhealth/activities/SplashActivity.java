@@ -37,22 +37,20 @@ public class SplashActivity extends FragmentActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+
                 //说明登录过，不需要进入导航页，直接进入主界面
                 //当新版本与旧版本一致时直接跳转进入主界面
-//                if (newVersion.equals(version)) {
-//
-//                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//
-//                } else {//需要进入导航页
-//                    Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
+                if (newVersion.equals(version)) {
+
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {//需要进入导航页
+                    Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         thread.start();

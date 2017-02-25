@@ -36,6 +36,7 @@ import com.wzy.mhealth.activities.DecreseActivity;
 import com.wzy.mhealth.activities.ExaminationOrderActivity;
 import com.wzy.mhealth.activities.ExaminationRecordActivity;
 import com.wzy.mhealth.activities.MyGradeActivity;
+import com.wzy.mhealth.activities.OrderAppointActivity;
 import com.wzy.mhealth.activities.ProudActivity;
 import com.wzy.mhealth.activities.SettingActivity;
 import com.wzy.mhealth.activities.StepCountActivity;
@@ -60,7 +61,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
  */
 public class MyFragment extends D3Fragment implements View.OnClickListener {
 
-    private RelativeLayout myrecord, setting, manager, erweima, myorder, about, familyHealth;
+    private RelativeLayout myrecord, setting, manager, erweima, myorder, about, familyHealth,appintrecord;
     private LinearLayout about1, ll_decrease, ll_grade, myproud;
     private ImageView headImage, iv_spped, iv_blood, iv_shop;
     private String dateTime;
@@ -125,6 +126,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
         iv_blood = (ImageView) view.findViewById(R.id.iv_blood);
         iv_shop = (ImageView) view.findViewById(R.id.iv_shop);
         tv_decrease=(TextView) view.findViewById(R.id.tv_decrease);
+        appintrecord=(RelativeLayout) view.findViewById(R.id.appintrecord);
         String url = Constants.SERVER_URL + "StepIntegrationServlet";
         MyHttpUtils.handData(handler, 170, url, null);
         ll_decrease = (LinearLayout) view.findViewById(R.id.ll_decrease);
@@ -161,6 +163,7 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
         erweima.setOnClickListener(this);
         about.setOnClickListener(this);
         myrecord.setOnClickListener(this);
+        appintrecord.setOnClickListener(this);
         ll_decrease.setOnClickListener(this);
         ll_grade.setOnClickListener(this);
         myorder.setOnClickListener(this);
@@ -343,6 +346,10 @@ public class MyFragment extends D3Fragment implements View.OnClickListener {
                 break;
             case R.id.myrecord:
                 intent = new Intent(getActivity(), ExaminationRecordActivity.class);
+                startActivity(intent);
+                break;
+            case  R.id.appintrecord:
+                intent=new Intent(getActivity(), OrderAppointActivity.class);
                 startActivity(intent);
                 break;
             case R.id.erweima:

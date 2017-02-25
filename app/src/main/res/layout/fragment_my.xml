@@ -162,6 +162,44 @@
                     android:background="@color/grey_bg" />
 
                 <RelativeLayout
+                    android:id="@+id/myorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp">
+
+                    <ImageView
+                        android:id="@+id/tui"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/appoint_order" />
+
+                    <TextView
+                        android:id="@+id/TextViewt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/tui"
+                        android:text="我的订单"
+                        android:textColor="@color/dark_grey"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="16dp"
+                        android:src="@mipmap/jiantou" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/grey_bg"></RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/myrecord"
                     android:layout_width="match_parent"
                     android:layout_height="45dp">
@@ -202,7 +240,7 @@
                     android:background="@color/grey_bg"></RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/myorder"
+                    android:id="@+id/appintrecord"
                     android:layout_width="match_parent"
                     android:layout_height="45dp">
 
@@ -222,7 +260,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/tu81"
-                        android:text="我的订单"
+                        android:text="就诊报道"
                         android:textColor="@color/dark_grey"
                         android:textSize="16sp" />
 
