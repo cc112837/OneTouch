@@ -27,6 +27,7 @@ import com.wzy.mhealth.model.ItemInfo;
 import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
+import com.wzy.mhealth.model.OrderAppiont;
 import com.wzy.mhealth.model.OrderDoctor;
 import com.wzy.mhealth.model.OrderDoctorHeader;
 import com.wzy.mhealth.model.OrderInfo;
@@ -559,6 +560,10 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("checkCase", ((Recommend) object).getStatus() + "");
             params.addBodyParameter("caseness", ((Recommend) object).getData() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DoctorBuy(), handler, what));
+        }
+        if(what==304){
+            params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderAppiont(), handler, what));
         }
     }
 }
