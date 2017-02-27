@@ -1,8 +1,10 @@
 package com.wzy.mhealth.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -69,6 +71,22 @@ public class OrderAppointActivity extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rightBtn:
+                AlertDialog.Builder builder = new AlertDialog.Builder(OrderAppointActivity.this);
+                builder.setMessage("关于预约报到：\n1.当患者在预约的时间到达医院后，点击“前往就诊”按钮提示医生，医生收到信息后将安排加号就诊；\n2.“前往就诊”按钮只能在预约当天有效时间段才能点击；");
+                builder.setTitle("如何预约");
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
                 break;
             case R.id.leftBtn:
                 finish();
