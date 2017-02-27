@@ -1,6 +1,7 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
+import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.OrderAppiont;
+import com.wzy.mhealth.model.TiUser;
+import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
@@ -30,11 +34,13 @@ public class OrderAppiontAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context context;
     private List<OrderAppiont.DataEntity> list;
+    private Handler handler;
 
-    public OrderAppiontAdapter(Context context, List<OrderAppiont.DataEntity> list) {
+    public OrderAppiontAdapter(Context context, List<OrderAppiont.DataEntity> list, Handler handler) {
         mInflater = LayoutInflater.from(context);
         this.list = list;
         this.context = context;
+        this.handler = handler;
     }
 
     @Override
@@ -53,7 +59,7 @@ public class OrderAppiontAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder = null;
         if (convertView == null) {
@@ -80,14 +86,27 @@ public class OrderAppiontAdapter extends BaseAdapter {
         viewHolder.tv_data.setText(list.get(position).getClinicTime());
         viewHolder.et_name.setText(list.get(position).getClinicName());
         viewHolder.et_address.setText(list.get(position).getAdrress());
-        viewHolder.tv_appiont.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
+        if ("0".equals(list.get(position).getClinicStatu())) {
+            viewHolder.tv_appiont.setEnabled(true);
+            viewHolder.tv_appiont.setText("就诊报道");
+            viewHolder.tv_appiont.setBackgroundResource(R.drawable.textview_1);
+            final ViewHolder finalViewHolder = viewHolder;
+            viewHolder.tv_appiont.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = Constants.SERVER_URL + "PatientAppointStatusServlet";
+                    TiUser tiUser = new TiUser();
+                    tiUser.setName(list.get(position).getClinicId());
+                    MyHttpUtils.handData(handler, 305, url, tiUser);
+                    finalViewHolder.tv_appiont.setText("已报道");
+                    finalViewHolder.tv_appiont.setBackgroundResource(R.drawable.textview3);
+                }
+            });
+        } else {
+            viewHolder.tv_appiont.setEnabled(false);
+            viewHolder.tv_appiont.setText("已报道");
+            viewHolder.tv_appiont.setBackgroundResource(R.drawable.textview3);
+        }
         return convertView;
     }
 

@@ -47,6 +47,15 @@ public class OrderAppiont {
         private String hospital;
         private String adrress;
         private String doctorTitle;
+        private String clinicStatu;
+
+        public String getClinicStatu() {
+            return clinicStatu;
+        }
+
+        public void setClinicStatu(String clinicStatu) {
+            this.clinicStatu = clinicStatu;
+        }
 
         public String getDoctorImage() {
             return doctorImage;

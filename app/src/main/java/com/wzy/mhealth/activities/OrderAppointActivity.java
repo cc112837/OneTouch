@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.OrderAppiontAdapter;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.OrderAppiont;
+import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
@@ -35,6 +37,10 @@ public class OrderAppointActivity extends AppCompatActivity {
                         orderAppiontAdapter.notifyDataSetChanged();
                     }
                     break;
+                case 305:
+                    StepInfo stepInfo=(StepInfo) msg.obj;
+                    Toast.makeText(OrderAppointActivity.this,stepInfo.getData(),Toast.LENGTH_LONG).show();
+                    break;
             }
         }
     };
@@ -55,7 +61,7 @@ public class OrderAppointActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         String url= Constants.SERVER_URL+"PatientControlShowServlet";
         MyHttpUtils.handData(handler,304,url,null);
-        orderAppiontAdapter = new OrderAppiontAdapter(this, list);
+        orderAppiontAdapter = new OrderAppiontAdapter(this, list,handler);
         lvShow.setAdapter(orderAppiontAdapter);
     }
 
