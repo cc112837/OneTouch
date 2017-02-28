@@ -72,7 +72,9 @@ public class OrderAppointActivity extends AppCompatActivity {
         switch (v.getId()){
             case R.id.rightBtn:
                 AlertDialog.Builder builder = new AlertDialog.Builder(OrderAppointActivity.this);
-                builder.setMessage("关于预约报到：\n1.当患者在预约的时间到达医院后，点击“前往就诊”按钮提示医生，医生收到信息后将安排加号就诊；\n2.“前往就诊”按钮只能在预约当天有效时间段才能点击；");
+                builder.setMessage("关于预约报到：\n" +
+                        "1.用户务必在到达医院后再“点击排队就诊”按钮，以免影响医生安排加号；\n" +
+                        "2.“点击排队就诊”按钮只有在预约当天时段才可点击；");
                 builder.setTitle("如何预约");
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override

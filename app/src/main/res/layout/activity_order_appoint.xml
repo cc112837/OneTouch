@@ -44,8 +44,9 @@
             android:layout_height="match_parent"
             android:text="预约订单"
             android:textColor="#ffffff"
+            android:gravity="center_vertical"
             android:textSize="@dimen/fontSizeMidMM"
-            android:layout_alignTop="@+id/rightBtn"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
 

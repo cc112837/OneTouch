@@ -86,9 +86,9 @@ public class OrderAppiontAdapter extends BaseAdapter {
         viewHolder.tv_data.setText(list.get(position).getClinicTime());
         viewHolder.et_name.setText(list.get(position).getClinicName());
         viewHolder.et_address.setText(list.get(position).getAdrress());
-        if ("0".equals(list.get(position).getClinicStatu())) {
+        if ( "0".equals(list.get(position).getClinicStatu())) {
             viewHolder.tv_appiont.setEnabled(true);
-            viewHolder.tv_appiont.setText("就诊报道");
+            viewHolder.tv_appiont.setText("点击排队就诊");
             viewHolder.tv_appiont.setBackgroundResource(R.drawable.textview_1);
             final ViewHolder finalViewHolder = viewHolder;
             viewHolder.tv_appiont.setOnClickListener(new View.OnClickListener() {
@@ -98,13 +98,22 @@ public class OrderAppiontAdapter extends BaseAdapter {
                     TiUser tiUser = new TiUser();
                     tiUser.setName(list.get(position).getClinicId());
                     MyHttpUtils.handData(handler, 305, url, tiUser);
-                    finalViewHolder.tv_appiont.setText("已报道");
+                    finalViewHolder.tv_appiont.setText("正在排队就诊");
                     finalViewHolder.tv_appiont.setBackgroundResource(R.drawable.textview3);
                 }
             });
-        } else {
+        } else if ("2".equals(list.get(position).getClinicStatu())) {
             viewHolder.tv_appiont.setEnabled(false);
-            viewHolder.tv_appiont.setText("已报道");
+            viewHolder.tv_appiont.setText("未在预约时间段");
+            viewHolder.tv_appiont.setBackgroundResource(R.drawable.textview3);
+        } else if("1".equals(list.get(position).getClinicStatu())){
+            viewHolder.tv_appiont.setEnabled(false);
+            viewHolder.tv_appiont.setText("正在排队就诊");
+            viewHolder.tv_appiont.setBackgroundResource(R.drawable.textview3);
+        }
+        else{
+            viewHolder.tv_appiont.setEnabled(false);
+            viewHolder.tv_appiont.setText("已结束就诊");
             viewHolder.tv_appiont.setBackgroundResource(R.drawable.textview3);
         }
         return convertView;
