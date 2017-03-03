@@ -2,7 +2,7 @@ package com.wzy.mhealth.model;
 
 /**
  * 项目名称：mhealth
- * 类描述：
+ * 类描述：用户管理病历修改
  * 创建人：吴聪聪
  * 邮箱：cc112837@163.com
  * 创建时间：2017/2/15 10:10
@@ -11,7 +11,7 @@ package com.wzy.mhealth.model;
  * 修改备注：
  */
 
-public class UserManageAid {
+public class UserManageCaseHis {
     /**
      * status : 1
      * userManageId : 546200fe

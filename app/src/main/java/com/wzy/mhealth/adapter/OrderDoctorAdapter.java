@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.OrderInfoActivity;
-import com.wzy.mhealth.model.OrderDoctor;
+import com.wzy.mhealth.model.AppointDoctor;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class OrderDoctorAdapter extends RecyclerView.Adapter<OrderDoctorAdapter.MyFriViewHolder> {
     private Context context;
-    private List<OrderDoctor.DataEntity> frilist;
+    private List<AppointDoctor.DataEntity> frilist;
     private LayoutInflater inflater;
     public String id;
 
@@ -41,7 +41,7 @@ public class OrderDoctorAdapter extends RecyclerView.Adapter<OrderDoctorAdapter.
        this.id=id;
     }
 
-    public OrderDoctorAdapter(Context context, List<OrderDoctor.DataEntity> frilist) {
+    public OrderDoctorAdapter(Context context, List<AppointDoctor.DataEntity> frilist) {
         this.context = context;
         this.frilist = frilist;
         inflater = LayoutInflater.from(context);

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * 项目名称：mhealth
- * 类描述：
+ * 类描述：微信支付相关信息类
  * 创建人：吴聪聪
  * 邮箱：cc112837@163.com
  * 创建时间：2016/12/6 15:10

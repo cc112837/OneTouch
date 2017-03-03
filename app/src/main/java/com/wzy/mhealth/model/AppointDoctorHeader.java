@@ -2,7 +2,7 @@ package com.wzy.mhealth.model;
 
 /**
  * 项目名称：mhealth
- * 类描述：
+ * 类描述：选择预约医生信息
  * 创建人：吴聪聪
  * 邮箱：cc112837@163.com
  * 创建时间：2017/2/13 11:14
@@ -11,7 +11,7 @@ package com.wzy.mhealth.model;
  * 修改备注：
  */
 
-public class OrderDoctorHeader {
+public class AppointDoctorHeader {
 
     /**
      * appointTime : 01-14上午

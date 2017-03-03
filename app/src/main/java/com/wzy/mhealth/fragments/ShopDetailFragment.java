@@ -16,7 +16,7 @@ import android.widget.RadioGroup;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.ShopDetail2;
+import com.wzy.mhealth.model.ShopDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -34,10 +34,10 @@ public class ShopDetailFragment extends Fragment implements RadioGroup.OnChecked
             super.handleMessage(msg);
             switch (msg.what) {
                 case 276:
-                    ShopDetail2 shopDetail2 = (ShopDetail2) msg.obj;
-                    productIntroduce = shopDetail2.getProductIntroduce();
-                    productPackaging = shopDetail2.getProductPackaging();
-                    productParameter = shopDetail2.getProductParameter();
+                    ShopDetail shopDetail = (ShopDetail) msg.obj;
+                    productIntroduce = shopDetail.getProductIntroduce();
+                    productPackaging = shopDetail.getProductPackaging();
+                    productParameter = shopDetail.getProductParameter();
                     DisplayMetrics dm = new DisplayMetrics();
                     //取得窗口属性
                     getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);

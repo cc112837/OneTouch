@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * 项目名称：mhealth
- * 类描述：
+ * 类描述：预约医生选择时间
  * 创建人：吴聪聪
  * 邮箱：cc112837@163.com
  * 创建时间：2017/2/10 16:08
@@ -13,7 +13,7 @@ import java.util.List;
  * 修改备注：
  */
 
-public class OrderDoctor {
+public class AppointDoctor {
 
     private List<DataEntity> data;
 

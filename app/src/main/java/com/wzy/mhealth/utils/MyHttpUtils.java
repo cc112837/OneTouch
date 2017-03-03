@@ -28,8 +28,8 @@ import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.NewsYang;
 import com.wzy.mhealth.model.NoHuaRecord;
 import com.wzy.mhealth.model.OrderAppiont;
-import com.wzy.mhealth.model.OrderDoctor;
-import com.wzy.mhealth.model.OrderDoctorHeader;
+import com.wzy.mhealth.model.AppointDoctor;
+import com.wzy.mhealth.model.AppointDoctorHeader;
 import com.wzy.mhealth.model.OrderInfo;
 import com.wzy.mhealth.model.Pridefine;
 import com.wzy.mhealth.model.Proud;
@@ -45,8 +45,8 @@ import com.wzy.mhealth.model.SelfHealth;
 import com.wzy.mhealth.model.Shop;
 import com.wzy.mhealth.model.ShopBuy;
 import com.wzy.mhealth.model.ShopCart;
+import com.wzy.mhealth.model.ShopInfoDetail;
 import com.wzy.mhealth.model.ShopDetail;
-import com.wzy.mhealth.model.ShopDetail2;
 import com.wzy.mhealth.model.ShopOrder;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.StepRank;
@@ -58,7 +58,7 @@ import com.wzy.mhealth.model.TestWeChat;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.model.Tijian;
 import com.wzy.mhealth.model.UserEvaluation;
-import com.wzy.mhealth.model.UserManageAid;
+import com.wzy.mhealth.model.UserManageCaseHis;
 import com.wzy.mhealth.model.UserManger;
 import com.wzy.mhealth.model.Zan;
 import com.wzy.mhealth.model.ZhixingTaocan;
@@ -420,11 +420,11 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 275) {//商品详情/商品
             params.addBodyParameter("productId", ((TiUser) object).getCardId());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopDetail(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopInfoDetail(), handler, what));
         }
         if (what == 276) {//商品详情/详情
             params.addBodyParameter("productId", ((TiUser) object).getCardId());
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopDetail2(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new ShopDetail(), handler, what));
         }
         if (what == 277) {//加入购物车
             params.addBodyParameter("productId", ((Pridefine) object).getName());
@@ -534,7 +534,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("age", ((Recommend) object).getData());
             params.addBodyParameter("birth", ((Recommend) object).getContext() + "");
             params.addBodyParameter("userManageId", ((Recommend) object).getStatus() + "");
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserManageAid(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserManageCaseHis(), handler, what));
 
         }
         if (what == 300) {//用户删除管理
@@ -543,13 +543,13 @@ public class MyHttpUtils extends HttpUtils {
         }
         if (what == 301) {//预约挂号页面
             params.addBodyParameter("doctorId", ((TiUser) object).getCardId() + "");
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderDoctor(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AppointDoctor(), handler, what));
         }
         if (what == 302) {//填写预约挂号页面
             params.addBodyParameter("doctorId", ((TiUser) object).getCardId() + "");
             params.addBodyParameter("appontTime", ((TiUser) object).getName() + "");
             params.addBodyParameter("appontAfter", ((TiUser) object).getPass() + "");
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderDoctorHeader(), handler, what));
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new AppointDoctorHeader(), handler, what));
         }
         if (what == 303) {//填写预约的提交
             params.addBodyParameter("appointTime", ((Recommend) object).getNewPrice() + "");

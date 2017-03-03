@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 体检总检项目页面
  */
 public class TotalFragment extends Fragment implements
         ExpandableListView.OnChildClickListener,

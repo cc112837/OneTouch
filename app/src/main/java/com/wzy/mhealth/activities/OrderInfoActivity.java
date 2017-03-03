@@ -20,7 +20,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.DoctorBuy;
-import com.wzy.mhealth.model.OrderDoctorHeader;
+import com.wzy.mhealth.model.AppointDoctorHeader;
 import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
@@ -70,14 +70,14 @@ public class OrderInfoActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 302:
-                    OrderDoctorHeader orderDoctorHeader = (OrderDoctorHeader) msg.obj;
-                    ImageLoader.getInstance().displayImage(orderDoctorHeader.getDoctorImage(), photo, PhotoUtils.avatarImageOptions);
-                    etAddress.setText(orderDoctorHeader.getAdrress());
-                    zhicheng.setText(orderDoctorHeader.getDoctorTitle());
-                    department.setText(orderDoctorHeader.getFirstdep());
-                    hospital.setText(orderDoctorHeader.getHospital());
-                    name.setText(orderDoctorHeader.getDoctorName());
-                    tvData.setText(orderDoctorHeader.getAppointTime());
+                    AppointDoctorHeader appointDoctorHeader = (AppointDoctorHeader) msg.obj;
+                    ImageLoader.getInstance().displayImage(appointDoctorHeader.getDoctorImage(), photo, PhotoUtils.avatarImageOptions);
+                    etAddress.setText(appointDoctorHeader.getAdrress());
+                    zhicheng.setText(appointDoctorHeader.getDoctorTitle());
+                    department.setText(appointDoctorHeader.getFirstdep());
+                    hospital.setText(appointDoctorHeader.getHospital());
+                    name.setText(appointDoctorHeader.getDoctorName());
+                    tvData.setText(appointDoctorHeader.getAppointTime());
                     break;
                 case 303:
                     DoctorBuy stepInfo = (DoctorBuy) msg.obj;

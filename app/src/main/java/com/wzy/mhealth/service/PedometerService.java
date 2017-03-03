@@ -13,7 +13,7 @@ import me.pedometer.StepListener;
 import me.pedometer.model.CalorieInfo;
 
 /**
- * Created by liudan on 15/11/11.
+ * 计步相关的类
  */
 public class PedometerService extends Service implements StepListener {
     private static final String TAG = PedometerService.class.getSimpleName();

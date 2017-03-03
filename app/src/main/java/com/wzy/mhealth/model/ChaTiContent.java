@@ -2,7 +2,7 @@ package com.wzy.mhealth.model;
 
 /**
  * 项目名称：mhealth
- * 类描述：
+ * 类描述：查体内容
  * 创建人：吴聪聪
  * 邮箱：cc112837@163.com
  * 创建时间：2016/6/24 14:46

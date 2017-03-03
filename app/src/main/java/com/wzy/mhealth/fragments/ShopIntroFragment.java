@@ -18,7 +18,7 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.activities.ShopDetailActivity;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.BannerItem;
-import com.wzy.mhealth.model.ShopDetail;
+import com.wzy.mhealth.model.ShopInfoDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.LocalImageView;
@@ -38,19 +38,19 @@ public class ShopIntroFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 275:
-                    ShopDetail shopDetail = (ShopDetail) msg.obj;
-                    if (shopDetail != null) {
+                    ShopInfoDetail shopInfoDetail = (ShopInfoDetail) msg.obj;
+                    if (shopInfoDetail != null) {
                         localImages.clear();
-                        for (int i = 0; i < shopDetail.getProductImageBig().size(); i++) {
+                        for (int i = 0; i < shopInfoDetail.getProductImageBig().size(); i++) {
                             BannerItem bannerItem = new BannerItem();
-                            bannerItem.setTitle(i + 1 + "/" + shopDetail.getProductImageBig().size());
-                            bannerItem.setUrl(shopDetail.getProductImageBig().get(i));
+                            bannerItem.setTitle(i + 1 + "/" + shopInfoDetail.getProductImageBig().size());
+                            bannerItem.setUrl(shopInfoDetail.getProductImageBig().get(i));
                             localImages.add(bannerItem);
                         }
-                        tv_sale.setText("已售："+shopDetail.getSaledNumber());
-                        tv_name.setText(shopDetail.getProductName() + "");
-                        tv_intro.setText(shopDetail.getData());
-                        tv_per.setText("¥" + shopDetail.getProductNewPrice());
+                        tv_sale.setText("已售："+ shopInfoDetail.getSaledNumber());
+                        tv_name.setText(shopInfoDetail.getProductName() + "");
+                        tv_intro.setText(shopInfoDetail.getData());
+                        tv_per.setText("¥" + shopInfoDetail.getProductNewPrice());
                         cb_shop.setPages(
                                 new CBViewHolderCreator<LocalImageView>() {
                                     @Override

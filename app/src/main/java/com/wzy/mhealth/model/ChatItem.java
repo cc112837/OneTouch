@@ -1,9 +1,13 @@
 package com.wzy.mhealth.model;
 
-import java.io.Serializable;
-
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 聊天相关类
+*/
 
 public class ChatItem implements Serializable{
 	public static final int CHAT = 0; 

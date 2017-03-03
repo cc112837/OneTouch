@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.adapter.OrderDoctorAdapter;
 import com.wzy.mhealth.constant.Constants;
-import com.wzy.mhealth.model.OrderDoctor;
+import com.wzy.mhealth.model.AppointDoctor;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
@@ -23,15 +23,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OrderDoctorActivity extends AppCompatActivity {
-    List<OrderDoctor.DataEntity> friends=new ArrayList<>();
+    List<AppointDoctor.DataEntity> friends=new ArrayList<>();
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
                 case 301:
-                    OrderDoctor orderDoctor=(OrderDoctor) msg.obj;
-                    friends.addAll(orderDoctor.getData());
+                    AppointDoctor appointDoctor =(AppointDoctor) msg.obj;
+                    friends.addAll(appointDoctor.getData());
                     doctorAdapter.notifyDataSetChanged();
                     break;
             }

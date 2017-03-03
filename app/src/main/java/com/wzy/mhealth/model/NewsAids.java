@@ -3,7 +3,7 @@ package com.wzy.mhealth.model;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/3/30.
+ * 急病诊疗
  */
 public class NewsAids {
 

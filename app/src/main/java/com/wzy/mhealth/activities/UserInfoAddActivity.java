@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Recommend;
-import com.wzy.mhealth.model.UserManageAid;
+import com.wzy.mhealth.model.UserManageCaseHis;
 import com.wzy.mhealth.model.UserManger;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Util;
@@ -39,7 +39,7 @@ public class UserInfoAddActivity extends AppCompatActivity implements TextWatche
             super.handleMessage(msg);
             switch (msg.what) {
                 case 299:
-                    UserManageAid stepInfo = (UserManageAid) msg.obj;
+                    UserManageCaseHis stepInfo = (UserManageCaseHis) msg.obj;
                     Toast.makeText(UserInfoAddActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
                     if ("new".equals(flag) && "1".equals(stepInfo.getStatus())&&aid.equals("aidll")) {
                         Intent intent = new Intent(UserInfoAddActivity.this, BookMangerActivity.class);
