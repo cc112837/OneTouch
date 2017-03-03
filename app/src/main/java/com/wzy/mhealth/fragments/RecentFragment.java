@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 近期病史预约页面
  */
 public class RecentFragment extends Fragment {
     private TextView et_content, marryView, sexView, nameView;

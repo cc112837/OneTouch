@@ -24,7 +24,11 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.view.LocalImageView;
 
 import java.util.ArrayList;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 商品介绍
+*/
 public class ShopIntroFragment extends Fragment {
     private ConvenientBanner cb_shop;
     private SnappingStepper stepperCustom;

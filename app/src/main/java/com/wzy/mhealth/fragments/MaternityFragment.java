@@ -20,7 +20,11 @@ import com.wzy.mhealth.view.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 妇产中心
+*/
 public class MaternityFragment extends Fragment {
     private RecyclerView lv_show;
     TaocanAllAdapter maternityAdapter;

@@ -20,7 +20,7 @@ import com.wzy.mhealth.model.Conclusion;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 体检结论
  */
 public class ConclusionFragment extends Fragment {
     private TextView tv_unusual,tv_yi,tv_advise,tv_conclu;

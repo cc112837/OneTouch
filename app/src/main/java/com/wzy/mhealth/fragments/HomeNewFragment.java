@@ -61,7 +61,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 首页
  */
 public class HomeNewFragment extends Fragment implements View.OnClickListener {
     private ConvenientBanner convenientBanner;

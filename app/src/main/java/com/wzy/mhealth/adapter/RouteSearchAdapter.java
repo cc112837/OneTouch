@@ -12,7 +12,11 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 路线查找
+*/
 public class RouteSearchAdapter extends BaseAdapter {
 	private Context context;
 	private List<PoiItem> poiItems = null;

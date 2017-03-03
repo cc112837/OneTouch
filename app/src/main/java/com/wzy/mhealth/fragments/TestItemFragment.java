@@ -12,7 +12,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.wzy.mhealth.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 体检项目注意事项
  */
 public class TestItemFragment extends Fragment {
 

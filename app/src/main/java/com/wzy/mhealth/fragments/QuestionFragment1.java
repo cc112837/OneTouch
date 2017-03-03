@@ -23,7 +23,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.ToastUtil;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 问卷调查
  */
 public class QuestionFragment1 extends Fragment implements TextWatcher {
     private Button tv_down;

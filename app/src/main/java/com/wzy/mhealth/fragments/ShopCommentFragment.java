@@ -22,7 +22,11 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 商品评价页面
+*/
 public class ShopCommentFragment extends Fragment implements RadioGroup.OnCheckedChangeListener {
     private RadioGroup rg_all;
     private RadioButton tv_all, tv_satis, tv_nosatis;

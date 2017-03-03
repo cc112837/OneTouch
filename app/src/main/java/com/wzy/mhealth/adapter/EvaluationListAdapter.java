@@ -12,7 +12,11 @@ import com.wzy.mhealth.model.UserEvaluation;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 用户评价列表
+*/
 public class EvaluationListAdapter extends BaseAdapter {
 
     private Context context;

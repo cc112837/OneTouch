@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 资讯首页
  */
 public class NewsFragment extends Fragment {
     private ViewPager vp_news;

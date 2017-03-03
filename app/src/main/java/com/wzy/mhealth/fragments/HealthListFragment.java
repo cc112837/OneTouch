@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 资讯列表页面
  */
 public class HealthListFragment extends Fragment implements XListView.IXListViewListener {
     String contentid;

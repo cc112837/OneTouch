@@ -29,7 +29,11 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 商品首页
+*/
 public class ShopFragment extends Fragment implements View.OnClickListener, SearchView.OnQueryTextListener {
     private ImageView leftBtn, rightBtn;
     private TextView tv_count;

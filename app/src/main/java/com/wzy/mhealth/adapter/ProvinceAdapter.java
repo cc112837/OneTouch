@@ -12,7 +12,11 @@ import com.wzy.mhealth.model.Provice;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 省市适配器
+*/
 public class ProvinceAdapter extends BaseAdapter {
 
     private Context context;

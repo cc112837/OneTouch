@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * 创建人：吴聪聪
  * 邮箱:cc112837@163.com
+ * 导航页面
  * 创建时间：2016/3/31 11:26
 */
 public class GuideFragment extends android.support.v4.app.Fragment {

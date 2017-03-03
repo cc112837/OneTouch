@@ -19,7 +19,11 @@ import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 体检具体项目
+*/
 public class TestItemAdapter extends BaseAdapter {
     private List<ChaTiContent> contentList;
     private Context con;

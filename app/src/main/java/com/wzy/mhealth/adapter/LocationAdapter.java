@@ -11,7 +11,11 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Provice;
 
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 地址选择适配器
+*/
 public class LocationAdapter extends BaseAdapter {
 
     private Context context;

@@ -15,7 +15,11 @@ import com.wzy.mhealth.utils.ImageUtil;
 import com.wzy.mhealth.utils.MyUtils;
 
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 医生列表的适配器
+*/
 public class DoctorListAdapter extends BaseAdapter {
 
     private Context context;

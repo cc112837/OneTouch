@@ -20,7 +20,7 @@ import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 问卷调查
  */
 public class QuestionFragment extends Fragment {
     private TextView tv_submit;

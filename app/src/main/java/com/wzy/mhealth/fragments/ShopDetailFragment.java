@@ -20,7 +20,11 @@ import com.wzy.mhealth.model.ShopDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 商品详情
+*/
 public class ShopDetailFragment extends Fragment implements RadioGroup.OnCheckedChangeListener {
     private WebView wv_shopdisplay;
     private RadioGroup rg_all;

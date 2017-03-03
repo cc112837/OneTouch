@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 现场查体
  */
 public class XianChaFragment extends Fragment implements
         ExpandableListView.OnChildClickListener,

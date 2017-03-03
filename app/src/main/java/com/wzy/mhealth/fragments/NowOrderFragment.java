@@ -24,7 +24,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 当前预约
  */
 public class NowOrderFragment extends Fragment {
     private ListView lv_show;

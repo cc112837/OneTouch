@@ -16,7 +16,7 @@ import com.wzy.mhealth.activities.MyYuyueActivity;
 import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
 
 /**
- * A simple {@link Fragment} subclass.
+ *体检预约
  */
 public class TijianYuyueFragment extends Fragment {
     private TextView tv_timeid,tv_yuyuecount;
