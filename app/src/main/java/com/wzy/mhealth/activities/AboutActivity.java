@@ -8,7 +8,11 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.utils.PackageUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 关于页面
+*/
 public class AboutActivity extends BaActivity {
     private TextView tv_version, tv_service;
 

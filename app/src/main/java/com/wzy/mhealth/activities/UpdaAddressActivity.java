@@ -33,7 +33,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 更新收货地址页面
+*/
 public class UpdaAddressActivity extends Activity implements View.OnClickListener {
     private TextView title, et_city;
     private ImageView leftBtn;

@@ -12,7 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 订单轨迹跟踪
+*/
 public class OrderRouteActivity extends Activity implements View.OnClickListener{
     private TextView tv_order,tv_copy,tv_confuse;
     private ImageView leftBtn;

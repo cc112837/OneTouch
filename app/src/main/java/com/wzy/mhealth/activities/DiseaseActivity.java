@@ -12,7 +12,11 @@ import com.google.gson.Gson;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.NewsAids;
 import com.wzy.mhealth.utils.ReadUtil;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 疾病诊疗
+*/
 public class DiseaseActivity extends BaActivity {
     private ListView lv_display, office;
     private ImageView leftBtn;

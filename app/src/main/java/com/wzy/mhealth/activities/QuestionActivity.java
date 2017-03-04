@@ -31,7 +31,11 @@ import com.wzy.mhealth.fragments.QuestionFragmenttt;
 import com.wzy.mhealth.model.Question;
 import com.wzy.mhealth.model.ReDefine;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 问卷调查页面
+*/
 public class QuestionActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView leftBtn;
     private FrameLayout question_contain;

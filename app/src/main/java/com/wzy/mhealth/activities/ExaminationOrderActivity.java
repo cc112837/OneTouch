@@ -16,7 +16,11 @@ import com.wzy.mhealth.fragments.NowOrderFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 体检订单页面
+*/
 public class ExaminationOrderActivity extends FragmentActivity {
     private Button rb_noworder,rb_hisorder;
     private ViewPager vp_order;

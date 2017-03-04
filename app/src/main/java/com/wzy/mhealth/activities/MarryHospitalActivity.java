@@ -15,7 +15,11 @@ import com.wzy.mhealth.fragments.YueZiFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 孕产中心
+*/
 public class MarryHospitalActivity extends FragmentActivity {
     private Button rb_fuke,rb_yuezi;
     private ViewPager vp_order;

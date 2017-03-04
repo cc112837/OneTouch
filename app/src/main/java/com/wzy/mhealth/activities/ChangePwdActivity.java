@@ -17,7 +17,11 @@ import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Tool;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 修改密码页面
+*/
 public class ChangePwdActivity extends BaActivity {
     EditText oldPwdView, pwdView, pwdView1;
     Button subBtn;

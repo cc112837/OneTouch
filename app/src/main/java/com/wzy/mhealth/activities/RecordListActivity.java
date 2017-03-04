@@ -18,7 +18,11 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ *  报告列表
+*/
 public class RecordListActivity extends BaActivity {
     private String tag;
     private ImageView leftBtn;

@@ -28,7 +28,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 基类导航栏
+*/
 public class BaseActivity extends FragmentActivity {
 
     public ImageView leftButton, rightButton;

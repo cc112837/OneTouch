@@ -8,7 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 我的积分页面
+*/
 public class MyGradeActivity extends Activity {
     private ImageView leftBtn;
     private TextView tv_count;

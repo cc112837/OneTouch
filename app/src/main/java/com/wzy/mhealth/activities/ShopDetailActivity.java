@@ -33,7 +33,11 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 商品详情页面
+*/
 public class ShopDetailActivity extends FragmentActivity implements View.OnClickListener {
     private ImageView leftBtn, rightBtn;
     private TextView tv_count, title_0, title, title_2;

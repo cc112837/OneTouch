@@ -24,7 +24,11 @@ import com.wzy.mhealth.model.Record;
 import com.wzy.mhealth.model.TaocanInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 体检预约信息校验
+*/
 
 public class ExaminationYueActivity extends Activity {
     private ImageView leftBtn;

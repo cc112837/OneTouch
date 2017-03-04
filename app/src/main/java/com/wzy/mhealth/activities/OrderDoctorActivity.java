@@ -21,7 +21,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 预约医生选择时间
+*/
 public class OrderDoctorActivity extends AppCompatActivity {
     List<AppointDoctor.DataEntity> friends=new ArrayList<>();
     private Handler handler=new Handler(){

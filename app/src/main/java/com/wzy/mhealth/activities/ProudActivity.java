@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Proud;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 我的勋章页面
+*/
 public class ProudActivity extends Activity {
     private TextView tv_how;
     private ImageView leftBtn;

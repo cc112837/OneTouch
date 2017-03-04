@@ -12,6 +12,7 @@ import com.wzy.mhealth.utils.PackageUtils;
 /**
  * 创建人：吴聪聪
  * 邮箱:cc112837@163.com
+ * 导航页
  * 创建时间：2016/3/31 11:25
  */
 public class SplashActivity extends FragmentActivity {

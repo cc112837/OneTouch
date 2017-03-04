@@ -25,7 +25,11 @@ import com.wzy.mhealth.dao.TTSController;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * GPS导航
+*/
 
 public class GPSNaviActivity extends BaActivity implements AMapNaviListener, AMapNaviViewListener {
 

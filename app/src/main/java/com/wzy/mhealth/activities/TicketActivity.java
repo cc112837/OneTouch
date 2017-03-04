@@ -2,7 +2,7 @@ package com.wzy.mhealth.activities;
 /**
  * 创建人：吴聪聪
  * 邮箱:cc112837@163.com
- * 优惠劵
+ * 发票信息页面
  * 创建时间：2016/11/18 16:18
  */
 

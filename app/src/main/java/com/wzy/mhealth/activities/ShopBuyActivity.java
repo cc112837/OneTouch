@@ -26,7 +26,11 @@ import com.wzy.mhealth.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 商品生成支付页面
+*/
 public class ShopBuyActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
     private View headview = null;

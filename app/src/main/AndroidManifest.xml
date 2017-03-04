@@ -297,7 +297,7 @@
         <activity android:name=".activities.ShopCommentActivity" />
         <activity android:name=".activities.OrderRouteActivity" />
         <activity android:name=".activities.ContactActivity" />
-        <activity android:name=".activities.AidsManagerActivity" />
+        <activity android:name=".activities.CaseHistoryActivity" />
         <activity android:name=".activities.OrderDoctorActivity" />
         <activity android:name=".activities.UserInfoAddActivity" />
         <activity android:name=".activities.UserManagerActivity" />

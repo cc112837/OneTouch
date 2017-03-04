@@ -45,8 +45,12 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-public class AidsManagerActivity extends AppCompatActivity {
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 病历添加页面
+*/
+public class CaseHistoryActivity extends AppCompatActivity {
     private ProgressDialog pdialog;
 	private int  count=0;
     private Handler handler = new Handler() {
@@ -56,7 +60,7 @@ public class AidsManagerActivity extends AppCompatActivity {
             switch (msg.what) {
                 case 150:
                     StepInfo stepInfo = (StepInfo) msg.obj;
-                    Toast.makeText(AidsManagerActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CaseHistoryActivity.this, stepInfo.getData(), Toast.LENGTH_LONG).show();
                     if ("1".equals(stepInfo.getStatus())) {
                         finish();
                     }
@@ -67,7 +71,7 @@ public class AidsManagerActivity extends AppCompatActivity {
 					if("1".equals(stepInf.getStatus())){
 						count++;
 					}
-                    Toast.makeText(AidsManagerActivity.this, stepInf.getData(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CaseHistoryActivity.this, stepInf.getData(), Toast.LENGTH_LONG).show();
                     break;
             }
         }
@@ -142,9 +146,9 @@ public class AidsManagerActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 if (imageItem.size() == 7) { //第一张为默认图片
-                    Toast.makeText(AidsManagerActivity.this, "图片数6张已满", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CaseHistoryActivity.this, "图片数6张已满", Toast.LENGTH_SHORT).show();
                 } else if (position == 0) { //点击图片位置为+ 0对应0张图片
-                    Toast.makeText(AidsManagerActivity.this, "添加图片", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CaseHistoryActivity.this, "添加图片", Toast.LENGTH_SHORT).show();
                     //选择图片
                     Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("image/*");
@@ -155,7 +159,7 @@ public class AidsManagerActivity extends AppCompatActivity {
             }
         });
 
-        pvOptions = new TimePickerView(AidsManagerActivity.this, TimePickerView.Type.YEAR_MONTH_DAY);
+        pvOptions = new TimePickerView(CaseHistoryActivity.this, TimePickerView.Type.YEAR_MONTH_DAY);
         pvOptions.setTime(new Date());
         pvOptions.setCyclic(false);
         pvOptions.setCancelable(true);
@@ -208,7 +212,7 @@ public class AidsManagerActivity extends AppCompatActivity {
             try {
                 Uri photoUri = data.getData();
                 String[] pojo = {MediaStore.MediaColumns.DATA};
-                Cursor cursor = AidsManagerActivity.this.getContentResolver().query(photoUri, pojo, null, null, null);
+                Cursor cursor = CaseHistoryActivity.this.getContentResolver().query(photoUri, pojo, null, null, null);
                 if (cursor != null) {
                     int columnIndex = cursor.getColumnIndexOrThrow(pojo[0]);
                     cursor.moveToFirst();
@@ -232,7 +236,7 @@ public class AidsManagerActivity extends AppCompatActivity {
     }
 
     protected void dialog(final int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(AidsManagerActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(CaseHistoryActivity.this);
         builder.setMessage("确认移除已添加图片吗？");
         builder.setTitle("提示");
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -273,7 +277,7 @@ public class AidsManagerActivity extends AppCompatActivity {
             case R.id.tv_date:
             case R.id.iv_jiantou:
                 ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).
-                        hideSoftInputFromWindow(AidsManagerActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                        hideSoftInputFromWindow(CaseHistoryActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 pvOptions.show();
                 break;
             case R.id.tv_examrecord:
@@ -306,10 +310,10 @@ public class AidsManagerActivity extends AppCompatActivity {
                 break;
             case R.id.tv_submit:
                 if (listitem.size() == 0) {
-                    Toast.makeText(AidsManagerActivity.this, "请先上传照片", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CaseHistoryActivity.this, "请先上传照片", Toast.LENGTH_LONG).show();
                 } else {
                     for (int i = 0; i < listitem.size(); i++) {
-                        pdialog = ProgressDialog.show(AidsManagerActivity.this, "正在加载...", "系统正在处理您的请求");
+                        pdialog = ProgressDialog.show(CaseHistoryActivity.this, "正在加载...", "系统正在处理您的请求");
                         String url = Constants.SERVER_URL + "CaseImageUploadServlet";
                         TiUser tiUser = new TiUser();
                         tiUser.setPass(listitem.get(i).getPath());
@@ -320,7 +324,7 @@ public class AidsManagerActivity extends AppCompatActivity {
                     String data = tvDate.getText().toString();
                     String et_hos = etPer.getText().toString();
                     if (("").equals(data) || ("").equals(et_hos)) {
-                        Toast.makeText(AidsManagerActivity.this, "请检查输入内容是否有空值", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CaseHistoryActivity.this, "请检查输入内容是否有空值", Toast.LENGTH_LONG).show();
                     } else {
                         String url = Constants.SERVER_URL + "CaseManageAddServlet";
                         Recommend recommend = new Recommend();

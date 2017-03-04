@@ -28,7 +28,11 @@ import java.util.Calendar;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 添加用户信息页面
+*/
 public class UserInfoAddActivity extends AppCompatActivity implements TextWatcher {
     @Bind(R.id.ll_aid)
     LinearLayout llAid;

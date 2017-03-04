@@ -6,7 +6,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 如何点亮勋章
+*/
 public class LightActivity extends Activity {
     private ImageView leftBtn;
 

@@ -17,7 +17,11 @@ import com.wzy.mhealth.fragments.TotalFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 体检报告页面展示
+*/
 public class RecordShowActivity extends FragmentActivity {
     private ImageView leftBtn;
     private Button rb_conclusion,rb_total;

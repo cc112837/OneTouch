@@ -7,7 +7,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 二维码扫描结果页面
+*/
 public class ScanresultActivity extends BaActivity {
     Button btn_back;
 

@@ -16,7 +16,11 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.ReDefine;
 import com.wzy.mhealth.model.Recommend;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 问卷调查的套餐推荐
+*/
 public class RecommandActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
     private LinearLayout ll_recom;

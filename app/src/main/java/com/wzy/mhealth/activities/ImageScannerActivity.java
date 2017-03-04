@@ -23,7 +23,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 图片浏览
+*/
 public class ImageScannerActivity extends AppCompatActivity {
     List<String> imageList = new ArrayList<>();
     @Bind(R.id.leftBtn)

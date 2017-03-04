@@ -38,7 +38,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 好友详情页面
+*/
 public class FriendDetailActivity extends AVBaseActivity implements View.OnClickListener {
     TextView usernameView;
     ImageView avatarView, avatarArrowView, leftBtn;

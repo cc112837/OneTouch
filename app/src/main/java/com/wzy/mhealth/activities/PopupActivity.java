@@ -20,7 +20,11 @@ import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Util;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 个人联系方式
+*/
 public class PopupActivity extends Activity {
     private Spinner sp_time;
     private Spinner sp_data;

@@ -35,7 +35,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 聊天消息页面
+*/
 public class MsgActivity extends BaseActivity {
     private TextView titleView;
     View imClientStateView;

@@ -19,7 +19,11 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avoscloud.leanchatlib.controller.ChatManager;
 import com.wzy.mhealth.LeanChat.service.PushManager;
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 设置页面
+*/
 public class SettingActivity extends Activity {
     private ImageView leftBtn;
     private Button logout;

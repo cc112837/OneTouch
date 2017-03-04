@@ -29,7 +29,11 @@ import java.util.Date;
 import java.util.HashMap;
 
 import me.pedometer.StepDetector;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 个人计步页面
+*/
 public class StepCountActivity extends BaActivity {
     private ImageView leftBtn_back;
     private ColorfulRingProgressView crpv;

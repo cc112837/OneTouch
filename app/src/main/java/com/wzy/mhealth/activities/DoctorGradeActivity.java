@@ -17,7 +17,11 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 对体检项目的内容评价
+*/
 public class DoctorGradeActivity extends BaActivity {
     private ImageView leftBtn;
     private CheckBox iv_1, iv_2, iv_3, iv_4, iv_5;

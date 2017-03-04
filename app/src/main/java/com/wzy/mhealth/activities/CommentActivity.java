@@ -20,7 +20,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 查看谁点赞了我页面
+*/
 public class CommentActivity extends Activity {
     private ImageView leftBtn;
     private ListView lv_show;

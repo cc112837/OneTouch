@@ -28,7 +28,11 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 用户管理页面
+*/
 public class UserManagerActivity extends AppCompatActivity {
     @Bind(R.id.lv_show)
     ListView lvShow;

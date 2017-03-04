@@ -19,7 +19,11 @@ import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.ToastUtil;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 商品详情
+*/
 public class ShopCommentActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn,iv_show;
     private TextView tv_how;

@@ -17,7 +17,11 @@ import com.wzy.mhealth.fragments.TestItemFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 体检预约页面
+*/
 public class TestSelfActivity extends FragmentActivity {
     private ImageView leftBtn;
     private Button rb_recent,rb_item;

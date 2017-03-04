@@ -8,7 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 更多服务页面
+*/
 public class ServiceMoreActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
     private TextView tv_hospital, tv_medcine;

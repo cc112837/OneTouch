@@ -27,7 +27,11 @@ import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
 
 import java.util.Map;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 预约医生付款
+*/
 public class OrderDoctorBuyActivity extends  BaActivity implements Handler.Callback {
     private TextView doctorname, price, price1, titleName;
     private Button buy;

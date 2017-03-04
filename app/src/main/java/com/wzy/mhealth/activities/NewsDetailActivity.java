@@ -21,7 +21,11 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.NewDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 资讯详情页面
+*/
 public class NewsDetailActivity extends BaActivity {
     private ImageView leftBtn;
     private WebView wv_dis;

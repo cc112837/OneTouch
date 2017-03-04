@@ -15,7 +15,11 @@ import com.wzy.mhealth.R;
 import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 体检报告页面
+*/
 public class ExaminationRecordActivity extends BaActivity {
     private ImageView leftBtn;
     private Button select;

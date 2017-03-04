@@ -30,7 +30,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 二维码扫一扫相关
+*/
 public class CaptureActivity extends BaActivity implements Callback {
 
     private CaptureActivityHandler handler;

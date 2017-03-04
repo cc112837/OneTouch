@@ -7,7 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 疾病诊疗详情
+*/
 public class DiseaseDetailActicity extends BaActivity {
     private ImageView leftBtn;
     private TextView tv_title,tv_content;

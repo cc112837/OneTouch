@@ -7,7 +7,11 @@ import android.widget.ImageView;
 import com.avoscloud.leanchatlib.model.LeanchatUser;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.zxingdemo.CreateQRImageTest;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 二维码生成界面
+*/
 public class BarCodeActivity extends BaActivity {
     private ImageView qrImgImageView;
 

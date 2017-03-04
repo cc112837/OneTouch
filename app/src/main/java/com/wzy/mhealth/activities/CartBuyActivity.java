@@ -31,7 +31,11 @@ import com.wzy.mhealth.view.PayRadioGroup;
 import com.wzy.mhealth.view.PayRadioPurified;
 
 import java.util.Map;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 购物车商品结算
+*/
 public class CartBuyActivity extends Activity implements Handler.Callback {
     private ImageView leftBtn;
     private Button btn_pay;

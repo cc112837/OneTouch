@@ -120,7 +120,7 @@ public class BookMangerActivity extends AppCompatActivity {
         tv_how.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BookMangerActivity.this, AidsManagerActivity.class);
+                Intent intent = new Intent(BookMangerActivity.this, CaseHistoryActivity.class);
                 intent.putExtra("name",name);
                 startActivity(intent);
             }

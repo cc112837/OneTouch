@@ -18,7 +18,11 @@ import com.wzy.mhealth.constant.Constants;
 import com.wzy.mhealth.model.TaocanDetail;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 套餐详情页面
+*/
 public class TaocanDetailAcitivty extends Activity {
     private ImageView leftBtn, iv_detail;
     private TextView tv_old, tv_new, tv_buy, titleView,tv_how;

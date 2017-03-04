@@ -53,6 +53,7 @@ import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.wechat.friends.Wechat;
 
 /**
+ * 登录页面
  * @author cc112837@163.com
  */
 public class LoginActivity extends BaseActivity implements TextWatcher, PlatformActionListener {

@@ -18,7 +18,11 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 用户评价列表
+*/
 public class EvaluationListActivity extends BaActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private List<UserEvaluation.DataEntity> evaluationList;
     private ListView listView;

@@ -21,7 +21,12 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-public class ContactActivity extends AppCompatActivity implements View.OnClickListener{
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 手机联系人页面
+ */
+public class ContactActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView leftBtn;
     LinearLayoutManager layoutManager;
     private RecyclerView rv_list;
@@ -54,18 +59,18 @@ public class ContactActivity extends AppCompatActivity implements View.OnClickLi
         ContactInfoService mContactInfoService = new ContactInfoService(this);
         //返回手机联系人对象集合
         contactList = mContactInfoService.getContactList();
-        contactGroupAdapter = new ContactGroupAdapter(ContactActivity.this,contactList);
+        contactGroupAdapter = new ContactGroupAdapter(ContactActivity.this, contactList);
         rv_list.setAdapter(contactGroupAdapter);
         contactGroupAdapter.setOnItemClickListener(new MyRecyItemClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                String smsBody = "《一点就医》，您身边的健康管理专家。点击下载:" + "http://a.app.qq.com/o/simple.jsp?pkgname=com.wzy.mhealth"+"【康泽云】";
+                String smsBody = "《一点就医》，您身边的健康管理专家。点击下载:" + "http://a.app.qq.com/o/simple.jsp?pkgname=com.wzy.mhealth" + "【康泽云】";
                 Uri smsToUri = Uri.parse("smsto:");
                 Intent sendIntent = new Intent(Intent.ACTION_VIEW, smsToUri);
-                sendIntent.putExtra("address",contactList.get(postion).getPhoneNum()); // 电话号码，这行去掉的话，默认就没有电话
+                sendIntent.putExtra("address", contactList.get(postion).getPhoneNum()); // 电话号码，这行去掉的话，默认就没有电话
                 sendIntent.putExtra("sms_body", smsBody);
                 sendIntent.setType("vnd.android-dir/mms-sms");
-                startActivityForResult(sendIntent,1002);
+                startActivityForResult(sendIntent, 1002);
             }
         });
         leftBtn.setOnClickListener(this);

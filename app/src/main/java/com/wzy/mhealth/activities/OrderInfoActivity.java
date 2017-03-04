@@ -28,7 +28,11 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 预约挂号详情页
+*/
 public class OrderInfoActivity extends AppCompatActivity {
 
     String identity="0";

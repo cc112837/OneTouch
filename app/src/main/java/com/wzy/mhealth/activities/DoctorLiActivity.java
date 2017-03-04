@@ -7,7 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * doctor。li页面
+*/
 public class DoctorLiActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn,iv_img;
     private TextView tv_name;

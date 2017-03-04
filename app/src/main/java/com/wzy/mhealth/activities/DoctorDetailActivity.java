@@ -30,7 +30,11 @@ import com.wzy.mhealth.utils.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 医生详情页面
+*/
 public class DoctorDetailActivity extends BaActivity {
 
     private TextView name, departmenTextView, zhichengTextView,

@@ -29,7 +29,11 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 医生列表显示
+*/
 public class DoctorListActivity extends BaActivity {
 
     private List<Doctor.DataEntity> doctorlist = new ArrayList<>();

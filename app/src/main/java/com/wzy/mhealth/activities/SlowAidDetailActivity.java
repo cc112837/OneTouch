@@ -12,7 +12,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.wzy.mhealth.R;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 慢病诊疗详情
+*/
 public class SlowAidDetailActivity extends Activity {
     private WebView wv_show;
     private ImageView leftBtn;

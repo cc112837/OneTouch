@@ -1,6 +1,7 @@
 package com.wzy.mhealth.activities;
 /**
  * 创建人：吴聪聪
+ * 智行介绍页面
  * 邮箱:cc112837@163.com
  * 创建时间：2016/7/18 14:20
  */

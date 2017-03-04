@@ -23,7 +23,11 @@ import com.wzy.mhealth.model.Retuback;
 import com.wzy.mhealth.model.StepInfo;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 订单详情状态
+*/
 public class OrderStatusActivity extends Activity implements View.OnClickListener {
     private TextView tv_orderstatus, tv_name, tv_ordersubmit, tv_price, back_money, tv_ordernum, tv_orderbuy, tv_bought;
     private ImageView iv_taointro, iv_taocandetail, leftBtn;

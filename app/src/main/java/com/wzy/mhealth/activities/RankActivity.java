@@ -29,7 +29,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 计步排行榜
+*/
 public class RankActivity extends Activity {
     private ImageView leftBtn, iv_userhead, iv_mytank;
     private ListView lv_show;

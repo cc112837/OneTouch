@@ -31,7 +31,11 @@ import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyAndroidUtil;
 import com.wzy.mhealth.utils.MyHttpUtils;
 import com.wzy.mhealth.utils.Tool;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 注册的密码校验页面
+*/
 public class CheckActivity extends Activity implements View.OnClickListener {
     private EditText register_password, register_password_again;
     private String pass;

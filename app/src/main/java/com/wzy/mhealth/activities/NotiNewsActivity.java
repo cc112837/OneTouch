@@ -10,7 +10,11 @@ import com.wzy.mhealth.MyApplication;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.utils.MyAndroidUtil;
 
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 新消息通知页面
+*/
 public class NotiNewsActivity extends BaActivity {
 
     ToggleButton switch1, switch2;

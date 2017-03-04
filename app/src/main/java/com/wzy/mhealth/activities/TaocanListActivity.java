@@ -29,7 +29,11 @@ import com.wzy.mhealth.view.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 套餐列表页面
+*/
 public class TaocanListActivity extends Activity {
     private ImageView leftBtn;
     private PopupWindow mPopupWindow;

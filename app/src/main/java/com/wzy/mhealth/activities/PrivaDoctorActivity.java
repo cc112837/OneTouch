@@ -19,7 +19,11 @@ import com.wzy.mhealth.model.BingZhen;
 import com.wzy.mhealth.model.Pridefine;
 import com.wzy.mhealth.model.TiUser;
 import com.wzy.mhealth.utils.MyHttpUtils;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 私人医生页面
+*/
 public class PrivaDoctorActivity extends Activity implements View.OnClickListener {
     private ImageView leftBtn;
     private WebView wv_show;

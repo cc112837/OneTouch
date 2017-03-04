@@ -32,7 +32,11 @@ import com.wzy.mhealth.fragments.ShopFragment;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-
+/**
+ * 创建人：吴聪聪
+ * 邮箱:cc112837@163.com
+ * 首页
+*/
 public class MainActivity extends AppCompatActivity {
     private RadioButton main_home;
     private RadioButton main_friend;
