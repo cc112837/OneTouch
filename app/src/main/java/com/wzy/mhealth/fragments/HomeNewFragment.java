@@ -142,36 +142,39 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                     if (taocanEntity != null) {
                         taocanEntitylist.clear();
                         taocanEntitylist.addAll(taocanEntity.getData());
-                        for (int i = 0; i < taocanEntity.getData().size(); i++) {
-                            BannerItem bannerItem = new BannerItem();
-                            bannerItem.setTitle(taocanEntity.getData().get(i).getName() + "");
-                            bannerItem.setUrl(taocanEntity.getData().get(i).getImg() + "");
-                            bannerItem.setId(taocanEntity.getData().get(i).getTaoId() + "");
-                            localImages.add(bannerItem);
-                        }
-                        convenientBanner.setPages(
-                                new CBViewHolderCreator<LocalImageHolderView>() {
-                                    @Override
-                                    public LocalImageHolderView createHolder() {
-                                        return new LocalImageHolderView();
-                                    }
-                                }, localImages)
-                                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                                .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
-                                        //设置指示器的方向
-                                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
-
                         taocanHomeAdapter.notifyDataSetChanged();
-                        lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent intent = new Intent(getActivity(), TaocanDetailAcitivty.class);
-                                intent.putExtra("id", taocanEntitylist.get(position - 1).getTaoId() + "");
-                                startActivity(intent);
-                            }
-                        });
                     }
+                    break;
+                case 174:
+                    TaocanEntity taocan = (TaocanEntity) msg.obj;
+                    for (int i = 0; i < taocan.getData().size(); i++) {
+                        BannerItem bannerItem = new BannerItem();
+                        bannerItem.setTitle(taocan.getData().get(i).getName() + "");
+                        bannerItem.setUrl(taocan.getData().get(i).getImg() + "");
+                        bannerItem.setId(taocan.getData().get(i).getTaoId() + "");
+                        localImages.add(bannerItem);
+                    }
+                    convenientBanner.setPages(
+                            new CBViewHolderCreator<LocalImageHolderView>() {
+                                @Override
+                                public LocalImageHolderView createHolder() {
+                                    return new LocalImageHolderView();
+                                }
+                            }, localImages)
+                            //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                            .setPageIndicator(new int[]{R.mipmap.dots_gray, R.mipmap.dot_white})
+                            //设置指示器的方向
+                            .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
 
+
+                    lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(getActivity(), TaocanDetailAcitivty.class);
+                            intent.putExtra("id", taocanEntitylist.get(position - 1).getTaoId() + "");
+                            startActivity(intent);
+                        }
+                    });
                     break;
             }
         }
@@ -182,8 +185,6 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         lv_show = (ListView) view.findViewById(R.id.lv_show);
         View headview = LayoutInflater.from(getContext()).inflate(R.layout.main_home, null);
         convenientBanner = (ConvenientBanner) headview.findViewById(R.id.convenientBanner);
-        String homeurl = Constants.SERVER_URL + "TaoCanManyServlet";
-        MyHttpUtils.handData(handler, 173, homeurl, null);
         taocanHomeAdapter = new TaocanHomeAdapter(getContext(), taocanEntitylist);
         lv_show.addHeaderView(headview);
         lv_show.setAdapter(taocanHomeAdapter);
@@ -191,17 +192,11 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         countView = (TextView) view.findViewById(R.id.countView);
         Button chat_btn = (Button) view.findViewById(R.id.chat_btn);
         Button sacn_btn = (Button) view.findViewById(R.id.sacn_btn);
-        String ur = Constants.SERVER_URL + "MhealthDoctorOrderServlet";
-        TiUser user = new TiUser();
-        user.setName("");
-        user.setPass("");
-        MyHttpUtils.handData(handler, 152, ur, user);
         LinearLayout doctor_more = (LinearLayout) headview.findViewById(R.id.doctor_more);
         doctor_more.setOnClickListener(this);
         gv_doctor = (GridView) headview.findViewById(R.id.gv_doctor);
         doctorHomeAdapter = new DoctorHomeAdapter(getContext(), doctorEntitylist);
         gv_doctor.setAdapter(doctorHomeAdapter);
-
         ll_marry = (LinearLayout) headview.findViewById(R.id.ll_marry);
         ll_marry.setOnClickListener(this);
         ll_heali = (LinearLayout) headview.findViewById(R.id.ll_heali);
@@ -239,7 +234,14 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
         });
         chat_btn.setOnClickListener(this);
         sacn_btn.setOnClickListener(this);
-
+        String homeurl = Constants.SERVER_URL + "TaoCanManyServlet";
+        MyHttpUtils.handData(handler, 174, homeurl, null);
+        MyHttpUtils.handData(handler, 173, homeurl, null);
+        String ur = Constants.SERVER_URL + "MhealthDoctorOrderServlet";
+        TiUser user = new TiUser();
+        user.setName("");
+        user.setPass("");
+        MyHttpUtils.handData(handler, 152, ur, user);
     }
 
 

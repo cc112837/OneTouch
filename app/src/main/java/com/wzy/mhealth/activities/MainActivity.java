@@ -2,12 +2,10 @@ package com.wzy.mhealth.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,7 +20,6 @@ import com.avoscloud.leanchatlib.model.Room;
 import com.wzy.mhealth.LeanChat.service.CacheService;
 import com.wzy.mhealth.LeanChat.service.ConversationManager;
 import com.wzy.mhealth.R;
-import com.wzy.mhealth.fragments.ChangeFragmentHelper;
 import com.wzy.mhealth.fragments.FriendFragment;
 import com.wzy.mhealth.fragments.HomeNewFragment;
 import com.wzy.mhealth.fragments.MyFragment;
@@ -32,6 +29,7 @@ import com.wzy.mhealth.fragments.ShopFragment;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+
 /**
  * 创建人：吴聪聪
  * 邮箱:cc112837@163.com
@@ -42,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton main_friend;
     private RadioButton main_my;
     private RadioButton main_news,main_shop;
-    private Fragment fragment;
+    private Fragment homeNewFragment,newsFragment,shopFragment,friendFragment,myFragment;
     private TextView countView;
     private RadioGroup main_tabBar;
+    private Fragment fragmentBy;
 
     public RadioGroup getMain_tabBar() {
         return main_tabBar;
@@ -65,66 +64,46 @@ public class MainActivity extends AppCompatActivity {
         FeedbackAgent agent = new FeedbackAgent(this);
         agent.sync();
         CacheService.registerUser(AVUser.getCurrentUser(LeanchatUser.class));
-        Fragment fragment = new HomeNewFragment();
-
-        ChangeFragmentHelper helper = new ChangeFragmentHelper();
-        helper.setTargetFragment(fragment);
-        helper.setIsClearStackBack(true);
-        changeFragment(helper);
         initView();
         EventBus.getDefault().register(this);
         updateCount();
     }
 
-    private void hideStatusBar() {
-        WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        attrs.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        getWindow().setAttributes(attrs);
-    }
-
-    private void showStatusBar() {
-        WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        getWindow().setAttributes(attrs);
-    }
 
     private void initView() {
-        FrameLayout main_container = ((FrameLayout) findViewById(R.id.main_container));
+        fragmentBy = getSupportFragmentManager().findFragmentById(
+                R.id.main_container);
         countView = (TextView) findViewById(R.id.countView);
         main_tabBar = ((RadioGroup) findViewById(R.id.main_tabBar));
         main_tabBar.check(R.id.main_home);
-        fragment = null;
         main_shop=(RadioButton) findViewById(R.id.main_shop);
         main_home = (RadioButton) findViewById(R.id.main_home);
         main_friend = (RadioButton) findViewById(R.id.main_friend);
         main_my = (RadioButton) findViewById(R.id.main_my);
         main_news = (RadioButton) findViewById(R.id.main_news);
+        showHomeFragment();
+        main_tabBar.check(R.id.main_home);
         main_tabBar.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.main_home:
-                        fragment = new HomeNewFragment();
+                        showHomeFragment();
                         break;
                     case R.id.main_news:
-                        fragment = new NewsFragment();
+                       showNewsFragment();
                         break;
                     case R.id.main_shop:
-                        fragment = new ShopFragment();
+                        showShopFragment();
                         break;
                     case R.id.main_friend:
-                        fragment = new FriendFragment();
+                       showFriendFragment();
                         break;
                     case R.id.main_my:
-                        fragment = new MyFragment();
+                        showUserFragment();
                         break;
 
                 }
-
-                ChangeFragmentHelper helper = new ChangeFragmentHelper();
-                helper.setTargetFragment(fragment);
-                helper.setIsClearStackBack(true);
-                changeFragment(helper);
             }
         });
     }
@@ -167,42 +146,99 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void changeFragment(ChangeFragmentHelper helper) {
-
-        //获取需要跳转的Fragment
-        Fragment targetFragment = helper.getTargetFragment();
-        //获取是否清空回退栈
-        boolean clearStackBack = helper.isClearStackBack();
-        //获取是否加入回退栈
-        String targetFragmentTag = helper.getTargetFragmentTag();
-        //获取Bundle
-        Bundle bundle = helper.getBundle();
-        //是否给Fragment传值
-        if (bundle != null) {
-            targetFragment.setArguments(bundle);
+    public void showHomeFragment() {
+        if (!(fragmentBy instanceof HomeNewFragment)) {
+            FragmentTransaction ft = getSupportFragmentManager()
+                    .beginTransaction();
+            hideFragment(ft);
+            if(homeNewFragment == null){
+                homeNewFragment = new HomeNewFragment();
+                ft.add(R.id.main_container, homeNewFragment);
+            }else {
+                ft.show(homeNewFragment);
+            }
+            ft.commit();
         }
+    }
+    public void showNewsFragment() {
 
-        FragmentManager manager = getSupportFragmentManager();
-
-        FragmentTransaction fragmentTransaction = manager.beginTransaction();
-
-        if (targetFragment != null) {
-            fragmentTransaction.replace(R.id.main_container, targetFragment);
+        if (!(fragmentBy instanceof NewsFragment)) {
+            FragmentTransaction ft = getSupportFragmentManager()
+                    .beginTransaction();
+            hideFragment(ft);
+            if(newsFragment == null){
+                newsFragment = new NewsFragment();
+                ft.add(R.id.main_container, newsFragment);
+            }else {
+                ft.show(newsFragment);
+            }
+            ft.commit();
         }
+    }
+    public void showShopFragment() {
 
-        //是否添加到回退栈
-        if (targetFragmentTag != null) {
-            fragmentTransaction.addToBackStack(targetFragmentTag);
+        if (!(fragmentBy instanceof ShopFragment)) {
+            FragmentTransaction ft = getSupportFragmentManager()
+                    .beginTransaction();
+            hideFragment(ft);
+            if(shopFragment == null){
+                shopFragment = new ShopFragment();
+                ft.add(R.id.main_container, shopFragment);
+            }else {
+                ft.show(shopFragment);
+            }
+            ft.commit();
         }
+    }
+    public void showFriendFragment() {
 
-        //是否清空回退栈
-        if (clearStackBack) {
-            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        if (!(fragmentBy instanceof FriendFragment)) {
+            FragmentTransaction ft = getSupportFragmentManager()
+                    .beginTransaction();
+            hideFragment(ft);
+            if(friendFragment == null){
+                friendFragment = new FriendFragment();
+                ft.add(R.id.main_container, friendFragment);
+            }else {
+                ft.show(friendFragment);
+            }
+            ft.commit();
         }
-
-        fragmentTransaction.commit();
     }
 
+    public void showUserFragment() {
+        if (!(fragmentBy instanceof MyFragment)) {
+            FragmentTransaction ft = getSupportFragmentManager()
+                    .beginTransaction();
+            hideFragment(ft);
+            if(myFragment == null){
+                myFragment = new MyFragment();
+                ft.add(R.id.main_container, myFragment);
+            }else {
+                ft.show(myFragment);
+            }
+            ft.commit();
+        }
+    }
+
+    //隐藏fragment
+    public void hideFragment(FragmentTransaction ft){
+        if(homeNewFragment != null){
+            ft.hide(homeNewFragment);
+        }
+        if(friendFragment != null){
+            ft.hide(friendFragment);
+        }
+        if(newsFragment != null){
+            ft.hide(newsFragment);
+        }
+        if(shopFragment != null){
+            ft.hide(shopFragment);
+        }
+        if(myFragment != null){
+            ft.hide(myFragment);
+        }
+    }
     protected void onPause() {
         super.onPause();
         AVAnalytics.onPause(this);

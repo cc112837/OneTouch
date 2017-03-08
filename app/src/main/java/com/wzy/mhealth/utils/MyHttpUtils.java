@@ -259,7 +259,7 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 171 || what == 172) {//套餐详情页面
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new Tijian(), handler, what));
         }
-        if (what == 173) {//套餐列表
+        if (what == 173||what==174) {//套餐列表
             sendData(HttpRequest.HttpMethod.POST, url, null, new MyCallBack(new TaocanEntity(), handler, what));
         }
         if (what == 180) {//忘记密码
