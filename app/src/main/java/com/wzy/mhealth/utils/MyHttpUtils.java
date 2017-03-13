@@ -21,6 +21,7 @@ import com.wzy.mhealth.model.DoctorDetail;
 import com.wzy.mhealth.model.FirstDep;
 import com.wzy.mhealth.model.ForgetPass;
 import com.wzy.mhealth.model.Friend;
+import com.wzy.mhealth.model.Hospital;
 import com.wzy.mhealth.model.HuaYanRecord;
 import com.wzy.mhealth.model.Info;
 import com.wzy.mhealth.model.ItemInfo;
@@ -374,7 +375,7 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("statify", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new UserEvaluation(), handler, what));
         }
-        if (what == 265) {
+        if (what == 265) {//私人医生慢病诊疗
             params.addBodyParameter("type", ((TiUser) object).getName());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new BingZhen(), handler, what));
         }
@@ -561,12 +562,19 @@ public class MyHttpUtils extends HttpUtils {
             params.addBodyParameter("caseness", ((Recommend) object).getData() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new DoctorBuy(), handler, what));
         }
-        if(what==304){
+        if(what==304){//预约信息展示
             params.addBodyParameter("userName", LeanchatUser.getCurrentUser().getUsername() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new OrderAppiont(), handler, what));
         }
         if(what==305){
             params.addBodyParameter("clinicId",((TiUser)object).getName() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
+        }
+        if(what==306){//医院列表显示
+            params.addBodyParameter("cityId",((TiUser)object).getName() + "");
+            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Hospital(), handler, what));
+        }
+        if(what==306){//医院列表城市显示
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
     }

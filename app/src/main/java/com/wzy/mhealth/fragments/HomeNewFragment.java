@@ -34,7 +34,7 @@ import com.wzy.mhealth.activities.DoctorDetailActivity;
 import com.wzy.mhealth.activities.DoctorLiActivity;
 import com.wzy.mhealth.activities.DoctorListActivity;
 import com.wzy.mhealth.activities.ExaminationYueActivity;
-import com.wzy.mhealth.activities.MarryHospitalActivity;
+import com.wzy.mhealth.activities.HospitalActivity;
 import com.wzy.mhealth.activities.MsgActivity;
 import com.wzy.mhealth.activities.NoContentActivity;
 import com.wzy.mhealth.activities.PrivaDoctorActivity;
@@ -409,7 +409,10 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_marry:
                 //婴幼中心  MarryHospitalActivity
-                Intent intent5 = new Intent(getActivity(), MarryHospitalActivity.class);
+//                Intent intent5 = new Intent(getActivity(), MarryHospitalActivity.class);
+//                startActivity(intent5);
+                //找医院
+                Intent intent5 = new Intent(getActivity(), HospitalActivity.class);
                 startActivity(intent5);
                 break;
             case R.id.ll_heali:

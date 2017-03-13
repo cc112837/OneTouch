@@ -151,14 +151,14 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:src="@mipmap/marry_hospital" />
+                    android:src="@mipmap/findhospital" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:gravity="center"
-                    android:text="母婴呵护"
+                    android:text="找医院"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp" />
             </LinearLayout>
