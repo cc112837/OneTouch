@@ -30,24 +30,25 @@ import com.wzy.mhealth.utils.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 创建人：吴聪聪
  * 邮箱:cc112837@163.com
  * 医生详情页面
-*/
+ */
 public class DoctorDetailActivity extends BaActivity {
 
     private TextView name, departmenTextView, zhichengTextView,
             hospitalTextView, xianqingTextView, tuwenfeiyong, dianhuafeiyong,
             jiahaofeiyong, privatefeiyong, vedioefeiyong;
-    private TextView  recommend, attitude, level;
+    private TextView recommend, attitude, level;
     private TextView yonghu1, yonghu1Degree, yonghu1Pingjia, youbianzi;
     private TextView yonghu2, yonghu2Degree, yonghu2Pingjia, zuobian;
     private LinearLayout tuwenLayout, vedioyuyue;
     private String doctor, doctorid;
     private List<UserEvaluation.DataEntity> userEvaluationList;
     private LinearLayout pingjia1, pingjia2;
-    private ImageView youbian, tuwentu, photo,dianhuatu, jiahaotu, privatetu, vediotu,p;
+    private ImageView youbian, tuwentu, photo, dianhuatu, jiahaotu, privatetu, vediotu, p;
     private RelativeLayout yonghupingjia;
 
     @Override
@@ -67,7 +68,6 @@ public class DoctorDetailActivity extends BaActivity {
         MyHttpUtils.handData(handler, 264, url, user);
 
 
-
     }
 
     private Handler handler = new Handler() {
@@ -78,7 +78,7 @@ public class DoctorDetailActivity extends BaActivity {
                 case 153:
                     final DoctorDetail doctorDetail = (DoctorDetail) msg.obj;
                     name.setText(doctorDetail.getUserName());
-                    ImageLoader.getInstance().displayImage(doctorDetail.getImage(),photo, ImageUtil.avatarlistdoctor);
+                    ImageLoader.getInstance().displayImage(doctorDetail.getImage(), photo, ImageUtil.avatarlistdoctor);
                     departmenTextView.setText(doctorDetail.getFirstdep());
                     zhichengTextView.setText(doctorDetail.getDoctorTilte());
                     hospitalTextView.setText(doctorDetail.getHospital());
@@ -110,7 +110,7 @@ public class DoctorDetailActivity extends BaActivity {
                     }
                     jiahaotu = (ImageView) findViewById(R.id.jiahaotu);
                     if (doctorDetail.getPriceVideo() >= 0) {
-                        jiahaofeiyong.setText(doctorDetail.getPriceVideo()+"元/次");
+                        jiahaofeiyong.setText(doctorDetail.getPriceVideo() + "元/次");
                         jiahaotu.setImageResource(R.mipmap.video_doctor);
                     } else {
                         jiahaofeiyong.setText("未开通");
@@ -118,7 +118,7 @@ public class DoctorDetailActivity extends BaActivity {
                     }
                     privatetu = (ImageView) findViewById(R.id.privatetu);
                     if (doctorDetail.getPricePrivate() >= 0) {
-                        privatefeiyong.setText( doctorDetail.getPricePrivate()+"元/次");
+                        privatefeiyong.setText(doctorDetail.getPricePrivate() + "元/次");
                         privatetu.setImageResource(R.mipmap.person_doctor);
                     } else {
                         privatefeiyong.setText("未开通");
@@ -126,7 +126,7 @@ public class DoctorDetailActivity extends BaActivity {
                     }
                     vediotu = (ImageView) findViewById(R.id.vediotu);
                     if (doctorDetail.getPriceAdd() >= 0) {
-                        vedioefeiyong.setText(doctorDetail.getPriceAdd()+"元");
+                        vedioefeiyong.setText(doctorDetail.getPriceAdd() + "元");
                         vediotu.setImageResource(R.mipmap.before_doctor);
                     } else {
                         vedioefeiyong.setText("未开通");
@@ -135,8 +135,8 @@ public class DoctorDetailActivity extends BaActivity {
                     vediotu.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(DoctorDetailActivity.this,OrderDoctorActivity.class);
-                            intent.putExtra("flag",doctorid);
+                            Intent intent = new Intent(DoctorDetailActivity.this, OrderDoctorActivity.class);
+                            intent.putExtra("flag", doctorid);
                             startActivity(intent);
                         }
                     });
@@ -181,8 +181,10 @@ public class DoctorDetailActivity extends BaActivity {
                     break;
                 case 264:
                     UserEvaluation userEvaluation = (UserEvaluation) msg.obj;
-                    userEvaluationList.clear();
-                    userEvaluationList.addAll(userEvaluation.getData());
+                    if (userEvaluation != null) {
+                        userEvaluationList.clear();
+                        userEvaluationList.addAll(userEvaluation.getData());
+                    }
                     yonghupingjia.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -242,7 +244,7 @@ public class DoctorDetailActivity extends BaActivity {
     };
 
     private void init() {
-        photo=(ImageView) findViewById(R.id.photo);
+        photo = (ImageView) findViewById(R.id.photo);
         tuwenLayout = (LinearLayout) findViewById(R.id.tuwenzixun);
         vedioyuyue = (LinearLayout) findViewById(R.id.vedioyuyue);
         yonghupingjia = (RelativeLayout) findViewById(R.id.yonghupingjia);

@@ -1,6 +1,8 @@
 package com.wzy.mhealth.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avoscloud.leanchatlib.utils.PhotoUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.wzy.mhealth.R;
 import com.wzy.mhealth.model.Hospital;
@@ -69,11 +72,12 @@ public class HospitalAdapter extends BaseAdapter{
 
         viewHolder.tv_tel.setText(list.get(position).getHospitalTelephone()+"");
         viewHolder.tv_name.setText(list.get(position).getHospitalName()+"");
-        ImageLoader.getInstance().displayImage(list.get(position).getHospitalImage(),viewHolder.iv_taocan);
+        ImageLoader.getInstance().displayImage(list.get(position).getHospitalImage(),viewHolder.iv_taocan, PhotoUtils.avatarImage);
         viewHolder.iv_tel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + list.get(position).getHospitalTelephone()));
+                context.startActivity(intent);
             }
         });
         viewHolder.tv_address.setText(list.get(position).getHospitalAddress()+"");

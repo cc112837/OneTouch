@@ -1,5 +1,6 @@
 package com.wzy.mhealth.activities;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,7 +61,7 @@ public class HospitalActivity extends AppCompatActivity {
     @Bind(R.id.lv_show)
     ListView lvShow;
     List<Provice.DataEntity.CityArrEntity> cityArr;
-    private ListView  locationListView, cityListView;
+    private ListView locationListView, cityListView;
     List<Hospital.DataEntity> list = new ArrayList<>();
     private HospitalAdapter hospitalAdapter;
     private Handler handler = new Handler() {
@@ -70,8 +71,26 @@ public class HospitalActivity extends AppCompatActivity {
             switch (msg.what) {
                 case 306:
                     Hospital hospital = (Hospital) msg.obj;
-                    list.addAll(hospital.getData());
-                    hospitalAdapter.notifyDataSetChanged();
+                    if (hospital != null) {
+                        list.clear();
+                        list.addAll(hospital.getData());
+                        hospitalAdapter.notifyDataSetChanged();
+                        lvShow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(HospitalActivity.this, DoctorListActivity.class);
+                                intent.putExtra("id", list.get(position).getHospitalId() + "");
+                                intent.putExtra("flag", "hos");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                    break;
+                case 160:
+                    Provice provice = (Provice) msg.obj;
+                    proviceList.clear();
+                    proviceList.addAll(provice.getData());
+                    locationAdapter.notifyDataSetChanged();
                     break;
             }
         }
@@ -91,11 +110,11 @@ public class HospitalActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({total_location, R.id.order,R.id.leftBtn})
+    @OnClick({total_location, R.id.order, R.id.leftBtn})
     public void onClick(View view) {
         switch (view.getId()) {
             case total_location:
-                String url = Constants.SERVER_URL + "MhealthProviceCeShiServlet";
+                String url = Constants.SERVER_URL + "MhealthProviceServlet";
                 MyHttpUtils.handData(handler, 160, url, null);
                 showPopupWindow(lvShow.getWidth(),
                         lvShow.getHeight());
@@ -106,6 +125,7 @@ public class HospitalActivity extends AppCompatActivity {
                 finish();
         }
     }
+
     private void showPopupWindow(int width, int height) {
         layout_left = (LinearLayout) LayoutInflater.from(
                 HospitalActivity.this).inflate(R.layout.popup_category, null);
@@ -136,11 +156,10 @@ public class HospitalActivity extends AppCompatActivity {
                 mPopupWindow.dismiss();
                 String url = Constants.SERVER_URL + "MhealthHospitalServlet";
                 TiUser user = new TiUser();
-                if(cityArr.get(position).getCityId()==920003){
+                if (cityArr.get(position).getCityId() == 920003) {
                     user.setName("");
                     textAddress.setText("全部");
-                }
-                else{
+                } else {
                     user.setName("" + cityArr.get(position).getCityId());
                     textAddress.setText(cityArr.get(position).getCity() + "");
                 }

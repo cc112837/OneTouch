@@ -448,6 +448,7 @@ public class HomeNewFragment extends Fragment implements View.OnClickListener {
             case R.id.doctor_more:
                 //更多医生
                 Intent intent23 = new Intent(getActivity(), DoctorListActivity.class);
+                intent23.putExtra("flag","new");
                 startActivity(intent23);
                 break;
 

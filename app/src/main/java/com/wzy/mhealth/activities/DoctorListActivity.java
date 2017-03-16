@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +30,7 @@ import com.wzy.mhealth.utils.MyHttpUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * 创建人：吴聪聪
  * 邮箱:cc112837@163.com
@@ -51,7 +53,7 @@ public class DoctorListActivity extends BaActivity {
     String firstDepid = "";
     String flag = "";
     boolean change = true;
-
+    private ArrayAdapter arrayAdapter;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -88,13 +90,23 @@ public class DoctorListActivity extends BaActivity {
             }
         }
     };
-    private ArrayAdapter arrayAdapter;
+    private String hosid;
+    private String flaghos;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_list);
+        Intent intent = getIntent();
+        flaghos = intent.getStringExtra("flag");
+        if("hos".equals(flaghos)){
+            hosid = intent.getStringExtra("id");
+            Log.e("id",hosid);
+        }
+        else{
+            hosid="";
+        }
         adapter = new DoctorListAdapter(this, doctorlist);
         init();
     }
@@ -141,6 +153,7 @@ public class DoctorListActivity extends BaActivity {
         TiUser user = new TiUser();
         user.setName("");
         user.setPass("");
+        user.setTel(hosid);
         MyHttpUtils.handData(handler, 152, url, user);
     }
 
@@ -163,6 +176,7 @@ public class DoctorListActivity extends BaActivity {
                     firstDepid = firstDeplist.get(position).getFirstDepId() + "";
                     user.setName(firstDepid);
                     user.setPass(flag);
+                    user.setTel(hosid);
                     MyHttpUtils.handData(handler, 152, url, user);
                 }
             });
@@ -179,6 +193,7 @@ public class DoctorListActivity extends BaActivity {
                     flag = list.get(position) + "";
                     user.setName(firstDepid);
                     user.setPass(flag);
+                    user.setTel(hosid);
                     MyHttpUtils.handData(handler, 152, url, user);
                 }
             });

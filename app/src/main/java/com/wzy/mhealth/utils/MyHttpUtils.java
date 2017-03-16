@@ -231,6 +231,7 @@ public class MyHttpUtils extends HttpUtils {
         if (what == 152) {//医生列表
             params.addBodyParameter("firstDepId", ((TiUser) object).getName());
             params.addBodyParameter("evaluate", ((TiUser) object).getPass());
+            params.addBodyParameter("hospitalId", ((TiUser) object).getTel());
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Doctor(), handler, what));
         }
         if (what == 153) {
@@ -573,9 +574,6 @@ public class MyHttpUtils extends HttpUtils {
         if(what==306){//医院列表显示
             params.addBodyParameter("cityId",((TiUser)object).getName() + "");
             sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new Hospital(), handler, what));
-        }
-        if(what==306){//医院列表城市显示
-            sendData(HttpRequest.HttpMethod.POST, url, params, new MyCallBack(new StepInfo(), handler, what));
         }
     }
 }
